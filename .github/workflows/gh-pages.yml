@@ -19,11 +19,17 @@ jobs:
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: 'latest'
-          
+
+      - name: Debug
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "List of files in root:"
+          ls -R
+
       - name: Build
-          run: |
-            cd RianvyBlog
-            hugo --minify
+        run: |
+          cd RianvyBlog
+          hugo --minify
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

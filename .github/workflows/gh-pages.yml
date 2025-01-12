@@ -27,14 +27,6 @@ jobs:
                --source RianvyBlog \
                --destination public
 
-      - name: Debug after build
-        run: |
-          echo "Текущая директория: $(pwd)"
-          echo "Содержимое корня репозитория:"
-          ls -R
-          echo "Содержимое папки public (где лежит сгенерированный сайт):"
-          ls -R public
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

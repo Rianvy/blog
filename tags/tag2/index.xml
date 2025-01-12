@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tag2 on Blog Rianvy</title>
-    <link>https://rianvy.github.io/tags/tag2/</link>
+    <link>https://rianvy.github.io/blog/tags/tag2/</link>
     <description>Recent content in tag2 on Blog Rianvy</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
-    <lastBuildDate>Sun, 12 Jan 2025 22:33:52 +0300</lastBuildDate><atom:link href="https://rianvy.github.io/tags/tag2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Jan 2025 22:33:52 +0300</lastBuildDate><atom:link href="https://rianvy.github.io/blog/tags/tag2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Article Title</title>
-      <link>https://rianvy.github.io/posts/post-2/article-title/</link>
+      <link>https://rianvy.github.io/blog/posts/post-2/article-title/</link>
       <pubDate>Sun, 12 Jan 2025 22:33:52 +0300</pubDate>
       
-      <guid>https://rianvy.github.io/posts/post-2/article-title/</guid>
+      <guid>https://rianvy.github.io/blog/posts/post-2/article-title/</guid>
       <description>&lt;p&gt;Cut out summary from your post content here.&lt;/p&gt;</description>
     </item>
     

@@ -1,0 +1,69 @@
+baseURL = 'https://rianvy.github.io/'
+languageCode = 'ru'
+defaultContentLanguage = "ru"
+title = 'Blog Rianvy'
+theme = "dream"
+
+# [services]
+# [services.disqus]
+# shortname = ""
+# [services.googleAnalytics]
+# ID = ""
+
+[params]
+# zenMode = true
+
+lightTheme = "emerald"
+darkTheme = "forest"
+
+# backgroundImage = "me/background.jpg"
+# backgroundImageDark = ""
+
+author = "Rianvy"
+# description = ""
+# avatar = "img/avatar.png"
+headerTitle = "Blog"
+motto = "Если что-то работает — то не трогай это"
+
+footerBottomText = "Powered by ❤️"
+
+rss = true
+
+# utterancesRepo = ""
+
+# valine = true
+# LEANCLOUD_APP_ID = ""
+# LEANCLOUD_APP_KEY = ""
+
+# waline = true
+# walineServer = ""
+
+email = "blackghost.v1@gmail.com"
+
+siteStartYear = 2025
+
+favicon = "favicon.ico"
+
+# Syntax highlighting
+# customSyntaxHighlighting = true
+
+# options
+stickyNav = true
+reorderNavItems = ["search", "rss", "posts", "categories", "tags"]
+collapseNavItems = ["posts", "tags", "rss"]
+# noDefaultSummaryCover = true
+# showTableOfContents = true
+showSummaryCoverInPost = true
+imageZoomableInPost = true
+showPrevNextPost = true
+# reorderShares = ["x", "facebook", "whatsapp"]
+
+# [params.navItems]
+
+# [params.advanced]
+# customCSS = ["css/custom.css"]
+# customJS = []
+
+# [params.experimental]
+jsDate = true
+# jsDateFormat = "yyyy年MM月dd日"

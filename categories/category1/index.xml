@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>category1 on Blog Rianvy</title>
+    <link>https://rianvy.github.io/categories/category1/</link>
+    <description>Recent content in category1 on Blog Rianvy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru</language>
+    <lastBuildDate>Sun, 12 Jan 2025 22:33:52 +0300</lastBuildDate><atom:link href="https://rianvy.github.io/categories/category1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Article Title</title>
+      <link>https://rianvy.github.io/posts/post-2/article-title/</link>
+      <pubDate>Sun, 12 Jan 2025 22:33:52 +0300</pubDate>
+      
+      <guid>https://rianvy.github.io/posts/post-2/article-title/</guid>
+      <description>&lt;p&gt;Cut out summary from your post content here.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

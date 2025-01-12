@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog Rianvy</title>
+    <link>https://rianvy.github.io/search/</link>
+    <description>Recent content on Blog Rianvy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru</language><atom:link href="https://rianvy.github.io/search/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

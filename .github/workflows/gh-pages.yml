@@ -13,7 +13,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
         with:
-          submodules: true  
+          submodules: true
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -22,10 +22,17 @@ jobs:
 
       - name: Build
         run: |
-          # Сборка из поддиректории RianvyBlog в публичную папку public (в корне)
-          hugo --minify \
+          # Включаем черновики -D
+          hugo --minify -D \
                --source RianvyBlog \
                --destination public
+
+      - name: Debug
+        run: |
+          echo "==== CONTENT OF REPO AFTER BUILD ===="
+          ls -R
+          echo "==== CONTENT OF 'public' ===="
+          ls -R public || echo "No public folder found!"
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

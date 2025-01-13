@@ -48,7 +48,7 @@ favicon = "favicon.ico"
 # customSyntaxHighlighting = true
 
 # options
-stickyNav = true
+# stickyNav = true
 reorderNavItems = ["search", "rss", "posts", "categories", "tags"]
 collapseNavItems = ["posts", "tags", "rss"]
 # noDefaultSummaryCover = true

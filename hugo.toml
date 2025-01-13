@@ -21,9 +21,9 @@ darkTheme = "forest"
 
 author = "Rianvy"
 # description = ""
-# avatar = "img/avatar.png"
-headerTitle = "Blog"
-motto = "Если что-то работает — то не трогай это"
+avatar = "img/avatar.jpg"
+headerTitle = "{Rianvy}.dev: блог об IT"
+motto = "Документируй сегодня то, что забудешь завтра"
 
 footerBottomText = "Powered by ❤️"
 

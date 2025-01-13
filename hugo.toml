@@ -48,22 +48,23 @@ favicon = "favicon.ico"
 # customSyntaxHighlighting = true
 
 # options
-# stickyNav = true
-reorderNavItems = ["search", "rss", "posts", "categories", "tags"]
+stickyNav = true
+reorderNavItems = ["search", "rss", "posts", "categories", "github", "tags"]
 collapseNavItems = ["posts", "tags", "rss"]
 # noDefaultSummaryCover = true
-# showTableOfContents = true
+showTableOfContents = true
 showSummaryCoverInPost = true
 imageZoomableInPost = true
 showPrevNextPost = true
 # reorderShares = ["x", "facebook", "whatsapp"]
 
-# [params.navItems]
-
 # [params.advanced]
 # customCSS = ["css/custom.css"]
 # customJS = []
 
-# [params.experimental]
-jsDate = true
-# jsDateFormat = "yyyy年MM月dd日"
+[markup]
+[markup.goldmark.parser.attribute]
+block = true
+
+[params.navItems]
+github = { href = "https://github.com/rianvy", target = "_blank", icon = "logo-github", title = "GitHub" }

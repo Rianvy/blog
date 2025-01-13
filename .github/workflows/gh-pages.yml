@@ -14,7 +14,7 @@ jobs:
         with:
           submodules: true
 
-      - name: Checkout destination
+      - name: Checkout destination (gh-pages)
         uses: actions/checkout@v3
         if: github.ref == 'refs/heads/main'
         with:
@@ -38,16 +38,16 @@ jobs:
           # Удаляем все файлы и директории, кроме .git
           find . -mindepth 1 -not -name '.git' -exec rm -rf {} +
           
-          # Копируем содержимое сгенерированного сайта в текущую директорию
+          # Копируем содержимое сгенерированного сайта (каталог public) в текущую директорию
           cp -R ${GITHUB_WORKSPACE}/public/* .
           
-          # Добавляем изменения в Git
-          git add .
+          # Настройка Git и добавление изменений
           git config user.name 'Rianvy'
           git config user.email 'blackghost.v1@gmail.com'
+          git add .
           
-          # Если изменений нет, команда git commit завершится ошибкой, поэтому используем || echo
+          # Делать коммит, если есть изменения
           git commit -m 'Updated site' || echo "No changes to commit"
           
-          # Публикуем изменения
+          # Публикуем изменения в ветку gh-pages
           git push

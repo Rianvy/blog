@@ -72,6 +72,19 @@
         {{ .Content | emojify }}
       </section>
 
+	{{ if .Params.tags }}
+	  <div class="tags mt-4">
+		{{ $lang := $.Site.Language.Lang }}  {{/* сохраняем внешний контекст */}}
+		{{ range .Params.tags }}
+		  <a class="badge h-6 no-underline hover:badge-primary mr-2"
+			 href="{{ printf "/blog/%s/tags/%s/" $lang (. | urlize) | absURL }}">
+			 {{ . }}
+		  </a>
+		{{ end }}
+	  </div>
+	{{ end }}
+
+
       {{ if site.Params.showPrevNextPost }}
       <div class="divider"></div>
       <div class="flex flex-col md:flex-row justify-between gap-4 py-4">

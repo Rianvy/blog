@@ -37,9 +37,22 @@
       {{ .Date | time.Format "Monday, Jan 2, 2006" }}
     {{ end }}
     </p>
-
     {{ .Summary | emojify | safeHTML }}
-
+	
+	<!--
+	{{ if .Params.categories }}
+	<div>
+	<ion-icon name="grid"></ion-icon>
+    {{ $lang := $.Site.Language.Lang }}
+    {{ range .Params.categories }}
+    <p class="badge h-6 no-underline"> {{ . }}</p>
+    {{ end }}
+	</div>
+    {{ end }}
+	
+	<div class="divider"></div>
+	-->
+	
     <div class="card-actions justify-between items-center mt-4">
       {{ partial "author.html" (dict "Params" .Params "template" "summary") }}
 

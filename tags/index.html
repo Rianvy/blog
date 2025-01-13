@@ -62,7 +62,10 @@
     <div id="dream-global-bg"></div>
 
     
-<nav class="mt-4 lg:mt-8 py-4">
+<nav x-data="{ isSticky: false }"
+  x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })"
+  class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
+  :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
 
   
   <div class="container flex justify-between px-4">
@@ -149,12 +152,40 @@
 
 
 
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="https://github.com/rianvy" target="_blank" title="GitHub">
+    
+    <ion-icon name="logo-github"></ion-icon>
+    
+    GitHub
+  </a>
+</li>
+
+
+
+
+
 <li>
   <a class="inline-flex items-center p-2 cursor-pointer" href="/blog/tags" title="Все теги">
     <ion-icon name="pricetags"></ion-icon>
     Все теги
   </a>
 </li>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -199,6 +230,19 @@
 
 
       
+      
+
+
+
+  
+  <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://github.com/rianvy" target="_blank" title="GitHub">
+    <ion-icon class="group-hover:text-primary-content" name="logo-github"></ion-icon>
+  </a>
+  
+
+
+
+      
 
       <div class="dropdown dropdown-end dropdown-hover">
         <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
@@ -236,6 +280,18 @@
 
 
           
+
+          
+          
+
+
+
+
+
+
+
+
+
 
           
         </ul>

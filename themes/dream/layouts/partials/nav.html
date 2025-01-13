@@ -21,12 +21,12 @@
       {{ if or site.Params.headerTitle site.Params.motto }}
       <div>
         {{ if site.Params.headerTitle }}
-        <a href="{{ site.BaseURL }}" class="text-lg font-semibold cursor-pointer">
-          {{ site.Params.headerTitle }}
+        <a href="{{ .Site.Home.RelPermalink }}" class="text-lg font-semibold cursor-pointer">
+          <!--{{ site.Params.headerTitle }}--> {{ T "headerTitle" }}
         </a>
         {{ end }}
         {{ if site.Params.motto }}
-        <div class="text-base-content/60 text-sm">{{ site.Params.motto }}</div>
+        <div class="text-base-content/60 text-sm"><!--{{ site.Params.motto }}--> {{- T "motto" -}}</div>
         {{ end }}
       </div>
       {{ end }}
@@ -77,6 +77,21 @@
       {{ partial "renderNavItem.html" . }}
       {{ end }}
 
+	  <div class="dropdown dropdown-end dropdown-hover">
+	    <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
+	  	<ion-icon class="group-hover:text-primary-content text-xl" name="language"></ion-icon>
+	    </div>
+	    <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+	  	{{ range $key, $lang := .Site.Params.navLang }}
+	  	  <li>
+	  		<a href="{{ $lang.href }}">
+	  		  <ion-icon name="{{ $lang.icon }}"></ion-icon> {{ $lang.title }}
+	  		</a>
+	  	  </li>
+	  	{{ end }}
+	    </ul>
+	  </div>
+	  
       <div class="dropdown dropdown-end dropdown-hover">
         <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
           <ion-icon class="group-hover:text-primary-content text-xl" name="menu"></ion-icon>

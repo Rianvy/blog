@@ -3,9 +3,9 @@ title: Роль файла .htaccess в настройке сервера Apache
 date: 2025-01-12T21:27:20+03:00
 lastmod: 2025-01-12T21:27:20+03:00
 author: Rianvy
-cover: https://sun9-24.userapi.com/s/v1/if1/zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg?quality=96&as=32x21,48x31,72x47,108x71,160x105,240x157,360x236,480x314,540x354,640x419,720x472,1000x655&from=bu&u=1CUd4Kbose68gyq-xgHCb0vA5012Zh9wQEzid-4KUpM&cs=807x529
+cover: "zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg"
 images:
-   - https://sun9-24.userapi.com/s/v1/if1/zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg?quality=96&as=32x21,48x31,72x47,108x71,160x105,240x157,360x236,480x314,540x354,640x419,720x472,1000x655&from=bu&u=1CUd4Kbose68gyq-xgHCb0vA5012Zh9wQEzid-4KUpM&cs=807x529
+   - "zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg"
 categories:
   - Администрирование
 tags:

@@ -1,8 +1,22 @@
-baseURL = 'https://rianvy.github.io/blog/'
-languageCode = 'ru'
+baseURL = "https://rianvy.github.io/blog/"
 defaultContentLanguage = "ru"
-title = 'Blog Rianvy'
+defaultContentLanguageInSubdir = true
+title = "Blog Rianvy"
 theme = "dream"
+
+[languages]
+  [languages.ru]
+    languageName = "Русский"
+    languageCode = "ru"
+    contentDir = "content/russian"
+    weight = 1
+
+  [languages.en]
+    languageName = "English"
+    languageCode = "en"
+    contentDir = "content/english"
+    weight = 2
+
 
 # [services]
 # [services.disqus]
@@ -22,8 +36,8 @@ darkTheme = "forest"
 author = "Rianvy"
 # description = ""
 avatar = "img/avatar.jpg"
-headerTitle = "{Rianvy}.dev: блог об IT"
-motto = "Документируй сегодня то, что забудешь завтра"
+motto = "Document today what you will forget tomorrow"
+headerTitle = "Blog about IT"
 
 footerBottomText = "Powered by ❤️"
 
@@ -68,3 +82,7 @@ block = true
 
 [params.navItems]
 github = { href = "https://github.com/rianvy", target = "_blank", icon = "logo-github", title = "GitHub" }
+
+[params.navLang]
+ru = { href = "/blog/ru/", icon = "language", title = "Русский" }
+en = { href = "/blog/en/", icon = "language", title = "English" }

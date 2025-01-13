@@ -21,3 +21,11 @@
 {{ with site.Params.navItems }}
 {{ partial "navCustomItems.html" (dict "navItems" $navItems "mobile" true) }}
 {{ end }}
+
+{{ range $key, $lang := .Site.Params.navLang }}
+  <li>
+	<a href="{{ $lang.href }}">
+	  <ion-icon name="{{ $lang.icon }}"></ion-icon> {{ $lang.title }}
+	</a>
+  </li>
+{{ end }}

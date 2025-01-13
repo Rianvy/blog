@@ -24,17 +24,30 @@ jobs:
       - name: Setup Hugo
         run: |
           curl -L -o /tmp/hugo.tar.gz 'https://github.com/gohugoio/hugo/releases/download/v0.110.0/hugo_extended_0.110.0_linux-amd64.tar.gz'
-          tar -C ${RUNNER_TEMP} -zxvf /tmp/hugo.tar.gz hugo          
+          tar -C ${RUNNER_TEMP} -zxvf /tmp/hugo.tar.gz hugo
+
       - name: Build
         run: ${RUNNER_TEMP}/hugo
 
       - name: Deploy
         if: github.ref == 'refs/heads/main'
         run: |
-          cp -R public/* ${GITHUB_WORKSPACE}/built-site/
+          # Переходим в директорию с клонированной веткой gh-pages
           cd ${GITHUB_WORKSPACE}/built-site
+          
+          # Удаляем все файлы и директории, кроме .git
+          find . -mindepth 1 -not -name '.git' -exec rm -rf {} +
+          
+          # Копируем содержимое сгенерированного сайта в текущую директорию
+          cp -R ${GITHUB_WORKSPACE}/public/* .
+          
+          # Добавляем изменения в Git
           git add .
           git config user.name 'Rianvy'
           git config user.email 'blackghost.v1@gmail.com'
-          git commit -m 'Updated site'
-          git push          
+          
+          # Если изменений нет, команда git commit завершится ошибкой, поэтому используем || echo
+          git commit -m 'Updated site' || echo "No changes to commit"
+          
+          # Публикуем изменения
+          git push

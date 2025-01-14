@@ -70,11 +70,11 @@ showTableOfContents = true
 showSummaryCoverInPost = true
 imageZoomableInPost = true
 showPrevNextPost = true
-# reorderShares = ["x", "facebook", "whatsapp"]
+# reorderShares = ["x", "facebook", "whatsapp", "share"]
 
-# [params.advanced]
-# customCSS = ["css/custom.css"]
-# customJS = []
+[params.advanced]
+customCSS = ["css/custom.css"]
+customJS = ["js/custom.js"]
 
 [markup]
 [markup.goldmark.parser.attribute]

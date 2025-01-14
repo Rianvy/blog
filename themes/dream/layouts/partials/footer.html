@@ -1,7 +1,13 @@
+<div id="top-scroller">
+  <a href="#the-top" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary">
+    <ion-icon name="arrow-up" role="img" class=" md flip-rtl hydrated"></ion-icon>
+  </a>
+</div>
+
 {{ if site.Params.zenMode }}
-<footer class="flex justify-between items-center gap-2 max-w-[65ch] mx-auto px-4 md:px-0 py-12">
+<footer class="flex justify-between items-center gap-2 max-w-[65ch] mx-auto px-4 md:px-0 py-12" id="site-footer">
 {{ else }}
-<footer class="flex justify-between items-center gap-2 px-4 py-12">
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
 {{ end }}
   {{ partial "footerLeft.html" . }}
   {{ partial "footerRight.html" . }}

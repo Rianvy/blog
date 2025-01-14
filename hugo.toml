@@ -19,8 +19,8 @@ theme = "dream"
 
 
 # [services]
-# [services.disqus]
-# shortname = ""
+[services.disqus]
+shortname = "disqus_ZlYjX5zCzv"
 [services.googleAnalytics]
 ID = "G-V1CKYK7EQD"
 

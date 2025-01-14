@@ -20,7 +20,7 @@ theme = "dream"
 
 # [services]
 [services.disqus]
-shortname = "disqus_ZlYjX5zCzv"
+shortname = "https-0x69-online-ru"
 [services.googleAnalytics]
 ID = "G-V1CKYK7EQD"
 

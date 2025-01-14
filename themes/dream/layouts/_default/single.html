@@ -76,10 +76,7 @@
 	  <div class="tags mt-4">
 		{{ $lang := $.Site.Language.Lang }}  {{/* сохраняем внешний контекст */}}
 		{{ range .Params.tags }}
-		  <a class="badge h-6 no-underline hover:badge-primary mr-2"
-			 href="{{ printf "/blog/%s/tags/%s/" $lang (. | urlize) | absURL }}">
-			 {{ . }}
-		  </a>
+		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
 		{{ end }}
 	  </div>
 	{{ end }}

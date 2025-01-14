@@ -15,6 +15,19 @@
                 href="https://0x69.online/en/tags/.htaccess/"
                 />
   </url><url>
+    <loc>https://0x69.online/en/</loc>
+    <lastmod>2025-01-12T21:27:20+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.online/ru/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.online/en/"
+                />
+  </url><url>
     <loc>https://0x69.online/en/categories/administration/</loc>
     <lastmod>2025-01-12T21:27:20+03:00</lastmod>
   </url><url>
@@ -29,19 +42,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://0x69.online/en/tags/apache/"
-                />
-  </url><url>
-    <loc>https://0x69.online/en/</loc>
-    <lastmod>2025-01-12T21:27:20+03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.online/ru/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.online/en/"
                 />
   </url><url>
     <loc>https://0x69.online/en/categories/</loc>

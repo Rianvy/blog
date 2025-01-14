@@ -1,7 +1,7 @@
 baseURL = "https://0x69.online/"
 defaultContentLanguage = "ru"
 defaultContentLanguageInSubdir = true
-title = "Blog Rianvy"
+title = "0x69.online"
 theme = "dream"
 
 [languages]
@@ -34,7 +34,7 @@ darkTheme = "forest"
 # backgroundImageDark = ""
 
 author = "Rianvy"
-# description = ""
+description = "В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет."
 avatar = "img/avatar.jpg"
 motto = "Document today what you will forget tomorrow"
 headerTitle = "Blog about IT"

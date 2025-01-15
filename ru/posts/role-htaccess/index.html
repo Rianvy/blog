@@ -1189,7 +1189,10 @@
   
     <script type="module">
       import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
-      mediumZoom('#dream-single-post-content img')
+      mediumZoom('#dream-single-post-content img', {
+	  scrollOffset: 0,
+	  background: 'rgba(25, 18, 25, .9)',
+	  })
     </script>
   
 

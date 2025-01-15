@@ -1,0 +1,51 @@
+#top-scroller {
+    position: sticky;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    pointer-events: none;
+    display: none;
+}
+
+#top-scroller a {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    #top-scroller {
+        margin: 30px;
+    }
+
+    #top-scroller a {
+        pointer-events: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        border-radius: 25px;
+    }
+}
+
+[data-theme="emerald"] #disqus_thread {
+  color-scheme: none;
+  background-color: #fff;
+}
+ 
+[data-theme="emerald"] #disqus_thread a {
+  color: #333c4d;
+}
+ 
+[data-theme="forest"] #disqus_thread {
+  color-scheme: none;
+  background-color: #171213;
+}
+ 
+[data-theme="forest"] #disqus_thread a {
+  color: #cbc9ca;
+}

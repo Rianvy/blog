@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role of the .htaccess file in Apache server configuration | 0x69.online</title>
+
+    
+<link href="/favicon.ico" rel="icon" type="image/x-icon" />
+
+
+<link rel="canonical" href="https://0x69.online/en/posts/role-htaccess/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content=".htaccess allows you to create your own Apache server management configuration in directories or hosting settings.
+" />
+
+
+<meta name="keywords" content="Servers,Apache,.htaccess,Web Security,Performance">
+
+
+
+<meta name="generator" content="Hugo 0.110.0">
+
+
+<meta property="og:title" content="Role of the .htaccess file in Apache server configuration" />
+<meta property="og:description" content=".htaccess allows you to create your own Apache server management configuration in directories or hosting settings." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0x69.online/en/posts/role-htaccess/" /><meta property="og:image" content="https://0x69.online/zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-01-12T21:27:20+03:00" />
+<meta property="article:modified_time" content="2025-01-12T21:27:20+03:00" />
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://0x69.online/zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg"/>
+
+<meta name="twitter:title" content="Role of the .htaccess file in Apache server configuration"/>
+<meta name="twitter:description" content=".htaccess allows you to create your own Apache server management configuration in directories or hosting settings."/>
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav x-data="{ isSticky: false }"
+  x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })"
+  class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
+  :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/img/avatar.jpg" alt="Blog about IT" />
+        </div>
+      </div>
+
+      
+      <div>
+        
+        <a href="/en/" class="text-lg font-semibold cursor-pointer">
+           0x69.online &lt;/&gt;
+        </a>
+        
+        
+        <div class="text-base-content/60 text-sm">To iterate is human, to recurse divine</div>
+        
+      </div>
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+<li>
+  <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="About">
+    <ion-icon name="information-circle"></ion-icon>About</div>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="group inline-flex items-center p-2 cursor-pointer" href="/en/search" title="Search">
+    <ion-icon name="search"></ion-icon>
+    Search
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/index.xml" title="RSS">
+    <ion-icon name="logo-rss"></ion-icon>
+    RSS
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="https://github.com/rianvy" target="_blank" title="GitHub">
+    
+    <ion-icon name="logo-github"></ion-icon>
+    
+    GitHub
+  </a>
+</li>
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+      
+      <div role="link" tabindex="0"
+        class="text-sm font-semibold cursor-pointer hover:underline"
+        @click="flip = !flip"
+        title="About"
+      >About</div>
+      
+      
+
+      
+      
+        
+      
+
+      
+
+      
+      
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/search" title="Search">
+  <ion-icon class="group-hover:text-primary-content" name="search"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+
+
+
+  
+  <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://github.com/rianvy" target="_blank" title="GitHub">
+    <ion-icon class="group-hover:text-primary-content" name="logo-github"></ion-icon>
+  </a>
+  
+
+
+
+      
+
+	  <div class="dropdown dropdown-end dropdown-hover">
+	    <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
+	  	<ion-icon class="group-hover:text-primary-content text-xl" name="language"></ion-icon>
+	    </div>
+	    <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+	  	
+	  	  <li>
+	  		<a href="/en/">
+	  		  <ion-icon name="language"></ion-icon> English
+	  		</a>
+	  	  </li>
+	  	
+	  	  <li>
+	  		<a href="/ru/">
+	  		  <ion-icon name="language"></ion-icon> Русский
+	  		</a>
+	  	  </li>
+	  	
+	    </ul>
+	  </div>
+	  
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
+          <ion-icon class="group-hover:text-primary-content text-xl" name="menu"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+          
+          
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/index.xml" title="RSS">
+    <ion-icon name="logo-rss"></ion-icon>
+    RSS
+  </a>
+</li>
+
+
+          
+
+          
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </ul>
+      </div>
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block"></div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      <meta itemprop="name" content="Role of the .htaccess file in Apache server configuration">
+<meta itemprop="description" content=".htaccess allows you to create your own Apache server management configuration in directories or hosting settings."><meta itemprop="datePublished" content="2025-01-12T21:27:20+03:00" />
+<meta itemprop="dateModified" content="2025-01-12T21:27:20+03:00" />
+<meta itemprop="wordCount" content="1050"><meta itemprop="image" content="https://0x69.online/zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg">
+<meta itemprop="keywords" content="Servers,Apache,.htaccess,Web Security,Performance," />
+
+      <header>
+        <h1 itemprop="headline">Role of the .htaccess file in Apache server configuration</h1>
+        <p class="text-sm">
+          
+            Sunday, Jan 12, 2025
+          
+
+          | <span>5 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Sunday, Jan 12, 2025
+            </span>
+          
+        </p>
+        <div class="flex justify-between">
+          <div class="flex items-center">
+  
+  <div class="avatar mr-1">
+    <div class="w-8 rounded-full">
+      <img class="my-0" src="/img/avatar.jpg" alt="Rianvy" />
+    </div>
+  </div>
+  
+
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+  
+    
+      <span itemprop="name">Rianvy</span>
+    
+  
+  </span>
+</div>
+
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Role%20of%20the%20.htaccess%20file%20in%20Apache%20server%20configuration&amp;url=https://0x69.online/en/posts/role-htaccess/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=https://0x69.online/en/posts/role-htaccess/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Role%20of%20the%20.htaccess%20file%20in%20Apache%20server%20configuration%20https://0x69.online/en/posts/role-htaccess/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://t.me/share/url?url=https://0x69.online/en/posts/role-htaccess/&amp;resubmit=true&amp;title=Role%20of%20the%20.htaccess%20file%20in%20Apache%20server%20configuration" target="_blank" rel="noopener noreferrer"
+      title="Share on Telegram">
+      <ion-icon class="group-hover:text-primary-content" name="send"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+        <img src="zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg" alt="Role of the .htaccess file in Apache server configuration" />
+        
+
+        <p>.htaccess allows you to create your own Apache server management configuration in directories or hosting settings.</p>
+<h2 id="introduction-to-htaccess">Introduction to .htaccess</h2>
+<blockquote>
+<p>The <strong>.htaccess</strong> (Hypertext Access) file is an Apache web server configuration file that allows you to customize the server at the directory or hosting level. All rules written in .htaccess apply to the current directory and all its subdirectories (unless they have their own .htaccess).</p>
+</blockquote>
+<h3 id="features-of-htaccess">Features of .htaccess:</h3>
+<ul>
+<li>Apache checks the file on every request to the site</li>
+<li>Changes take effect on the next request to the server</li>
+<li>Some directives (especially those related to PHP modules) may require a server restart.</li>
+<li>Apache global settings may restrict available directives</li>
+<li>Syntax errors result in error 500</li>
+<li>Affects performance with large number of rules</li>
+</ul>
+<h2 id="basic-configuration">Basic configuration</h2>
+<h3 id="enabling-the-rewrite-module">Enabling the Rewrite module</h3>
+<p>To work with URLs, you must activate the module:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteEngine <span style="color:#66d9ef">On</span>
+</span></span></code></pre></div><h2 id="access-control">Access Control</h2>
+<h3 id="restrict-access-by-ip">Restrict access by IP</h3>
+<p>These rules are especially useful for:</p>
+<ul>
+<li>Protecting the admin panel</li>
+<li>Restrict access to the test version of the site</li>
+<li>Blocking spam bots</li>
+<li>Geo-restrict access to content</li>
+</ul>
+<h4 id="single-ip-ban">Single IP ban</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>Order Deny,Allow
+</span></span><span style="display:flex;"><span>Deny from <span style="color:#ae81ff">123.123.123.123</span>.123
+</span></span></code></pre></div><p><strong>Practical application:</strong></p>
+<ul>
+<li>Blocking spammers or malicious users</li>
+<li>Temporarily restricting access to problematic users</li>
+<li>Protect against DDoS attacks from specific addresses</li>
+</ul>
+<p><strong>Usage example:</strong> You have an online store and you have noticed suspicious activity from a certain IP address - multiple attempts to find the password to the admin area. You can temporarily block this IP.</p>
+<h4 id="allow-access-only-to-a-specific-ip">Allow access only to a specific IP</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>Order Deny,Allow
+</span></span><span style="display:flex;"><span>Deny from <span style="color:#66d9ef">all</span>
+</span></span><span style="display:flex;"><span>Allow from <span style="color:#ae81ff">123.123.123.123</span>.123
+</span></span></code></pre></div><p><strong>Practical application:</strong></p>
+<ul>
+<li>Access to the staging-version of the site for developers only</li>
+<li>Restrict access to admin panel by office IP</li>
+<li>Protecting confidential sections of the site</li>
+</ul>
+<p><strong>Usage Example:</strong> You have a test version of your site that should be accessible only by company employees. You can allow access only from office IP addresses.</p>
+<h2 id="encoding-and-language-settings">Encoding and language settings</h2>
+<h3 id="default-encoding">Default encoding</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>AddDefaultCharset UTF-8
+</span></span></code></pre></div><p><strong>What it&rsquo;s for:</strong></p>
+<ul>
+<li>Proper display of special characters</li>
+<li>Support for multilingual content</li>
+<li>Prevent coding problems in forms</li>
+</ul>
+<p><strong>Usage Example:</strong> You have a multilingual site with Russian and Chinese content. Setting UTF-8 will ensure that characters from both languages are displayed correctly.</p>
+<h2 id="error-handling">Error handling</h2>
+<h3 id="custom-error-pages">Custom error pages</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>ErrorDocument <span style="color:#ae81ff">404</span> <span style="color:#e6db74">/errors/404.html</span>
+</span></span><span style="display:flex;"><span>ErrorDocument <span style="color:#ae81ff">403</span> <span style="color:#e6db74">/errors/403.html</span>
+</span></span><span style="display:flex;"><span>ErrorDocument <span style="color:#ae81ff">401</span> <span style="color:#e6db74">/errors/401.html</span>
+</span></span><span style="display:flex;"><span>ErrorDocument <span style="color:#ae81ff">500</span> <span style="color:#e6db74">/errors/500.html</span>
+</span></span></code></pre></div><p><strong>Practical application:</strong></p>
+<ul>
+<li>Improving user experience</li>
+<li>Retaining visitors when errors occur</li>
+<li>Branding error pages</li>
+<li>Providing useful information when failures occur</li>
+</ul>
+<p><strong>Usage Example:</strong>
+On a 404 page you can:</p>
+<ul>
+<li>Show popular sections of the site</li>
+<li>Add a search form</li>
+<li>Suggest contacting support</li>
+<li>Show a sitemap</li>
+</ul>
+<h2 id="manage-urls-and-redirects">Manage URLs and redirects</h2>
+<h3 id="redirect-to-html">Redirect to .html</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteCond %{REQUEST_URI} (.*/[^/.]+)($|\?)
+</span></span><span style="display:flex;"><span>RewriteRule .* %1.html [R=301,L]
+</span></span><span style="display:flex;"><span>RewriteRule ^(.*)/$ /$1.html [R=301,L]
+</span></span></code></pre></div><p><strong>Practical application:</strong></p>
+<ul>
+<li>Creating clean URLs without extensions</li>
+<li>SEO optimization</li>
+<li>Simplifying site structure</li>
+<li>Migration from old URL structure</li>
+</ul>
+<p><strong>Usage Example:</strong>
+Instead of URLs like:</p>
+<ul>
+<li><code>site.ru/about.html</code></li>
+<li><code>site.ru/contacts.html</code></li>
+</ul>
+<p>Users will be able to use:</p>
+<ul>
+<li><code>site.ru/about</code></li>
+<li><code>site.ru/contacts</code></li>
+</ul>
+<h3 id="managing-slashes-in-urls">Managing slashes in URLs</h3>
+<h4 id="delete-end-slash">Delete end slash</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteCond %{REQUEST_FILENAME} !-d
+</span></span><span style="display:flex;"><span>RewriteRule ^(.+)/$ /$1 [R=301,L]
+</span></span></code></pre></div><p><strong>Why it&rsquo;s needed:</strong></p>
+<ul>
+<li>URL uniformity</li>
+<li>Prevent duplicate pages</li>
+<li>SEO improvement</li>
+<li>Clean link structure</li>
+</ul>
+<p><strong>Usage Example:</strong>
+All URLs of the form:</p>
+<ul>
+<li><code>site.ru/blog/</code>.</li>
+<li><code>site.ru/about/</code>.
+Will be automatically converted to:</li>
+<li><code>site.ru/blog</code></li>
+<li><code>site.ru/about</code></li>
+</ul>
+<h3 id="handling-www-and-no-www">Handling www and no www</h3>
+<h4 id="redirect-from-www-to-without-www">Redirect from www to without www</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+</span></span><span style="display:flex;"><span>RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+</span></span></code></pre></div><p><strong>Important for:</strong></p>
+<ul>
+<li>SEO optimization</li>
+<li>Preventing duplicate pages</li>
+<li>Link consistency</li>
+<li>Proper functioning of cookies</li>
+</ul>
+<p><strong>Example of use:</strong>
+All URLs of the form:</p>
+<ul>
+<li><code>www.site.ru/page</code></li>
+<li><code>www.site.ru/blog/post</code>
+Will be automatically converted to:</li>
+<li><code>site.ru/page</code></li>
+<li><code>site.ru/blog/post</code>.</li>
+</ul>
+<h4 id="redirect-without-www-to-www">Redirect without www to www</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteCond %{HTTP_HOST} ^site.ru$ [NC]
+</span></span><span style="display:flex;"><span>RewriteRule ^(.*)$ http://www.site.ru/$1 [R=301,L]
+</span></span></code></pre></div><h2 id="security">Security</h2>
+<h3 id="hotlink-protection">Hotlink protection</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteEngine <span style="color:#66d9ef">On</span>
+</span></span><span style="display:flex;"><span>RewriteCond %{HTTP_REFERER} !^$
+</span></span><span style="display:flex;"><span>RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?site\.ru [NC].
+</span></span><span style="display:flex;"><span>RewriteRule \.(jpg|jpeg|png|gif)$ <span style="color:#e6db74">/images/stop-hotlinking.jpg</span> [NC,R,L]
+</span></span></code></pre></div><p><strong>Practical application:</strong></p>
+<ul>
+<li>Copyright protection</li>
+<li>Saving traffic</li>
+<li>Prevent image theft</li>
+<li>Protection from parasitic use of resources</li>
+</ul>
+<p><strong>Application Example:</strong>
+If someone tries to embed your image on their website:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">“http://your-site.ru/images/expensive-photo.jpg”</span>&gt;
+</span></span></code></pre></div><p>A warning stub will be shown instead of your image.</p>
+<h3 id="bruteforce-protection">Bruteforce protection</h3>
+<p>Comprehensive approach using mod_security or limiting the number of requests:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span><span style="color:#75715e"># Limit the number of requests</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_ratelimit.c</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Ограничение до 5 запросов в секунду</span>
+</span></span><span style="display:flex;"><span>    SetOutputFilter RATE_LIMIT
+</span></span><span style="display:flex;"><span>    SetEnv rate-limit <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Blocking suspicious patterns</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_security2.c</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    SecRule REQUEST_URI <span style="color:#e6db74">&#34;/administrator\.php&#34;</span> \
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;phase:1,deny,status:403,id:1000,msg:&#39;Suspicious admin access attempt&#39;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Additional safety rules</span>
+</span></span><span style="display:flex;"><span>SetEnvIfNoCase <span style="color:#66d9ef">User</span>-Agent <span style="color:#e6db74">&#34;^libwww-perl*&#34;</span> block_bot
+</span></span><span style="display:flex;"><span>Deny from env=block_bot
+</span></span></code></pre></div><p><strong>Applies to:</strong></p>
+<ul>
+<li>Protect the admin panel</li>
+<li>Prevent password mining</li>
+<li>Blocking automated attacks</li>
+<li>Protect authorization forms</li>
+</ul>
+<h2 id="performance-optimization">Performance optimization</h2>
+<h3 id="static-content-caching">Static Content Caching</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_expires.c</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  ExpiresActive <span style="color:#66d9ef">On</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Images</span>
+</span></span><span style="display:flex;"><span>  ExpiresByType image/jpg <span style="color:#e6db74">&#34;access plus 1 month&#34;</span>
+</span></span><span style="display:flex;"><span>  ExpiresByType image/jpeg <span style="color:#e6db74">&#34;access plus 1 month&#34;</span>
+</span></span><span style="display:flex;"><span>  ExpiresByType image/gif <span style="color:#e6db74">&#34;access plus 1 month&#34;</span>
+</span></span><span style="display:flex;"><span>  ExpiresByType image/png <span style="color:#e6db74">&#34;access plus 1 month&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># CSS, JavaScript</span>
+</span></span><span style="display:flex;"><span>  ExpiresByType text/css <span style="color:#e6db74">&#34;access plus 1 week&#34;</span>
+</span></span><span style="display:flex;"><span>  ExpiresByType application/javascript <span style="color:#e6db74">&#34;access plus 1 week&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Add versioning via GET parameter to update files</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Example: style.css?v=1.2</span>
+</span></span><span style="display:flex;"><span>  RewriteCond %{REQUEST_FILENAME} \.(css|js|jpg|jpeg|png|gif)$
+</span></span><span style="display:flex;"><span>  RewriteCond %{QUERY_STRING} !^v=
+</span></span><span style="display:flex;"><span>  RewriteRule ^(.*)$ $1?v=1.0 [L]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
+</span></span></code></pre></div><p><strong>Benefits:</strong></p>
+<ul>
+<li>Reduced server load</li>
+<li>Faster page loading</li>
+<li>Saving traffic</li>
+<li>Improved user experience</li>
+</ul>
+<p><strong>Important Note:</strong> When updating files, you must:</p>
+<ul>
+<li>Change the version in the GET parameter</li>
+<li>Or use new file names</li>
+<li>Or clear the client-side cache</li>
+</ul>
+<h3 id="gzip-compression">GZIP compression</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_deflate.c</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Compress only text files</span>
+</span></span><span style="display:flex;"><span>    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css
+</span></span><span style="display:flex;"><span>    AddOutputFilterByType DEFLATE application/xml application/xhtml+xml
+</span></span><span style="display:flex;"><span>    AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Do not compress already compressed formats</span>
+</span></span><span style="display:flex;"><span>    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|pdf|zip|rar)$ no-gzip dont-vary
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
+</span></span></code></pre></div><p><strong>Efficiency:</strong></p>
+<ul>
+<li>Reduces HTML size by up to 70%</li>
+<li>CSS compression up to 80%</li>
+<li>Compress JavaScript up to 60%</li>
+<li>Speed up site loading</li>
+</ul>
+<h3 id="optimization-for-spa">Optimization for SPA</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_rewrite.c</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    RewriteEngine <span style="color:#66d9ef">On</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Specify the correct path if the application is in a subdirectory</span>
+</span></span><span style="display:flex;"><span>    RewriteBase <span style="color:#e6db74">/path/to/app/</span>
+</span></span><span style="display:flex;"><span>    RewriteRule ^index\.html$ - [L]
+</span></span><span style="display:flex;"><span>    RewriteCond %{REQUEST_FILENAME} !-f
+</span></span><span style="display:flex;"><span>    RewriteCond %{REQUEST_FILENAME} !-d
+</span></span><span style="display:flex;"><span>    RewriteCond %{REQUEST_FILENAME} !-l
+</span></span><span style="display:flex;"><span>    RewriteRule . <span style="color:#e6db74">/path/to/app/index.html</span> [L]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
+</span></span></code></pre></div><p><strong>Note:</strong> If your application is in the root of the site, use <code>RewriteBase /</code>. For a subdirectory, specify the appropriate path.</p>
+<h2 id="debugging-and-monitoring">Debugging and monitoring</h2>
+<h3 id="error-logging">Error Logging</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>php_flag log_errors <span style="color:#66d9ef">on</span>
+</span></span><span style="display:flex;"><span>php_value error_log <span style="color:#e6db74">/path/to/error.log</span>
+</span></span></code></pre></div><h3 id="customization-for-development">Customization for development</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>php_flag display_errors <span style="color:#66d9ef">on</span>
+</span></span><span style="display:flex;"><span>php_value error_reporting E_ALL
+</span></span></code></pre></div><h2 id="recommendations-for-use">Recommendations for use</h2>
+<h3 id="best-practices">Best Practices</h3>
+<ul>
+<li>Create backups before making changes</li>
+<li>Test in a secure environment</li>
+<li>Document changes</li>
+<li>Group related directives</li>
+<li>Check logs regularly</li>
+<li>Optimize the number of rules</li>
+<li>Use up-to-date security methods</li>
+<li>Monitor performance</li>
+</ul>
+<h3 id="typical-errors">Typical errors</h3>
+<ul>
+<li>Incorrect RewriteRule order</li>
+<li>Lack of condition checking</li>
+<li>Overuse of .htaccess</li>
+<li>Lack of error handling</li>
+<li>Insecure permissions settings</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>The .htaccess file is a powerful Apache customization tool that, when used correctly, can greatly improve the security and performance of your site. However, it is important to keep in mind the potential impact on performance and the need to thoroughly test all changes.</p>
+<h2 id="useful-resources">Useful Resources</h2>
+<ul>
+<li><a href="https://httpd.apache.org/docs/" target="_blank">Apache Official Documentation</a>
+</li>
+<li><a href="https://httpd.apache.org/docs/2.4/misc/security_tips.html" target="_blank">Apache Security Guide</a>
+</li>
+<li><a href="https://htaccess.madewithlove.com/" target="_blank">.htaccess Rule Generator</a>
+</li>
+</ul>
+      </section>
+
+	
+	  <div class="tags mt-4">
+		  
+		
+		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/en/tags/servers/">Servers</a>
+		
+		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/en/tags/apache/">Apache</a>
+		
+		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/en/tags/.htaccess/">.htaccess</a>
+		
+		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/en/tags/web-security/">Web Security</a>
+		
+		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/en/tags/performance/">Performance</a>
+		
+	  </div>
+	
+
+
+      
+      <div class="divider"></div>
+      <div class="flex flex-col md:flex-row justify-between gap-4 py-4">
+        
+        <div></div>
+        
+
+        
+        <div></div>
+        
+      </div>
+      
+
+      
+      <div class="divider"></div>
+
+      <section class="space-y-4">
+        
+<article>
+  <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+        this.page.identifier = '\/en\/posts\/role-htaccess\/';
+        this.page.title = 'Role of the .htaccess file in Apache server configuration';
+        this.page.url = 'https:\/\/0x69.online\/en\/posts\/role-htaccess\/';
+
+        
+    };
+    function initDisqus() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "https-0x69-online-ru" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    };
+    setTimeout(() => {
+        initDisqus();
+    }, 3000);
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+
+
+
+
+
+
+
+
+      </section>
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+
+    
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-to-htaccess">Introduction to .htaccess</a>
+      <ul>
+        <li><a href="#features-of-htaccess">Features of .htaccess:</a></li>
+      </ul>
+    </li>
+    <li><a href="#basic-configuration">Basic configuration</a>
+      <ul>
+        <li><a href="#enabling-the-rewrite-module">Enabling the Rewrite module</a></li>
+      </ul>
+    </li>
+    <li><a href="#access-control">Access Control</a>
+      <ul>
+        <li><a href="#restrict-access-by-ip">Restrict access by IP</a></li>
+      </ul>
+    </li>
+    <li><a href="#encoding-and-language-settings">Encoding and language settings</a>
+      <ul>
+        <li><a href="#default-encoding">Default encoding</a></li>
+      </ul>
+    </li>
+    <li><a href="#error-handling">Error handling</a>
+      <ul>
+        <li><a href="#custom-error-pages">Custom error pages</a></li>
+      </ul>
+    </li>
+    <li><a href="#manage-urls-and-redirects">Manage URLs and redirects</a>
+      <ul>
+        <li><a href="#redirect-to-html">Redirect to .html</a></li>
+        <li><a href="#managing-slashes-in-urls">Managing slashes in URLs</a></li>
+        <li><a href="#handling-www-and-no-www">Handling www and no www</a></li>
+      </ul>
+    </li>
+    <li><a href="#security">Security</a>
+      <ul>
+        <li><a href="#hotlink-protection">Hotlink protection</a></li>
+        <li><a href="#bruteforce-protection">Bruteforce protection</a></li>
+      </ul>
+    </li>
+    <li><a href="#performance-optimization">Performance optimization</a>
+      <ul>
+        <li><a href="#static-content-caching">Static Content Caching</a></li>
+        <li><a href="#gzip-compression">GZIP compression</a></li>
+        <li><a href="#optimization-for-spa">Optimization for SPA</a></li>
+      </ul>
+    </li>
+    <li><a href="#debugging-and-monitoring">Debugging and monitoring</a>
+      <ul>
+        <li><a href="#error-logging">Error Logging</a></li>
+        <li><a href="#customization-for-development">Customization for development</a></li>
+      </ul>
+    </li>
+    <li><a href="#recommendations-for-use">Recommendations for use</a>
+      <ul>
+        <li><a href="#best-practices">Best Practices</a></li>
+        <li><a href="#typical-errors">Typical errors</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#useful-resources">Useful Resources</a></li>
+  </ul>
+</nav>
+    
+  </div>
+</div>
+
+
+            <div id="top-scroller">
+  <a href="#the-top" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary">
+    <ion-icon name="arrow-up" role="img" class=" md flip-rtl hydrated"></ion-icon>
+  </a>
+</div>
+
+
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 0x69.online
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+
+  <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="language" class="text-2xl md hydrated" role="img"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+		
+		  <li>
+			<a href="/en/">
+			  <ion-icon name="language"></ion-icon> English
+			</a>
+		  </li>
+		
+		  <li>
+			<a href="/ru/">
+			  <ion-icon name="language"></ion-icon> Русский
+			</a>
+		  </li>
+		
+      </ul>
+</div>
+
+<div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+  
+  
+  <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+    <article
+      class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30"
+    >
+      <div class="card-body">
+        <div class="card-title">A brief summary of my skills</div>
+
+        <div class="prose dark:prose-invert">
+          <ul>
+<li><strong>C# and C++</strong> - high-performance development ⚡</li>
+<li><strong>PHP (Laravel)</strong> and <strong>JavaScript</strong> - creating web applications and interactive services 🚀</li>
+<li><strong>MySQL</strong> and <strong>PostgreSQL</strong> - reliable relational databases 💾</li>
+<li>Adaptive <strong>HTML</strong>, <strong>CSS</strong> and <strong>JS</strong> - modern design for any device 💡</li>
+</ul>
+
+        </div>
+      </div>
+    </article>
+  </div>
+  
+  <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+    <article
+      class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30"
+    >
+      <div class="card-body">
+        <div class="card-title">About me</div>
+
+        <div class="prose dark:prose-invert">
+          <p>Hi! I&rsquo;m <strong>Rianvy</strong> (this is my pseudonym), and my real name is Maxim Alexandrov. I&rsquo;m 27 years old, I live in Tula. I&rsquo;m a senier developer and designer 😎<br>
+In this blog I share notes about technology, life and everything that inspires me 🚀</p>
+<p>If you have any questions or ideas, write in the comments or send an email to my inbox 📩<br>
+I&rsquo;d be happy to chat and maybe work together 🤝</p>
+
+        </div>
+      </div>
+    </article>
+  </div>
+  
+  
+
+  
+  <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+    <article
+      class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30"
+    >
+      <div class="card-body">
+        <div class="card-title">Social Links</div>
+
+        <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://codepen.io/Rianvy" target="_blank" title="Codepen">
+      <ion-icon name="logo-codepen"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+      </div>
+    </article>
+  </div>
+  
+
+  
+</div>
+
+            
+
+            <div id="top-scroller">
+  <a href="#the-top" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary">
+    <ion-icon name="arrow-up" role="img" class=" md flip-rtl hydrated"></ion-icon>
+  </a>
+</div>
+
+
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 0x69.online
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+
+  <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="language" class="text-2xl md hydrated" role="img"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+		
+		  <li>
+			<a href="/en/">
+			  <ion-icon name="language"></ion-icon> English
+			</a>
+		  </li>
+		
+		  <li>
+			<a href="/ru/">
+			  <ion-icon name="language"></ion-icon> Русский
+			</a>
+		  </li>
+		
+      </ul>
+</div>
+
+<div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "forest"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+    
+
+
+
+
+
+
+  
+    <script type="module">
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img')
+    </script>
+  
+
+
+
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1CKYK7EQD"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V1CKYK7EQD', { 'anonymize_ip': false });
+}
+</script>
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

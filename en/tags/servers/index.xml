@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Servers on 0x69.online</title>
+    <link>https://0x69.online/en/tags/servers/</link>
+    <description>Recent content in Servers on 0x69.online</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 12 Jan 2025 21:27:20 +0300</lastBuildDate><atom:link href="https://0x69.online/en/tags/servers/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Role of the .htaccess file in Apache server configuration</title>
+      <link>https://0x69.online/en/posts/role-htaccess/</link>
+      <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
+      
+      <guid>https://0x69.online/en/posts/role-htaccess/</guid>
+      <description>&lt;p&gt;.htaccess allows you to create your own Apache server management configuration in directories or hosting settings.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

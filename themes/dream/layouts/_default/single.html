@@ -57,6 +57,19 @@
             {{ end }}</span>
           {{ end }}
         </p>
+
+		{{ if .Params.categories }}
+		<div class="categories flex justify-between mt-4 mb-4">
+		<div class="flex items-center gap-2">
+		<ion-icon class="group-hover:text-primary-content md hydrated" name="grid" role="img"></ion-icon>
+		  {{ $lang := $.Site.Language.Lang }}  {{/* сохраняем внешний контекст */}}
+		  {{ range .Params.categories }}
+			<a class="badge h-6 no-underline hover:badge-primary mr-2" href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+		  {{ end }}
+		</div>
+		</div>
+		{{ end }}
+
         <div class="flex justify-between">
           {{ partial "author.html" (dict "Params" .Params "template" "single") }}
 

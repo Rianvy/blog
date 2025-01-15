@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="ru"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Роль файла .htaccess в настройке сервера Apache | 0x69.online</title>
+
+    
+<link href="/favicon.ico" rel="icon" type="image/x-icon" />
+
+
+<link rel="canonical" href="https://0x69.online/posts/role-htaccess/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content=".htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга.
+" />
+
+
+<meta name="keywords" content="Серверы,Apache,.htaccess,Веб-безопасность,Производительность">
+
+
+
+<meta name="generator" content="Hugo 0.110.0">
+
+
+<meta property="og:title" content="Роль файла .htaccess в настройке сервера Apache" />
+<meta property="og:description" content=".htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0x69.online/posts/role-htaccess/" /><meta property="og:image" content="https://0x69.online/zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-01-12T21:27:20+03:00" />
+<meta property="article:modified_time" content="2025-01-12T21:27:20+03:00" />
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://0x69.online/zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg"/>
+
+<meta name="twitter:title" content="Роль файла .htaccess в настройке сервера Apache"/>
+<meta name="twitter:description" content=".htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга."/>
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav x-data="{ isSticky: false }"
+  x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })"
+  class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
+  :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Повернуть!">
+        <div class="h-10 rounded-full">
+          <img src="/img/avatar.jpg" alt="Blog about IT" />
+        </div>
+      </div>
+
+      
+      <div>
+        
+        <a href="/" class="text-lg font-semibold cursor-pointer">
+           0x69.online: блог об IT
+        </a>
+        
+        
+        <div class="text-base-content/60 text-sm">Документируй сегодня то, что забудешь завтра</div>
+        
+      </div>
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+<li>
+  <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="Обо мне">
+    <ion-icon name="information-circle"></ion-icon>Обо мне</div>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="group inline-flex items-center p-2 cursor-pointer" href="/search" title="Поиск">
+    <ion-icon name="search"></ion-icon>
+    Поиск
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/index.xml" title="RSS">
+    <ion-icon name="logo-rss"></ion-icon>
+    RSS
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Архивы">
+    <ion-icon name="archive"></ion-icon>
+    Архивы
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="Все категории">
+    <ion-icon name="grid"></ion-icon>
+    Все категории
+  </a>
+</li>
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="https://github.com/rianvy" target="_blank" title="GitHub">
+    
+    <ion-icon name="logo-github"></ion-icon>
+    
+    GitHub
+  </a>
+</li>
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="Все теги">
+    <ion-icon name="pricetags"></ion-icon>
+    Все теги
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+      
+      <div role="link" tabindex="0"
+        class="text-sm font-semibold cursor-pointer hover:underline"
+        @click="flip = !flip"
+        title="Обо мне"
+      >Обо мне</div>
+      
+      
+
+      
+      
+        
+      
+
+      
+
+      
+      
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/search" title="Поиск">
+  <ion-icon class="group-hover:text-primary-content" name="search"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="Все категории">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+
+
+
+  
+  <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://github.com/rianvy" target="_blank" title="GitHub">
+    <ion-icon class="group-hover:text-primary-content" name="logo-github"></ion-icon>
+  </a>
+  
+
+
+
+      
+
+	  <div class="dropdown dropdown-end dropdown-hover">
+	    <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
+	  	<ion-icon class="group-hover:text-primary-content text-xl" name="language"></ion-icon>
+	    </div>
+	    <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+	  	
+	  	  <li>
+	  		<a href="/en/">
+	  		  <ion-icon name="language"></ion-icon> English
+	  		</a>
+	  	  </li>
+	  	
+	  	  <li>
+	  		<a href="/ru/">
+	  		  <ion-icon name="language"></ion-icon> Русский
+	  		</a>
+	  	  </li>
+	  	
+	    </ul>
+	  </div>
+	  
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
+          <ion-icon class="group-hover:text-primary-content text-xl" name="menu"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+          
+          
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Архивы">
+    <ion-icon name="archive"></ion-icon>
+    Архивы
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="Все теги">
+    <ion-icon name="pricetags"></ion-icon>
+    Все теги
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/index.xml" title="RSS">
+    <ion-icon name="logo-rss"></ion-icon>
+    RSS
+  </a>
+</li>
+
+
+          
+
+          
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </ul>
+      </div>
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block"></div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      <meta itemprop="name" content="Роль файла .htaccess в настройке сервера Apache">
+<meta itemprop="description" content=".htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга."><meta itemprop="datePublished" content="2025-01-12T21:27:20+03:00" />
+<meta itemprop="dateModified" content="2025-01-12T21:27:20+03:00" />
+<meta itemprop="wordCount" content="949"><meta itemprop="image" content="https://0x69.online/zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg">
+<meta itemprop="keywords" content="Серверы,Apache,.htaccess,Веб-безопасность,Производительность," />
+
+      <header>
+        <h1 itemprop="headline">Роль файла .htaccess в настройке сервера Apache</h1>
+        <p class="text-sm">
+          
+            воскресенье, янв. 12, 2025
+          
+
+          | <span>5 минут чтения</span>
+
+          
+          | <span>Обновлено
+            
+              воскресенье, янв. 12, 2025
+            </span>
+          
+        </p>
+        <div class="flex justify-between">
+          <div class="flex items-center">
+  
+  <div class="avatar mr-1">
+    <div class="w-8 rounded-full">
+      <img class="my-0" src="/img/avatar.jpg" alt="Rianvy" />
+    </div>
+  </div>
+  
+
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+  
+    
+      <span itemprop="name">Rianvy</span>
+    
+  
+  </span>
+</div>
+
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=%d0%a0%d0%be%d0%bb%d1%8c%20%d1%84%d0%b0%d0%b9%d0%bb%d0%b0%20.htaccess%20%d0%b2%20%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b5%20%d1%81%d0%b5%d1%80%d0%b2%d0%b5%d1%80%d0%b0%20Apache&amp;url=https://0x69.online/posts/role-htaccess/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=https://0x69.online/posts/role-htaccess/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=%d0%a0%d0%be%d0%bb%d1%8c%20%d1%84%d0%b0%d0%b9%d0%bb%d0%b0%20.htaccess%20%d0%b2%20%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b5%20%d1%81%d0%b5%d1%80%d0%b2%d0%b5%d1%80%d0%b0%20Apache%20https://0x69.online/posts/role-htaccess/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://t.me/share/url?url=https://0x69.online/posts/role-htaccess/&amp;resubmit=true&amp;title=%d0%a0%d0%be%d0%bb%d1%8c%20%d1%84%d0%b0%d0%b9%d0%bb%d0%b0%20.htaccess%20%d0%b2%20%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b5%20%d1%81%d0%b5%d1%80%d0%b2%d0%b5%d1%80%d0%b0%20Apache" target="_blank" rel="noopener noreferrer"
+      title="Share on Telegram">
+      <ion-icon class="group-hover:text-primary-content" name="send"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+        <img src="zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg" alt="Роль файла .htaccess в настройке сервера Apache" />
+        
+
+        <p>.htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга.</p>
+<h2 id="введение-в-htaccess">Введение в .htaccess</h2>
+<blockquote>
+<p>Файл <strong>.htaccess</strong> (Hypertext Access) – это конфигурационный файл веб‑сервера Apache, который позволяет настраивать работу сервера на уровне директорий или хостинга. Все правила, прописанные в .htaccess, действуют в текущей директории и всех её подкаталогах (если в них нет собственного .htaccess).</p>
+</blockquote>
+<h3 id="особенности-работы-с-htaccess">Особенности работы с .htaccess:</h3>
+<ul>
+<li>Apache проверяет файл при каждом запросе к сайту</li>
+<li>Изменения вступают в силу при следующем запросе к серверу</li>
+<li>Некоторые директивы (особенно связанные с модулями PHP) могут потребовать перезагрузки сервера</li>
+<li>Глобальные настройки Apache могут ограничивать доступные директивы</li>
+<li>Синтаксические ошибки приводят к ошибке 500</li>
+<li>Влияет на производительность при большом количестве правил</li>
+</ul>
+<h2 id="базовая-настройка">Базовая настройка</h2>
+<h3 id="включение-модуля-rewrite">Включение модуля Rewrite</h3>
+<p>Для работы с URL необходимо активировать модуль:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteEngine <span style="color:#66d9ef">On</span>
+</span></span></code></pre></div><h2 id="контроль-доступа">Контроль доступа</h2>
+<h3 id="ограничение-доступа-по-ip">Ограничение доступа по IP</h3>
+<p>Эти правила особенно полезны для:</p>
+<ul>
+<li>Защиты панели администратора</li>
+<li>Ограничения доступа к тестовой версии сайта</li>
+<li>Блокировки спам-ботов</li>
+<li>Геоограничений доступа к контенту</li>
+</ul>
+<h4 id="запрет-одного-ip">Запрет одного IP</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>Order Deny,Allow
+</span></span><span style="display:flex;"><span>Deny from <span style="color:#ae81ff">123.123.123.123</span>
+</span></span></code></pre></div><p><strong>Практическое применение:</strong></p>
+<ul>
+<li>Блокировка спамеров или злоумышленников</li>
+<li>Временное ограничение доступа проблемным пользователям</li>
+<li>Защита от DDoS-атак с конкретных адресов</li>
+</ul>
+<p><strong>Пример использования:</strong> У вас есть интернет-магазин, и вы заметили подозрительную активность с определенного IP-адреса - множество попыток подбора пароля к админке. Вы можете временно заблокировать этот IP.</p>
+<h4 id="разрешаем-доступ-только-конкретному-ip">Разрешаем доступ только конкретному IP</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>Order Deny,Allow
+</span></span><span style="display:flex;"><span>Deny from <span style="color:#66d9ef">all</span>
+</span></span><span style="display:flex;"><span>Allow from <span style="color:#ae81ff">123.123.123.123</span>
+</span></span></code></pre></div><p><strong>Практическое применение:</strong></p>
+<ul>
+<li>Доступ к staging-версии сайта только для разработчиков</li>
+<li>Ограничение доступа к админ-панели по IP офиса</li>
+<li>Защита конфиденциальных разделов сайта</li>
+</ul>
+<p><strong>Пример использования:</strong> У вас есть тестовая версия сайта, доступ к которой должны иметь только сотрудники компании. Вы можете разрешить доступ только с IP-адресов офиса.</p>
+<h2 id="настройка-кодировки-и-языка">Настройка кодировки и языка</h2>
+<h3 id="кодировка-по-умолчанию">Кодировка по умолчанию</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>AddDefaultCharset UTF-8
+</span></span></code></pre></div><p><strong>Для чего это нужно:</strong></p>
+<ul>
+<li>Правильное отображение специальных символов</li>
+<li>Поддержка многоязычного контента</li>
+<li>Предотвращение проблем с кодировкой в формах</li>
+</ul>
+<p><strong>Пример использования:</strong> У вас многоязычный сайт с русским и китайским контентом. Установка UTF-8 обеспечит корректное отображение символов обоих языков.</p>
+<h2 id="обработка-ошибок">Обработка ошибок</h2>
+<h3 id="собственные-страницы-ошибок">Собственные страницы ошибок</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>ErrorDocument <span style="color:#ae81ff">404</span> <span style="color:#e6db74">/errors/404.html</span>
+</span></span><span style="display:flex;"><span>ErrorDocument <span style="color:#ae81ff">403</span> <span style="color:#e6db74">/errors/403.html</span>
+</span></span><span style="display:flex;"><span>ErrorDocument <span style="color:#ae81ff">401</span> <span style="color:#e6db74">/errors/401.html</span>
+</span></span><span style="display:flex;"><span>ErrorDocument <span style="color:#ae81ff">500</span> <span style="color:#e6db74">/errors/500.html</span>
+</span></span></code></pre></div><p><strong>Практическое применение:</strong></p>
+<ul>
+<li>Улучшение пользовательского опыта</li>
+<li>Сохранение посетителей при ошибках</li>
+<li>Брендирование страниц ошибок</li>
+<li>Предоставление полезной информации при сбоях</li>
+</ul>
+<p><strong>Пример использования:</strong>
+На странице 404 вы можете:</p>
+<ul>
+<li>Показать популярные разделы сайта</li>
+<li>Добавить форму поиска</li>
+<li>Предложить связаться с поддержкой</li>
+<li>Показать карту сайта</li>
+</ul>
+<h2 id="управление-url-и-редиректами">Управление URL и редиректами</h2>
+<h3 id="редирект-на-html">Редирект на .html</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteCond %{REQUEST_URI} (.*/[^/.]+)($|\?)
+</span></span><span style="display:flex;"><span>RewriteRule .* %1.html [R=301,L]
+</span></span><span style="display:flex;"><span>RewriteRule ^(.*)/$ /$1.html [R=301,L]
+</span></span></code></pre></div><p><strong>Практическое применение:</strong></p>
+<ul>
+<li>Создание чистых URL без расширений</li>
+<li>SEO-оптимизация</li>
+<li>Упрощение структуры сайта</li>
+<li>Миграция со старой структуры URL</li>
+</ul>
+<p><strong>Пример использования:</strong>
+Вместо URL вида:</p>
+<ul>
+<li><code>site.ru/about.html</code></li>
+<li><code>site.ru/contacts.html</code></li>
+</ul>
+<p>Пользователи смогут использовать:</p>
+<ul>
+<li><code>site.ru/about</code></li>
+<li><code>site.ru/contacts</code></li>
+</ul>
+<h3 id="управление-слешами-в-url">Управление слешами в URL</h3>
+<h4 id="удаление-конечного-слеша">Удаление конечного слеша</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteCond %{REQUEST_FILENAME} !-d
+</span></span><span style="display:flex;"><span>RewriteRule ^(.+)/$ /$1 [R=301,L]
+</span></span></code></pre></div><p><strong>Зачем это нужно:</strong></p>
+<ul>
+<li>Единообразие URL</li>
+<li>Предотвращение дублей страниц</li>
+<li>Улучшение SEO</li>
+<li>Чистота ссылочной структуры</li>
+</ul>
+<p><strong>Пример использования:</strong>
+Все URL вида:</p>
+<ul>
+<li><code>site.ru/blog/</code></li>
+<li><code>site.ru/about/</code>
+Будут автоматически преобразованы в:</li>
+<li><code>site.ru/blog</code></li>
+<li><code>site.ru/about</code></li>
+</ul>
+<h3 id="обработка-www-и-без-www">Обработка www и без www</h3>
+<h4 id="редирект-с-www-на-без-www">Редирект с www на без www</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+</span></span><span style="display:flex;"><span>RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+</span></span></code></pre></div><p><strong>Важно для:</strong></p>
+<ul>
+<li>SEO-оптимизации</li>
+<li>Предотвращения дублей страниц</li>
+<li>Единообразия ссылок</li>
+<li>Правильной работы cookies</li>
+</ul>
+<p><strong>Пример использования:</strong>
+Все URL вида:</p>
+<ul>
+<li><code>www.site.ru/page</code></li>
+<li><code>www.site.ru/blog/post</code>
+Будут автоматически преобразованы в:</li>
+<li><code>site.ru/page</code></li>
+<li><code>site.ru/blog/post</code></li>
+</ul>
+<h4 id="редирект-без-www-на-www">Редирект без www на www</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteCond %{HTTP_HOST} ^site.ru$ [NC]
+</span></span><span style="display:flex;"><span>RewriteRule ^(.*)$ http://www.site.ru/$1 [R=301,L]
+</span></span></code></pre></div><h2 id="безопасность">Безопасность</h2>
+<h3 id="защита-от-хотлинка">Защита от хотлинка</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteEngine <span style="color:#66d9ef">On</span>
+</span></span><span style="display:flex;"><span>RewriteCond %{HTTP_REFERER} !^$
+</span></span><span style="display:flex;"><span>RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?site\.ru [NC]
+</span></span><span style="display:flex;"><span>RewriteRule \.(jpg|jpeg|png|gif)$ <span style="color:#e6db74">/images/stop-hotlinking.jpg</span> [NC,R,L]
+</span></span></code></pre></div><p><strong>Практическое применение:</strong></p>
+<ul>
+<li>Защита авторского контента</li>
+<li>Экономия трафика</li>
+<li>Предотвращение кражи изображений</li>
+<li>Защита от паразитного использования ресурсов</li>
+</ul>
+<p><strong>Пример использования:</strong>
+Если кто-то попытается встроить ваше изображение на свой сайт:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://your-site.ru/images/expensive-photo.jpg&#34;</span>&gt;
+</span></span></code></pre></div><p>Вместо вашего изображения будет показана заглушка с предупреждением.</p>
+<h3 id="защита-от-брутфорса">Защита от брутфорса</h3>
+<p>Комплексный подход с использованием mod_security или ограничением количества запросов:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span><span style="color:#75715e"># Ограничение количества запросов</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_ratelimit.c</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Ограничение до 5 запросов в секунду</span>
+</span></span><span style="display:flex;"><span>    SetOutputFilter RATE_LIMIT
+</span></span><span style="display:flex;"><span>    SetEnv rate-limit <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Блокировка подозрительных паттернов</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_security2.c</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    SecRule REQUEST_URI <span style="color:#e6db74">&#34;/administrator\.php&#34;</span> \
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;phase:1,deny,status:403,id:1000,msg:&#39;Suspicious admin access attempt&#39;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Дополнительные правила безопасности</span>
+</span></span><span style="display:flex;"><span>SetEnvIfNoCase <span style="color:#66d9ef">User</span>-Agent <span style="color:#e6db74">&#34;^libwww-perl*&#34;</span> block_bot
+</span></span><span style="display:flex;"><span>Deny from env=block_bot
+</span></span></code></pre></div><p><strong>Применяется для:</strong></p>
+<ul>
+<li>Защиты админ-панели</li>
+<li>Предотвращения подбора паролей</li>
+<li>Блокировки автоматизированных атак</li>
+<li>Защиты форм авторизации</li>
+</ul>
+<h2 id="оптимизация-производительности">Оптимизация производительности</h2>
+<h3 id="кэширование-статического-контента">Кэширование статического контента</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_expires.c</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  ExpiresActive <span style="color:#66d9ef">On</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Изображения</span>
+</span></span><span style="display:flex;"><span>  ExpiresByType image/jpg <span style="color:#e6db74">&#34;access plus 1 month&#34;</span>
+</span></span><span style="display:flex;"><span>  ExpiresByType image/jpeg <span style="color:#e6db74">&#34;access plus 1 month&#34;</span>
+</span></span><span style="display:flex;"><span>  ExpiresByType image/gif <span style="color:#e6db74">&#34;access plus 1 month&#34;</span>
+</span></span><span style="display:flex;"><span>  ExpiresByType image/png <span style="color:#e6db74">&#34;access plus 1 month&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># CSS, JavaScript</span>
+</span></span><span style="display:flex;"><span>  ExpiresByType text/css <span style="color:#e6db74">&#34;access plus 1 week&#34;</span>
+</span></span><span style="display:flex;"><span>  ExpiresByType application/javascript <span style="color:#e6db74">&#34;access plus 1 week&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Добавьте версионирование через GET-параметр для обновления файлов</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Пример: style.css?v=1.2</span>
+</span></span><span style="display:flex;"><span>  RewriteCond %{REQUEST_FILENAME} \.(css|js|jpg|jpeg|png|gif)$
+</span></span><span style="display:flex;"><span>  RewriteCond %{QUERY_STRING} !^v=
+</span></span><span style="display:flex;"><span>  RewriteRule ^(.*)$ $1?v=1.0 [L]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
+</span></span></code></pre></div><p><strong>Преимущества:</strong></p>
+<ul>
+<li>Уменьшение нагрузки на сервер</li>
+<li>Ускорение загрузки страниц</li>
+<li>Экономия трафика</li>
+<li>Улучшение пользовательского опыта</li>
+</ul>
+<p><strong>Важное примечание:</strong> При обновлении файлов необходимо:</p>
+<ul>
+<li>Изменять версию в GET-параметре</li>
+<li>Или использовать новые имена файлов</li>
+<li>Или очищать кэш на стороне клиента</li>
+</ul>
+<h3 id="сжатие-gzip">Сжатие GZIP</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_deflate.c</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Сжимаем только текстовые файлы</span>
+</span></span><span style="display:flex;"><span>    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css
+</span></span><span style="display:flex;"><span>    AddOutputFilterByType DEFLATE application/xml application/xhtml+xml
+</span></span><span style="display:flex;"><span>    AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Не сжимаем уже сжатые форматы</span>
+</span></span><span style="display:flex;"><span>    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|pdf|zip|rar)$ no-gzip dont-vary
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
+</span></span></code></pre></div><p><strong>Эффективность:</strong></p>
+<ul>
+<li>Уменьшение размера HTML до 70%</li>
+<li>Сжатие CSS до 80%</li>
+<li>Сжатие JavaScript до 60%</li>
+<li>Ускорение загрузки сайта</li>
+</ul>
+<h3 id="оптимизация-для-spa">Оптимизация для SPA</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_rewrite.c</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    RewriteEngine <span style="color:#66d9ef">On</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Укажите правильный путь, если приложение находится в подкаталоге</span>
+</span></span><span style="display:flex;"><span>    RewriteBase <span style="color:#e6db74">/path/to/app/</span>
+</span></span><span style="display:flex;"><span>    RewriteRule ^index\.html$ - [L]
+</span></span><span style="display:flex;"><span>    RewriteCond %{REQUEST_FILENAME} !-f
+</span></span><span style="display:flex;"><span>    RewriteCond %{REQUEST_FILENAME} !-d
+</span></span><span style="display:flex;"><span>    RewriteCond %{REQUEST_FILENAME} !-l
+</span></span><span style="display:flex;"><span>    RewriteRule . <span style="color:#e6db74">/path/to/app/index.html</span> [L]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
+</span></span></code></pre></div><p><strong>Примечание:</strong> Если ваше приложение находится в корне сайта, используйте <code>RewriteBase /</code>. Для подкаталога укажите соответствующий путь.</p>
+<h2 id="отладка-и-мониторинг">Отладка и мониторинг</h2>
+<h3 id="логирование-ошибок">Логирование ошибок</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>php_flag log_errors <span style="color:#66d9ef">on</span>
+</span></span><span style="display:flex;"><span>php_value error_log <span style="color:#e6db74">/path/to/error.log</span>
+</span></span></code></pre></div><h3 id="настройка-для-разработки">Настройка для разработки</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>php_flag display_errors <span style="color:#66d9ef">on</span>
+</span></span><span style="display:flex;"><span>php_value error_reporting E_ALL
+</span></span></code></pre></div><h2 id="рекомендации-по-использованию">Рекомендации по использованию</h2>
+<h3 id="лучшие-практики">Лучшие практики</h3>
+<ul>
+<li>Создавайте резервные копии перед изменениями</li>
+<li>Тестируйте в безопасной среде</li>
+<li>Документируйте изменения</li>
+<li>Группируйте связанные директивы</li>
+<li>Регулярно проверяйте логи</li>
+<li>Оптимизируйте количество правил</li>
+<li>Используйте актуальные методы защиты</li>
+<li>Следите за производительностью</li>
+</ul>
+<h3 id="типичные-ошибки">Типичные ошибки</h3>
+<ul>
+<li>Неправильный порядок RewriteRule</li>
+<li>Отсутствие проверки условий</li>
+<li>Избыточное использование .htaccess</li>
+<li>Отсутствие обработки ошибок</li>
+<li>Небезопасные настройки прав доступа</li>
+</ul>
+<h2 id="заключение">Заключение</h2>
+<p>Файл .htaccess – это мощный инструмент для настройки Apache, который при правильном использовании может значительно улучшить безопасность и производительность вашего сайта. Однако важно помнить о потенциальном влиянии на производительность и необходимости тщательного тестирования всех изменений.</p>
+<h2 id="полезные-ресурсы">Полезные ресурсы</h2>
+<ul>
+<li><a href="https://httpd.apache.org/docs/" target="_blank">Официальная документация Apache</a>
+</li>
+<li><a href="https://httpd.apache.org/docs/2.4/misc/security_tips.html" target="_blank">Руководство по безопасности Apache</a>
+</li>
+<li><a href="https://htaccess.madewithlove.com/" target="_blank">Генератор правил .htaccess</a>
+</li>
+</ul>
+      </section>
+
+	
+	  <div class="tags mt-4">
+		  
+		
+		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/tags/%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D1%8B/">Серверы</a>
+		
+		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/tags/apache/">Apache</a>
+		
+		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/tags/.htaccess/">.htaccess</a>
+		
+		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/tags/%D0%B2%D0%B5%D0%B1-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C/">Веб-безопасность</a>
+		
+		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/tags/%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C/">Производительность</a>
+		
+	  </div>
+	
+
+
+      
+      <div class="divider"></div>
+      <div class="flex flex-col md:flex-row justify-between gap-4 py-4">
+        
+        <div></div>
+        
+
+        
+        <div></div>
+        
+      </div>
+      
+
+      
+      <div class="divider"></div>
+
+      <section class="space-y-4">
+        
+<article>
+  <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+        this.page.identifier = '\/posts\/role-htaccess\/';
+        this.page.title = 'Роль файла .htaccess в настройке сервера Apache';
+        this.page.url = 'https:\/\/0x69.online\/posts\/role-htaccess\/';
+
+        
+    };
+    function initDisqus() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "https-0x69-online-ru" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    };
+    setTimeout(() => {
+        initDisqus();
+    }, 3000);
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+
+
+
+
+
+
+
+
+      </section>
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+
+    
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#введение-в-htaccess">Введение в .htaccess</a>
+      <ul>
+        <li><a href="#особенности-работы-с-htaccess">Особенности работы с .htaccess:</a></li>
+      </ul>
+    </li>
+    <li><a href="#базовая-настройка">Базовая настройка</a>
+      <ul>
+        <li><a href="#включение-модуля-rewrite">Включение модуля Rewrite</a></li>
+      </ul>
+    </li>
+    <li><a href="#контроль-доступа">Контроль доступа</a>
+      <ul>
+        <li><a href="#ограничение-доступа-по-ip">Ограничение доступа по IP</a></li>
+      </ul>
+    </li>
+    <li><a href="#настройка-кодировки-и-языка">Настройка кодировки и языка</a>
+      <ul>
+        <li><a href="#кодировка-по-умолчанию">Кодировка по умолчанию</a></li>
+      </ul>
+    </li>
+    <li><a href="#обработка-ошибок">Обработка ошибок</a>
+      <ul>
+        <li><a href="#собственные-страницы-ошибок">Собственные страницы ошибок</a></li>
+      </ul>
+    </li>
+    <li><a href="#управление-url-и-редиректами">Управление URL и редиректами</a>
+      <ul>
+        <li><a href="#редирект-на-html">Редирект на .html</a></li>
+        <li><a href="#управление-слешами-в-url">Управление слешами в URL</a></li>
+        <li><a href="#обработка-www-и-без-www">Обработка www и без www</a></li>
+      </ul>
+    </li>
+    <li><a href="#безопасность">Безопасность</a>
+      <ul>
+        <li><a href="#защита-от-хотлинка">Защита от хотлинка</a></li>
+        <li><a href="#защита-от-брутфорса">Защита от брутфорса</a></li>
+      </ul>
+    </li>
+    <li><a href="#оптимизация-производительности">Оптимизация производительности</a>
+      <ul>
+        <li><a href="#кэширование-статического-контента">Кэширование статического контента</a></li>
+        <li><a href="#сжатие-gzip">Сжатие GZIP</a></li>
+        <li><a href="#оптимизация-для-spa">Оптимизация для SPA</a></li>
+      </ul>
+    </li>
+    <li><a href="#отладка-и-мониторинг">Отладка и мониторинг</a>
+      <ul>
+        <li><a href="#логирование-ошибок">Логирование ошибок</a></li>
+        <li><a href="#настройка-для-разработки">Настройка для разработки</a></li>
+      </ul>
+    </li>
+    <li><a href="#рекомендации-по-использованию">Рекомендации по использованию</a>
+      <ul>
+        <li><a href="#лучшие-практики">Лучшие практики</a></li>
+        <li><a href="#типичные-ошибки">Типичные ошибки</a></li>
+      </ul>
+    </li>
+    <li><a href="#заключение">Заключение</a></li>
+    <li><a href="#полезные-ресурсы">Полезные ресурсы</a></li>
+  </ul>
+</nav>
+    
+  </div>
+</div>
+
+
+            <div id="top-scroller">
+  <a href="#the-top" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary">
+    <ion-icon name="arrow-up" role="img" class=" md flip-rtl hydrated"></ion-icon>
+  </a>
+</div>
+
+
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 0x69.online
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+
+  <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="language" class="text-2xl md hydrated" role="img"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+		
+		  <li>
+			<a href="/en/">
+			  <ion-icon name="language"></ion-icon> English
+			</a>
+		  </li>
+		
+		  <li>
+			<a href="/ru/">
+			  <ion-icon name="language"></ion-icon> Русский
+			</a>
+		  </li>
+		
+      </ul>
+</div>
+
+<div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+  
+  
+  <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+    <article
+      class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30"
+    >
+      <div class="card-body">
+        <div class="card-title">Коротко о моих навыках</div>
+
+        <div class="prose dark:prose-invert">
+          <ul>
+<li><strong>C# и C++</strong> — высокопроизводительная разработка ⚡</li>
+<li><strong>PHP (Laravel)</strong> и <strong>JavaScript</strong> — создание веб‑приложений и интерактивных сервисов 🚀</li>
+<li><strong>MySQL</strong> и <strong>PostgreSQL</strong> — надёжные реляционные базы данных 💾</li>
+<li>Адаптивная вёрстка на <strong>HTML</strong>, <strong>CSS</strong> и <strong>JS</strong> — современный дизайн под любые устройства 💡</li>
+</ul>
+
+        </div>
+      </div>
+    </article>
+  </div>
+  
+  <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+    <article
+      class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30"
+    >
+      <div class="card-body">
+        <div class="card-title">Обо мне</div>
+
+        <div class="prose dark:prose-invert">
+          <p>Привет! Я <strong>Rianvy</strong> (это мой псевдоним), а по‑настоящему меня зовут Максим Александров. Мне 27 лет, живу в Туле. Я сеньер‑разработчик и дизайнер 😎<br>
+В этом блоге делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет 🚀</p>
+<p>Если у тебя есть вопросы или идеи, пиши в комментариях или отправляй письмо на мою почту 📩<br>
+Буду рад пообщаться и, возможно, поработать вместе 🤝</p>
+
+        </div>
+      </div>
+    </article>
+  </div>
+  
+  
+
+  
+  <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+    <article
+      class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30"
+    >
+      <div class="card-body">
+        <div class="card-title">Социальные сети</div>
+
+        <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://codepen.io/Rianvy" target="_blank" title="Codepen">
+      <ion-icon name="logo-codepen"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+      </div>
+    </article>
+  </div>
+  
+
+  
+</div>
+
+            
+
+            <div id="top-scroller">
+  <a href="#the-top" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary">
+    <ion-icon name="arrow-up" role="img" class=" md flip-rtl hydrated"></ion-icon>
+  </a>
+</div>
+
+
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 0x69.online
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+
+  <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="language" class="text-2xl md hydrated" role="img"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+		
+		  <li>
+			<a href="/en/">
+			  <ion-icon name="language"></ion-icon> English
+			</a>
+		  </li>
+		
+		  <li>
+			<a href="/ru/">
+			  <ion-icon name="language"></ion-icon> Русский
+			</a>
+		  </li>
+		
+      </ul>
+</div>
+
+<div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "forest"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+    
+
+
+
+
+
+
+  
+    <script type="module">
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img')
+    </script>
+  
+
+
+
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1CKYK7EQD"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V1CKYK7EQD', { 'anonymize_ip': false });
+}
+</script>
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

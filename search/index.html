@@ -6,13 +6,13 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная | 0x69.online</title>
+    <title>Поиск | 0x69.online</title>
 
     
 <link href="/favicon.ico" rel="icon" type="image/x-icon" />
 
 
-<link rel="canonical" href="https://0x69.online/" />
+<link rel="canonical" href="https://0x69.online/search/" />
 
 
 
@@ -24,15 +24,15 @@
 <meta name="generator" content="Hugo 0.110.0">
 
 
-<meta property="og:title" content="0x69.online" />
+<meta property="og:title" content="" />
 <meta property="og:description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://0x69.online/" />
+<meta property="og:url" content="https://0x69.online/search/" />
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="0x69.online"/>
+<meta name="twitter:title" content=""/>
 <meta name="twitter:description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет."/>
 
 
@@ -328,72 +328,57 @@
             
 
 
+<div class="mt-8 lg:mt-12 px-4"
 
+x-data="{
+  search: '',
+  get posts() { return this.search !== '' ? window.fuse.search(this.search) : [] },
+}">
+  <label for="search" class="input input-bordered flex items-center gap-2">
+    <input id="search" name="search" type="text" class="grow" placeholder="Поиск" x-model.debounce="search" />
+    <ion-icon name="search"></ion-icon>
+  </label>
 
-<div class="dream-grid">
-  
-  <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
-    <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/role-htaccess/">
-  
-  <figure>
-    
-    
-      
-      <picture>
-        <source srcset="/posts/role-htaccess/_hu2182f64dc8b1f68b1af981fbfb68339f_197966_ec6ed9150e61883cb8b6f092ec2a1dc7.webp" type="image/webp" />
-        <img src="/posts/role-htaccess/zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg" alt="zRgnEbEZS0WLCXA8anIF_7SAtZbfRXg79C3Kx-qGVglV1bmW89q-N5Dz32Dx6xsN0YYWs4Jx.jpg" />
-      </picture>
-    
-    
-  </figure>
-  
+  <div class="mt-8 space-y-4">
+  <template x-for="post in posts">
+    <a class="card card-compact bg-base-100 hover:bg-base-content/10 cursor-pointer border border-base-content/30" :href="post.item.url">
+      <div class="card-body">
+        <h2 class="card-title" x-text="post.item.title"></h2>
 
-  <div class="card-body">
-    <h2 class="card-title">Роль файла .htaccess в настройке сервера Apache</h2>
+        <div x-html="post.item.description"></div>
 
-    <p class="date text-base-content/60">
-    
-      воскресенье, янв. 12, 2025
-    
-    </p>
-    <p>.htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга.</p>
-	
-	
-	
-    <div class="card-actions justify-between items-center mt-4">
-      <div class="flex items-center">
-  
-  <div class="avatar mr-1">
-    <div class="w-8 rounded-full">
-      <img class="my-0" src="/img/avatar.jpg" alt="Rianvy" />
-    </div>
-  </div>
-  
+        <div class="card-actions justify-between items-center mt-4">
+          <div class="flex items-center">
+            <template x-if="post.item.avatar">
+            <div class="avatar mr-1">
+              <div class="w-8 rounded-full">
+                <img class="my-0" :src="post.item.avatar" :alt="post.item.author" />
+              </div>
+            </div>
+            </template>
+            <template x-if="!post.item.avatar">
+            <span>@</span>
+            </template>
 
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
-  
-    
-      <span itemprop="name">Rianvy</span>
-    
-  
-  </span>
-</div>
+            <template x-if="post.item.author">
+            <span x-text="post.item.author"></span>
+            </template>
+            <template x-if="!post.item.author">
+            <span>Rianvy</span>
+            </template>
+            </span>
+          </div>
 
-
-      <div class="flex items-center">
-        <ion-icon name="time" class="mr-1"></ion-icon>
-        <span>5 минут чтения</span>
+          <div class="inline-flex items-center">
+            <ion-icon name="time" class="mr-1"></ion-icon>
+            <span><span x-text="post.item.readingTime"></span> минут чтения</span>
+          </div>
+        </div>
       </div>
-    </div>
+    </a>
+  </template>
   </div>
-</a>
-
-  </div>
-  
 </div>
-
-
-
 
 
 
@@ -573,44 +558,6 @@
   
 
   
-  <div class="w-full md:w-1/2 p-4 dream-column">
-    <article
-      class="card card-compact bg-base-100 shadow-xl dark:border dark:border-base-content/30"
-    >
-      <div class="card-body">
-        <div id="disqus_thread"></div>
-<script>
-    window.disqus_config = function () {
-        this.page.identifier = '\/';
-        this.page.title = '0x69.online';
-        this.page.url = 'https:\/\/0x69.online\/';
-
-        
-        this.callbacks.onReady.push(function () {
-            window.aboutMasonry.layout();
-        });
-        
-    };
-    function initDisqus() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "https-0x69-online-ru" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    };
-    setTimeout(() => {
-        initDisqus();
-    }, 3000);
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-      </div>
-    </article>
-  </div>
-  
 </div>
 
             
@@ -716,6 +663,21 @@
     
 
 
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js" integrity="sha256-42IbU8t3tOwwbexB7ZVRHm3YDRf65aBPPjRtIUufj5I=" crossorigin="anonymous"></script>
+<script>
+  var fuseData = [{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Администрирование"],"description":"\u003cp\u003e.htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга.\u003c/p\u003e","readingTime":5,"tags":["Серверы","Apache",".htaccess","Веб-безопасность","Производительность"],"title":"Роль файла .htaccess в настройке сервера Apache","url":"/posts/role-htaccess/"}];
+  var fuseOptions = {
+    keys: [
+      "title",
+    ]
+  };
+
+  var fuse = new Fuse(fuseData, fuseOptions);
+</script>
 
 
 

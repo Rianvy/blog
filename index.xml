@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>0x69.online</title>
+    <link>https://0x69.online/</link>
+    <description>Recent content on 0x69.online</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru</language>
+    <lastBuildDate>Sun, 12 Jan 2025 21:27:20 +0300</lastBuildDate><atom:link href="https://0x69.online/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Роль файла .htaccess в настройке сервера Apache</title>
+      <link>https://0x69.online/posts/role-htaccess/</link>
+      <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
+      
+      <guid>https://0x69.online/posts/role-htaccess/</guid>
+      <description>&lt;p&gt;.htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -68,6 +68,25 @@
         {{ if and .Params.Cover site.Params.showSummaryCoverInPost }}
         <img src="{{ .Params.Cover }}" alt="{{ .Title }}" />
         {{ end }}
+		
+		{{ $currentLang := .Site.Language.Lang }}
+		{{ $basePath := replace .RelPermalink (printf "/%s/" $currentLang) "" }}
+		<blockquote class="dream-alert tip">
+		  <p class="heading">
+			<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
+			{{ if eq $currentLang "ru" }}
+			  This post is also 
+			  <a href="{{ printf "/en/%s" $basePath | absURL }}" target="_blank" class="badge h-6 no-underline hover:badge-primary mr-2">
+				available in English
+			  </a>
+			{{ else if eq $currentLang "en" }}
+			  This post is also 
+			  <a href="{{ printf "/ru/%s" $basePath | absURL }}" target="_blank" class="badge h-6 no-underline hover:badge-primary mr-2">
+				available in Russian
+			  </a>
+			{{ end }}
+		  </p>
+		</blockquote>
 
         {{ .Content | emojify }}
       </section>

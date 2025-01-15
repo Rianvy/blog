@@ -4,9 +4,9 @@ date: 2025-01-12T21:27:20+03:00
 lastmod: 2025-01-12T21:27:20+03:00
 author: Rianvy
 avatar: /img/avatar.jpg
-cover: /posts/role-htaccess/Cover.png
+cover: /ru/posts/role-htaccess/Cover.png
 images:
-   - /posts/role-htaccess/Cover.png
+   - /ru/posts/role-htaccess/Cover.png
 categories:
   - Администрирование
 tags:

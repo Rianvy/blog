@@ -1,6 +1,6 @@
 baseURL = "https://0x69.online"
 defaultContentLanguage = "ru"
-defaultContentLanguageInSubdir = true
+defaultContentLanguageInSubdir = false
 title = "0x69.online"
 theme = "dream"
 

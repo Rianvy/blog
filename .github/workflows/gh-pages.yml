@@ -31,7 +31,7 @@ jobs:
             ! -name .git \
             ! -name .nojekyll \
             ! -name CNAME \
-            ! -name . \
+             ! -name . \
             -exec rm -rf {} +
 
       - name: Setup Hugo

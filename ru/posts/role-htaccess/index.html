@@ -1241,17 +1241,20 @@ php_value error_reporting E_ALL
                 window.customSyntaxHighlighting.light;
 
             
+            const themeUrl = `https:
+
+            
             let link = document.querySelector('link[data-syntax-highlight]');
             if (!link) {
                 
                 link = document.createElement('link');
                 link.rel = 'stylesheet';
-                link.href = `https:
+                link.href = themeUrl;
                 link.setAttribute('data-syntax-highlight', 'true');
                 document.head.appendChild(link);
             } else {
                 
-                link.href = `https:
+                link.href = themeUrl;
             }
         } catch (error) {
             console.warn('Error updating syntax theme:', error);
@@ -1265,7 +1268,7 @@ php_value error_reporting E_ALL
     Alpine.effect(() => {
         updateSyntaxTheme();
     });
-  });
+});
 </script>
 
 

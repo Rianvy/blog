@@ -54,3 +54,7 @@
 {{ end }}
 </article>
 {{ end }}
+
+{{ if site.Params.telegramComments }}
+<script async src="https://comments.app/js/widget.js?3" data-comments-app-website="{{ site.Params.telegramCommentsSiteID }}" data-limit="{{ site.Params.telegramCommentsLimit }}"></script>
+{{ end }}

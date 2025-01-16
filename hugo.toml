@@ -19,8 +19,8 @@ theme = "dream"
 
 
 # [services]
-[services.disqus]
-shortname = "https-0x69-online-ru"
+#[services.disqus]
+#shortname = "https-0x69-online-ru"
 [services.googleAnalytics]
 ID = "G-V1CKYK7EQD"
 
@@ -51,6 +51,10 @@ rss = true
 
 # waline = true
 # walineServer = ""
+
+telegramComments = true
+telegramCommentsSiteID = "YjlEv4KV"
+telegramCommentsLimit = "100"
 
 email = "blackghost.v1@gmail.com"
 

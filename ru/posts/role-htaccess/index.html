@@ -63,6 +63,7 @@
 
 
 <link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css" data-syntax-highlight="true" id="syntax-theme">
 <style>
   pre {
    border-radius: 6px;
@@ -1241,20 +1242,16 @@ php_value error_reporting E_ALL
                 window.customSyntaxHighlighting.light;
 
             
-            const themeUrl = `https:
-
-            
             let link = document.querySelector('link[data-syntax-highlight]');
-            if (!link) {
+            if (link) {
                 
-                link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = themeUrl;
-                link.setAttribute('data-syntax-highlight', 'true');
-                document.head.appendChild(link);
-            } else {
+                const currentHref = link.href;
+
                 
-                link.href = themeUrl;
+                const updatedHref = currentHref.replace(/styles\/[^/]+\.min\.css/, `styles/${currentTheme}.min.css`);
+
+                
+                link.href = updatedHref;
             }
         } catch (error) {
             console.warn('Error updating syntax theme:', error);

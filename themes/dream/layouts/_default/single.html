@@ -4,6 +4,7 @@
 
 {{ if site.Params.SyntaxHighlighting }}
 <link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/{{site.Params.SyntaxHighlightingThemeDark}}.min.css" data-syntax-highlight="true" id="syntax-theme">
 <style>
   pre {
    border-radius: 6px;
@@ -190,21 +191,17 @@
                 window.customSyntaxHighlighting.dark : 
                 window.customSyntaxHighlighting.light;
 
-            // Формируем URL для темы подсветки
-            const themeUrl = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${currentTheme}.min.css`;
-
-            // Ищем элемент <link> с атрибутом data-syntax-highlight
+            // Получаем элемент <link> с атрибутом data-syntax-highlight
             let link = document.querySelector('link[data-syntax-highlight]');
-            if (!link) {
-                // Если такого элемента нет, создаем его
-                link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = themeUrl;
-                link.setAttribute('data-syntax-highlight', 'true');
-                document.head.appendChild(link);
-            } else {
-                // Если элемент найден, просто обновляем ссылку на стиль
-                link.href = themeUrl;
+            if (link) {
+                // Получаем текущий URL из атрибута href
+                const currentHref = link.href;
+
+                // Используем регулярное выражение для замены темы в URL
+                const updatedHref = currentHref.replace(/styles\/[^/]+\.min\.css/, `styles/${currentTheme}.min.css`);
+
+                // Обновляем href в элементе <link>
+                link.href = updatedHref;
             }
         } catch (error) {
             console.warn('Error updating syntax theme:', error);

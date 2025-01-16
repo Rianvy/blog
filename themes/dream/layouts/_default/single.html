@@ -190,18 +190,21 @@
                 window.customSyntaxHighlighting.dark : 
                 window.customSyntaxHighlighting.light;
 
+            // Формируем URL для темы подсветки
+            const themeUrl = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${currentTheme}.min.css`;
+
             // Ищем элемент <link> с атрибутом data-syntax-highlight
             let link = document.querySelector('link[data-syntax-highlight]');
             if (!link) {
                 // Если такого элемента нет, создаем его
                 link = document.createElement('link');
                 link.rel = 'stylesheet';
-                link.href = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${currentTheme}.min.css`;
+                link.href = themeUrl;
                 link.setAttribute('data-syntax-highlight', 'true');
                 document.head.appendChild(link);
             } else {
                 // Если элемент найден, просто обновляем ссылку на стиль
-                link.href = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${currentTheme}.min.css`;
+                link.href = themeUrl;
             }
         } catch (error) {
             console.warn('Error updating syntax theme:', error);
@@ -215,7 +218,7 @@
     Alpine.effect(() => {
         updateSyntaxTheme();
     });
-  });
+});
 </script>
 {{ end }}
 

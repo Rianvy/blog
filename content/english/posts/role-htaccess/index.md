@@ -37,7 +37,7 @@ Tags:
 
 ### Enabling the Rewrite module
 To work with URLs, you must activate the module:
-```.htaccess
+```apache
 RewriteEngine On
 ```
 
@@ -51,9 +51,9 @@ These rules are especially useful for:
 - Geo-restrict access to content
 
 #### Single IP ban
-```.htaccess
+```apache
 Order Deny,Allow
-Deny from 123.123.123.123.123
+Deny from 123.123.123.123
 ```
 
 **Practical application:**
@@ -64,10 +64,10 @@ Deny from 123.123.123.123.123
 **Usage example:** You have an online store and you have noticed suspicious activity from a certain IP address - multiple attempts to find the password to the admin area. You can temporarily block this IP.
 
 #### Allow access only to a specific IP
-```.htaccess
+```apache
 Order Deny,Allow
 Deny from all
-Allow from 123.123.123.123.123
+Allow from 123.123.123.123
 ```
 
 **Practical application:**
@@ -80,7 +80,7 @@ Allow from 123.123.123.123.123
 ## Encoding and language settings
 
 ### Default encoding
-```.htaccess
+```apache
 AddDefaultCharset UTF-8
 ```
 
@@ -94,7 +94,7 @@ AddDefaultCharset UTF-8
 ## Error handling
 
 ### Custom error pages
-```.htaccess
+```apache
 ErrorDocument 404 /errors/404.html
 ErrorDocument 403 /errors/403.html
 ErrorDocument 401 /errors/401.html
@@ -117,7 +117,7 @@ On a 404 page you can:
 ## Manage URLs and redirects
 
 ### Redirect to .html
-```.htaccess
+```apache
 RewriteCond %{REQUEST_URI} (.*/[^/.]+)($|\?)
 RewriteRule .* %1.html [R=301,L]
 RewriteRule ^(.*)/$ /$1.html [R=301,L]
@@ -140,7 +140,7 @@ Users will be able to use:
 
 ### Managing slashes in URLs
 #### Delete end slash
-```.htaccess
+```apache
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)/$ /$1 [R=301,L]
 ```
@@ -153,8 +153,8 @@ RewriteRule ^(.+)/$ /$1 [R=301,L]
 
 **Usage Example:** 
 All URLs of the form:
-- `site.ru/blog/`.
-- `site.ru/about/`.
+- `site.ru/blog/`
+- `site.ru/about/`
 Will be automatically converted to:
 - `site.ru/blog`
 - `site.ru/about`
@@ -162,7 +162,7 @@ Will be automatically converted to:
 ### Handling www and no www
 
 #### Redirect from www to without www
-```.htaccess
+```apache
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 ```
@@ -179,10 +179,10 @@ All URLs of the form:
 - `www.site.ru/blog/post`
 Will be automatically converted to:
 - `site.ru/page`
-- `site.ru/blog/post`.
+- `site.ru/blog/post`
 
 #### Redirect without www to www
-```.htaccess
+```apache
 RewriteCond %{HTTP_HOST} ^site.ru$ [NC]
 RewriteRule ^(.*)$ http://www.site.ru/$1 [R=301,L]
 ```
@@ -190,10 +190,10 @@ RewriteRule ^(.*)$ http://www.site.ru/$1 [R=301,L]
 ## Security
 
 ### Hotlink protection
-```.htaccess
+```apache
 RewriteEngine On
 RewriteCond %{HTTP_REFERER} !^$
-RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?site\.ru [NC].
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?site\.ru [NC]
 RewriteRule \.(jpg|jpeg|png|gif)$ /images/stop-hotlinking.jpg [NC,R,L]
 ```
 
@@ -213,10 +213,10 @@ A warning stub will be shown instead of your image.
 ### Bruteforce protection
 Comprehensive approach using mod_security or limiting the number of requests:
 
-```.htaccess
+```apache
 # Limit the number of requests
 <IfModule mod_ratelimit.c>
-    # Ограничение до 5 запросов в секунду
+    # Limit to 5 requests per second
     SetOutputFilter RATE_LIMIT
     SetEnv rate-limit 5
 </IfModule>
@@ -241,7 +241,7 @@ Deny from env=block_bot
 ## Performance optimization
 
 ### Static Content Caching
-```.htaccess
+```apache
 <IfModule mod_expires.c>
   ExpiresActive On
   
@@ -275,7 +275,7 @@ Deny from env=block_bot
 - Or clear the client-side cache
 
 ### GZIP compression
-```.htaccess
+```apache
 <IfModule mod_deflate.c>
     # Compress only text files
     AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css
@@ -294,7 +294,7 @@ Deny from env=block_bot
 - Speed up site loading
 
 ### Optimization for SPA
-```.htaccess
+```apache
 <IfModule mod_rewrite.c>
     RewriteEngine On
     # Specify the correct path if the application is in a subdirectory
@@ -312,13 +312,13 @@ Deny from env=block_bot
 ## Debugging and monitoring
 
 ### Error Logging
-```.htaccess
+```apache
 php_flag log_errors on
 php_value error_log /path/to/error.log
 ```
 
 ### Customization for development
-```.htaccess
+```apache
 php_flag display_errors on
 php_value error_reporting E_ALL
 ```

@@ -37,7 +37,7 @@ tags:
 
 ### Включение модуля Rewrite
 Для работы с URL необходимо активировать модуль:
-```.htaccess
+```apache
 RewriteEngine On
 ```
 
@@ -51,7 +51,7 @@ RewriteEngine On
 - Геоограничений доступа к контенту
 
 #### Запрет одного IP
-```.htaccess
+```apache
 Order Deny,Allow
 Deny from 123.123.123.123
 ```
@@ -64,7 +64,7 @@ Deny from 123.123.123.123
 **Пример использования:** У вас есть интернет-магазин, и вы заметили подозрительную активность с определенного IP-адреса - множество попыток подбора пароля к админке. Вы можете временно заблокировать этот IP.
 
 #### Разрешаем доступ только конкретному IP
-```.htaccess
+```apache
 Order Deny,Allow
 Deny from all
 Allow from 123.123.123.123
@@ -80,7 +80,7 @@ Allow from 123.123.123.123
 ## Настройка кодировки и языка
 
 ### Кодировка по умолчанию
-```.htaccess
+```apache
 AddDefaultCharset UTF-8
 ```
 
@@ -94,7 +94,7 @@ AddDefaultCharset UTF-8
 ## Обработка ошибок
 
 ### Собственные страницы ошибок
-```.htaccess
+```apache
 ErrorDocument 404 /errors/404.html
 ErrorDocument 403 /errors/403.html
 ErrorDocument 401 /errors/401.html
@@ -117,7 +117,7 @@ ErrorDocument 500 /errors/500.html
 ## Управление URL и редиректами
 
 ### Редирект на .html
-```.htaccess
+```apache
 RewriteCond %{REQUEST_URI} (.*/[^/.]+)($|\?)
 RewriteRule .* %1.html [R=301,L]
 RewriteRule ^(.*)/$ /$1.html [R=301,L]
@@ -140,7 +140,7 @@ RewriteRule ^(.*)/$ /$1.html [R=301,L]
 
 ### Управление слешами в URL
 #### Удаление конечного слеша
-```.htaccess
+```apache
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)/$ /$1 [R=301,L]
 ```
@@ -162,7 +162,7 @@ RewriteRule ^(.+)/$ /$1 [R=301,L]
 ### Обработка www и без www
 
 #### Редирект с www на без www
-```.htaccess
+```apache
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 ```
@@ -182,7 +182,7 @@ RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 - `site.ru/blog/post`
 
 #### Редирект без www на www
-```.htaccess
+```apache
 RewriteCond %{HTTP_HOST} ^site.ru$ [NC]
 RewriteRule ^(.*)$ http://www.site.ru/$1 [R=301,L]
 ```
@@ -190,7 +190,7 @@ RewriteRule ^(.*)$ http://www.site.ru/$1 [R=301,L]
 ## Безопасность
 
 ### Защита от хотлинка
-```.htaccess
+```apache
 RewriteEngine On
 RewriteCond %{HTTP_REFERER} !^$
 RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?site\.ru [NC]
@@ -213,7 +213,7 @@ RewriteRule \.(jpg|jpeg|png|gif)$ /images/stop-hotlinking.jpg [NC,R,L]
 ### Защита от брутфорса
 Комплексный подход с использованием mod_security или ограничением количества запросов:
 
-```.htaccess
+```apache
 # Ограничение количества запросов
 <IfModule mod_ratelimit.c>
     # Ограничение до 5 запросов в секунду
@@ -241,7 +241,7 @@ Deny from env=block_bot
 ## Оптимизация производительности
 
 ### Кэширование статического контента
-```.htaccess
+```apache
 <IfModule mod_expires.c>
   ExpiresActive On
   
@@ -275,7 +275,7 @@ Deny from env=block_bot
 - Или очищать кэш на стороне клиента
 
 ### Сжатие GZIP
-```.htaccess
+```apache
 <IfModule mod_deflate.c>
     # Сжимаем только текстовые файлы
     AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css
@@ -294,7 +294,7 @@ Deny from env=block_bot
 - Ускорение загрузки сайта
 
 ### Оптимизация для SPA
-```.htaccess
+```apache
 <IfModule mod_rewrite.c>
     RewriteEngine On
     # Укажите правильный путь, если приложение находится в подкаталоге
@@ -312,13 +312,13 @@ Deny from env=block_bot
 ## Отладка и мониторинг
 
 ### Логирование ошибок
-```.htaccess
+```apache
 php_flag log_errors on
 php_value error_log /path/to/error.log
 ```
 
 ### Настройка для разработки
-```.htaccess
+```apache
 php_flag display_errors on
 php_value error_reporting E_ALL
 ```

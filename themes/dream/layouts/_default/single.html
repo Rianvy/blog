@@ -2,18 +2,11 @@
 
 {{ define "css" }}
 
-{{ if site.Params.customSyntaxHighlighting }}
-<link rel="stylesheet" data-custom-syntax-highlighting />
+{{ if site.Params.SyntaxHighlighting }}
+<link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
 <style>
-  .chroma {
-    padding: 1em;
-    background-color: var(--dream-pre-bg, #f5f5f5);
-    border-radius: .5em;
-    overflow: auto;
-  }
-
-  html.dark .chroma {
-    background-color: var(--dream-pre-bg-dark, #262626);
+  pre {
+   border-radius: 6px;
   }
 </style>
 {{ else }}
@@ -173,23 +166,59 @@
 {{ partial "luxon.html" . }}
 {{ end }}
 
-{{ if site.Params.customSyntaxHighlighting }}
-{{- $syntaxLightCSS := resources.Get "css/syntax-light.css" | minify -}}
-{{- $syntaxDarkCSS := resources.Get "css/syntax-dark.css" | minify -}}
+{{ if site.Params.SyntaxHighlighting }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/apache.min.js"></script>
 <script>
-  window.customSyntaxHighlighting = {
-    light: {{ $syntaxLightCSS.RelPermalink }},
-    dark: {{ $syntaxDarkCSS.RelPermalink }}
-  }
+  hljs.highlightAll();
+  hljs.addPlugin(new CopyButtonPlugin());
 
   document.addEventListener('alpine:initialized', () => {
-    var isDark = Alpine.store('darkMode').isDark()
-    var customSyntaxHighlightingUrl = isDark ? window.customSyntaxHighlighting.dark : window.customSyntaxHighlighting.light
+    // Определяем темы подсветки синтаксиса как глобальные переменные
+    window.customSyntaxHighlighting = {
+        dark: '{{ .Site.Params.SyntaxHighlightingThemeDark }}',
+        light: '{{ .Site.Params.SyntaxHighlightingThemeLight }}'
+    };
 
-    document
-      .querySelector('link[data-custom-syntax-highlighting]')
-      .setAttribute('href', customSyntaxHighlightingUrl)
-  })
+    // Функция для обновления темы подсветки синтаксиса
+    const updateSyntaxTheme = () => {
+        try {
+            // Получаем текущую тему (темная или светлая)
+            const isDark = Alpine.store('darkMode').isDark();
+            const currentTheme = isDark ? 
+                window.customSyntaxHighlighting.dark : 
+                window.customSyntaxHighlighting.light;
+
+            // Ищем элемент <link> с атрибутом data-syntax-highlight
+            let link = document.querySelector('link[data-syntax-highlight]');
+            if (!link) {
+                // Если такого элемента нет, создаем его
+                link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${currentTheme}.min.css`;
+                link.setAttribute('data-syntax-highlight', 'true');
+                document.head.appendChild(link);
+            } else {
+                // Если элемент найден, просто обновляем ссылку на стиль
+                link.href = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${currentTheme}.min.css`;
+            }
+        } catch (error) {
+            console.warn('Error updating syntax theme:', error);
+        }
+    };
+
+    // Первоначальная установка темы
+    updateSyntaxTheme();
+
+    // Следим за изменениями темы через Alpine.js
+    Alpine.effect(() => {
+        updateSyntaxTheme();
+    });
+  });
+</script>
+
+
 </script>
 {{ end }}
 

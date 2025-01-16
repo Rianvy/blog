@@ -59,12 +59,14 @@ siteStartYear = 2025
 favicon = "favicon.ico"
 
 # Syntax highlighting
-# customSyntaxHighlighting = true
+SyntaxHighlighting = true
+SyntaxHighlightingThemeDark = "a11y-dark"
+SyntaxHighlightingThemeLight = "atom-one-dark"
 
 # options
 stickyNav = true
 reorderNavItems = ["search", "rss", "posts", "categories", "github", "tags"]
-collapseNavItems = ["posts", "tags", "rss"]
+collapseNavItems = ["posts", "tags", "github", "rss"]
 # noDefaultSummaryCover = true
 showTableOfContents = true
 showSummaryCoverInPost = true
@@ -77,8 +79,9 @@ customCSS = ["css/custom.css"]
 customJS = ["js/custom.js"]
 
 [markup]
-[markup.goldmark.parser.attribute]
-block = true
+  [markup.highlight]
+    codeFences = false
+    guessSyntax = false
 
 [params.navItems]
 github = { href = "https://github.com/rianvy", target = "_blank", icon = "logo-github", title = "GitHub" }

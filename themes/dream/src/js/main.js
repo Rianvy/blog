@@ -58,19 +58,6 @@ document.addEventListener('alpine:init', () => {
       }
 
       this.setThemeForUtterances()
-      this.changeSyntaxHighlightingTheme()
-    },
-
-    changeSyntaxHighlightingTheme() {
-      if (document.querySelector('#dream-single-post-main')) {
-        const customSyntaxHighlightingUrl = this.isDark()
-          ? window.customSyntaxHighlighting.dark
-          : window.customSyntaxHighlighting.light
-
-        document
-          .querySelector('link[data-custom-syntax-highlighting]')
-          .setAttribute('href', customSyntaxHighlightingUrl)
-      }
     },
 
     setThemeForUtterances() {

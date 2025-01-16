@@ -52,13 +52,6 @@ document.addEventListener('alpine:init', function () {
         window.localStorage.setItem('hugo-theme-dream-is-dark', status);
       }
       this.setThemeForUtterances();
-      this.changeSyntaxHighlightingTheme();
-    },
-    changeSyntaxHighlightingTheme: function changeSyntaxHighlightingTheme() {
-      if (document.querySelector('#dream-single-post-main')) {
-        var customSyntaxHighlightingUrl = this.isDark() ? window.customSyntaxHighlighting.dark : window.customSyntaxHighlighting.light;
-        document.querySelector('link[data-custom-syntax-highlighting]').setAttribute('href', customSyntaxHighlightingUrl);
-      }
     },
     setThemeForUtterances: function setThemeForUtterances() {
       var utterances = document.querySelector('iframe.utterances-frame');

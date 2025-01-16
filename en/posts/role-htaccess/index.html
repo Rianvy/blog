@@ -62,10 +62,10 @@
     
 
 
+<link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
 <style>
   pre {
-    padding: 1em;
-    overflow: auto;
+   border-radius: 6px;
   }
 </style>
 
@@ -258,19 +258,6 @@
 
 
       
-      
-
-
-
-  
-  <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://github.com/rianvy" target="_blank" title="GitHub">
-    <ion-icon class="group-hover:text-primary-content" name="logo-github"></ion-icon>
-  </a>
-  
-
-
-
-      
 
 	  <div class="dropdown dropdown-end dropdown-hover">
 	    <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
@@ -316,6 +303,22 @@
     All Tags
   </a>
 </li>
+
+
+          
+          
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="https://github.com/rianvy" target="_blank" title="GitHub">
+    
+    <ion-icon name="logo-github"></ion-icon>
+    
+    GitHub
+  </a>
+</li>
+
 
 
           
@@ -493,8 +496,9 @@
 <h2 id="basic-configuration">Basic configuration</h2>
 <h3 id="enabling-the-rewrite-module">Enabling the Rewrite module</h3>
 <p>To work with URLs, you must activate the module:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteEngine <span style="color:#66d9ef">On</span>
-</span></span></code></pre></div><h2 id="access-control">Access Control</h2>
+<pre><code class="language-apache">RewriteEngine On
+</code></pre>
+<h2 id="access-control">Access Control</h2>
 <h3 id="restrict-access-by-ip">Restrict access by IP</h3>
 <p>These rules are especially useful for:</p>
 <ul>
@@ -504,9 +508,10 @@
 <li>Geo-restrict access to content</li>
 </ul>
 <h4 id="single-ip-ban">Single IP ban</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>Order Deny,Allow
-</span></span><span style="display:flex;"><span>Deny from <span style="color:#ae81ff">123.123.123.123</span>.123
-</span></span></code></pre></div><p><strong>Practical application:</strong></p>
+<pre><code class="language-apache">Order Deny,Allow
+Deny from 123.123.123.123
+</code></pre>
+<p><strong>Practical application:</strong></p>
 <ul>
 <li>Blocking spammers or malicious users</li>
 <li>Temporarily restricting access to problematic users</li>
@@ -514,10 +519,11 @@
 </ul>
 <p><strong>Usage example:</strong> You have an online store and you have noticed suspicious activity from a certain IP address - multiple attempts to find the password to the admin area. You can temporarily block this IP.</p>
 <h4 id="allow-access-only-to-a-specific-ip">Allow access only to a specific IP</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>Order Deny,Allow
-</span></span><span style="display:flex;"><span>Deny from <span style="color:#66d9ef">all</span>
-</span></span><span style="display:flex;"><span>Allow from <span style="color:#ae81ff">123.123.123.123</span>.123
-</span></span></code></pre></div><p><strong>Practical application:</strong></p>
+<pre><code class="language-apache">Order Deny,Allow
+Deny from all
+Allow from 123.123.123.123
+</code></pre>
+<p><strong>Practical application:</strong></p>
 <ul>
 <li>Access to the staging-version of the site for developers only</li>
 <li>Restrict access to admin panel by office IP</li>
@@ -526,8 +532,9 @@
 <p><strong>Usage Example:</strong> You have a test version of your site that should be accessible only by company employees. You can allow access only from office IP addresses.</p>
 <h2 id="encoding-and-language-settings">Encoding and language settings</h2>
 <h3 id="default-encoding">Default encoding</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>AddDefaultCharset UTF-8
-</span></span></code></pre></div><p><strong>What it&rsquo;s for:</strong></p>
+<pre><code class="language-apache">AddDefaultCharset UTF-8
+</code></pre>
+<p><strong>What it&rsquo;s for:</strong></p>
 <ul>
 <li>Proper display of special characters</li>
 <li>Support for multilingual content</li>
@@ -536,11 +543,12 @@
 <p><strong>Usage Example:</strong> You have a multilingual site with Russian and Chinese content. Setting UTF-8 will ensure that characters from both languages are displayed correctly.</p>
 <h2 id="error-handling">Error handling</h2>
 <h3 id="custom-error-pages">Custom error pages</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>ErrorDocument <span style="color:#ae81ff">404</span> <span style="color:#e6db74">/errors/404.html</span>
-</span></span><span style="display:flex;"><span>ErrorDocument <span style="color:#ae81ff">403</span> <span style="color:#e6db74">/errors/403.html</span>
-</span></span><span style="display:flex;"><span>ErrorDocument <span style="color:#ae81ff">401</span> <span style="color:#e6db74">/errors/401.html</span>
-</span></span><span style="display:flex;"><span>ErrorDocument <span style="color:#ae81ff">500</span> <span style="color:#e6db74">/errors/500.html</span>
-</span></span></code></pre></div><p><strong>Practical application:</strong></p>
+<pre><code class="language-apache">ErrorDocument 404 /errors/404.html
+ErrorDocument 403 /errors/403.html
+ErrorDocument 401 /errors/401.html
+ErrorDocument 500 /errors/500.html
+</code></pre>
+<p><strong>Practical application:</strong></p>
 <ul>
 <li>Improving user experience</li>
 <li>Retaining visitors when errors occur</li>
@@ -557,10 +565,11 @@ On a 404 page you can:</p>
 </ul>
 <h2 id="manage-urls-and-redirects">Manage URLs and redirects</h2>
 <h3 id="redirect-to-html">Redirect to .html</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteCond %{REQUEST_URI} (.*/[^/.]+)($|\?)
-</span></span><span style="display:flex;"><span>RewriteRule .* %1.html [R=301,L]
-</span></span><span style="display:flex;"><span>RewriteRule ^(.*)/$ /$1.html [R=301,L]
-</span></span></code></pre></div><p><strong>Practical application:</strong></p>
+<pre><code class="language-apache">RewriteCond %{REQUEST_URI} (.*/[^/.]+)($|\?)
+RewriteRule .* %1.html [R=301,L]
+RewriteRule ^(.*)/$ /$1.html [R=301,L]
+</code></pre>
+<p><strong>Practical application:</strong></p>
 <ul>
 <li>Creating clean URLs without extensions</li>
 <li>SEO optimization</li>
@@ -580,9 +589,10 @@ Instead of URLs like:</p>
 </ul>
 <h3 id="managing-slashes-in-urls">Managing slashes in URLs</h3>
 <h4 id="delete-end-slash">Delete end slash</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteCond %{REQUEST_FILENAME} !-d
-</span></span><span style="display:flex;"><span>RewriteRule ^(.+)/$ /$1 [R=301,L]
-</span></span></code></pre></div><p><strong>Why it&rsquo;s needed:</strong></p>
+<pre><code class="language-apache">RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+</code></pre>
+<p><strong>Why it&rsquo;s needed:</strong></p>
 <ul>
 <li>URL uniformity</li>
 <li>Prevent duplicate pages</li>
@@ -592,17 +602,18 @@ Instead of URLs like:</p>
 <p><strong>Usage Example:</strong>
 All URLs of the form:</p>
 <ul>
-<li><code>site.ru/blog/</code>.</li>
-<li><code>site.ru/about/</code>.
+<li><code>site.ru/blog/</code></li>
+<li><code>site.ru/about/</code>
 Will be automatically converted to:</li>
 <li><code>site.ru/blog</code></li>
 <li><code>site.ru/about</code></li>
 </ul>
 <h3 id="handling-www-and-no-www">Handling www and no www</h3>
 <h4 id="redirect-from-www-to-without-www">Redirect from www to without www</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-</span></span><span style="display:flex;"><span>RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
-</span></span></code></pre></div><p><strong>Important for:</strong></p>
+<pre><code class="language-apache">RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+</code></pre>
+<p><strong>Important for:</strong></p>
 <ul>
 <li>SEO optimization</li>
 <li>Preventing duplicate pages</li>
@@ -616,18 +627,20 @@ All URLs of the form:</p>
 <li><code>www.site.ru/blog/post</code>
 Will be automatically converted to:</li>
 <li><code>site.ru/page</code></li>
-<li><code>site.ru/blog/post</code>.</li>
+<li><code>site.ru/blog/post</code></li>
 </ul>
 <h4 id="redirect-without-www-to-www">Redirect without www to www</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteCond %{HTTP_HOST} ^site.ru$ [NC]
-</span></span><span style="display:flex;"><span>RewriteRule ^(.*)$ http://www.site.ru/$1 [R=301,L]
-</span></span></code></pre></div><h2 id="security">Security</h2>
+<pre><code class="language-apache">RewriteCond %{HTTP_HOST} ^site.ru$ [NC]
+RewriteRule ^(.*)$ http://www.site.ru/$1 [R=301,L]
+</code></pre>
+<h2 id="security">Security</h2>
 <h3 id="hotlink-protection">Hotlink protection</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>RewriteEngine <span style="color:#66d9ef">On</span>
-</span></span><span style="display:flex;"><span>RewriteCond %{HTTP_REFERER} !^$
-</span></span><span style="display:flex;"><span>RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?site\.ru [NC].
-</span></span><span style="display:flex;"><span>RewriteRule \.(jpg|jpeg|png|gif)$ <span style="color:#e6db74">/images/stop-hotlinking.jpg</span> [NC,R,L]
-</span></span></code></pre></div><p><strong>Practical application:</strong></p>
+<pre><code class="language-apache">RewriteEngine On
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?site\.ru [NC]
+RewriteRule \.(jpg|jpeg|png|gif)$ /images/stop-hotlinking.jpg [NC,R,L]
+</code></pre>
+<p><strong>Practical application:</strong></p>
 <ul>
 <li>Copyright protection</li>
 <li>Saving traffic</li>
@@ -636,27 +649,29 @@ Will be automatically converted to:</li>
 </ul>
 <p><strong>Application Example:</strong>
 If someone tries to embed your image on their website:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">“http://your-site.ru/images/expensive-photo.jpg”</span>&gt;
-</span></span></code></pre></div><p>A warning stub will be shown instead of your image.</p>
+<pre><code class="language-html">&lt;img src=“http://your-site.ru/images/expensive-photo.jpg”&gt;
+</code></pre>
+<p>A warning stub will be shown instead of your image.</p>
 <h3 id="bruteforce-protection">Bruteforce protection</h3>
 <p>Comprehensive approach using mod_security or limiting the number of requests:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span><span style="color:#75715e"># Limit the number of requests</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_ratelimit.c</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Ограничение до 5 запросов в секунду</span>
-</span></span><span style="display:flex;"><span>    SetOutputFilter RATE_LIMIT
-</span></span><span style="display:flex;"><span>    SetEnv rate-limit <span style="color:#ae81ff">5</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Blocking suspicious patterns</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_security2.c</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>    SecRule REQUEST_URI <span style="color:#e6db74">&#34;/administrator\.php&#34;</span> \
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;phase:1,deny,status:403,id:1000,msg:&#39;Suspicious admin access attempt&#39;&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Additional safety rules</span>
-</span></span><span style="display:flex;"><span>SetEnvIfNoCase <span style="color:#66d9ef">User</span>-Agent <span style="color:#e6db74">&#34;^libwww-perl*&#34;</span> block_bot
-</span></span><span style="display:flex;"><span>Deny from env=block_bot
-</span></span></code></pre></div><p><strong>Applies to:</strong></p>
+<pre><code class="language-apache"># Limit the number of requests
+&lt;IfModule mod_ratelimit.c&gt;
+    # Limit to 5 requests per second
+    SetOutputFilter RATE_LIMIT
+    SetEnv rate-limit 5
+&lt;/IfModule&gt;
+
+# Blocking suspicious patterns
+&lt;IfModule mod_security2.c&gt;
+    SecRule REQUEST_URI &quot;/administrator\.php&quot; \
+    &quot;phase:1,deny,status:403,id:1000,msg:'Suspicious admin access attempt'&quot;
+&lt;/IfModule&gt;
+
+# Additional safety rules
+SetEnvIfNoCase User-Agent &quot;^libwww-perl*&quot; block_bot
+Deny from env=block_bot
+</code></pre>
+<p><strong>Applies to:</strong></p>
 <ul>
 <li>Protect the admin panel</li>
 <li>Prevent password mining</li>
@@ -665,26 +680,27 @@ If someone tries to embed your image on their website:</p>
 </ul>
 <h2 id="performance-optimization">Performance optimization</h2>
 <h3 id="static-content-caching">Static Content Caching</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_expires.c</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>  ExpiresActive <span style="color:#66d9ef">On</span>
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Images</span>
-</span></span><span style="display:flex;"><span>  ExpiresByType image/jpg <span style="color:#e6db74">&#34;access plus 1 month&#34;</span>
-</span></span><span style="display:flex;"><span>  ExpiresByType image/jpeg <span style="color:#e6db74">&#34;access plus 1 month&#34;</span>
-</span></span><span style="display:flex;"><span>  ExpiresByType image/gif <span style="color:#e6db74">&#34;access plus 1 month&#34;</span>
-</span></span><span style="display:flex;"><span>  ExpiresByType image/png <span style="color:#e6db74">&#34;access plus 1 month&#34;</span>
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># CSS, JavaScript</span>
-</span></span><span style="display:flex;"><span>  ExpiresByType text/css <span style="color:#e6db74">&#34;access plus 1 week&#34;</span>
-</span></span><span style="display:flex;"><span>  ExpiresByType application/javascript <span style="color:#e6db74">&#34;access plus 1 week&#34;</span>
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Add versioning via GET parameter to update files</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Example: style.css?v=1.2</span>
-</span></span><span style="display:flex;"><span>  RewriteCond %{REQUEST_FILENAME} \.(css|js|jpg|jpeg|png|gif)$
-</span></span><span style="display:flex;"><span>  RewriteCond %{QUERY_STRING} !^v=
-</span></span><span style="display:flex;"><span>  RewriteRule ^(.*)$ $1?v=1.0 [L]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
-</span></span></code></pre></div><p><strong>Benefits:</strong></p>
+<pre><code class="language-apache">&lt;IfModule mod_expires.c&gt;
+  ExpiresActive On
+  
+  # Images
+  ExpiresByType image/jpg &quot;access plus 1 month&quot;
+  ExpiresByType image/jpeg &quot;access plus 1 month&quot;
+  ExpiresByType image/gif &quot;access plus 1 month&quot;
+  ExpiresByType image/png &quot;access plus 1 month&quot;
+  
+  # CSS, JavaScript
+  ExpiresByType text/css &quot;access plus 1 week&quot;
+  ExpiresByType application/javascript &quot;access plus 1 week&quot;
+  
+  # Add versioning via GET parameter to update files
+  # Example: style.css?v=1.2
+  RewriteCond %{REQUEST_FILENAME} \.(css|js|jpg|jpeg|png|gif)$
+  RewriteCond %{QUERY_STRING} !^v=
+  RewriteRule ^(.*)$ $1?v=1.0 [L]
+&lt;/IfModule&gt;
+</code></pre>
+<p><strong>Benefits:</strong></p>
 <ul>
 <li>Reduced server load</li>
 <li>Faster page loading</li>
@@ -698,16 +714,17 @@ If someone tries to embed your image on their website:</p>
 <li>Or clear the client-side cache</li>
 </ul>
 <h3 id="gzip-compression">GZIP compression</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_deflate.c</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Compress only text files</span>
-</span></span><span style="display:flex;"><span>    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css
-</span></span><span style="display:flex;"><span>    AddOutputFilterByType DEFLATE application/xml application/xhtml+xml
-</span></span><span style="display:flex;"><span>    AddOutputFilterByType DEFLATE application/javascript application/x-javascript
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Do not compress already compressed formats</span>
-</span></span><span style="display:flex;"><span>    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|pdf|zip|rar)$ no-gzip dont-vary
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
-</span></span></code></pre></div><p><strong>Efficiency:</strong></p>
+<pre><code class="language-apache">&lt;IfModule mod_deflate.c&gt;
+    # Compress only text files
+    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css
+    AddOutputFilterByType DEFLATE application/xml application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+    
+    # Do not compress already compressed formats
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|pdf|zip|rar)$ no-gzip dont-vary
+&lt;/IfModule&gt;
+</code></pre>
+<p><strong>Efficiency:</strong></p>
 <ul>
 <li>Reduces HTML size by up to 70%</li>
 <li>CSS compression up to 80%</li>
@@ -715,25 +732,28 @@ If someone tries to embed your image on their website:</p>
 <li>Speed up site loading</li>
 </ul>
 <h3 id="optimization-for-spa">Optimization for SPA</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_rewrite.c</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>    RewriteEngine <span style="color:#66d9ef">On</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Specify the correct path if the application is in a subdirectory</span>
-</span></span><span style="display:flex;"><span>    RewriteBase <span style="color:#e6db74">/path/to/app/</span>
-</span></span><span style="display:flex;"><span>    RewriteRule ^index\.html$ - [L]
-</span></span><span style="display:flex;"><span>    RewriteCond %{REQUEST_FILENAME} !-f
-</span></span><span style="display:flex;"><span>    RewriteCond %{REQUEST_FILENAME} !-d
-</span></span><span style="display:flex;"><span>    RewriteCond %{REQUEST_FILENAME} !-l
-</span></span><span style="display:flex;"><span>    RewriteRule . <span style="color:#e6db74">/path/to/app/index.html</span> [L]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
-</span></span></code></pre></div><p><strong>Note:</strong> If your application is in the root of the site, use <code>RewriteBase /</code>. For a subdirectory, specify the appropriate path.</p>
+<pre><code class="language-apache">&lt;IfModule mod_rewrite.c&gt;
+    RewriteEngine On
+    # Specify the correct path if the application is in a subdirectory
+    RewriteBase /path/to/app/
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteRule . /path/to/app/index.html [L]
+&lt;/IfModule&gt;
+</code></pre>
+<p><strong>Note:</strong> If your application is in the root of the site, use <code>RewriteBase /</code>. For a subdirectory, specify the appropriate path.</p>
 <h2 id="debugging-and-monitoring">Debugging and monitoring</h2>
 <h3 id="error-logging">Error Logging</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>php_flag log_errors <span style="color:#66d9ef">on</span>
-</span></span><span style="display:flex;"><span>php_value error_log <span style="color:#e6db74">/path/to/error.log</span>
-</span></span></code></pre></div><h3 id="customization-for-development">Customization for development</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.htaccess" data-lang=".htaccess"><span style="display:flex;"><span>php_flag display_errors <span style="color:#66d9ef">on</span>
-</span></span><span style="display:flex;"><span>php_value error_reporting E_ALL
-</span></span></code></pre></div><h2 id="recommendations-for-use">Recommendations for use</h2>
+<pre><code class="language-apache">php_flag log_errors on
+php_value error_log /path/to/error.log
+</code></pre>
+<h3 id="customization-for-development">Customization for development</h3>
+<pre><code class="language-apache">php_flag display_errors on
+php_value error_reporting E_ALL
+</code></pre>
+<h2 id="recommendations-for-use">Recommendations for use</h2>
 <h3 id="best-practices">Best Practices</h3>
 <ul>
 <li>Create backups before making changes</li>
@@ -1196,6 +1216,60 @@ I&rsquo;d be happy to chat and maybe work together 🤝</p>
 
 
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/apache.min.js"></script>
+<script>
+  hljs.highlightAll();
+  hljs.addPlugin(new CopyButtonPlugin());
+
+  document.addEventListener('alpine:initialized', () => {
+    
+    window.customSyntaxHighlighting = {
+        dark: 'a11y-dark',
+        light: 'atom-one-dark'
+    };
+
+    
+    const updateSyntaxTheme = () => {
+        try {
+            
+            const isDark = Alpine.store('darkMode').isDark();
+            const currentTheme = isDark ? 
+                window.customSyntaxHighlighting.dark : 
+                window.customSyntaxHighlighting.light;
+
+            
+            let link = document.querySelector('link[data-syntax-highlight]');
+            if (!link) {
+                
+                link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = `https:
+                link.setAttribute('data-syntax-highlight', 'true');
+                document.head.appendChild(link);
+            } else {
+                
+                link.href = `https:
+            }
+        } catch (error) {
+            console.warn('Error updating syntax theme:', error);
+        }
+    };
+
+    
+    updateSyntaxTheme();
+
+    
+    Alpine.effect(() => {
+        updateSyntaxTheme();
+    });
+  });
+</script>
+
+
+</script>
 
 
 

@@ -138,7 +138,6 @@
       {{ end }}
 
       {{ if or site.Config.Services.Disqus.Shortname site.Params.utterancesRepo site.Params.valine site.Params.waline site.Params.telegramComments }}
-      <div class="divider"></div>
 
       <section class="space-y-4">
         {{ partialCached "commentSystems.html" . .RelPermalink }}

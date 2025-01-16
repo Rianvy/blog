@@ -54,7 +54,7 @@ rss = true
 
 telegramComments = true
 telegramCommentsSiteID = "YjlEv4KV"
-telegramCommentsLimit = "100"
+telegramCommentsLimit = "10"
 
 email = "blackghost.v1@gmail.com"
 

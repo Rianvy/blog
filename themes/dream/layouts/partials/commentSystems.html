@@ -62,39 +62,28 @@
 <script>
 document.addEventListener('alpine:initialized', () => {
 
-    // Функция для обновления темы телеграм
     const updateTelegramTheme = () => {
         try {
-            // Получаем текущую тему (темная или светлая)
+		
             const isDark = Alpine.store('darkMode').isDark();
-			
-			if (isDark){
-			
-				var src = $(".telegram_comments iframe").attr("src");
-				
-				if (src) {
-					src = src.replace("dark=0", "dark=1");
-					$(".telegram_comments iframe").attr("src", src);
-				}
-				
-			}else {
-			
-				var src = $(".telegram_comments iframe").attr("src");
-				if (src) {
-					src = src.replace("dark=1", "dark=0");
-					$(".telegram_comments iframe").attr("src", src);
-				}
-				
-			}
+
+            const iframe = document.querySelector(".telegram_comments iframe");
+            if (iframe) {
+                let src = iframe.getAttribute("src");
+                if (src) {
+                    src = isDark 
+                        ? src.replace("dark=0", "dark=1") 
+                        : src.replace("dark=1", "dark=0");
+                    iframe.setAttribute("src", src);
+                }
+            }
         } catch (error) {
             console.warn('Error updating telegram theme:', error);
         }
     };
 
-    // Первоначальная установка темы
     updateTelegramTheme();
 
-    // Следим за изменениями темы через Alpine.js
     Alpine.effect(() => {
         updateTelegramTheme();
     });

@@ -838,7 +838,7 @@ document.addEventListener('alpine:initialized', () => {
 
     const updateTelegramTheme = () => {
         try {
-
+		
             const isDark = Alpine.store('darkMode').isDark();
 
             const iframe = document.querySelector(".telegram_comments iframe");
@@ -850,26 +850,6 @@ document.addEventListener('alpine:initialized', () => {
                         : src.replace("dark=1", "dark=0");
                     iframe.setAttribute("src", src);
                 }
-
-                
-                iframe.addEventListener('load', () => {
-                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    if (iframeDoc) {
-                        
-                        const bodyElements = iframeDoc.querySelectorAll('body');
-                        bodyElements.forEach((body) => {
-                            if (body.style.backgroundColor === 'rgb(255, 255, 255)') {
-                                body.style.backgroundColor = ''; 
-                            }
-                        });
-
-                        
-                        const darkElements = iframeDoc.querySelectorAll('body.bc-dark, .bc-preview-wrap.bc-dark');
-                        darkElements.forEach((element) => {
-                            element.style.backgroundColor = ''; 
-                        });
-                    }
-                });
             }
         } catch (error) {
             console.warn('Error updating telegram theme:', error);

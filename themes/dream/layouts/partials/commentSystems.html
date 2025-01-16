@@ -57,14 +57,14 @@
 
 {{ if site.Params.telegramComments }}
 <article class="telegram_comments">
-<script async src="https://comments.app/js/widget.js?3" data-comments-app-website="{{ site.Params.telegramCommentsSiteID }}" data-limit="{{ site.Params.telegramCommentsLimit }}" data-colorful="1" data-color="E5C41D" data-dark="1"></script>
+<script async src="https://comments.app/js/widget.js?3" data-comments-app-website="{{ site.Params.telegramCommentsSiteID }}" data-limit="{{ site.Params.telegramCommentsLimit }}" data-colorful="1" data-color="1eb854" data-dark="1"></script>
 </article>
 <script>
 document.addEventListener('alpine:initialized', () => {
 
     const updateTelegramTheme = () => {
         try {
-		
+
             const isDark = Alpine.store('darkMode').isDark();
 
             const iframe = document.querySelector(".telegram_comments iframe");
@@ -76,6 +76,26 @@ document.addEventListener('alpine:initialized', () => {
                         : src.replace("dark=1", "dark=0");
                     iframe.setAttribute("src", src);
                 }
+
+                // Wait for the iframe to load before modifying its styles
+                iframe.addEventListener('load', () => {
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    if (iframeDoc) {
+                        // Select all `body` elements with `background-color: #fff` and remove the styles
+                        const bodyElements = iframeDoc.querySelectorAll('body');
+                        bodyElements.forEach((body) => {
+                            if (body.style.backgroundColor === 'rgb(255, 255, 255)') {
+                                body.style.backgroundColor = ''; // Remove inline style
+                            }
+                        });
+
+                        // Remove background-color from specific classes
+                        const darkElements = iframeDoc.querySelectorAll('body.bc-dark, .bc-preview-wrap.bc-dark');
+                        darkElements.forEach((element) => {
+                            element.style.backgroundColor = ''; // Remove inline style
+                        });
+                    }
+                });
             }
         } catch (error) {
             console.warn('Error updating telegram theme:', error);

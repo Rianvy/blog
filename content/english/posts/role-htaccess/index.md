@@ -15,6 +15,7 @@ Tags:
   - .htaccess
   - Web Security
   - Performance
+telegram_post_link: https://t.me/ox69_online/5
 ---
 .htaccess allows you to create your own Apache server management configuration in directories or hosting settings.
 

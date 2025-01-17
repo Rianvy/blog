@@ -137,7 +137,7 @@
       </div>
       {{ end }}
 
-      {{ if or site.Config.Services.Disqus.Shortname site.Params.utterancesRepo site.Params.valine site.Params.waline site.Params.commentsApp }}
+      {{ if or site.Config.Services.Disqus.Shortname site.Params.utterancesRepo site.Params.valine site.Params.waline site.Params.commentsApp site.Params.telegramComments }}
 
       <section class="space-y-4">
         {{ partialCached "commentSystems.html" . .RelPermalink }}
@@ -169,7 +169,11 @@
 {{ if site.Params.SyntaxHighlighting }}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/apache.min.js"></script>
+{{- if .Site.Params.SyntaxHighlightingLanguages -}}
+  {{- range .Site.Params.SyntaxHighlightingLanguages -}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/{{ . }}.min.js"></script>
+  {{- end -}}
+{{- end -}}
 <script>
   hljs.highlightAll();
   hljs.addPlugin(new CopyButtonPlugin());

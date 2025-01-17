@@ -53,20 +53,24 @@ rss = true
 # walineServer = ""
 
 #comments.app
-commentsApp = true
+commentsApp = false
 commentsAppSiteID = "YjlEv4KV"
 commentsAppLimit = "10"
+
+#Telegram Comments
+telegramComments = true
+telegramCommentsHomeId = "https://t.me/ox69_online/8"
 
 email = "blackghost.v1@gmail.com"
 
 siteStartYear = 2025
 
-favicon = "favicon.ico"
-
 # Syntax highlighting
+#https://github.com/highlightjs/highlight.js/tree/main/src/languages
 SyntaxHighlighting = true
 SyntaxHighlightingThemeDark = "a11y-dark"
 SyntaxHighlightingThemeLight = "atom-one-dark"
+SyntaxHighlightingLanguages = ["apache", "json"]
 
 # options
 stickyNav = true

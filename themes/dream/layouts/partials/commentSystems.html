@@ -56,5 +56,13 @@
 {{ end }}
 
 {{ if site.Params.commentsApp }}
+<article class="telegram_comments">
 {{ partial "commentsApp.html" . }}
+</article>
+{{ end }}
+
+{{ if site.Params.telegramComments }}
+<article class="telegram_comments">
+{{ partial "telegramComments.html" .Params.telegram_post_link }}
+</article>
 {{ end }}

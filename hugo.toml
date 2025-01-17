@@ -53,9 +53,9 @@ rss = true
 # walineServer = ""
 
 #comments.app
-telegramComments = true
-telegramCommentsSiteID = "YjlEv4KV"
-telegramCommentsLimit = "10"
+commentsApp = true
+commentsAppSiteID = "YjlEv4KV"
+commentsAppLimit = "10"
 
 email = "blackghost.v1@gmail.com"
 

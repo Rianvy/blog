@@ -57,14 +57,8 @@
 
 {{ if site.Params.telegramComments }}
 <style>
-.telegram_comments {
-    background: transparent !important;
-	background-color: transparent !important;
-}
 iframe[src*="comments.app"] {
-    background: transparent !important;
-	background-color: transparent !important;
-    border: none;
+    border-radius: 6px;
 }
 </style>
 <article class="telegram_comments">
@@ -72,21 +66,14 @@ iframe[src*="comments.app"] {
 </article>
 <script>
 document.addEventListener('alpine:initialized', () => {
-
     const updateTelegramTheme = () => {
         try {
-		
             const isDark = Alpine.store('darkMode').isDark();
-
             const iframe = document.querySelector(".telegram_comments iframe");
-            if (iframe) {
-                let src = iframe.getAttribute("src");
-                if (src) {
-                    src = isDark 
-                        ? src.replace("dark=0", "dark=1") 
-                        : src.replace("dark=1", "dark=0");
-                    iframe.setAttribute("src", src);
-                }
+
+            if (iframe?.src) {
+                const newSrc = iframe.src.replace(/dark=\d/, `dark=${isDark ? 1 : 0}`);
+                iframe.src = newSrc;
             }
         } catch (error) {
             console.warn('Error updating telegram theme:', error);

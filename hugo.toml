@@ -52,6 +52,7 @@ rss = true
 # waline = true
 # walineServer = ""
 
+#comments.app
 telegramComments = true
 telegramCommentsSiteID = "YjlEv4KV"
 telegramCommentsLimit = "10"

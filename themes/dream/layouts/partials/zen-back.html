@@ -31,4 +31,11 @@
     {{ partial "disqus.html" (dict "Context" . "Identifier" "/") }}
   </div>
   {{ end }}
+  
+  {{ if and site.Params.commentsApp .IsHome }}
+  <div class="divider divider-vertical"></div>
+  <div class="pb-4">
+        {{ partial "commentsApp.html" . }}
+  </div>
+  {{ end }}
 </div>

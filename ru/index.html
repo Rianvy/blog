@@ -576,6 +576,48 @@
   
 
   
+  
+  
+  <div class="w-full md:w-1/2 p-4 dream-column">
+    <article
+      class="card card-compact bg-base-100 shadow-xl dark:border dark:border-base-content/30"
+    >
+      <div class="card-body">
+        <style>
+iframe[src*="comments.app"] {
+    border-radius: 6px;
+}
+</style>
+<article class="telegram_comments">
+<script async src="https://comments.app/js/widget.js?3" data-comments-app-website="YjlEv4KV" data-limit="10" data-colorful="1" data-color="1eb854" data-dark="1"></script>
+</article>
+<script>
+document.addEventListener('alpine:initialized', () => {
+    const updateTelegramTheme = () => {
+        try {
+            const isDark = Alpine.store('darkMode').isDark();
+            const iframe = document.querySelector(".telegram_comments iframe");
+
+            if (iframe?.src) {
+                const newSrc = iframe.src.replace(/dark=\d/, `dark=${isDark ? 1 : 0}`);
+                iframe.src = newSrc;
+            }
+        } catch (error) {
+            console.warn('Error updating telegram theme:', error);
+        }
+    };
+
+    updateTelegramTheme();
+
+    Alpine.effect(() => {
+        updateTelegramTheme();
+    });
+});
+</script>
+      </div>
+    </article>
+  </div>
+  
 </div>
 
             

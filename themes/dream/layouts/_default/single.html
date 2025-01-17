@@ -137,7 +137,7 @@
       </div>
       {{ end }}
 
-      {{ if or site.Config.Services.Disqus.Shortname site.Params.utterancesRepo site.Params.valine site.Params.waline site.Params.telegramComments }}
+      {{ if or site.Config.Services.Disqus.Shortname site.Params.utterancesRepo site.Params.valine site.Params.waline site.Params.commentsApp }}
 
       <section class="space-y-4">
         {{ partialCached "commentSystems.html" . .RelPermalink }}

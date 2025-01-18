@@ -367,7 +367,7 @@
         <h1 itemprop="headline">Роль файла .htaccess в настройке сервера Apache</h1>
         <p class="text-sm">
           
-            воскресенье, янв. 12, 2025
+            <span data-format="luxon">2025-01-12T21:27:20&#43;03:00</span>
           
 
           | <span>5 минут чтения</span>
@@ -375,7 +375,7 @@
           
           | <span>Обновлено
             
-              воскресенье, янв. 12, 2025
+              <span data-format="luxon">2025-01-12T21:27:20&#43;03:00</span>
             </span>
           
         </p>
@@ -1127,6 +1127,24 @@ php_value error_reporting E_ALL
 <script src="/js/main.min.js"></script>
 
     
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
+  integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
+  crossorigin="anonymous"
+></script>
+<script>
+  format()
+
+  function format() {
+    document.querySelectorAll('span[data-format="luxon"]').forEach(el => {
+      const date = el.textContent
+
+      el.textContent = luxon.DateTime.fromISO(date, { locale: "ru" }).toFormat("HH:mm, dd MMMM")
+    })
+  }
+</script>
 
 
 

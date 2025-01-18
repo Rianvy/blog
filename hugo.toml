@@ -81,3 +81,7 @@ github = { href = "https://github.com/rianvy", target = "_blank", icon = "logo-g
 [params.navLang]
 ru = { href = "/ru/", icon = "language", title = "Русский" }
 en = { href = "/en/", icon = "language", title = "English" }
+
+[params.experimental]
+jsDate = true
+jsDateFormat = "HH:mm, dd MMMM"

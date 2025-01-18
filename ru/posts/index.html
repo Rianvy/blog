@@ -539,33 +539,14 @@
         <article class="telegram_comments card card-compact bg-base-100 shadow-xl dark:border dark:border-base-content/30">
             <div class="card-body">
                 <div class="card-title">Комментарии</div>
-                <script async src="https://telegram.org/js/telegram-widget.js?22" 
-data-telegram-discussion="ox69_online/8" 
-data-comments-limit="10" data-colorful="1" data-color="1eb854" data-dark="1"></script>
-<script>
-document.addEventListener('alpine:initialized', () => {
-    const updateTelegramTheme = () => {
-        try {
-            const isDark = Alpine.store('darkMode').isDark();
-            const targetDarkValue = isDark ? "1" : "0";
-
-            document.querySelectorAll(".telegram_comments iframe").forEach((iframe) => {
-                const src = iframe.getAttribute("src");
-                if (src) {
-                    const updatedSrc = src.replace(/([?&]dark=)[^&]*/, `$1${targetDarkValue}`);
-                    iframe.setAttribute("src", updatedSrc);
-                }
-            });
-        } catch (error) {
-            console.warn('Error updating telegram theme:', error);
-        }
-    };
-
-    updateTelegramTheme();
-
-    Alpine.effect(updateTelegramTheme);
-});
-</script>
+                <div x-data="commentsWidget" 
+     x-init="init()"
+     data-widget-type="telegram"
+     data-discussion="ox69_online/8"
+     data-limit="10"
+     :data-dark="$store.darkMode.isDark() ? '1' : '0'"
+     class="comments-widget">
+</div>
             </div>
         </article>
     </div>
@@ -573,78 +554,7 @@ document.addEventListener('alpine:initialized', () => {
 </div>
 
             
-
-            <div id="top-scroller">
-  <a href="#the-top" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary">
-    <ion-icon name="arrow-up" role="img" class=" md flip-rtl hydrated"></ion-icon>
-  </a>
-</div>
-
-
-<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
-
-  <div>
-  
-  <p>
-    © 2025 0x69.online
-  </p>
-  
-
-  
-  <p>Powered by ❤️</p>
-  
-</div>
-
-  <div class="dropdown dropdown-end sm:hidden">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
-        <ion-icon name="language" class="text-2xl md hydrated" role="img"></ion-icon>
-      </div>
-      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
-		
-		  <li>
-			<a href="/en/">
-			  <ion-icon name="language"></ion-icon> English
-			</a>
-		  </li>
-		
-		  <li>
-			<a href="/ru/">
-			  <ion-icon name="language"></ion-icon> Русский
-			</a>
-		  </li>
-		
-      </ul>
-</div>
-
-<div
-  x-data="{ icons: [
-    { name: 'moon', status: 'y' },
-    { name: 'sunny', status: 'n' },
-    { name: 'desktop', status: 'auto' }
-  ] }"
-  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
->
-  <template x-for="icon in icons">
-    <div
-      role="button"
-      tabindex="0"
-      :aria-label="'Select ' + icon.name + ' mode'"
-      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
-      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
-      @click="$store.darkMode.toggle(icon.status)"
-    >
-      <ion-icon
-        :name="`${icon.name}-outline`"
-        class="group-hover:text-primary-content"
-        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
-      >
-      </ion-icon>
-    </div>
-  </template>
-</div>
-
-</footer>
-
+			
           </div>
         </div>
       </div>
@@ -695,6 +605,26 @@ if (!doNotTrack) {
 }
 </script>
 
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	
     
 
     <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>

@@ -1,0 +1,13 @@
+<style>
+iframe[src*="comments.app"] {
+    border-radius: 6px;
+}
+</style>
+<div x-data="commentsWidget" 
+     x-init="init()"
+     data-widget-type="commentsApp"
+     data-discussion="{{ site.Params.commentsAppSiteID }}"
+     data-limit="{{ site.Params.commentsAppLimit }}"
+     :data-dark="$store.darkMode.isDark() ? '1' : '0'"
+     class="comments-widget">
+</div>

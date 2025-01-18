@@ -1,0 +1,9 @@
+{{- $link := . -}}
+<div x-data="commentsWidget" 
+     x-init="init()"
+     data-widget-type="telegram"
+     data-discussion="{{ replace $link "https://t.me/" "" }}"
+     data-limit="10"
+     :data-dark="$store.darkMode.isDark() ? '1' : '0'"
+     class="comments-widget">
+</div>

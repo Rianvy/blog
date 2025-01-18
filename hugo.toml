@@ -10,68 +10,51 @@ theme = "dream"
     languageCode = "ru"
     contentDir = "content/russian"
     weight = 1
-
   [languages.en]
     languageName = "English"
     languageCode = "en"
     contentDir = "content/english"
     weight = 2
 
-
-# [services]
-#[services.disqus]
-#shortname = "https-0x69-online-ru"
-[services.googleAnalytics]
-ID = "G-V1CKYK7EQD"
+[services]
+  [services.googleAnalytics]
+    ID = "G-V1CKYK7EQD"
 
 [params]
+yandexMetricaId = "99568144"
 # zenMode = true
-
 lightTheme = "emerald"
 darkTheme = "forest"
-
 # backgroundImage = "me/background.jpg"
 # backgroundImageDark = ""
-
 author = "Rianvy"
 description = "В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет."
 avatar = "img/avatar.jpg"
 motto = "Document today what you will forget tomorrow"
 headerTitle = "Blog about IT"
-
 footerBottomText = "Powered by ❤️"
-
 rss = true
-
 # utterancesRepo = ""
-
 # valine = true
 # LEANCLOUD_APP_ID = ""
 # LEANCLOUD_APP_KEY = ""
-
 # waline = true
 # walineServer = ""
-
 #comments.app
 commentsApp = false
 commentsAppSiteID = "YjlEv4KV"
 commentsAppLimit = "10"
-
 #Telegram Comments
 telegramComments = true
 telegramCommentsHomeId = "https://t.me/ox69_online/8"
-
 email = "blackghost.v1@gmail.com"
-
 siteStartYear = 2025
-
 # Syntax highlighting
 #https://github.com/highlightjs/highlight.js/tree/main/src/languages
 SyntaxHighlighting = true
 SyntaxHighlightingThemeDark = "a11y-dark"
 SyntaxHighlightingThemeLight = "atom-one-dark"
 SyntaxHighlightingLanguages = ["apache", "json"]
-
 # options
 stickyNav = true
 reorderNavItems = ["search", "rss", "posts", "categories", "github", "tags"]

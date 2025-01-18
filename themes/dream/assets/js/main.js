@@ -1,6 +1,7 @@
 "use strict";
 
 document.addEventListener('alpine:init', function () {
+  // Первый скрипт: управление темной темой
   Alpine.store('darkMode', {
     init: function init() {
       var _this = this;
@@ -63,4 +64,58 @@ document.addEventListener('alpine:init', function () {
       }
     }
   });
+
+  // Второй скрипт: универсальный компонент для загрузки виджетов
+  Alpine.data('commentsWidget', () => ({
+    init() {
+      this.loadWidget();
+      this.$watch('$store.darkMode.isDark()', () => {
+        this.loadWidget();
+      });
+    },
+    loadWidget() {
+      // Очищаем предыдущий виджет
+      this.$el.innerHTML = '';
+
+      // Извлекаем данные из атрибутов
+      const type = this.$el.getAttribute('data-widget-type'); // Тип виджета: telegram или commentsApp
+      const discussion = this.$el.getAttribute('data-discussion'); // ID обсуждения
+      const limit = this.$el.getAttribute('data-limit') || '10'; // Лимит комментариев
+      const isDark = this.$store.darkMode.isDark() ? '1' : '0'; // Тема
+
+      // Создаем новый скрипт
+      const script = document.createElement('script');
+      script.async = true;
+
+      // Устанавливаем атрибуты в зависимости от типа виджета
+      if (type === 'telegram') {
+        script.src = 'https://telegram.org/js/telegram-widget.js?22';
+        const dataAttributes = {
+          'data-telegram-discussion': discussion,
+          'data-comments-limit': limit,
+          'data-colorful': '1',
+          'data-color': '1eb854',
+          'data-dark': isDark
+        };
+        Object.entries(dataAttributes).forEach(([key, value]) => {
+          script.setAttribute(key, value);
+        });
+      } else if (type === 'commentsApp') {
+        script.src = 'https://comments.app/js/widget.js?3';
+        const dataAttributes = {
+          'data-comments-app-website': discussion,
+          'data-limit': limit,
+          'data-colorful': '1',
+          'data-color': '1eb854',
+          'data-dark': isDark
+        };
+        Object.entries(dataAttributes).forEach(([key, value]) => {
+          script.setAttribute(key, value);
+        });
+      }
+
+      // Добавляем скрипт в контейнер
+      this.$el.appendChild(script);
+    }
+  }));
 });

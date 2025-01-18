@@ -27,7 +27,7 @@
     <div class="w-full md:w-1/2 p-4 dream-column">
         <article class="card card-compact bg-base-100 shadow-xl dark:border dark:border-base-content/30">
             <div class="card-body">
-                {{ partial "disqus.html" (dict "Context" . "Identifier" "/") }}
+                {{ partial "comments/disqus.html" (dict "Context" . "Identifier" "/") }}
             </div>
         </article>
     </div>
@@ -37,7 +37,7 @@
         <article class="telegram_comments card card-compact bg-base-100 shadow-xl dark:border dark:border-base-content/30">
             <div class="card-body">
                 <div class="card-title">{{ T "comments" }}</div>
-                {{ partial "commentsApp.html" . }}
+                {{ partial "comments/commentsApp.html" . }}
             </div>
         </article>
     </div>
@@ -47,7 +47,7 @@
         <article class="telegram_comments card card-compact bg-base-100 shadow-xl dark:border dark:border-base-content/30">
             <div class="card-body">
                 <div class="card-title">{{ T "comments" }}</div>
-                {{ partial "telegramComments.html" site.Params.telegramCommentsHomeId }}
+                {{ partial "comments/telegramComments.html" site.Params.telegramCommentsHomeId }}
             </div>
         </article>
     </div>

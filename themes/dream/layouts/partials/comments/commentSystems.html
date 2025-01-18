@@ -1,6 +1,6 @@
 {{ if site.Config.Services.Disqus.Shortname }}
 <article>
-  {{ partial "disqus.html" (dict "Context" . "Identifier" .RelPermalink) }}
+  {{ partial "comments/disqus.html" (dict "Context" . "Identifier" .RelPermalink) }}
 </article>
 {{ end }}
 
@@ -21,8 +21,8 @@
 
 {{ if site.Params.valine }}
 <article>
-{{ if fileExists "layouts/partials/valine.html" }}
-  {{ partialCached "valine.html" . }}
+{{ if fileExists "layouts/partials/comments/valine.html" }}
+  {{ partialCached "comments/valine.html" . }}
 {{ else }}
   <div id="vcomments"></div>
   <script>
@@ -38,8 +38,8 @@
 
 {{ if site.Params.waline }}
 <article>
-{{ if fileExists "layouts/partials/waline.html" }}
-  {{ partialCached "waline.html" . }}
+{{ if fileExists "layouts/partials/comments/waline.html" }}
+  {{ partialCached "comments/waline.html" . }}
 {{ else }}
   <div id="waline"></div>
   <script type="module">
@@ -57,12 +57,12 @@
 
 {{ if site.Params.commentsApp }}
 <article class="telegram_comments">
-{{ partial "commentsApp.html" . }}
+{{ partial "comments/commentsApp.html" . }}
 </article>
 {{ end }}
 
 {{ if site.Params.telegramComments }}
 <article class="telegram_comments">
-{{ partial "telegramComments.html" .Params.telegram_post_link }}
+{{ partial "comments/telegramComments.html" .Params.telegram_post_link }}
 </article>
 {{ end }}

@@ -624,6 +624,18 @@ html {
   scrollbar-color: color-mix(in oklch, currentColor 60%, transparent) transparent;
 }
 
+::selection {
+  background: #15843c;
+  color: #fff;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background: #15843c;
+  color: #fff;
+  text-shadow: none;
+}
+
 :root {
   color-scheme: light;
   --b2: 93% 0 0;
@@ -3988,6 +4000,17 @@ html {
   --tw-text-opacity: 1;
   color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
 }
+
+
+.filter-button.data-checked\:badge-primary[data-state="checked"] {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-p, oklch(var(--p) / var(--tw-border-opacity)));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-p, oklch(var(--p) / var(--tw-bg-opacity)));
+  --tw-text-opacity: 1;
+  color: var(--fallback-pc, oklch(var(--pc) / var(--tw-text-opacity)));
+}
+
 
 .hover\:badge-primary:hover.badge-outline {
   --tw-text-opacity: 1;

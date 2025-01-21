@@ -19,3 +19,15 @@
   {{ $mainJs = $mainJs | minify }}
 {{ end }}
 <script src="{{ $mainJs.RelPermalink }}"></script>
+
+{{ if site.Params.backToTop }}
+<script src="/js/addBackToTop.js"></script>
+<script>
+  commonJsStrict.addBackToTop({
+    diameter: 50,
+    scrollContainer: document.body,
+    innerHTML: '<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 244l144-144 144 144M256 120v292"/></svg>',
+    className: 'h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary',
+  });
+</script>
+{{ end }}

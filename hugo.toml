@@ -57,7 +57,8 @@ SyntaxHighlightingThemeLight = "atom-one-dark"
 SyntaxHighlightingLanguages = ["apache", "json"]
 # options
 stickyNav = true
-reorderNavItems = ["search", "rss", "posts", "categories", "github", "tags"]
+portfolio = true
+reorderNavItems = ["search", "rss", "posts", "categories", "portfolio", "github", "tags"]
 collapseNavItems = ["posts", "tags", "github", "rss"]
 # noDefaultSummaryCover = true
 showTableOfContents = true
@@ -65,6 +66,7 @@ showSummaryCoverInPost = true
 imageZoomableInPost = true
 showPrevNextPost = true
 # reorderShares = ["x", "facebook", "whatsapp", "share"]
+backToTop = true
 
 [params.advanced]
 customCSS = ["css/custom.css"]

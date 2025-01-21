@@ -3,6 +3,11 @@ headerTitle = "0x69.online: блог об IT"
 motto = "Документируй сегодня то, что забудешь завтра"
 about = "Обо мне"
 comments = "Комментарии"
+portfolio = "Портфолио"
+portfolioDisabled = "Портфолио отключено или не настроено."
+all = "Все"
+browserNoVideoSupport = "Ваш браузер не поддерживает воспроизведение видео."
+toolsUsed = "Используемые программы"
 
 [home]
 other = "Главная"

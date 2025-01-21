@@ -19,6 +19,13 @@
     {{ T "archives" }}
   </a>
 </li>
+{{ else if and (eq . "portfolio") (site.Params.portfolio) (gt (len (where site.RegularPages "Type" "portfolio")) 0) }}
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="{{ "portfolio" | relLangURL }}" title="{{ T "portfolio" }}">
+    <ion-icon name="sparkles"></ion-icon>
+    {{ T "portfolio" }}
+  </a>
+</li>
 {{ else if and (eq . "categories") site.Taxonomies.categories }}
 <li>
   <a class="inline-flex items-center p-2 cursor-pointer" href="{{ "categories" | relLangURL }}" title="{{ T "allCategories" }}">

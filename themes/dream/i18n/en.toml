@@ -2,6 +2,11 @@
 headerTitle = "0x69.online </>"
 motto = "To iterate is human, to recurse divine"
 comments = "Comments"
+portfolio = "Portfolio"
+portfolioDisabled = "Portfolio is disabled or not configured."
+all = "All"
+browserNoVideoSupport = "Your browser does not support video playback."
+toolsUsed = "Tools used"
 
 # Alerts
 note = "Note"

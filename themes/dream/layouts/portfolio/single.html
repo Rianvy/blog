@@ -1,0 +1,269 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+
+{{ define "css" }}
+
+{{ if site.Params.SyntaxHighlighting }}
+<link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/{{site.Params.SyntaxHighlightingThemeDark}}.min.css" data-syntax-highlight="true" id="syntax-theme">
+<style>
+  pre {
+   border-radius: 6px;
+  }
+</style>
+{{ else }}
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+{{ end }}
+
+{{ partialCached "comments/commentSystemHeads.html" . }}
+
+{{ end }}
+
+{{ define "main" }}
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block"></div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      {{ template "_internal/schema.html" . }}
+
+      <header>
+        <h1 itemprop="headline">{{ .Title }}</h1>
+        <p class="text-sm">
+          {{ if site.Params.Experimental.jsDate }}
+            <span data-format="luxon">{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}</span>
+          {{ else }}
+            {{ .Date | time.Format "Monday, Jan 2, 2006" }}
+          {{ end }}
+
+          {{ if ne .Params.nolastmod true }}
+          | <span>{{ T "updatedAt" }}
+            {{ if site.Params.Experimental.jsDate }}
+              <span data-format="luxon">{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}</span>
+            {{ else }}
+              {{ .Lastmod | time.Format "Monday, Jan 2, 2006" }}
+            {{ end }}</span>
+          {{ end }}
+        </p>
+
+		{{ if .Params.categories }}
+		<div class="categories flex justify-between mt-4 mb-4">
+		<div class="flex items-center gap-2">
+		<ion-icon class="group-hover:text-primary-content md hydrated" name="grid" role="img"></ion-icon>
+		  {{ $lang := $.Site.Language.Lang }}  {{/* сохраняем внешний контекст */}}
+		  {{ range .Params.categories }}
+			<a class="badge h-6 no-underline hover:badge-primary mr-2" href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+		  {{ end }}
+		</div>
+		</div>
+		{{ end }}
+
+        <div class="flex justify-between">
+          {{ partial "author.html" (dict "Params" .Params "template" "single") }}
+
+          {{ partial "share.html" . }}
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        {{ if and .Params.Cover site.Params.showSummaryCoverInPost }}
+        <img src="{{ .Params.Cover }}" alt="{{ .Title }}"/>
+        {{ end }}
+		
+        {{ template "portfolio/partials/toolsUsed.html" . }}
+		
+		{{ $currentLang := .Site.Language.Lang }}
+		{{ $basePath := replace .RelPermalink (printf "/%s/" $currentLang) "" }}
+		<blockquote class="dream-alert tip">
+		  <p class="heading">
+			<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
+			{{ if eq $currentLang "ru" }}
+			  This work is also 
+			  <a href="{{ printf "/en/%s" $basePath | absURL }}" target="_blank" class="badge h-6 no-underline hover:badge-primary mr-2">
+				available in English
+			  </a>
+			{{ else if eq $currentLang "en" }}
+			  This work is also 
+			  <a href="{{ printf "/ru/%s" $basePath | absURL }}" target="_blank" class="badge h-6 no-underline hover:badge-primary mr-2">
+				available in Russian
+			  </a>
+			{{ end }}
+		  </p>
+		</blockquote>
+
+        {{ .Content | emojify }}
+      </section>
+
+	{{ if .Params.tags }}
+	  <div class="tags mt-4">
+		{{ $lang := $.Site.Language.Lang }}  {{/* сохраняем внешний контекст */}}
+		{{ range .Params.tags }}
+		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+		{{ end }}
+	  </div>
+	{{ end }}
+
+
+      {{ if site.Params.showPrevNextPost }}
+      <div class="divider"></div>
+      <div class="flex flex-col md:flex-row justify-between gap-4 py-4">
+        {{ with .NextInSection }}
+        <a class="group btn btn-outline" href="{{ .RelPermalink }}" title="{{ .Title }}">
+          <ion-icon name="chevron-back"></ion-icon>
+          <div class="inline-flex flex-col items-start">
+            <span class="text-base-content/60 group-hover:text-neutral-content/60 text-xs font-normal">{{ T "prevPage" }}</span>
+            <span class="max-w-48 truncate">{{ .LinkTitle }}</span>
+          </div>
+        </a>
+        {{ else }}
+        <div></div>
+        {{ end }}
+
+        {{ with .PrevInSection }}
+        <a class="group btn btn-outline" href="{{ .RelPermalink }}" title="{{ .Title }}">
+          <div class="inline-flex flex-col items-end">
+            <span class="text-base-content/60 group-hover:text-neutral-content/60 text-xs font-normal">{{ T "nextPage" }}</span>
+            <span class="max-w-48 truncate">{{ .LinkTitle }}</span>
+          </div>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </a>
+        {{ else }}
+        <div></div>
+        {{ end }}
+      </div>
+      {{ end }}
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    {{ if fileExists "layouts/partials/adsense.html" }}
+    <div class="dream-adsense">
+      {{ partialCached "adsense.html" . }}
+    </div>
+    {{ end }}
+
+    {{ if site.Params.showTableOfContents }}
+      {{ .TableOfContents }}
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{ define "js" }}
+
+{{ if site.Params.Experimental.jsDate }}
+{{ partial "luxon.html" . }}
+{{ end }}
+
+{{ if site.Params.SyntaxHighlighting }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+{{- if .Site.Params.SyntaxHighlightingLanguages -}}
+  {{- range .Site.Params.SyntaxHighlightingLanguages -}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/{{ . }}.min.js"></script>
+  {{- end -}}
+{{- end -}}
+<script>
+  hljs.highlightAll();
+  hljs.addPlugin(new CopyButtonPlugin());
+
+  document.addEventListener('alpine:initialized', () => {
+    // Определяем темы подсветки синтаксиса как глобальные переменные
+    window.customSyntaxHighlighting = {
+        dark: '{{ .Site.Params.SyntaxHighlightingThemeDark }}',
+        light: '{{ .Site.Params.SyntaxHighlightingThemeLight }}'
+    };
+
+    // Функция для обновления темы подсветки синтаксиса
+    const updateSyntaxTheme = () => {
+        try {
+            // Получаем текущую тему (темная или светлая)
+            const isDark = Alpine.store('darkMode').isDark();
+            const currentTheme = isDark ? 
+                window.customSyntaxHighlighting.dark : 
+                window.customSyntaxHighlighting.light;
+
+            // Получаем элемент <link> с атрибутом data-syntax-highlight
+            let link = document.querySelector('link[data-syntax-highlight]');
+            if (link) {
+                // Получаем текущий URL из атрибута href
+                const currentHref = link.href;
+
+                // Используем регулярное выражение для замены темы в URL
+                const updatedHref = currentHref.replace(/styles\/[^/]+\.min\.css/, `styles/${currentTheme}.min.css`);
+
+                // Обновляем href в элементе <link>
+                link.href = updatedHref;
+            }
+        } catch (error) {
+            console.warn('Error updating syntax theme:', error);
+        }
+    };
+
+    // Первоначальная установка темы
+    updateSyntaxTheme();
+
+    // Следим за изменениями темы через Alpine.js
+    Alpine.effect(() => {
+        updateSyntaxTheme();
+    });
+});
+</script>
+{{ end }}
+<!-- Spotlight -->
+<link rel="stylesheet" href="https://unpkg.com/spotlight.js/dist/spotlight.min.css">
+<script src="https://unpkg.com/spotlight.js@0.7.8/dist/spotlight.bundle.js"></script>
+<!-- Lazysizes -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const images = Array.from(document.querySelectorAll('#dream-single-post-content img'));
+    
+    images.forEach(img => {
+        const originalSrc = img.src;
+        
+        img.classList.add('lazyload');
+        img.setAttribute('data-src', originalSrc);
+        img.src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+    });
+    
+    const imageData = images.map(img => ({
+        src: img.getAttribute('data-src') || img.src,
+        description: img.title || '',
+        alt: img.alt || ''
+    }));
+    
+    images.forEach((img, index) => {
+        img.style.cursor = 'zoom-in';
+        
+        img.addEventListener('click', function() {
+            setTimeout(() => {
+                Spotlight.show(imageData, {
+                    index: index + 1,
+                    animation: 'slide',
+                    controls: {
+                        close: true,
+                        prev: true,
+                        next: true,
+                        zoomIn: true,
+                        zoomOut: true,
+                        rotateLeft: true,
+                        rotateRight: true,
+						spinner: true,
+						preload: true,
+                    },
+                    keyboard: true,
+                    loop: true,
+                    dragRotation: false
+                });
+            }, 0);
+        });
+    });
+});
+</script>
+
+{{ end }}

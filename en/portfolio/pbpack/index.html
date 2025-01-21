@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social media design PBPack | 0x69.online</title>
+
+    
+<meta name="google-site-verification" content="SX8wwAcRfmBYPxrIA69UFfuq8DDa2GxWVBzVj9tucMA" />
+<link rel="canonical" href="https://0x69.online/en/portfolio/pbpack/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
+
+
+
+<meta name="generator" content="Hugo 0.110.0">
+
+
+<meta property="og:title" content="Social media design PBPack" />
+<meta property="og:description" content="Developed visual identity for PBPack&#39;s social media brand, including YouTube and Telegram." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0x69.online/en/portfolio/pbpack/" /><meta property="og:image" content="https://0x69.online/Cover.png" /><meta property="article:section" content="portfolio" />
+<meta property="article:published_time" content="2025-01-19T20:25:20+03:00" />
+<meta property="article:modified_time" content="2025-01-19T20:25:20+03:00" />
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://0x69.online/Cover.png"/>
+
+<meta name="twitter:title" content="Social media design PBPack"/>
+<meta name="twitter:description" content="Developed visual identity for PBPack&#39;s social media brand, including YouTube and Telegram."/>
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+
+
+
+    
+
+
+<link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css" data-syntax-highlight="true" id="syntax-theme">
+<style>
+  pre {
+   border-radius: 6px;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav x-data="{ isSticky: false }"
+  x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })"
+  class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
+  :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/img/avatar.jpg" alt="Blog about IT" />
+        </div>
+      </div>
+
+      
+      <div>
+        
+        <a href="/en/" class="text-lg font-semibold cursor-pointer">
+           0x69.online &lt;/&gt;
+        </a>
+        
+        
+        <div class="text-base-content/60 text-sm">To iterate is human, to recurse divine</div>
+        
+      </div>
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+<li>
+  <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="About">
+    <ion-icon name="information-circle"></ion-icon>About</div>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="group inline-flex items-center p-2 cursor-pointer" href="/en/search" title="Search">
+    <ion-icon name="search"></ion-icon>
+    Search
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/index.xml" title="RSS">
+    <ion-icon name="logo-rss"></ion-icon>
+    RSS
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/portfolio" title="Portfolio">
+    <ion-icon name="sparkles"></ion-icon>
+    Portfolio
+  </a>
+</li>
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="https://github.com/rianvy" target="_blank" title="GitHub">
+    
+    <ion-icon name="logo-github"></ion-icon>
+    
+    GitHub
+  </a>
+</li>
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+      
+      <div role="link" tabindex="0"
+        class="text-sm font-semibold cursor-pointer hover:underline"
+        @click="flip = !flip"
+        title="About"
+      >About</div>
+      
+      
+
+      
+      
+        
+      
+
+      
+
+      
+      
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/search" title="Search">
+  <ion-icon class="group-hover:text-primary-content" name="search"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/portfolio" title="Portfolio">
+  <ion-icon class="group-hover:text-primary-content" name="sparkles"></ion-icon>
+</a>
+
+
+      
+
+	  <div class="dropdown dropdown-end dropdown-hover">
+	    <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
+	  	<ion-icon class="group-hover:text-primary-content text-xl" name="language"></ion-icon>
+	    </div>
+	    <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+	  	
+	  	  <li>
+	  		<a href="/en/">
+	  		  <ion-icon name="language"></ion-icon> English
+	  		</a>
+	  	  </li>
+	  	
+	  	  <li>
+	  		<a href="/ru/">
+	  		  <ion-icon name="language"></ion-icon> Русский
+	  		</a>
+	  	  </li>
+	  	
+	    </ul>
+	  </div>
+	  
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
+          <ion-icon class="group-hover:text-primary-content text-xl" name="menu"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+          
+          
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+          
+          
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="https://github.com/rianvy" target="_blank" title="GitHub">
+    
+    <ion-icon name="logo-github"></ion-icon>
+    
+    GitHub
+  </a>
+</li>
+
+
+
+          
+          
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/index.xml" title="RSS">
+    <ion-icon name="logo-rss"></ion-icon>
+    RSS
+  </a>
+</li>
+
+
+          
+
+          
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </ul>
+      </div>
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block"></div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      <meta itemprop="name" content="Social media design PBPack">
+<meta itemprop="description" content="Developed visual identity for PBPack&#39;s social media brand, including YouTube and Telegram."><meta itemprop="datePublished" content="2025-01-19T20:25:20+03:00" />
+<meta itemprop="dateModified" content="2025-01-19T20:25:20+03:00" />
+<meta itemprop="wordCount" content="179"><meta itemprop="image" content="https://0x69.online/Cover.png">
+<meta itemprop="keywords" content="" />
+
+      <header>
+        <h1 itemprop="headline">Social media design PBPack</h1>
+        <p class="text-sm">
+          
+            <span data-format="luxon">2025-01-19T20:25:20&#43;03:00</span>
+          
+
+          
+          | <span>Updated at
+            
+              <span data-format="luxon">2025-01-19T20:25:20&#43;03:00</span>
+            </span>
+          
+        </p>
+
+		
+
+        <div class="flex justify-between">
+          <div class="flex items-center">
+  
+  <div class="avatar mr-1">
+    <div class="w-8 rounded-full">
+      <img class="my-0" src="/img/avatar.jpg" alt="Rianvy" />
+    </div>
+  </div>
+  
+
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+  
+    
+      <span itemprop="name">Rianvy</span>
+    
+  
+  </span>
+</div>
+
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Social%20media%20design%20PBPack&amp;url=https://0x69.online/en/portfolio/pbpack/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=https://0x69.online/en/portfolio/pbpack/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Social%20media%20design%20PBPack%20https://0x69.online/en/portfolio/pbpack/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://t.me/share/url?url=https://0x69.online/en/portfolio/pbpack/&amp;resubmit=true&amp;title=Social%20media%20design%20PBPack" target="_blank" rel="noopener noreferrer"
+      title="Share on Telegram">
+      <ion-icon class="group-hover:text-primary-content" name="send"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+        <img src="Cover.png" alt="Social media design PBPack"/>
+        
+		
+        <style>
+    .toolsUsed {
+        width: 25px;
+        display: inline;
+    }
+</style>
+
+<h2 class="text-lg font-bold mb-4">Tools used</h2>
+<table class="table-auto w-full border-collapse shadow-lg rounded-lg">
+    <tbody>
+        
+    </tbody>
+</table>
+		
+		
+		
+		<blockquote class="dream-alert tip">
+		  <p class="heading">
+			<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
+			
+			  This work is also 
+			  <a href="https://0x69.online/ru/portfolio/pbpack/" target="_blank" class="badge h-6 no-underline hover:badge-primary mr-2">
+				available in Russian
+			  </a>
+			
+		  </p>
+		</blockquote>
+
+        <p>Developed visual identity for PBPack&rsquo;s social media brand, including YouTube and Telegram.</p>
+<p><img src="work/Header.png" alt="A vivid project headline"></p>
+<h2 id="-about-pbpack-project">📌 About PBPack Project</h2>
+<p><strong>Project Objective:</strong><br>
+Creating a unified visual style for PBPack brand, focused on YouTube and Telegram platforms. The main goal is a harmonious and vivid representation of the brand in these channels.</p>
+<p><strong>Key stages of development:</strong></p>
+<ul>
+<li>✔️ Creating an identity for YouTube (header, avatar, video cover templates)</li>
+<li>✔️ Development of custom interface for Telegram (channel and bot design)</li>
+<li>✔️ Design of animated logo for use on all platforms</li>
+</ul>
+<hr>
+<h3 id="result-of-work">Result of work</h3>
+<p><img src="work/YT-HEADER.png" alt="YouTube Header" title="YouTube channel's main banner">
+<img src="work/Covers.png" alt="Basic Covers" title="Templates for different content on YouTube">
+<img src="work/Telegram.png" alt="Telegram registration" title="Telegram interface with PBPack corporate identity"></p>
+<hr>
+<h2 id="-key-elements">🚀 Key elements</h2>
+<h3 id="-animated-logo">🌀 Animated logo</h3>
+<video controls autoplay loop muted width="800">
+  <source src="work/Logo-final.mp4" type="video/mp4">
+  Your browser does not support video playback.
+</video>
+<blockquote>
+<p><em>Animation of the logo with smooth transition of colors and shape transformation, creating a dynamic perception of the brand.</em></p>
+</blockquote>
+<hr>
+<h2 id="-presentation-and-adaptation">📱 Presentation and adaptation</h2>
+<h3 id="youtube">YouTube</h3>
+<p><img src="work/MackBook.png" alt="Desktop view" title="Adaptation for YouTube channel widescreens">
+<img src="work/Iphone.png" alt="Mobile View" title="Optimized YouTube mobile interface"></p>
+<h3 id="telegram">Telegram</h3>
+<p><img src="work/Telegram.png" alt="Telegram interface" title="Telegram channel interface with PBPack branding"></p>
+<p><strong>Implementation features:</strong></p>
+<ul>
+<li>Unified style applied on all platforms</li>
+<li>Adaptive templates for regular publications in YouTube and Telegram</li>
+</ul>
+<hr>
+<h2 id="-cover-creation-process">🎨 Cover creation process</h2>
+<video controls autoplay loop muted width="800">
+  <source src="work/Creation-process.mp4" type="video/mp4">
+  Your browser does not support video playback.
+</video>
+<blockquote>
+<p><em>From developing a composition to choosing a color palette and typography.</em></p>
+</blockquote>
+<hr>
+<h2 id="-basic-brand-elements">🔧 Basic brand elements</h2>
+<p><img src="work/Colo&amp;Fonts.png" alt="Palette &amp; Fonts" title="Color system and brand typography">
+<img src="work/Avatars&amp;Logo.png" alt="Avatars" title="Variations of avatars and logos for social media">
+<img src="work/Logo.png" alt="Logo" title="PBPack project's main logo"></p>
+<hr>
+<h2 id="-ready-made-solutions">📌 Ready-made solutions</h2>
+<p><img src="work/AutoShot-sale.png" alt="Basic Covers" title="Template for video covers">
+<img src="work/Covers.png" alt="Basic Covers" title="Templates for different types of content on YouTube">
+<img src="work/Other-Covers.png" alt="Alternatives" title="Additional designs and layout options"></p>
+<hr>
+<h2 id="-realized-projects">🔗 Realized projects</h2>
+<ul>
+<li><a href="https://www.youtube.com/@pbpack/videos" target="_blank">🎥 YouTube channel</a>
+</li>
+<li><a href="https://t.me/PBPackOne" target="_blank">📨 Telegram channel</a>
+</li>
+</ul>
+      </section>
+
+	
+
+
+      
+      <div class="divider"></div>
+      <div class="flex flex-col md:flex-row justify-between gap-4 py-4">
+        
+        <div></div>
+        
+
+        
+        <div></div>
+        
+      </div>
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+
+    
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-about-pbpack-project">📌 About PBPack Project</a>
+      <ul>
+        <li><a href="#result-of-work">Result of work</a></li>
+      </ul>
+    </li>
+    <li><a href="#-key-elements">🚀 Key elements</a>
+      <ul>
+        <li><a href="#-animated-logo">🌀 Animated logo</a></li>
+      </ul>
+    </li>
+    <li><a href="#-presentation-and-adaptation">📱 Presentation and adaptation</a>
+      <ul>
+        <li><a href="#youtube">YouTube</a></li>
+        <li><a href="#telegram">Telegram</a></li>
+      </ul>
+    </li>
+    <li><a href="#-cover-creation-process">🎨 Cover creation process</a></li>
+    <li><a href="#-basic-brand-elements">🔧 Basic brand elements</a></li>
+    <li><a href="#-ready-made-solutions">📌 Ready-made solutions</a></li>
+    <li><a href="#-realized-projects">🔗 Realized projects</a></li>
+  </ul>
+</nav>
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 0x69.online
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+
+  <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="language" class="text-2xl md hydrated" role="img"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+		
+		  <li>
+			<a href="/en/">
+			  <ion-icon name="language"></ion-icon> English
+			</a>
+		  </li>
+		
+		  <li>
+			<a href="/ru/">
+			  <ion-icon name="language"></ion-icon> Русский
+			</a>
+		  </li>
+		
+      </ul>
+</div>
+
+<div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">A brief summary of my skills</div>
+
+                <div class="prose dark:prose-invert">
+                    <ul>
+<li><strong>C# and C++</strong> - high-performance development ⚡</li>
+<li><strong>PHP (Laravel)</strong> and <strong>JavaScript</strong> - creating web applications and interactive services 🚀</li>
+<li><strong>MySQL</strong> and <strong>PostgreSQL</strong> - reliable relational databases 💾</li>
+<li>Adaptive <strong>HTML</strong>, <strong>CSS</strong> and <strong>JS</strong> - modern design for any device 💡</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">About me</div>
+
+                <div class="prose dark:prose-invert">
+                    <p>Hi! I&rsquo;m <strong>Rianvy</strong> (this is my pseudonym), and my real name is Maxim Alexandrov. I&rsquo;m 27 years old, I live in Tula. I&rsquo;m a senier developer and designer 😎<br>
+In this blog I share notes about technology, life and everything that inspires me 🚀</p>
+<p>If you have any questions or ideas, write in the comments or send an email to my inbox 📩<br>
+I&rsquo;d be happy to chat and maybe work together 🤝</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Open Source projects 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    <table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/Rianvy/Stalker2Control" target="_blank">Stalker2Control</a>
+</td>
+<td>A versatile tool for S.T.A.L.K.E.R. 2, allowing you to control the game: item spawning, god mode activation, noclip, time acceleration, and more.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Rianvy/QuickInstallApp" target="_blank">QuickInstallApp</a>
+</td>
+<td>A handy and simple application for automating software installation on Windows.</td>
+</tr>
+</tbody>
+</table>
+
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Social Links</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://codepen.io/Rianvy" target="_blank" title="Codepen">
+      <ion-icon name="logo-codepen"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+    <div class="w-full md:w-1/2 p-4 dream-column">
+        <article class="telegram_comments card card-compact bg-base-100 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Comments</div>
+                <div x-data="commentsWidget" 
+     x-init="init()"
+     data-widget-type="telegram"
+     data-discussion="ox69_online/8"
+     data-limit="10"
+     :data-dark="$store.darkMode.isDark() ? '1' : '0'"
+     class="comments-widget">
+</div>
+            </div>
+        </article>
+    </div>
+    
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "forest"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+<script src="/js/addBackToTop.js"></script>
+<script>
+  commonJsStrict.addBackToTop({
+    diameter: 50,
+    scrollContainer: document.body,
+    innerHTML: '<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 244l144-144 144 144M256 120v292"/></svg>',
+    className: 'h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary',
+  });
+</script>
+
+    
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
+  integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
+  crossorigin="anonymous"
+></script>
+<script>
+  format()
+
+  function format() {
+    document.querySelectorAll('span[data-format="luxon"]').forEach(el => {
+      const date = el.textContent
+
+      el.textContent = luxon.DateTime.fromISO(date, { locale: "en" }).toFormat("HH:mm, dd MMMM")
+    })
+  }
+</script>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/apache.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script><script>
+  hljs.highlightAll();
+  hljs.addPlugin(new CopyButtonPlugin());
+
+  document.addEventListener('alpine:initialized', () => {
+    
+    window.customSyntaxHighlighting = {
+        dark: 'a11y-dark',
+        light: 'atom-one-dark'
+    };
+
+    
+    const updateSyntaxTheme = () => {
+        try {
+            
+            const isDark = Alpine.store('darkMode').isDark();
+            const currentTheme = isDark ? 
+                window.customSyntaxHighlighting.dark : 
+                window.customSyntaxHighlighting.light;
+
+            
+            let link = document.querySelector('link[data-syntax-highlight]');
+            if (link) {
+                
+                const currentHref = link.href;
+
+                
+                const updatedHref = currentHref.replace(/styles\/[^/]+\.min\.css/, `styles/${currentTheme}.min.css`);
+
+                
+                link.href = updatedHref;
+            }
+        } catch (error) {
+            console.warn('Error updating syntax theme:', error);
+        }
+    };
+
+    
+    updateSyntaxTheme();
+
+    
+    Alpine.effect(() => {
+        updateSyntaxTheme();
+    });
+});
+</script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/spotlight.js/dist/spotlight.min.css">
+<script src="https://unpkg.com/spotlight.js@0.7.8/dist/spotlight.bundle.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const images = Array.from(document.querySelectorAll('#dream-single-post-content img'));
+    
+    images.forEach(img => {
+        const originalSrc = img.src;
+        
+        img.classList.add('lazyload');
+        img.setAttribute('data-src', originalSrc);
+        img.src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+    });
+    
+    const imageData = images.map(img => ({
+        src: img.getAttribute('data-src') || img.src,
+        description: img.title || '',
+        alt: img.alt || ''
+    }));
+    
+    images.forEach((img, index) => {
+        img.style.cursor = 'zoom-in';
+        
+        img.addEventListener('click', function() {
+            setTimeout(() => {
+                Spotlight.show(imageData, {
+                    index: index + 1,
+                    animation: 'slide',
+                    controls: {
+                        close: true,
+                        prev: true,
+                        next: true,
+                        zoomIn: true,
+                        zoomOut: true,
+                        rotateLeft: true,
+                        rotateRight: true,
+						spinner: true,
+						preload: true,
+                    },
+                    keyboard: true,
+                    loop: true,
+                    dragRotation: false
+                });
+            }, 0);
+        });
+    });
+});
+</script>
+
+
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1CKYK7EQD"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-V1CKYK7EQD', { 'anonymize_ip': false });
+}
+</script>
+
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

@@ -149,6 +149,16 @@
 
 
 
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/en/portfolio" title="Portfolio">
+    <ion-icon name="sparkles"></ion-icon>
+    Portfolio
+  </a>
+</li>
+
+
+
+
 
 
 
@@ -222,6 +232,13 @@
       
 <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/categories" title="All Categories">
   <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/portfolio" title="Portfolio">
+  <ion-icon class="group-hover:text-primary-content" name="sparkles"></ion-icon>
 </a>
 
 
@@ -392,13 +409,7 @@
 
 
 
-            <div id="top-scroller">
-  <a href="#the-top" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary">
-    <ion-icon name="arrow-up" role="img" class=" md flip-rtl hydrated"></ion-icon>
-  </a>
-</div>
-
-
+            
 <footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
 
   <div>
@@ -462,7 +473,6 @@
 </div>
 
 </footer>
-
           </div>
         </div>
         <div class="back">
@@ -498,6 +508,38 @@
 In this blog I share notes about technology, life and everything that inspires me 🚀</p>
 <p>If you have any questions or ideas, write in the comments or send an email to my inbox 📩<br>
 I&rsquo;d be happy to chat and maybe work together 🤝</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Open Source projects 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    <table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/Rianvy/Stalker2Control" target="_blank">Stalker2Control</a>
+</td>
+<td>A versatile tool for S.T.A.L.K.E.R. 2, allowing you to control the game: item spawning, god mode activation, noclip, time acceleration, and more.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Rianvy/QuickInstallApp" target="_blank">QuickInstallApp</a>
+</td>
+<td>A handy and simple application for automating software installation on Windows.</td>
+</tr>
+</tbody>
+</table>
 
                 </div>
             </div>
@@ -605,6 +647,17 @@ I&rsquo;d be happy to chat and maybe work together 🤝</p>
   
 
 <script src="/js/main.min.js"></script>
+
+
+<script src="/js/addBackToTop.js"></script>
+<script>
+  commonJsStrict.addBackToTop({
+    diameter: 50,
+    scrollContainer: document.body,
+    innerHTML: '<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 244l144-144 144 144M256 120v292"/></svg>',
+    className: 'h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary',
+  });
+</script>
 
     
 

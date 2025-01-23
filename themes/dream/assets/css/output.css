@@ -4080,26 +4080,52 @@ html {
   --tw-prose-td-borders: var(--tw-prose-invert-td-borders);
 }
 
-.hover\:bg-base-content\/10:hover {
-  background-color: var(--fallback-bc,oklch(var(--bc)/0.1));
+@media (hover: hover) {
+	.hover\:bg-base-content\/10:hover {
+	  background-color: var(--fallback-bc,oklch(var(--bc)/0.1));
+	}
+
+	.hover\:bg-primary:hover {
+	  --tw-bg-opacity: 1;
+	  background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity, 1)));
+	}
+
+	.hover\:underline:hover {
+	  text-decoration-line: underline;
+	}
+
+	.group:hover .group-hover\:text-neutral-content\/60 {
+	  color: var(--fallback-nc,oklch(var(--nc)/0.6));
+	}
+
+	.group:hover .group-hover\:text-primary-content {
+	  --tw-text-opacity: 1;
+	  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity, 1)));
+	}
 }
 
-.hover\:bg-primary:hover {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity, 1)));
-}
+@media (hover: none) {
+	.hover\:bg-base-content\/10:active {
+	  background-color: var(--fallback-bc,oklch(var(--bc)/0.1));
+	}
 
-.hover\:underline:hover {
-  text-decoration-line: underline;
-}
+	.hover\:bg-primary:active {
+	  --tw-bg-opacity: 1;
+	  background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity, 1)));
+	}
 
-.group:hover .group-hover\:text-neutral-content\/60 {
-  color: var(--fallback-nc,oklch(var(--nc)/0.6));
-}
+	.hover\:underline:active {
+	  text-decoration-line: underline;
+	}
 
-.group:hover .group-hover\:text-primary-content {
-  --tw-text-opacity: 1;
-  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity, 1)));
+	.group:active .group-hover\:text-neutral-content\/60 {
+	  color: var(--fallback-nc,oklch(var(--nc)/0.6));
+	}
+
+	.group:active .group-hover\:text-primary-content {
+	  --tw-text-opacity: 1;
+	  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity, 1)));
+	}
 }
 
 @media (min-width: 640px) {

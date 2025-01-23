@@ -4,58 +4,54 @@
 
 {{ define "main" }}
 
-{{ if site.Params.zenMode }}
-<div class="max-w-[65ch] mt-8 lg:mt-12 mx-auto px-4"
-{{ else }}
 <div class="mt-8 lg:mt-12 px-4"
-{{ end }}
 x-data="{
   search: '',
-  get posts() { return this.search !== '' ? window.fuse.search(this.search) : [] },
+  get results() {
+    return this.search !== '' ? window.fuse.search(this.search) : [];
+  },
 }">
+  <!-- Поле поиска -->
   <label for="search" class="input input-bordered flex items-center gap-2">
     <input id="search" name="search" type="text" class="grow" placeholder="{{ T "search" }}" x-model.debounce="search" />
     <ion-icon name="search"></ion-icon>
   </label>
 
+  <!-- Результаты поиска -->
   <div class="mt-8 space-y-4">
-  <template x-for="post in posts">
-    <a class="card card-compact bg-base-100 hover:bg-base-content/10 cursor-pointer border border-base-content/30" :href="post.item.url">
-      <div class="card-body">
-        <h2 class="card-title" x-text="post.item.title"></h2>
+    <template x-for="result in results">
+      <a class="card card-compact bg-base-100 hover:bg-base-content/10 cursor-pointer border border-base-content/30" :href="result.item.url">
+        <div class="card-body">
+          <h2 class="card-title" x-text="result.item.title"></h2>
+          <div x-html="result.item.description"></div>
+          <div class="card-actions justify-between items-center mt-4">
+            <div class="flex items-center">
+              <template x-if="result.item.avatar">
+                <div class="avatar mr-1">
+                  <div class="w-8 rounded-full">
+                    <img class="my-0" :src="result.item.avatar" :alt="result.item.author" />
+                  </div>
+                </div>
+              </template>
+              <template x-if="!result.item.avatar">
+                <span>@</span>
+              </template>
 
-        <div x-html="post.item.description"></div>
-
-        <div class="card-actions justify-between items-center mt-4">
-          <div class="flex items-center">
-            <template x-if="post.item.avatar">
-            <div class="avatar mr-1">
-              <div class="w-8 rounded-full">
-                <img class="my-0" :src="post.item.avatar" :alt="post.item.author" />
-              </div>
+              <template x-if="result.item.author">
+                <span x-text="result.item.author"></span>
+              </template>
+              <template x-if="!result.item.author">
+                <span>{{ site.Params.author }}</span>
+              </template>
             </div>
-            </template>
-            <template x-if="!post.item.avatar">
-            <span>@</span>
-            </template>
-
-            <template x-if="post.item.author">
-            <span x-text="post.item.author"></span>
-            </template>
-            <template x-if="!post.item.author">
-            <span>{{ site.Params.author }}</span>
-            </template>
-            </span>
-          </div>
-
-          <div class="inline-flex items-center">
-            <ion-icon name="time" class="mr-1"></ion-icon>
-            <span><span x-text="post.item.readingTime"></span>{{ T "minuteRead" .ReadingTime }}</span>
+            <div class="inline-flex items-center">
+              <ion-icon name="time" class="mr-1"></ion-icon>
+              <span><span x-text="result.item.readingTime"></span>{{ T "minuteRead" .ReadingTime }}</span>
+            </div>
           </div>
         </div>
-      </div>
-    </a>
-  </template>
+      </a>
+    </template>
   </div>
 </div>
 
@@ -64,8 +60,31 @@ x-data="{
 {{ define "js" }}
 
 {{ $data := slice }}
+
+<!-- Сбор данных из постов -->
 {{ range (where site.RegularPages "Type" "posts") }}
-{{ $data = $data | append (dict "title" .Title "url" .RelPermalink "author" .Params.author "avatar" .Params.avatar "categories" .Params.categories "tags" .Params.tags "description" (.Summary | emojify | safeHTML) "readingTime" .ReadingTime) }}
+{{ $data = $data | append (dict 
+  "title" .Title 
+  "url" .RelPermalink 
+  "author" .Params.author 
+  "avatar" .Params.avatar 
+  "categories" .Params.categories 
+  "tags" .Params.tags 
+  "description" (.Summary | emojify | safeHTML) 
+  "readingTime" .ReadingTime
+) }}
+{{ end }}
+
+<!-- Сбор данных из портфолио -->
+{{ range (where site.RegularPages "Type" "portfolio") }}
+{{ $data = $data | append (dict 
+  "title" .Title 
+  "url" .RelPermalink 
+  "author" .Params.author 
+  "avatar" .Params.avatar 
+  "description" (.Summary | emojify | safeHTML) 
+  "readingTime" .ReadingTime
+) }}
 {{ end }}
 
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js" integrity="sha256-42IbU8t3tOwwbexB7ZVRHm3YDRf65aBPPjRtIUufj5I=" crossorigin="anonymous"></script>
@@ -74,7 +93,12 @@ x-data="{
   var fuseOptions = {
     keys: [
       "title",
-    ]
+      "description",
+      "categories",
+      "tags"
+    ],
+    includeMatches: true,
+    threshold: 0.3
   };
 
   var fuse = new Fuse(fuseData, fuseOptions);

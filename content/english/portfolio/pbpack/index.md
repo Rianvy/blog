@@ -9,6 +9,9 @@ images:
    - Cover.png
 filters:
   - Social-Media
+tools:
+  - Photoshop
+  - After Effects
 ---
 Developed visual identity for PBPack's social media brand, including YouTube and Telegram.
 <!--more-->

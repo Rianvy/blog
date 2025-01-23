@@ -345,56 +345,54 @@
           <div class="container">
             
 
-
 <div class="mt-8 lg:mt-12 px-4"
-
 x-data="{
   search: '',
-  get posts() { return this.search !== '' ? window.fuse.search(this.search) : [] },
+  get results() {
+    return this.search !== '' ? window.fuse.search(this.search) : [];
+  },
 }">
+  
   <label for="search" class="input input-bordered flex items-center gap-2">
     <input id="search" name="search" type="text" class="grow" placeholder="Поиск" x-model.debounce="search" />
     <ion-icon name="search"></ion-icon>
   </label>
 
+  
   <div class="mt-8 space-y-4">
-  <template x-for="post in posts">
-    <a class="card card-compact bg-base-100 hover:bg-base-content/10 cursor-pointer border border-base-content/30" :href="post.item.url">
-      <div class="card-body">
-        <h2 class="card-title" x-text="post.item.title"></h2>
+    <template x-for="result in results">
+      <a class="card card-compact bg-base-100 hover:bg-base-content/10 cursor-pointer border border-base-content/30" :href="result.item.url">
+        <div class="card-body">
+          <h2 class="card-title" x-text="result.item.title"></h2>
+          <div x-html="result.item.description"></div>
+          <div class="card-actions justify-between items-center mt-4">
+            <div class="flex items-center">
+              <template x-if="result.item.avatar">
+                <div class="avatar mr-1">
+                  <div class="w-8 rounded-full">
+                    <img class="my-0" :src="result.item.avatar" :alt="result.item.author" />
+                  </div>
+                </div>
+              </template>
+              <template x-if="!result.item.avatar">
+                <span>@</span>
+              </template>
 
-        <div x-html="post.item.description"></div>
-
-        <div class="card-actions justify-between items-center mt-4">
-          <div class="flex items-center">
-            <template x-if="post.item.avatar">
-            <div class="avatar mr-1">
-              <div class="w-8 rounded-full">
-                <img class="my-0" :src="post.item.avatar" :alt="post.item.author" />
-              </div>
+              <template x-if="result.item.author">
+                <span x-text="result.item.author"></span>
+              </template>
+              <template x-if="!result.item.author">
+                <span>Rianvy</span>
+              </template>
             </div>
-            </template>
-            <template x-if="!post.item.avatar">
-            <span>@</span>
-            </template>
-
-            <template x-if="post.item.author">
-            <span x-text="post.item.author"></span>
-            </template>
-            <template x-if="!post.item.author">
-            <span>Rianvy</span>
-            </template>
-            </span>
-          </div>
-
-          <div class="inline-flex items-center">
-            <ion-icon name="time" class="mr-1"></ion-icon>
-            <span><span x-text="post.item.readingTime"></span> минут чтения</span>
+            <div class="inline-flex items-center">
+              <ion-icon name="time" class="mr-1"></ion-icon>
+              <span><span x-text="result.item.readingTime"></span> минут чтения</span>
+            </div>
           </div>
         </div>
-      </div>
-    </a>
-  </template>
+      </a>
+    </template>
   </div>
 </div>
 
@@ -414,7 +412,6 @@ x-data="{
   <p>Powered by ❤️</p>
   
 </div>
-
   <div class="dropdown dropdown-end sm:hidden">
       <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
         <ion-icon name="language" class="text-2xl md hydrated" role="img"></ion-icon>
@@ -528,6 +525,11 @@ x-data="{
 <td><a href="https://github.com/Rianvy/QuickInstallApp" target="_blank">QuickInstallApp</a>
 </td>
 <td>Удобное и простое приложение для автоматизации установки программного обеспечения на Windows.</td>
+</tr>
+<tr>
+<td><a href="#">AsyncPaymentsPHP</a>
+</td>
+<td>Простая библиотека для приема платежей в ваших проектах.</td>
 </tr>
 </tbody>
 </table>
@@ -657,13 +659,25 @@ x-data="{
 
 
 
+
+
+
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js" integrity="sha256-42IbU8t3tOwwbexB7ZVRHm3YDRf65aBPPjRtIUufj5I=" crossorigin="anonymous"></script>
 <script>
-  var fuseData = [{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Администрирование"],"description":"\u003cp\u003e.htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга.\u003c/p\u003e","readingTime":5,"tags":["Серверы","Apache",".htaccess","Веб-безопасность","Производительность"],"title":"Роль файла .htaccess в настройке сервера Apache","url":"/ru/posts/role-htaccess/"}];
+  var fuseData = [{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Администрирование"],"description":"\u003cp\u003e.htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга.\u003c/p\u003e","readingTime":5,"tags":["Серверы","Apache",".htaccess","Веб-безопасность","Производительность"],"title":"Роль файла .htaccess в настройке сервера Apache","url":"/ru/posts/role-htaccess/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","description":"\u003cp\u003eРазработка визуального стиля для бренда PBPack в социальных сетях, включая YouTube и Telegram.\u003c/p\u003e","readingTime":1,"title":"Social media design PBPack","url":"/ru/portfolio/pbpack/"}];
   var fuseOptions = {
     keys: [
       "title",
-    ]
+      "description",
+      "categories",
+      "tags"
+    ],
+    includeMatches: true,
+    threshold: 0.3
   };
 
   var fuse = new Fuse(fuseData, fuseOptions);

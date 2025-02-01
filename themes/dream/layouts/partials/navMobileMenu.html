@@ -35,12 +35,12 @@
         {{ $link := "" }}
         {{ if or $isCategoriesPage $isTagsPage }}
           {{ $section := cond $isCategoriesPage "categories" "tags" }}
-          {{ $link = printf "/%s/%s/" $langCode $section | absURL }}
+          {{ $link = printf "%s%s/%s/" $.Site.BaseURL $langCode $section }}
         {{ else if $translatedPage }}
           {{ $link = (index $translatedPage 0).Permalink }}
         {{ else }}
           {{ $currentPath := strings.TrimPrefix (printf "/%s/" $.Site.Language.Lang) $.Page.RelPermalink }}
-          {{ $link = printf "/%s/%s" $langCode $currentPath | absURL }}
+          {{ $link = printf "%s%s/%s" $.Site.BaseURL $langCode $currentPath }}
         {{ end }}
         
         <li>

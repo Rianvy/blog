@@ -190,7 +190,7 @@
 {{ define "js" }}
 
 	{{ if .Page.Store.Get "hasVideoShortcode" }}
-	<script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+	<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 	<script>
 	  document.addEventListener('DOMContentLoaded', () => {
 		const players = Plyr.setup('.plyr-video');
@@ -275,10 +275,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/rotate/lg-rotate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/fullscreen/lg-fullscreen.min.js"></script>
 
+<!-- Vanilla Lazyload JS -->
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+
 <style>
-.lg-sub-html {
+  .lg-sub-html {
     backdrop-filter: blur(16px);
-}
+  }
 </style>
 
 <script>
@@ -292,13 +295,19 @@
       images.forEach(img => {
         if (!img.closest("a")) {
           const wrapper = document.createElement("a");
-          wrapper.href = img.src;
+          wrapper.href = img.getAttribute("data-src") || img.src; 
           wrapper.classList.add("lg-item");
 
           const title = img.title ? `<h2 class="text-lg">${img.title}</h2>` : "";
           const alt = img.alt ? `<h1 class="text-2xl">${img.alt}</h1>` : "";
           wrapper.dataset.subHtml = `${alt}${title}`;
 
+          // Настройка lazyload для изображений
+          img.setAttribute("data-src", img.src); // Сохраняем оригинальный src в data-src
+          img.removeAttribute("src"); // Удаляем src для lazyload
+          img.classList.add("lazyload"); // Добавляем класс lazyload
+
+          // Вставляем wrapper перед изображением и добавляем его обратно
           img.parentNode.insertBefore(wrapper, img);
           wrapper.appendChild(img);
         }
@@ -319,6 +328,11 @@
         hideControlOnEnd: false,
         closeOnTap: true,
         subHtmlSelectorRelative: true
+      });
+
+      const lazyLoadInstance = new LazyLoad({
+        elements_selector: ".lazyload",
+        threshold: 300, // Настройка порога видимости
       });
     }
   });

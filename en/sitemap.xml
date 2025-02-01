@@ -15,6 +15,18 @@
                 href="https://0x69.online/en/"
                 />
   </url><url>
+    <loc>https://0x69.online/en/tags/animated-logo/</loc>
+    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.online/en/tags/branding/</loc>
+    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.online/en/tags/design/</loc>
+    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.online/en/tags/identity/</loc>
+    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+  </url><url>
     <loc>https://0x69.online/en/portfolio/</loc>
     <lastmod>2025-01-19T20:25:20+03:00</lastmod>
     <xhtml:link
@@ -40,6 +52,35 @@
                 hreflang="en"
                 href="https://0x69.online/en/portfolio/pbpack/"
                 />
+  </url><url>
+    <loc>https://0x69.online/en/tags/</loc>
+    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.online/ru/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.online/en/tags/"
+                />
+  </url><url>
+    <loc>https://0x69.online/en/tags/telegram/</loc>
+    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.online/ru/tags/telegram/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.online/en/tags/telegram/"
+                />
+  </url><url>
+    <loc>https://0x69.online/en/tags/visual-style/</loc>
+    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
   </url><url>
     <loc>https://0x69.online/en/tags/.htaccess/</loc>
     <lastmod>2025-01-12T21:27:20+03:00</lastmod>
@@ -114,19 +155,6 @@
   </url><url>
     <loc>https://0x69.online/en/tags/servers/</loc>
     <lastmod>2025-01-12T21:27:20+03:00</lastmod>
-  </url><url>
-    <loc>https://0x69.online/en/tags/</loc>
-    <lastmod>2025-01-12T21:27:20+03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.online/ru/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.online/en/tags/"
-                />
   </url><url>
     <loc>https://0x69.online/en/tags/web-security/</loc>
     <lastmod>2025-01-12T21:27:20+03:00</lastmod>

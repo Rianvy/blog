@@ -29,14 +29,14 @@
 <meta property="og:title" content="Роль файла .htaccess в настройке сервера Apache" />
 <meta property="og:description" content=".htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://0x69.online/ru/posts/role-htaccess/" /><meta property="og:image" content="https://0x69.online/ru/posts/role-htaccess/Cover.png" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://0x69.online/ru/posts/role-htaccess/" /><meta property="og:image" content="https://0x69.online/Cover.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2025-01-12T21:27:20+03:00" />
 <meta property="article:modified_time" content="2025-01-12T21:27:20+03:00" />
 
 
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://0x69.online/ru/posts/role-htaccess/Cover.png"/>
+<meta name="twitter:image" content="https://0x69.online/Cover.png"/>
 
 <meta name="twitter:title" content="Роль файла .htaccess в настройке сервера Apache"/>
 <meta name="twitter:description" content=".htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга."/>
@@ -117,95 +117,179 @@
       <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
         <ion-icon name="menu" class="text-2xl"></ion-icon>
       </div>
-      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-md">
+        
+  
+  
+    <li>
+      <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="Обо мне">
+        <ion-icon name="information-circle"></ion-icon>Обо мне</div>
+    </li>
+  
+
+
+
+
+  
+
+
+<ul class="p-0 m-0 list-none">
+
+<style>
+.menu-title {
+    margin-bottom: 4px;
+}
+</style>
+
+  
+  <li>
+    <div class="menu-title">Язык</div>
+    <ul class="p-0 m-0 list-none">
+      
+        
+  
+        
+        
+        
+  
+        
+        
+        
+          
+            
+          
+        
+  
+        <li>
+          <a href="/en/posts/role-htaccess/" 
+             title="English" 
+             class="inline-flex items-center p-2 ">
+            <ion-icon name="language" role="img" class="md hydrated"></ion-icon> 
+            English
+			
+          </a>
+        </li>
+      
+        
+  
+        
+        
+        
+  
+        
+        
+        
+          
+            
+          
+        
+  
+        <li>
+          <a href="https://0x69.online/ru" 
+             title="Русский" 
+             class="inline-flex items-center p-2 active">
+            <ion-icon name="language" role="img" class="md hydrated"></ion-icon> 
+            Русский
+			
+      		<ion-icon name="checkmark-circle"></ion-icon>
+      		
+          </a>
+        </li>
+      
+    </ul>
+  </li>
+
+  
+  <li>
+    <div class="menu-title">Меню</div>
+    <ul class="p-0 m-0 list-none">
+      
         
 
 
 <li>
-  <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="Обо мне">
-    <ion-icon name="information-circle"></ion-icon>Обо мне</div>
+  
+    <a class="inline-flex items-center p-2" href="/ru/search" title="Поиск">
+      <ion-icon name="search" role="img" class="md hydrated"></ion-icon> Поиск
+    </a>
+  
 </li>
-
-
-
-
-
-
-
+      
+        
 
 
 <li>
-  <a class="group inline-flex items-center p-2 cursor-pointer" href="/ru/search" title="Поиск">
-    <ion-icon name="search"></ion-icon>
-    Поиск
-  </a>
+  
+    <a class="inline-flex items-center p-2" href="/ru/categories" title="Категории">
+      <ion-icon name="grid" role="img" class="md hydrated"></ion-icon> Категории
+    </a>
+  
 </li>
-
-
+      
+        
 
 
 <li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="/ru/index.xml" title="RSS">
-    <ion-icon name="logo-rss"></ion-icon>
-    RSS
-  </a>
+  
+    <a class="inline-flex items-center p-2" href="/ru/portfolio" title="Портфолио">
+      <ion-icon name="sparkles" role="img" class="md hydrated"></ion-icon> Портфолио
+    </a>
+  
 </li>
-
-
+      
+        
 
 
 <li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="/ru/posts" title="Архивы">
-    <ion-icon name="archive"></ion-icon>
-    Архивы
-  </a>
+  
+    <a class="inline-flex items-center p-2" href="/ru/posts" title="Архивы">
+      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> Архивы
+    </a>
+  
 </li>
-
-
+      
+        
 
 
 <li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="/ru/categories" title="Все категории">
-    <ion-icon name="grid"></ion-icon>
-    Все категории
-  </a>
+  
+    <a class="inline-flex items-center p-2" href="/ru/tags" title="Все теги">
+      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> Все теги
+    </a>
+  
 </li>
-
-
+      
+        
 
 
 <li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="/ru/portfolio" title="Портфолио">
-    <ion-icon name="sparkles"></ion-icon>
-    Портфолио
-  </a>
-</li>
-
-
-
-
-
-
-
-<li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="https://github.com/rianvy" target="_blank" title="GitHub">
+  
     
-    <ion-icon name="logo-github"></ion-icon>
     
-    GitHub
-  </a>
+    
+      <a class="inline-flex items-center p-2" href="https://github.com/rianvy" target="_blank" title="GitHub">
+        
+          <ion-icon name="logo-github" role="img" class="md hydrated"></ion-icon>
+        
+        GitHub
+      </a>
+    
+  
 </li>
-
-
-
+      
+        
 
 
 <li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="/ru/tags" title="Все теги">
-    <ion-icon name="pricetags"></ion-icon>
-    Все теги
-  </a>
+  
+    <a class="inline-flex items-center p-2" href="/ru/index.xml" title="RSS">
+      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
+    </a>
+  
 </li>
+      
+      
+        
 
 
 
@@ -216,13 +300,10 @@
 
 
 
-
-
-
-
-
-
-
+      
+    </ul>
+  </li>
+</ul>
       </ul>
     </div>
     <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
@@ -255,7 +336,7 @@
 
       
       
-<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/ru/categories" title="Все категории">
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/ru/categories" title="Категории">
   <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
 </a>
 
@@ -268,27 +349,59 @@
 
 
       
-
-	  <div class="dropdown dropdown-end dropdown-hover">
-	    <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
-	  	<ion-icon class="group-hover:text-primary-content text-xl" name="language"></ion-icon>
-	    </div>
-	    <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
-	  	
-	  	  <li>
-	  		<a href="/en/">
-	  		  <ion-icon name="language"></ion-icon> English
-	  		</a>
-	  	  </li>
-	  	
-	  	  <li>
-	  		<a href="/ru/">
-	  		  <ion-icon name="language"></ion-icon> Русский
-	  		</a>
-	  	  </li>
-	  	
-	    </ul>
-	  </div>
+      
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select language">
+      	<ion-icon class="group-hover:text-primary-content text-xl" name="language"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl">
+      	
+      	  
+      
+      	  
+      	  
+      
+      	  
+      	  
+      		
+      		  
+      		
+      	  
+      
+      	  <li>
+      		<a href="/en/posts/role-htaccess/" class="">
+      		  <ion-icon name="language"></ion-icon> 
+      		  English
+      		  
+      		  
+      		</a>
+      	  </li>
+      	
+      	  
+      
+      	  
+      	  
+      
+      	  
+      	  
+      		
+      		  
+      		
+      	  
+      
+      	  <li>
+      		<a href="https://0x69.online/ru" class="active">
+      		  <ion-icon name="language"></ion-icon> 
+      		  Русский
+      		  
+      		  
+      			<ion-icon name="checkmark-circle"></ion-icon>
+      		  
+      		</a>
+      	  </li>
+      	
+        </ul>
+      </div>
 	  
       <div class="dropdown dropdown-end dropdown-hover">
         <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
@@ -297,50 +410,55 @@
         <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
           
           
+
+
 <li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="/ru/posts" title="Архивы">
-    <ion-icon name="archive"></ion-icon>
-    Архивы
-  </a>
+  
+    <a class="inline-flex items-center p-2" href="/ru/posts" title="Архивы">
+      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> Архивы
+    </a>
+  
 </li>
-
-
           
           
+
+
 <li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="/ru/tags" title="Все теги">
-    <ion-icon name="pricetags"></ion-icon>
-    Все теги
-  </a>
+  
+    <a class="inline-flex items-center p-2" href="/ru/tags" title="Все теги">
+      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> Все теги
+    </a>
+  
 </li>
-
-
           
           
-
 
 
 <li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="https://github.com/rianvy" target="_blank" title="GitHub">
+  
     
-    <ion-icon name="logo-github"></ion-icon>
     
-    GitHub
-  </a>
+    
+      <a class="inline-flex items-center p-2" href="https://github.com/rianvy" target="_blank" title="GitHub">
+        
+          <ion-icon name="logo-github" role="img" class="md hydrated"></ion-icon>
+        
+        GitHub
+      </a>
+    
+  
 </li>
-
-
-
           
           
+
+
 <li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="/ru/index.xml" title="RSS">
-    <ion-icon name="logo-rss"></ion-icon>
-    RSS
-  </a>
+  
+    <a class="inline-flex items-center p-2" href="/ru/index.xml" title="RSS">
+      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
+    </a>
+  
 </li>
-
-
           
 
           
@@ -362,7 +480,19 @@
     </section>
   </div>
 </nav>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
 
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
 
     <div class="flip-container" :class="{ 'flip-it': flip }">
       <div class="flipper">
@@ -377,7 +507,7 @@
       <meta itemprop="name" content="Роль файла .htaccess в настройке сервера Apache">
 <meta itemprop="description" content=".htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга."><meta itemprop="datePublished" content="2025-01-12T21:27:20+03:00" />
 <meta itemprop="dateModified" content="2025-01-12T21:27:20+03:00" />
-<meta itemprop="wordCount" content="949"><meta itemprop="image" content="https://0x69.online/ru/posts/role-htaccess/Cover.png">
+<meta itemprop="wordCount" content="949"><meta itemprop="image" content="https://0x69.online/Cover.png">
 <meta itemprop="keywords" content="Серверы,Apache,.htaccess,Веб-безопасность,Производительность," />
 
       <header>
@@ -396,18 +526,22 @@
             </span>
           
         </p>
-
-		
-		<div class="categories flex justify-between mt-4 mb-4">
-		<div class="flex items-center gap-2">
-		<ion-icon class="group-hover:text-primary-content md hydrated" name="grid" role="img"></ion-icon>
-		    
-		  
-			<a class="badge h-6 no-underline hover:badge-primary mr-2" href="/ru/categories/%D0%B0%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/">Администрирование</a>
-		  
+		<div class="categories mt-4 mb-4">
+		  <div class="flex items-center gap-2">
+			<ion-icon 
+			  class="text-lg opacity-80 hover:text-primary-content transition-colors"
+			  name="grid"
+			  aria-hidden="true"
+			></ion-icon>
+			  <a
+				href="/ru/categories/%d0%b0%d0%b4%d0%bc%d0%b8%d0%bd%d0%b8%d1%81%d1%82%d1%80%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5/"
+				class="badge no-underline hover:badge-primary transition-all duration-200"
+				rel="category"
+				aria-label="Администрирование"
+				data-category="администрирование"
+			  >Администрирование</a>
+		  </div>
 		</div>
-		</div>
-		
 
         <div class="flex justify-between">
           <div class="flex items-center">
@@ -472,22 +606,27 @@
 
       <section id="dream-single-post-content" itemprop="articleBody">
         
-        <img src="/ru/posts/role-htaccess/Cover.png" alt="Роль файла .htaccess в настройке сервера Apache" />
+        <img src="https://0x69.online/ru/posts/role-htaccess/Cover.png" alt="Роль файла .htaccess в настройке сервера Apache"/>
         
+		
 		
 		
 		
 		<blockquote class="dream-alert tip">
 		  <p class="heading">
 			<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
+			Эта запись также доступна на
 			
-			  This post is also 
-			  <a href="https://0x69.online/en/posts/role-htaccess/" target="_blank" class="badge h-6 no-underline hover:badge-primary mr-2">
-				available in English
+			  
+			  <a href="https://0x69.online/en/posts/role-htaccess/" 
+				 class="badge h-6 no-underline hover:badge-primary mr-2"
+				 rel="noopener noreferrer">
+				English
 			  </a>
 			
 		  </p>
 		</blockquote>
+		
 
         <p>.htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга.</p>
 <h2 id="введение-в-htaccess">Введение в .htaccess</h2>
@@ -795,24 +934,44 @@ php_value error_reporting E_ALL
 </li>
 </ul>
       </section>
-
-	
-	  <div class="tags mt-4">
-		  
-		
-		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/ru/tags/%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D1%8B/">Серверы</a>
-		
-		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/ru/tags/apache/">Apache</a>
-		
-		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/ru/tags/.htaccess/">.htaccess</a>
-		
-		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/ru/tags/%D0%B2%D0%B5%D0%B1-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C/">Веб-безопасность</a>
-		
-		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="/ru/tags/%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C/">Производительность</a>
-		
+	  <div class="tags mt-4 flex flex-wrap gap-2">
+	  <ion-icon name="pricetags" class="text-lg opacity-75 mr-1"></ion-icon>
+		  <a 
+			href="/ru/tags/%d1%81%d0%b5%d1%80%d0%b2%d0%b5%d1%80%d1%8b/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Серверы"
+			data-tag="серверы"
+		  >Серверы</a>
+		  <a 
+			href="/ru/tags/apache/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Apache"
+			data-tag="apache"
+		  >Apache</a>
+		  <a 
+			href="/ru/tags/htaccess/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label=".htaccess"
+			data-tag=".htaccess"
+		  >.htaccess</a>
+		  <a 
+			href="/ru/tags/%d0%b2%d0%b5%d0%b1-%d0%b1%d0%b5%d0%b7%d0%be%d0%bf%d0%b0%d1%81%d0%bd%d0%be%d1%81%d1%82%d1%8c/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Веб-безопасность"
+			data-tag="веб-безопасность"
+		  >Веб-безопасность</a>
+		  <a 
+			href="/ru/tags/%d0%bf%d1%80%d0%be%d0%b8%d0%b7%d0%b2%d0%be%d0%b4%d0%b8%d1%82%d0%b5%d0%bb%d1%8c%d0%bd%d0%be%d1%81%d1%82%d1%8c/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Производительность"
+			data-tag="производительность"
+		  >Производительность</a>
 	  </div>
-	
-
 
       
       <div class="divider"></div>
@@ -943,28 +1102,7 @@ php_value error_reporting E_ALL
   <p>Powered by ❤️</p>
   
 </div>
-  <div class="dropdown dropdown-end sm:hidden">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
-        <ion-icon name="language" class="text-2xl md hydrated" role="img"></ion-icon>
-      </div>
-      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
-		
-		  <li>
-			<a href="/en/">
-			  <ion-icon name="language"></ion-icon> English
-			</a>
-		  </li>
-		
-		  <li>
-			<a href="/ru/">
-			  <ion-icon name="language"></ion-icon> Русский
-			</a>
-		  </li>
-		
-      </ul>
-</div>
-
-<div
+  <div
   x-data="{ icons: [
     { name: 'moon', status: 'y' },
     { name: 'sunny', status: 'n' },
@@ -1257,13 +1395,68 @@ php_value error_reporting E_ALL
 
 
   
-    <script type="module">
-      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
-      mediumZoom('#dream-single-post-content img', {
-	  scrollOffset: 0,
-	  background: 'rgba(25, 18, 25, .9)',
-	  })
-    </script>
+ 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-rotate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-fullscreen.min.css">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/rotate/lg-rotate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/fullscreen/lg-fullscreen.min.js"></script>
+
+<style>
+.lg-sub-html {
+    backdrop-filter: blur(16px);
+}
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const galleryContainer = document.querySelector("#dream-single-post-content");
+    const images = galleryContainer?.querySelectorAll("img");
+
+    if (galleryContainer && images?.length > 0) {
+      galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
+
+      images.forEach(img => {
+        if (!img.closest("a")) {
+          const wrapper = document.createElement("a");
+          wrapper.href = img.src;
+          wrapper.classList.add("lg-item");
+
+          const title = img.title ? `<h2 class="text-lg">${img.title}</h2>` : "";
+          const alt = img.alt ? `<h1 class="text-2xl">${img.alt}</h1>` : "";
+          wrapper.dataset.subHtml = `${alt}${title}`;
+
+          img.parentNode.insertBefore(wrapper, img);
+          wrapper.appendChild(img);
+        }
+      });
+
+      lightGallery(galleryContainer, {
+        selector: "a.lg-item",
+        plugins: [lgZoom, lgRotate, lgFullscreen],
+        speed: 500,
+        zoom: true,
+        fullScreen: true,
+        download: false,
+        counter: true,
+        mousewheel: true,
+        zoomFromOrigin: true,
+        scale: 1,
+        rotate: true,
+        hideControlOnEnd: false,
+        closeOnTap: true,
+        subHtmlSelectorRelative: true
+      });
+    }
+  });
+</script>
+
   
 
 

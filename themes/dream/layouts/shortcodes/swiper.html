@@ -1,0 +1,102 @@
+{{ $id := .Get "id" | default (printf "swiper-%s" (now.Format "20060102150405")) }}
+{{ $pagination := .Get "pagination" | default false }} 
+{{ $loop := .Get "loop" | default false }} 
+{{ $autoplay := .Get "autoplay" | default false }}
+
+<div class="swiper-container {{ $id }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <div class="swiper {{ $id }}-mySwiper">
+        <div class="swiper-wrapper">
+            {{ .Inner | safeHTML }}
+        </div>
+        {{ if $pagination }}
+        <div class="swiper-pagination"></div>
+        {{ end }}
+    </div>
+    <script type="module">
+        import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
+        const swiperOptions = {
+          {{ if $loop }}
+          loop: true,
+          {{ end }}
+          {{ if $autoplay }}
+          autoplay: {
+            delay: {{ $autoplay }},
+            disableOnInteraction: false,
+          },
+          {{ end }}
+          {{ if $pagination }}
+          pagination: {
+            el: ".{{ $id }}-mySwiper .swiper-pagination",
+            type: "progressbar",
+          },
+          {{ end }}
+        };
+        new Swiper('.{{ $id }}-mySwiper', swiperOptions);
+    </script>
+</div>
+
+<style>
+    .swiper-slide {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+        object-position: top;
+    }
+	
+	@media (max-width: 768px) {
+		.swiper-slide img {
+			height: auto;
+			max-height: 200px;
+		}
+	}
+	
+	[data-theme="emerald"] {
+	.swiper-slide::before {
+		top: 0;
+		background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent);
+		}
+		.swiper-slide::after {
+		bottom: 0;
+		background: linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent);
+		}
+	}
+
+    .swiper-slide::before,
+    .swiper-slide::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 50px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .swiper-slide {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .swiper-pagination {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        width: 90%;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+    }
+
+    .swiper-pagination-progressbar-fill {
+        background: #007bff;
+        border-radius: 3px;
+    }
+</style>

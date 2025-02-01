@@ -7,6 +7,13 @@ description: "Разработка визуального стиля для бр
 cover: Cover.png
 images:
    - Cover.png
+tags:
+  - Дизайн
+  - Брендинг
+  - Айдентика
+  - Telegram
+  - Анимированный Логотип
+  - Визуальный Стиль
 filters:
   - Social-Media
 tools:

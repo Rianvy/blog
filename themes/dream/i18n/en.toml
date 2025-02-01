@@ -2,11 +2,6 @@
 headerTitle = "0x69.online </>"
 motto = "To iterate is human, to recurse divine"
 comments = "Comments"
-portfolio = "Portfolio"
-portfolioDisabled = "Portfolio is disabled or not configured."
-all = "All"
-browserNoVideoSupport = "Your browser does not support video playback."
-toolsUsed = "Tools used"
 
 # Alerts
 note = "Note"
@@ -42,3 +37,28 @@ other = "{{ .Count }} categories"
 [tag]
 one = "1 tag"
 other = "{{ .Count }} tags"
+
+[color]
+  [color.table]
+    header = { name = "Name", code = "Code", example = "Example" }
+    copy_button = { tooltip = "Copy Code" }
+
+[video]
+  not_supported = "Your browser does not support video playback."
+  
+[portfolio]
+  title = "Portfolio"
+  disabled = "Portfolio is disabled or not configured."
+  all = "All"
+  toolsUsed = "Tools used"
+  
+[summary]
+  post = "Post"
+  portfolio = "Portfolio"
+  
+[menu]
+  languages = "Languages"
+  menu = "Menu"
+
+[post_available_in]
+  text = "This post is also available in"

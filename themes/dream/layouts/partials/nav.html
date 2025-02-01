@@ -36,7 +36,7 @@
       <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
         <ion-icon name="menu" class="text-2xl"></ion-icon>
       </div>
-      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-md">
         {{ partial "navMobileMenu.html" . }}
       </ul>
     </div>
@@ -76,21 +76,42 @@
       {{ range $items }}
       {{ partial "renderNavItem.html" . }}
       {{ end }}
-
-	  <div class="dropdown dropdown-end dropdown-hover">
-	    <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
-	  	<ion-icon class="group-hover:text-primary-content text-xl" name="language"></ion-icon>
-	    </div>
-	    <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
-	  	{{ range $key, $lang := .Site.Params.navLang }}
-	  	  <li>
-	  		<a href="{{ $lang.href }}">
-	  		  <ion-icon name="{{ $lang.icon }}"></ion-icon> {{ $lang.title }}
-	  		</a>
-	  	  </li>
-	  	{{ end }}
-	    </ul>
-	  </div>
+      
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select language">
+      	<ion-icon class="group-hover:text-primary-content text-xl" name="language"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl">
+      	{{ range $langCode, $langParams := $.Site.Params.navLang }}
+      	  {{ $translatedPage := where $.Page.Translations "Lang" $langCode | first 1 }}
+      
+      	  {{ $isCategoriesPage := hasPrefix ($.Path) "/categories/" }}
+      	  {{ $isTagsPage := hasPrefix ($.Path) "/tags/" }}
+      
+      	  {{ $link := "" }}
+      	  {{ if or $isCategoriesPage $isTagsPage }}
+      		{{ $link = printf "/%s/%s/" $langCode (cond $isCategoriesPage "categories" "tags") }}
+      	  {{ else }}
+      		{{ if $translatedPage }}
+      		  {{ $link = (index $translatedPage 0).RelPermalink }}
+      		{{ else }}
+      		  {{ $link = absLangURL $langCode }}
+      		{{ end }}
+      	  {{ end }}
+      
+      	  <li>
+      		<a href="{{ $link }}" class="{{ if eq $langCode $.Site.Language.Lang }}active{{ end }}">
+      		  <ion-icon name="{{ $langParams.icon }}"></ion-icon> 
+      		  {{ $langParams.title }}
+      		  
+      		  {{ if eq $langCode $.Site.Language.Lang }}
+      			<ion-icon name="checkmark-circle"></ion-icon>
+      		  {{ end }}
+      		</a>
+      	  </li>
+      	{{ end }}
+        </ul>
+      </div>
 	  
       <div class="dropdown dropdown-end dropdown-hover">
         <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
@@ -98,7 +119,7 @@
         </div>
         <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
           {{ range $collapseNavItems }}
-          {{ partial "renderMobileNavItem.html" . }}
+          {{ partial "renderMobileNavItem.html" (dict "item" . "site" $.Site) }}
           {{ end }}
 
           {{ with site.Params.navItems }}

@@ -1,0 +1,102 @@
+<style>
+.color-box {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border-radius: 50%;
+}
+@media (max-width: 768px) {
+    .color-table thead {
+        display: none;
+    }
+    .color-table tbody tr {
+        display: block;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        padding: 10px;
+        border: 1px solid var(--fallback-bc, oklch(var(--bc) / 0.3));
+    }
+    
+    .color-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 0;
+        padding: 8px 0;
+    }
+    .color-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-right: 10px;
+        color: #555;
+    }
+    .color-box {
+        margin-bottom: 0;
+    }
+}
+</style>
+<script>
+function copyToClipboard(text, button) {
+    navigator.clipboard.writeText(text).then(() => {
+        const icon = button.querySelector('ion-icon');
+        const originalIcon = icon.getAttribute('name');
+        const originalColor = icon.style.color;
+        
+        icon.setAttribute('name', 'checkmark-outline');
+        icon.style.color = '#10B981';
+        
+        setTimeout(() => {
+            icon.setAttribute('name', originalIcon);
+            icon.style.color = originalColor;
+        }, 2000);
+    }).catch(err => {
+        console.error("Copy Error: ", err);
+    });
+}
+</script>
+{{ $colors := slice }}
+{{ range $key, $value := .Params }}
+    {{ if and (strings.HasPrefix $key "name") (index $.Params (print "code" (replace $key "name" ""))) }}
+        {{ $colors = $colors | append (dict 
+            "name" $value 
+            "code" (upper (index $.Params (print "code" (replace $key "name" "")))) 
+        ) }}
+    {{ end }}
+{{ end }}
+<table class="color-table">
+    <thead>
+        <tr>
+            <th>{{ i18n "color.table.header.name" }}</th>
+            <th>{{ i18n "color.table.header.code" }}</th>
+            <th>{{ i18n "color.table.header.example" }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ range $colors }}
+        <tr>
+            <td>{{ .name }}</td>
+            <td>
+                <span>
+                    {{ .code }} 
+                    <button class="badge h-6 no-underline hover:badge-primary" onclick="copyToClipboard('{{ .code }}', this)" title="{{ i18n "color.table.copy_button.tooltip" }}">
+                        <ion-icon name="copy-outline"></ion-icon>
+                    </button>
+                </span>
+            </td>
+            <td>
+                {{ if in .code "/" }}
+                    {{ $splits := split .code "/" }}
+                    {{ range $splits }}
+                        <div class="color-box border border-base-content/30" style="background-color: {{ . }};"></div>
+                    {{ end }}
+                {{ else }}
+                    <div class="color-box border border-base-content/30" style="background-color: {{ .code }};"></div>
+                {{ end }}
+            </td>
+        </tr>
+        {{ end }}
+    </tbody>
+</table>

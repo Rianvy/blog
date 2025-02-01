@@ -11,7 +11,7 @@
   <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
 </a>
 {{ else if and (eq . "portfolio") (site.Params.portfolio) (gt (len (where site.RegularPages "Type" "portfolio")) 0) }}
-<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="{{ "portfolio" | relLangURL }}" title="{{ T "portfolio" }}">
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="{{ "portfolio" | relLangURL }}" title="{{ i18n "portfolio.title" }}">
   <ion-icon class="group-hover:text-primary-content" name="sparkles"></ion-icon>
 </a>
 {{ else if and (eq . "categories") site.Taxonomies.categories }}

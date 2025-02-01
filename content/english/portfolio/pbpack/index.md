@@ -7,6 +7,13 @@ description: "Developed visual identity for PBPack's social media brand, includi
 cover: Cover.png
 images:
    - Cover.png
+tags:
+  - Design
+  - Branding
+  - Identity
+  - Telegram
+  - Animated Logo
+  - Visual Style
 filters:
   - Social-Media
 tools:

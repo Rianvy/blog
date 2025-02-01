@@ -3,11 +3,6 @@ headerTitle = "0x69.online: блог об IT"
 motto = "Документируй сегодня то, что забудешь завтра"
 about = "Обо мне"
 comments = "Комментарии"
-portfolio = "Портфолио"
-portfolioDisabled = "Портфолио отключено или не настроено."
-all = "Все"
-browserNoVideoSupport = "Ваш браузер не поддерживает воспроизведение видео."
-toolsUsed = "Используемые программы"
 
 [home]
 other = "Главная"
@@ -31,7 +26,7 @@ many = "{{ .Count }} тегов"
 other = "{{ .Count }} тегов"
 
 [allCategories]
-other = "Все категории"
+other = "Категории"
 
 [category]
 one = "1 категория"
@@ -65,3 +60,28 @@ other = "Следующая"
 
 [search]
 other = "Поиск"
+
+[color]
+  [color.table]
+    header = { name = "Название", code = "Код", example = "Пример" }
+    copy_button = { tooltip = "Скопировать код" }
+
+[video]
+  not_supported = "Ваш браузер не поддерживает воспроизведение видео."
+
+[portfolio]
+  title = "Портфолио"
+  disabled = "Портфолио отключено или не настроено."
+  all = "Все"
+  toolsUsed = "Используемые инструменты"
+
+[summary]
+  post = "Пост"
+  portfolio = "Портфолио"
+
+[menu]
+  languages = "Язык"
+  menu = "Меню"
+
+[post_available_in]
+  text = "Эта запись также доступна на"

@@ -52,17 +52,30 @@
           {{ end }}
         </p>
 
-		{{ if .Params.categories }}
-		<div class="categories flex justify-between mt-4 mb-4">
-		<div class="flex items-center gap-2">
-		<ion-icon class="group-hover:text-primary-content md hydrated" name="grid" role="img"></ion-icon>
-		  {{ $lang := $.Site.Language.Lang }}  {{/* сохраняем внешний контекст */}}
-		  {{ range .Params.categories }}
-			<a class="badge h-6 no-underline hover:badge-primary mr-2" href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
-		  {{ end }}
+		{{- with .Params.categories }}
+		<div class="categories mt-4 mb-4">
+		  <div class="flex items-center gap-2">
+			<ion-icon 
+			  class="text-lg opacity-80 hover:text-primary-content transition-colors"
+			  name="grid"
+			  aria-hidden="true"
+			></ion-icon>
+			
+			{{- $base := path.Join "categories" | relLangURL | printf "%s/" }}
+			{{- range $category := . }}
+			  <a
+				href="{{ $base }}{{ $category | anchorize }}/"
+				class="badge no-underline hover:badge-primary transition-all duration-200"
+				rel="category"
+				aria-label="{{ $category }}"
+				data-category="{{ $category | lower }}"
+			  >
+				{{- $category | strings.FirstUpper -}}
+			  </a>
+			{{- end }}
+		  </div>
 		</div>
-		</div>
-		{{ end }}
+		{{- end }}
 
         <div class="flex justify-between">
           {{ partial "author.html" (dict "Params" .Params "template" "single") }}
@@ -73,40 +86,50 @@
 
       <section id="dream-single-post-content" itemprop="articleBody">
         {{ if and .Params.Cover site.Params.showSummaryCoverInPost }}
-        <img src="{{ .Params.Cover }}" alt="{{ .Title }}" />
+        <img src="{{ (printf "%s/%s" $.Page.RelPermalink .Params.Cover) | absURL }}" alt="{{ .Title }}"/>
         {{ end }}
 		
-		{{ $currentLang := .Site.Language.Lang }}
-		{{ $basePath := replace .RelPermalink (printf "/%s/" $currentLang) "" }}
+		{{ if eq .Section "portfolio" }}
+		{{ partial "portfolio/toolsUsed.html" . }}
+		{{ end }}
+		
+		{{ if .IsTranslated }}
 		<blockquote class="dream-alert tip">
 		  <p class="heading">
 			<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
-			{{ if eq $currentLang "ru" }}
-			  This post is also 
-			  <a href="{{ printf "/en/%s" $basePath | absURL }}" target="_blank" class="badge h-6 no-underline hover:badge-primary mr-2">
-				available in English
-			  </a>
-			{{ else if eq $currentLang "en" }}
-			  This post is also 
-			  <a href="{{ printf "/ru/%s" $basePath | absURL }}" target="_blank" class="badge h-6 no-underline hover:badge-primary mr-2">
-				available in Russian
+			{{ i18n "post_available_in.text" }}
+			{{ range $index, $translation := .Translations }}
+			  {{ if $index }}, {{ end }}
+			  <a href="{{ $translation.Permalink }}" 
+				 class="badge h-6 no-underline hover:badge-primary mr-2"
+				 rel="noopener noreferrer">
+				{{ $translation.Language.LanguageName }}
 			  </a>
 			{{ end }}
 		  </p>
 		</blockquote>
+		{{ end }}
 
         {{ .Content | emojify }}
       </section>
 
-	{{ if .Params.tags }}
-	  <div class="tags mt-4">
-		{{ $lang := $.Site.Language.Lang }}  {{/* сохраняем внешний контекст */}}
-		{{ range .Params.tags }}
-		  <a class="badge h-6 no-underline hover:badge-primary mr-2" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
-		{{ end }}
+	{{- with .Params.tags }}
+	  <div class="tags mt-4 flex flex-wrap gap-2">
+	  <ion-icon name="pricetags" class="text-lg opacity-75 mr-1"></ion-icon>
+		{{- $base := path.Join "tags" | relLangURL }}
+		{{- range $index, $tag := . }}
+		  <a 
+			href="{{ $base }}/{{ $tag | anchorize }}/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="{{ $tag }}"
+			data-tag="{{ $tag | lower }}"
+		  >
+			{{- $tag -}}
+		  </a>
+		{{- end }}
 	  </div>
-	{{ end }}
-
+	{{- end }}
 
       {{ if site.Params.showPrevNextPost }}
       <div class="divider"></div>
@@ -226,13 +249,68 @@
   {{ if fileExists "layouts/partials/medium-zoom.html" }}
     {{ partialCached "medium-zoom.html" . }}
   {{ else }}
-    <script type="module">
-      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
-      mediumZoom('#dream-single-post-content img', {
-	  scrollOffset: 0,
-	  background: 'rgba(25, 18, 25, .9)',
-	  })
-    </script>
+ 
+<!-- LightGallery CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-rotate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-fullscreen.min.css">
+
+<!-- LightGallery JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/rotate/lg-rotate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/fullscreen/lg-fullscreen.min.js"></script>
+
+<style>
+.lg-sub-html {
+    backdrop-filter: blur(16px);
+}
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const galleryContainer = document.querySelector("#dream-single-post-content");
+    const images = galleryContainer?.querySelectorAll("img");
+
+    if (galleryContainer && images?.length > 0) {
+      galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
+
+      images.forEach(img => {
+        if (!img.closest("a")) {
+          const wrapper = document.createElement("a");
+          wrapper.href = img.src;
+          wrapper.classList.add("lg-item");
+
+          const title = img.title ? `<h2 class="text-lg">${img.title}</h2>` : "";
+          const alt = img.alt ? `<h1 class="text-2xl">${img.alt}</h1>` : "";
+          wrapper.dataset.subHtml = `${alt}${title}`;
+
+          img.parentNode.insertBefore(wrapper, img);
+          wrapper.appendChild(img);
+        }
+      });
+
+      lightGallery(galleryContainer, {
+        selector: "a.lg-item",
+        plugins: [lgZoom, lgRotate, lgFullscreen],
+        speed: 500,
+        zoom: true,
+        fullScreen: true,
+        download: false,
+        counter: true,
+        mousewheel: true,
+        zoomFromOrigin: true,
+        scale: 1,
+        rotate: true,
+        hideControlOnEnd: false,
+        closeOnTap: true,
+        subHtmlSelectorRelative: true
+      });
+    }
+  });
+</script>
+
   {{ end }}
 {{ end }}
 

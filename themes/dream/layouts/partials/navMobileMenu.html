@@ -1,23 +1,76 @@
 {{ with site.GetPage "/about" }}
-{{ $aboutPages := .Resources.ByType "page" }}
-{{ if gt (len $aboutPages) 0 }}
-<li>
-  <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="{{ T "about" }}">
-    <ion-icon name="information-circle"></ion-icon>
-    {{- T "about" -}}
-  </div>
-</li>
-{{ end }}
+  {{ $aboutPages := .Resources.ByType "page" }}
+  {{ if gt (len $aboutPages) 0 }}
+    <li>
+      <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="{{ T "about" }}">
+        <ion-icon name="information-circle"></ion-icon>
+        {{- T "about" -}}
+      </div>
+    </li>
+  {{ end }}
 {{ end }}
 
 {{ $navItems := slice "search" "rss" "posts" "categories" "tags" }}
 {{ if site.Params.reorderNavItems }}
-{{ $navItems = site.Params.reorderNavItems }}
-{{ end }}
-{{ range $navItems }}
-{{ partial "renderMobileNavItem.html" . }}
+  {{ $navItems = site.Params.reorderNavItems }}
 {{ end }}
 
-{{ with site.Params.navItems }}
-{{ partial "navCustomItems.html" (dict "navItems" $navItems "mobile" true) }}
-{{ end }}
+<ul class="p-0 m-0 list-none">
+
+<style>
+.menu-title {
+    margin-bottom: 4px;
+}
+</style>
+
+  <!-- Language Switcher -->
+  <li>
+    <div class="menu-title">{{ i18n "menu.languages" }}</div>
+    <ul class="p-0 m-0 list-none">
+      {{ range $langCode, $lang := $.Site.Params.navLang }}
+        {{ $translatedPage := where $.Page.Translations "Lang" $langCode | first 1 }}
+  
+        <!-- Проверяем, находится ли пользователь на странице категорий или тегов -->
+        {{ $isCategoriesPage := hasPrefix ($.Path) "/categories/" }}
+        {{ $isTagsPage := hasPrefix ($.Path) "/tags/" }}
+  
+        <!-- Определяем правильный URL для редиректа -->
+        {{ $link := "" }}
+        {{ if or $isCategoriesPage $isTagsPage }}
+          {{ $link = printf "/%s/%s/" $langCode (cond $isCategoriesPage "categories" "tags") }}
+        {{ else }}
+          {{ if $translatedPage }}
+            {{ $link = (index $translatedPage 0).RelPermalink }}
+          {{ else }}
+            {{ $link = absLangURL $langCode }}
+          {{ end }}
+        {{ end }}
+  
+        <li>
+          <a href="{{ $link }}" 
+             title="{{ $lang.title }}" 
+             class="inline-flex items-center p-2 {{ if eq $langCode $.Site.Language.Lang }}active{{ end }}">
+            <ion-icon name="{{ $lang.icon }}" role="img" class="md hydrated"></ion-icon> 
+            {{ $lang.title }}
+			{{ if eq $langCode $.Site.Language.Lang }}
+      		<ion-icon name="checkmark-circle"></ion-icon>
+      		{{ end }}
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  </li>
+
+  <!-- Menu Options -->
+  <li>
+    <div class="menu-title">{{ i18n "menu.menu" }}</div>
+    <ul class="p-0 m-0 list-none">
+      {{ range $navItems }}
+        {{ partial "renderMobileNavItem.html" (dict "item" . "site" $.Site) }}
+      {{ end }}
+      {{ with site.Params.navItems }}
+        {{ partial "navCustomItems.html" (dict "navItems" $navItems "mobile" true "site" $.Site) }}
+      {{ end }}
+    </ul>
+  </li>
+</ul>

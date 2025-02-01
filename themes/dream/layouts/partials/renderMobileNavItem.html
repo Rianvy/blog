@@ -1,56 +1,41 @@
-{{ if and (eq . "search") (gt (len (where site.Pages "Type" "search")) 0) }}
+{{ $item := .item }}
+{{ $site := .site }}
+
 <li>
-  <a class="group inline-flex items-center p-2 cursor-pointer" href="{{ "search" | relLangURL }}" title="{{ T "search" }}">
-    <ion-icon name="search"></ion-icon>
-    {{ T "search" }}
-  </a>
-</li>
-{{ else if and (eq . "rss") site.Params.rss }}
-<li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="{{ "index.xml" | relLangURL }}" title="RSS">
-    <ion-icon name="logo-rss"></ion-icon>
-    RSS
-  </a>
-</li>
-{{ else if and (eq . "posts") (gt (len (where site.RegularPages "Type" "posts")) 0) }}
-<li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="{{ "posts" | relLangURL }}" title="{{ T "archives" }}">
-    <ion-icon name="archive"></ion-icon>
-    {{ T "archives" }}
-  </a>
-</li>
-{{ else if and (eq . "portfolio") (site.Params.portfolio) (gt (len (where site.RegularPages "Type" "portfolio")) 0) }}
-<li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="{{ "portfolio" | relLangURL }}" title="{{ T "portfolio" }}">
-    <ion-icon name="sparkles"></ion-icon>
-    {{ T "portfolio" }}
-  </a>
-</li>
-{{ else if and (eq . "categories") site.Taxonomies.categories }}
-<li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="{{ "categories" | relLangURL }}" title="{{ T "allCategories" }}">
-    <ion-icon name="grid"></ion-icon>
-    {{ T "allCategories" }}
-  </a>
-</li>
-{{ else if and (eq . "tags") site.Taxonomies.tags }}
-<li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="{{ "tags" | relLangURL }}" title="{{ T "allTags" }}">
-    <ion-icon name="pricetags"></ion-icon>
-    {{ T "allTags" }}
-  </a>
-</li>
-{{ else }}
-{{ $navItems := site.Params.navItems }}
-{{ $item := index $navItems . }}
-{{ with $item }}
-<li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="{{ .href }}" target="{{ .target }}" title="{{ .title }}">
-    {{ if .icon }}
-    <ion-icon name="{{ .icon }}"></ion-icon>
+  {{ if and (eq $item "search") (gt (len (where $site.Pages "Type" "search")) 0) }}
+    <a class="inline-flex items-center p-2" href="{{ "search" | relLangURL }}" title="{{ T "search" }}">
+      <ion-icon name="search" role="img" class="md hydrated"></ion-icon> {{ T "search" }}
+    </a>
+  {{ else if and (eq $item "rss") $site.Params.rss }}
+    <a class="inline-flex items-center p-2" href="{{ "index.xml" | relLangURL }}" title="RSS">
+      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
+    </a>
+  {{ else if and (eq $item "posts") (gt (len (where $site.RegularPages "Type" "posts")) 0) }}
+    <a class="inline-flex items-center p-2" href="{{ "posts" | relLangURL }}" title="{{ T "archives" }}">
+      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> {{ T "archives" }}
+    </a>
+  {{ else if and (eq $item "portfolio") ($site.Params.portfolio) (gt (len (where $site.RegularPages "Type" "portfolio")) 0) }}
+    <a class="inline-flex items-center p-2" href="{{ "portfolio" | relLangURL }}" title="{{ i18n "portfolio.title" }}">
+      <ion-icon name="sparkles" role="img" class="md hydrated"></ion-icon> {{ i18n "portfolio.title" }}
+    </a>
+  {{ else if and (eq $item "categories") $site.Taxonomies.categories }}
+    <a class="inline-flex items-center p-2" href="{{ "categories" | relLangURL }}" title="{{ T "allCategories" }}">
+      <ion-icon name="grid" role="img" class="md hydrated"></ion-icon> {{ T "allCategories" }}
+    </a>
+  {{ else if and (eq $item "tags") $site.Taxonomies.tags }}
+    <a class="inline-flex items-center p-2" href="{{ "tags" | relLangURL }}" title="{{ T "allTags" }}">
+      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> {{ T "allTags" }}
+    </a>
+  {{ else }}
+    {{ $navItems := $site.Params.navItems }}
+    {{ $itemData := index $navItems $item }}
+    {{ with $itemData }}
+      <a class="inline-flex items-center p-2" href="{{ .href }}" target="{{ .target }}" title="{{ .title }}">
+        {{ if .icon }}
+          <ion-icon name="{{ .icon }}" role="img" class="md hydrated"></ion-icon>
+        {{ end }}
+        {{ .title }}
+      </a>
     {{ end }}
-    {{ .title }}
-  </a>
+  {{ end }}
 </li>
-{{ end }}
-{{ end }}

@@ -58,7 +58,7 @@ SyntaxHighlightingLanguages = ["apache", "json"]
 # options
 stickyNav = true
 portfolio = true
-reorderNavItems = ["search", "rss", "posts", "categories", "portfolio", "github", "tags"]
+reorderNavItems = ["search", "categories", "portfolio", "posts", "tags", "github", "rss",]
 collapseNavItems = ["posts", "tags", "github", "rss"]
 # noDefaultSummaryCover = true
 showTableOfContents = true

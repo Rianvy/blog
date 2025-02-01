@@ -1,5 +1,5 @@
 {{ define "title" }}
-{{- T "portfolio" -}}
+{{ i18n "portfolio.title" }}
 {{ end }}
 
 {{ define "main" }}
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
       class="filter-button badge h-6 no-underline hover:badge-primary mr-2 data-checked:badge-primary" 
       data-filter="*" 
       data-state="checked">
-      {{ T "all" }}
+	  {{ i18n "portfolio.all" }}
     </button>
     {{ $filters := slice }}
     {{ range (where site.RegularPages "Type" "portfolio") }}
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="dream-grid">
   {{ range (where site.RegularPages "Type" "portfolio") }}
     <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column {{ with .Params.filters }}{{ range . }}{{ . }} {{ end }}{{ end }}">
-      {{ template "portfolio/partials/card.html" . }}
+      {{ .Render "summary" }}
     </div>
   {{ end }}
 </div>
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 {{ else }}
   <div class="text-center mt-8">
-    <p>{{ T "portfolioDisabled" }}</p>
+    <p>{{ i18n "portfolio.disabled" }}</p>
   </div>
 {{ end }}
 

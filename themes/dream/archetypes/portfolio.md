@@ -7,11 +7,32 @@ avatar: /img/avatar.jpg
 cover: Cover.png
 images:
    - Cover.png
+tags:
+  - Дизайн
 filters:
   - Social-Media
 tools:
   - Photoshop
   - After Effects
+  - Illustrator
+  - InDesign
+  - Lightroom
+  - Figma
+  - HTML
+  - CSS
+  - JavaScript
+  - Jquery
+  - Tailwind CSS
+  - Bootstrap 5
+  - Google Sheets API
+  - C
+  - C#
+  - C++
+  - Java
+  - Unity
+  - Laravel
+  - Mysql
+  - PostgreSQL
 ---
 
 Короткое описание

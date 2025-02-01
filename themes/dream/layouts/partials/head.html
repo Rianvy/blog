@@ -10,7 +10,7 @@
 <meta name="google-site-verification" content="SX8wwAcRfmBYPxrIA69UFfuq8DDa2GxWVBzVj9tucMA" />
 <link rel="canonical" href="{{ .Permalink }}" />
 
-{{ if eq .Type "posts" }}
+{{ if or (eq .Type "posts") (eq .Type "portfolio") }}
 <!-- Page Author & Description -->
 <meta name="author" content="{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ site.Params.author }}{{ end }}" />
 <meta name="description" content="{{ .Summary | plainify }}" />

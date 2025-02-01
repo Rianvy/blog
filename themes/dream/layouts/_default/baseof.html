@@ -26,6 +26,19 @@
     <div id="dream-global-bg"></div>
 
     {{ partial "nav.html" . }}
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
 
     <div class="flip-container" :class="{ 'flip-it': flip }">
       <div class="flipper">

@@ -77,43 +77,44 @@
       {{ partial "renderNavItem.html" . }}
       {{ end }}
 	  
-      <!-- Language Switcher -->	    
-<div class="dropdown dropdown-end dropdown-hover">
-  <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select language">
-    <ion-icon class="group-hover:text-primary-content text-xl" name="language"></ion-icon>
-  </div>
-  <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl">
-    {{ range $langCode, $langParams := $.Site.Params.navLang }}
-      {{ $isCategoriesPage := hasPrefix ($.Path) "/categories/" }}
-      {{ $isTagsPage := hasPrefix ($.Path) "/tags/" }}
-      
-      {{/* Determine the correct link */}}
-      {{ $link := "" }}
-      {{ if or $isCategoriesPage $isTagsPage }}
-        {{ $section := cond $isCategoriesPage "categories" "tags" }}
-        {{ $link = printf "/%s/%s/" $langCode $section }}
-      {{ else }}
-        {{ $translatedPage := where $.Page.Translations "Lang" $langCode | first 1 }}
-        {{ if $translatedPage }}
-          {{ $link = (index $translatedPage 0).RelPermalink }}
-        {{ else }}
-          {{ $currentPath := strings.TrimPrefix (printf "/%s/" $.Site.Language.Lang) $.Page.RelPermalink }}
-          {{ $link = printf "/%s/%s" $langCode $currentPath }}
-        {{ end }}
-      {{ end }}
-      
-      <li>
-        <a href="{{ $link }}" class="{{ if eq $langCode $.Site.Language.Lang }}active{{ end }}">
-          <ion-icon name="language" role="img" class="md hydrated"></ion-icon>
-          {{ $langParams.title }}
-          {{ if eq $langCode $.Site.Language.Lang }}
-            <ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
-          {{ end }}
-        </a>
-      </li>
-    {{ end }}
-  </ul>
-</div>
+	<!-- Language Switcher -->
+	<div class="dropdown dropdown-end dropdown-hover">
+	  <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select language">
+		<ion-icon class="group-hover:text-primary-content text-xl" name="language"></ion-icon>
+	  </div>
+	  <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl">
+		{{ range $langCode, $langParams := $.Site.Params.navLang }}
+		  {{/* Получаем перевод страницы */}}
+		  {{ $translatedPage := where $.Page.Translations "Lang" $langCode | first 1 }}
+		  
+		  {{/* Проверяем, является ли текущая страница страницей категорий или тегов */}}
+		  {{ $isCategoriesPage := hasPrefix ($.Path) "/categories/" }}
+		  {{ $isTagsPage := hasPrefix ($.Path) "/tags/" }}
+
+		  {{/* Определяем правильную ссылку */}}
+		  {{ $link := "" }}
+		  {{ if or $isCategoriesPage $isTagsPage }}
+			{{ $section := cond $isCategoriesPage "categories" "tags" }}
+			{{ $link = printf "%s%s/%s/" $.Site.BaseURL $langCode $section }}
+		  {{ else if $translatedPage }}
+			{{ $link = (index $translatedPage 0).Permalink }}
+		  {{ else }}
+			{{ $currentPath := strings.TrimPrefix (printf "/%s/" $.Site.Language.Lang) $.Page.RelPermalink }}
+			{{ $link = printf "%s%s/%s" $.Site.BaseURL $langCode $currentPath }}
+		  {{ end }}
+
+		  <li>
+			<a href="{{ $link }}" class="{{ if eq $langCode $.Site.Language.Lang }}active{{ end }}">
+			  <ion-icon name="language" role="img" class="md hydrated"></ion-icon>
+			  {{ $langParams.title }}
+			  {{ if eq $langCode $.Site.Language.Lang }}
+				<ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
+			  {{ end }}
+			</a>
+		  </li>
+		{{ end }}
+	  </ul>
+	</div>
      	  
       <div class="dropdown dropdown-end dropdown-hover">
         <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">

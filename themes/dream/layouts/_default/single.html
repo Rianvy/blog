@@ -19,6 +19,10 @@
 </style>
 {{ end }}
 
+{{ if .Page.Store.Get "hasVideoShortcode" }}
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+{{ end }}
+
 {{ partialCached "comments/commentSystemHeads.html" . }}
 
 {{ end }}
@@ -185,9 +189,18 @@
 
 {{ define "js" }}
 
-{{ if site.Params.Experimental.jsDate }}
-{{ partial "luxon.html" . }}
-{{ end }}
+	{{ if .Page.Store.Get "hasVideoShortcode" }}
+	<script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+	<script>
+	  document.addEventListener('DOMContentLoaded', () => {
+		const players = Plyr.setup('.plyr-video');
+	  });
+	</script>
+	{{ end }}
+
+	{{ if site.Params.Experimental.jsDate }}
+	{{ partial "luxon.html" . }}
+	{{ end }}
 
 {{ if site.Params.SyntaxHighlighting }}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>

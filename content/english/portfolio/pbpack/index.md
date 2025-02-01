@@ -46,7 +46,7 @@ Creating a unified visual style for PBPack brand, focused on YouTube and Telegra
 ## 🚀 Key elements
 
 ### 🌀 Animated logo  
-{{< video "work/Logo-final.mp4" >}}  
+{{< video "work/Logo-final.mp4" "work/Cover_video_logo-final.png" >}} 
 > *Animation of the logo with smooth transition of colors and shape transformation, creating a dynamic perception of the brand.*
 
 ---
@@ -68,7 +68,7 @@ Creating a unified visual style for PBPack brand, focused on YouTube and Telegra
 
 ## 🎨 Cover creation process
 
-{{< video "work/Creation-process.mp4" >}}  
+{{< video "work/Creation-process.mp4" "work/Cover_video_creation-process.png" >}}  
 > *From developing a composition to choosing a color palette and typography.*
 
 ---

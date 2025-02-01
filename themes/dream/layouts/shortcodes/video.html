@@ -1,4 +1,16 @@
-<video controls loop muted width="800">
-  <source src="{{ .Get 0 }}" type="video/mp4">
-  {{ i18n "video.not_supported" }}
+{{ .Page.Store.Set "hasVideoShortcode" true }}
+{{- $src := .Get 0 | default "" -}}
+{{- $poster := .Get 1 | default "" -}}
+
+<video 
+  class="plyr-video"
+  playsinline 
+  controls 
+  {{ if $poster }}data-poster="{{ $poster }}"{{ end }}
+  loop 
+  muted
+>
+  <source src="{{ $src }}" type="video/mp4">
+  {{- with .Get 2 }}<source src="{{ . }}" type="video/webm">{{ end -}}
+  <p>{{ i18n "video.not_supported" }}</p>
 </video>

@@ -4,7 +4,8 @@
     <title>0x69.online</title>
     <link>https://0x69.online/en/search/</link>
     <description>Recent content on 0x69.online</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://0x69.online/en/search/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="https://0x69.online/en/search/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

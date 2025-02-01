@@ -31,7 +31,7 @@ jobs:
             ! -name .git \
             ! -name .nojekyll \
             ! -name CNAME \
-             ! -name . \
+            ! -name . \
             -exec rm -rf {} +
 
       - name: Setup Hugo
@@ -40,7 +40,12 @@ jobs:
           tar -C "${RUNNER_TEMP}" -zxvf /tmp/hugo.tar.gz hugo
 
       - name: Build
-        run: $RUNNER_TEMP/hugo
+        run: $RUNNER_TEMP/hugo --baseURL="https://0x69.online/"
+
+      - name: Create .nojekyll file
+        if: github.ref == 'refs/heads/main'
+        run: |
+          touch "${{ github.workspace }}/built-site/.nojekyll"
 
       - name: Deploy
         if: github.ref == 'refs/heads/main'

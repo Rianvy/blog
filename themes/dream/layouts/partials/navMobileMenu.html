@@ -32,6 +32,7 @@
         {{ $isCategoriesPage := hasPrefix ($.Path) "/categories/" }}
         {{ $isTagsPage := hasPrefix ($.Path) "/tags/" }}
         
+        {{/* Determine the correct link */}}
         {{ $link := "" }}
         {{ if or $isCategoriesPage $isTagsPage }}
           {{ $section := cond $isCategoriesPage "categories" "tags" }}

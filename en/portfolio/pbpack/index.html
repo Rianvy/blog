@@ -74,6 +74,10 @@
 
 
 
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
+
+
 
 
 
@@ -687,9 +691,15 @@ Creating a unified visual style for PBPack brand, focused on YouTube and Telegra
 <hr>
 <h2 id="-key-elements">🚀 Key elements</h2>
 <h3 id="-animated-logo">🌀 Animated logo</h3>
-<video controls loop muted width="800">
-  <source src="work/Logo-final.mp4" type="video/mp4">
-  Your browser does not support video playback.
+<video 
+  class="plyr-video"
+  playsinline 
+  controls 
+  data-poster="work/Cover_video_logo-final.png"
+  loop 
+  muted
+>
+  <source src="work/Logo-final.mp4" type="video/mp4"><p>Your browser does not support video playback.</p>
 </video>
 
 
@@ -712,9 +722,15 @@ Creating a unified visual style for PBPack brand, focused on YouTube and Telegra
 </ul>
 <hr>
 <h2 id="-cover-creation-process">🎨 Cover creation process</h2>
-<video controls loop muted width="800">
-  <source src="work/Creation-process.mp4" type="video/mp4">
-  Your browser does not support video playback.
+<video 
+  class="plyr-video"
+  playsinline 
+  controls 
+  data-poster="work/Cover_video_creation-process.png"
+  loop 
+  muted
+>
+  <source src="work/Creation-process.mp4" type="video/mp4"><p>Your browser does not support video playback.</p>
 </video>
 
 
@@ -1099,8 +1115,17 @@ I&rsquo;d be happy to chat and maybe work together 🤝</p>
 
     
 
+	
+	<script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+	<script>
+	  document.addEventListener('DOMContentLoaded', () => {
+		const players = Plyr.setup('.plyr-video');
+	  });
+	</script>
+	
 
-<script
+	
+	<script
   src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
   integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
   crossorigin="anonymous"
@@ -1117,7 +1142,7 @@ I&rsquo;d be happy to chat and maybe work together 🤝</p>
   }
 </script>
 
-
+	
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>

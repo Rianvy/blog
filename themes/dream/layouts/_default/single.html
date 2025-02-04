@@ -23,6 +23,74 @@
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 {{ end }}
 
+{{ if .Page.Store.Get "hasSwiperShortcode" }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<style>
+    .swiper-slide {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+        object-position: top;
+    }
+	
+	@media (max-width: 768px) {
+		.swiper-slide img {
+			height: auto;
+			max-height: 200px;
+		}
+	}
+	
+	[data-theme="emerald"] {
+	.swiper-slide::before {
+		top: 0;
+		background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent);
+		}
+		.swiper-slide::after {
+		bottom: 0;
+		background: linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent);
+		}
+	}
+
+    .swiper-slide::before,
+    .swiper-slide::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 50px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .swiper-slide {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .swiper-pagination {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        width: 90%;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+    }
+
+    .swiper-pagination-progressbar-fill {
+        background: #007bff;
+        border-radius: 3px;
+    }
+</style>
+{{ end }}
+
 {{ partialCached "comments/commentSystemHeads.html" . }}
 
 {{ end }}
@@ -195,6 +263,36 @@
 	  document.addEventListener('DOMContentLoaded', () => {
 		const players = Plyr.setup('.plyr-video');
 	  });
+	</script>
+	{{ end }}
+	
+	{{ if .Page.Store.Get "hasSwiperShortcode" }}
+	<script>
+	window.initSwiper = function(config) {
+		import('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs').then((SwiperModule) => {
+			const Swiper = SwiperModule.default;
+
+			const swiperOptions = {
+				loop: config.loop || false,
+				autoplay: config.autoplay
+					? {
+						  delay: parseInt(config.autoplay, 10),
+						  disableOnInteraction: false,
+					  }
+					: undefined,
+				pagination: config.pagination
+					? {
+						  el: `.swiper-container.${config.id} .swiper-pagination`,
+						  type: "progressbar",
+					  }
+					: undefined,
+			};
+
+			new Swiper(`.${config.id}-mySwiper`, swiperOptions);
+		}).catch((error) => {
+			console.error('Failed to load Swiper:', error);
+		});
+	};
 	</script>
 	{{ end }}
 

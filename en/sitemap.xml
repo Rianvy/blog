@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://0x69.online/en/</loc>
-    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
@@ -15,20 +15,52 @@
                 href="https://0x69.online/en/"
                 />
   </url><url>
-    <loc>https://0x69.online/en/tags/animated-logo/</loc>
-    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+    <loc>https://0x69.online/en/tags/adaptation-for-mobile-devices/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
   </url><url>
-    <loc>https://0x69.online/en/tags/branding/</loc>
-    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+    <loc>https://0x69.online/en/tags/adaptive-landing/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
   </url><url>
     <loc>https://0x69.online/en/tags/design/</loc>
-    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
   </url><url>
-    <loc>https://0x69.online/en/tags/identity/</loc>
-    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+    <loc>https://0x69.online/en/tags/figma/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.online/ru/tags/figma/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.online/en/tags/figma/"
+                />
+  </url><url>
+    <loc>https://0x69.online/en/tags/interactive-landing/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.online/en/tags/landing-design/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.online/en/tags/landing-development/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.online/en/portfolio/prostavki/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.online/ru/portfolio/prostavki/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.online/en/portfolio/prostavki/"
+                />
   </url><url>
     <loc>https://0x69.online/en/portfolio/</loc>
-    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
@@ -39,6 +71,31 @@
                 hreflang="en"
                 href="https://0x69.online/en/portfolio/"
                 />
+  </url><url>
+    <loc>https://0x69.online/en/tags/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.online/ru/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.online/en/tags/"
+                />
+  </url><url>
+    <loc>https://0x69.online/en/tags/web-development/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.online/en/tags/animated-logo/</loc>
+    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.online/en/tags/branding/</loc>
+    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.online/en/tags/identity/</loc>
+    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
   </url><url>
     <loc>https://0x69.online/en/portfolio/pbpack/</loc>
     <lastmod>2025-01-19T20:25:20+03:00</lastmod>
@@ -51,19 +108,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://0x69.online/en/portfolio/pbpack/"
-                />
-  </url><url>
-    <loc>https://0x69.online/en/tags/</loc>
-    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.online/ru/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.online/en/tags/"
                 />
   </url><url>
     <loc>https://0x69.online/en/tags/telegram/</loc>

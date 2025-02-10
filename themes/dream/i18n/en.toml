@@ -62,3 +62,6 @@ other = "{{ .Count }} tags"
 
 [post_available_in]
   text = "This post is also available in"
+
+[donation]
+  button = "Support the author 💳"

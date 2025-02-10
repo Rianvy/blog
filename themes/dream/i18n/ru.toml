@@ -85,3 +85,6 @@ other = "Поиск"
 
 [post_available_in]
   text = "Эта запись также доступна на"
+
+[donation]
+  button = "Купить автору кофе ☕"

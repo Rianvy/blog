@@ -21,7 +21,11 @@
 <script src="{{ $mainJs.RelPermalink }}"></script>
 
 {{ if site.Params.backToTop }}
-<script src="/js/addBackToTop.js"></script>
+	{{ $backToTopJs := resources.Get "js/backToTop.js" }}
+	{{ if hugo.IsProduction }}
+	  {{ $backToTopJs = $backToTopJs | minify }}
+	{{ end }}
+<script src="{{ $backToTopJs.RelPermalink }}"></script>
 <script>
   commonJsStrict.addBackToTop({
     diameter: 50,

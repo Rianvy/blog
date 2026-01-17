@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on 0x69.online</title>
-    <link>https://0x69.online/en/categories/</link>
-    <description>Recent content in Categories on 0x69.online</description>
+    <title>Categories on 0x69.ru</title>
+    <link>https://0x69.ru/en/categories/</link>
+    <description>Recent content in Categories on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 12 Jan 2025 21:27:20 +0300</lastBuildDate>
-    <atom:link href="https://0x69.online/en/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Jan 2026 22:29:50 +0300</lastBuildDate>
+    <atom:link href="https://0x69.ru/en/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Guides</title>
+      <link>https://0x69.ru/en/categories/guides/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/categories/guides/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Neural Networks</title>
+      <link>https://0x69.ru/en/categories/neural-networks/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/categories/neural-networks/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Administration</title>
-      <link>https://0x69.online/en/categories/administration/</link>
+      <link>https://0x69.ru/en/categories/administration/</link>
       <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
-      <guid>https://0x69.online/en/categories/administration/</guid>
+      <guid>https://0x69.ru/en/categories/administration/</guid>
       <description></description>
     </item>
   </channel>

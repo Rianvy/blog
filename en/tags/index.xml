@@ -1,137 +1,263 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on 0x69.online</title>
-    <link>https://0x69.online/en/tags/</link>
-    <description>Recent content in Tags on 0x69.online</description>
+    <title>Tags on 0x69.ru</title>
+    <link>https://0x69.ru/en/tags/</link>
+    <description>Recent content in Tags on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 27 Jan 2025 18:00:34 +0300</lastBuildDate>
-    <atom:link href="https://0x69.online/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Jan 2026 22:29:50 +0300</lastBuildDate>
+    <atom:link href="https://0x69.ru/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AdGuard</title>
+      <link>https://0x69.ru/en/tags/adguard/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/adguard/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI</title>
+      <link>https://0x69.ru/en/tags/ai/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Anthropic</title>
+      <link>https://0x69.ru/en/tags/anthropic/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/anthropic/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ChatGPT</title>
+      <link>https://0x69.ru/en/tags/chatgpt/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/chatgpt/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Claude</title>
+      <link>https://0x69.ru/en/tags/claude/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/claude/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Comss.one DNS</title>
+      <link>https://0x69.ru/en/tags/comss.one-dns/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/comss.one-dns/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Deezer</title>
+      <link>https://0x69.ru/en/tags/deezer/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/deezer/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DNS</title>
+      <link>https://0x69.ru/en/tags/dns/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/dns/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DNS Filtering</title>
+      <link>https://0x69.ru/en/tags/dns-filtering/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/dns-filtering/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gemini</title>
+      <link>https://0x69.ru/en/tags/gemini/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/gemini/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GitHub Copilot</title>
+      <link>https://0x69.ru/en/tags/github-copilot/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/github-copilot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Google AI</title>
+      <link>https://0x69.ru/en/tags/google-ai/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/google-ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Grok</title>
+      <link>https://0x69.ru/en/tags/grok/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/grok/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Microsoft Copilot</title>
+      <link>https://0x69.ru/en/tags/microsoft-copilot/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/microsoft-copilot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Neural Networks</title>
+      <link>https://0x69.ru/en/tags/neural-networks/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/neural-networks/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>OpenAI</title>
+      <link>https://0x69.ru/en/tags/openai/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/openai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tutorial</title>
+      <link>https://0x69.ru/en/tags/tutorial/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/tutorial/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VPN</title>
+      <link>https://0x69.ru/en/tags/vpn/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/tags/vpn/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Adaptation for Mobile Devices</title>
-      <link>https://0x69.online/en/tags/adaptation-for-mobile-devices/</link>
+      <link>https://0x69.ru/en/tags/adaptation-for-mobile-devices/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/adaptation-for-mobile-devices/</guid>
+      <guid>https://0x69.ru/en/tags/adaptation-for-mobile-devices/</guid>
       <description></description>
     </item>
     <item>
       <title>Adaptive Landing</title>
-      <link>https://0x69.online/en/tags/adaptive-landing/</link>
+      <link>https://0x69.ru/en/tags/adaptive-landing/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/adaptive-landing/</guid>
+      <guid>https://0x69.ru/en/tags/adaptive-landing/</guid>
       <description></description>
     </item>
     <item>
       <title>Design</title>
-      <link>https://0x69.online/en/tags/design/</link>
+      <link>https://0x69.ru/en/tags/design/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/design/</guid>
+      <guid>https://0x69.ru/en/tags/design/</guid>
       <description></description>
     </item>
     <item>
       <title>Figma</title>
-      <link>https://0x69.online/en/tags/figma/</link>
+      <link>https://0x69.ru/en/tags/figma/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/figma/</guid>
+      <guid>https://0x69.ru/en/tags/figma/</guid>
       <description></description>
     </item>
     <item>
       <title>Interactive Landing</title>
-      <link>https://0x69.online/en/tags/interactive-landing/</link>
+      <link>https://0x69.ru/en/tags/interactive-landing/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/interactive-landing/</guid>
+      <guid>https://0x69.ru/en/tags/interactive-landing/</guid>
       <description></description>
     </item>
     <item>
       <title>Landing Design</title>
-      <link>https://0x69.online/en/tags/landing-design/</link>
+      <link>https://0x69.ru/en/tags/landing-design/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/landing-design/</guid>
+      <guid>https://0x69.ru/en/tags/landing-design/</guid>
       <description></description>
     </item>
     <item>
       <title>Landing Development</title>
-      <link>https://0x69.online/en/tags/landing-development/</link>
+      <link>https://0x69.ru/en/tags/landing-development/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/landing-development/</guid>
+      <guid>https://0x69.ru/en/tags/landing-development/</guid>
       <description></description>
     </item>
     <item>
       <title>Web Development</title>
-      <link>https://0x69.online/en/tags/web-development/</link>
+      <link>https://0x69.ru/en/tags/web-development/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/web-development/</guid>
+      <guid>https://0x69.ru/en/tags/web-development/</guid>
       <description></description>
     </item>
     <item>
       <title>Animated Logo</title>
-      <link>https://0x69.online/en/tags/animated-logo/</link>
+      <link>https://0x69.ru/en/tags/animated-logo/</link>
       <pubDate>Sun, 19 Jan 2025 20:25:20 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/animated-logo/</guid>
+      <guid>https://0x69.ru/en/tags/animated-logo/</guid>
       <description></description>
     </item>
     <item>
       <title>Branding</title>
-      <link>https://0x69.online/en/tags/branding/</link>
+      <link>https://0x69.ru/en/tags/branding/</link>
       <pubDate>Sun, 19 Jan 2025 20:25:20 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/branding/</guid>
+      <guid>https://0x69.ru/en/tags/branding/</guid>
       <description></description>
     </item>
     <item>
       <title>Identity</title>
-      <link>https://0x69.online/en/tags/identity/</link>
+      <link>https://0x69.ru/en/tags/identity/</link>
       <pubDate>Sun, 19 Jan 2025 20:25:20 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/identity/</guid>
+      <guid>https://0x69.ru/en/tags/identity/</guid>
       <description></description>
     </item>
     <item>
       <title>Telegram</title>
-      <link>https://0x69.online/en/tags/telegram/</link>
+      <link>https://0x69.ru/en/tags/telegram/</link>
       <pubDate>Sun, 19 Jan 2025 20:25:20 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/telegram/</guid>
+      <guid>https://0x69.ru/en/tags/telegram/</guid>
       <description></description>
     </item>
     <item>
       <title>Visual Style</title>
-      <link>https://0x69.online/en/tags/visual-style/</link>
+      <link>https://0x69.ru/en/tags/visual-style/</link>
       <pubDate>Sun, 19 Jan 2025 20:25:20 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/visual-style/</guid>
+      <guid>https://0x69.ru/en/tags/visual-style/</guid>
       <description></description>
     </item>
     <item>
       <title>.Htaccess</title>
-      <link>https://0x69.online/en/tags/.htaccess/</link>
+      <link>https://0x69.ru/en/tags/.htaccess/</link>
       <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/.htaccess/</guid>
+      <guid>https://0x69.ru/en/tags/.htaccess/</guid>
       <description></description>
     </item>
     <item>
       <title>Apache</title>
-      <link>https://0x69.online/en/tags/apache/</link>
+      <link>https://0x69.ru/en/tags/apache/</link>
       <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/apache/</guid>
+      <guid>https://0x69.ru/en/tags/apache/</guid>
       <description></description>
     </item>
     <item>
       <title>Performance</title>
-      <link>https://0x69.online/en/tags/performance/</link>
+      <link>https://0x69.ru/en/tags/performance/</link>
       <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/performance/</guid>
+      <guid>https://0x69.ru/en/tags/performance/</guid>
       <description></description>
     </item>
     <item>
       <title>Servers</title>
-      <link>https://0x69.online/en/tags/servers/</link>
+      <link>https://0x69.ru/en/tags/servers/</link>
       <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/servers/</guid>
+      <guid>https://0x69.ru/en/tags/servers/</guid>
       <description></description>
     </item>
     <item>
       <title>Web Security</title>
-      <link>https://0x69.online/en/tags/web-security/</link>
+      <link>https://0x69.ru/en/tags/web-security/</link>
       <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
-      <guid>https://0x69.online/en/tags/web-security/</guid>
+      <guid>https://0x69.ru/en/tags/web-security/</guid>
       <description></description>
     </item>
   </channel>

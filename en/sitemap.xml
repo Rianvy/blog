@@ -2,217 +2,440 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://0x69.online/en/</loc>
-    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+    <loc>https://0x69.ru/en/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
-                href="https://0x69.online/ru/"
+                href="https://0x69.ru/ru/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://0x69.online/en/"
+                href="https://0x69.ru/en/"
                 />
   </url><url>
-    <loc>https://0x69.online/en/tags/adaptation-for-mobile-devices/</loc>
-    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
-  </url><url>
-    <loc>https://0x69.online/en/tags/adaptive-landing/</loc>
-    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
-  </url><url>
-    <loc>https://0x69.online/en/tags/design/</loc>
-    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
-  </url><url>
-    <loc>https://0x69.online/en/tags/figma/</loc>
-    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+    <loc>https://0x69.ru/en/tags/adguard/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
-                href="https://0x69.online/ru/tags/figma/"
+                href="https://0x69.ru/ru/tags/adguard/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://0x69.online/en/tags/figma/"
+                href="https://0x69.ru/en/tags/adguard/"
                 />
   </url><url>
-    <loc>https://0x69.online/en/tags/interactive-landing/</loc>
-    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
-  </url><url>
-    <loc>https://0x69.online/en/tags/landing-design/</loc>
-    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
-  </url><url>
-    <loc>https://0x69.online/en/tags/landing-development/</loc>
-    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
-  </url><url>
-    <loc>https://0x69.online/en/portfolio/prostavki/</loc>
-    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+    <loc>https://0x69.ru/en/tags/ai/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
-                href="https://0x69.online/ru/portfolio/prostavki/"
+                href="https://0x69.ru/ru/tags/ai/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://0x69.online/en/portfolio/prostavki/"
+                href="https://0x69.ru/en/tags/ai/"
                 />
   </url><url>
-    <loc>https://0x69.online/en/portfolio/</loc>
-    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+    <loc>https://0x69.ru/en/tags/anthropic/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
-                href="https://0x69.online/ru/portfolio/"
+                href="https://0x69.ru/ru/tags/anthropic/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://0x69.online/en/portfolio/"
+                href="https://0x69.ru/en/tags/anthropic/"
                 />
   </url><url>
-    <loc>https://0x69.online/en/tags/</loc>
-    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+    <loc>https://0x69.ru/en/categories/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
-                href="https://0x69.online/ru/tags/"
+                href="https://0x69.ru/ru/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://0x69.online/en/tags/"
+                href="https://0x69.ru/en/categories/"
                 />
   </url><url>
-    <loc>https://0x69.online/en/tags/web-development/</loc>
+    <loc>https://0x69.ru/en/tags/chatgpt/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/chatgpt/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/chatgpt/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/posts/unlock-ai-without-vpn-dns-guide/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/posts/unlock-ai-without-vpn-dns-guide/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/posts/unlock-ai-without-vpn-dns-guide/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/claude/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/claude/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/claude/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/comss.one-dns/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/comss.one-dns/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/comss.one-dns/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/deezer/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/deezer/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/deezer/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/dns/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/dns/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/dns/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/dns-filtering/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/gemini/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/gemini/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/gemini/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/github-copilot/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/github-copilot/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/github-copilot/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/google-ai/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/google-ai/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/google-ai/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/grok/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/grok/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/grok/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/categories/guides/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/microsoft-copilot/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/microsoft-copilot/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/microsoft-copilot/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/neural-networks/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/categories/neural-networks/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/openai/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/openai/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/openai/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/posts/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/posts/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/tutorial/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/vpn/</loc>
+    <lastmod>2026-01-17T22:29:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/vpn/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/vpn/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/adaptation-for-mobile-devices/</loc>
     <lastmod>2025-01-27T18:00:34+03:00</lastmod>
   </url><url>
-    <loc>https://0x69.online/en/tags/animated-logo/</loc>
+    <loc>https://0x69.ru/en/tags/adaptive-landing/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/design/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/figma/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/figma/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/figma/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/interactive-landing/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/landing-design/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/landing-development/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/portfolio/prostavki/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/portfolio/prostavki/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/portfolio/prostavki/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/portfolio/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/portfolio/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/portfolio/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/web-development/</loc>
+    <lastmod>2025-01-27T18:00:34+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/animated-logo/</loc>
     <lastmod>2025-01-19T20:25:20+03:00</lastmod>
   </url><url>
-    <loc>https://0x69.online/en/tags/branding/</loc>
+    <loc>https://0x69.ru/en/tags/branding/</loc>
     <lastmod>2025-01-19T20:25:20+03:00</lastmod>
   </url><url>
-    <loc>https://0x69.online/en/tags/identity/</loc>
+    <loc>https://0x69.ru/en/tags/identity/</loc>
     <lastmod>2025-01-19T20:25:20+03:00</lastmod>
   </url><url>
-    <loc>https://0x69.online/en/portfolio/pbpack/</loc>
-    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.online/ru/portfolio/pbpack/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.online/en/portfolio/pbpack/"
-                />
-  </url><url>
-    <loc>https://0x69.online/en/tags/telegram/</loc>
+    <loc>https://0x69.ru/en/portfolio/pbpack/</loc>
     <lastmod>2025-01-19T20:25:20+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
-                href="https://0x69.online/ru/tags/telegram/"
+                href="https://0x69.ru/ru/portfolio/pbpack/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://0x69.online/en/tags/telegram/"
+                href="https://0x69.ru/en/portfolio/pbpack/"
                 />
   </url><url>
-    <loc>https://0x69.online/en/tags/visual-style/</loc>
+    <loc>https://0x69.ru/en/tags/telegram/</loc>
+    <lastmod>2025-01-19T20:25:20+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/telegram/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/telegram/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/visual-style/</loc>
     <lastmod>2025-01-19T20:25:20+03:00</lastmod>
   </url><url>
-    <loc>https://0x69.online/en/tags/.htaccess/</loc>
+    <loc>https://0x69.ru/en/tags/.htaccess/</loc>
     <lastmod>2025-01-12T21:27:20+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
-                href="https://0x69.online/ru/tags/.htaccess/"
+                href="https://0x69.ru/ru/tags/.htaccess/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://0x69.online/en/tags/.htaccess/"
+                href="https://0x69.ru/en/tags/.htaccess/"
                 />
   </url><url>
-    <loc>https://0x69.online/en/categories/administration/</loc>
+    <loc>https://0x69.ru/en/categories/administration/</loc>
     <lastmod>2025-01-12T21:27:20+03:00</lastmod>
   </url><url>
-    <loc>https://0x69.online/en/tags/apache/</loc>
+    <loc>https://0x69.ru/en/tags/apache/</loc>
     <lastmod>2025-01-12T21:27:20+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
-                href="https://0x69.online/ru/tags/apache/"
+                href="https://0x69.ru/ru/tags/apache/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://0x69.online/en/tags/apache/"
+                href="https://0x69.ru/en/tags/apache/"
                 />
   </url><url>
-    <loc>https://0x69.online/en/categories/</loc>
+    <loc>https://0x69.ru/en/tags/performance/</loc>
+    <lastmod>2025-01-12T21:27:20+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/posts/role-htaccess/</loc>
     <lastmod>2025-01-12T21:27:20+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
-                href="https://0x69.online/ru/categories/"
+                href="https://0x69.ru/ru/posts/role-htaccess/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://0x69.online/en/categories/"
+                href="https://0x69.ru/en/posts/role-htaccess/"
                 />
   </url><url>
-    <loc>https://0x69.online/en/tags/performance/</loc>
+    <loc>https://0x69.ru/en/tags/servers/</loc>
     <lastmod>2025-01-12T21:27:20+03:00</lastmod>
   </url><url>
-    <loc>https://0x69.online/en/posts/</loc>
+    <loc>https://0x69.ru/en/tags/web-security/</loc>
     <lastmod>2025-01-12T21:27:20+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/search/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
-                href="https://0x69.online/ru/posts/"
+                href="https://0x69.ru/ru/search/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://0x69.online/en/posts/"
-                />
-  </url><url>
-    <loc>https://0x69.online/en/posts/role-htaccess/</loc>
-    <lastmod>2025-01-12T21:27:20+03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.online/ru/posts/role-htaccess/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.online/en/posts/role-htaccess/"
-                />
-  </url><url>
-    <loc>https://0x69.online/en/tags/servers/</loc>
-    <lastmod>2025-01-12T21:27:20+03:00</lastmod>
-  </url><url>
-    <loc>https://0x69.online/en/tags/web-security/</loc>
-    <lastmod>2025-01-12T21:27:20+03:00</lastmod>
-  </url><url>
-    <loc>https://0x69.online/en/search/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.online/ru/search/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.online/en/search/"
+                href="https://0x69.ru/en/search/"
                 />
   </url>
 </urlset>

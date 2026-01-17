@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>0x69.online</title>
-    <link>https://0x69.online/ru/search/</link>
-    <description>Recent content on 0x69.online</description>
+    <title>0x69.ru</title>
+    <link>https://0x69.ru/ru/search/</link>
+    <description>Recent content on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>ru</language>
-    <atom:link href="https://0x69.online/ru/search/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://0x69.ru/ru/search/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

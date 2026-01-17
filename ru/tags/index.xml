@@ -1,137 +1,263 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on 0x69.online</title>
-    <link>https://0x69.online/ru/tags/</link>
-    <description>Recent content in Tags on 0x69.online</description>
+    <title>Tags on 0x69.ru</title>
+    <link>https://0x69.ru/ru/tags/</link>
+    <description>Recent content in Tags on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>ru</language>
-    <lastBuildDate>Mon, 27 Jan 2025 18:00:34 +0300</lastBuildDate>
-    <atom:link href="https://0x69.online/ru/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Jan 2026 22:29:50 +0300</lastBuildDate>
+    <atom:link href="https://0x69.ru/ru/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AdGuard</title>
+      <link>https://0x69.ru/ru/tags/adguard/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/adguard/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI</title>
+      <link>https://0x69.ru/ru/tags/ai/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Anthropic</title>
+      <link>https://0x69.ru/ru/tags/anthropic/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/anthropic/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ChatGPT</title>
+      <link>https://0x69.ru/ru/tags/chatgpt/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/chatgpt/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Claude</title>
+      <link>https://0x69.ru/ru/tags/claude/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/claude/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Comss.one DNS</title>
+      <link>https://0x69.ru/ru/tags/comss.one-dns/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/comss.one-dns/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Deezer</title>
+      <link>https://0x69.ru/ru/tags/deezer/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/deezer/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DNS</title>
+      <link>https://0x69.ru/ru/tags/dns/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/dns/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DNS-Фильтрация</title>
+      <link>https://0x69.ru/ru/tags/dns-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/dns-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gemini</title>
+      <link>https://0x69.ru/ru/tags/gemini/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/gemini/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GitHub Copilot</title>
+      <link>https://0x69.ru/ru/tags/github-copilot/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/github-copilot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Google AI</title>
+      <link>https://0x69.ru/ru/tags/google-ai/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/google-ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Grok</title>
+      <link>https://0x69.ru/ru/tags/grok/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/grok/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Microsoft Copilot</title>
+      <link>https://0x69.ru/ru/tags/microsoft-copilot/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/microsoft-copilot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>OpenAI</title>
+      <link>https://0x69.ru/ru/tags/openai/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/openai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VPN</title>
+      <link>https://0x69.ru/ru/tags/vpn/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/vpn/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Нейросети</title>
+      <link>https://0x69.ru/ru/tags/%D0%BD%D0%B5%D0%B9%D1%80%D0%BE%D1%81%D0%B5%D1%82%D0%B8/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/%D0%BD%D0%B5%D0%B9%D1%80%D0%BE%D1%81%D0%B5%D1%82%D0%B8/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Руководство</title>
+      <link>https://0x69.ru/ru/tags/%D1%80%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/%D1%80%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Figma</title>
-      <link>https://0x69.online/ru/tags/figma/</link>
+      <link>https://0x69.ru/ru/tags/figma/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/figma/</guid>
+      <guid>https://0x69.ru/ru/tags/figma/</guid>
       <description></description>
     </item>
     <item>
       <title>Адаптация</title>
-      <link>https://0x69.online/ru/tags/%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B0%D1%86%D0%B8%D1%8F/</link>
+      <link>https://0x69.ru/ru/tags/%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B0%D1%86%D0%B8%D1%8F/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B0%D1%86%D0%B8%D1%8F/</guid>
+      <guid>https://0x69.ru/ru/tags/%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B0%D1%86%D0%B8%D1%8F/</guid>
       <description></description>
     </item>
     <item>
       <title>Адаптивный Лендинг</title>
-      <link>https://0x69.online/ru/tags/%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</link>
+      <link>https://0x69.ru/ru/tags/%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</guid>
+      <guid>https://0x69.ru/ru/tags/%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</guid>
       <description></description>
     </item>
     <item>
       <title>Веб-Разработка</title>
-      <link>https://0x69.online/ru/tags/%D0%B2%D0%B5%D0%B1-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/</link>
+      <link>https://0x69.ru/ru/tags/%D0%B2%D0%B5%D0%B1-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D0%B2%D0%B5%D0%B1-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/</guid>
+      <guid>https://0x69.ru/ru/tags/%D0%B2%D0%B5%D0%B1-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/</guid>
       <description></description>
     </item>
     <item>
       <title>Дизайн</title>
-      <link>https://0x69.online/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD/</link>
+      <link>https://0x69.ru/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD/</guid>
+      <guid>https://0x69.ru/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD/</guid>
       <description></description>
     </item>
     <item>
       <title>Дизайн Лендинга</title>
-      <link>https://0x69.online/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B0/</link>
+      <link>https://0x69.ru/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B0/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B0/</guid>
+      <guid>https://0x69.ru/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B0/</guid>
       <description></description>
     </item>
     <item>
       <title>Интерактивный Лендинг</title>
-      <link>https://0x69.online/ru/tags/%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</link>
+      <link>https://0x69.ru/ru/tags/%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</guid>
+      <guid>https://0x69.ru/ru/tags/%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</guid>
       <description></description>
     </item>
     <item>
       <title>Разработка Лендинга</title>
-      <link>https://0x69.online/ru/tags/%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B0/</link>
+      <link>https://0x69.ru/ru/tags/%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B0/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B0/</guid>
+      <guid>https://0x69.ru/ru/tags/%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B0/</guid>
       <description></description>
     </item>
     <item>
       <title>Telegram</title>
-      <link>https://0x69.online/ru/tags/telegram/</link>
+      <link>https://0x69.ru/ru/tags/telegram/</link>
       <pubDate>Sun, 19 Jan 2025 20:25:20 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/telegram/</guid>
+      <guid>https://0x69.ru/ru/tags/telegram/</guid>
       <description></description>
     </item>
     <item>
       <title>Айдентика</title>
-      <link>https://0x69.online/ru/tags/%D0%B0%D0%B9%D0%B4%D0%B5%D0%BD%D1%82%D0%B8%D0%BA%D0%B0/</link>
+      <link>https://0x69.ru/ru/tags/%D0%B0%D0%B9%D0%B4%D0%B5%D0%BD%D1%82%D0%B8%D0%BA%D0%B0/</link>
       <pubDate>Sun, 19 Jan 2025 20:25:20 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D0%B0%D0%B9%D0%B4%D0%B5%D0%BD%D1%82%D0%B8%D0%BA%D0%B0/</guid>
+      <guid>https://0x69.ru/ru/tags/%D0%B0%D0%B9%D0%B4%D0%B5%D0%BD%D1%82%D0%B8%D0%BA%D0%B0/</guid>
       <description></description>
     </item>
     <item>
       <title>Анимированный Логотип</title>
-      <link>https://0x69.online/ru/tags/%D0%B0%D0%BD%D0%B8%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D1%8B%D0%B9-%D0%BB%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF/</link>
+      <link>https://0x69.ru/ru/tags/%D0%B0%D0%BD%D0%B8%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D1%8B%D0%B9-%D0%BB%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF/</link>
       <pubDate>Sun, 19 Jan 2025 20:25:20 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D0%B0%D0%BD%D0%B8%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D1%8B%D0%B9-%D0%BB%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF/</guid>
+      <guid>https://0x69.ru/ru/tags/%D0%B0%D0%BD%D0%B8%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D1%8B%D0%B9-%D0%BB%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF/</guid>
       <description></description>
     </item>
     <item>
       <title>Брендинг</title>
-      <link>https://0x69.online/ru/tags/%D0%B1%D1%80%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</link>
+      <link>https://0x69.ru/ru/tags/%D0%B1%D1%80%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</link>
       <pubDate>Sun, 19 Jan 2025 20:25:20 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D0%B1%D1%80%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</guid>
+      <guid>https://0x69.ru/ru/tags/%D0%B1%D1%80%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</guid>
       <description></description>
     </item>
     <item>
       <title>Визуальный Стиль</title>
-      <link>https://0x69.online/ru/tags/%D0%B2%D0%B8%D0%B7%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D1%81%D1%82%D0%B8%D0%BB%D1%8C/</link>
+      <link>https://0x69.ru/ru/tags/%D0%B2%D0%B8%D0%B7%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D1%81%D1%82%D0%B8%D0%BB%D1%8C/</link>
       <pubDate>Sun, 19 Jan 2025 20:25:20 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D0%B2%D0%B8%D0%B7%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D1%81%D1%82%D0%B8%D0%BB%D1%8C/</guid>
+      <guid>https://0x69.ru/ru/tags/%D0%B2%D0%B8%D0%B7%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D1%81%D1%82%D0%B8%D0%BB%D1%8C/</guid>
       <description></description>
     </item>
     <item>
       <title>.Htaccess</title>
-      <link>https://0x69.online/ru/tags/.htaccess/</link>
+      <link>https://0x69.ru/ru/tags/.htaccess/</link>
       <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/.htaccess/</guid>
+      <guid>https://0x69.ru/ru/tags/.htaccess/</guid>
       <description></description>
     </item>
     <item>
       <title>Apache</title>
-      <link>https://0x69.online/ru/tags/apache/</link>
+      <link>https://0x69.ru/ru/tags/apache/</link>
       <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/apache/</guid>
+      <guid>https://0x69.ru/ru/tags/apache/</guid>
       <description></description>
     </item>
     <item>
       <title>Веб-Безопасность</title>
-      <link>https://0x69.online/ru/tags/%D0%B2%D0%B5%D0%B1-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C/</link>
+      <link>https://0x69.ru/ru/tags/%D0%B2%D0%B5%D0%B1-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C/</link>
       <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D0%B2%D0%B5%D0%B1-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C/</guid>
+      <guid>https://0x69.ru/ru/tags/%D0%B2%D0%B5%D0%B1-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C/</guid>
       <description></description>
     </item>
     <item>
       <title>Производительность</title>
-      <link>https://0x69.online/ru/tags/%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C/</link>
+      <link>https://0x69.ru/ru/tags/%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C/</link>
       <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C/</guid>
+      <guid>https://0x69.ru/ru/tags/%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C/</guid>
       <description></description>
     </item>
     <item>
       <title>Серверы</title>
-      <link>https://0x69.online/ru/tags/%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D1%8B/</link>
+      <link>https://0x69.ru/ru/tags/%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D1%8B/</link>
       <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
-      <guid>https://0x69.online/ru/tags/%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D1%8B/</guid>
+      <guid>https://0x69.ru/ru/tags/%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D1%8B/</guid>
       <description></description>
     </item>
   </channel>

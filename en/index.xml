@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>0x69.online</title>
-    <link>https://0x69.online/en/</link>
-    <description>Recent content on 0x69.online</description>
+    <title>0x69.ru</title>
+    <link>https://0x69.ru/en/</link>
+    <description>Recent content on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 27 Jan 2025 18:00:34 +0300</lastBuildDate>
-    <atom:link href="https://0x69.online/en/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Jan 2026 22:29:50 +0300</lastBuildDate>
+    <atom:link href="https://0x69.ru/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ChatGPT, Claude and Gemini without VPN — 4 DNS Methods</title>
+      <link>https://0x69.ru/en/posts/unlock-ai-without-vpn-dns-guide/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/en/posts/unlock-ai-without-vpn-dns-guide/</guid>
+      <description>&lt;p&gt;Unlock neural networks without VPN — through DNS, hosts, or AdGuard.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Landing Page ProStavki</title>
-      <link>https://0x69.online/en/portfolio/prostavki/</link>
+      <link>https://0x69.ru/en/portfolio/prostavki/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.online/en/portfolio/prostavki/</guid>
+      <guid>https://0x69.ru/en/portfolio/prostavki/</guid>
       <description>&lt;p&gt;Landing Page development for a sports analytics project, including Google Sheets integration and unique visual style.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Social media design PBPack</title>
-      <link>https://0x69.online/en/portfolio/pbpack/</link>
+      <link>https://0x69.ru/en/portfolio/pbpack/</link>
       <pubDate>Sun, 19 Jan 2025 20:25:20 +0300</pubDate>
-      <guid>https://0x69.online/en/portfolio/pbpack/</guid>
+      <guid>https://0x69.ru/en/portfolio/pbpack/</guid>
       <description>&lt;p&gt;Developed visual identity for PBPack&amp;rsquo;s social media brand, including YouTube and Telegram.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Role of the .htaccess file in Apache server configuration</title>
-      <link>https://0x69.online/en/posts/role-htaccess/</link>
+      <link>https://0x69.ru/en/posts/role-htaccess/</link>
       <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
-      <guid>https://0x69.online/en/posts/role-htaccess/</guid>
+      <guid>https://0x69.ru/en/posts/role-htaccess/</guid>
       <description>&lt;p&gt;.htaccess allows you to create your own Apache server management configuration in directories or hosting settings.&lt;/p&gt;</description>
     </item>
   </channel>

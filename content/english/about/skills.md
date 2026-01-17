@@ -1,7 +1,32 @@
 ---
-title: A brief summary of my skills
+title: Stack
 ---
-- **C# and C++** - high-performance development ⚡  
-- **PHP (Laravel)** and **JavaScript** - creating web applications and interactive services 🚀  
-- **MySQL** and **PostgreSQL** - reliable relational databases 💾  
-- Adaptive **HTML**, **CSS** and **JS** - modern design for any device 💡
+
+## 💻 Programming Languages
+
+- **C#**, **PHP**, **JavaScript/TypeScript**, **Python**
+
+## ⚛️ Frontend
+
+- **React** / **Next.js**, **Vue.js** / **Nuxt.js**
+- **Tailwind CSS** / **SCSS**
+- Responsive layout (**HTML**, **CSS**, **JS**) 📱
+
+## 🔧 Backend
+
+- **Laravel**, **Node.js** / **Express** / **NestJS**
+- **REST APIs**
+
+## 🗄️ Databases
+
+- **MySQL**, **PostgreSQL**, **MongoDB**, **Redis**
+
+## 🛠️ DevOps
+
+- **Docker**, **Git**, **CI/CD**, **Linux** 🐧
+
+## 🎨 Design & Graphics
+
+- **Figma** — UI/UX design and prototyping
+- **Photoshop** — graphics and image editing
+- **After Effects** — motion design and animation 🎬

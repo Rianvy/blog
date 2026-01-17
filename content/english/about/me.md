@@ -1,8 +1,23 @@
 ---
-title: About me
+title: Readme.md
 ---
-Hi! I'm **Rianvy** (this is my pseudonym), and my real name is Maxim Alexandrov. I'm 27 years old, I live in Tula. I'm a senier developer and designer 😎  
-In this blog I share notes about technology, life and everything that inspires me 🚀  
 
-If you have any questions or ideas, write in the comments or send an email to my inbox 📩  
-I'd be happy to chat and maybe work together 🤝
+# whoami 👨‍💻
+
+```bash
+$ cat /etc/profile
+```
+
+**Username:** Rianvy  
+**Real name:** Maksim Alexandrov  
+**Age:** 28  
+**Location:** Tula, RU  
+**Role:** Senior Developer & UI/UX Designer 😎  
+
+## About
+
+This blog is my personal knowledge base, where I push notes about my tech stack, life experience, and everything that triggers my interest `=>` 🚀
+
+## Contact
+
+Open for collaboration 🤝 — ready to merge ideas and work on joint projects.

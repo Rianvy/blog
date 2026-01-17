@@ -22,11 +22,11 @@
       <div>
         {{ if site.Params.headerTitle }}
         <a href="{{ .Site.Home.RelPermalink }}" class="text-lg font-semibold cursor-pointer">
-          <!--{{ site.Params.headerTitle }}--> {{ T "headerTitle" }}
+          {{ site.Params.headerTitle }}
         </a>
         {{ end }}
         {{ if site.Params.motto }}
-        <div class="text-base-content/60 text-sm"><!--{{ site.Params.motto }}--> {{- T "motto" -}}</div>
+        <div class="text-base-content/60 text-sm">{{- T "motto" -}}</div>
         {{ end }}
       </div>
       {{ end }}

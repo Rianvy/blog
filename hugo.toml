@@ -1,7 +1,7 @@
-baseURL = "https://0x69.online/"
+baseURL = "https://0x69.ru/"
 defaultContentLanguage = "ru"
 defaultContentLanguageInSubdir = true
-title = "0x69.online"
+title = "0x69.ru"
 theme = "dream"
 
 [languages]
@@ -18,10 +18,10 @@ theme = "dream"
 
 [services]
   [services.googleAnalytics]
-    ID = "G-V1CKYK7EQD"
+    ID = ""
 
 [params]
-yandexMetricaId = "99568144"
+yandexMetricaId = ""
 # zenMode = true
 lightTheme = "emerald"
 darkTheme = "forest"
@@ -31,7 +31,7 @@ author = "Rianvy"
 description = "В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет."
 avatar = "img/avatar.jpg"
 motto = "Document today what you will forget tomorrow"
-headerTitle = "Blog about IT"
+headerTitle = "0x69.ru </>"
 footerBottomText = "Powered by ❤️"
 rss = true
 # utterancesRepo = ""
@@ -45,8 +45,8 @@ commentsApp = false
 commentsAppSiteID = "YjlEv4KV"
 commentsAppLimit = "10"
 #Telegram Comments
-telegramComments = true
-telegramCommentsHomeId = "https://t.me/ox69_online/8"
+#telegramComments = true
+#telegramCommentsHomeId = ""
 email = "blackghost.v1@gmail.com"
 siteStartYear = 2025
 # Syntax highlighting

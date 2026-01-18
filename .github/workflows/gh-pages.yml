@@ -26,13 +26,28 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           cd "${{ github.workspace }}/built-site"
-          # Удаляем всё, кроме .git, .nojekyll и текущей директории (.)
           find . -maxdepth 1 \
             ! -name .git \
             ! -name .nojekyll \
             ! -name CNAME \
             ! -name . \
             -exec rm -rf {} +
+
+      # ===== BUILD THEME ASSETS =====
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build theme CSS and JS
+        working-directory: themes/dream
+        run: |
+          npm install
+          npm run build
+          echo "✅ Theme assets built successfully"
+          ls -la assets/css/
+          ls -la assets/js/ 2>/dev/null || true
+      # ===== END THEME BUILD =====
 
       - name: Setup Hugo
         run: |

@@ -63,7 +63,11 @@ other = "Поиск"
 [color]
   [color.table]
     header = { name = "Название", code = "Код", example = "Пример" }
-    copy_button = { tooltip = "Скопировать код" }
+    [color.table.copy_button]
+      tooltip = "Скопировать код"
+      text = "Копировать"
+      copied = "Скопировано!"
+      copyError = "Ошибка копирования"
 
 [video]
   not_supported = "Ваш браузер не поддерживает воспроизведение видео."
@@ -86,4 +90,10 @@ other = "Поиск"
   text = "Эта запись также доступна на"
 
 [donation]
-  button = "Купить автору кофе ☕"
+  button = "Поддержать проект"
+  title = "Поддержать проект"
+  subtitle = "Выберите удобный способ"
+  close = "Закрыть"
+  info = "Все платежи защищены. Любая поддержка помогает развивать проект и создавать новые материалы ❤️"
+  cloudtips_description = "Для пользователей из России"
+  tribute_description = "Зарубежные карты, криптовалюта из кошелька Telegram: USDT, Bitcoin, Toncoin, Notcoin"

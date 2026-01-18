@@ -1,0 +1,61 @@
+{{- $headers := index .THead 0 -}}
+
+<!-- Десктопная версия: обычная таблица -->
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      {{ range .THead }}
+      <tr>
+        {{ range . }}
+        <th 
+          class="text-base-content/80
+          {{- with .Alignment -}}
+            {{- if eq . "center" }} text-center{{ end -}}
+            {{- if eq . "right" }} text-right{{ end -}}
+          {{- end -}}"
+        >
+          {{ .Text }}
+        </th>
+        {{ end }}
+      </tr>
+      {{ end }}
+    </thead>
+    <tbody>
+      {{ range .TBody }}
+      <tr>
+        {{ range . }}
+        <td 
+          class="
+          {{- with .Alignment -}}
+            {{- if eq . "center" }} text-center{{ end -}}
+            {{- if eq . "right" }} text-right{{ end -}}
+          {{- end -}}"
+        >
+          {{ .Text }}
+        </td>
+        {{ end }}
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+</div>
+
+<!-- Мобильная версия: карточки -->
+<div class="md:hidden my-6 space-y-3">
+  {{ range .TBody }}
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      {{ range $i, $cell := . }}
+      <div class="flex justify-between items-center py-1.5 {{ if not (eq $i 0) }}border-t border-base-200{{ end }}">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          {{ (index $headers $i).Text }}
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          {{ $cell.Text }}
+        </span>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+</div>

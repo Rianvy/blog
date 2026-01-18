@@ -40,7 +40,11 @@ other = "{{ .Count }} tags"
 [color]
   [color.table]
     header = { name = "Name", code = "Code", example = "Example" }
-    copy_button = { tooltip = "Copy Code" }
+    [color.table.copy_button]
+      tooltip = "Copy Code"
+      text = "Copy"
+      copied = "Copied!"
+      copyError = "Failed to copy"
 
 [video]
   not_supported = "Your browser does not support video playback."
@@ -63,4 +67,10 @@ other = "{{ .Count }} tags"
   text = "This post is also available in"
 
 [donation]
-  button = "Support the author 💳"
+  button = "Support the Project"
+  title = "Support the Project"
+  subtitle = "Choose a convenient method"
+  close = "Close"
+  info = "All payments are secure. Any support helps develop the project and create new content ❤️"
+  cloudtips_description = "For users from Russia"
+  tribute_description = "International cards, Telegram Stars, USDT, Bitcoin, Toncoin, Notcoin"

@@ -4,6 +4,7 @@
 {{ $loop := .Get "loop" | default false }} 
 {{ $autoplay := .Get "autoplay" | default false }}
 
+<div class="not-prose my-5">
 <div class="swiper-container {{ $id }}">
     <div class="swiper {{ $id }}-mySwiper">
         <div class="swiper-wrapper">
@@ -13,6 +14,7 @@
         <div class="swiper-pagination"></div>
         {{ end }}
     </div>
+</div>
 </div>
 
 <script type="module">

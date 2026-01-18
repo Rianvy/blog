@@ -1,102 +1,101 @@
-<style>
-.color-box {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-    margin-bottom: 5px;
-    border-radius: 50%;
-}
-@media (max-width: 768px) {
-    .color-table thead {
-        display: none;
-    }
-    .color-table tbody tr {
-        display: block;
-        margin-bottom: 20px;
-        border-radius: 8px;
-        padding: 10px;
-        border: 1px solid var(--fallback-bc, oklch(var(--bc) / 0.3));
-    }
-    
-    .color-table td {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border: 0;
-        padding: 8px 0;
-    }
-    .color-table td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        text-transform: uppercase;
-        margin-right: 10px;
-        color: #555;
-    }
-    .color-box {
-        margin-bottom: 0;
-    }
-}
-</style>
-<script>
-function copyToClipboard(text, button) {
-    navigator.clipboard.writeText(text).then(() => {
-        const icon = button.querySelector('ion-icon');
-        const originalIcon = icon.getAttribute('name');
-        const originalColor = icon.style.color;
-        
-        icon.setAttribute('name', 'checkmark-outline');
-        icon.style.color = '#10B981';
-        
-        setTimeout(() => {
-            icon.setAttribute('name', originalIcon);
-            icon.style.color = originalColor;
-        }, 2000);
-    }).catch(err => {
-        console.error("Copy Error: ", err);
-    });
-}
-</script>
-{{ $colors := slice }}
-{{ range $key, $value := .Params }}
-    {{ if and (strings.HasPrefix $key "name") (index $.Params (print "code" (replace $key "name" ""))) }}
-        {{ $colors = $colors | append (dict 
+{{- $colors := slice -}}
+{{- range $key, $value := .Params -}}
+{{- if and (strings.HasPrefix $key "name") (index $.Params (print "code" (replace $key "name" ""))) -}}
+{{- $colors = $colors | append (dict 
             "name" $value 
             "code" (upper (index $.Params (print "code" (replace $key "name" "")))) 
-        ) }}
-    {{ end }}
-{{ end }}
-<table class="color-table">
-    <thead>
-        <tr>
-            <th>{{ i18n "color.table.header.name" }}</th>
-            <th>{{ i18n "color.table.header.code" }}</th>
-            <th>{{ i18n "color.table.header.example" }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{ range $colors }}
-        <tr>
-            <td>{{ .name }}</td>
-            <td>
-                <span>
-                    {{ .code }} 
-                    <button class="badge h-6 no-underline hover:badge-primary" onclick="copyToClipboard('{{ .code }}', this)" title="{{ i18n "color.table.copy_button.tooltip" }}">
-                        <ion-icon name="copy-outline"></ion-icon>
-                    </button>
-                </span>
-            </td>
-            <td>
-                {{ if in .code "/" }}
-                    {{ $splits := split .code "/" }}
-                    {{ range $splits }}
-                        <div class="color-box border border-base-content/30" style="background-color: {{ . }};"></div>
-                    {{ end }}
-                {{ else }}
-                    <div class="color-box border border-base-content/30" style="background-color: {{ .code }};"></div>
-                {{ end }}
-            </td>
-        </tr>
+        ) -}}
+{{- end -}}
+{{- end -}}
+{{- if $colors -}}
+<div class="not-prose">
+  <!-- Сетка цветов -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    {{ range $colors }}
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      <!-- Цветовая полоса сверху -->
+      <div class="h-20 relative overflow-hidden">
+        {{ if in .code "/" }}
+        {{ $splits := split .code "/" }}
+        <div class="flex h-full">
+          {{ range $splits }}
+          <div class="flex-1 transition-transform duration-300 group-hover:scale-105" style="background-color: {{ . }};"></div>
+          {{ end }}
+        </div>
+        {{ else }}
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: {{ .code }};"></div>
         {{ end }}
-    </tbody>
-</table>
+        <!-- Overlay градиент -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      <!-- Контент карточки -->
+      <div class="p-4">
+        <!-- Название цвета -->
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          {{ .name }}
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          <!-- Кружок с цветом -->
+          <div class="flex-shrink-0">
+            {{ if in .code "/" }}
+            {{ $splits := split .code "/" }}
+            <div class="relative w-10 h-10 rounded-full border-2 border-base-300 shadow-sm overflow-hidden">
+              <div class="flex h-full">
+                {{ range $splits }}
+                <div class="flex-1" style="background-color: {{ . }};"></div>
+                {{ end }}
+              </div>
+            </div>
+            {{ else }}
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: {{ .code }};"></div>
+            {{ end }}
+          </div>
+          <!-- Код цвета -->
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            {{ .code }}
+          </code>
+        </div>
+        <!-- Кнопка копирования -->
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('{{ .code }}', this, '{{ .name }}')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">{{ i18n "color.table.copy_button.text" | default "Copy" }}</span>
+        </button>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+<script>
+  function copyColorCode(colorCode, button, colorName) {
+    navigator.clipboard.writeText(colorCode).then(() => {
+      // Анимация иконки
+      const icon = button.querySelector('svg');
+      const buttonText = button.querySelector('span');
+      const originalPath = icon.innerHTML;
+      const originalText = buttonText ? buttonText.textContent : '';
+      // Меняем на галочку
+      icon.innerHTML = `
+      
+	<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+            d="M5 13l4 4L19 7" />
+    `;
+      if (buttonText) {
+        buttonText.textContent = '{{ i18n "color.table.copy_button.copied" | default "Copied!" }}';
+      }
+      button.classList.add('btn-success');
+      // Возвращаем кнопку обратно
+      setTimeout(() => {
+        icon.innerHTML = originalPath;
+        if (buttonText) {
+          buttonText.textContent = originalText;
+        }
+        button.classList.remove('btn-success');
+      }, 2000);
+    }).catch(err => {
+      console.error("Copy Error: ", err);
+    });
+  }
+</script>
+{{- end -}}

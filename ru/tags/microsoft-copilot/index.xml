@@ -9,11 +9,11 @@
     <lastBuildDate>Sat, 17 Jan 2026 22:29:50 +0300</lastBuildDate>
     <atom:link href="https://0x69.ru/ru/tags/microsoft-copilot/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>ChatGPT, Claude и Gemini без VPN — 4 способа через DNS</title>
-      <link>https://0x69.ru/ru/posts/unlock-ai-without-vpn-dns-guide/</link>
+      <title>ChatGPT, Claude и Gemini — корректная настройка DNS для доступа к AI-сервисам</title>
+      <link>https://0x69.ru/ru/posts/chatgpt-claude-gemini-dns-dostup/</link>
       <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
-      <guid>https://0x69.ru/ru/posts/unlock-ai-without-vpn-dns-guide/</guid>
-      <description>&lt;p&gt;Разблокируй нейросети без VPN — через DNS, hosts или AdGuard.&lt;/p&gt;</description>
+      <guid>https://0x69.ru/ru/posts/chatgpt-claude-gemini-dns-dostup/</guid>
+      <description>&lt;p&gt;Корректная настройка DNS для стабильного доступа к AI-сервисам — через DNS, hosts или AdGuard.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

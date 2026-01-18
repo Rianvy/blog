@@ -1,0 +1,3675 @@
+<!DOCTYPE html>
+<html lang="en"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services | 0x69.ru</title>
+
+    
+<meta name="google-site-verification" content="SX8wwAcRfmBYPxrIA69UFfuq8DDa2GxWVBzVj9tucMA" />
+<link rel="canonical" href="https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="Proper DNS configuration for stable access to AI services – via DNS, hosts file, or AdGuard.
+" />
+
+
+<meta name="keywords" content="DNS,Neural Networks,ChatGPT,Gemini,Claude,AdGuard,Comss.one DNS,Guide,AI,OpenAI,Anthropic,Google AI,Microsoft Copilot,GitHub Copilot,DNS Filtering">
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services">
+  <meta property="og:description" content="Proper DNS configuration for stable access to AI services – via DNS, hosts file, or AdGuard.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-01-17T22:29:50+03:00">
+    <meta property="article:modified_time" content="2026-01-17T22:29:50+03:00">
+    <meta property="article:tag" content="DNS">
+    <meta property="article:tag" content="Neural Networks">
+    <meta property="article:tag" content="ChatGPT">
+    <meta property="article:tag" content="Gemini">
+    <meta property="article:tag" content="Claude">
+    <meta property="article:tag" content="AdGuard">
+    <meta property="og:image" content="https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/Cover.png">
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/Cover.png">
+  <meta name="twitter:title" content="ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services">
+  <meta name="twitter:description" content="Proper DNS configuration for stable access to AI services – via DNS, hosts file, or AdGuard.">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+
+
+
+    
+
+
+<link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css" data-syntax-highlight="true" id="syntax-theme">
+<style>
+  pre {
+   border-radius: 6px;
+  }
+</style>
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<style>
+    .swiper-slide {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+        object-position: top;
+    }
+	
+	@media (max-width: 768px) {
+		.swiper-slide img {
+			height: auto;
+			max-height: 200px;
+		}
+	}
+	
+	[data-theme="emerald"] {
+	.swiper-slide::before {
+		top: 0;
+		background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent);
+		}
+		.swiper-slide::after {
+		bottom: 0;
+		background: linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent);
+		}
+	}
+
+    .swiper-slide::before,
+    .swiper-slide::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 50px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .swiper-slide {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .swiper-pagination {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        width: 90%;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+    }
+
+    .swiper-pagination-progressbar-fill {
+        background: #007bff;
+        border-radius: 3px;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav x-data="{ isSticky: false }"
+  x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })"
+  class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
+  :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/img/avatar.jpg" alt="0x69.ru &lt;/&gt;" />
+        </div>
+      </div>
+
+      
+      <div>
+        
+        <a href="/en/" class="text-lg font-semibold cursor-pointer">
+          0x69.ru &lt;/&gt;
+        </a>
+        
+        
+        <div class="text-base-content/60 text-sm">To iterate is human, to recurse divine</div>
+        
+      </div>
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-md">
+        
+  
+  
+    <li>
+      <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="About">
+        <ion-icon name="information-circle"></ion-icon>About</div>
+    </li>
+  
+
+
+
+
+  
+
+
+<ul class="p-0 m-0 list-none">
+
+<style>
+.menu-title {
+    margin-bottom: 4px;
+}
+</style>
+
+  
+  <li>
+    <div class="menu-title">Languages</div>
+    <ul class="p-0 m-0 list-none">
+      
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/" 
+             title="English" 
+             class="inline-flex items-center p-2 active">
+            <ion-icon name="language" role="img" class="md hydrated"></ion-icon> 
+            English
+            
+              <ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/posts/chatgpt-claude-gemini-dns-dostup/" 
+             title="Русский" 
+             class="inline-flex items-center p-2 ">
+            <ion-icon name="language" role="img" class="md hydrated"></ion-icon> 
+            Русский
+            
+          </a>
+        </li>
+      
+    </ul>
+  </li>
+
+  
+  <li>
+    <div class="menu-title">Menu</div>
+    <ul class="p-0 m-0 list-none">
+      
+        
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/search" title="Search">
+      <ion-icon name="search" role="img" class="md hydrated"></ion-icon> Search
+    </a>
+  
+</li>
+      
+        
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/categories" title="All Categories">
+      <ion-icon name="grid" role="img" class="md hydrated"></ion-icon> All Categories
+    </a>
+  
+</li>
+      
+        
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/portfolio" title="Portfolio">
+      <ion-icon name="sparkles" role="img" class="md hydrated"></ion-icon> Portfolio
+    </a>
+  
+</li>
+      
+        
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/posts" title="Archives">
+      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> Archives
+    </a>
+  
+</li>
+      
+        
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/tags" title="All Tags">
+      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> All Tags
+    </a>
+  
+</li>
+      
+        
+
+
+<li>
+  
+    
+    
+    
+      <a class="inline-flex items-center p-2" href="https://github.com/rianvy" target="_blank" title="GitHub">
+        
+          <ion-icon name="logo-github" role="img" class="md hydrated"></ion-icon>
+        
+        GitHub
+      </a>
+    
+  
+</li>
+      
+        
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/index.xml" title="RSS">
+      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
+    </a>
+  
+</li>
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </li>
+</ul>
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+      
+      <div role="link" tabindex="0"
+        class="text-sm font-semibold cursor-pointer hover:underline"
+        @click="flip = !flip"
+        title="About"
+      >About</div>
+      
+      
+
+      
+      
+        
+      
+
+      
+
+      
+      
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/search" title="Search">
+  <ion-icon class="group-hover:text-primary-content" name="search"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/portfolio" title="Portfolio">
+  <ion-icon class="group-hover:text-primary-content" name="sparkles"></ion-icon>
+</a>
+
+
+      
+	  
+	
+	<div class="dropdown dropdown-end dropdown-hover">
+	  <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select language">
+		<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
+	  </div>
+	  <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl">
+		
+		  
+		  
+		  
+		  
+
+		  
+		  
+			
+			
+		  
+
+		  <li>
+			<a href="https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/" class="active">
+			  <ion-icon name="language" role="img" class="md hydrated"></ion-icon>
+			  English
+			  
+				<ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
+			  
+			</a>
+		  </li>
+		
+		  
+		  
+		  
+		  
+
+		  
+		  
+			
+		  
+
+		  <li>
+			<a href="https://0x69.ru/ru/posts/chatgpt-claude-gemini-dns-dostup/" class="">
+			  <ion-icon name="language" role="img" class="md hydrated"></ion-icon>
+			  Русский
+			  
+			</a>
+		  </li>
+		
+	  </ul>
+	</div>
+     	  
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
+          <ion-icon class="group-hover:text-primary-content text-xl" name="menu"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+          
+          
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/posts" title="Archives">
+      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> Archives
+    </a>
+  
+</li>
+          
+          
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/tags" title="All Tags">
+      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> All Tags
+    </a>
+  
+</li>
+          
+          
+
+
+<li>
+  
+    
+    
+    
+      <a class="inline-flex items-center p-2" href="https://github.com/rianvy" target="_blank" title="GitHub">
+        
+          <ion-icon name="logo-github" role="img" class="md hydrated"></ion-icon>
+        
+        GitHub
+      </a>
+    
+  
+</li>
+          
+          
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/index.xml" title="RSS">
+      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
+    </a>
+  
+</li>
+          
+
+          
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </ul>
+      </div>
+      
+    </section>
+  </div>
+</nav>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block"></div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services">
+  <meta itemprop="description" content="Proper DNS configuration for stable access to AI services – via DNS, hosts file, or AdGuard.">
+  <meta itemprop="datePublished" content="2026-01-17T22:29:50+03:00">
+  <meta itemprop="dateModified" content="2026-01-17T22:29:50+03:00">
+  <meta itemprop="wordCount" content="3870">
+  <meta itemprop="image" content="https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/Cover.png">
+  <meta itemprop="keywords" content="DNS,Neural Networks,ChatGPT,Gemini,Claude,AdGuard,Comss.one DNS,Guide,AI,OpenAI,Anthropic,Google AI,Microsoft Copilot,GitHub Copilot,DNS Filtering">
+
+      <header>
+        <h1 itemprop="headline">ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services</h1>
+        <p class="text-sm">
+          
+            <span data-format="luxon">2026-01-17T22:29:50&#43;03:00</span>
+          
+
+          | <span>19 minute read</span>
+
+          
+          | <span>Updated at
+            
+              <span data-format="luxon">2026-01-17T22:29:50&#43;03:00</span>
+            </span>
+          
+        </p>
+		<div class="categories mt-4 mb-4">
+		  <div class="flex items-center gap-2">
+			<ion-icon 
+			  class="text-lg opacity-80 hover:text-primary-content transition-colors"
+			  name="grid"
+			  aria-hidden="true"
+			></ion-icon>
+			  <a
+				href="/en/categories/guides/"
+				class="badge no-underline hover:badge-primary transition-all duration-200"
+				rel="category"
+				aria-label="Guides"
+				data-category="guides"
+			  >Guides</a>
+			  <a
+				href="/en/categories/neural-networks/"
+				class="badge no-underline hover:badge-primary transition-all duration-200"
+				rel="category"
+				aria-label="Neural Networks"
+				data-category="neural networks"
+			  >Neural Networks</a>
+		  </div>
+		</div>
+
+        <div class="flex justify-between">
+          <div class="flex items-center">
+  
+  <div class="avatar mr-1">
+    <div class="w-8 rounded-full">
+      <img class="my-0" src="/img/avatar.jpg" alt="Rianvy" />
+    </div>
+  </div>
+  
+
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+  
+    
+      <span itemprop="name">Rianvy</span>
+    
+  
+  </span>
+</div>
+
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=ChatGPT,%20Claude,%20and%20Gemini%20%e2%80%93%20Proper%20DNS%20Configuration%20for%20Accessing%20AI%20Services&amp;url=https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=ChatGPT,%20Claude,%20and%20Gemini%20%e2%80%93%20Proper%20DNS%20Configuration%20for%20Accessing%20AI%20Services%20https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://t.me/share/url?url=https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/&amp;resubmit=true&amp;title=ChatGPT,%20Claude,%20and%20Gemini%20%e2%80%93%20Proper%20DNS%20Configuration%20for%20Accessing%20AI%20Services" target="_blank" rel="noopener noreferrer"
+      title="Share on Telegram">
+      <ion-icon class="group-hover:text-primary-content" name="send"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+        <img src="https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/Cover.png" alt="ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services"/>
+        
+		
+		
+		
+		
+		<blockquote class="dream-alert tip">
+		  <p class="heading">
+			<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
+			This post is also available in
+			
+			  
+			  <a href="https://0x69.ru/ru/posts/chatgpt-claude-gemini-dns-dostup/" 
+				 class="badge h-6 no-underline hover:badge-primary mr-2"
+				 rel="noopener noreferrer">
+				Русский
+			  </a>
+			
+		  </p>
+		</blockquote>
+		
+
+        <p>Proper DNS configuration for stable access to AI services – via DNS, hosts file, or AdGuard.</p>
+<h2 id="introduction">Introduction</h2>
+
+
+
+  <blockquote>
+    <p>Many AI services employ <strong>geographic access restrictions</strong>, determining the user&rsquo;s region by IP address. OpenAI, Anthropic, Google, and other companies restrict access from certain regions at their server level.</p>
+  </blockquote>
+
+<p>There are several technical approaches for correctly configuring network parameters to establish a connection with AI services. This article discusses methods based on proper domain name resolution and selecting permissible connection points.</p>
+<p><img src="/en/posts/chatgpt-claude-gemini-dns-dostup/img/comet_nzC7Rl2r30.png" alt="Grok"></p>
+<p>Access to ChatGPT, Claude, and Gemini can be configured using:</p>
+<ol>
+<li>Alternative DNS servers;</li>
+<li>The local <code>hosts</code> file;</li>
+<li>DNS filtering via AdGuard DNS;</li>
+<li>Ready-made DNS solutions with pre-configured rules.</li>
+</ol>
+<p>These methods work by correctly resolving domain names and selecting IP addresses of servers that accept connections. It uses only standard DNS operation without tunneling or bypassing network restrictions.</p>
+<hr>
+<h2 id="-important-security-and-trust-issues">⚠️ Important: Security and Trust Issues</h2>
+<p>All described methods imply trust in the sources of IP addresses:</p>
+<p><strong>Third-party DNS servers</strong> see all your DNS queries (which sites you visit).</p>
+<p><strong>IP addresses from hosts lists</strong> redirect your traffic through third-party intermediate servers.</p>
+<p><strong>Proxy nodes</strong> can technically:</p>
+<ul>
+<li>See unencrypted traffic (if the site uses HTTP).</li>
+<li>Log your requests.</li>
+<li>Potentially intercept data.</li>
+</ul>
+<p><strong>Recommendations:</strong></p>
+<ol>
+<li>Use only trusted sources (Xbox DNS, Malw.link, Comss.one).</li>
+<li>For critical data, consider alternative solutions.</li>
+<li>Never enter passwords or payment details via unverified proxies.</li>
+<li>Regularly check the relevance of IP addresses from official sources.</li>
+<li>Use these methods at your own risk, understanding the technical specifics of DNS operation.</li>
+</ol>
+<hr>
+<h2 id="how-geographic-access-restrictions-work">How Geographic Access Restrictions Work</h2>
+<p>To understand why DNS methods work, it&rsquo;s important to understand the mechanism of user region verification.</p>
+<h3 id="what-happens-during-connection">What Happens During Connection</h3>
+<p>When you open an AI service website, a chain of actions occurs:</p>
+<ol>
+<li><strong>DNS Resolution</strong><br>
+The system requests the IP address of the domain (e.g., <code>chatgpt.com</code>).</li>
+<li><strong>Connecting to the Server</strong><br>
+The browser connects to the obtained IP.</li>
+<li><strong>Verification by the Service</strong><br>
+The server analyzes the user&rsquo;s IP address and decides whether to allow access or not.</li>
+</ol>
+<p>If the IP is identified as belonging to a restricted region, the service may:</p>
+<ul>
+<li>Not load.</li>
+<li>Show an unavailability message.</li>
+<li>Block registration or login.</li>
+</ul>
+<h3 id="the-role-of-dns-in-the-connection-process">The Role of DNS in the Connection Process</h3>
+<p>Many AI services use:</p>
+<ul>
+<li>Different IP addresses for different regions.</li>
+<li>CDNs and load balancers.</li>
+<li>Separate frontend nodes with different geo-check logic.</li>
+</ul>
+<p>If DNS returns an <strong>alternative permissible IP address</strong>, then:</p>
+<ul>
+<li>The connection is established directly.</li>
+<li>The geo-restriction may determine a different region.</li>
+<li>The service becomes accessible.</li>
+</ul>
+<p>It&rsquo;s important to understand:<br>
+👉 <strong>When using third-party DNS, your ISP does not participate in name resolution.</strong><br>
+👉 <strong>Traffic is not encrypted or tunneled</strong> (this is not a VPN).<br>
+👉 Only <strong>which IP address the domain name resolves to</strong> changes.</p>
+<p>This is precisely why:</p>
+<ul>
+<li>The <code>hosts</code> file.</li>
+<li>Third-party DNS.</li>
+<li>AdGuard DNS with <code>dnsrewrite</code>.</li>
+</ul>
+<p>allow for proper connection configuration.</p>
+<hr>
+<h2 id="method-1-alternative-dns-server">Method 1. Alternative DNS Server</h2>
+<h3 id="how-it-works">How it Works</h3>
+<p>The simplest method is to replace your ISP&rsquo;s DNS server with a public server that returns current IP addresses without regional filtering. Suitable options: <strong>Xbox DNS</strong> or <strong>Malw.link DNS</strong>. These servers provide standard DNS responses.</p>
+<p>An additional plus: you can use encrypted protocols like DNS over HTTPS (DoH) or DNS over TLS (DoT), which encrypt DNS queries. Your ISP cannot spoof DNS responses or see which domains you request. However, the IP addresses of the servers you connect to and the HTTPS connection itself remain visible to your ISP.</p>
+<hr>
+<h3 id="available-dns-servers">Available DNS Servers</h3>
+<p><strong>Xbox DNS</strong></p>
+<ul>
+<li>IP: <code>176.99.11.77</code>, <code>80.78.247.254</code></li>
+<li>DoH: <code>https://xbox-dns.ru/dns-query</code></li>
+</ul>
+<p><strong>Malw.link</strong></p>
+<ul>
+<li>IP: <code>84.21.189.133</code>, <code>193.23.209.189</code></li>
+<li>DoH: <code>https://dns.malw.link/dns-query</code></li>
+</ul>
+
+
+
+  <blockquote>
+    <p>📎 More details: <a href="https://xbox-dns.ru/" target="_blank">xbox-dns.ru</a>
+ and <a href="https://info.dns.malw.link/" target="_blank">info.dns.malw.link</a>
+</p>
+  </blockquote>
+
+<hr>
+<h3 id="browser-configuration">Browser Configuration</h3>
+<p>Modern browsers can use their own DNS independent of system settings.</p>
+<h4 id="chrome-edge-brave">Chrome, Edge, Brave</h4>
+<p><img src="/en/posts/chatgpt-claude-gemini-dns-dostup/img/comet_t6DmwePZq4.png" alt="Settings → Privacy &amp; Security → Security"></p>
+<ol>
+<li>Open browser <strong>Settings</strong>.</li>
+<li>Go to <strong>Privacy &amp; Security</strong> → <strong>Security</strong>.</li>
+<li>Find <strong>Use secure DNS</strong>.</li>
+<li>Select <strong>Choose another provider</strong> and enter one of the addresses:
+<ul>
+<li><code>https://xbox-dns.ru/dns-query</code></li>
+<li><code>https://dns.malw.link/dns-query</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="firefox">Firefox</h4>
+<p><img src="/en/posts/chatgpt-claude-gemini-dns-dostup/img/firefox_5cMjdPtqaq.png" alt="DNS over HTTPS in Firefox"></p>
+<ol>
+<li><strong>Settings</strong> → <strong>Privacy &amp; Security</strong>.</li>
+<li>Scroll to the <strong>DNS over HTTPS</strong> section.</li>
+<li>Enable <strong>DNS over HTTPS (Max Protection)</strong>.</li>
+<li>Select provider <strong>Custom URL</strong>.</li>
+<li>In the <strong>URL</strong> field, enter one of the addresses:
+<ul>
+<li><code>https://xbox-dns.ru/dns-query</code></li>
+<li><code>https://dns.malw.link/dns-query</code></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="operating-system-configuration">Operating System Configuration</h3>
+<p>Configuration at the system level ensures DNS works for all applications, not just the browser.</p>
+<h4 id="windows-11">Windows 11</h4>
+
+
+ 
+ 
+
+
+<div class="not-prose my-5">
+<div class="swiper-container first-slider">
+    <div class="swiper first-slider-mySwiper">
+        <div class="swiper-wrapper">
+            
+  <div class="swiper-slide">
+  
+    <img src="img/ApplicationFrameHost_M4HJZqIXDT.png">
+  
+</div>
+  <div class="swiper-slide">
+  
+    <img src="img/ApplicationFrameHost_YT6QkS1Pwb.png">
+  
+</div>
+
+        </div>
+        
+        <div class="swiper-pagination"></div>
+        
+    </div>
+</div>
+</div>
+
+<script type="module">
+    window.initSwiper && window.initSwiper({
+        id: 'first-slider',
+        loop: "true",
+        autoplay: "2500",
+        pagination: "true",
+    });
+</script>
+<ol>
+<li><strong>Settings</strong> → <strong>Network &amp; internet</strong>.</li>
+<li>Select <strong>Wi-Fi</strong> or <strong>Ethernet</strong> (depending on connection).</li>
+<li>Click on your connection.</li>
+<li>Find <strong>DNS server assignment</strong> → <strong>Edit</strong>.</li>
+<li>Select <strong>Manual</strong> and enable <strong>IPv4</strong>.</li>
+<li>Enter addresses:</li>
+</ol>
+<p><strong>Xbox DNS</strong></p>
+<ul>
+<li>Preferred DNS: <code>176.99.11.77</code></li>
+<li>Alternate DNS: <code>80.78.247.254</code></li>
+</ul>
+<p><strong>Malw.link DNS</strong></p>
+<ul>
+<li>Preferred DNS: <code>84.21.189.133</code></li>
+<li>Alternate DNS: <code>193.23.209.189</code></li>
+</ul>
+<ol start="7">
+<li>Save changes.</li>
+</ol>
+<h4 id="macos">macOS</h4>
+<ol>
+<li><strong>System Preferences</strong> → <strong>Network</strong>.</li>
+<li>Select active connection → <strong>Details</strong> (or <strong>Advanced</strong>).</li>
+<li>Go to the <strong>DNS</strong> tab.</li>
+<li>Remove existing entries and add new ones:
+<ul>
+<li><code>176.99.11.77</code> and <code>80.78.247.254</code> (Xbox DNS), or</li>
+<li><code>84.21.189.133</code> and <code>193.23.209.189</code> (Malw.link)</li>
+</ul>
+</li>
+<li>Click <strong>OK</strong> → <strong>Apply</strong>.</li>
+</ol>
+<h4 id="linux-ubuntudebian-with-networkmanager">Linux (Ubuntu/Debian with NetworkManager)</h4>
+<ol>
+<li><strong>Settings</strong> → <strong>Network</strong>.</li>
+<li>Click ⚙️ next to your connection.</li>
+<li><strong>IPv4</strong> tab → <strong>DNS</strong> section.</li>
+<li>Turn off <strong>Automatic DNS</strong>.</li>
+<li>Enter addresses separated by commas:
+<ul>
+<li><code>176.99.11.77, 80.78.247.254</code> or</li>
+<li><code>84.21.189.133, 193.23.209.189</code></li>
+</ul>
+</li>
+<li>Apply changes and reconnect.</li>
+</ol>
+<hr>
+<h3 id="pros-and-cons">Pros and Cons</h3>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Pros ✅
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Cons ❌
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Quick setup – 2 minutes
+        </td>
+        
+        <td 
+          class=""
+        >
+          DNS traffic goes through a third party.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Works immediately for all sites.
+        </td>
+        
+        <td 
+          class=""
+        >
+          No granular control.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          No additional software required.
+        </td>
+        
+        <td 
+          class=""
+        >
+          May affect access to corporate resources.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          DoH encrypts DNS queries.
+        </td>
+        
+        <td 
+          class=""
+        >
+          Dependency on DNS server availability.
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Quick setup – 2 minutes
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          DNS traffic goes through a third party.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Works immediately for all sites.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          No granular control.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          No additional software required.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          May affect access to corporate resources.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          DoH encrypts DNS queries.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Dependency on DNS server availability.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><h3 id="verdict">Verdict</h3>
+<p>Excellent solution for a quick start. Requires no technical knowledge, set up in a couple of minutes. Suitable as a basic measure or for users who need a simple method without unnecessary complexity.</p>
+
+
+ 
+ 
+
+
+<div class="not-prose my-5">
+<div class="swiper-container second-slider">
+    <div class="swiper second-slider-mySwiper">
+        <div class="swiper-wrapper">
+            
+  <div class="swiper-slide">
+  
+    <img src="img/comet_7fcq7MCsWq.png" alt="ChatGPT" title="ChatGPT">
+  
+</div>
+  <div class="swiper-slide">
+  
+    <img src="img/comet_b3mfbxuoGx.png" alt="Gemini" title="Gemini">
+  
+</div>
+  <div class="swiper-slide">
+  
+    <img src="img/comet_YlE4m2YXq3.png" alt="Grok" title="Grok">
+  
+</div>
+  <div class="swiper-slide">
+  
+    <img src="img/comet_mvmj9ZKulV.png" alt="Claude" title="Claude">
+  
+</div>
+
+        </div>
+        
+        <div class="swiper-pagination"></div>
+        
+    </div>
+</div>
+</div>
+
+<script type="module">
+    window.initSwiper && window.initSwiper({
+        id: 'second-slider',
+        loop: "true",
+        autoplay: "2500",
+        pagination: "true",
+    });
+</script>
+<hr>
+<h2 id="method-2-hosts-file">Method 2. Hosts File</h2>
+<p>⚠️ <strong>Important Limitation:</strong> The hosts method does not guarantee stable work with large CDN services (Google, OpenAI, Anthropic). It may stop working without warning and requires regular IP address updates.</p>
+<h3 id="how-it-works-1">How it Works</h3>
+<p>The <code>hosts</code> file is a text file in your operating system that acts as a local address book for domains. You can specify, for example: &ldquo;When I open chatgpt.com, use IP address 45.155.204.190.&rdquo;</p>
+<p>The operating system checks this file <strong>before any DNS queries</strong>, allowing full control over where the device connects—your ISP is not involved in the DNS resolution process.</p>
+<p>The record format is very simple:</p>
+<pre><code>IP-address    domain
+</code></pre>
+<p>For example:</p>
+<pre><code>45.155.204.190    chatgpt.com
+</code></pre>
+<h3 id="where-to-find-the-hosts-file">Where to Find the Hosts File</h3>
+<p>The file location depends on the operating system:</p>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Operating System
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          File Path
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Windows
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>C:\Windows\System32\drivers\etc\hosts</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          macOS
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>/etc/hosts</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Linux
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>/etc/hosts</code>
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Operating System
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Windows
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          File Path
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>C:\Windows\System32\drivers\etc\hosts</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Operating System
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          macOS
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          File Path
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>/etc/hosts</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Operating System
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Linux
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          File Path
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>/etc/hosts</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><h3 id="how-to-edit-hosts-in-windows">How to Edit Hosts in Windows</h3>
+<p><img src="/en/posts/chatgpt-claude-gemini-dns-dostup/img/NVIDIA_Overlay_NDXTv1FUwu.png" alt="Run Notepad as Administrator"></p>
+<p><strong>Important:</strong> you need administrator rights to edit, otherwise the system won&rsquo;t allow saving changes.</p>
+<p><strong>The Correct Way:</strong></p>
+<ol>
+<li>Press Win + S, type &ldquo;Notepad&rdquo;.</li>
+<li>Right-click → &ldquo;Run as administrator&rdquo;.</li>
+<li>In Notepad: File → Open.</li>
+<li>In the path field, paste: <code>C:\Windows\System32\drivers\etc\</code>.
+
+
+ 
+ 
+
+
+<div class="not-prose my-5">
+<div class="swiper-container third-slider">
+    <div class="swiper third-slider-mySwiper">
+        <div class="swiper-wrapper">
+            
+  <div class="swiper-slide">
+  
+    <img src="img/Notepad_qHj9Ua856p.png">
+  
+</div>
+  <div class="swiper-slide">
+  
+    <img src="img/Notepad_9EXvMFEpui.png">
+  
+</div>
+  <div class="swiper-slide">
+  
+    <img src="img/Notepad_YNVqm5pPs8.png">
+  
+</div>
+  <div class="swiper-slide">
+  
+    <img src="img/Notepad_Q1QoStC2gL.png">
+  
+</div>
+
+        </div>
+        
+        <div class="swiper-pagination"></div>
+        
+    </div>
+</div>
+</div>
+
+<script type="module">
+    window.initSwiper && window.initSwiper({
+        id: 'third-slider',
+        loop: "true",
+        autoplay: "2500",
+        pagination: "true",
+    });
+</script></li>
+<li>In the &ldquo;File type&rdquo; dropdown, select <strong>&ldquo;All Files&rdquo;</strong> (otherwise hosts won&rsquo;t appear).</li>
+<li>Open the file.</li>
+<li>Scroll to the very end.</li>
+<li>Add the necessary entries (each on a new line).
+
+
+ 
+ 
+
+
+<div class="not-prose my-5">
+<div class="swiper-container fourth-slider">
+    <div class="swiper fourth-slider-mySwiper">
+        <div class="swiper-wrapper">
+            
+  <div class="swiper-slide">
+  
+    <img src="img/Notepad_gjZkCJ9Tun.png">
+  
+</div>
+  <div class="swiper-slide">
+  
+    <img src="img/Notepad_Or2cEaoEe3.png">
+  
+</div>
+
+        </div>
+        
+        <div class="swiper-pagination"></div>
+        
+    </div>
+</div>
+</div>
+
+<script type="module">
+    window.initSwiper && window.initSwiper({
+        id: 'fourth-slider',
+        loop: "true",
+        autoplay: "2500",
+        pagination: "true",
+    });
+</script></li>
+<li>Save (Ctrl + S).</li>
+</ol>
+<p><strong>Critical Points:</strong></p>
+<ul>
+<li><strong>Use only Notepad or Notepad++.</strong> No Word, WordPad, or other text editors—they add invisible formatting characters that will break the file.</li>
+<li>There must be a space or tab between the IP and domain.</li>
+<li>Don&rsquo;t check &ldquo;Always open files of this type in this program&rdquo; — hosts should remain unassociated with programs.</li>
+<li>If Windows complains about saving, check your antivirus — some block changes to hosts as potentially dangerous.</li>
+</ul>
+<h3 id="how-to-edit-hosts-in-macoslinux">How to Edit Hosts in macOS/Linux</h3>
+<pre><code class="language-bash">sudo nano /etc/hosts
+</code></pre>
+<p>Enter the administrator password, add entries, save (Ctrl + O, Enter, Ctrl + X).</p>
+<h3 id="example-entries-for-ai-services">Example Entries for AI Services</h3>
+
+
+
+  <blockquote>
+    <p>ℹ️ <strong>About Duplicate IP Addresses:</strong> You&rsquo;ll notice that one IP (<code>45.155.204.190</code>) is used for many different services (OpenAI, Google, Anthropic). This is the address of a special proxy server that:</p>
+<ul>
+<li>Accepts connections regardless of client geography.</li>
+<li>Forwards requests to the services&rsquo; real servers.</li>
+<li>Allows establishing a connection to AI services.</li>
+</ul>
+  </blockquote>
+
+<p>Here is a basic set for main services:</p>
+<pre><code># Google AI Services
+45.155.204.190 gemini.google.com
+45.155.204.190 aistudio.google.com
+45.155.204.190 generativelanguage.googleapis.com
+45.155.204.190 aitestkitchen.withgoogle.com
+45.155.204.190 aisandbox-pa.googleapis.com
+45.155.204.190 webchannel-alkalimakersuite-pa.clients6.google.com
+45.155.204.190 alkalimakersuite-pa.clients6.google.com
+45.155.204.190 assistant-s3-pa.googleapis.com
+45.155.204.190 proactivebackend-pa.googleapis.com
+45.155.204.190 robinfrontend-pa.googleapis.com
+45.155.204.190 o.pki.goog
+45.155.204.190 labs.google
+45.155.204.190 notebooklm.google.com
+45.155.204.190 jules.google.com
+45.155.204.190 stitch.withgoogle.com
+
+# OpenAI
+45.155.204.190 chatgpt.com
+45.155.204.190 ab.chatgpt.com
+45.155.204.190 auth.openai.com
+45.155.204.190 auth0.openai.com
+45.155.204.190 platform.openai.com
+45.155.204.190 cdn.oaistatic.com
+45.155.204.190 files.oaiusercontent.com
+45.155.204.190 cdn.auth0.com
+45.155.204.190 tcr9i.chat.openai.com
+45.155.204.190 webrtc.chatgpt.com
+45.155.204.190 android.chat.openai.com
+45.155.204.190 api.openai.com
+45.155.204.190 operator.chatgpt.com
+45.155.204.190 sora.chatgpt.com
+45.155.204.190 sora.com
+45.155.204.190 videos.openai.com
+45.155.204.190 ios.chat.openai.com
+
+# Microsoft
+45.155.204.190 copilot.microsoft.com
+45.155.204.190 sydney.bing.com
+45.155.204.190 edgeservices.bing.com
+45.155.204.190 rewards.bing.com
+
+# GitHub Copilot
+144.31.14.104 api.github.com
+144.31.14.104 api.individual.githubcopilot.com
+144.31.14.104 proxy.individual.githubcopilot.com
+
+# Grok
+45.155.204.190 grok.com
+45.155.204.190 accounts.x.ai
+45.155.204.190 assets.grok.com
+
+# Claude
+45.155.204.190 claude.ai
+45.155.204.190 console.anthropic.com
+45.155.204.190 api.anthropic.com
+</code></pre>
+<p>Lines starting with <code>#</code> are comments. The system ignores them; they are for human convenience.</p>
+<h3 id="where-to-get-current-ip-addresses">Where to Get Current IP Addresses</h3>
+<p>Service IP addresses change periodically. Manually searching for them via nslookup or dig is inconvenient. It&rsquo;s easier to use ready-made up-to-date lists.</p>
+<p><strong>Recommended:</strong> <a href="https://info.dns.malw.link/hosts" target="_blank">info.dns.malw.link/hosts</a>
+</p>
+<p>There are ready-made configurations for different services. Just copy the needed lines into your hosts file. If there are comments with <code>#</code> in the list, you can leave or remove them—as you prefer.</p>
+<h3 id="pros-and-cons-1">Pros and Cons</h3>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          <strong>Pros ✅</strong>
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          <strong>Cons ❌</strong>
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Maximum Control</strong> — only you decide what and where is resolved.
+        </td>
+        
+        <td 
+          class=""
+        >
+          <strong>IP addresses can change</strong> — you&rsquo;ll need to monitor and update manually.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Complete Privacy</strong> — no external DNS servers are involved.
+        </td>
+        
+        <td 
+          class=""
+        >
+          <strong>Inconvenient with large lists of sites</strong> (100+ domains) — difficult to edit.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>High Speed</strong> — system doesn&rsquo;t make network DNS queries.
+        </td>
+        
+        <td 
+          class=""
+        >
+          <strong>No synchronization between devices</strong> — each needs to be configured separately.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Independence from external services.</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <strong>Requires minimal technical skills</strong> for setup.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Suitable for paranoids :)</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          <strong>Pros ✅</strong>
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Maximum Control</strong> — only you decide what and where is resolved.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          <strong>Cons ❌</strong>
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>IP addresses can change</strong> — you&rsquo;ll need to monitor and update manually.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          <strong>Pros ✅</strong>
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Complete Privacy</strong> — no external DNS servers are involved.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          <strong>Cons ❌</strong>
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Inconvenient with large lists of sites</strong> (100+ domains) — difficult to edit.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          <strong>Pros ✅</strong>
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>High Speed</strong> — system doesn&rsquo;t make network DNS queries.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          <strong>Cons ❌</strong>
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>No synchronization between devices</strong> — each needs to be configured separately.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          <strong>Pros ✅</strong>
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Independence from external services.</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          <strong>Cons ❌</strong>
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Requires minimal technical skills</strong> for setup.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          <strong>Pros ✅</strong>
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Suitable for paranoids :)</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          <strong>Cons ❌</strong>
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><p><strong>Verdict:</strong> Perfect for those who want complete control and are willing to spend 10 minutes on initial setup. For advanced users and privacy paranoids.</p>
+<hr>
+<h2 id="method-3-adguard-dns">Method 3. AdGuard DNS</h2>
+<p>This is the optimal balance between convenience and control. It combines the simplicity of third-party DNS with the flexibility of the hosts file while simplifying the IP address update process.</p>
+<h3 id="how-it-works-2">How it Works</h3>
+<p>AdGuard DNS is not just a public DNS like Google or Cloudflare. It can work with DNS response rewriting rules via a special <code>dnsrewrite</code> syntax. Essentially, you create your rules in the cloud, and AdGuard DNS applies them to your device.</p>
+<p><strong>Important:</strong> The IP addresses of AI service servers can change, and AdGuard DNS <strong>does not update them automatically</strong>. The advantage is that you can update all IP addresses <strong>in one place</strong> (in the AdGuard web interface), and the changes immediately apply to all your devices—no need to edit the <code>hosts</code> file on each device separately.</p>
+<p>Rule syntax:</p>
+<pre><code>||domain^$dnsrewrite=IP-address
+</code></pre>
+<p>Let&rsquo;s break it down with an example:</p>
+<pre><code>||chatgpt.com^$dnsrewrite=45.155.204.190
+</code></pre>
+<p><strong>What&rsquo;s what:</strong></p>
+<ul>
+<li><code>||</code> — means &ldquo;this domain and all its subdomains&rdquo;.</li>
+<li><code>chatgpt.com</code> — target domain.</li>
+<li><code>^</code> — end-of-hostname marker.</li>
+<li><code>$dnsrewrite=</code> — &ldquo;rewrite DNS response&rdquo; command.</li>
+<li><code>45.155.204.190</code> — the IP address to be returned instead of the standard one.</li>
+</ul>
+<p>When your device asks &ldquo;where is chatgpt.com?&rdquo;, the query goes to AdGuard DNS. It sees the rule, returns the IP you specified, and the standard DNS resolution is replaced with an alternative one.</p>
+<h3 id="setting-up-adguard-dns">Setting Up AdGuard DNS</h3>
+<p><strong>Step 1: Registration</strong></p>
+<ol>
+<li>Go to <a href="https://adguard-dns.io/ru/" target="_blank">adguard-dns.io/ru/</a>
+.</li>
+<li>Register (email + password, or via Google/Apple/GitHub).</li>
+<li>The free tier gives 300,000 DNS queries per month—more than enough for personal use.
+<img src="/en/posts/chatgpt-claude-gemini-dns-dostup/img/comet_1hHWvggFTJ.png" alt="Personal Account"></li>
+</ol>
+<p><strong>Step 2: Creating a Device</strong></p>
+<ol>
+<li>In your account, click &ldquo;Add device&rdquo;.</li>
+<li>Choose device type (computer, smartphone, router).</li>
+<li>Copy the DNS server address.</li>
+</ol>
+<p>You&rsquo;ll get a personal address like:</p>
+<ul>
+<li><strong>DNS-over-HTTPS</strong>: <code>https://d.adguard-dns.com/dns-query/your_id</code></li>
+<li><strong>DNS-over-TLS</strong>: <code>tls://your_id.d.adguard-dns.com</code></li>
+<li><strong>Regular DNS</strong>: simple IP addresses (less secure, but simpler).</li>
+</ul>
+
+
+ 
+ 
+
+
+<div class="not-prose my-5">
+<div class="swiper-container fifth-slider">
+    <div class="swiper fifth-slider-mySwiper">
+        <div class="swiper-wrapper">
+            
+  <div class="swiper-slide">
+  
+    <img src="img/comet_fi3bau44Mo.png">
+  
+</div>
+  <div class="swiper-slide">
+  
+    <img src="img/comet_eR2iMRSBiW.png">
+  
+</div>
+  <div class="swiper-slide">
+  
+    <img src="img/comet_l6eMQgwPRL.png">
+  
+</div>
+
+        </div>
+        
+        <div class="swiper-pagination"></div>
+        
+    </div>
+</div>
+</div>
+
+<script type="module">
+    window.initSwiper && window.initSwiper({
+        id: 'fifth-slider',
+        loop: "true",
+        autoplay: "2500",
+        pagination: "true",
+    });
+</script>
+<p><strong>Step 3: Applying DNS</strong></p>
+<p>Use the instructions from Method 1 (alternative DNS), but instead of Xbox DNS or Malw.link, specify the address from AdGuard.</p>
+<h3 id="adding-rewriting-rules">Adding Rewriting Rules</h3>
+<p>Now for the interesting part—adding rules for AI services.</p>
+<ol>
+<li>Go to &ldquo;Custom rules&rdquo;.
+<img src="/en/posts/chatgpt-claude-gemini-dns-dostup/img/comet_If93vCL6tE.png" alt="Personal Account"></li>
+<li>Click &ldquo;Editor&rdquo;.
+<img src="/en/posts/chatgpt-claude-gemini-dns-dostup/img/comet_GUubAI2Nxt.png" alt="Editor"></li>
+<li>Paste the rules into the field.</li>
+</ol>
+
+
+
+  <blockquote>
+    <p>ℹ️ <strong>About Duplicate IP Addresses:</strong> You&rsquo;ll notice that one IP (<code>45.155.204.190</code>) is used for many different services (OpenAI, Google, Anthropic). This is the address of a special proxy server that:</p>
+<ul>
+<li>Accepts connections regardless of client geography.</li>
+<li>Forwards requests to the services&rsquo; real servers.</li>
+<li>Allows establishing a connection to AI services.</li>
+</ul>
+  </blockquote>
+
+<p><strong>Basic set for ChatGPT, Claude, Grok, and Gemini:</strong></p>
+<pre><code>||gemini.google.com^$dnsrewrite=45.155.204.190
+||aistudio.google.com^$dnsrewrite=45.155.204.190
+||generativelanguage.googleapis.com^$dnsrewrite=45.155.204.190
+||aitestkitchen.withgoogle.com^$dnsrewrite=45.155.204.190
+||aisandbox-pa.googleapis.com^$dnsrewrite=45.155.204.190
+||webchannel-alkalimakersuite-pa.clients6.google.com^$dnsrewrite=45.155.204.190
+||alkalimakersuite-pa.clients6.google.com^$dnsrewrite=45.155.204.190
+||assistant-s3-pa.googleapis.com^$dnsrewrite=45.155.204.190
+||proactivebackend-pa.googleapis.com^$dnsrewrite=45.155.204.190
+||robinfrontend-pa.googleapis.com^$dnsrewrite=45.155.204.190
+||o.pki.goog^$dnsrewrite=45.155.204.190
+||labs.google^$dnsrewrite=45.155.204.190
+||notebooklm.google.com^$dnsrewrite=45.155.204.190
+||jules.google.com^$dnsrewrite=45.155.204.190
+||stitch.withgoogle.com^$dnsrewrite=45.155.204.190
+||chatgpt.com^$dnsrewrite=45.155.204.190
+||ab.chatgpt.com^$dnsrewrite=45.155.204.190
+||auth.openai.com^$dnsrewrite=45.155.204.190
+||auth0.openai.com^$dnsrewrite=45.155.204.190
+||platform.openai.com^$dnsrewrite=45.155.204.190
+||cdn.oaistatic.com^$dnsrewrite=45.155.204.190
+||files.oaiusercontent.com^$dnsrewrite=45.155.204.190
+||cdn.auth0.com^$dnsrewrite=45.155.204.190
+||tcr9i.chat.openai.com^$dnsrewrite=45.155.204.190
+||webrtc.chatgpt.com^$dnsrewrite=45.155.204.190
+||android.chat.openai.com^$dnsrewrite=45.155.204.190
+||api.openai.com^$dnsrewrite=45.155.204.190
+||operator.chatgpt.com^$dnsrewrite=45.155.204.190
+||sora.chatgpt.com^$dnsrewrite=45.155.204.190
+||sora.com^$dnsrewrite=45.155.204.190
+||videos.openai.com^$dnsrewrite=45.155.204.190
+||ios.chat.openai.com^$dnsrewrite=45.155.204.190
+||copilot.microsoft.com^$dnsrewrite=45.155.204.190
+||sydney.bing.com^$dnsrewrite=45.155.204.190
+||edgeservices.bing.com^$dnsrewrite=45.155.204.190
+||rewards.bing.com^$dnsrewrite=45.155.204.190
+||api.github.com^$dnsrewrite=144.31.14.104
+||api.individual.githubcopilot.com^$dnsrewrite=144.31.14.104
+||proxy.individual.githubcopilot.com^$dnsrewrite=144.31.14.104
+||grok.com^$dnsrewrite=45.155.204.190
+||accounts.x.ai^$dnsrewrite=45.155.204.190
+||assets.grok.com^$dnsrewrite=45.155.204.190
+||claude.ai^$dnsrewrite=45.155.204.190
+||console.anthropic.com^$dnsrewrite=45.155.204.190
+||api.anthropic.com^$dnsrewrite=45.155.204.190
+</code></pre>
+<ol start="4">
+<li>Click &ldquo;Save&rdquo;.
+<img src="/en/posts/chatgpt-claude-gemini-dns-dostup/img/comet_yPLxeBQm0p.png" alt="Custom Rules"></li>
+</ol>
+<p>Changes apply within 1-2 minutes.</p>
+<h3 id="how-to-make-a-rule-list-yourself-and-quickly">How to Make a Rule List Yourself and Quickly:</h3>
+<p><strong>In VS Code or Notepad++:</strong></p>
+<ol>
+<li><code>Ctrl+H</code> (Find and Replace).</li>
+<li>Enable <strong>Regular expressions</strong> (<code>.*</code>).</li>
+<li><strong>Find:</strong> <code>^(\d+\.\d+\.\d+\.\d+)\s+(\S+)</code></li>
+<li><strong>Replace with:</strong> <code>||$2^$dnsrewrite=$1</code></li>
+<li><strong>Replace all</strong>.</li>
+<li>Done in 5 seconds! 🚀</li>
+</ol>
+
+
+
+  <blockquote>
+    <p>💡 <strong>Note:</strong> Find and replace with regular expressions is available in VS Code, Notepad++, Sublime Text, and other advanced editors. It is not available in the standard Windows Notepad.</p>
+  </blockquote>
+
+<p><strong>List of current AI service domains:</strong> still the same <a href="https://info.dns.malw.link/" target="_blank">info.dns.malw.link</a>
+.</p>
+<h3 id="important-nuances">Important Nuances</h3>
+<p><strong>Hosts vs AdGuard DNS Priority</strong></p>
+<p>If you previously entered domains in the local <code>hosts</code> file, AdGuard DNS won&rsquo;t work for those domains—the system won&rsquo;t query DNS at all.</p>
+<p><strong>Solution:</strong> Either clear the AI service entries from hosts, or use only one of the methods.</p>
+<p><strong>Free Version Limits:</strong></p>
+<ul>
+<li>300,000 DNS queries per month.</li>
+<li>Up to 100 custom filtering rules.</li>
+<li>Up to 5 connected devices.</li>
+</ul>
+<p>More than enough for personal use.</p>
+<h3 id="pros-and-cons-2">Pros and Cons</h3>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Pros ✅
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Cons ❌
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Centralized management</strong> — all rules in one place.
+        </td>
+        
+        <td 
+          class=""
+        >
+          <strong>Requires registration and trust</strong> — AdGuard sees your DNS queries.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Works on all devices</strong> with the specified AdGuard DNS.
+        </td>
+        
+        <td 
+          class=""
+        >
+          <strong>Limits on the free tier.</strong>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>No need to manually update IPs</strong> — changes in the account apply automatically.
+        </td>
+        
+        <td 
+          class=""
+        >
+          <strong>Dependency on the service</strong> — problems with AdGuard can disrupt internet access.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Additional blocking</strong> of ads and trackers via filters.
+        </td>
+        
+        <td 
+          class=""
+        >
+          <strong>More complex to set up</strong> than simple DNS.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Query encryption</strong> via DoH/DoT.
+        </td>
+        
+        <td 
+          class=""
+        >
+          
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Query statistics</strong> — device activity is visible.
+        </td>
+        
+        <td 
+          class=""
+        >
+          
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Centralized management</strong> — all rules in one place.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Requires registration and trust</strong> — AdGuard sees your DNS queries.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Works on all devices</strong> with the specified AdGuard DNS.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Limits on the free tier.</strong>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>No need to manually update IPs</strong> — changes in the account apply automatically.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Dependency on the service</strong> — problems with AdGuard can disrupt internet access.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Additional blocking</strong> of ads and trackers via filters.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>More complex to set up</strong> than simple DNS.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Query encryption</strong> via DoH/DoT.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Query statistics</strong> — device activity is visible.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><p><strong>Verdict:</strong> Best option for those who want a balance between convenience and control. Recommended for users with medium technical knowledge.</p>
+<hr>
+<h2 id="method-4-comssone-dns--ready-made-out-of-the-box-solution">Method 4. Comss.one DNS – Ready-Made &ldquo;Out of the Box&rdquo; Solution</h2>
+<p><strong>Comss.one DNS</strong> is a public DNS service with pre-configured access to AI services and built-in DNS filtering. Unlike hosts and AdGuard DNS, <strong>nothing needs to be entered manually</strong> here—all rules are already added on the server side.</p>
+<p>The service solves several tasks at once:</p>
+<ul>
+<li>Correct name resolution for AI services.</li>
+<li>Blocking ads, trackers, phishing, and malicious sites.</li>
+<li>Protecting DNS queries using modern encryption protocols.</li>
+</ul>
+<hr>
+<h3 id="what-comssone-dns-offers">What Comss.one DNS Offers</h3>
+<p><strong>Supported AI Services:</strong></p>
+<ul>
+<li>ChatGPT and Sora.</li>
+<li>Claude AI.</li>
+<li>Google Gemini.</li>
+<li>Microsoft Copilot.</li>
+<li>GitHub Copilot.</li>
+<li>xAI Grok.</li>
+</ul>
+<p><strong>Additionally:</strong></p>
+<ul>
+<li>Blocking ads and counters (AdGuard DNS + AdAway filters).</li>
+<li>Protection against phishing and malicious domains.</li>
+<li>Correct operation of Windows updates, antiviruses, and insider builds.</li>
+<li>DDoS protection for servers.</li>
+<li>DNSSEC support.</li>
+</ul>
+
+
+
+  <blockquote>
+    <p>📎 More details: <a href="https://www.comss.ru/page.php?id=7315" target="_blank">Comss.one DNS</a>
+</p>
+  </blockquote>
+
+<hr>
+<h3 id="comssone-dns-server-addresses-current">Comss.one DNS Server Addresses (Current)</h3>
+<h4 id="-dns-over-https-doh">🔐 DNS-over-HTTPS (DoH)</h4>
+<p><strong>For Windows and Browsers:</strong></p>
+<pre><code>https://dns.comss.one/dns-query
+</code></pre>
+<p><strong>For MikroTik and Keenetic Routers:</strong></p>
+<pre><code>https://router.comss.one/dns-query
+</code></pre>
+<p>Server IP:</p>
+<pre><code>195.133.25.16
+</code></pre>
+<p><strong>For iPhone, iPad, and macOS:</strong></p>
+<ul>
+<li>Configuration profile: <a href="https://dl.comss.org/download/dns.comss.one.mobileconfig" target="_blank">dns.comss.one.mobileconfig</a>
+</li>
+</ul>
+<hr>
+<h4 id="-dns-over-tls-dot">🔐 DNS-over-TLS (DoT)</h4>
+<p><strong>For Android and Linux:</strong></p>
+<pre><code>dns.comss.one
+</code></pre>
+<p>or</p>
+<pre><code>tls://dns.comss.one
+</code></pre>
+<hr>
+<h4 id="-dns-over-quic-doq">🔐 DNS-over-QUIC (DoQ)</h4>
+<pre><code>quic://dns.comss.one
+</code></pre>
+<hr>
+<h4 id="-regular-dns-servers-ipv4">🌐 Regular DNS Servers (IPv4)</h4>
+<p>Use if the device doesn&rsquo;t support encryption:</p>
+<pre><code>83.220.169.155
+212.109.195.93
+</code></pre>
+<hr>
+<h3 id="configuration-briefly">Configuration (Briefly)</h3>
+<p>Configuration is fully analogous to <strong>Method 1</strong>:</p>
+<ul>
+<li>In browser — via &ldquo;Secure DNS&rdquo;.</li>
+<li>In system — via network settings.</li>
+<li>On router — via DNS or DoH/DoT section.</li>
+</ul>
+<p>The only difference is the server address — Comss.one is used.</p>
+<hr>
+<h3 id="important-nuances-1">Important Nuances</h3>
+<ul>
+<li>If the system has entries in <code>hosts</code> for ChatGPT, Gemini, etc. — <strong>Comss.one DNS will not be used</strong> for those domains.</li>
+<li>Not recommended to use simultaneously:
+<ul>
+<li>Comss.one DNS.</li>
+<li>AdGuard DNS.</li>
+<li>Hosts.</li>
+</ul>
+</li>
+<li>When using a router, DNS needs to be changed <strong>on it</strong>, not on each device.</li>
+</ul>
+<hr>
+<h3 id="pros-and-cons-3">Pros and Cons</h3>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Pros ✅
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Cons ❌
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Works immediately</strong> — no rules or manual IP entry.
+        </td>
+        
+        <td 
+          class=""
+        >
+          <strong>Complete trust in one provider</strong> — you rely on the service&rsquo;s choices.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Ready access to AI services</strong> — already configured and working.
+        </td>
+        
+        <td 
+          class=""
+        >
+          <strong>No granular customization</strong> — cannot flexibly configure blocking like in AdGuard DNS.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Blocks ads and trackers</strong> &ldquo;out of the box&rdquo;.
+        </td>
+        
+        <td 
+          class=""
+        >
+          <strong>Dependency on Comss.one infrastructure</strong> — access depends on this service&rsquo;s operation and availability.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Supports DoH / DoT / DoQ</strong> — modern and secure protocols.
+        </td>
+        
+        <td 
+          class=""
+        >
+          <strong>Not maximum privacy level</strong> — DNS queries are processed by an external server (unlike the <code>hosts</code> file).
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Great for routers</strong> — set up once for the entire network.
+        </td>
+        
+        <td 
+          class=""
+        >
+          
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Free</strong> — no financial cost.
+        </td>
+        
+        <td 
+          class=""
+        >
+          
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Minimal technical knowledge</strong> — easy to set up and use.
+        </td>
+        
+        <td 
+          class=""
+        >
+          
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Works immediately</strong> — no rules or manual IP entry.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Complete trust in one provider</strong> — you rely on the service&rsquo;s choices.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Ready access to AI services</strong> — already configured and working.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>No granular customization</strong> — cannot flexibly configure blocking like in AdGuard DNS.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Blocks ads and trackers</strong> &ldquo;out of the box&rdquo;.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Dependency on Comss.one infrastructure</strong> — access depends on this service&rsquo;s operation and availability.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Supports DoH / DoT / DoQ</strong> — modern and secure protocols.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Not maximum privacy level</strong> — DNS queries are processed by an external server (unlike the <code>hosts</code> file).
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Great for routers</strong> — set up once for the entire network.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Free</strong> — no financial cost.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Pros ✅
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Minimal technical knowledge</strong> — easy to set up and use.
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Cons ❌
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><hr>
+<h3 id="verdict-1">Verdict</h3>
+<p><strong>Comss.one DNS is the best &ldquo;set it and forget it&rdquo; option.</strong></p>
+<p>If you need <strong>the simplest and most stable way</strong> to work with ChatGPT, Claude, and Gemini—this is the optimal choice. Especially good for:</p>
+<ul>
+<li>Beginners.</li>
+<li>Home routers.</li>
+<li>Families.</li>
+<li>Smartphones and smart devices.</li>
+</ul>
+<p>For fine-tuning — AdGuard DNS.
+For maximum autonomy — <code>hosts</code>.
+But for most users, <strong>Comss.one DNS is the optimal compromise</strong> between convenience and functionality.</p>
+<hr>
+<h2 id="verifying-functionality">Verifying Functionality</h2>
+<p>After configuring any of the methods, check that everything works:</p>
+<h3 id="dns-check">DNS Check</h3>
+<ol>
+<li>Open <a href="https://dnsleaktest.com/" target="_blank">https://dnsleaktest.com/</a>
+.</li>
+<li>Click &ldquo;Extended test&rdquo;.</li>
+<li>Ensure the correct DNS servers are used:
+<ul>
+<li>Xbox DNS: <code>176.99.11.77</code> or <code>80.78.247.254</code></li>
+<li>Malw.link: <code>84.21.189.133</code> or <code>193.23.209.189</code></li>
+<li>AdGuard or Comss.one: corresponding IPs.</li>
+</ul>
+</li>
+</ol>
+<h3 id="checking-access-to-ai-services">Checking Access to AI Services</h3>
+<p>Try opening:</p>
+<ul>
+<li><a href="https://chatgpt.com" target="_blank">chatgpt.com</a>
+</li>
+<li><a href="https://claude.ai" target="_blank">claude.ai</a>
+</li>
+<li><a href="https://gemini.google.com" target="_blank">gemini.google.com</a>
+</li>
+<li><a href="https://grok.com" target="_blank">grok.com</a>
+</li>
+</ul>
+<p>If a site doesn&rsquo;t open:</p>
+<ol>
+<li>Clear DNS cache: <code>ipconfig /flushdns</code> (Windows) or <code>sudo dscacheutil -flushcache</code> (macOS).</li>
+<li>Restart the browser.</li>
+<li>Check that there are no conflicting entries in hosts.</li>
+<li>Ensure IP addresses are current.</li>
+</ol>
+<h3 id="if-nothing-helps">If Nothing Helps</h3>
+<ul>
+<li>Try another DNS server from the article.</li>
+<li>Check if your antivirus is blocking the connection.</li>
+<li>Temporarily disable VPN (if it was on).</li>
+<li>Update IP addresses from current lists.</li>
+</ul>
+<hr>
+<h2 id="frequently-asked-questions-faq">Frequently Asked Questions (FAQ)</h2>
+<p><strong>Q: Can I use multiple methods simultaneously?</strong></p>
+<p>A: Not recommended. Hosts has priority over DNS, so AdGuard DNS or Comss.one won&rsquo;t work for domains entered in hosts.</p>
+<hr>
+<p><strong>Q: Is it safe to use someone else&rsquo;s DNS servers?</strong></p>
+<p>A: The DNS servers from the article (Xbox DNS, Malw.link, Comss.one) are public and verified. But they see your DNS queries. For maximum privacy, use hosts.</p>
+<hr>
+<p><strong>Q: Why one IP for all services?</strong></p>
+<p>A: <code>45.155.204.190</code> is the address of a proxy server that forwards requests to the real servers of OpenAI, Google, and other companies.</p>
+<hr>
+<p><strong>Q: IP addresses stopped working. What to do?</strong></p>
+<p>A: Update the list from <a href="https://info.dns.malw.link/hosts" target="_blank">info.dns.malw.link/hosts</a>
+. CDN IP addresses can change.</p>
+<hr>
+<p><strong>Q: Will this work on mobile devices?</strong></p>
+<p>A: Yes. For iOS/Android, configure DNS in system settings or use configuration profiles (for iOS) and Private DNS apps (for Android).</p>
+<hr>
+<p><strong>Q: Can my ISP block these methods?</strong></p>
+<p>A: Your ISP can block specific DNS servers or IP addresses. In that case, you&rsquo;ll need to find new working addresses or consider alternative solutions.</p>
+<hr>
+<h2 id="conclusion">Conclusion</h2>
+<p>Getting stable access to ChatGPT, Claude, and Gemini through proper DNS configuration is <strong>quite possible</strong> and often easier than it seems. In most cases, geographic restrictions are implemented by the services themselves via IP address verification, and DNS approaches allow resolving domain names to alternative connection points.</p>
+<p>All four options solve the same problem but differ in convenience, control, and autonomy.</p>
+<p><strong>My Recommendations:</strong></p>
+<ul>
+<li>
+<p><strong>For beginners and those who want &ldquo;set it and forget it&rdquo;:</strong>
+<strong>Comss.one DNS</strong> — the simplest and most universal option. Ready access to AI services, ad and tracker blocking, DoH/DoT/DoQ support. No IP addresses, rules, or manual updates—just change DNS and use it.</p>
+</li>
+<li>
+<p><strong>For users with moderate experience who need balance:</strong>
+<strong>AdGuard DNS</strong> — the optimal compromise between convenience and flexibility. Set up rewriting rules once, and they work on all devices. No need to edit hosts, yet you retain control over which domains resolve where.</p>
+</li>
+<li>
+<p><strong>For advanced users and privacy paranoids:</strong>
+<strong>The <code>hosts</code> file</strong> — maximum autonomy. Everything is local, no third-party DNS services or query leaks. However, you&rsquo;ll need to monitor IP address relevance and update them manually.</p>
+</li>
+<li>
+<p><strong>For family and home use:</strong>
+<strong>Comss.one DNS on the router</strong> — one setup for the entire network. Smartphones, laptops, TVs, game consoles, and smart devices get access to AI services without additional configuration.</p>
+</li>
+</ul>
+<p>In real life, DNS approaches are often <strong>more stable and convenient</strong> than alternative solutions: they don&rsquo;t slow down the connection, work transparently, and don&rsquo;t require constant maintenance.</p>
+<hr>
+<h2 id="useful-links">Useful Links</h2>
+<p><strong>DNS Services</strong></p>
+<ul>
+<li><strong>Comss.one DNS</strong> — AI access &amp; filtering <a href="https://www.comss.ru/page.php?id=7315" target="_blank">link</a>
+.</li>
+<li><strong>AdGuard DNS</strong> — filtering rules (<code>dnsrewrite</code>) <a href="https://adguard-dns.io/ru/" target="_blank">link</a>
+.</li>
+<li><strong>Xbox DNS</strong> — public DNS with DoH <a href="https://xbox-dns.ru/" target="_blank">link</a>
+.</li>
+<li><strong>Malw.link DNS</strong> — public DNS and IP lists <a href="https://info.dns.malw.link/" target="_blank">link</a>
+.</li>
+</ul>
+<p><strong>Ready IPs and Hosts Files</strong></p>
+<ul>
+<li><strong>Hosts and IP lists for AI services</strong> <a href="https://info.dns.malw.link/hosts" target="_blank">link</a>
+.</li>
+</ul>
+<p><strong>Connection Check</strong></p>
+<ul>
+<li><strong>DNS Leak Test</strong> <a href="https://dnsleaktest.com/" target="_blank">link</a>
+.</li>
+<li><strong>Whoer</strong> (IP, DNS, region) <a href="https://whoer.net/" target="_blank">link</a>
+.</li>
+</ul>
+<p><strong>Documentation</strong></p>
+<ul>
+<li><strong>AdGuard DNS — Help</strong> <a href="https://adguard-dns.io/kb/" target="_blank">link</a>
+.</li>
+<li><strong>Comss.ru — Guides</strong> <a href="https://www.comss.ru/" target="_blank">link</a>
+.</li>
+</ul>
+<div class="divider my-8 text-base-content/20"></div>
+
+<div class="flex justify-center my-6">
+  <button onclick="document.getElementById('donation-modal').showModal()"
+          class="btn btn-lg btn-primary rounded-full shadow-lg hover:shadow-xl 
+                 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] 
+                 active:scale-[0.98] gap-2 px-8 border-0 no-underline">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+    </svg>
+    <span>Support the project</span>
+  </button>
+</div>
+
+<div class="divider my-8 text-base-content/20"></div>
+
+
+<dialog id="donation-modal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box bg-base-100 p-0 overflow-hidden shadow-2xl max-w-md">
+    
+    
+    <div class="bg-primary p-6 relative">
+      <form method="dialog" class="absolute top-4 right-4">
+        <button class="btn btn-sm btn-circle btn-ghost text-primary-content/70 
+                       hover:text-primary-content hover:bg-primary-content/10">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </form>
+      
+      <div class="flex items-center gap-4">
+        <div class="bg-primary-content/15 p-3 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-content" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-primary-content">Support the Project</h3>
+          <p class="text-primary-content/80 text-sm mt-1">Choose a convenient method</p>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="p-6 space-y-4">
+      
+      
+      <a href="https://pay.cloudtips.ru/p/b59e1765" 
+         target="_blank"
+         rel="noopener noreferrer"
+         class="group flex items-center gap-4 p-4 rounded-xl border-2 border-base-300 
+                hover:border-primary hover:shadow-lg hover:bg-base-200/50
+                transition-all duration-200 no-underline block">
+        <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-xl 
+                    flex items-center justify-center shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z" />
+          </svg>
+        </div>
+        <div class="flex-grow min-w-0">
+          <h4 class="font-semibold text-base text-base-content">Cloudtips</h4>
+          <p class="text-sm text-base-content/60 mt-0.5">For users from Russia</p>
+        </div>
+        <div class="flex-shrink-0 text-base-content/30 group-hover:text-primary 
+                    transition-all group-hover:translate-x-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+      </a>
+      
+      
+      <a href="https://t.me/tribute/app?startapp=dE4k" 
+         target="_blank"
+         rel="noopener noreferrer"
+         class="group flex items-center gap-4 p-4 rounded-xl border-2 border-base-300 
+                hover:border-primary hover:shadow-lg hover:bg-base-200/50
+                transition-all duration-200 no-underline block">
+        <div class="flex-shrink-0 w-12 h-12 bg-purple-600 rounded-xl 
+                    flex items-center justify-center shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+          </svg>
+        </div>
+        <div class="flex-grow min-w-0">
+          <h4 class="font-semibold text-base text-base-content">Tribute</h4>
+          <p class="text-sm text-base-content/60 mt-0.5">International cards, Telegram Stars, USDT, Bitcoin, Toncoin, Notcoin</p>
+        </div>
+        <div class="flex-shrink-0 text-base-content/30 group-hover:text-primary 
+                    transition-all group-hover:translate-x-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+      </a>
+      
+      
+      <div class="mt-6 p-4 bg-base-200/50 rounded-xl">
+        <div class="flex items-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+          </svg>
+          <p class="text-sm text-base-content/70">
+            All payments are secure. Any support helps develop the project and create new content ❤️
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <form method="dialog" class="modal-backdrop bg-black/50">
+    <button>Close</button>
+  </form>
+</dialog>
+<h3 id="legal-note">Legal Note</h3>
+<p>All links and technical examples are provided <strong>for reference and educational purposes only</strong>. The material is dedicated to issues of proper DNS resolution and network parameter configuration within the standard capabilities of operating systems and network equipment.</p>
+<p>The described approaches are based on standard DNS operation mechanisms and do not involve using means to bypass technical restrictions or violate service terms of use.</p>
+<p>The user is solely responsible for complying with applicable laws and service terms of use when applying the described configuration methods.</p>
+      </section>
+	  <div class="tags mt-4 flex flex-wrap gap-2">
+	  <ion-icon name="pricetags" class="text-lg opacity-75 mr-1"></ion-icon>
+		  <a 
+			href="/en/tags/dns/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="DNS"
+			data-tag="dns"
+		  >DNS</a>
+		  <a 
+			href="/en/tags/neural-networks/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Neural Networks"
+			data-tag="neural networks"
+		  >Neural Networks</a>
+		  <a 
+			href="/en/tags/chatgpt/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="ChatGPT"
+			data-tag="chatgpt"
+		  >ChatGPT</a>
+		  <a 
+			href="/en/tags/gemini/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Gemini"
+			data-tag="gemini"
+		  >Gemini</a>
+		  <a 
+			href="/en/tags/claude/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Claude"
+			data-tag="claude"
+		  >Claude</a>
+		  <a 
+			href="/en/tags/adguard/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="AdGuard"
+			data-tag="adguard"
+		  >AdGuard</a>
+		  <a 
+			href="/en/tags/comssone-dns/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Comss.one DNS"
+			data-tag="comss.one dns"
+		  >Comss.one DNS</a>
+		  <a 
+			href="/en/tags/guide/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Guide"
+			data-tag="guide"
+		  >Guide</a>
+		  <a 
+			href="/en/tags/ai/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="AI"
+			data-tag="ai"
+		  >AI</a>
+		  <a 
+			href="/en/tags/openai/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="OpenAI"
+			data-tag="openai"
+		  >OpenAI</a>
+		  <a 
+			href="/en/tags/anthropic/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Anthropic"
+			data-tag="anthropic"
+		  >Anthropic</a>
+		  <a 
+			href="/en/tags/google-ai/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Google AI"
+			data-tag="google ai"
+		  >Google AI</a>
+		  <a 
+			href="/en/tags/microsoft-copilot/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Microsoft Copilot"
+			data-tag="microsoft copilot"
+		  >Microsoft Copilot</a>
+		  <a 
+			href="/en/tags/github-copilot/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="GitHub Copilot"
+			data-tag="github copilot"
+		  >GitHub Copilot</a>
+		  <a 
+			href="/en/tags/dns-filtering/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="DNS Filtering"
+			data-tag="dns filtering"
+		  >DNS Filtering</a>
+	  </div>
+
+      
+      <div class="divider"></div>
+      <div class="flex flex-col md:flex-row justify-between gap-4 py-4">
+        
+        <div></div>
+        
+
+        
+        <a class="group btn btn-outline" href="/en/posts/role-htaccess/" title="Role of the .htaccess file in Apache server configuration">
+          <div class="inline-flex flex-col items-end">
+            <span class="text-base-content/60 group-hover:text-neutral-content/60 text-xs font-normal">Next page</span>
+            <span class="max-w-48 truncate">Role of the .htaccess file in Apache server configuration</span>
+          </div>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </a>
+        
+      </div>
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+
+    
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#-important-security-and-trust-issues">⚠️ Important: Security and Trust Issues</a></li>
+    <li><a href="#how-geographic-access-restrictions-work">How Geographic Access Restrictions Work</a>
+      <ul>
+        <li><a href="#what-happens-during-connection">What Happens During Connection</a></li>
+        <li><a href="#the-role-of-dns-in-the-connection-process">The Role of DNS in the Connection Process</a></li>
+      </ul>
+    </li>
+    <li><a href="#method-1-alternative-dns-server">Method 1. Alternative DNS Server</a>
+      <ul>
+        <li><a href="#how-it-works">How it Works</a></li>
+        <li><a href="#available-dns-servers">Available DNS Servers</a></li>
+        <li><a href="#browser-configuration">Browser Configuration</a></li>
+        <li><a href="#operating-system-configuration">Operating System Configuration</a></li>
+        <li><a href="#pros-and-cons">Pros and Cons</a></li>
+        <li><a href="#verdict">Verdict</a></li>
+      </ul>
+    </li>
+    <li><a href="#method-2-hosts-file">Method 2. Hosts File</a>
+      <ul>
+        <li><a href="#how-it-works-1">How it Works</a></li>
+        <li><a href="#where-to-find-the-hosts-file">Where to Find the Hosts File</a></li>
+        <li><a href="#how-to-edit-hosts-in-windows">How to Edit Hosts in Windows</a></li>
+        <li><a href="#how-to-edit-hosts-in-macoslinux">How to Edit Hosts in macOS/Linux</a></li>
+        <li><a href="#example-entries-for-ai-services">Example Entries for AI Services</a></li>
+        <li><a href="#where-to-get-current-ip-addresses">Where to Get Current IP Addresses</a></li>
+        <li><a href="#pros-and-cons-1">Pros and Cons</a></li>
+      </ul>
+    </li>
+    <li><a href="#method-3-adguard-dns">Method 3. AdGuard DNS</a>
+      <ul>
+        <li><a href="#how-it-works-2">How it Works</a></li>
+        <li><a href="#setting-up-adguard-dns">Setting Up AdGuard DNS</a></li>
+        <li><a href="#adding-rewriting-rules">Adding Rewriting Rules</a></li>
+        <li><a href="#how-to-make-a-rule-list-yourself-and-quickly">How to Make a Rule List Yourself and Quickly:</a></li>
+        <li><a href="#important-nuances">Important Nuances</a></li>
+        <li><a href="#pros-and-cons-2">Pros and Cons</a></li>
+      </ul>
+    </li>
+    <li><a href="#method-4-comssone-dns--ready-made-out-of-the-box-solution">Method 4. Comss.one DNS – Ready-Made &ldquo;Out of the Box&rdquo; Solution</a>
+      <ul>
+        <li><a href="#what-comssone-dns-offers">What Comss.one DNS Offers</a></li>
+        <li><a href="#comssone-dns-server-addresses-current">Comss.one DNS Server Addresses (Current)</a></li>
+        <li><a href="#configuration-briefly">Configuration (Briefly)</a></li>
+        <li><a href="#important-nuances-1">Important Nuances</a></li>
+        <li><a href="#pros-and-cons-3">Pros and Cons</a></li>
+        <li><a href="#verdict-1">Verdict</a></li>
+      </ul>
+    </li>
+    <li><a href="#verifying-functionality">Verifying Functionality</a>
+      <ul>
+        <li><a href="#dns-check">DNS Check</a></li>
+        <li><a href="#checking-access-to-ai-services">Checking Access to AI Services</a></li>
+        <li><a href="#if-nothing-helps">If Nothing Helps</a></li>
+      </ul>
+    </li>
+    <li><a href="#frequently-asked-questions-faq">Frequently Asked Questions (FAQ)</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#useful-links">Useful Links</a>
+      <ul>
+        <li><a href="#legal-note">Legal Note</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Maksim Alexandrov<br>
+<strong>Age:</strong> 28<br>
+<strong>Location:</strong> Tula, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>This blog is my personal knowledge base, where I push notes about my tech stack, life experience, and everything that triggers my interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — ready to merge ideas and work on joint projects.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-programming-languages">💻 Programming Languages</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Responsive layout (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST APIs</strong></li>
+</ul>
+<h2 id="-databases">🗄️ Databases</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-design--graphics">🎨 Design &amp; Graphics</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX design and prototyping</li>
+<li><strong>Photoshop</strong> — graphics and image editing</li>
+<li><strong>After Effects</strong> — motion design and animation 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Open Source Projects 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          🚧 WIP
+        </td>
+        
+        <td 
+          class=""
+        >
+          No projects to showcase yet. Stay tuned!
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          🚧 WIP
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          No projects to showcase yet. Stay tuned!
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Projects 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN service in Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN service in Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Social Links</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "forest"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+	
+	
+	  
+	
+<script src="/js/backToTop.min.js"></script>
+<script>
+  commonJsStrict.addBackToTop({
+    diameter: 50,
+    scrollContainer: document.body,
+    innerHTML: '<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 244l144-144 144 144M256 120v292"/></svg>',
+    className: 'h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary',
+  });
+</script>
+
+    
+
+	
+	
+	
+	<script>
+	window.initSwiper = function(config) {
+		import('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs').then((SwiperModule) => {
+			const Swiper = SwiperModule.default;
+
+			const swiperOptions = {
+				loop: config.loop || false,
+				autoplay: config.autoplay
+					? {
+						  delay: parseInt(config.autoplay, 10),
+						  disableOnInteraction: false,
+					  }
+					: undefined,
+				pagination: config.pagination
+					? {
+						  el: `.swiper-container.${config.id} .swiper-pagination`,
+						  type: "progressbar",
+					  }
+					: undefined,
+			};
+
+			new Swiper(`.${config.id}-mySwiper`, swiperOptions);
+		}).catch((error) => {
+			console.error('Failed to load Swiper:', error);
+		});
+	};
+	</script>
+	
+
+	
+	<script
+  src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
+  integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
+  crossorigin="anonymous"
+></script>
+<script>
+  format()
+
+  function format() {
+    document.querySelectorAll('span[data-format="luxon"]').forEach(el => {
+      const date = el.textContent
+
+      el.textContent = luxon.DateTime.fromISO(date, { locale: "en" }).toFormat("HH:mm, dd MMMM")
+    })
+  }
+</script>
+
+	
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/apache.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script><script>
+  hljs.highlightAll();
+  hljs.addPlugin(new CopyButtonPlugin());
+
+  document.addEventListener('alpine:initialized', () => {
+    
+    window.customSyntaxHighlighting = {
+        dark: 'a11y-dark',
+        light: 'atom-one-dark'
+    };
+
+    
+    const updateSyntaxTheme = () => {
+        try {
+            
+            const isDark = Alpine.store('darkMode').isDark();
+            const currentTheme = isDark ? 
+                window.customSyntaxHighlighting.dark : 
+                window.customSyntaxHighlighting.light;
+
+            
+            let link = document.querySelector('link[data-syntax-highlight]');
+            if (link) {
+                
+                const currentHref = link.href;
+
+                
+                const updatedHref = currentHref.replace(/styles\/[^/]+\.min\.css/, `styles/${currentTheme}.min.css`);
+
+                
+                link.href = updatedHref;
+            }
+        } catch (error) {
+            console.warn('Error updating syntax theme:', error);
+        }
+    };
+
+    
+    updateSyntaxTheme();
+
+    
+    Alpine.effect(() => {
+        updateSyntaxTheme();
+    });
+});
+</script>
+
+
+
+  
+ 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-rotate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-fullscreen.min.css">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/rotate/lg-rotate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/fullscreen/lg-fullscreen.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+
+<style>
+  .lg-sub-html {
+    backdrop-filter: blur(16px);
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const galleryContainer = document.querySelector("#dream-single-post-content");
+    const images = galleryContainer?.querySelectorAll("img");
+
+    if (galleryContainer && images?.length > 0) {
+      galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
+
+      images.forEach(img => {
+        if (!img.closest("a")) {
+          const wrapper = document.createElement("a");
+          wrapper.href = img.getAttribute("data-src") || img.src; 
+          wrapper.classList.add("lg-item");
+
+          const title = img.title ? `<h2 class="text-lg">${img.title}</h2>` : "";
+          const alt = img.alt ? `<h1 class="text-2xl">${img.alt}</h1>` : "";
+          wrapper.dataset.subHtml = `${alt}${title}`;
+
+          
+          img.setAttribute("data-src", img.src); 
+          img.removeAttribute("src"); 
+          img.classList.add("lazyload"); 
+
+          
+          img.parentNode.insertBefore(wrapper, img);
+          wrapper.appendChild(img);
+        }
+      });
+
+      lightGallery(galleryContainer, {
+        selector: "a.lg-item",
+        plugins: [lgZoom, lgRotate, lgFullscreen],
+        speed: 500,
+        zoom: true,
+        fullScreen: true,
+        download: false,
+        counter: true,
+        mousewheel: true,
+        zoomFromOrigin: true,
+        scale: 1,
+        rotate: true,
+        hideControlOnEnd: false,
+        closeOnTap: true,
+        subHtmlSelectorRelative: true
+      });
+
+      const lazyLoadInstance = new LazyLoad({
+        elements_selector: ".lazyload",
+        threshold: 300, 
+      });
+    }
+  });
+</script>
+
+  
+
+
+
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

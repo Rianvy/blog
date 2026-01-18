@@ -9,11 +9,11 @@
     <lastBuildDate>Sat, 17 Jan 2026 22:29:50 +0300</lastBuildDate>
     <atom:link href="https://0x69.ru/en/categories/guides/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>ChatGPT, Claude and Gemini without VPN — 4 DNS Methods</title>
-      <link>https://0x69.ru/en/posts/unlock-ai-without-vpn-dns-guide/</link>
+      <title>ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services</title>
+      <link>https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/</link>
       <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
-      <guid>https://0x69.ru/en/posts/unlock-ai-without-vpn-dns-guide/</guid>
-      <description>&lt;p&gt;Unlock neural networks without VPN — through DNS, hosts, or AdGuard.&lt;/p&gt;</description>
+      <guid>https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/</guid>
+      <description>&lt;p&gt;Proper DNS configuration for stable access to AI services – via DNS, hosts file, or AdGuard.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

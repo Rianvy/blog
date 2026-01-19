@@ -18,7 +18,7 @@ tags:
   - Адаптация
   - Figma
 filters:
-  - Web-Design
+  - Web-Development
 tools:
   - Figma
   - HTML

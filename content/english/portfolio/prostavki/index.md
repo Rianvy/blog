@@ -18,7 +18,7 @@ tags:
   - Adaptation for mobile devices
   - Figma
 filters:
-  - Web-Design
+  - Web-Development
 tools:
   - Figma
   - HTML

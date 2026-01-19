@@ -6,8 +6,15 @@
     <description>Recent content on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>ru</language>
-    <lastBuildDate>Sat, 17 Jan 2026 22:29:50 +0300</lastBuildDate>
+    <lastBuildDate>Mon, 19 Jan 2026 08:05:59 +0300</lastBuildDate>
     <atom:link href="https://0x69.ru/ru/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CodeSqueeze — Online Code Minifier</title>
+      <link>https://0x69.ru/ru/portfolio/codesqueeze/</link>
+      <pubDate>Mon, 19 Jan 2026 08:05:59 +0300</pubDate>
+      <guid>https://0x69.ru/ru/portfolio/codesqueeze/</guid>
+      <description>&lt;p&gt;CodeSqueeze — современный веб-инструмент для минификации HTML, CSS и JavaScript, ориентированный на скорость, приватность и комфортную работу прямо в браузере.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>ChatGPT, Claude и Gemini — корректная настройка DNS для доступа к AI-сервисам</title>
       <link>https://0x69.ru/ru/posts/chatgpt-claude-gemini-dns-dostup/</link>

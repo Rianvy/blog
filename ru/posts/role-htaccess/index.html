@@ -611,7 +611,7 @@
 
       <section id="dream-single-post-content" itemprop="articleBody">
         
-        <img src="https://0x69.ru/ru/posts/role-htaccess/Cover.png" alt="Роль файла .htaccess в настройке сервера Apache"/>
+        <img src="https://0x69.ru/ru/posts/role-htaccess/Cover.png" alt="Роль файла .htaccess в настройке сервера Apache" class="my-4"/>
         
 		
 		
@@ -1566,7 +1566,7 @@ php_value error_reporting E_ALL
         if (!img.closest("a")) {
           const wrapper = document.createElement("a");
           wrapper.href = img.getAttribute("data-src") || img.src; 
-          wrapper.classList.add("lg-item");
+          wrapper.classList.add("lg-item", "not-prose");
 
           const title = img.title ? `<h2 class="text-lg">${img.title}</h2>` : "";
           const alt = img.alt ? `<h1 class="text-2xl">${img.alt}</h1>` : "";

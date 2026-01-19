@@ -664,7 +664,7 @@
 
       <section id="dream-single-post-content" itemprop="articleBody">
         
-        <img src="https://0x69.ru/en/portfolio/prostavki/Cover.png" alt="Landing Page ProStavki"/>
+        <img src="https://0x69.ru/en/portfolio/prostavki/Cover.png" alt="Landing Page ProStavki" class="my-4"/>
         
 		
 		
@@ -1387,7 +1387,13 @@
       <div class="divider"></div>
       <div class="flex flex-col md:flex-row justify-between gap-4 py-4">
         
-        <div></div>
+        <a class="group btn btn-outline" href="/en/portfolio/codesqueeze/" title="CodeSqueeze — Online Code Minifier">
+          <ion-icon name="chevron-back"></ion-icon>
+          <div class="inline-flex flex-col items-start">
+            <span class="text-base-content/60 group-hover:text-neutral-content/60 text-xs font-normal">Previous page</span>
+            <span class="max-w-48 truncate">CodeSqueeze — Online Code Minifier</span>
+          </div>
+        </a>
         
 
         
@@ -1963,7 +1969,7 @@
         if (!img.closest("a")) {
           const wrapper = document.createElement("a");
           wrapper.href = img.getAttribute("data-src") || img.src; 
-          wrapper.classList.add("lg-item");
+          wrapper.classList.add("lg-item", "not-prose");
 
           const title = img.title ? `<h2 class="text-lg">${img.title}</h2>` : "";
           const alt = img.alt ? `<h1 class="text-2xl">${img.alt}</h1>` : "";

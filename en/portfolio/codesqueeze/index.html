@@ -1,0 +1,2334 @@
+<!DOCTYPE html>
+<html lang="en"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeSqueeze — Online Code Minifier | 0x69.ru</title>
+
+    
+<meta name="google-site-verification" content="SX8wwAcRfmBYPxrIA69UFfuq8DDa2GxWVBzVj9tucMA" />
+<link rel="canonical" href="https://0x69.ru/en/portfolio/codesqueeze/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="CodeSqueeze is a modern web tool for minifying HTML, CSS, and JavaScript, focused on speed, privacy, and a comfortable in-browser workflow.
+" />
+
+
+<meta name="keywords" content="Web Development,UI/UX,Frontend,JavaScript,Optimization,Web Tools,Figma">
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/en/portfolio/codesqueeze/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="CodeSqueeze — Online Code Minifier">
+  <meta property="og:description" content="A modern online HTML, CSS, and JavaScript minifier with offline support, detailed statistics, and a thoughtfully designed interface.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="portfolio">
+    <meta property="article:published_time" content="2026-01-19T08:05:59+03:00">
+    <meta property="article:modified_time" content="2026-01-19T08:05:59+03:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="UI/UX">
+    <meta property="article:tag" content="Frontend">
+    <meta property="article:tag" content="JavaScript">
+    <meta property="article:tag" content="Optimization">
+    <meta property="article:tag" content="Web Tools">
+    <meta property="og:image" content="https://0x69.ru/en/portfolio/codesqueeze/Cover.png">
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://0x69.ru/en/portfolio/codesqueeze/Cover.png">
+  <meta name="twitter:title" content="CodeSqueeze — Online Code Minifier">
+  <meta name="twitter:description" content="A modern online HTML, CSS, and JavaScript minifier with offline support, detailed statistics, and a thoughtfully designed interface.">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+
+
+
+    
+
+
+<link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css" data-syntax-highlight="true" id="syntax-theme">
+<style>
+  pre {
+   border-radius: 6px;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav x-data="{ isSticky: false }"
+  x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })"
+  class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
+  :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/img/avatar.jpg" alt="0x69.ru &lt;/&gt;" />
+        </div>
+      </div>
+
+      
+      <div>
+        
+        <a href="/en/" class="text-lg font-semibold cursor-pointer">
+          0x69.ru &lt;/&gt;
+        </a>
+        
+        
+        <div class="text-base-content/60 text-sm">To iterate is human, to recurse divine</div>
+        
+      </div>
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-md">
+        
+  
+  
+    <li>
+      <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="About">
+        <ion-icon name="information-circle"></ion-icon>About</div>
+    </li>
+  
+
+
+
+
+  
+
+
+<ul class="p-0 m-0 list-none">
+
+<style>
+.menu-title {
+    margin-bottom: 4px;
+}
+</style>
+
+  
+  <li>
+    <div class="menu-title">Languages</div>
+    <ul class="p-0 m-0 list-none">
+      
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/portfolio/codesqueeze/" 
+             title="English" 
+             class="inline-flex items-center p-2 active">
+            <ion-icon name="language" role="img" class="md hydrated"></ion-icon> 
+            English
+            
+              <ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/portfolio/codesqueeze/" 
+             title="Русский" 
+             class="inline-flex items-center p-2 ">
+            <ion-icon name="language" role="img" class="md hydrated"></ion-icon> 
+            Русский
+            
+          </a>
+        </li>
+      
+    </ul>
+  </li>
+
+  
+  <li>
+    <div class="menu-title">Menu</div>
+    <ul class="p-0 m-0 list-none">
+      
+        
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/search" title="Search">
+      <ion-icon name="search" role="img" class="md hydrated"></ion-icon> Search
+    </a>
+  
+</li>
+      
+        
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/categories" title="All Categories">
+      <ion-icon name="grid" role="img" class="md hydrated"></ion-icon> All Categories
+    </a>
+  
+</li>
+      
+        
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/portfolio" title="Portfolio">
+      <ion-icon name="sparkles" role="img" class="md hydrated"></ion-icon> Portfolio
+    </a>
+  
+</li>
+      
+        
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/posts" title="Archives">
+      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> Archives
+    </a>
+  
+</li>
+      
+        
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/tags" title="All Tags">
+      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> All Tags
+    </a>
+  
+</li>
+      
+        
+
+
+<li>
+  
+    
+    
+    
+      <a class="inline-flex items-center p-2" href="https://github.com/rianvy" target="_blank" title="GitHub">
+        
+          <ion-icon name="logo-github" role="img" class="md hydrated"></ion-icon>
+        
+        GitHub
+      </a>
+    
+  
+</li>
+      
+        
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/index.xml" title="RSS">
+      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
+    </a>
+  
+</li>
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </li>
+</ul>
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+      
+      <div role="link" tabindex="0"
+        class="text-sm font-semibold cursor-pointer hover:underline"
+        @click="flip = !flip"
+        title="About"
+      >About</div>
+      
+      
+
+      
+      
+        
+      
+
+      
+
+      
+      
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/search" title="Search">
+  <ion-icon class="group-hover:text-primary-content" name="search"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/portfolio" title="Portfolio">
+  <ion-icon class="group-hover:text-primary-content" name="sparkles"></ion-icon>
+</a>
+
+
+      
+	  
+	
+	<div class="dropdown dropdown-end dropdown-hover">
+	  <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select language">
+		<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
+	  </div>
+	  <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl">
+		
+		  
+		  
+		  
+		  
+
+		  
+		  
+			
+			
+		  
+
+		  <li>
+			<a href="https://0x69.ru/en/portfolio/codesqueeze/" class="active">
+			  <ion-icon name="language" role="img" class="md hydrated"></ion-icon>
+			  English
+			  
+				<ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
+			  
+			</a>
+		  </li>
+		
+		  
+		  
+		  
+		  
+
+		  
+		  
+			
+		  
+
+		  <li>
+			<a href="https://0x69.ru/ru/portfolio/codesqueeze/" class="">
+			  <ion-icon name="language" role="img" class="md hydrated"></ion-icon>
+			  Русский
+			  
+			</a>
+		  </li>
+		
+	  </ul>
+	</div>
+     	  
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
+          <ion-icon class="group-hover:text-primary-content text-xl" name="menu"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+          
+          
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/posts" title="Archives">
+      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> Archives
+    </a>
+  
+</li>
+          
+          
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/tags" title="All Tags">
+      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> All Tags
+    </a>
+  
+</li>
+          
+          
+
+
+<li>
+  
+    
+    
+    
+      <a class="inline-flex items-center p-2" href="https://github.com/rianvy" target="_blank" title="GitHub">
+        
+          <ion-icon name="logo-github" role="img" class="md hydrated"></ion-icon>
+        
+        GitHub
+      </a>
+    
+  
+</li>
+          
+          
+
+
+<li>
+  
+    <a class="inline-flex items-center p-2" href="/en/index.xml" title="RSS">
+      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
+    </a>
+  
+</li>
+          
+
+          
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </ul>
+      </div>
+      
+    </section>
+  </div>
+</nav>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block"></div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="CodeSqueeze — Online Code Minifier">
+  <meta itemprop="description" content="A modern online HTML, CSS, and JavaScript minifier with offline support, detailed statistics, and a thoughtfully designed interface.">
+  <meta itemprop="datePublished" content="2026-01-19T08:05:59+03:00">
+  <meta itemprop="dateModified" content="2026-01-19T08:05:59+03:00">
+  <meta itemprop="wordCount" content="348">
+  <meta itemprop="image" content="https://0x69.ru/en/portfolio/codesqueeze/Cover.png">
+  <meta itemprop="keywords" content="Web Development,UI/UX,Frontend,JavaScript,Optimization,Web Tools,Figma">
+
+      <header>
+        <h1 itemprop="headline">CodeSqueeze — Online Code Minifier</h1>
+        <p class="text-sm">
+          
+            <span data-format="luxon">2026-01-19T08:05:59&#43;03:00</span>
+          
+
+          | <span>2 minute read</span>
+
+          
+          | <span>Updated at
+            
+              <span data-format="luxon">2026-01-19T08:05:59&#43;03:00</span>
+            </span>
+          
+        </p>
+
+        <div class="flex justify-between">
+          <div class="flex items-center">
+  
+  <div class="avatar mr-1">
+    <div class="w-8 rounded-full">
+      <img class="my-0" src="/img/avatar.jpg" alt="Rianvy" />
+    </div>
+  </div>
+  
+
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+  
+    
+      <span itemprop="name">Rianvy</span>
+    
+  
+  </span>
+</div>
+
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=CodeSqueeze%20%e2%80%94%20Online%20Code%20Minifier&amp;url=https://0x69.ru/en/portfolio/codesqueeze/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=https://0x69.ru/en/portfolio/codesqueeze/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=CodeSqueeze%20%e2%80%94%20Online%20Code%20Minifier%20https://0x69.ru/en/portfolio/codesqueeze/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://t.me/share/url?url=https://0x69.ru/en/portfolio/codesqueeze/&amp;resubmit=true&amp;title=CodeSqueeze%20%e2%80%94%20Online%20Code%20Minifier" target="_blank" rel="noopener noreferrer"
+      title="Share on Telegram">
+      <ion-icon class="group-hover:text-primary-content" name="send"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+        <img src="https://0x69.ru/en/portfolio/codesqueeze/Cover.png" alt="CodeSqueeze — Online Code Minifier" class="my-4"/>
+        
+		
+		
+		<div class="not-prose my-12">
+  
+  <div class="mb-8">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </div>
+      <h3 class="text-2xl md:text-3xl font-bold text-base-content">Tools used</h3>
+    </div>
+  </div>
+  
+  <div class="grid grid-cols-2 gap-3 md:hidden">
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-6 h-6 flex-shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 57" class="w-full h-full">
+          <path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" />
+          <path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" />
+          <path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" />
+          <path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" />
+          <path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" />
+        </svg>
+      </div>
+      
+      <span class="font-medium text-sm text-base-content">Figma</span>
+    </div>
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-6 h-6 flex-shrink-0">
+        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 141.53199999999998" class="toolsUsed">
+          <path d="M10.383 126.894L0 0l124 .255-10.979 126.639-50.553 14.638z" fill="#e34f26" />
+          <path d="M62.468 129.277V12.085l51.064.17-9.106 104.851z" fill="#ef652a" />
+          <path d="M99.49 41.362l1.446-15.49H22.383l4.34 47.49h54.213L78.81 93.617l-17.362 4.68-17.617-5.106-.936-12.085H27.319l2.128 24.681 32 8.936 32.255-8.936 4.34-48.17H41.107L39.49 41.362z" fill="#fff" />
+        </svg>
+      </div>
+      
+      <span class="font-medium text-sm text-base-content">HTML</span>
+    </div>
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-6 h-6 flex-shrink-0">
+        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 141.53" class="toolsUsed">
+          <path d="M10.383 126.892L0 0l124 .255-10.979 126.637-50.553 14.638z" fill="#1b73ba" />
+          <path d="M62.468 129.275V12.085l51.064.17-9.106 104.85z" fill="#1c88c7" />
+          <path d="M100.851 27.064H22.298l2.128 15.318h37.276l-36.68 15.745 2.127 14.808h54.043l-1.958 20.68-18.298 3.575-16.595-4.255-1.277-11.745H27.83l2.042 24.426 32.681 9.106 31.32-9.957 4-47.745H64.765l36.085-14.978z" fill="#fff" />
+        </svg>
+      </div>
+      
+      <span class="font-medium text-sm text-base-content">CSS</span>
+    </div>
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-6 h-6 flex-shrink-0">
+        <svg viewBox=".15 .13 799.7 479.69" xmlns="http://www.w3.org/2000/svg" class="toolsUsed">
+          <path d="m400 .13c-106.63 0-173.27 53.3-199.93 159.89 39.99-53.3 86.64-73.28 139.95-59.96 30.42 7.6 52.16 29.67 76.23 54.09 39.2 39.78 84.57 85.82 183.68 85.82 106.62 0 173.27-53.3 199.92-159.9-39.98 53.3-86.63 73.29-139.95 59.97-30.41-7.6-52.15-29.67-76.22-54.09-39.2-39.78-84.58-85.82-183.68-85.82zm-199.93 239.84c-106.62 0-173.27 53.3-199.92 159.9 39.98-53.3 86.63-73.29 139.95-59.96 30.41 7.61 52.15 29.67 76.22 54.08 39.2 39.78 84.58 85.83 183.68 85.83 106.63 0 173.27-53.3 199.93-159.9-39.99 53.3-86.64 73.29-139.95 59.96-30.42-7.59-52.16-29.67-76.23-54.08-39.2-39.78-84.57-85.83-183.68-85.83z" fill="#06b6d4" />
+        </svg>
+      </div>
+      
+      <span class="font-medium text-sm text-base-content">Tailwind CSS</span>
+    </div>
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-6 h-6 flex-shrink-0">
+        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 141.53199999999998" class="toolsUsed">
+          <path d="M10.383 126.894L0 0l124 .255-10.979 126.639-50.553 14.638z" fill="#e9ca32" />
+          <path d="M62.468 129.277V12.085l51.064.17-9.106 104.851z" fill="#ffde25" />
+          <g fill="#fff">
+            <path d="M57 26H43.5v78L33 102V91.5l-12.5-2V113l36.5 9.5zM67.127 26H104.5L102 40.95H81.394v24.533H102L99.5 115l-32.373 7.5V107L89 99.5 90.263 79l-23.136 3.35z" />
+          </g>
+        </svg>
+      </div>
+      
+      <span class="font-medium text-sm text-base-content">JavaScript</span>
+    </div>
+    
+  </div>
+  
+  <div class="hidden md:block overflow-hidden rounded-xl border border-base-300 bg-base-100">
+    <table class="w-full">
+      <tbody class="divide-y divide-base-300">
+               
+        <tr class="group hover:bg-base-200/50 transition-colors">
+                 
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-5 h-5 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 57" class="w-full h-full">
+                  <path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" />
+                  <path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" />
+                  <path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" />
+                  <path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" />
+                  <path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" />
+                </svg>
+              </div>
+              
+              <span class="font-medium text-base-content">Figma</span>
+            </div>
+          </td>
+                   
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-5 h-5 flex-shrink-0">
+                <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 141.53199999999998" class="toolsUsed">
+                  <path d="M10.383 126.894L0 0l124 .255-10.979 126.639-50.553 14.638z" fill="#e34f26" />
+                  <path d="M62.468 129.277V12.085l51.064.17-9.106 104.851z" fill="#ef652a" />
+                  <path d="M99.49 41.362l1.446-15.49H22.383l4.34 47.49h54.213L78.81 93.617l-17.362 4.68-17.617-5.106-.936-12.085H27.319l2.128 24.681 32 8.936 32.255-8.936 4.34-48.17H41.107L39.49 41.362z" fill="#fff" />
+                </svg>
+              </div>
+              
+              <span class="font-medium text-base-content">HTML</span>
+            </div>
+          </td>
+                   
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-5 h-5 flex-shrink-0">
+                <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 141.53" class="toolsUsed">
+                  <path d="M10.383 126.892L0 0l124 .255-10.979 126.637-50.553 14.638z" fill="#1b73ba" />
+                  <path d="M62.468 129.275V12.085l51.064.17-9.106 104.85z" fill="#1c88c7" />
+                  <path d="M100.851 27.064H22.298l2.128 15.318h37.276l-36.68 15.745 2.127 14.808h54.043l-1.958 20.68-18.298 3.575-16.595-4.255-1.277-11.745H27.83l2.042 24.426 32.681 9.106 31.32-9.957 4-47.745H64.765l36.085-14.978z" fill="#fff" />
+                </svg>
+              </div>
+              
+              <span class="font-medium text-base-content">CSS</span>
+            </div>
+          </td>
+            
+        </tr>
+             
+        <tr class="group hover:bg-base-200/50 transition-colors">
+                 
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-5 h-5 flex-shrink-0">
+                <svg viewBox=".15 .13 799.7 479.69" xmlns="http://www.w3.org/2000/svg" class="toolsUsed">
+                  <path d="m400 .13c-106.63 0-173.27 53.3-199.93 159.89 39.99-53.3 86.64-73.28 139.95-59.96 30.42 7.6 52.16 29.67 76.23 54.09 39.2 39.78 84.57 85.82 183.68 85.82 106.62 0 173.27-53.3 199.92-159.9-39.98 53.3-86.63 73.29-139.95 59.97-30.41-7.6-52.15-29.67-76.22-54.09-39.2-39.78-84.58-85.82-183.68-85.82zm-199.93 239.84c-106.62 0-173.27 53.3-199.92 159.9 39.98-53.3 86.63-73.29 139.95-59.96 30.41 7.61 52.15 29.67 76.22 54.08 39.2 39.78 84.58 85.83 183.68 85.83 106.63 0 173.27-53.3 199.93-159.9-39.99 53.3-86.64 73.29-139.95 59.96-30.42-7.59-52.16-29.67-76.23-54.08-39.2-39.78-84.57-85.83-183.68-85.83z" fill="#06b6d4" />
+                </svg>
+              </div>
+              
+              <span class="font-medium text-base-content">Tailwind CSS</span>
+            </div>
+          </td>
+                     
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" colspan="2" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-5 h-5 flex-shrink-0">
+                <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 141.53199999999998" class="toolsUsed">
+                  <path d="M10.383 126.894L0 0l124 .255-10.979 126.639-50.553 14.638z" fill="#e9ca32" />
+                  <path d="M62.468 129.277V12.085l51.064.17-9.106 104.851z" fill="#ffde25" />
+                  <g fill="#fff">
+                    <path d="M57 26H43.5v78L33 102V91.5l-12.5-2V113l36.5 9.5zM67.127 26H104.5L102 40.95H81.394v24.533H102L99.5 115l-32.373 7.5V107L89 99.5 90.263 79l-23.136 3.35z" />
+                  </g>
+                </svg>
+              </div>
+              
+              <span class="font-medium text-base-content">JavaScript</span>
+            </div>
+          </td>
+               
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+		
+		
+		
+		<blockquote class="dream-alert tip">
+		  <p class="heading">
+			<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
+			This post is also available in
+			
+			  
+			  <a href="https://0x69.ru/ru/portfolio/codesqueeze/" 
+				 class="badge h-6 no-underline hover:badge-primary mr-2"
+				 rel="noopener noreferrer">
+				Русский
+			  </a>
+			
+		  </p>
+		</blockquote>
+		
+
+        <p><strong>CodeSqueeze</strong> is a modern web tool for minifying HTML, CSS, and JavaScript, focused on speed, privacy, and a comfortable in-browser workflow.</p>
+<p>🔗 <strong>Online demo:</strong>
+<a href="https://codesqueeze.0x69.ru/" target="_blank">https://codesqueeze.0x69.ru/</a>
+</p>
+<h2 id="-about-the-project">📌 About the project</h2>
+<p><strong>CodeSqueeze</strong> is a standalone product developed from the initial idea to the final implementation.
+The interface, UX logic, and visual system were designed in <strong>Figma</strong>, after which the tool was fully implemented on the frontend with no backend involved.</p>
+<p>The main goal of the project was to create a <strong>fast and intuitive tool</strong> that doesn’t distract the user and provides clear, transparent feedback when working with code.</p>
+<hr>
+<h2 id="-what-was-done">✨ What was done</h2>
+<h3 id="interface--ux">Interface &amp; UX</h3>
+<ul>
+<li>Designed the complete user flow in <strong>Figma</strong>: from screen structure to an interactive prototype</li>
+<li>Implemented a dark theme with an accent brand color</li>
+<li>Responsive, mobile-first interface</li>
+<li>Added subtle visual accents and micro-animations to improve perception</li>
+</ul>
+<h3 id="functionality">Functionality</h3>
+<ul>
+<li>Dual-pane editor for source and processed code</li>
+<li>HTML, CSS, and JavaScript minification with result control</li>
+<li>Reverse formatting (Beautify) for improved readability</li>
+<li>Detailed statistics: size before and after, compression percentage, processing time</li>
+<li>Operation history with state persistence in the browser</li>
+<li>Keyboard shortcuts to speed up workflow</li>
+<li>Notification system for clear user feedback</li>
+</ul>
+<h3 id="technical-approach">Technical approach</h3>
+<ul>
+<li>Pure <strong>Vanilla JavaScript</strong> without frameworks</li>
+<li>Modular code structure for easier maintenance and scalability</li>
+<li><strong>Tailwind CSS</strong> for building the design system</li>
+<li>Fully client-side data processing — code is never sent to a server</li>
+<li>Offline support after the first load</li>
+</ul>
+<h3 id="additional-sections">Additional sections</h3>
+<ul>
+<li>Features — overview of capabilities</li>
+<li>Stats — extended statistics</li>
+<li>Documentation — usage guide</li>
+<li>Privacy &amp; Terms — legal pages</li>
+</ul>
+<hr>
+<h2 id="-project-interface">🖼️ Project interface</h2>
+<h3 id="main-page">Main page</h3>
+<p><img src="/en/portfolio/codesqueeze/work/main.png" alt="Main page" title="Main CodeSqueeze interface"></p>
+<h3 id="features">Features</h3>
+<p><img src="/en/portfolio/codesqueeze/work/features.png" alt="Features" title="Service feature overview"></p>
+<h3 id="statistics">Statistics</h3>
+<p><img src="/en/portfolio/codesqueeze/work/stats.png" alt="Statistics" title="Detailed minification statistics"></p>
+<h3 id="documentation">Documentation</h3>
+<p><img src="/en/portfolio/codesqueeze/work/docs.png" alt="Documentation" title="Documentation"></p>
+<h3 id="privacy--terms">Privacy &amp; Terms</h3>
+<p><img src="/en/portfolio/codesqueeze/work/privacy.png" alt="Privacy Policy" title="Privacy Policy"></p>
+<p><img src="/en/portfolio/codesqueeze/work/terms.png" alt="Terms of Service" title="Terms of Service"></p>
+<hr>
+<h2 id="-mobile-version">📱 Mobile version</h2>
+<div class="not-prose">
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 xl:gap-10"><article class="group relative cursor-pointer">
+        
+        <div
+          class="absolute inset-x-4 bottom-0 h-1/2
+                 bg-gradient-to-t from-black/25 to-transparent
+                 dark:from-black/50
+                 rounded-3xl blur-2xl
+                 scale-90 opacity-0
+                 group-hover:opacity-100 group-hover:scale-95
+                 transition-all duration-500 ease-out"
+          aria-hidden="true">
+        </div>
+
+        
+        <div
+          class="relative
+                 transform-gpu
+                 group-hover:-translate-y-2 group-hover:scale-[1.02]
+                 transition-all duration-300 ease-out">
+          
+          <div class="rounded-2xl sm:rounded-3xl overflow-hidden
+                      bg-neutral-100 dark:bg-neutral-800/80
+                      ring-1 ring-neutral-200/80 dark:ring-neutral-700/50
+                      shadow-lg shadow-neutral-200/50 dark:shadow-black/20
+                      group-hover:shadow-2xl group-hover:shadow-neutral-300/50
+                      dark:group-hover:shadow-black/40
+                      group-hover:ring-neutral-300 dark:group-hover:ring-neutral-600
+                      transition-all duration-300">
+
+            
+            <div class="relative aspect-[9/16] sm:aspect-[9/17] md:aspect-[9/18] lg:aspect-[9/19] xl:aspect-[9/20] w-full overflow-hidden">
+              
+              
+              <img
+                src="work/main-mobile.png"
+                alt="Скриншот мобильной версии Main"
+                class="w-full h-full object-cover object-top
+                       transform-gpu
+                       group-hover:scale-105
+                       transition-transform duration-500 ease-out"
+                loading="lazy"
+                decoding="async"
+              >
+
+              
+              <div
+                class="absolute inset-0
+                       bg-gradient-to-t from-black/60 via-transparent to-transparent
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300
+                       pointer-events-none"
+                aria-hidden="true">
+              </div>
+
+              
+              <div
+                class="absolute inset-0 flex items-center justify-center
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300 delay-75
+                       pointer-events-none">
+                <span class="p-3 sm:p-4 rounded-full bg-white/90 dark:bg-neutral-900/90
+                             shadow-lg backdrop-blur-sm
+                             transform scale-75 group-hover:scale-100
+                             transition-transform duration-300">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-neutral-700 dark:text-neutral-200" 
+                       fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                  </svg>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="mt-3 sm:mt-4 text-center pointer-events-none">
+          <h3 class="text-sm sm:text-base font-medium 
+                     text-neutral-600 dark:text-neutral-400
+                     group-hover:text-neutral-900 dark:group-hover:text-neutral-200
+                     transition-colors duration-300 capitalize">
+            Main
+          </h3>
+          
+          
+          <div class="mt-1.5 mx-auto w-8 h-0.5 rounded-full
+                      bg-neutral-300 dark:bg-neutral-700
+                      group-hover:w-16 group-hover:bg-primary-500 dark:group-hover:bg-primary-400
+                      transition-all duration-300"
+               aria-hidden="true">
+          </div>
+        </div>
+
+      </article><article class="group relative cursor-pointer">
+        
+        <div
+          class="absolute inset-x-4 bottom-0 h-1/2
+                 bg-gradient-to-t from-black/25 to-transparent
+                 dark:from-black/50
+                 rounded-3xl blur-2xl
+                 scale-90 opacity-0
+                 group-hover:opacity-100 group-hover:scale-95
+                 transition-all duration-500 ease-out"
+          aria-hidden="true">
+        </div>
+
+        
+        <div
+          class="relative
+                 transform-gpu
+                 group-hover:-translate-y-2 group-hover:scale-[1.02]
+                 transition-all duration-300 ease-out">
+          
+          <div class="rounded-2xl sm:rounded-3xl overflow-hidden
+                      bg-neutral-100 dark:bg-neutral-800/80
+                      ring-1 ring-neutral-200/80 dark:ring-neutral-700/50
+                      shadow-lg shadow-neutral-200/50 dark:shadow-black/20
+                      group-hover:shadow-2xl group-hover:shadow-neutral-300/50
+                      dark:group-hover:shadow-black/40
+                      group-hover:ring-neutral-300 dark:group-hover:ring-neutral-600
+                      transition-all duration-300">
+
+            
+            <div class="relative aspect-[9/16] sm:aspect-[9/17] md:aspect-[9/18] lg:aspect-[9/19] xl:aspect-[9/20] w-full overflow-hidden">
+              
+              
+              <img
+                src="work/features-mobile.png"
+                alt="Скриншот мобильной версии Features"
+                class="w-full h-full object-cover object-top
+                       transform-gpu
+                       group-hover:scale-105
+                       transition-transform duration-500 ease-out"
+                loading="lazy"
+                decoding="async"
+              >
+
+              
+              <div
+                class="absolute inset-0
+                       bg-gradient-to-t from-black/60 via-transparent to-transparent
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300
+                       pointer-events-none"
+                aria-hidden="true">
+              </div>
+
+              
+              <div
+                class="absolute inset-0 flex items-center justify-center
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300 delay-75
+                       pointer-events-none">
+                <span class="p-3 sm:p-4 rounded-full bg-white/90 dark:bg-neutral-900/90
+                             shadow-lg backdrop-blur-sm
+                             transform scale-75 group-hover:scale-100
+                             transition-transform duration-300">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-neutral-700 dark:text-neutral-200" 
+                       fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                  </svg>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="mt-3 sm:mt-4 text-center pointer-events-none">
+          <h3 class="text-sm sm:text-base font-medium 
+                     text-neutral-600 dark:text-neutral-400
+                     group-hover:text-neutral-900 dark:group-hover:text-neutral-200
+                     transition-colors duration-300 capitalize">
+            Features
+          </h3>
+          
+          
+          <div class="mt-1.5 mx-auto w-8 h-0.5 rounded-full
+                      bg-neutral-300 dark:bg-neutral-700
+                      group-hover:w-16 group-hover:bg-primary-500 dark:group-hover:bg-primary-400
+                      transition-all duration-300"
+               aria-hidden="true">
+          </div>
+        </div>
+
+      </article><article class="group relative cursor-pointer">
+        
+        <div
+          class="absolute inset-x-4 bottom-0 h-1/2
+                 bg-gradient-to-t from-black/25 to-transparent
+                 dark:from-black/50
+                 rounded-3xl blur-2xl
+                 scale-90 opacity-0
+                 group-hover:opacity-100 group-hover:scale-95
+                 transition-all duration-500 ease-out"
+          aria-hidden="true">
+        </div>
+
+        
+        <div
+          class="relative
+                 transform-gpu
+                 group-hover:-translate-y-2 group-hover:scale-[1.02]
+                 transition-all duration-300 ease-out">
+          
+          <div class="rounded-2xl sm:rounded-3xl overflow-hidden
+                      bg-neutral-100 dark:bg-neutral-800/80
+                      ring-1 ring-neutral-200/80 dark:ring-neutral-700/50
+                      shadow-lg shadow-neutral-200/50 dark:shadow-black/20
+                      group-hover:shadow-2xl group-hover:shadow-neutral-300/50
+                      dark:group-hover:shadow-black/40
+                      group-hover:ring-neutral-300 dark:group-hover:ring-neutral-600
+                      transition-all duration-300">
+
+            
+            <div class="relative aspect-[9/16] sm:aspect-[9/17] md:aspect-[9/18] lg:aspect-[9/19] xl:aspect-[9/20] w-full overflow-hidden">
+              
+              
+              <img
+                src="work/stats-mobile.png"
+                alt="Скриншот мобильной версии Stats"
+                class="w-full h-full object-cover object-top
+                       transform-gpu
+                       group-hover:scale-105
+                       transition-transform duration-500 ease-out"
+                loading="lazy"
+                decoding="async"
+              >
+
+              
+              <div
+                class="absolute inset-0
+                       bg-gradient-to-t from-black/60 via-transparent to-transparent
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300
+                       pointer-events-none"
+                aria-hidden="true">
+              </div>
+
+              
+              <div
+                class="absolute inset-0 flex items-center justify-center
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300 delay-75
+                       pointer-events-none">
+                <span class="p-3 sm:p-4 rounded-full bg-white/90 dark:bg-neutral-900/90
+                             shadow-lg backdrop-blur-sm
+                             transform scale-75 group-hover:scale-100
+                             transition-transform duration-300">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-neutral-700 dark:text-neutral-200" 
+                       fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                  </svg>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="mt-3 sm:mt-4 text-center pointer-events-none">
+          <h3 class="text-sm sm:text-base font-medium 
+                     text-neutral-600 dark:text-neutral-400
+                     group-hover:text-neutral-900 dark:group-hover:text-neutral-200
+                     transition-colors duration-300 capitalize">
+            Stats
+          </h3>
+          
+          
+          <div class="mt-1.5 mx-auto w-8 h-0.5 rounded-full
+                      bg-neutral-300 dark:bg-neutral-700
+                      group-hover:w-16 group-hover:bg-primary-500 dark:group-hover:bg-primary-400
+                      transition-all duration-300"
+               aria-hidden="true">
+          </div>
+        </div>
+
+      </article><article class="group relative cursor-pointer">
+        
+        <div
+          class="absolute inset-x-4 bottom-0 h-1/2
+                 bg-gradient-to-t from-black/25 to-transparent
+                 dark:from-black/50
+                 rounded-3xl blur-2xl
+                 scale-90 opacity-0
+                 group-hover:opacity-100 group-hover:scale-95
+                 transition-all duration-500 ease-out"
+          aria-hidden="true">
+        </div>
+
+        
+        <div
+          class="relative
+                 transform-gpu
+                 group-hover:-translate-y-2 group-hover:scale-[1.02]
+                 transition-all duration-300 ease-out">
+          
+          <div class="rounded-2xl sm:rounded-3xl overflow-hidden
+                      bg-neutral-100 dark:bg-neutral-800/80
+                      ring-1 ring-neutral-200/80 dark:ring-neutral-700/50
+                      shadow-lg shadow-neutral-200/50 dark:shadow-black/20
+                      group-hover:shadow-2xl group-hover:shadow-neutral-300/50
+                      dark:group-hover:shadow-black/40
+                      group-hover:ring-neutral-300 dark:group-hover:ring-neutral-600
+                      transition-all duration-300">
+
+            
+            <div class="relative aspect-[9/16] sm:aspect-[9/17] md:aspect-[9/18] lg:aspect-[9/19] xl:aspect-[9/20] w-full overflow-hidden">
+              
+              
+              <img
+                src="work/docs-mobile.png"
+                alt="Скриншот мобильной версии Docs"
+                class="w-full h-full object-cover object-top
+                       transform-gpu
+                       group-hover:scale-105
+                       transition-transform duration-500 ease-out"
+                loading="lazy"
+                decoding="async"
+              >
+
+              
+              <div
+                class="absolute inset-0
+                       bg-gradient-to-t from-black/60 via-transparent to-transparent
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300
+                       pointer-events-none"
+                aria-hidden="true">
+              </div>
+
+              
+              <div
+                class="absolute inset-0 flex items-center justify-center
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300 delay-75
+                       pointer-events-none">
+                <span class="p-3 sm:p-4 rounded-full bg-white/90 dark:bg-neutral-900/90
+                             shadow-lg backdrop-blur-sm
+                             transform scale-75 group-hover:scale-100
+                             transition-transform duration-300">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-neutral-700 dark:text-neutral-200" 
+                       fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                  </svg>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="mt-3 sm:mt-4 text-center pointer-events-none">
+          <h3 class="text-sm sm:text-base font-medium 
+                     text-neutral-600 dark:text-neutral-400
+                     group-hover:text-neutral-900 dark:group-hover:text-neutral-200
+                     transition-colors duration-300 capitalize">
+            Docs
+          </h3>
+          
+          
+          <div class="mt-1.5 mx-auto w-8 h-0.5 rounded-full
+                      bg-neutral-300 dark:bg-neutral-700
+                      group-hover:w-16 group-hover:bg-primary-500 dark:group-hover:bg-primary-400
+                      transition-all duration-300"
+               aria-hidden="true">
+          </div>
+        </div>
+
+      </article><article class="group relative cursor-pointer">
+        
+        <div
+          class="absolute inset-x-4 bottom-0 h-1/2
+                 bg-gradient-to-t from-black/25 to-transparent
+                 dark:from-black/50
+                 rounded-3xl blur-2xl
+                 scale-90 opacity-0
+                 group-hover:opacity-100 group-hover:scale-95
+                 transition-all duration-500 ease-out"
+          aria-hidden="true">
+        </div>
+
+        
+        <div
+          class="relative
+                 transform-gpu
+                 group-hover:-translate-y-2 group-hover:scale-[1.02]
+                 transition-all duration-300 ease-out">
+          
+          <div class="rounded-2xl sm:rounded-3xl overflow-hidden
+                      bg-neutral-100 dark:bg-neutral-800/80
+                      ring-1 ring-neutral-200/80 dark:ring-neutral-700/50
+                      shadow-lg shadow-neutral-200/50 dark:shadow-black/20
+                      group-hover:shadow-2xl group-hover:shadow-neutral-300/50
+                      dark:group-hover:shadow-black/40
+                      group-hover:ring-neutral-300 dark:group-hover:ring-neutral-600
+                      transition-all duration-300">
+
+            
+            <div class="relative aspect-[9/16] sm:aspect-[9/17] md:aspect-[9/18] lg:aspect-[9/19] xl:aspect-[9/20] w-full overflow-hidden">
+              
+              
+              <img
+                src="work/privacy-mobile.png"
+                alt="Скриншот мобильной версии Privacy"
+                class="w-full h-full object-cover object-top
+                       transform-gpu
+                       group-hover:scale-105
+                       transition-transform duration-500 ease-out"
+                loading="lazy"
+                decoding="async"
+              >
+
+              
+              <div
+                class="absolute inset-0
+                       bg-gradient-to-t from-black/60 via-transparent to-transparent
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300
+                       pointer-events-none"
+                aria-hidden="true">
+              </div>
+
+              
+              <div
+                class="absolute inset-0 flex items-center justify-center
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300 delay-75
+                       pointer-events-none">
+                <span class="p-3 sm:p-4 rounded-full bg-white/90 dark:bg-neutral-900/90
+                             shadow-lg backdrop-blur-sm
+                             transform scale-75 group-hover:scale-100
+                             transition-transform duration-300">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-neutral-700 dark:text-neutral-200" 
+                       fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                  </svg>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="mt-3 sm:mt-4 text-center pointer-events-none">
+          <h3 class="text-sm sm:text-base font-medium 
+                     text-neutral-600 dark:text-neutral-400
+                     group-hover:text-neutral-900 dark:group-hover:text-neutral-200
+                     transition-colors duration-300 capitalize">
+            Privacy
+          </h3>
+          
+          
+          <div class="mt-1.5 mx-auto w-8 h-0.5 rounded-full
+                      bg-neutral-300 dark:bg-neutral-700
+                      group-hover:w-16 group-hover:bg-primary-500 dark:group-hover:bg-primary-400
+                      transition-all duration-300"
+               aria-hidden="true">
+          </div>
+        </div>
+
+      </article><article class="group relative cursor-pointer">
+        
+        <div
+          class="absolute inset-x-4 bottom-0 h-1/2
+                 bg-gradient-to-t from-black/25 to-transparent
+                 dark:from-black/50
+                 rounded-3xl blur-2xl
+                 scale-90 opacity-0
+                 group-hover:opacity-100 group-hover:scale-95
+                 transition-all duration-500 ease-out"
+          aria-hidden="true">
+        </div>
+
+        
+        <div
+          class="relative
+                 transform-gpu
+                 group-hover:-translate-y-2 group-hover:scale-[1.02]
+                 transition-all duration-300 ease-out">
+          
+          <div class="rounded-2xl sm:rounded-3xl overflow-hidden
+                      bg-neutral-100 dark:bg-neutral-800/80
+                      ring-1 ring-neutral-200/80 dark:ring-neutral-700/50
+                      shadow-lg shadow-neutral-200/50 dark:shadow-black/20
+                      group-hover:shadow-2xl group-hover:shadow-neutral-300/50
+                      dark:group-hover:shadow-black/40
+                      group-hover:ring-neutral-300 dark:group-hover:ring-neutral-600
+                      transition-all duration-300">
+
+            
+            <div class="relative aspect-[9/16] sm:aspect-[9/17] md:aspect-[9/18] lg:aspect-[9/19] xl:aspect-[9/20] w-full overflow-hidden">
+              
+              
+              <img
+                src="work/terms-mobile.png"
+                alt="Скриншот мобильной версии Terms"
+                class="w-full h-full object-cover object-top
+                       transform-gpu
+                       group-hover:scale-105
+                       transition-transform duration-500 ease-out"
+                loading="lazy"
+                decoding="async"
+              >
+
+              
+              <div
+                class="absolute inset-0
+                       bg-gradient-to-t from-black/60 via-transparent to-transparent
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300
+                       pointer-events-none"
+                aria-hidden="true">
+              </div>
+
+              
+              <div
+                class="absolute inset-0 flex items-center justify-center
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300 delay-75
+                       pointer-events-none">
+                <span class="p-3 sm:p-4 rounded-full bg-white/90 dark:bg-neutral-900/90
+                             shadow-lg backdrop-blur-sm
+                             transform scale-75 group-hover:scale-100
+                             transition-transform duration-300">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-neutral-700 dark:text-neutral-200" 
+                       fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                  </svg>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="mt-3 sm:mt-4 text-center pointer-events-none">
+          <h3 class="text-sm sm:text-base font-medium 
+                     text-neutral-600 dark:text-neutral-400
+                     group-hover:text-neutral-900 dark:group-hover:text-neutral-200
+                     transition-colors duration-300 capitalize">
+            Terms
+          </h3>
+          
+          
+          <div class="mt-1.5 mx-auto w-8 h-0.5 rounded-full
+                      bg-neutral-300 dark:bg-neutral-700
+                      group-hover:w-16 group-hover:bg-primary-500 dark:group-hover:bg-primary-400
+                      transition-all duration-300"
+               aria-hidden="true">
+          </div>
+        </div>
+
+      </article>
+  </div>
+</div>
+<hr>
+<h2 id="-design-system">🎨 Design system</h2>
+<div class="not-prose">
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #00FF88;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Brand / Primary
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #00FF88;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #00FF88
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#00FF88', this, 'Brand \/ Primary')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Copy</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #009952;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Brand Dark
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #009952;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #009952
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#009952', this, 'Brand Dark')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Copy</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #0A0A0A;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Background Dark
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #0A0A0A;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #0A0A0A
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#0A0A0A', this, 'Background Dark')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Copy</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #141414;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Surface Dark
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #141414;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #141414
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#141414', this, 'Surface Dark')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Copy</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #E6FFF5;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Text / Accent
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #E6FFF5;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #E6FFF5
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#E6FFF5', this, 'Text \/ Accent')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Copy</span>
+        </button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<script>
+  function copyColorCode(colorCode, button, colorName) {
+    navigator.clipboard.writeText(colorCode).then(() => {
+      
+      const icon = button.querySelector('svg');
+      const buttonText = button.querySelector('span');
+      const originalPath = icon.innerHTML;
+      const originalText = buttonText ? buttonText.textContent : '';
+      
+      icon.innerHTML = `
+      
+	<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+            d="M5 13l4 4L19 7" />
+    `;
+      if (buttonText) {
+        buttonText.textContent = 'Copied!';
+      }
+      button.classList.add('btn-success');
+      
+      setTimeout(() => {
+        icon.innerHTML = originalPath;
+        if (buttonText) {
+          buttonText.textContent = originalText;
+        }
+        button.classList.remove('btn-success');
+      }, 2000);
+    }).catch(err => {
+      console.error("Copy Error: ", err);
+    });
+  }
+</script>
+<ul>
+<li><strong>Typography:</strong> Inter for the interface, JetBrains Mono for working with code</li>
+<li><strong>Visual techniques:</strong> soft shadows, glow accents, progress indicators, subtle animations</li>
+</ul>
+<hr>
+<h2 id="-summary">🌐 Summary</h2>
+<ul>
+<li>A full-featured product implemented without a backend</li>
+<li>Well-thought-out UI/UX with a focus on usability and speed</li>
+<li>Secure code processing directly in the browser</li>
+<li>Flexible architecture ready for future growth</li>
+</ul>
+      </section>
+	  <div class="tags mt-4 flex flex-wrap gap-2">
+	  <ion-icon name="pricetags" class="text-lg opacity-75 mr-1"></ion-icon>
+		  <a 
+			href="/en/tags/web-development/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Web Development"
+			data-tag="web development"
+		  >Web Development</a>
+		  <a 
+			href="/en/tags/uiux/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="UI/UX"
+			data-tag="ui/ux"
+		  >UI/UX</a>
+		  <a 
+			href="/en/tags/frontend/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Frontend"
+			data-tag="frontend"
+		  >Frontend</a>
+		  <a 
+			href="/en/tags/javascript/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="JavaScript"
+			data-tag="javascript"
+		  >JavaScript</a>
+		  <a 
+			href="/en/tags/optimization/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Optimization"
+			data-tag="optimization"
+		  >Optimization</a>
+		  <a 
+			href="/en/tags/web-tools/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Web Tools"
+			data-tag="web tools"
+		  >Web Tools</a>
+		  <a 
+			href="/en/tags/figma/" 
+			class="badge no-underline hover:badge-primary transition-colors duration-200"
+			rel="tag"
+			aria-label="Figma"
+			data-tag="figma"
+		  >Figma</a>
+	  </div>
+
+      
+      <div class="divider"></div>
+      <div class="flex flex-col md:flex-row justify-between gap-4 py-4">
+        
+        <div></div>
+        
+
+        
+        <a class="group btn btn-outline" href="/en/portfolio/prostavki/" title="Landing Page ProStavki">
+          <div class="inline-flex flex-col items-end">
+            <span class="text-base-content/60 group-hover:text-neutral-content/60 text-xs font-normal">Next page</span>
+            <span class="max-w-48 truncate">Landing Page ProStavki</span>
+          </div>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </a>
+        
+      </div>
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+
+    
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-about-the-project">📌 About the project</a></li>
+    <li><a href="#-what-was-done">✨ What was done</a>
+      <ul>
+        <li><a href="#interface--ux">Interface &amp; UX</a></li>
+        <li><a href="#functionality">Functionality</a></li>
+        <li><a href="#technical-approach">Technical approach</a></li>
+        <li><a href="#additional-sections">Additional sections</a></li>
+      </ul>
+    </li>
+    <li><a href="#-project-interface">🖼️ Project interface</a>
+      <ul>
+        <li><a href="#main-page">Main page</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#statistics">Statistics</a></li>
+        <li><a href="#documentation">Documentation</a></li>
+        <li><a href="#privacy--terms">Privacy &amp; Terms</a></li>
+      </ul>
+    </li>
+    <li><a href="#-mobile-version">📱 Mobile version</a></li>
+    <li><a href="#-design-system">🎨 Design system</a></li>
+    <li><a href="#-summary">🌐 Summary</a></li>
+  </ul>
+</nav>
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Maksim Alexandrov<br>
+<strong>Age:</strong> 28<br>
+<strong>Location:</strong> Tula, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>This blog is my personal knowledge base, where I push notes about my tech stack, life experience, and everything that triggers my interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — ready to merge ideas and work on joint projects.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-programming-languages">💻 Programming Languages</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Responsive layout (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST APIs</strong></li>
+</ul>
+<h2 id="-databases">🗄️ Databases</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-design--graphics">🎨 Design &amp; Graphics</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX design and prototyping</li>
+<li><strong>Photoshop</strong> — graphics and image editing</li>
+<li><strong>After Effects</strong> — motion design and animation 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Open Source Projects 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          🚧 WIP
+        </td>
+        
+        <td 
+          class=""
+        >
+          No projects to showcase yet. Stay tuned!
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          🚧 WIP
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          No projects to showcase yet. Stay tuned!
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Projects 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN service in Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN service in Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Social Links</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "forest"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+	
+	
+	  
+	
+<script src="/js/backToTop.min.js"></script>
+<script>
+  commonJsStrict.addBackToTop({
+    diameter: 50,
+    scrollContainer: document.body,
+    innerHTML: '<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 244l144-144 144 144M256 120v292"/></svg>',
+    className: 'h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary',
+  });
+</script>
+
+    
+
+	
+	
+	
+
+	
+	<script
+  src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
+  integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
+  crossorigin="anonymous"
+></script>
+<script>
+  format()
+
+  function format() {
+    document.querySelectorAll('span[data-format="luxon"]').forEach(el => {
+      const date = el.textContent
+
+      el.textContent = luxon.DateTime.fromISO(date, { locale: "en" }).toFormat("HH:mm, dd MMMM")
+    })
+  }
+</script>
+
+	
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/apache.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script><script>
+  hljs.highlightAll();
+  hljs.addPlugin(new CopyButtonPlugin());
+
+  document.addEventListener('alpine:initialized', () => {
+    
+    window.customSyntaxHighlighting = {
+        dark: 'a11y-dark',
+        light: 'atom-one-dark'
+    };
+
+    
+    const updateSyntaxTheme = () => {
+        try {
+            
+            const isDark = Alpine.store('darkMode').isDark();
+            const currentTheme = isDark ? 
+                window.customSyntaxHighlighting.dark : 
+                window.customSyntaxHighlighting.light;
+
+            
+            let link = document.querySelector('link[data-syntax-highlight]');
+            if (link) {
+                
+                const currentHref = link.href;
+
+                
+                const updatedHref = currentHref.replace(/styles\/[^/]+\.min\.css/, `styles/${currentTheme}.min.css`);
+
+                
+                link.href = updatedHref;
+            }
+        } catch (error) {
+            console.warn('Error updating syntax theme:', error);
+        }
+    };
+
+    
+    updateSyntaxTheme();
+
+    
+    Alpine.effect(() => {
+        updateSyntaxTheme();
+    });
+});
+</script>
+
+
+
+  
+ 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-rotate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-fullscreen.min.css">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/rotate/lg-rotate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/fullscreen/lg-fullscreen.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+
+<style>
+  .lg-sub-html {
+    backdrop-filter: blur(16px);
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const galleryContainer = document.querySelector("#dream-single-post-content");
+    const images = galleryContainer?.querySelectorAll("img");
+
+    if (galleryContainer && images?.length > 0) {
+      galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
+
+      images.forEach(img => {
+        if (!img.closest("a")) {
+          const wrapper = document.createElement("a");
+          wrapper.href = img.getAttribute("data-src") || img.src; 
+          wrapper.classList.add("lg-item", "not-prose");
+
+          const title = img.title ? `<h2 class="text-lg">${img.title}</h2>` : "";
+          const alt = img.alt ? `<h1 class="text-2xl">${img.alt}</h1>` : "";
+          wrapper.dataset.subHtml = `${alt}${title}`;
+
+          
+          img.setAttribute("data-src", img.src); 
+          img.removeAttribute("src"); 
+          img.classList.add("lazyload"); 
+
+          
+          img.parentNode.insertBefore(wrapper, img);
+          wrapper.appendChild(img);
+        }
+      });
+
+      lightGallery(galleryContainer, {
+        selector: "a.lg-item",
+        plugins: [lgZoom, lgRotate, lgFullscreen],
+        speed: 500,
+        zoom: true,
+        fullScreen: true,
+        download: false,
+        counter: true,
+        mousewheel: true,
+        zoomFromOrigin: true,
+        scale: 1,
+        rotate: true,
+        hideControlOnEnd: false,
+        closeOnTap: true,
+        subHtmlSelectorRelative: true
+      });
+
+      const lazyLoadInstance = new LazyLoad({
+        elements_selector: ".lazyload",
+        threshold: 300, 
+      });
+    }
+  });
+</script>
+
+  
+
+
+
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

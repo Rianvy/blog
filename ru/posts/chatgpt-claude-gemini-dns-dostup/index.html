@@ -685,7 +685,7 @@
 
       <section id="dream-single-post-content" itemprop="articleBody">
         
-        <img src="https://0x69.ru/ru/posts/chatgpt-claude-gemini-dns-dostup/Cover.png" alt="ChatGPT, Claude и Gemini — корректная настройка DNS для доступа к AI-сервисам"/>
+        <img src="https://0x69.ru/ru/posts/chatgpt-claude-gemini-dns-dostup/Cover.png" alt="ChatGPT, Claude и Gemini — корректная настройка DNS для доступа к AI-сервисам" class="my-4"/>
         
 		
 		
@@ -3610,7 +3610,7 @@
         if (!img.closest("a")) {
           const wrapper = document.createElement("a");
           wrapper.href = img.getAttribute("data-src") || img.src; 
-          wrapper.classList.add("lg-item");
+          wrapper.classList.add("lg-item", "not-prose");
 
           const title = img.title ? `<h2 class="text-lg">${img.title}</h2>` : "";
           const alt = img.alt ? `<h1 class="text-2xl">${img.alt}</h1>` : "";

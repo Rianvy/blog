@@ -1,38 +1,24 @@
-{{ with site.GetPage "/about" }}
-  {{ $aboutPages := .Resources.ByType "page" }}
-  {{ if gt (len $aboutPages) 0 }}
-    <li>
-      <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="{{ T "about" }}">
-        <ion-icon name="information-circle"></ion-icon>
-        {{- T "about" -}}
-      </div>
-    </li>
-  {{ end }}
-{{ end }}
-
+{{/* Навигационные элементы */}}
 {{ $navItems := slice "search" "rss" "posts" "categories" "tags" }}
 {{ if site.Params.reorderNavItems }}
   {{ $navItems = site.Params.reorderNavItems }}
 {{ end }}
 
-<ul class="p-0 m-0 list-none">
+<nav class="space-y-4" aria-label="{{ i18n "menu.navigation" | default "Навигация" }}">
 
-<style>
-.menu-title {
-    margin-bottom: 4px;
-}
-</style>
-
-  <!-- Language Switcher -->
-  <li>
-    <div class="menu-title">{{ i18n "menu.languages" }}</div>
-    <ul class="p-0 m-0 list-none">
+  <!-- Переключатель языка -->
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      {{ i18n "menu.languages" | default "Язык" }}
+    </h3>
+    <ul class="space-y-1">
       {{ range $langCode, $lang := $.Site.Params.navLang }}
         {{ $translatedPage := where $.Page.Translations "Lang" $langCode | first 1 }}
         {{ $isCategoriesPage := hasPrefix ($.Path) "/categories/" }}
         {{ $isTagsPage := hasPrefix ($.Path) "/tags/" }}
+        {{ $isActive := eq $langCode $.Site.Language.Lang }}
         
-        {{/* Determine the correct link */}}
+        {{/* Определяем правильную ссылку */}}
         {{ $link := "" }}
         {{ if or $isCategoriesPage $isTagsPage }}
           {{ $section := cond $isCategoriesPage "categories" "tags" }}
@@ -46,29 +32,69 @@
         
         <li>
           <a href="{{ $link }}" 
-             title="{{ $lang.title }}" 
-             class="inline-flex items-center p-2 {{ if eq $langCode $.Site.Language.Lang }}active{{ end }}">
-            <ion-icon name="{{ $lang.icon }}" role="img" class="md hydrated"></ion-icon> 
-            {{ $lang.title }}
-            {{ if eq $langCode $.Site.Language.Lang }}
-              <ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
+             title="{{ $lang.title }}"
+             hreflang="{{ $langCode }}"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    {{ if $isActive }}
+                      bg-primary/10 text-primary font-medium
+                    {{ else }}
+                      hover:bg-base-200
+                    {{ end }}"
+             {{ if $isActive }}aria-current="true"{{ end }}>
+            <ion-icon name="{{ $lang.icon }}" class="text-lg"></ion-icon>
+            <span class="flex-1">{{ $lang.title }}</span>
+            {{ if $isActive }}
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
             {{ end }}
           </a>
         </li>
       {{ end }}
     </ul>
-  </li>
+  </div>
 
-  <!-- Menu Options -->
-  <li>
-    <div class="menu-title">{{ i18n "menu.menu" }}</div>
-    <ul class="p-0 m-0 list-none">
+  <!-- Разделитель -->
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  <!-- Меню навигации -->
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      {{ i18n "menu.menu" | default "Меню" }}
+    </h3>
+    <ul class="space-y-1">
       {{ range $navItems }}
         {{ partial "renderMobileNavItem.html" (dict "item" . "site" $.Site) }}
       {{ end }}
+      
       {{ with site.Params.navItems }}
         {{ partial "navCustomItems.html" (dict "navItems" $navItems "mobile" true "site" $.Site) }}
       {{ end }}
     </ul>
-  </li>
-</ul>
+  </div>
+
+  <!-- Дополнительные действия (опционально) -->
+  {{ if or site.Params.showThemeToggle site.Params.showScrollTop }}
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      {{ i18n "menu.settings" | default "Настройки" }}
+    </h3>
+    <ul class="space-y-1">
+      {{ if site.Params.showThemeToggle }}
+      <li>
+        <button type="button"
+                class="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg
+                       transition-all duration-200 hover:bg-base-200"
+                @click="toggleTheme()"
+                aria-label="{{ i18n "menu.toggleTheme" | default "Переключить тему" }}">
+          <ion-icon name="contrast-outline" class="text-lg"></ion-icon>
+          <span>{{ i18n "menu.theme" | default "Тема" }}</span>
+        </button>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
+</nav>

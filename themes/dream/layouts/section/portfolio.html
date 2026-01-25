@@ -5,83 +5,264 @@
 {{ define "main" }}
 
 {{ if site.Params.portfolio }}
-<!-- isotope -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const grid = document.querySelector(".dream-grid");
-  const iso = new Isotope(grid, {
-    itemSelector: ".dream-column",
-    layoutMode: "fitRows",
-  });
 
-  const filterButtons = document.querySelectorAll(".filter-button");
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const filterValue = button.getAttribute("data-filter");
-      iso.arrange({ filter: filterValue });
+<div class="mt-8 lg:mt-12 px-4 sm:px-6">
+  <div class="max-w-7xl mx-auto">
 
-      filterButtons.forEach((btn) => btn.setAttribute("data-state", "unchecked"));
+    <!-- Заголовок -->
+    <div class="text-center mb-8 lg:mb-12">
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">
+        {{ i18n "portfolio.title" }}
+      </h1>
+      {{ with site.Params.portfolioDescription }}
+      <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto">{{ . }}</p>
+      {{ end }}
+      
+      <!-- Статистика -->
+      <div class="flex justify-center items-center gap-4 sm:gap-6 mt-4 text-sm text-base-content/60">
+        <div class="flex items-center gap-1.5">
+          <ion-icon name="folder-outline" class="text-base"></ion-icon>
+          <span>{{ len (where site.RegularPages "Type" "portfolio") }} {{ i18n "portfolio.projects" | default "проектов" }}</span>
+        </div>
+        
+        {{ $filters := slice }}
+        {{ range (where site.RegularPages "Type" "portfolio") }}
+          {{ with .Params.filters }}
+            {{ range . }}
+              {{ $filters = $filters | append . }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        {{ $uniqueFilters := uniq $filters }}
+        
+        {{ if gt (len $uniqueFilters) 0 }}
+        <div class="w-1 h-1 rounded-full bg-base-content/30"></div>
+        <div class="flex items-center gap-1.5">
+          <ion-icon name="pricetags-outline" class="text-base"></ion-icon>
+          <span>{{ len $uniqueFilters }} {{ i18n "portfolio.categories" | default "категорий" }}</span>
+        </div>
+        {{ end }}
+      </div>
+    </div>
 
-      button.setAttribute("data-state", "checked");
-    });
-  });
-});
-</script>
+    <!-- Фильтры -->
+    {{ $allPortfolioPages := where site.RegularPages "Type" "portfolio" }}
 
-<div class="container flex justify-between px-4 mt-4 mb-4">
-  <div class="filters-button-group text-center my-4">
-    <button 
-      class="filter-button badge h-6 no-underline hover:badge-primary mr-2 data-checked:badge-primary" 
-      data-filter="*" 
-      data-state="checked">
-	  {{ i18n "portfolio.all" }}
-    </button>
     {{ $filters := slice }}
-    {{ range (where site.RegularPages "Type" "portfolio") }}
+    {{ range $allPortfolioPages }}
       {{ with .Params.filters }}
         {{ range . }}
           {{ $filters = $filters | append . }}
         {{ end }}
       {{ end }}
     {{ end }}
-    {{ range uniq $filters }}
-      <button 
-        class="filter-button badge h-6 no-underline hover:badge-primary mr-2 data-checked:badge-primary" 
-        data-filter=".{{ . }}" 
-        data-state="unchecked">
-        {{ . | humanize }}
-      </button>
-    {{ end }}
-  </div>
-</div>
+    {{ $uniqueFilters := uniq $filters }}
 
-  {{ if site.Params.zenMode }}
-    <div class="dream-zen-posts max-w-[65ch] mt-8 mx-auto px-4 space-y-8">
+    {{ if gt (len $uniqueFilters) 0 }}
+    <div class="mb-6 sm:mb-8">
+      
+      <!-- Мобильная версия: горизонтальный скролл -->
+      <div class="sm:hidden overflow-x-auto scrollbar-hide -mx-4 px-4">
+        <div class="flex gap-2 pb-2 w-max" role="group" aria-label="{{ i18n "portfolio.filterBy" | default "Фильтр по категориям" }}">
+          <button 
+            class="filter-button badge badge-md h-8 px-3
+                  no-underline cursor-pointer whitespace-nowrap
+                  transition-all duration-200
+                  hover:badge-primary
+                  data-[state=checked]:badge-primary data-[state=checked]:shadow-sm" 
+            data-filter="*" 
+            data-state="checked"
+            aria-pressed="true">
+            <ion-icon name="apps-outline" class="mr-1 text-sm"></ion-icon>
+            {{ i18n "portfolio.all" | default "Все" }}
+            <span class="ml-1 opacity-60">({{ len $allPortfolioPages }})</span>
+          </button>
+          
+          {{ range $filter := $uniqueFilters }}
+          {{ $filterCount := 0 }}
+          {{ range $allPortfolioPages }}
+            {{ $pageFilters := .Params.filters }}
+            {{ range $pageFilters }}
+              {{ if eq . $filter }}
+                {{ $filterCount = add $filterCount 1 }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+          <button 
+            class="filter-button badge badge-md h-8 px-3
+                  no-underline cursor-pointer whitespace-nowrap
+                  transition-all duration-200
+                  hover:badge-primary
+                  data-[state=checked]:badge-primary data-[state=checked]:shadow-sm" 
+            data-filter=".{{ $filter | urlize }}" 
+            data-state="unchecked"
+            aria-pressed="false">
+            {{ $filter | humanize }}
+            <span class="ml-1 opacity-60">({{ $filterCount }})</span>
+          </button>
+          {{ end }}
+        </div>
+      </div>
+      
+      <!-- Индикатор скролла (мобильные) -->
+      <div class="sm:hidden flex justify-center gap-1 mt-2">
+        <span class="text-xs text-base-content/40 flex items-center gap-1">
+          <ion-icon name="swap-horizontal-outline"></ion-icon>
+          {{ i18n "portfolio.swipeToFilter" | default "Листайте для выбора" }}
+        </span>
+      </div>
+      
+      <!-- Десктопная версия: обычный flex-wrap -->
+      <div class="hidden sm:flex flex-wrap justify-center gap-2" role="group" aria-label="{{ i18n "portfolio.filterBy" | default "Фильтр по категориям" }}">
+        <button 
+          class="filter-button badge badge-lg h-9 px-4
+                no-underline cursor-pointer
+                transition-all duration-200
+                hover:badge-primary
+                data-[state=checked]:badge-primary data-[state=checked]:shadow-sm" 
+          data-filter="*" 
+          data-state="checked"
+          aria-pressed="true">
+          <ion-icon name="apps-outline" class="mr-1.5 text-sm"></ion-icon>
+          {{ i18n "portfolio.all" | default "Все" }}
+          <span class="ml-1.5 opacity-60">({{ len $allPortfolioPages }})</span>
+        </button>
+        
+        {{ range $filter := $uniqueFilters }}
+        {{ $filterCount := 0 }}
+        {{ range $allPortfolioPages }}
+          {{ $pageFilters := .Params.filters }}
+          {{ range $pageFilters }}
+            {{ if eq . $filter }}
+              {{ $filterCount = add $filterCount 1 }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        <button 
+          class="filter-button badge badge-lg h-9 px-4
+                no-underline cursor-pointer
+                transition-all duration-200
+                hover:badge-primary
+                data-[state=checked]:badge-primary data-[state=checked]:shadow-sm" 
+          data-filter=".{{ $filter | urlize }}" 
+          data-state="unchecked"
+          aria-pressed="false">
+          {{ $filter | humanize }}
+          <span class="ml-1.5 opacity-60">({{ $filterCount }})</span>
+        </button>
+        {{ end }}
+      </div>
+      
+    </div>
+    {{ end }}
+
+    <!-- Сетка проектов -->
+    {{ if site.Params.zenMode }}
+    
+    <!-- Zen Mode -->
+    <div class="dream-zen-posts max-w-[65ch] mx-auto space-y-6 sm:space-y-8">
       {{ range (where site.RegularPages "Type" "portfolio") }}
         {{ .Render "zen-summary" }}
       {{ end }}
     </div>
-  {{ else }}
-<div class="dream-grid">
-  {{ range (where site.RegularPages "Type" "portfolio") }}
-    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column {{ with .Params.filters }}{{ range . }}{{ . }} {{ end }}{{ end }}">
-      {{ .Render "summary" }}
+    
+    {{ else }}
+    
+    <!-- Grid Mode -->
+    <div class="dream-grid" id="portfolio-grid">
+      {{ range (where site.RegularPages "Type" "portfolio") }}
+      <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2 sm:p-3 lg:p-4 dream-column {{ with .Params.filters }}{{ range . }}{{ . | urlize }} {{ end }}{{ end }}">
+        {{ .Render "summary" }}
+      </div>
+      {{ end }}
     </div>
-  {{ end }}
+    
+    <!-- Пустое состояние при фильтрации -->
+    <div id="no-results" class="hidden text-center py-12 sm:py-16">
+      <ion-icon name="folder-open-outline" class="text-6xl sm:text-7xl text-base-content/20 mb-4"></ion-icon>
+      <p class="text-base-content/60 mb-2">{{ i18n "portfolio.noProjects" | default "Проектов не найдено" }}</p>
+      <p class="text-sm text-base-content/40">{{ i18n "portfolio.tryOtherFilter" | default "Попробуйте другой фильтр" }}</p>
+    </div>
+    
+    {{ end }}
+
+  </div>
 </div>
-  {{ end }}
+
+<!-- Isotope JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const grid = document.querySelector(".dream-grid");
+  if (!grid) return;
+  
+  const noResults = document.getElementById("no-results");
+  
+  const iso = new Isotope(grid, {
+    itemSelector: ".dream-column",
+    layoutMode: "fitRows",
+    transitionDuration: '0.4s',
+    stagger: 30,
+    hiddenStyle: {
+      opacity: 0,
+      transform: 'scale(0.9)'
+    },
+    visibleStyle: {
+      opacity: 1,
+      transform: 'scale(1)'
+    }
+  });
+
+  const filterButtons = document.querySelectorAll(".filter-button");
+  
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const filterValue = button.getAttribute("data-filter");
+      
+      iso.arrange({ filter: filterValue });
+
+      // Обновляем состояние кнопок
+      filterButtons.forEach((btn) => {
+        btn.setAttribute("data-state", "unchecked");
+        btn.setAttribute("aria-pressed", "false");
+      });
+      button.setAttribute("data-state", "checked");
+      button.setAttribute("aria-pressed", "true");
+    });
+  });
+  
+  // Проверка на пустые результаты
+  iso.on('arrangeComplete', function(filteredItems) {
+    if (noResults) {
+      if (filteredItems.length === 0) {
+        noResults.classList.remove('hidden');
+        grid.classList.add('hidden');
+      } else {
+        noResults.classList.add('hidden');
+        grid.classList.remove('hidden');
+      }
+    }
+  });
+});
+</script>
 
 {{ else }}
-  <div class="text-center mt-8">
-    <p>{{ i18n "portfolio.disabled" }}</p>
+
+<!-- Портфолио отключено -->
+<div class="mt-8 lg:mt-12 px-4 sm:px-6">
+  <div class="max-w-2xl mx-auto text-center py-16 sm:py-24">
+    <ion-icon name="briefcase-outline" class="text-6xl sm:text-7xl text-base-content/20 mb-4"></ion-icon>
+    <h1 class="text-xl sm:text-2xl font-bold mb-2">{{ i18n "portfolio.title" }}</h1>
+    <p class="text-base-content/60">{{ i18n "portfolio.disabled" | default "Портфолио временно недоступно" }}</p>
   </div>
+</div>
+
 {{ end }}
 
 {{ end }}
 
 {{ define "js" }}
-  {{ if site.Params.Experimental.jsDate }}
-    {{ partial "luxon.html" . }}
-  {{ end }}
+{{ if site.Params.Experimental.jsDate }}
+  {{ partial "luxon.html" . }}
+{{ end }}
 {{ end }}

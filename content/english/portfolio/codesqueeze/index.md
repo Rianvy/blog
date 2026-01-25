@@ -23,12 +23,11 @@ tools:
   - CSS
   - Tailwind CSS
   - JavaScript
+github: "https://github.com/Rianvy/CodeSqueeze"
+demo: "https://codesqueeze.0x69.ru"
 ---
 **CodeSqueeze** is a modern web tool for minifying HTML, CSS, and JavaScript, focused on speed, privacy, and a comfortable in-browser workflow.
 <!--more-->
-
-🔗 **Online demo:**
-[https://codesqueeze.0x69.ru/](https://codesqueeze.0x69.ru/)
 
 ## 📌 About the project
 

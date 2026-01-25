@@ -1,41 +1,104 @@
-{{ $item := .item }}
-{{ $site := .site }}
+{{/* layouts/partials/renderMobileNavItem.html */}}
 
+{{- $item := .item -}}
+{{- $site := .site -}}
+
+{{- $baseClasses := "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]" -}}
+{{- $iconClasses := "text-lg text-base-content/70" -}}
+
+{{ if and (eq $item "search") (gt (len (where $site.Pages "Type" "search")) 0) }}
 <li>
-  {{ if and (eq $item "search") (gt (len (where $site.Pages "Type" "search")) 0) }}
-    <a class="inline-flex items-center p-2" href="{{ "search" | relLangURL }}" title="{{ T "search" }}">
-      <ion-icon name="search" role="img" class="md hydrated"></ion-icon> {{ T "search" }}
-    </a>
-  {{ else if and (eq $item "rss") $site.Params.rss }}
-    <a class="inline-flex items-center p-2" href="{{ "index.xml" | relLangURL }}" title="RSS">
-      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
-    </a>
-  {{ else if and (eq $item "posts") (gt (len (where $site.RegularPages "Type" "posts")) 0) }}
-    <a class="inline-flex items-center p-2" href="{{ "posts" | relLangURL }}" title="{{ T "archives" }}">
-      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> {{ T "archives" }}
-    </a>
-  {{ else if and (eq $item "portfolio") ($site.Params.portfolio) (gt (len (where $site.RegularPages "Type" "portfolio")) 0) }}
-    <a class="inline-flex items-center p-2" href="{{ "portfolio" | relLangURL }}" title="{{ i18n "portfolio.title" }}">
-      <ion-icon name="sparkles" role="img" class="md hydrated"></ion-icon> {{ i18n "portfolio.title" }}
-    </a>
-  {{ else if and (eq $item "categories") $site.Taxonomies.categories }}
-    <a class="inline-flex items-center p-2" href="{{ "categories" | relLangURL }}" title="{{ T "allCategories" }}">
-      <ion-icon name="grid" role="img" class="md hydrated"></ion-icon> {{ T "allCategories" }}
-    </a>
-  {{ else if and (eq $item "tags") $site.Taxonomies.tags }}
-    <a class="inline-flex items-center p-2" href="{{ "tags" | relLangURL }}" title="{{ T "allTags" }}">
-      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> {{ T "allTags" }}
-    </a>
-  {{ else }}
-    {{ $navItems := $site.Params.navItems }}
-    {{ $itemData := index $navItems $item }}
-    {{ with $itemData }}
-      <a class="inline-flex items-center p-2" href="{{ .href }}" target="{{ .target }}" title="{{ .title }}">
-        {{ if .icon }}
-          <ion-icon name="{{ .icon }}" role="img" class="md hydrated"></ion-icon>
-        {{ end }}
-        {{ .title }}
-      </a>
-    {{ end }}
-  {{ end }}
+  <a href="{{ "search" | relLangURL }}" 
+     class="{{ $baseClasses }}"
+     title="{{ T "search" }}">
+    <ion-icon name="search-outline" class="{{ $iconClasses }}"></ion-icon>
+    <span>{{ T "search" }}</span>
+  </a>
 </li>
+
+{{ else if and (eq $item "rss") $site.Params.rss }}
+<li>
+  <a href="{{ "index.xml" | relLangURL }}" 
+     class="{{ $baseClasses }}"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="{{ $iconClasses }}"></ion-icon>
+    <span>RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+  </a>
+</li>
+
+{{ else if and (eq $item "posts") (gt (len (where $site.RegularPages "Type" "posts")) 0) }}
+<li>
+  <a href="{{ "posts" | relLangURL }}" 
+     class="{{ $baseClasses }}"
+     title="{{ T "archives" }}">
+    <ion-icon name="library-outline" class="{{ $iconClasses }}"></ion-icon>
+    <span>{{ T "archives" }}</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      {{ len (where $site.RegularPages "Type" "posts") }}
+    </span>
+  </a>
+</li>
+
+{{ else if and (eq $item "portfolio") ($site.Params.portfolio) (gt (len (where $site.RegularPages "Type" "portfolio")) 0) }}
+<li>
+  <a href="{{ "portfolio" | relLangURL }}" 
+     class="{{ $baseClasses }}"
+     title="{{ i18n "portfolio.title" }}">
+    <ion-icon name="briefcase-outline" class="{{ $iconClasses }}"></ion-icon>
+    <span>{{ i18n "portfolio.title" }}</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      {{ len (where $site.RegularPages "Type" "portfolio") }}
+    </span>
+  </a>
+</li>
+
+{{ else if and (eq $item "categories") $site.Taxonomies.categories }}
+<li>
+  <a href="{{ "categories" | relLangURL }}" 
+     class="{{ $baseClasses }}"
+     title="{{ T "allCategories" }}">
+    <ion-icon name="folder-outline" class="{{ $iconClasses }}"></ion-icon>
+    <span>{{ T "allCategories" }}</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      {{ len $site.Taxonomies.categories }}
+    </span>
+  </a>
+</li>
+
+{{ else if and (eq $item "tags") $site.Taxonomies.tags }}
+<li>
+  <a href="{{ "tags" | relLangURL }}" 
+     class="{{ $baseClasses }}"
+     title="{{ T "allTags" }}">
+    <ion-icon name="pricetags-outline" class="{{ $iconClasses }}"></ion-icon>
+    <span>{{ T "allTags" }}</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      {{ len $site.Taxonomies.tags }}
+    </span>
+  </a>
+</li>
+
+{{ else }}
+{{- $navItems := $site.Params.navItems -}}
+{{- $customItem := index $navItems $item -}}
+{{ with $customItem }}
+<li>
+  <a href="{{ .href }}" 
+     class="{{ $baseClasses }}"
+     {{ with .target }}target="{{ . }}"{{ end }}
+     {{ if eq .target "_blank" }}rel="noopener noreferrer"{{ end }}
+     title="{{ .title }}">
+    {{ if .icon }}
+    <ion-icon name="{{ .icon }}" class="{{ $iconClasses }}"></ion-icon>
+    {{ end }}
+    <span>{{ .title }}</span>
+    {{ if eq .target "_blank" }}
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    {{ end }}
+  </a>
+</li>
+{{ end }}
+{{ end }}

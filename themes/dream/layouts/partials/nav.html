@@ -1,16 +1,23 @@
 {{ if site.Params.stickyNav }}
-<nav x-data="{ isSticky: false }"
-  x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })"
+<nav x-data="{ isSticky: false, mobileMenuOpen: false }"
+  x-init="
+    window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+    $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+  "
   class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
   :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
 {{ else }}
-<nav class="mt-4 lg:mt-8 py-4">
+<nav x-data="{ mobileMenuOpen: false }" 
+     x-init="$watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value))"
+     class="mt-4 lg:mt-8 py-4">
 {{ end }}
+
   {{ if site.Params.zenMode }}
   <div class="container flex justify-between max-w-[65ch] mx-auto px-4 md:px-0">
   {{ else }}
   <div class="container flex justify-between px-4">
   {{ end }}
+  
     <section class="flex items-center gap-4">
       <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="{{ T "flip" }}">
         <div class="h-10 rounded-full">
@@ -32,14 +39,84 @@
       {{ end }}
     </section>
 
-    <div class="dropdown dropdown-end sm:hidden">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
-        <ion-icon name="menu" class="text-2xl"></ion-icon>
+    <!-- Мобильное меню -->
+    <div class="sm:hidden">
+      <!-- Кнопка открытия -->
+      <button @click="mobileMenuOpen = !mobileMenuOpen" 
+              class="btn btn-ghost btn-square"
+              :class="{ 'bg-primary text-primary-content': mobileMenuOpen }"
+              aria-label="{{ i18n "menu.toggle" | default "Открыть меню" }}"
+              :aria-expanded="mobileMenuOpen">
+        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-2xl"></ion-icon>
+      </button>
+      
+      <!-- Overlay с блюром -->
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"
+           @click="mobileMenuOpen = false"
+           class="fixed inset-0 z-40 bg-base-100/70 backdrop-blur-md"
+           aria-hidden="true">
       </div>
-      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-md">
-        {{ partial "navMobileMenu.html" . }}
-      </ul>
+      
+      <!-- Выпадающее меню -->
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+           x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+           x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+           @click.outside="mobileMenuOpen = false"
+           @keydown.escape.window="mobileMenuOpen = false"
+           class="absolute right-4 top-full mt-0 z-50 
+                  w-72 max-w-[calc(100vw-2rem)]
+                  bg-base-100 rounded-2xl shadow-2xl
+                  border border-base-200 dark:border-base-content/10
+                  overflow-hidden">
+        
+        <!-- Шапка меню -->
+        <div class="flex items-center justify-between p-4 border-b border-base-200 dark:border-base-content/10">
+          <span class="font-semibold">{{ i18n "menu.menu" | default "Меню" }}</span>
+          <button @click="mobileMenuOpen = false" 
+                  class="btn btn-ghost btn-circle btn-sm"
+                  aria-label="{{ i18n "menu.close" | default "Закрыть" }}">
+            <ion-icon name="close" class="text-lg"></ion-icon>
+          </button>
+        </div>
+        
+        <!-- Кнопка About -->
+        {{ with site.GetPage "/about" }}
+          {{ $aboutPages := .Resources.ByType "page" }}
+          {{ if gt (len $aboutPages) 0 }}
+          <div class="p-4 border-b border-base-200 dark:border-base-content/10">
+            <button type="button"
+                    class="inline-flex items-center gap-2 w-full p-3 rounded-lg
+                           cursor-pointer transition-all duration-200
+                           hover:bg-base-200 active:scale-[0.98]"
+                    @click="flip = !flip; mobileMenuOpen = false"
+                    title="{{ T "about" }}"
+                    aria-label="{{ T "about" }}">
+              <ion-icon name="information-circle-outline" class="text-lg text-primary"></ion-icon>
+              <span class="flex-1 text-left font-medium">{{ T "about" }}</span>
+              <ion-icon name="chevron-forward-outline" class="text-base-content/50"></ion-icon>
+            </button>
+          </div>
+          {{ end }}
+        {{ end }}
+        
+        <!-- Контент меню -->
+        <div class="p-4 max-h-[60vh] overflow-y-auto">
+          {{ partial "navMobileMenu.html" . }}
+        </div>
+      </div>
     </div>
+
+    <!-- Десктопное меню -->
     <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
       {{ with site.GetPage "/about" }}
       {{ $aboutPages := .Resources.ByType "page" }}
@@ -76,49 +153,63 @@
       {{ range $items }}
       {{ partial "renderNavItem.html" . }}
       {{ end }}
-	  
-	<!-- Language Switcher -->
-	<div class="dropdown dropdown-end dropdown-hover">
-	  <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select language">
-		<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
-	  </div>
-	  <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl">
-		{{ range $langCode, $langParams := $.Site.Params.navLang }}
-		  {{ $translatedPage := where $.Page.Translations "Lang" $langCode | first 1 }}
-		  
-		  {{ $isCategoriesPage := hasPrefix ($.Path) "/categories/" }}
-		  {{ $isTagsPage := hasPrefix ($.Path) "/tags/" }}
-
-		  {{ $link := "" }}
-		  {{ if or $isCategoriesPage $isTagsPage }}
-			{{ $section := cond $isCategoriesPage "categories" "tags" }}
-			{{/* Формируем базовую ссылку с использованием absURL */}}
-			{{ $link = printf "%s%s/%s/" ($.Site.BaseURL | absURL) $langCode $section }}
-		  {{ else if $translatedPage }}
-			{{ $link = (index $translatedPage 0).Permalink | absURL }}
-		  {{ else }}
-			{{ $currentPath := strings.TrimPrefix (printf "/%s/" $.Site.Language.Lang) $.Page.RelPermalink }}
-			{{ $link = printf "%s%s/%s" ($.Site.BaseURL | absURL) $langCode $currentPath }}
-		  {{ end }}
-
-		  <li>
-			<a href="{{ $link }}" class="{{ if eq $langCode $.Site.Language.Lang }}active{{ end }}">
-			  <ion-icon name="language" role="img" class="md hydrated"></ion-icon>
-			  {{ $langParams.title }}
-			  {{ if eq $langCode $.Site.Language.Lang }}
-				<ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
-			  {{ end }}
-			</a>
-		  </li>
-		{{ end }}
-	  </ul>
-	</div>
-     	  
+      
+      <!-- Language Switcher -->
       <div class="dropdown dropdown-end dropdown-hover">
-        <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
-          <ion-icon class="group-hover:text-primary-content text-xl" name="menu"></ion-icon>
+        <div tabindex="0" role="button" 
+             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
+                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
+             aria-label="{{ i18n "menu.selectLanguage" | default "Выбрать язык" }}">
+          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
+                    name="language-outline"></ion-icon>
         </div>
-        <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-xl z-[1] shadow-xl 
+                                border border-base-200 dark:border-base-content/10 p-2 min-w-[160px]">
+          {{ range $langCode, $langParams := $.Site.Params.navLang }}
+            {{ $translatedPage := where $.Page.Translations "Lang" $langCode | first 1 }}
+            {{ $isCategoriesPage := hasPrefix ($.Path) "/categories/" }}
+            {{ $isTagsPage := hasPrefix ($.Path) "/tags/" }}
+            {{ $isActive := eq $langCode $.Site.Language.Lang }}
+
+            {{ $link := "" }}
+            {{ if or $isCategoriesPage $isTagsPage }}
+              {{ $section := cond $isCategoriesPage "categories" "tags" }}
+              {{ $link = printf "%s%s/%s/" ($.Site.BaseURL | absURL) $langCode $section }}
+            {{ else if $translatedPage }}
+              {{ $link = (index $translatedPage 0).Permalink | absURL }}
+            {{ else }}
+              {{ $currentPath := strings.TrimPrefix (printf "/%s/" $.Site.Language.Lang) $.Page.RelPermalink }}
+              {{ $link = printf "%s%s/%s" ($.Site.BaseURL | absURL) $langCode $currentPath }}
+            {{ end }}
+
+            <li>
+              <a href="{{ $link }}" 
+                 hreflang="{{ $langCode }}"
+                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
+                        {{ if $isActive }}bg-primary/10 text-primary font-medium{{ end }}"
+                 {{ if $isActive }}aria-current="true"{{ end }}>
+                <ion-icon name="{{ $langParams.icon | default "globe-outline" }}" class="text-lg"></ion-icon>
+                <span class="flex-1">{{ $langParams.title }}</span>
+                {{ if $isActive }}
+                <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+                {{ end }}
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+          
+      <!-- Collapsed Menu -->
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" 
+             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
+                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
+             aria-label="{{ i18n "menu.more" | default "Ещё" }}">
+          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
+                    name="ellipsis-horizontal"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu w-44 bg-base-100 rounded-xl z-[1] shadow-xl 
+                                border border-base-200 dark:border-base-content/10 p-2">
           {{ range $collapseNavItems }}
           {{ partial "renderMobileNavItem.html" (dict "item" . "site" $.Site) }}
           {{ end }}

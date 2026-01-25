@@ -4,54 +4,180 @@
 
 {{ define "main" }}
 
-<div class="mt-8 lg:mt-12 px-4"
+<div class="mt-8 lg:mt-12 px-4 sm:px-6"
 x-data="{
   search: '',
+  isLoading: false,
   get results() {
-    return this.search !== '' ? window.fuse.search(this.search) : [];
+    return this.search.trim() !== '' ? window.fuse.search(this.search) : [];
   },
-}">
-  <!-- Поле поиска -->
-  <label for="search" class="input input-bordered flex items-center gap-2">
-    <input id="search" name="search" type="text" class="grow" placeholder="{{ T "search" }}" x-model.debounce="search" />
-    <ion-icon name="search"></ion-icon>
-  </label>
+  get hasResults() {
+    return this.results.length > 0;
+  },
+  get showEmpty() {
+    return this.search.trim() !== '' && !this.hasResults;
+  },
+  clearSearch() {
+    this.search = '';
+    this.$refs.searchInput.focus();
+  }
+}"
+x-init="$refs.searchInput.focus()">
 
-  <!-- Результаты поиска -->
-  <div class="mt-8 space-y-4">
-    <template x-for="result in results">
-      <a class="card card-compact bg-base-100 hover:bg-base-content/10 cursor-pointer border border-base-content/30" :href="result.item.url">
-        <div class="card-body">
-          <h2 class="card-title" x-text="result.item.title"></h2>
-          <div x-html="result.item.description"></div>
-          <div class="card-actions justify-between items-center mt-4">
-            <div class="flex items-center">
-              <template x-if="result.item.avatar">
-                <div class="avatar mr-1">
-                  <div class="w-8 rounded-full">
-                    <img class="my-0" :src="result.item.avatar" :alt="result.item.author" />
-                  </div>
+  <div class="max-w-2xl mx-auto">
+    
+    <!-- Заголовок -->
+    <div class="text-center mb-6 sm:mb-8">
+      <h1 class="text-2xl sm:text-3xl font-bold mb-2">{{ T "search" }}</h1>
+      <p class="text-sm text-base-content/60">{{ T "searchHint" | default "Поиск по заголовкам, описаниям и тегам" }}</p>
+    </div>
+
+    <!-- Поле поиска -->
+    <div class="relative">
+      <label for="search" class="input input-bordered input-lg flex items-center gap-2 
+                                  focus-within:input-primary transition-colors duration-200">
+        <ion-icon name="search" class="text-base-content/50 text-lg"></ion-icon>
+        <input id="search" 
+               name="search" 
+               type="text" 
+               class="grow bg-transparent" 
+               placeholder="{{ T "searchPlaceholder" | default "Введите запрос..." }}" 
+               x-model.debounce.300ms="search"
+               x-ref="searchInput"
+               autocomplete="off" />
+        
+        <!-- Кнопка очистки -->
+        <button x-show="search.length > 0" 
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 scale-75"
+                x-transition:enter-end="opacity-100 scale-100"
+                @click="clearSearch()"
+                class="btn btn-ghost btn-circle btn-sm"
+                aria-label="{{ T "clear" | default "Очистить" }}">
+          <ion-icon name="close" class="text-lg"></ion-icon>
+        </button>
+      </label>
+      
+      <!-- Счётчик результатов -->
+      <div class="absolute -bottom-6 left-0 text-xs text-base-content/50"
+           x-show="search.trim() !== ''"
+           x-transition>
+        <span x-text="results.length"></span> {{ T "resultsFound" | default "найдено" }}
+      </div>
+    </div>
+
+    <!-- Результаты поиска -->
+    <div class="mt-10 sm:mt-12 space-y-3 sm:space-y-4">
+      
+      <!-- Пустое состояние - начало поиска -->
+      <div x-show="search.trim() === ''" 
+           x-transition
+           class="text-center py-12 sm:py-16">
+        <ion-icon name="search-outline" class="text-6xl sm:text-7xl text-base-content/20 mb-4"></ion-icon>
+        <p class="text-base-content/50">{{ T "searchStart" | default "Начните вводить для поиска" }}</p>
+      </div>
+      
+      <!-- Ничего не найдено -->
+      <div x-show="showEmpty" 
+           x-transition
+           class="text-center py-12 sm:py-16">
+        <ion-icon name="sad-outline" class="text-6xl sm:text-7xl text-base-content/20 mb-4"></ion-icon>
+        <p class="text-base-content/60 mb-2">{{ T "noResults" | default "Ничего не найдено" }}</p>
+        <p class="text-sm text-base-content/40">{{ T "tryAnother" | default "Попробуйте другой запрос" }}</p>
+      </div>
+
+      <!-- Список результатов -->
+      <template x-for="(result, index) in results" :key="result.item.url">
+        <a class="block group" :href="result.item.url"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 translate-y-4"
+           x-transition:enter-end="opacity-100 translate-y-0"
+           :style="{ transitionDelay: `${index * 50}ms` }">
+          <article class="card card-compact 
+                          bg-base-200/50 dark:bg-base-200/10
+                          hover:bg-base-200 dark:hover:bg-base-200/20
+                          border border-transparent hover:border-primary/30
+                          hover:shadow-md
+                          transition-all duration-200">
+            <div class="card-body p-4 sm:p-5">
+              
+              <!-- Заголовок -->
+              <h2 class="card-title text-base sm:text-lg group-hover:text-primary transition-colors duration-200">
+                <span x-text="result.item.title"></span>
+                <ion-icon name="arrow-forward" 
+                          class="text-base-content/30 group-hover:text-primary 
+                                 group-hover:translate-x-1 transition-all duration-200 ml-auto shrink-0"></ion-icon>
+              </h2>
+              
+              <!-- Описание -->
+              <div class="text-sm text-base-content/70 line-clamp-2 sm:line-clamp-3" 
+                   x-html="result.item.description"></div>
+              
+              <!-- Теги (если есть) -->
+              <template x-if="result.item.tags && result.item.tags.length > 0">
+                <div class="flex flex-wrap gap-1.5 mt-2">
+                  <template x-for="tag in result.item.tags.slice(0, 3)" :key="tag">
+                    <span class="badge badge-sm badge-outline opacity-60" x-text="tag"></span>
+                  </template>
+                  <template x-if="result.item.tags.length > 3">
+                    <span class="badge badge-sm badge-ghost" x-text="'+' + (result.item.tags.length - 3)"></span>
+                  </template>
                 </div>
               </template>
-              <template x-if="!result.item.avatar">
-                <span>@</span>
-              </template>
+              
+              <!-- Мета информация -->
+              <div class="card-actions justify-between items-center mt-3 pt-3 
+                          border-t border-base-content/10">
+                
+                <!-- Автор -->
+                <div class="flex items-center gap-2 text-sm text-base-content/60">
+                  <template x-if="result.item.avatar">
+                    <div class="avatar">
+                      <div class="w-6 h-6 rounded-full ring-1 ring-base-content/10">
+                        <img class="my-0" :src="result.item.avatar" :alt="result.item.author" />
+                      </div>
+                    </div>
+                  </template>
+                  <template x-if="!result.item.avatar">
+                    <div class="avatar placeholder">
+                      <div class="w-6 h-6 rounded-full bg-base-300">
+                        <ion-icon name="person" class="text-xs"></ion-icon>
+                      </div>
+                    </div>
+                  </template>
+                  
+                  <span x-text="result.item.author || '{{ site.Params.author }}'"></span>
+                </div>
+                
+                <!-- Время чтения -->
+                <div class="flex items-center gap-1 text-xs text-base-content/50">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <span>
+                    <span x-text="result.item.readingTime"></span> {{ T "minRead" | default "мин" }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </a>
+      </template>
+    </div>
+    
+    <!-- Подсказки для поиска -->
+    <div x-show="search.trim() === ''" 
+         x-transition
+         class="mt-8 sm:mt-12">
+      <p class="text-xs text-base-content/40 text-center mb-3">{{ T "popularSearches" | default "Популярные запросы" }}</p>
+      <div class="flex flex-wrap justify-center gap-2">
+        {{ range first 5 (site.Taxonomies.tags.ByCount) }}
+        <button @click="search = '{{ .Page.Title }}'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
+          {{ .Page.Title }}
+        </button>
+        {{ end }}
+      </div>
+    </div>
 
-              <template x-if="result.item.author">
-                <span x-text="result.item.author"></span>
-              </template>
-              <template x-if="!result.item.author">
-                <span>{{ site.Params.author }}</span>
-              </template>
-            </div>
-            <div class="inline-flex items-center">
-              <ion-icon name="time" class="mr-1"></ion-icon>
-              <span><span x-text="result.item.readingTime"></span>{{ T "minuteRead" .ReadingTime }}</span>
-            </div>
-          </div>
-        </div>
-      </a>
-    </template>
   </div>
 </div>
 
@@ -70,8 +196,9 @@ x-data="{
   "avatar" .Params.avatar 
   "categories" .Params.categories 
   "tags" .Params.tags 
-  "description" (.Summary | emojify | safeHTML) 
+  "description" (.Summary | plainify | truncate 200) 
   "readingTime" .ReadingTime
+  "date" (.Date.Format "2006-01-02")
 ) }}
 {{ end }}
 
@@ -82,8 +209,11 @@ x-data="{
   "url" .RelPermalink 
   "author" .Params.author 
   "avatar" .Params.avatar 
-  "description" (.Summary | emojify | safeHTML) 
+  "categories" .Params.categories
+  "tags" .Params.tags
+  "description" (.Summary | plainify | truncate 200) 
   "readingTime" .ReadingTime
+  "date" (.Date.Format "2006-01-02")
 ) }}
 {{ end }}
 
@@ -92,13 +222,15 @@ x-data="{
   var fuseData = {{ $data }};
   var fuseOptions = {
     keys: [
-      "title",
-      "description",
-      "categories",
-      "tags"
+      { name: "title", weight: 2 },
+      { name: "description", weight: 1 },
+      { name: "categories", weight: 1.5 },
+      { name: "tags", weight: 1.5 }
     ],
     includeMatches: true,
-    threshold: 0.3
+    threshold: 0.3,
+    ignoreLocation: true,
+    minMatchCharLength: 2
   };
 
   var fuse = new Fuse(fuseData, fuseOptions);

@@ -1,6 +1,40 @@
-# New
+# Основные
 motto = "To iterate is human, to recurse divine"
+about = "About"
 comments = "Comments"
+home = "Home"
+backToHome = "Back to home"
+flip = "Flip it!"
+archives = "Archives"
+allTags = "All Tags"
+allCategories = "All Categories"
+socialLinks = "Social Links"
+updatedAt = "Updated at"
+prevPage = "Previous page"
+nextPage = "Next page"
+
+# Search
+search = "Search"
+searchHint = "Search by titles, descriptions and tags"
+searchPlaceholder = "Enter your query..."
+clear = "Clear"
+resultsFound = "found"
+searchStart = "Start typing to search"
+noResults = "Nothing found"
+tryAnother = "Try a different query"
+minRead = "min"
+popularSearches = "Popular searches"
+
+backToTop = "Back to top"
+top = "Top"
+focus = "Focus"
+words = "words"
+tableOfContents = "Contents"
+contents = "Contents"
+relatedPosts = "Related Posts"
+quickActions = "Quick Actions"
+share = "Share"
+copy = "Copy"
 
 # Alerts
 note = "Note"
@@ -9,68 +43,161 @@ important = "Important"
 warning = "Warning"
 caution = "Caution"
 
-home = "Home"
-backToHome = "Back to home"
-flip = "Flip it!"
-about = "About"
-search = "Search"
-prevPage = "Previous page"
-nextPage = "Next page"
+# Archives
+"archives.description" = "Chronological list of all publications"
+"archives.total" = "total"
+"archives.posts" = "posts"
+"archives.projects" = "projects"
+"archives.years" = "years"
+"archives.jumpTo" = "Jump to year"
+"archives.entries" = "entries"
+"archives.latest" = "Latest"
+"archives.project" = "Project"
+"archives.post" = "Post"
+"archives.min" = "min"
+"archives.beginning" = "The beginning..."
 
-archives = "Archives"
-allCategories = "All Categories"
-allTags = "All Tags"
+# Months
+"months.January" = "January"
+"months.February" = "February"
+"months.March" = "March"
+"months.April" = "April"
+"months.May" = "May"
+"months.June" = "June"
+"months.July" = "July"
+"months.August" = "August"
+"months.September" = "September"
+"months.October" = "October"
+"months.November" = "November"
+"months.December" = "December"
 
-minuteRead = " minute read"
-updatedAt = "Updated at"
-socialLinks = "Social Links"
+# Taxonomies (tags, categories)
+"taxonomy.tag" = "Tag"
+"taxonomy.category" = "Category"
+"taxonomy.backToTags" = "All tags"
+"taxonomy.backToCategories" = "All categories"
+"taxonomy.backToList" = "Back to list"
+"taxonomy.otherTags" = "Other tags"
+"taxonomy.otherCategories" = "Other categories"
+"taxonomy.postsIn" = "Posts in"
+"taxonomy.total" = "total"
+"taxonomy.noPosts" = "No posts yet"
+"taxonomy.tagsDescription" = "Navigate by topics and keywords"
+"taxonomy.categoriesDescription" = "Browse content by categories"
+"taxonomy.defaultDescription" = "All available sections"
+"taxonomy.tags" = "tags"
+"taxonomy.categories" = "categories"
+"taxonomy.posts" = "posts"
+"taxonomy.allTags" = "All tags"
+"taxonomy.allCategories" = "All categories"
+"taxonomy.latestPosts" = "Latest posts"
 
-[article]
-one = "1 article"
-other = "{{ .Count }} articles"
+# Plural forms
+[tag]
+one = "1 tag"
+other = "{{ .Count }} tags"
 
 [category]
 one = "1 category"
 other = "{{ .Count }} categories"
 
-[tag]
-one = "1 tag"
-other = "{{ .Count }} tags"
+[article]
+one = "1 article"
+other = "{{ .Count }} articles"
 
+[minuteRead]
+one = " minute read"
+other = " minutes read"
+
+# Colors
 [color]
   [color.table]
-    header = { name = "Name", code = "Code", example = "Example" }
+    [color.table.header]
+      name = "Name"
+      code = "Code"
+      example = "Example"
     [color.table.copy_button]
       tooltip = "Copy Code"
       text = "Copy"
       copied = "Copied!"
       copyError = "Failed to copy"
 
+# Video
 [video]
-  not_supported = "Your browser does not support video playback."
-  
+not_supported = "Your browser does not support video playback."
+
+# Portfolio
 [portfolio]
-  title = "Portfolio"
-  disabled = "Portfolio is disabled or not configured."
-  all = "All"
-  toolsUsed = "Tools used"
-  
+title = "Portfolio"
+disabled = "Coming soon"
+badge = "My Work"
+heroTitle = "Projects I'm Proud Of"
+heroDescription = "Each project is a unique story. Here are the works into which I've put my heart, knowledge, and creativity."
+statsProjects = "projects"
+statsCategories = "categories"
+statsTools = "technologies"
+all = "All"
+swipeToFilter = "Swipe to filter"
+statusCompleted = "Completed"
+statusInProgress = "In Progress"
+statusArchived = "Archived"
+toolsUsed = "Tools used"
+viewProject = "View project"
+sourceCode = "Source Code"
+liveDemo = "View Live Demo"
+demo = "Demo"
+viewOnGithub = "View on GitHub"
+viewDemo = "View Demo"
+noProjects = "No projects found"
+tryOtherFilter = "Try another category"
+resetFilter = "Show all"
+processTitle = "How I Work"
+processDescription = "A simple and clear project workflow"
+step1Title = "Discussion"
+step1Description = "Getting to know the project, defining goals and requirements"
+step2Title = "Planning"
+step2Description = "Developing strategy, design and technical architecture"
+step3Title = "Development"
+step3Description = "Building the product with regular progress demos"
+step4Title = "Launch"
+step4Description = "Project deployment and post-launch support"
+techTitle = "Technologies"
+techDescription = "Tools I use in my work"
+faqTitle = "Frequently Asked Questions"
+faqDescription = "Answers to common questions about collaboration"
+faq1Question = "How much does project development cost?"
+faq1Answer = "The cost depends on the complexity and scope of work. After discussing the requirements, I will provide a detailed estimate. The first consultation is free."
+faq2Question = "How long does development take?"
+faq2Answer = "Timelines range from 2-4 weeks for landing pages to several months for complex projects. Exact deadlines are discussed individually."
+faq3Question = "What guarantees do you provide?"
+faq3Answer = "I provide warranty support after project launch, bug fixes and assistance if you have questions. Terms are discussed in the contract."
+faq4Question = "Do you work with international clients?"
+faq4Answer = "Yes, I work with clients from any country. Communication is possible in Russian and English via convenient messengers."
+ctaTitle = "Have an interesting project?"
+ctaDescription = "Let's discuss your idea. The first consultation is free."
+ctaButton = "Contact me"
+ctaEmail = "Email"
+
+# Summary
 [summary]
-  post = "Post"
-  portfolio = "Portfolio"
-  
+post = "Post"
+portfolio = "Portfolio"
+
+# Menu
 [menu]
-  languages = "Languages"
-  menu = "Menu"
+languages = "Languages"
+menu = "Menu"
 
+# Available in other languages
 [post_available_in]
-  text = "This post is also available in"
+text = "This post is also available in"
 
+# Donations
 [donation]
-  button = "Support the Project"
-  title = "Support the Project"
-  subtitle = "Choose a convenient method"
-  close = "Close"
-  info = "All payments are secure. Any support helps develop the project and create new content ❤️"
-  cloudtips_description = "For users from Russia"
-  tribute_description = "International cards, Telegram Stars, USDT, Bitcoin, Toncoin, Notcoin"
+button = "Support the Project"
+title = "Support the Project"
+subtitle = "Choose a convenient method"
+close = "Close"
+info = "All payments are secure. Any support helps develop the project and create new content ❤️"
+cloudtips_description = "For users from Russia"
+tribute_description = "International cards, Telegram Stars, USDT, Bitcoin, Toncoin, Notcoin"

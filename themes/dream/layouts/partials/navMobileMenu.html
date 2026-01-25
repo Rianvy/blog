@@ -72,29 +72,4 @@
     </ul>
   </div>
 
-  <!-- Дополнительные действия (опционально) -->
-  {{ if or site.Params.showThemeToggle site.Params.showScrollTop }}
-  <div class="border-t border-base-200 dark:border-base-content/10"></div>
-  
-  <div class="space-y-2">
-    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
-      {{ i18n "menu.settings" | default "Настройки" }}
-    </h3>
-    <ul class="space-y-1">
-      {{ if site.Params.showThemeToggle }}
-      <li>
-        <button type="button"
-                class="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg
-                       transition-all duration-200 hover:bg-base-200"
-                @click="toggleTheme()"
-                aria-label="{{ i18n "menu.toggleTheme" | default "Переключить тему" }}">
-          <ion-icon name="contrast-outline" class="text-lg"></ion-icon>
-          <span>{{ i18n "menu.theme" | default "Тема" }}</span>
-        </button>
-      </li>
-      {{ end }}
-    </ul>
-  </div>
-  {{ end }}
-
 </nav>

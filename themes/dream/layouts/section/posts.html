@@ -3,161 +3,395 @@
 {{ end }}
 
 {{ define "main"}}
+
+{{/* Собираем все страницы: посты + портфолио */}}
+{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ $portfolio := where site.RegularPages "Section" "portfolio" }}
+{{ $allPages := $posts | append $portfolio }}
+{{ $allPages = sort $allPages ".Date" "desc" }}
+
+{{ $groups := $allPages.GroupByDate (default "2006" .Params.groupLayout) }}
+
 <div class="mt-8 lg:mt-12 px-4 sm:px-6">
   
-  <!-- Заголовок -->
-  <div class="mx-auto prose dark:prose-invert text-center mb-8 lg:mb-12">
-    <h1 class="text-2xl sm:text-3xl lg:text-4xl">
+  <!-- Hero секция -->
+  <section class="max-w-4xl mx-auto text-center mb-10 lg:mb-14">
+    
+    <!-- Иконка -->
+    <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 text-primary mb-4">
+      <ion-icon name="time-outline" class="text-3xl"></ion-icon>
+    </div>
+    
+    <!-- Заголовок -->
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">
       {{ default (T "archives") .Title }}
     </h1>
+    
+    <!-- Описание -->
     {{ with .Content }}
-    <p class="text-sm sm:text-base text-base-content/70">{{ . }}</p>
+    <p class="text-base-content/70 max-w-xl mx-auto mb-6">{{ . }}</p>
+    {{ else }}
+    <p class="text-base-content/70 max-w-xl mx-auto mb-6">
+      {{ T "archives.description" | default "Хронология всех публикаций на сайте" }}
+    </p>
     {{ end }}
     
     <!-- Статистика -->
-    <div class="not-prose flex justify-center items-center gap-4 sm:gap-6 mt-4 text-sm text-base-content/60">
-      <div class="flex items-center gap-1.5">
-        <ion-icon name="document-text-outline" class="text-base"></ion-icon>
-        <span>{{ len .Pages }} {{ T "posts" | default "записей" }}</span>
+    <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4">
+      
+      <!-- Всего записей -->
+      <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
+        <ion-icon name="layers-outline" class="text-lg text-primary"></ion-icon>
+        <span class="font-bold">{{ len $allPages }}</span>
+        <span class="text-sm text-base-content/60">{{ T "archives.total" | default "всего" }}</span>
       </div>
-      <div class="w-1 h-1 rounded-full bg-base-content/30"></div>
-      <div class="flex items-center gap-1.5">
-        <ion-icon name="calendar-outline" class="text-base"></ion-icon>
-        <span>{{ len (.Pages.GroupByDate "2006") }} {{ T "years" | default "лет" }}</span>
+      
+      <!-- Постов -->
+      <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
+        <ion-icon name="document-text-outline" class="text-lg text-secondary"></ion-icon>
+        <span class="font-bold">{{ len $posts }}</span>
+        <span class="text-sm text-base-content/60">{{ T "archives.posts" | default "постов" }}</span>
       </div>
+      
+      <!-- Проектов -->
+      {{ if gt (len $portfolio) 0 }}
+      <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
+        <ion-icon name="briefcase-outline" class="text-lg text-accent"></ion-icon>
+        <span class="font-bold">{{ len $portfolio }}</span>
+        <span class="text-sm text-base-content/60">{{ T "archives.projects" | default "проектов" }}</span>
+      </div>
+      {{ end }}
+      
+      <!-- Лет -->
+      <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
+        <ion-icon name="calendar-outline" class="text-lg text-info"></ion-icon>
+        <span class="font-bold">{{ len $groups }}</span>
+        <span class="text-sm text-base-content/60">{{ T "archives.years" | default "лет" }}</span>
+      </div>
+      
     </div>
-  </div>
+  </section>
 
   <!-- Быстрая навигация по годам -->
-  {{ $groups := .Pages.GroupByDate (default "2006" .Params.groupLayout) }}
-  {{ if gt (len $groups) 3 }}
-  <div class="max-w-2xl mx-auto mb-6 sm:mb-8">
-    <div class="flex flex-wrap justify-center gap-2">
-      {{ range $groups }}
-      <a href="#year-{{ .Key }}" 
-         class="badge badge-outline hover:badge-primary transition-colors duration-200 no-underline">
-        {{ .Key }}
-      </a>
-      {{ end }}
-    </div>
-  </div>
-  {{ end }}
-
-  <!-- Таймлайн -->
-  <div class="max-w-2xl mx-auto">
-    {{ $groupLayout := default "2006" .Params.groupLayout }}
-    {{ range $index, $group := .Pages.GroupByDate $groupLayout }}
-    
-    <div id="year-{{ .Key }}" 
-         class="relative pl-6 sm:pl-8 pb-8 lg:pb-12 
-                scroll-mt-20
-                border-l-2 border-base-300 dark:border-base-content/20
-                last:pb-0 last:border-l-transparent">
-      
-      <!-- Точка на линии -->
-      <div class="absolute -left-[9px] sm:-left-[11px] top-0 
-                  w-4 h-4 sm:w-5 sm:h-5 
-                  rounded-full bg-base-100 
-                  border-2 border-primary
-                  flex items-center justify-center
-                  transition-transform duration-200 hover:scale-110">
-        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary"></div>
+  {{ if gt (len $groups) 2 }}
+  <nav class="max-w-3xl mx-auto mb-8 sm:mb-10">
+    <div class="p-3 rounded-2xl bg-base-200/30 border border-base-300">
+      <div class="flex items-center gap-2 mb-3 px-1">
+        <ion-icon name="navigate-outline" class="text-base-content/50"></ion-icon>
+        <span class="text-sm text-base-content/50">{{ T "archives.jumpTo" | default "Перейти к году" }}</span>
       </div>
-      
-      <!-- Год -->
-      <div class="flex items-center gap-2 sm:gap-3 mb-4">
-        <h2 class="text-xl sm:text-2xl font-bold text-primary">
-          {{ .Key }}
-        </h2>
-        <span class="badge badge-sm sm:badge-md badge-ghost">
-          {{ len .Pages }} {{ if eq (len .Pages) 1 }}{{ T "post" | default "запись" }}{{ else }}{{ T "posts" | default "записей" }}{{ end }}
-        </span>
-      </div>
-      
-      <!-- Список постов -->
-      <div class="space-y-2 sm:space-y-3">
-        {{ range .Pages }}
-        <article class="group">
-          <a href="{{ .RelPermalink }}" 
-             class="block p-3 sm:p-4 
-                    rounded-lg sm:rounded-xl
-                    bg-base-200/50 dark:bg-base-200/10
-                    border border-transparent
-                    hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
-                    hover:shadow-sm
-                    transition-all duration-200
-                    no-underline">
-            
-            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
-              <!-- Дата -->
-              <time datetime="{{ .Date.Format "2006-01-02" }}" 
-                    class="text-xs sm:text-sm text-base-content/50 font-mono shrink-0 
-                           flex items-center gap-1.5">
-                <ion-icon name="calendar-clear-outline" class="text-xs sm:hidden"></ion-icon>
-                {{ .Date.Format "02 Jan" }}
-              </time>
-              
-              <!-- Заголовок -->
-              <h3 class="text-sm sm:text-base font-medium 
-                         group-hover:text-primary transition-colors duration-200
-                         line-clamp-2 sm:line-clamp-1">
-                {{ .Title }}
-              </h3>
-              
-              <!-- Стрелка (на десктопе) -->
-              <ion-icon name="arrow-forward" 
-                        class="hidden sm:block ml-auto text-base-content/30 
-                               group-hover:text-primary group-hover:translate-x-1
-                               transition-all duration-200 shrink-0"></ion-icon>
-            </div>
-            
-            <!-- Описание (если есть) -->
-            {{ with .Description }}
-            <p class="hidden sm:block text-xs text-base-content/50 mt-2 line-clamp-1">
-              {{ . }}
-            </p>
-            {{ end }}
-          </a>
-          
-          <!-- Теги -->
-          {{ with .Params.tags }}
-          <div class="flex flex-wrap gap-1.5 mt-2 ml-1">
-            {{ range first 3 . }}
-            {{ $tagURL := printf "/tags/%s/" (. | urlize) }}
-            <a href="{{ $tagURL | relLangURL }}" 
-               class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200"
-               rel="tag" 
-               aria-label="{{ . }}"
-               data-tag="{{ . | urlize }}">
-              {{ . }}
-            </a>
-            {{ end }}
-            {{ if gt (len .) 3 }}
-            <span class="badge badge-sm badge-ghost">+{{ sub (len .) 3 }}</span>
-            {{ end }}
-          </div>
-          {{ end }}
-        </article>
+      <div class="flex flex-wrap gap-2">
+        {{ range $index, $group := $groups }}
+        <a href="#year-{{ .Key }}" 
+           class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                  bg-base-100 border border-base-300
+                  hover:border-primary hover:bg-primary hover:text-primary-content
+                  transition-all duration-200 no-underline">
+          <span class="font-medium">{{ .Key }}</span>
+          <span class="text-xs opacity-60 group-hover:opacity-80">({{ len .Pages }})</span>
+        </a>
         {{ end }}
       </div>
     </div>
+  </nav>
+  {{ end }}
+
+  <!-- Таймлайн -->
+  <div class="max-w-3xl mx-auto">
+    {{ $groupLayout := default "2006" .Params.groupLayout }}
+    {{ range $index, $group := $groups }}
+    
+    <section id="year-{{ .Key }}" 
+             class="relative pl-6 sm:pl-10 pb-10 lg:pb-14 
+                    scroll-mt-24
+                    border-l-2 border-base-300 dark:border-base-content/20
+                    last:pb-0">
+      
+      <!-- Маркер года на таймлайне -->
+      <div class="absolute -left-[13px] sm:-left-[17px] top-0">
+        <div class="w-6 h-6 sm:w-8 sm:h-8 
+                    rounded-full bg-primary text-primary-content
+                    flex items-center justify-center
+                    shadow-lg shadow-primary/25
+                    transition-transform duration-200 hover:scale-110">
+          <ion-icon name="calendar" class="text-sm sm:text-base"></ion-icon>
+        </div>
+      </div>
+      
+      <!-- Заголовок года -->
+      <div class="flex flex-wrap items-center gap-3 mb-5">
+        <h2 class="text-2xl sm:text-3xl font-bold">
+          {{ .Key }}
+        </h2>
+        <div class="flex items-center gap-2">
+          <span class="badge badge-primary badge-outline">
+            {{ len .Pages }} {{ T "archives.entries" | default "записей" }}
+          </span>
+          {{ if eq $index 0 }}
+          <span class="badge badge-success badge-sm gap-1">
+            <ion-icon name="flash" class="text-xs"></ion-icon>
+            {{ T "archives.latest" | default "Новое" }}
+          </span>
+          {{ end }}
+        </div>
+      </div>
+      
+      <!-- Группировка по месяцам -->
+      {{ $monthGroups := .Pages.GroupByDate "January" }}
+      {{ range $monthGroups }}
+      <div class="mb-6 last:mb-0">
+        
+        <!-- Месяц -->
+        <div class="flex items-center gap-2 mb-3 ml-1">
+          <div class="w-2 h-2 rounded-full bg-base-content/20"></div>
+          <h3 class="text-sm font-medium text-base-content/60 uppercase tracking-wider">
+            {{ T (printf "months.%s" .Key) | default .Key }}
+          </h3>
+          <div class="flex-1 h-px bg-base-300/50"></div>
+          <span class="text-xs text-base-content/40">{{ len .Pages }}</span>
+        </div>
+        
+        <!-- Список постов -->
+        <div class="space-y-2">
+          {{ range .Pages }}
+          
+          {{/* Определяем тип контента */}}
+          {{ $isPortfolio := eq .Section "portfolio" }}
+          {{ $typeColor := cond $isPortfolio "accent" "secondary" }}
+          {{ $typeIcon := cond $isPortfolio "briefcase-outline" "document-text-outline" }}
+          {{ $typeLabel := cond $isPortfolio (T "archives.project" | default "Проект") (T "archives.post" | default "Пост") }}
+          
+          <article class="group">
+            <a href="{{ .RelPermalink }}" 
+               class="block p-3 sm:p-4 
+                      rounded-xl
+                      bg-base-200/50 dark:bg-base-200/10
+                      border border-transparent
+                      hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
+                      hover:shadow-md
+                      transition-all duration-200
+                      no-underline
+                      {{ if $isPortfolio }}ring-1 ring-accent/10{{ end }}">
+              
+              <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                
+                <!-- Дата -->
+                <time datetime="{{ .Date.Format "2006-01-02" }}" 
+                      class="text-xs text-base-content/50 font-mono shrink-0 
+                             flex items-center gap-1.5 tabular-nums">
+                  <ion-icon name="calendar-clear-outline" class="text-xs opacity-50"></ion-icon>
+                  {{ .Date.Format "02" }}
+                </time>
+                
+                <!-- Иконка типа контента -->
+                <div class="hidden sm:flex items-center justify-center w-8 h-8 rounded-lg shrink-0
+                            {{ if $isPortfolio }}bg-accent/10{{ else }}bg-base-300/50{{ end }}
+                            group-hover:bg-primary/10 transition-colors">
+                  <ion-icon name="{{ $typeIcon }}" 
+                            class="text-base transition-colors
+                                   {{ if $isPortfolio }}text-accent{{ else }}text-base-content/50{{ end }}
+                                   group-hover:text-primary"></ion-icon>
+                </div>
+                
+                <!-- Контент -->
+                <div class="flex-1 min-w-0">
+                  
+                  <!-- Бейдж типа (мобильный) -->
+                  <div class="sm:hidden mb-1">
+                    <span class="badge badge-xs badge-{{ $typeColor }} badge-outline">
+                      {{ $typeLabel }}
+                    </span>
+                  </div>
+                  
+                  <h4 class="text-sm sm:text-base font-medium 
+                             group-hover:text-primary transition-colors duration-200
+                             line-clamp-2 sm:line-clamp-1">
+                    {{ .Title }}
+                  </h4>
+                  
+                  <!-- Мета-информация -->
+                  <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-base-content/40">
+                    
+                    <!-- Тип (десктоп) -->
+                    <span class="hidden sm:flex items-center gap-1 text-{{ $typeColor }}">
+                      <ion-icon name="{{ $typeIcon }}" class="text-xs"></ion-icon>
+                      {{ $typeLabel }}
+                    </span>
+                    
+                    <!-- Категория -->
+                    {{ with .Params.categories }}
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="folder-outline" class="text-xs"></ion-icon>
+                      {{ index . 0 }}
+                    </span>
+                    {{ end }}
+                    
+                    <!-- Фильтры портфолио -->
+                    {{ if $isPortfolio }}
+                    {{ with .Params.filters }}
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="pricetag-outline" class="text-xs"></ion-icon>
+                      {{ index . 0 }}
+                    </span>
+                    {{ end }}
+                    {{ end }}
+                    
+                    <!-- Время чтения -->
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="time-outline" class="text-xs"></ion-icon>
+                      {{ .ReadingTime }} {{ T "archives.min" | default "мин" }}
+                    </span>
+                    
+                    <!-- Статус проекта -->
+                    {{ if $isPortfolio }}
+                    {{ with .Params.status }}
+                    {{ $statusColor := "neutral" }}
+                    {{ $statusText := . }}
+                    {{ if eq . "completed" }}
+                      {{ $statusColor = "success" }}
+                      {{ $statusText = T "portfolio.statusCompleted" | default "Завершён" }}
+                    {{ else if eq . "in-progress" }}
+                      {{ $statusColor = "warning" }}
+                      {{ $statusText = T "portfolio.statusInProgress" | default "В работе" }}
+                    {{ end }}
+                    <span class="badge badge-xs badge-{{ $statusColor }}">{{ $statusText }}</span>
+                    {{ end }}
+                    {{ end }}
+                    
+                  </div>
+                </div>
+                
+                <!-- Стрелка -->
+                <ion-icon name="arrow-forward" 
+                          class="hidden sm:block text-base-content/30 
+                                 group-hover:text-primary group-hover:translate-x-1
+                                 transition-all duration-200 shrink-0"></ion-icon>
+              </div>
+              
+              <!-- Описание -->
+              {{ with .Description }}
+              <p class="hidden md:block text-xs text-base-content/50 mt-2 ml-0 sm:ml-12 line-clamp-1">
+                {{ . }}
+              </p>
+              {{ end }}
+            </a>
+            
+            <!-- Теги / Инструменты -->
+            {{ $tags := .Params.tags }}
+            {{ if $isPortfolio }}
+              {{ $tags = .Params.tools }}
+            {{ end }}
+            {{ with $tags }}
+            <div class="flex flex-wrap gap-1.5 mt-2 ml-1 sm:ml-12">
+              {{ range first 4 . }}
+              {{ if $isPortfolio }}
+              <span class="badge badge-sm badge-ghost">
+                {{ . }}
+              </span>
+              {{ else }}
+              {{ $tagURL := printf "/tags/%s/" (. | urlize) }}
+              <a href="{{ $tagURL | relLangURL }}" 
+                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
+                 rel="tag">
+                {{ . }}
+              </a>
+              {{ end }}
+              {{ end }}
+              {{ if gt (len .) 4 }}
+              <span class="badge badge-sm badge-ghost opacity-60">+{{ sub (len .) 4 }}</span>
+              {{ end }}
+            </div>
+            {{ end }}
+          </article>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+      
+    </section>
     
     {{ end }}
+    
+    <!-- Конец таймлайна -->
+    <div class="relative pl-6 sm:pl-10">
+      <div class="absolute -left-[9px] sm:-left-[13px] top-0">
+        <div class="w-4 h-4 sm:w-6 sm:h-6 
+                    rounded-full bg-base-300 
+                    flex items-center justify-center">
+          <ion-icon name="flag" class="text-xs text-base-content/50"></ion-icon>
+        </div>
+      </div>
+      <p class="text-sm text-base-content/40 italic py-4">
+        {{ T "archives.beginning" | default "Начало пути..." }}
+      </p>
+    </div>
   </div>
   
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
   // Плавная прокрутка к году
   document.querySelectorAll('a[href^="#year-"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', function(e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         history.pushState(null, null, this.getAttribute('href'));
+        
+        // Подсветка года
+        target.classList.add('highlight');
+        setTimeout(() => target.classList.remove('highlight'), 1500);
       }
     });
   });
+  
+  // Анимация появления секций при скролле
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-fade-in');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  document.querySelectorAll('section[id^="year-"]').forEach(section => {
+    observer.observe(section);
+  });
+});
 </script>
+
+<style>
+  /* Анимация подсветки при переходе */
+  section.highlight {
+    animation: highlight-pulse 1.5s ease-out;
+  }
+  
+  @keyframes highlight-pulse {
+    0% { background-color: oklch(var(--p) / 0.1); }
+    100% { background-color: transparent; }
+  }
+  
+  /* Анимация появления */
+  .animate-fade-in {
+    animation: fade-in-up 0.5s ease-out forwards;
+  }
+  
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Плавный скролл */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
 {{ end }}

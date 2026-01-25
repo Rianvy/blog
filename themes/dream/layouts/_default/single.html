@@ -30,14 +30,31 @@
   @media (max-width: 768px) { .swiper-slide img { height: auto; max-height: 200px; } }
   {{ end }}
   
-  /* Reading Progress */
+  /* Reading Progress with percentage */
   .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: oklch(var(--p)); z-index: 9999; transition: width 0.1s ease-out; }
+  .reading-progress-text { position: fixed; top: 0.75rem; right: 1rem; z-index: 9999; font-size: 0.75rem; font-weight: 600; color: oklch(var(--p)); background: oklch(var(--b1) / 0.9); backdrop-filter: blur(8px); padding: 0.25rem 0.75rem; border-radius: 1rem; opacity: 0; transition: opacity 0.3s ease; }
+  .reading-progress-text.visible { opacity: 1; }
+  
+  /* Copy code button */
+  pre { position: relative; }
+  .copy-code-btn { position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.75rem; background: oklch(var(--b3)); border-radius: 0.25rem; cursor: pointer; opacity: 0; transition: opacity 0.2s, background 0.2s; }
+  pre:hover .copy-code-btn { opacity: 1; }
+  .copy-code-btn:hover { background: oklch(var(--p)); color: oklch(var(--pc)); }
+  .copy-code-btn.copied { background: oklch(var(--su)); color: oklch(var(--suc)); }
   
   /* Smooth anchor scroll */
   html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
   
-  /* Enhanced TOC */
-  #TableOfContents { position: sticky; top: 5rem; max-height: calc(100vh - 6rem); overflow-y: auto; }
+  /* Enhanced TOC with scrollbar */
+  #TableOfContents { 
+    max-height: calc(100vh - 12rem); 
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  #TableOfContents::-webkit-scrollbar { width: 6px; }
+  #TableOfContents::-webkit-scrollbar-track { background: transparent; }
+  #TableOfContents::-webkit-scrollbar-thumb { background: oklch(var(--b3)); border-radius: 3px; }
+  #TableOfContents::-webkit-scrollbar-thumb:hover { background: oklch(var(--bc) / 0.3); }
   #TableOfContents a.active { color: oklch(var(--p)); font-weight: 600; }
   #TableOfContents ul { border-left: 2px solid oklch(var(--b3)); }
   
@@ -56,6 +73,28 @@
   }
   #dream-single-post-content a:not(.badge):not(.btn):not(.lg-item):hover { background-size: 100% 2px; }
   
+  /* Focus Mode - скрываем только правый сайдбар */
+  body.focus-mode aside.right-sidebar { 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.3s ease; 
+  }
+  body.focus-mode article { 
+    max-width: 65ch; 
+    margin: 0 auto; 
+  }
+  
+  /* Левый сайдбар всегда видим */
+  aside.left-sidebar {
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Визуальная индикация активного режима фокуса */
+  body.focus-mode #focus-mode-btn {
+    background: oklch(var(--p) / 0.2);
+    color: oklch(var(--p));
+  }
+  
   /* LightGallery */
   .lg-sub-html { backdrop-filter: blur(16px); }
 </style>
@@ -64,84 +103,120 @@
 {{ end }}
 
 {{ define "main" }}
-{{/* Reading Progress Bar */}}
+{{/* Reading Progress Bar with Percentage */}}
 <div class="reading-progress" id="reading-progress"></div>
+<div class="reading-progress-text" id="reading-progress-text">0%</div>
 
-<div class="lg:grid lg:grid-cols-4 gap-6 mt-4 px-4 max-w-screen-2xl mx-auto">
+<div class="lg:grid lg:grid-cols-12 gap-6 mt-4 px-4 max-w-screen-2xl mx-auto">
   {{/* Left Sidebar - Desktop Only */}}
-  <aside class="hidden lg:block">
+  <aside class="hidden lg:block lg:col-span-2 left-sidebar">
     <div class="sticky top-20 space-y-4">
-      {{/* Quick Actions */}}
+      {{/* Back to Top with Focus Mode */}}
       <div class="flex flex-col gap-2">
         <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn btn-ghost btn-sm gap-2" aria-label="{{ T "backToTop" | default "Back to top" }}">
           <ion-icon name="arrow-up-outline"></ion-icon>
           <span class="text-xs">{{ T "backToTop" | default "Top" }}</span>
+        </button>
+        <button onclick="toggleFocusMode()" class="btn btn-ghost btn-sm gap-2" id="focus-mode-btn" aria-label="Focus Mode">
+          <ion-icon name="eye-outline" id="focus-mode-icon"></ion-icon>
+          <span class="text-xs" id="focus-mode-text">{{ T "focus" | default "Focus" }}</span>
         </button>
       </div>
     </div>
   </aside>
 
   {{/* Main Content */}}
-  <article class="lg:col-span-2 mx-auto prose prose-quoteless dark:prose-invert w-full" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+  <article class="lg:col-span-7 mx-auto prose prose-quoteless dark:prose-invert w-full max-w-4xl" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
     {{ template "_internal/schema.html" . }}
 
-    <header class="not-prose mb-8">
-      {{/* Categories */}}
+    <header class="not-prose mb-6 sm:mb-8">
+      {{/* Breadcrumbs - скрытие на очень маленьких экранах */}}
+      <nav class="text-xs sm:text-sm breadcrumbs mb-3 sm:mb-4 overflow-x-auto scrollbar-none">
+        <ul class="flex-nowrap">
+          <li class="shrink-0"><a href="{{ "/" | relLangURL }}">{{ T "home" | default "Home" }}</a></li>
+          {{ with .Section }}
+          <li class="shrink-0"><a href="{{ (path.Join "/" .) | relLangURL }}">{{ . | humanize | title }}</a></li>
+          {{ end }}
+          {{ with .Params.categories }}
+          <li class="shrink-0"><a href="{{ path.Join "categories" (index . 0) | relLangURL }}">{{ index . 0 | title }}</a></li>
+          {{ end }}
+          <li class="truncate max-w-[150px] sm:max-w-[200px] md:max-w-none">{{ .Title }}</li>
+        </ul>
+      </nav>
+
+      {{/* Categories - улучшенный wrap */}}
       {{ with .Params.categories }}
-      <div class="flex flex-wrap gap-2 mb-4">
+      <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
         {{ $base := path.Join "categories" | relLangURL | printf "%s/" }}
         {{ range . }}
-        <a href="{{ $base }}{{ . | anchorize }}/" class="badge badge-outline badge-sm hover:badge-primary transition-all" rel="category">
+        <a href="{{ $base }}{{ . | anchorize }}/" 
+          class="badge badge-sm sm:badge-md badge-ghost hover:badge-primary transition-colors" 
+          rel="category">
           {{ . | strings.FirstUpper }}
         </a>
         {{ end }}
       </div>
       {{ end }}
 
-      {{/* Title */}}
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4" itemprop="headline">{{ .Title }}</h1>
+      {{/* Title - плавное масштабирование */}}
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight sm:leading-snug mb-3 sm:mb-4 break-words hyphens-auto" 
+          itemprop="headline">
+        {{ .Title }}
+      </h1>
 
-      {{/* Meta Info */}}
-      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-base-content/70 mb-6">
+      {{/* Meta Info - адаптивная сетка */}}
+      <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-xs sm:text-sm text-base-content/70 mb-4 sm:mb-6">
         {{/* Date */}}
-        <time datetime="{{ .Date.Format "2006-01-02" }}" class="flex items-center gap-1">
-          <ion-icon name="calendar-outline" class="text-base"></ion-icon>
-          {{ if site.Params.Experimental.jsDate }}
-          <span data-format="luxon">{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}</span>
-          {{ else }}
-          {{ .Date | time.Format ":date_long" }}
-          {{ end }}
+        <time datetime="{{ .Date.Format "2006-01-02" }}" class="flex items-center gap-1 min-w-0">
+          <ion-icon name="calendar-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          <span class="truncate">
+            {{ if site.Params.Experimental.jsDate }}
+            <span data-format="luxon">{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}</span>
+            {{ else }}
+            <span class="hidden sm:inline">{{ .Date | time.Format ":date_long" }}</span>
+            <span class="sm:hidden">{{ .Date | time.Format ":date_short" }}</span>
+            {{ end }}
+          </span>
         </time>
 
         {{/* Reading Time */}}
         <span class="flex items-center gap-1">
-          <ion-icon name="time-outline" class="text-base"></ion-icon>
-          {{ .ReadingTime }} {{ T "minuteRead" .ReadingTime }}
+          <ion-icon name="time-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          <span class="truncate">
+            {{ .ReadingTime }}<span class="hidden xs:inline"> {{ T "minuteRead" .ReadingTime }}</span><span class="xs:hidden"> мин</span>
+          </span>
         </span>
 
-        {{/* Word Count */}}
-        <span class="flex items-center gap-1">
-          <ion-icon name="document-text-outline" class="text-base"></ion-icon>
+        {{/* Word Count - скрыть на мобильных если много элементов */}}
+        <span class="hidden sm:flex items-center gap-1">
+          <ion-icon name="document-text-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
           {{ .WordCount }} {{ T "words" | default "words" }}
         </span>
 
         {{/* Last Modified */}}
         {{ if and (ne .Params.nolastmod true) (ne .Date .Lastmod) }}
-        <span class="flex items-center gap-1" title="{{ T "updatedAt" }}">
-          <ion-icon name="refresh-outline" class="text-base"></ion-icon>
-          {{ if site.Params.Experimental.jsDate }}
-          <span data-format="luxon">{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}</span>
-          {{ else }}
-          {{ .Lastmod | time.Format ":date_medium" }}
-          {{ end }}
+        <span class="flex items-center gap-1 col-span-2 sm:col-span-1" title="{{ T "updatedAt" }}">
+          <ion-icon name="refresh-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          <span class="truncate">
+            {{ if site.Params.Experimental.jsDate }}
+            <span data-format="luxon">{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}</span>
+            {{ else }}
+            <span class="hidden sm:inline">{{ .Lastmod | time.Format ":date_medium" }}</span>
+            <span class="sm:hidden">{{ .Lastmod | time.Format ":date_short" }}</span>
+            {{ end }}
+          </span>
         </span>
         {{ end }}
       </div>
 
-      {{/* Author & Share */}}
-      <div class="flex flex-wrap justify-between items-center gap-4 py-4 border-y border-base-300">
-        {{ partial "author.html" (dict "Params" .Params "template" "single") }}
-        {{ partial "share.html" . }}
+      {{/* Author & Share - вертикальный стек на мобильных */}}
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4 py-3 sm:py-4 border-y border-base-300">
+        <div class="min-w-0 flex-1">
+          {{ partial "author.html" (dict "Params" .Params "template" "single") }}
+        </div>
+        <div class="flex justify-start sm:justify-end shrink-0">
+          {{ partial "share.html" . }}
+        </div>
       </div>
     </header>
 
@@ -199,54 +274,89 @@
     </figure>
     {{ end }}
 
-    {{/* Portfolio Tools */}}
+    {{/* Portfolio Tools & Actions */}}
     {{ if eq .Section "portfolio" }}
-    {{ partial "portfolio/toolsUsed.html" . }}
 
-    {{ if or .Params.github .Params.demo }}
-    <div class="not-prose mb-8 z-40">
-      <div class="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-base-100/80 backdrop-blur-md border border-base-300 shadow-lg">
-        {{/* Left: Project title */}}
-        <div class="flex items-center gap-2 min-w-0">
-          <ion-icon name="folder-open-outline" class="text-xl text-primary shrink-0"></ion-icon>
-          <span class="font-medium truncate text-sm sm:text-base">{{ .Title }}</span>
-        </div>
+      {{ partial "portfolio/toolsUsed.html" . }}
+
+      {{ if or .Params.github .Params.demo }}
+      <div class="not-prose mb-8 space-y-2">
         
-        {{/* Right: Actions */}}
-        <div class="flex items-center gap-2">
-          {{ with .Params.github }}
-          <a href="{{ . }}" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="btn btn-sm btn-ghost gap-1.5"
-            title="View on GitHub">
-            <ion-icon name="logo-github" class="text-lg"></ion-icon>
-            <span class="hidden sm:inline">GitHub</span>
-          </a>
+        {{ with .Params.github }}
+        <a href="{{ . }}" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="group flex items-center gap-3 p-3 rounded-xl
+                  bg-base-200/50 dark:bg-base-200/10
+                  border border-transparent
+                  hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
+                  transition-all duration-200">
+          <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-base-300/50 group-hover:bg-primary/10 transition-colors">
+            <ion-icon name="logo-github" class="text-xl group-hover:text-primary transition-colors"></ion-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-medium group-hover:text-primary transition-colors">{{ i18n "portfolio.sourceCode" | default "Исходный код" }}</div>
+            <div class="text-xs text-base-content/50 truncate">{{ . }}</div>
+          </div>
+          <ion-icon name="arrow-forward" class="text-base-content/30 group-hover:text-primary group-hover:translate-x-1 transition-all"></ion-icon>
+        </a>
+        {{ end }}
+        
+        {{ with .Params.demo }}
+        <a href="{{ . }}" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="group flex items-center gap-3 p-3 rounded-xl
+                  bg-primary/5 dark:bg-primary/10
+                  border border-primary/20
+                  hover:border-primary/40 hover:bg-primary/10
+                  transition-all duration-200">
+          <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+            <ion-icon name="rocket-outline" class="text-xl text-primary"></ion-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-medium text-primary">{{ i18n "portfolio.liveDemo" | default "Открыть демо" }}</div>
+            <div class="text-xs text-base-content/50 truncate">{{ . }}</div>
+          </div>
+          <ion-icon name="open-outline" class="text-primary group-hover:translate-x-1 transition-all"></ion-icon>
+        </a>
+        {{ end }}
+        
+      </div>
+      {{ end }}
+
+    {{ end }}
+
+    {{/* Content */}}
+    <section id="dream-single-post-content" class="fade-in-up" itemprop="articleBody">
+      {{ .Content }}
+    </section>
+
+    {{/* Related Posts */}}
+    {{ $related := .Site.RegularPages.Related . | first 3 }}
+    {{ if $related }}
+    <div class="not-prose mt-12 pt-6 border-t border-base-300 fade-in-up">
+      <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+        <ion-icon name="reader-outline" class="text-2xl"></ion-icon>
+        {{ T "relatedPosts" | default "Читайте также" }}
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {{ range $related }}
+        <a href="{{ .RelPermalink }}" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+          {{ if .Params.Cover }}
+          <figure class="overflow-hidden">
+            <img src="{{ (printf "%s/%s" .RelPermalink .Params.Cover) | absURL }}" alt="{{ .Title }}" class="w-full h-32 object-cover transition-transform group-hover:scale-105" loading="lazy"/>
+          </figure>
           {{ end }}
-          
-          {{ with .Params.demo }}
-          <a href="{{ . }}" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="btn btn-sm btn-primary gap-1.5"
-            title="View Live Demo">
-            <ion-icon name="eye-outline" class="text-lg"></ion-icon>
-            <span class="hidden sm:inline">Live Demo</span>
-          </a>
-          {{ end }}
-        </div>
+          <div class="card-body p-4">
+            <h4 class="card-title text-sm line-clamp-2">{{ .Title }}</h4>
+            <p class="text-xs text-base-content/60">{{ .ReadingTime }} {{ T "minuteRead" .ReadingTime }}</p>
+          </div>
+        </a>
+        {{ end }}
       </div>
     </div>
     {{ end }}
-    {{ end }}
-
-    
-
-    {{/* Content */}}
-    <section id="dream-single-post-content" itemprop="articleBody">
-      {{ .Content }}
-    </section>
 
     {{/* Tags */}}
     {{ with .Params.tags }}
@@ -303,9 +413,9 @@
     {{ end }}
   </article>
 
-  {{/* Right Sidebar */}}
-  <aside class="hidden lg:block">
-    <div class="sticky top-20 space-y-6">
+  {{/* Right Sidebar - с прокруткой */}}
+  <aside class="hidden lg:block lg:col-span-3 right-sidebar">
+    <div class="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto space-y-6 pr-2">
       {{/* Adsense */}}
       {{ if fileExists "layouts/partials/adsense.html" }}
       <div class="dream-adsense">
@@ -435,9 +545,41 @@
 
 {{ define "js" }}
 <script>
+// Focus Mode Toggle
+function toggleFocusMode() {
+  const body = document.body;
+  const icon = document.getElementById('focus-mode-icon');
+  const text = document.getElementById('focus-mode-text');
+  
+  body.classList.toggle('focus-mode');
+  
+  const isFocusMode = body.classList.contains('focus-mode');
+  
+  if (icon) {
+    icon.setAttribute('name', isFocusMode ? 'eye-off-outline' : 'eye-outline');
+  }
+  
+  if (text) {
+    text.textContent = isFocusMode ? '{{ T "exitFocus" | default "Exit" }}' : '{{ T "focus" | default "Focus" }}';
+  }
+  
+  // Сохраняем состояние в localStorage
+  localStorage.setItem('focusMode', isFocusMode ? 'on' : 'off');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  // Reading Progress
+  // Восстанавливаем состояние режима фокуса
+  if (localStorage.getItem('focusMode') === 'on') {
+    document.body.classList.add('focus-mode');
+    const icon = document.getElementById('focus-mode-icon');
+    const text = document.getElementById('focus-mode-text');
+    if (icon) icon.setAttribute('name', 'eye-off-outline');
+    if (text) text.textContent = '{{ T "exitFocus" | default "Exit" }}';
+  }
+
+  // Reading Progress with Percentage
   const progressBar = document.getElementById('reading-progress');
+  const progressText = document.getElementById('reading-progress-text');
   const article = document.getElementById('dream-single-post-main');
   
   if (progressBar && article) {
@@ -445,20 +587,56 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = article.getBoundingClientRect();
       const scrolled = Math.max(0, -rect.top);
       const total = rect.height - window.innerHeight;
-      const progress = Math.min(100, (scrolled / total) * 100);
+      const progress = Math.min(100, Math.max(0, (scrolled / total) * 100));
       progressBar.style.width = `${progress}%`;
+      
+      if (progressText) {
+        progressText.textContent = `${Math.round(progress)}%`;
+        progressText.classList.toggle('visible', progress > 5 && progress < 95);
+      }
     };
     
     window.addEventListener('scroll', updateProgress, { passive: true });
     updateProgress();
   }
 
+  // Fade-in animation on scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  // Save reading position
+  const savePosition = () => {
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    localStorage.setItem(`reading-pos-${window.location.pathname}`, scrollPercent);
+  };
+  
+  const restorePosition = () => {
+    const saved = localStorage.getItem(`reading-pos-${window.location.pathname}`);
+    if (saved && parseFloat(saved) > 10) {
+      const scrollTo = (parseFloat(saved) / 100) * (document.documentElement.scrollHeight - window.innerHeight);
+      window.scrollTo({ top: scrollTo, behavior: 'smooth' });
+    }
+  };
+  
+  window.addEventListener('scroll', savePosition, { passive: true });
+  setTimeout(restorePosition, 100);
+
   // Active TOC Highlight
   const tocLinks = document.querySelectorAll('#TableOfContents a');
   const headings = document.querySelectorAll('#dream-single-post-content h1, #dream-single-post-content h2, #dream-single-post-content h3');
   
   if (tocLinks.length && headings.length) {
-    const observer = new IntersectionObserver((entries) => {
+    const tocObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           tocLinks.forEach(link => link.classList.remove('active'));
@@ -468,7 +646,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, { rootMargin: '-20% 0% -60% 0%' });
     
-    headings.forEach(h => observer.observe(h));
+    headings.forEach(h => tocObserver.observe(h));
   }
 });
 </script>
@@ -550,54 +728,267 @@ window.initSwiper = function(config) {
 </script>
 {{ end }}
 
-{{/* Image Gallery */}}
+{{/* Image Gallery - Enhanced for Web Portfolio */}}
 {{ if site.Params.imageZoomableInPost }}
 {{ if fileExists "layouts/partials/medium-zoom.html" }}
 {{ partialCached "medium-zoom.html" . }}
 {{ else }}
+
+{{/* Styles */}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-fullscreen.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-thumbnail.min.css">
 
+{{/* Custom Portfolio Styles */}}
+<style>
+  /* Улучшенный оверлей */
+  .lg-backdrop {
+    background-color: rgba(0, 0, 0, 0.95) !important;
+  }
+  
+  /* Стили для подписей */
+  .lg-sub-html {
+    background: linear-gradient(transparent, rgba(0,0,0,0.8)) !important;
+    padding: 20px 40px !important;
+    text-align: left !important;
+  }
+  
+  .lg-sub-html h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  
+  .lg-sub-html h2 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.8);
+  }
+  
+  .lg-sub-html .project-meta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.6);
+  }
+  
+  .lg-sub-html .project-link {
+    color: #60a5fa;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .lg-sub-html .project-link:hover {
+    color: #93c5fd;
+  }
+  
+  /* Плавные переходы для изображений */
+  .lg-item img {
+    transition: transform 0.3s ease;
+  }
+  
+  /* Индикатор прогресса */
+  .lg-progress-bar {
+    background-color: #3b82f6 !important;
+    height: 3px !important;
+  }
+  
+  /* Миниатюры */
+  .lg-thumb-item {
+    border-radius: 4px;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  
+  .lg-thumb-item.active,
+  .lg-thumb-item:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  
+  /* Кнопки управления */
+  .lg-toolbar .lg-icon {
+    font-size: 1.5rem;
+  }
+</style>
+
+{{/* Scripts */}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/fullscreen/lg-fullscreen.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const galleryContainer = document.querySelector("#dream-single-post-content");
-    const images = galleryContainer?.querySelectorAll("img");
+document.addEventListener("DOMContentLoaded", () => {
+  const galleryContainer = document.querySelector("#dream-single-post-content");
+  const images = galleryContainer?.querySelectorAll("img");
 
-    if (galleryContainer && images?.length > 0) {
-      galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
+  if (!galleryContainer || !images?.length) return;
 
-      images.forEach(img => {
-        if (!img.closest("a")) {
-          const wrapper = document.createElement("a");
-          wrapper.href = img.src;
-          wrapper.classList.add("lg-item", "not-prose");
+  // Очистка существующих элементов
+  galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
 
-          const title = img.title ? `<h2 class="text-lg">${img.title}</h2>` : "";
-          const alt = img.alt ? `<h1 class="text-2xl">${img.alt}</h1>` : "";
-          wrapper.dataset.subHtml = `${alt}${title}`;
+  images.forEach((img, index) => {
+    if (img.closest("a.lg-item")) return;
 
-          img.parentNode.insertBefore(wrapper, img);
-          wrapper.appendChild(img);
-        }
-      });
+    const wrapper = document.createElement("a");
+    wrapper.href = img.src;
+    wrapper.classList.add("lg-item", "not-prose");
+    
+    // Добавляем курсор для индикации кликабельности
+    wrapper.style.cursor = "zoom-in";
 
-      lightGallery(galleryContainer, {
-        selector: "a.lg-item",
-        plugins: [lgZoom, lgFullscreen],
-        speed: 500,
-        download: false,
-        counter: true,
-        mousewheel: true,
-        closeOnTap: true,
-        subHtmlSelectorRelative: true
-      });
+    // Формируем расширенную подпись с метаданными
+    const alt = img.alt || "";
+    const title = img.title || "";
+    
+    // Извлекаем дополнительные данные из data-атрибутов
+    const projectUrl = img.dataset.projectUrl || "";
+    const projectYear = img.dataset.year || "";
+    const projectTech = img.dataset.tech || "";
+
+    let subHtml = "";
+    
+    if (alt) {
+      subHtml += `<h1>${alt}</h1>`;
+    }
+    
+    if (title) {
+      subHtml += `<h2>${title}</h2>`;
+    }
+    
+    // Добавляем мета-информацию о проекте
+    if (projectUrl || projectYear || projectTech) {
+      subHtml += `<div class="project-meta">`;
+      
+      if (projectYear) {
+        subHtml += `<span>📅 ${projectYear}</span>`;
+      }
+      
+      if (projectTech) {
+        subHtml += `<span>🛠️ ${projectTech}</span>`;
+      }
+      
+      if (projectUrl) {
+        subHtml += `<a href="${projectUrl}" target="_blank" rel="noopener" class="project-link">🔗 Открыть проект</a>`;
+      }
+      
+      subHtml += `</div>`;
+    }
+
+    wrapper.dataset.subHtml = subHtml;
+    
+    // Добавляем data-src для ленивой загрузки в галерее
+    wrapper.dataset.src = img.src;
+    
+    // Поддержка разных размеров (если есть)
+    if (img.dataset.srcLarge) {
+      wrapper.dataset.src = img.dataset.srcLarge;
+    }
+
+    img.parentNode.insertBefore(wrapper, img);
+    wrapper.appendChild(img);
+  });
+
+  // Инициализация LightGallery с расширенными настройками
+  const gallery = lightGallery(galleryContainer, {
+    selector: "a.lg-item",
+    plugins: [lgZoom, lgFullscreen, lgThumbnail],
+    
+    // === Основные настройки ===
+    speed: 400,
+    backdropDuration: 300,
+    startAnimationDuration: 400,
+    endAnimationDuration: 300,
+    
+    // === Навигация ===
+    loop: true,
+    slideShowAutoplay: false,
+    slideShowInterval: 4000,
+    mousewheel: true,
+    hideScrollbar: true,
+    
+    // === Закрытие галереи ===
+    closeOnTap: true,
+    closable: true,
+    escKey: true,
+    
+    // === Счётчик и UI ===
+    counter: true,
+    download: false,
+    getCaptionFromTitleOrAlt: false,
+    subHtmlSelectorRelative: true,
+    
+    // === Мобильные устройства ===
+    mobileSettings: {
+      controls: true,
+      showCloseIcon: true,
+      download: false
+    },
+    
+    // === Swipe настройки ===
+    swipeThreshold: 50,
+    enableSwipe: true,
+    enableDrag: true,
+    
+    // === Zoom плагин ===
+    zoomFromOrigin: true,
+    actualSize: true,
+    showZoomInOutIcons: true,
+    actualSizeIcons: {
+      zoomIn: "lg-zoom-in",
+      zoomOut: "lg-zoom-out"
+    },
+    scale: 1,
+    zoom: true,
+    
+    // === Thumbnail плагин ===
+    thumbnail: true,
+    thumbWidth: 100,
+    thumbHeight: "80px",
+    thumbMargin: 5,
+    toggleThumb: true,
+    animateThumb: true,
+    
+    // === Fullscreen плагин ===
+    fullScreen: true,
+    
+    // === Preload ===
+    preload: 2,
+    
+    // === Accessibility ===
+    ariaLabelledby: "lg-slide-title",
+    ariaDescribedby: "lg-slide-desc"
+  });
+
+  // === Дополнительные обработчики событий ===
+  
+  // Аналитика (если нужна)
+  galleryContainer.addEventListener("lgAfterOpen", () => {
+    console.log("Gallery opened");
+    // Здесь можно добавить отправку в аналитику
+  });
+
+  // Отслеживание просмотра слайдов
+  galleryContainer.addEventListener("lgAfterSlide", (event) => {
+    const { index } = event.detail;
+    console.log(`Viewing slide ${index + 1}`);
+  });
+
+  // Клавиатурная навигация для зума
+  document.addEventListener("keydown", (e) => {
+    if (!document.querySelector(".lg-container")) return;
+    
+    if (e.key === "+" || e.key === "=") {
+      gallery.zoomIn();
+    } else if (e.key === "-") {
+      gallery.zoomOut();
     }
   });
+});
 </script>
 {{ end }}
 {{ end }}

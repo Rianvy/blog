@@ -1,31 +1,96 @@
-# New
+# Основные
 motto = "Документируй сегодня то, что забудешь завтра"
 about = "Обо мне"
 comments = "Комментарии"
+home = "Главная"
+backToHome = "На главную"
+flip = "Повернуть!"
+archives = "Архивы"
+allTags = "Все теги"
+allCategories = "Категории"
+socialLinks = "Социальные сети"
+updatedAt = "Обновлено"
+prevPage = "Предыдущая"
+nextPage = "Следующая"
 
-[home]
-other = "Главная"
+# Поиск
+search = "Поиск"
+searchHint = "Поиск по заголовкам, описаниям и тегам"
+searchPlaceholder = "Введите запрос..."
+clear = "Очистить"
+resultsFound = "найдено"
+searchStart = "Начните вводить для поиска"
+noResults = "Ничего не найдено"
+tryAnother = "Попробуйте другой запрос"
+minRead = "мин"
+popularSearches = "Популярные запросы"
 
-[backToHome]
-other = "На главную"
+backToTop = "Наверх"
+top = "Наверх"
+focus = "Фокус"
+words = "слов"
+tableOfContents = "Содержание"
+contents = "Содержание"
+relatedPosts = "Читайте также"
+quickActions = "Быстрые действия"
+share = "Поделиться"
+copy = "Копировать"
 
-[flip]
-other = "Повернуть!"
+# Архивы
+"archives.description" = "Хронология всех публикаций на сайте"
+"archives.total" = "всего"
+"archives.posts" = "постов"
+"archives.projects" = "проектов"
+"archives.years" = "лет"
+"archives.jumpTo" = "Перейти к году"
+"archives.entries" = "записей"
+"archives.latest" = "Новое"
+"archives.project" = "Проект"
+"archives.post" = "Пост"
+"archives.min" = "мин"
+"archives.beginning" = "Начало пути..."
 
-[archives]
-other = "Архивы"
+# Месяцы
+"months.January" = "Январь"
+"months.February" = "Февраль"
+"months.March" = "Март"
+"months.April" = "Апрель"
+"months.May" = "Май"
+"months.June" = "Июнь"
+"months.July" = "Июль"
+"months.August" = "Август"
+"months.September" = "Сентябрь"
+"months.October" = "Октябрь"
+"months.November" = "Ноябрь"
+"months.December" = "Декабрь"
 
-[allTags]
-other = "Все теги"
+# Таксономии (теги, категории)
+"taxonomy.tag" = "Тег"
+"taxonomy.category" = "Категория"
+"taxonomy.backToTags" = "Все теги"
+"taxonomy.backToCategories" = "Все категории"
+"taxonomy.backToList" = "К списку"
+"taxonomy.otherTags" = "Другие теги"
+"taxonomy.otherCategories" = "Другие категории"
+"taxonomy.postsIn" = "Записи в"
+"taxonomy.total" = "всего"
+"taxonomy.noPosts" = "Записей пока нет"
+"taxonomy.tagsDescription" = "Навигация по темам и ключевым словам"
+"taxonomy.categoriesDescription" = "Просмотр материалов по рубрикам"
+"taxonomy.defaultDescription" = "Все доступные разделы"
+"taxonomy.tags" = "тегов"
+"taxonomy.categories" = "категорий"
+"taxonomy.posts" = "записей"
+"taxonomy.allTags" = "Все теги"
+"taxonomy.allCategories" = "Все категории"
+"taxonomy.latestPosts" = "Последние записи"
 
+# Множественные формы (для русского нужны one/few/many/other)
 [tag]
 one = "1 тег"
 few = "{{ .Count }} тега"
 many = "{{ .Count }} тегов"
 other = "{{ .Count }} тегов"
-
-[allCategories]
-other = "Категории"
 
 [category]
 one = "1 категория"
@@ -39,61 +104,101 @@ few = "{{ .Count }} статьи"
 many = "{{ .Count }} статей"
 other = "{{ .Count }} статей"
 
-[socialLinks]
-other = "Социальные сети"
-
 [minuteRead]
 one = " минута чтения"
 few = " минуты чтения"
 many = " минут чтения"
 other = " минут чтения"
 
-[updatedAt]
-other = "Обновлено"
-
-[prevPage]
-other = "Предыдущая"
-
-[nextPage]
-other = "Следующая"
-
-[search]
-other = "Поиск"
-
+# Цвета
 [color]
   [color.table]
-    header = { name = "Название", code = "Код", example = "Пример" }
+    [color.table.header]
+      name = "Название"
+      code = "Код"
+      example = "Пример"
     [color.table.copy_button]
       tooltip = "Скопировать код"
       text = "Копировать"
       copied = "Скопировано!"
       copyError = "Ошибка копирования"
 
+# Видео
 [video]
-  not_supported = "Ваш браузер не поддерживает воспроизведение видео."
+not_supported = "Ваш браузер не поддерживает воспроизведение видео."
 
+# Портфолио
 [portfolio]
-  title = "Портфолио"
-  disabled = "Портфолио отключено или не настроено."
-  all = "Все"
-  toolsUsed = "Используемые инструменты"
+title = "Портфолио"
+disabled = "Раздел скоро появится"
+badge = "Мои работы"
+heroTitle = "Проекты, которыми я горжусь"
+heroDescription = "Каждый проект — это уникальная история. Здесь собраны работы, в которые я вложил душу, знания и креативность."
+statsProjects = "проектов"
+statsCategories = "категорий"
+statsTools = "технологий"
+all = "Все"
+swipeToFilter = "Свайпайте для фильтра"
+statusCompleted = "Завершён"
+statusInProgress = "В работе"
+statusArchived = "Архив"
+toolsUsed = "Используемые инструменты"
+viewProject = "Смотреть проект"
+sourceCode = "Исходный код"
+liveDemo = "Открыть демо"
+demo = "Демо"
+viewOnGithub = "Открыть на GitHub"
+viewDemo = "Смотреть демо"
+noProjects = "Проектов не найдено"
+tryOtherFilter = "Попробуйте другую категорию"
+resetFilter = "Показать все"
+processTitle = "Как я работаю"
+processDescription = "Простой и понятный процесс работы над проектом"
+step1Title = "Обсуждение"
+step1Description = "Знакомство с проектом, определение целей и требований"
+step2Title = "Планирование"
+step2Description = "Разработка стратегии, дизайна и технической архитектуры"
+step3Title = "Разработка"
+step3Description = "Создание продукта с регулярными демонстрациями прогресса"
+step4Title = "Запуск"
+step4Description = "Публикация проекта и поддержка после запуска"
+techTitle = "Технологии"
+techDescription = "Инструменты, которые я использую в работе"
+faqTitle = "Часто задаваемые вопросы"
+faqDescription = "Ответы на популярные вопросы о сотрудничестве"
+faq1Question = "Сколько стоит разработка проекта?"
+faq1Answer = "Стоимость зависит от сложности и объема работ. После обсуждения требований я предоставлю детальную оценку. Первая консультация — бесплатно."
+faq2Question = "Сколько времени занимает разработка?"
+faq2Answer = "Сроки варьируются от 2-4 недель для лендингов до нескольких месяцев для сложных проектов. Точные сроки обсуждаются индивидуально."
+faq3Question = "Какие гарантии вы предоставляете?"
+faq3Answer = "Предоставляю гарантийную поддержку после запуска проекта, исправление багов и помощь в случае вопросов. Условия обсуждаются в договоре."
+faq4Question = "Работаете ли вы с зарубежными клиентами?"
+faq4Answer = "Да, работаю с клиентами из любых стран. Общение возможно на русском и английском языках через удобные мессенджеры."
+ctaTitle = "Есть интересный проект?"
+ctaDescription = "Давайте обсудим вашу идею. Первая консультация — бесплатно."
+ctaButton = "Написать мне"
+ctaEmail = "Email"
 
+# Summary
 [summary]
-  post = "Пост"
-  portfolio = "Портфолио"
+post = "Пост"
+portfolio = "Портфолио"
 
+# Меню
 [menu]
-  languages = "Язык"
-  menu = "Меню"
+languages = "Язык"
+menu = "Меню"
 
+# Доступность на других языках
 [post_available_in]
-  text = "Эта запись также доступна на"
+text = "Эта запись также доступна на"
 
+# Донаты
 [donation]
-  button = "Поддержать проект"
-  title = "Поддержать проект"
-  subtitle = "Выберите удобный способ"
-  close = "Закрыть"
-  info = "Все платежи защищены. Любая поддержка помогает развивать проект и создавать новые материалы ❤️"
-  cloudtips_description = "Для пользователей из России"
-  tribute_description = "Зарубежные карты, криптовалюта из кошелька Telegram: USDT, Bitcoin, Toncoin, Notcoin"
+button = "Поддержать проект"
+title = "Поддержать проект"
+subtitle = "Выберите удобный способ"
+close = "Закрыть"
+info = "Все платежи защищены. Любая поддержка помогает развивать проект и создавать новые материалы ❤️"
+cloudtips_description = "Для пользователей из России"
+tribute_description = "Зарубежные карты, криптовалюта из кошелька Telegram: USDT, Bitcoin, Toncoin, Notcoin"

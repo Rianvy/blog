@@ -66,7 +66,7 @@ showSummaryCoverInPost = true
 imageZoomableInPost = true
 showPrevNextPost = true
 # reorderShares = ["x", "facebook", "whatsapp", "share"]
-backToTop = true
+backToTop = false
 
 [params.advanced]
 customCSS = ["css/custom.css"]
@@ -86,4 +86,4 @@ en = { href = "/en/", icon = "language", title = "English" }
 
 [params.experimental]
 jsDate = true
-jsDateFormat = "HH:mm, dd MMMM"
+jsDateFormat = "dd.MM.yyyy, HH:mm"

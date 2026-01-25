@@ -3,102 +3,143 @@
 {{- $item := .item -}}
 {{- $site := .site -}}
 
-{{- $baseClasses := "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]" -}}
-{{- $iconClasses := "text-lg text-base-content/70" -}}
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
+{{/* ЕДИНЫЕ КЛАССЫ (синхронизированы с header.html)                          */}}
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
+{{- $menuItemClass := "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50" -}}
+{{- $menuIconClass := "text-lg flex-shrink-0 text-base-content/70" -}}
+{{- $badgeClass := "badge badge-sm badge-ghost font-normal" -}}
+{{- $externalIconClass := "text-xs text-base-content/40 flex-shrink-0" -}}
 
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
+{{/* SEARCH                                                                   */}}
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
 {{ if and (eq $item "search") (gt (len (where $site.Pages "Type" "search")) 0) }}
-<li>
+<li role="none">
   <a href="{{ "search" | relLangURL }}" 
-     class="{{ $baseClasses }}"
+     role="menuitem"
+     class="{{ $menuItemClass }}"
      title="{{ T "search" }}">
-    <ion-icon name="search-outline" class="{{ $iconClasses }}"></ion-icon>
-    <span>{{ T "search" }}</span>
+    <ion-icon name="search-outline" class="{{ $menuIconClass }}"></ion-icon>
+    <span class="flex-1">{{ T "search" }}</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
   </a>
 </li>
 
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
+{{/* RSS                                                                      */}}
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
 {{ else if and (eq $item "rss") $site.Params.rss }}
-<li>
+<li role="none">
   <a href="{{ "index.xml" | relLangURL }}" 
-     class="{{ $baseClasses }}"
+     role="menuitem"
+     class="{{ $menuItemClass }}"
      title="RSS"
      target="_blank"
      rel="noopener noreferrer">
-    <ion-icon name="logo-rss" class="{{ $iconClasses }}"></ion-icon>
-    <span>RSS</span>
-    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    <ion-icon name="logo-rss" class="{{ $menuIconClass }}"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="{{ $externalIconClass }}"></ion-icon>
   </a>
 </li>
 
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
+{{/* POSTS / ARCHIVES                                                         */}}
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
 {{ else if and (eq $item "posts") (gt (len (where $site.RegularPages "Type" "posts")) 0) }}
-<li>
+{{- $postsCount := len (where $site.RegularPages "Type" "posts") -}}
+<li role="none">
   <a href="{{ "posts" | relLangURL }}" 
-     class="{{ $baseClasses }}"
+     role="menuitem"
+     class="{{ $menuItemClass }}"
      title="{{ T "archives" }}">
-    <ion-icon name="library-outline" class="{{ $iconClasses }}"></ion-icon>
-    <span>{{ T "archives" }}</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      {{ len (where $site.RegularPages "Type" "posts") }}
-    </span>
+    <ion-icon name="library-outline" class="{{ $menuIconClass }}"></ion-icon>
+    <span class="flex-1">{{ T "archives" }}</span>
+    {{ if gt $postsCount 0 }}
+    <span class="{{ $badgeClass }}">{{ $postsCount }}</span>
+    {{ end }}
   </a>
 </li>
 
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
+{{/* PORTFOLIO                                                                */}}
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
 {{ else if and (eq $item "portfolio") ($site.Params.portfolio) (gt (len (where $site.RegularPages "Type" "portfolio")) 0) }}
-<li>
+{{- $portfolioCount := len (where $site.RegularPages "Type" "portfolio") -}}
+<li role="none">
   <a href="{{ "portfolio" | relLangURL }}" 
-     class="{{ $baseClasses }}"
+     role="menuitem"
+     class="{{ $menuItemClass }}"
      title="{{ i18n "portfolio.title" }}">
-    <ion-icon name="briefcase-outline" class="{{ $iconClasses }}"></ion-icon>
-    <span>{{ i18n "portfolio.title" }}</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      {{ len (where $site.RegularPages "Type" "portfolio") }}
-    </span>
+    <ion-icon name="briefcase-outline" class="{{ $menuIconClass }}"></ion-icon>
+    <span class="flex-1">{{ i18n "portfolio.title" }}</span>
+    {{ if gt $portfolioCount 0 }}
+    <span class="{{ $badgeClass }}">{{ $portfolioCount }}</span>
+    {{ end }}
   </a>
 </li>
 
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
+{{/* CATEGORIES                                                               */}}
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
 {{ else if and (eq $item "categories") $site.Taxonomies.categories }}
-<li>
+{{- $categoriesCount := len $site.Taxonomies.categories -}}
+<li role="none">
   <a href="{{ "categories" | relLangURL }}" 
-     class="{{ $baseClasses }}"
+     role="menuitem"
+     class="{{ $menuItemClass }}"
      title="{{ T "allCategories" }}">
-    <ion-icon name="folder-outline" class="{{ $iconClasses }}"></ion-icon>
-    <span>{{ T "allCategories" }}</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      {{ len $site.Taxonomies.categories }}
-    </span>
+    <ion-icon name="folder-outline" class="{{ $menuIconClass }}"></ion-icon>
+    <span class="flex-1">{{ T "allCategories" }}</span>
+    {{ if gt $categoriesCount 0 }}
+    <span class="{{ $badgeClass }}">{{ $categoriesCount }}</span>
+    {{ end }}
   </a>
 </li>
 
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
+{{/* TAGS                                                                     */}}
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
 {{ else if and (eq $item "tags") $site.Taxonomies.tags }}
-<li>
+{{- $tagsCount := len $site.Taxonomies.tags -}}
+<li role="none">
   <a href="{{ "tags" | relLangURL }}" 
-     class="{{ $baseClasses }}"
+     role="menuitem"
+     class="{{ $menuItemClass }}"
      title="{{ T "allTags" }}">
-    <ion-icon name="pricetags-outline" class="{{ $iconClasses }}"></ion-icon>
-    <span>{{ T "allTags" }}</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      {{ len $site.Taxonomies.tags }}
-    </span>
+    <ion-icon name="pricetags-outline" class="{{ $menuIconClass }}"></ion-icon>
+    <span class="flex-1">{{ T "allTags" }}</span>
+    {{ if gt $tagsCount 0 }}
+    <span class="{{ $badgeClass }}">{{ $tagsCount }}</span>
+    {{ end }}
   </a>
 </li>
 
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
+{{/* CUSTOM NAV ITEMS                                                         */}}
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
 {{ else }}
-{{- $navItems := $site.Params.navItems -}}
-{{- $customItem := index $navItems $item -}}
-{{ with $customItem }}
-<li>
-  <a href="{{ .href }}" 
-     class="{{ $baseClasses }}"
-     {{ with .target }}target="{{ . }}"{{ end }}
-     {{ if eq .target "_blank" }}rel="noopener noreferrer"{{ end }}
-     title="{{ .title }}">
-    {{ if .icon }}
-    <ion-icon name="{{ .icon }}" class="{{ $iconClasses }}"></ion-icon>
-    {{ end }}
-    <span>{{ .title }}</span>
-    {{ if eq .target "_blank" }}
-    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
-    {{ end }}
-  </a>
-</li>
-{{ end }}
+  {{- $navItems := $site.Params.navItems -}}
+  {{- $customItem := index $navItems $item -}}
+  {{ with $customItem }}
+  {{- $isExternal := eq .target "_blank" -}}
+  <li role="none">
+    <a href="{{ .href }}" 
+       role="menuitem"
+       class="{{ $menuItemClass }}"
+       {{ with .target }}target="{{ . }}"{{ end }}
+       {{ if $isExternal }}rel="noopener noreferrer"{{ end }}
+       title="{{ .title }}">
+      {{ with .icon }}
+      <ion-icon name="{{ . }}" class="{{ $menuIconClass }}"></ion-icon>
+      {{ else }}
+      <ion-icon name="link-outline" class="{{ $menuIconClass }}"></ion-icon>
+      {{ end }}
+      <span class="flex-1">{{ .title }}</span>
+      {{ if $isExternal }}
+      <ion-icon name="open-outline" class="{{ $externalIconClass }}"></ion-icon>
+      {{ end }}
+    </a>
+  </li>
+  {{ end }}
 {{ end }}

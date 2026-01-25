@@ -4,72 +4,188 @@
 
 {{ define "main"}}
 
-{{ if site.Params.zenMode }}
-<div class="max-w-[65ch] mt-4 mx-auto">
-{{ else }}
-<div class="flex flex-col md:flex-row mt-4">
-{{ end }}
-  <div class="md:basis-[200px] lg:basis-[300px] p-4 prose dark:prose-invert">
-    <h1 class="text-2xl">
-      {{- .Title -}}
-    </h1>
-    <p class="text-sm">
-      {{- T "article" (len .Pages) -}}
-    </p>
-    <div class="flex flex-wrap gap-4 mt-6">
-      {{ $title := .Title }}
+{{ $currentTitle := .Title }}
+{{ $termCount := len .Pages }}
+{{ $taxonomyPlural := .Data.Plural }}
+{{ $allTerms := index site.Taxonomies $taxonomyPlural }}
 
-      {{ range (index site.Taxonomies .Data.Plural).Alphabetical }}
-      {{ if eq .Page.Title $title }}
-      <span class="badge h-6 badge-primary">
-        {{ .Page.Title }}
-      </span>
-      {{ else }}
-      <a href="{{ .Page.RelPermalink }}" class="badge h-6 no-underline hover:badge-primary">
-        {{ .Page.Title }}
-      </a>
-      {{ end }}
-      {{ end }}
-    </div>
-  </div>
-  {{ if site.Params.zenMode }}
-  <div class="divider divider-vertical"></div>
-  {{ else }}
-  <div class="divider divider-vertical md:divider-horizontal px-4 md:px-0"></div>
-  {{ end }}
-  <div class="flex-1">
-    {{ $paginator := .Paginate .Pages }}
+<div class="mt-8 lg:mt-12 px-4 sm:px-6">
+  <div class="max-w-7xl mx-auto">
 
-    {{ if site.Params.zenMode }}
-    <div class="dream-zen-posts px-4 space-y-8">
-      {{ range $paginator.Pages }}
-        {{ .Render "zen-summary" }}
-      {{ end }}
-    </div>
-    {{ else }}
-    <div class="dream-grid">
-    {{ range $paginator.Pages }}
-      <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
-        {{ .Render "summary" }}
+    <!-- Hero секция -->
+    <section class="text-center mb-10 lg:mb-14">
+      
+      <!-- Иконка -->
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 text-primary mb-4">
+        {{ if eq $taxonomyPlural "tags" }}
+        <ion-icon name="pricetag-outline" class="text-3xl"></ion-icon>
+        {{ else if eq $taxonomyPlural "categories" }}
+        <ion-icon name="folder-open-outline" class="text-3xl"></ion-icon>
+        {{ else }}
+        <ion-icon name="bookmark-outline" class="text-3xl"></ion-icon>
+        {{ end }}
       </div>
-    {{ end }}
-    </div>
+      
+      <!-- Бейдж типа -->
+      <div class="mb-3">
+        <span class="badge badge-outline badge-sm">
+          {{ if eq $taxonomyPlural "tags" }}
+            {{ i18n "taxonomy.tag" | default "Тег" }}
+          {{ else if eq $taxonomyPlural "categories" }}
+            {{ i18n "taxonomy.category" | default "Категория" }}
+          {{ else }}
+            {{ .Data.Singular | strings.FirstUpper }}
+          {{ end }}
+        </span>
+      </div>
+      
+      <!-- Заголовок -->
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+        {{ .Title }}
+      </h1>
+      
+      <!-- Статистика -->
+      <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-6">
+        
+        <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
+          <ion-icon name="document-text-outline" class="text-lg text-primary"></ion-icon>
+          <span class="font-bold">{{ $termCount }}</span>
+          <span class="text-sm text-base-content/60">
+            {{ i18n "article" $termCount | default (printf "%d записей" $termCount) }}
+          </span>
+        </div>
+        
+      </div>
+      
+      <!-- Навигация: назад к списку -->
+      <a href="{{ printf "/%s/" $taxonomyPlural | relLangURL }}" 
+         class="inline-flex items-center gap-2 text-sm text-base-content/60 hover:text-primary transition-colors no-underline">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        {{ if eq $taxonomyPlural "tags" }}
+          {{ i18n "taxonomy.backToTags" | default "Все теги" }}
+        {{ else if eq $taxonomyPlural "categories" }}
+          {{ i18n "taxonomy.backToCategories" | default "Все категории" }}
+        {{ else }}
+          {{ i18n "taxonomy.backToList" | default "К списку" }}
+        {{ end }}
+      </a>
+    </section>
+
+    <!-- Связанные теги/категории -->
+    {{ if gt (len $allTerms) 1 }}
+    <section class="mb-10 lg:mb-14">
+      <div class="p-4 sm:p-6 rounded-2xl bg-base-200/30 border border-base-300">
+        
+        <!-- Заголовок секции -->
+        <div class="flex items-center gap-2 mb-4">
+          <ion-icon name="git-branch-outline" class="text-base-content/50"></ion-icon>
+          <span class="text-sm font-medium text-base-content/50">
+            {{ if eq $taxonomyPlural "tags" }}
+              {{ i18n "taxonomy.otherTags" | default "Другие теги" }}
+            {{ else }}
+              {{ i18n "taxonomy.otherCategories" | default "Другие категории" }}
+            {{ end }}
+          </span>
+          <div class="flex-1 h-px bg-base-300"></div>
+        </div>
+        
+        <!-- Теги/Категории -->
+        <div class="flex flex-wrap gap-2">
+          {{ range $allTerms.ByCount }}
+          {{ $isActive := eq .Page.Title $currentTitle }}
+          
+          {{ if $isActive }}
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                       bg-primary text-primary-content font-medium text-sm">
+            {{ .Page.Title }}
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-primary-content/20">
+              {{ .Count }}
+            </span>
+          </span>
+          {{ else }}
+          <a href="{{ .Page.RelPermalink }}" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    {{ if le .Count 1 }}opacity-70{{ end }}">
+            <span class="font-medium">{{ .Page.Title }}</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              {{ .Count }}
+            </span>
+          </a>
+          {{ end }}
+          {{ end }}
+        </div>
+        
+      </div>
+    </section>
     {{ end }}
 
-    {{ if gt $paginator.TotalPages 1 }}
-    <div class="flex justify-center pt-8">
-      {{ partial "paginator.html" (dict "paginator" $paginator) }}
-    </div>
-    {{ end }}
+    <div class="divider"></div>
+
+    <!-- Контент -->
+    <section>
+      {{ $paginator := .Paginate .Pages }}
+
+      <!-- Заголовок списка -->
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-bold flex items-center gap-2">
+          <ion-icon name="newspaper-outline" class="text-xl text-primary"></ion-icon>
+          {{ i18n "taxonomy.postsIn" | default "Записи в" }}
+          <span class="text-primary">{{ .Title }}</span>
+        </h2>
+        <span class="text-sm text-base-content/50">
+          {{ $paginator.TotalNumberOfElements }} {{ i18n "taxonomy.total" | default "всего" }}
+        </span>
+      </div>
+
+      {{ if site.Params.zenMode }}
+      
+      <!-- Zen Mode -->
+      <div class="dream-zen-posts max-w-[65ch] mx-auto space-y-6">
+        {{ range $paginator.Pages }}
+          {{ .Render "zen-summary" }}
+        {{ end }}
+      </div>
+      
+      {{ else }}
+      
+      <!-- Grid Mode -->
+      <div class="dream-grid">
+        {{ range $paginator.Pages }}
+        <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 dream-column">
+          {{ .Render "summary" }}
+        </div>
+        {{ end }}
+      </div>
+      
+      {{ end }}
+
+      <!-- Пустое состояние -->
+      {{ if eq (len $paginator.Pages) 0 }}
+      <div class="text-center py-12">
+        <ion-icon name="document-outline" class="text-4xl text-base-content/30 mb-3"></ion-icon>
+        <p class="text-base-content/60">{{ i18n "taxonomy.noPosts" | default "Записей пока нет" }}</p>
+      </div>
+      {{ end }}
+
+      <!-- Пагинация -->
+      {{ if gt $paginator.TotalPages 1 }}
+      <div class="flex justify-center pt-10">
+        {{ partial "paginator.html" (dict "paginator" $paginator) }}
+      </div>
+      {{ end }}
+      
+    </section>
+
   </div>
 </div>
 
 {{ end }}
 
 {{ define "js" }}
-
 {{ if site.Params.Experimental.jsDate }}
 {{ partial "luxon.html" . }}
 {{ end }}
-
 {{ end }}

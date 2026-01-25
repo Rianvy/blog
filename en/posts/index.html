@@ -66,48 +66,60 @@
 
     
 <nav x-data="{ isSticky: false, mobileMenuOpen: false }"
-  x-init="
-    window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
-    $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
-  "
-  class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
-  :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
+     x-init="
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     "
+     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300"
+     :class="{ 'bg-base-100/95 backdrop-blur-md shadow-lg dark:border-b dark:border-base-content/20': isSticky }">
 
 
   
-  <div class="container flex justify-between px-4">
+  <div class="container flex items-center justify-between px-4">
   
   
-    <section class="flex items-center gap-4">
-      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
-        <div class="h-10 rounded-full">
-          <img src="/img/avatar.jpg" alt="0x69.ru &lt;/&gt;" />
+    
+    
+    
+    <section class="flex items-center gap-3">
+      <button class="avatar cursor-pointer transition-all duration-200 group" 
+              @click="flip = !flip" 
+              title="Flip it!"
+              aria-label="Flip it!">
+        <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+          <img src="/img/avatar.jpg" 
+               alt="0x69.ru &lt;/&gt;" 
+               class="rounded-full" 
+               loading="eager" />
         </div>
-      </div>
+      </button>
 
       
-      <div>
+      <div class="flex flex-col">
         
-        <a href="/en/" class="text-lg font-semibold cursor-pointer">
+        <a href="/en/" 
+           class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
           0x69.ru &lt;/&gt;
         </a>
         
         
-        <div class="text-base-content/60 text-sm">To iterate is human, to recurse divine</div>
+        <span class="text-sm text-base-content/60 hidden sm:block">To iterate is human, to recurse divine</span>
         
       </div>
       
     </section>
 
     
+    
+    
     <div class="sm:hidden">
       
       <button @click="mobileMenuOpen = !mobileMenuOpen" 
-              class="btn btn-ghost btn-square"
-              :class="{ 'bg-primary text-primary-content': mobileMenuOpen }"
+              class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+              :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
               aria-label="Открыть меню"
               :aria-expanded="mobileMenuOpen">
-        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-2xl"></ion-icon>
+        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
       </button>
       
       
@@ -119,7 +131,7 @@
            x-transition:leave-start="opacity-100"
            x-transition:leave-end="opacity-0"
            @click="mobileMenuOpen = false"
-           class="fixed inset-0 z-40 bg-base-100/70 backdrop-blur-md"
+           class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm"
            aria-hidden="true">
       </div>
       
@@ -133,17 +145,13 @@
            x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
            @click.outside="mobileMenuOpen = false"
            @keydown.escape.window="mobileMenuOpen = false"
-           class="absolute right-4 top-full mt-0 z-50 
-                  w-72 max-w-[calc(100vw-2rem)]
-                  bg-base-100 rounded-2xl shadow-2xl
-                  border border-base-200 dark:border-base-content/10
-                  overflow-hidden">
+           class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden">
         
         
-        <div class="flex items-center justify-between p-4 border-b border-base-200 dark:border-base-content/10">
-          <span class="font-semibold">Menu</span>
+        <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+          <span class="font-semibold text-base-content">Menu</span>
           <button @click="mobileMenuOpen = false" 
-                  class="btn btn-ghost btn-circle btn-sm"
+                  class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
                   aria-label="Закрыть">
             <ion-icon name="close" class="text-lg"></ion-icon>
           </button>
@@ -153,24 +161,22 @@
         
           
           
-          <div class="p-4 border-b border-base-200 dark:border-base-content/10">
+          <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
             <button type="button"
-                    class="inline-flex items-center gap-2 w-full p-3 rounded-lg
-                           cursor-pointer transition-all duration-200
-                           hover:bg-base-200 active:scale-[0.98]"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                     @click="flip = !flip; mobileMenuOpen = false"
                     title="About"
                     aria-label="About">
-              <ion-icon name="information-circle-outline" class="text-lg text-primary"></ion-icon>
-              <span class="flex-1 text-left font-medium">About</span>
-              <ion-icon name="chevron-forward-outline" class="text-base-content/50"></ion-icon>
+              <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+              <span class="flex-1 text-left">About</span>
+              <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
             </button>
           </div>
           
         
         
         
-        <div class="p-4 max-h-[60vh] overflow-y-auto">
+        <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
           
 
 
@@ -257,108 +263,164 @@
     <ul class="space-y-1">
       
         
-<li>
+
+
+
+
+
+<li role="none">
   <a href="/en/search" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="Search">
-    <ion-icon name="search-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>Search</span>
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Search</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
   </a>
 </li>
 
 
+
+
+
       
         
-<li>
+
+
+
+
+<li role="none">
   <a href="/en/categories" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="All Categories">
-    <ion-icon name="folder-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>All Categories</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      3
-    </span>
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Categories</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
   </a>
 </li>
 
 
+
+
+
       
         
-<li>
+
+
+
+
+<li role="none">
   <a href="/en/portfolio" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="Portfolio">
-    <ion-icon name="briefcase-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>Portfolio</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      3
-    </span>
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Portfolio</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
   </a>
 </li>
 
 
+
+
+
       
         
-<li>
+
+
+
+
+<li role="none">
   <a href="/en/posts" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="Archives">
-    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>Archives</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      3
-    </span>
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
   </a>
 </li>
 
 
+
+
+
       
         
-<li>
+
+
+
+
+<li role="none">
   <a href="/en/tags" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="All Tags">
-    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>All Tags</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      51
-    </span>
-  </a>
-</li>
-
-
-      
-        
-<li>
-  <a href="https://github.com/rianvy" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
-     target="_blank"
-     rel="noopener noreferrer"
-     title="GitHub">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
     
-    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
-    
-    <span>GitHub</span>
-    
-    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    <span class="badge badge-sm badge-ghost font-normal">51</span>
     
   </a>
 </li>
 
 
+
+
+
       
         
-<li>
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
   <a href="/en/index.xml" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="RSS"
      target="_blank"
      rel="noopener noreferrer">
-    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
-    <span>RSS</span>
-    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
   </a>
 </li>
+
+
+
 
 
       
@@ -379,25 +441,24 @@
     </ul>
   </div>
 
-  
-  
-
 </nav>
         </div>
       </div>
     </div>
 
     
-    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+    
+    
+    <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
       
       
       
-      <div role="link" tabindex="0"
-        class="text-sm font-semibold cursor-pointer hover:underline"
-        @click="flip = !flip"
-        title="About"
-      >About</div>
-      
+        
+        
+        <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                @click="flip = !flip"
+                title="About">About</button>
+        
       
 
       
@@ -406,186 +467,260 @@
       
 
       
+        
+        
+        
+        
+        
+          
 
-      
-      
-      
-      
-<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/search" title="Search">
-  <ion-icon class="group-hover:text-primary-content" name="search"></ion-icon>
+
+
+
+
+
+
+<a href="/en/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Search"
+   aria-label="Search">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
 </a>
 
 
-      
-      
-<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/categories" title="All Categories">
-  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+
+
+
+        
+          
+
+
+
+
+
+
+
+<a href="/en/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="All Categories"
+   aria-label="All Categories">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
 </a>
 
 
-      
-      
-<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/portfolio" title="Portfolio">
-  <ion-icon class="group-hover:text-primary-content" name="sparkles"></ion-icon>
+
+
+
+        
+          
+
+
+
+
+
+
+
+<a href="/en/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Portfolio"
+   aria-label="Portfolio">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
 </a>
 
 
+
+
+
+        
       
-      
-      
-      <div class="dropdown dropdown-end dropdown-hover">
-        <div tabindex="0" role="button" 
-             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
-                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
-             aria-label="Выбрать язык">
-          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
-                    name="language-outline"></ion-icon>
+        
+        
+        
+        <div class="dropdown dropdown-end dropdown-hover">
+          <button tabindex="0" 
+                  class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                  aria-label="Выбрать язык"
+                  aria-haspopup="true">
+            <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+          </button>
+          <ul tabindex="0" 
+              class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+              role="menu">
+            
+              
+              
+              
+              
+
+              
+              
+                
+                
+              
+
+              <li role="none">
+                <a href="https://0x69.ru/en/posts/" 
+                   hreflang="en"
+                   role="menuitem"
+                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                   aria-current="true">
+                  <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                  <span class="flex-1">English</span>
+                  
+                  <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                  
+                </a>
+              </li>
+            
+              
+              
+              
+              
+
+              
+              
+                
+              
+
+              <li role="none">
+                <a href="https://0x69.ru/ru/posts/" 
+                   hreflang="ru"
+                   role="menuitem"
+                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                   >
+                  <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                  <span class="flex-1">Русский</span>
+                  
+                </a>
+              </li>
+            
+          </ul>
         </div>
-        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-xl z-[1] shadow-xl 
-                                border border-base-200 dark:border-base-content/10 p-2 min-w-[160px]">
           
-            
-            
-            
-            
-
-            
+        
+        
+        
+        <div class="dropdown dropdown-end dropdown-hover">
+          <button tabindex="0" 
+                  class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                  aria-label="Ещё"
+                  aria-haspopup="true">
+            <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+          </button>
+          <ul tabindex="0" 
+              class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+              role="menu">
             
               
-              
-            
 
-            <li>
-              <a href="https://0x69.ru/en/posts/" 
-                 hreflang="en"
-                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
-                        bg-primary/10 text-primary font-medium"
-                 aria-current="true">
-                <ion-icon name="language" class="text-lg"></ion-icon>
-                <span class="flex-1">English</span>
-                
-                <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
-                
-              </a>
-            </li>
-          
-            
-            
-            
-            
 
-            
-            
-              
-            
 
-            <li>
-              <a href="https://0x69.ru/ru/posts/" 
-                 hreflang="ru"
-                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
-                        "
-                 >
-                <ion-icon name="language" class="text-lg"></ion-icon>
-                <span class="flex-1">Русский</span>
-                
-              </a>
-            </li>
-          
-        </ul>
-      </div>
-          
-      
-      <div class="dropdown dropdown-end dropdown-hover">
-        <div tabindex="0" role="button" 
-             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
-                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
-             aria-label="Ещё">
-          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
-                    name="ellipsis-horizontal"></ion-icon>
-        </div>
-        <ul tabindex="0" class="dropdown-content menu w-44 bg-base-100 rounded-xl z-[1] shadow-xl 
-                                border border-base-200 dark:border-base-content/10 p-2">
-          
-          
-<li>
+
+<li role="none">
   <a href="/en/posts" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="Archives">
-    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>Archives</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      3
-    </span>
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
   </a>
 </li>
 
 
-          
-          
-<li>
+
+
+
+            
+              
+
+
+
+
+<li role="none">
   <a href="/en/tags" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="All Tags">
-    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>All Tags</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      51
-    </span>
-  </a>
-</li>
-
-
-          
-          
-<li>
-  <a href="https://github.com/rianvy" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
-     target="_blank"
-     rel="noopener noreferrer"
-     title="GitHub">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
     
-    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
-    
-    <span>GitHub</span>
-    
-    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    <span class="badge badge-sm badge-ghost font-normal">51</span>
     
   </a>
 </li>
 
 
-          
-          
-<li>
+
+
+
+            
+              
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+            
+              
+
+
+
+
+
+<li role="none">
   <a href="/en/index.xml" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="RSS"
      target="_blank"
      rel="noopener noreferrer">
-    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
-    <span>RSS</span>
-    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
   </a>
 </li>
 
 
-          
-
-          
-          
 
 
 
+            
 
-
+            
+              
 
 
 
 
 
-          
-        </ul>
-      </div>
+
+
+
+
+
+            
+          </ul>
+        </div>
       
     </section>
   </div>
@@ -609,350 +744,1142 @@
         <div class="front">
           <div class="container">
             
+
+
+
+
+
+
+
+
+
 <div class="mt-8 lg:mt-12 px-4 sm:px-6">
   
   
-  <div class="mx-auto prose dark:prose-invert text-center mb-8 lg:mb-12">
-    <h1 class="text-2xl sm:text-3xl lg:text-4xl">
+  <section class="max-w-4xl mx-auto text-center mb-10 lg:mb-14">
+    
+    
+    <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 text-primary mb-4">
+      <ion-icon name="time-outline" class="text-3xl"></ion-icon>
+    </div>
+    
+    
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">
       Posts
     </h1>
     
     
     
-    <div class="not-prose flex justify-center items-center gap-4 sm:gap-6 mt-4 text-sm text-base-content/60">
-      <div class="flex items-center gap-1.5">
-        <ion-icon name="document-text-outline" class="text-base"></ion-icon>
-        <span>3 записей</span>
+    <p class="text-base-content/70 max-w-xl mx-auto mb-6">
+      Chronological list of all publications
+    </p>
+    
+    
+    
+    <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4">
+      
+      
+      <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
+        <ion-icon name="layers-outline" class="text-lg text-primary"></ion-icon>
+        <span class="font-bold">6</span>
+        <span class="text-sm text-base-content/60">total</span>
       </div>
-      <div class="w-1 h-1 rounded-full bg-base-content/30"></div>
-      <div class="flex items-center gap-1.5">
-        <ion-icon name="calendar-outline" class="text-base"></ion-icon>
-        <span>2 лет</span>
+      
+      
+      <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
+        <ion-icon name="document-text-outline" class="text-lg text-secondary"></ion-icon>
+        <span class="font-bold">3</span>
+        <span class="text-sm text-base-content/60">posts</span>
       </div>
+      
+      
+      
+      <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
+        <ion-icon name="briefcase-outline" class="text-lg text-accent"></ion-icon>
+        <span class="font-bold">3</span>
+        <span class="text-sm text-base-content/60">projects</span>
+      </div>
+      
+      
+      
+      <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
+        <ion-icon name="calendar-outline" class="text-lg text-info"></ion-icon>
+        <span class="font-bold">2</span>
+        <span class="text-sm text-base-content/60">years</span>
+      </div>
+      
     </div>
-  </div>
+  </section>
 
   
   
-  
 
   
-  <div class="max-w-2xl mx-auto">
+  <div class="max-w-3xl mx-auto">
     
     
     
-    <div id="year-2026" 
-         class="relative pl-6 sm:pl-8 pb-8 lg:pb-12 
-                scroll-mt-20
-                border-l-2 border-base-300 dark:border-base-content/20
-                last:pb-0 last:border-l-transparent">
+    <section id="year-2026" 
+             class="relative pl-6 sm:pl-10 pb-10 lg:pb-14 
+                    scroll-mt-24
+                    border-l-2 border-base-300 dark:border-base-content/20
+                    last:pb-0">
       
       
-      <div class="absolute -left-[9px] sm:-left-[11px] top-0 
-                  w-4 h-4 sm:w-5 sm:h-5 
-                  rounded-full bg-base-100 
-                  border-2 border-primary
-                  flex items-center justify-center
-                  transition-transform duration-200 hover:scale-110">
-        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary"></div>
+      <div class="absolute -left-[13px] sm:-left-[17px] top-0">
+        <div class="w-6 h-6 sm:w-8 sm:h-8 
+                    rounded-full bg-primary text-primary-content
+                    flex items-center justify-center
+                    shadow-lg shadow-primary/25
+                    transition-transform duration-200 hover:scale-110">
+          <ion-icon name="calendar" class="text-sm sm:text-base"></ion-icon>
+        </div>
       </div>
       
       
-      <div class="flex items-center gap-2 sm:gap-3 mb-4">
-        <h2 class="text-xl sm:text-2xl font-bold text-primary">
+      <div class="flex flex-wrap items-center gap-3 mb-5">
+        <h2 class="text-2xl sm:text-3xl font-bold">
           2026
         </h2>
-        <span class="badge badge-sm sm:badge-md badge-ghost">
-          2 записей
-        </span>
+        <div class="flex items-center gap-2">
+          <span class="badge badge-primary badge-outline">
+            3 entries
+          </span>
+          
+          <span class="badge badge-success badge-sm gap-1">
+            <ion-icon name="flash" class="text-xs"></ion-icon>
+            Latest
+          </span>
+          
+        </div>
       </div>
       
       
-      <div class="space-y-2 sm:space-y-3">
+      
+      
+      <div class="mb-6 last:mb-0">
         
-        <article class="group">
-          <a href="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/" 
-             class="block p-3 sm:p-4 
-                    rounded-lg sm:rounded-xl
-                    bg-base-200/50 dark:bg-base-200/10
-                    border border-transparent
-                    hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
-                    hover:shadow-sm
-                    transition-all duration-200
-                    no-underline">
+        
+        <div class="flex items-center gap-2 mb-3 ml-1">
+          <div class="w-2 h-2 rounded-full bg-base-content/20"></div>
+          <h3 class="text-sm font-medium text-base-content/60 uppercase tracking-wider">
+            January
+          </h3>
+          <div class="flex-1 h-px bg-base-300/50"></div>
+          <span class="text-xs text-base-content/40">3</span>
+        </div>
+        
+        
+        <div class="space-y-2">
+          
+          
+          
+          
+          
+          
+          
+          
+          <article class="group">
+            <a href="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/" 
+               class="block p-3 sm:p-4 
+                      rounded-xl
+                      bg-base-200/50 dark:bg-base-200/10
+                      border border-transparent
+                      hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
+                      hover:shadow-md
+                      transition-all duration-200
+                      no-underline
+                      ">
+              
+              <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                
+                
+                <time datetime="2026-01-25" 
+                      class="text-xs text-base-content/50 font-mono shrink-0 
+                             flex items-center gap-1.5 tabular-nums">
+                  <ion-icon name="calendar-clear-outline" class="text-xs opacity-50"></ion-icon>
+                  25
+                </time>
+                
+                
+                <div class="hidden sm:flex items-center justify-center w-8 h-8 rounded-lg shrink-0
+                            bg-base-300/50
+                            group-hover:bg-primary/10 transition-colors">
+                  <ion-icon name="document-text-outline" 
+                            class="text-base transition-colors
+                                   text-base-content/50
+                                   group-hover:text-primary"></ion-icon>
+                </div>
+                
+                
+                <div class="flex-1 min-w-0">
+                  
+                  
+                  <div class="sm:hidden mb-1">
+                    <span class="badge badge-xs badge-secondary badge-outline">
+                      Post
+                    </span>
+                  </div>
+                  
+                  <h4 class="text-sm sm:text-base font-medium 
+                             group-hover:text-primary transition-colors duration-200
+                             line-clamp-2 sm:line-clamp-1">
+                    How to Watch Movies and TV Shows in 4K via Lampa and TorrServer
+                  </h4>
+                  
+                  
+                  <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-base-content/40">
+                    
+                    
+                    <span class="hidden sm:flex items-center gap-1 text-secondary">
+                      <ion-icon name="document-text-outline" class="text-xs"></ion-icon>
+                      Post
+                    </span>
+                    
+                    
+                    
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="folder-outline" class="text-xs"></ion-icon>
+                      Guides
+                    </span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="time-outline" class="text-xs"></ion-icon>
+                      17 min
+                    </span>
+                    
+                    
+                    
+                    
+                  </div>
+                </div>
+                
+                
+                <ion-icon name="arrow-forward" 
+                          class="hidden sm:block text-base-content/30 
+                                 group-hover:text-primary group-hover:translate-x-1
+                                 transition-all duration-200 shrink-0"></ion-icon>
+              </div>
+              
+              
+              
+            </a>
             
-            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
-              
-              <time datetime="2026-01-25" 
-                    class="text-xs sm:text-sm text-base-content/50 font-mono shrink-0 
-                           flex items-center gap-1.5">
-                <ion-icon name="calendar-clear-outline" class="text-xs sm:hidden"></ion-icon>
-                25 Jan
-              </time>
+            
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5 mt-2 ml-1 sm:ml-12">
               
               
-              <h3 class="text-sm sm:text-base font-medium 
-                         group-hover:text-primary transition-colors duration-200
-                         line-clamp-2 sm:line-clamp-1">
-                How to Watch Movies and TV Shows in 4K via Lampa and TorrServer
-              </h3>
+              
+              <a href="/en/tags/lampa/" 
+                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
+                 rel="tag">
+                Lampa
+              </a>
               
               
-              <ion-icon name="arrow-forward" 
-                        class="hidden sm:block ml-auto text-base-content/30 
-                               group-hover:text-primary group-hover:translate-x-1
-                               transition-all duration-200 shrink-0"></ion-icon>
+              
+              
+              <a href="/en/tags/torrserver/" 
+                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
+                 rel="tag">
+                TorrServer
+              </a>
+              
+              
+              
+              
+              <a href="/en/tags/android-tv/" 
+                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
+                 rel="tag">
+                Android TV
+              </a>
+              
+              
+              
+              
+              <a href="/en/tags/apple-tv/" 
+                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
+                 rel="tag">
+                Apple TV
+              </a>
+              
+              
+              
+              <span class="badge badge-sm badge-ghost opacity-60">+9</span>
+              
             </div>
             
-            
-            
-          </a>
+          </article>
           
           
           
-          <div class="flex flex-wrap gap-1.5 mt-2 ml-1">
-            
-            
-            <a href="/en/tags/lampa/" 
-               class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200"
-               rel="tag" 
-               aria-label="Lampa"
-               data-tag="lampa">
-              Lampa
+          
+          
+          
+          
+          
+          <article class="group">
+            <a href="/en/portfolio/codesqueeze/" 
+               class="block p-3 sm:p-4 
+                      rounded-xl
+                      bg-base-200/50 dark:bg-base-200/10
+                      border border-transparent
+                      hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
+                      hover:shadow-md
+                      transition-all duration-200
+                      no-underline
+                      ring-1 ring-accent/10">
+              
+              <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                
+                
+                <time datetime="2026-01-19" 
+                      class="text-xs text-base-content/50 font-mono shrink-0 
+                             flex items-center gap-1.5 tabular-nums">
+                  <ion-icon name="calendar-clear-outline" class="text-xs opacity-50"></ion-icon>
+                  19
+                </time>
+                
+                
+                <div class="hidden sm:flex items-center justify-center w-8 h-8 rounded-lg shrink-0
+                            bg-accent/10
+                            group-hover:bg-primary/10 transition-colors">
+                  <ion-icon name="briefcase-outline" 
+                            class="text-base transition-colors
+                                   text-accent
+                                   group-hover:text-primary"></ion-icon>
+                </div>
+                
+                
+                <div class="flex-1 min-w-0">
+                  
+                  
+                  <div class="sm:hidden mb-1">
+                    <span class="badge badge-xs badge-accent badge-outline">
+                      Project
+                    </span>
+                  </div>
+                  
+                  <h4 class="text-sm sm:text-base font-medium 
+                             group-hover:text-primary transition-colors duration-200
+                             line-clamp-2 sm:line-clamp-1">
+                    CodeSqueeze — Online Code Minifier
+                  </h4>
+                  
+                  
+                  <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-base-content/40">
+                    
+                    
+                    <span class="hidden sm:flex items-center gap-1 text-accent">
+                      <ion-icon name="briefcase-outline" class="text-xs"></ion-icon>
+                      Project
+                    </span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="pricetag-outline" class="text-xs"></ion-icon>
+                      Web-Development
+                    </span>
+                    
+                    
+                    
+                    
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="time-outline" class="text-xs"></ion-icon>
+                      2 min
+                    </span>
+                    
+                    
+                    
+                    
+                    
+                    
+                  </div>
+                </div>
+                
+                
+                <ion-icon name="arrow-forward" 
+                          class="hidden sm:block text-base-content/30 
+                                 group-hover:text-primary group-hover:translate-x-1
+                                 transition-all duration-200 shrink-0"></ion-icon>
+              </div>
+              
+              
+              
+              <p class="hidden md:block text-xs text-base-content/50 mt-2 ml-0 sm:ml-12 line-clamp-1">
+                A modern online HTML, CSS, and JavaScript minifier with offline support, detailed statistics, and a thoughtfully designed interface.
+              </p>
+              
             </a>
             
             
-            <a href="/en/tags/torrserver/" 
-               class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200"
-               rel="tag" 
-               aria-label="TorrServer"
-               data-tag="torrserver">
-              TorrServer
-            </a>
             
             
-            <a href="/en/tags/android-tv/" 
-               class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200"
-               rel="tag" 
-               aria-label="Android TV"
-               data-tag="android-tv">
-              Android TV
-            </a>
-            
-            
-            <span class="badge badge-sm badge-ghost">+10</span>
-            
-          </div>
-          
-        </article>
-        
-        <article class="group">
-          <a href="/en/posts/chatgpt-claude-gemini-dns-dostup/" 
-             class="block p-3 sm:p-4 
-                    rounded-lg sm:rounded-xl
-                    bg-base-200/50 dark:bg-base-200/10
-                    border border-transparent
-                    hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
-                    hover:shadow-sm
-                    transition-all duration-200
-                    no-underline">
-            
-            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
               
-              <time datetime="2026-01-17" 
-                    class="text-xs sm:text-sm text-base-content/50 font-mono shrink-0 
-                           flex items-center gap-1.5">
-                <ion-icon name="calendar-clear-outline" class="text-xs sm:hidden"></ion-icon>
-                17 Jan
-              </time>
+            
+            
+            <div class="flex flex-wrap gap-1.5 mt-2 ml-1 sm:ml-12">
               
               
-              <h3 class="text-sm sm:text-base font-medium 
-                         group-hover:text-primary transition-colors duration-200
-                         line-clamp-2 sm:line-clamp-1">
-                ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services
-              </h3>
+              <span class="badge badge-sm badge-ghost">
+                Figma
+              </span>
               
               
-              <ion-icon name="arrow-forward" 
-                        class="hidden sm:block ml-auto text-base-content/30 
-                               group-hover:text-primary group-hover:translate-x-1
-                               transition-all duration-200 shrink-0"></ion-icon>
+              
+              <span class="badge badge-sm badge-ghost">
+                HTML
+              </span>
+              
+              
+              
+              <span class="badge badge-sm badge-ghost">
+                CSS
+              </span>
+              
+              
+              
+              <span class="badge badge-sm badge-ghost">
+                Tailwind CSS
+              </span>
+              
+              
+              
+              <span class="badge badge-sm badge-ghost opacity-60">+1</span>
+              
             </div>
             
-            
-            
-          </a>
+          </article>
           
           
           
-          <div class="flex flex-wrap gap-1.5 mt-2 ml-1">
-            
-            
-            <a href="/en/tags/dns/" 
-               class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200"
-               rel="tag" 
-               aria-label="DNS"
-               data-tag="dns">
-              DNS
+          
+          
+          
+          
+          
+          <article class="group">
+            <a href="/en/posts/chatgpt-claude-gemini-dns-dostup/" 
+               class="block p-3 sm:p-4 
+                      rounded-xl
+                      bg-base-200/50 dark:bg-base-200/10
+                      border border-transparent
+                      hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
+                      hover:shadow-md
+                      transition-all duration-200
+                      no-underline
+                      ">
+              
+              <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                
+                
+                <time datetime="2026-01-17" 
+                      class="text-xs text-base-content/50 font-mono shrink-0 
+                             flex items-center gap-1.5 tabular-nums">
+                  <ion-icon name="calendar-clear-outline" class="text-xs opacity-50"></ion-icon>
+                  17
+                </time>
+                
+                
+                <div class="hidden sm:flex items-center justify-center w-8 h-8 rounded-lg shrink-0
+                            bg-base-300/50
+                            group-hover:bg-primary/10 transition-colors">
+                  <ion-icon name="document-text-outline" 
+                            class="text-base transition-colors
+                                   text-base-content/50
+                                   group-hover:text-primary"></ion-icon>
+                </div>
+                
+                
+                <div class="flex-1 min-w-0">
+                  
+                  
+                  <div class="sm:hidden mb-1">
+                    <span class="badge badge-xs badge-secondary badge-outline">
+                      Post
+                    </span>
+                  </div>
+                  
+                  <h4 class="text-sm sm:text-base font-medium 
+                             group-hover:text-primary transition-colors duration-200
+                             line-clamp-2 sm:line-clamp-1">
+                    ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services
+                  </h4>
+                  
+                  
+                  <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-base-content/40">
+                    
+                    
+                    <span class="hidden sm:flex items-center gap-1 text-secondary">
+                      <ion-icon name="document-text-outline" class="text-xs"></ion-icon>
+                      Post
+                    </span>
+                    
+                    
+                    
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="folder-outline" class="text-xs"></ion-icon>
+                      Guides
+                    </span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="time-outline" class="text-xs"></ion-icon>
+                      19 min
+                    </span>
+                    
+                    
+                    
+                    
+                  </div>
+                </div>
+                
+                
+                <ion-icon name="arrow-forward" 
+                          class="hidden sm:block text-base-content/30 
+                                 group-hover:text-primary group-hover:translate-x-1
+                                 transition-all duration-200 shrink-0"></ion-icon>
+              </div>
+              
+              
+              
             </a>
             
             
-            <a href="/en/tags/neural-networks/" 
-               class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200"
-               rel="tag" 
-               aria-label="Neural Networks"
-               data-tag="neural-networks">
-              Neural Networks
-            </a>
             
             
-            <a href="/en/tags/chatgpt/" 
-               class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200"
-               rel="tag" 
-               aria-label="ChatGPT"
-               data-tag="chatgpt">
-              ChatGPT
-            </a>
             
+            <div class="flex flex-wrap gap-1.5 mt-2 ml-1 sm:ml-12">
+              
+              
+              
+              <a href="/en/tags/dns/" 
+                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
+                 rel="tag">
+                DNS
+              </a>
+              
+              
+              
+              
+              <a href="/en/tags/neural-networks/" 
+                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
+                 rel="tag">
+                Neural Networks
+              </a>
+              
+              
+              
+              
+              <a href="/en/tags/chatgpt/" 
+                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
+                 rel="tag">
+                ChatGPT
+              </a>
+              
+              
+              
+              
+              <a href="/en/tags/gemini/" 
+                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
+                 rel="tag">
+                Gemini
+              </a>
+              
+              
+              
+              <span class="badge badge-sm badge-ghost opacity-60">+11</span>
+              
+            </div>
             
-            <span class="badge badge-sm badge-ghost">+12</span>
-            
-          </div>
+          </article>
           
-        </article>
-        
+        </div>
       </div>
-    </div>
-    
-    
-    
-    <div id="year-2025" 
-         class="relative pl-6 sm:pl-8 pb-8 lg:pb-12 
-                scroll-mt-20
-                border-l-2 border-base-300 dark:border-base-content/20
-                last:pb-0 last:border-l-transparent">
       
       
-      <div class="absolute -left-[9px] sm:-left-[11px] top-0 
-                  w-4 h-4 sm:w-5 sm:h-5 
-                  rounded-full bg-base-100 
-                  border-2 border-primary
-                  flex items-center justify-center
-                  transition-transform duration-200 hover:scale-110">
-        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary"></div>
+    </section>
+    
+    
+    
+    <section id="year-2025" 
+             class="relative pl-6 sm:pl-10 pb-10 lg:pb-14 
+                    scroll-mt-24
+                    border-l-2 border-base-300 dark:border-base-content/20
+                    last:pb-0">
+      
+      
+      <div class="absolute -left-[13px] sm:-left-[17px] top-0">
+        <div class="w-6 h-6 sm:w-8 sm:h-8 
+                    rounded-full bg-primary text-primary-content
+                    flex items-center justify-center
+                    shadow-lg shadow-primary/25
+                    transition-transform duration-200 hover:scale-110">
+          <ion-icon name="calendar" class="text-sm sm:text-base"></ion-icon>
+        </div>
       </div>
       
       
-      <div class="flex items-center gap-2 sm:gap-3 mb-4">
-        <h2 class="text-xl sm:text-2xl font-bold text-primary">
+      <div class="flex flex-wrap items-center gap-3 mb-5">
+        <h2 class="text-2xl sm:text-3xl font-bold">
           2025
         </h2>
-        <span class="badge badge-sm sm:badge-md badge-ghost">
-          1 запись
-        </span>
+        <div class="flex items-center gap-2">
+          <span class="badge badge-primary badge-outline">
+            3 entries
+          </span>
+          
+        </div>
       </div>
       
       
-      <div class="space-y-2 sm:space-y-3">
+      
+      
+      <div class="mb-6 last:mb-0">
         
-        <article class="group">
-          <a href="/en/posts/role-htaccess/" 
-             class="block p-3 sm:p-4 
-                    rounded-lg sm:rounded-xl
-                    bg-base-200/50 dark:bg-base-200/10
-                    border border-transparent
-                    hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
-                    hover:shadow-sm
-                    transition-all duration-200
-                    no-underline">
+        
+        <div class="flex items-center gap-2 mb-3 ml-1">
+          <div class="w-2 h-2 rounded-full bg-base-content/20"></div>
+          <h3 class="text-sm font-medium text-base-content/60 uppercase tracking-wider">
+            January
+          </h3>
+          <div class="flex-1 h-px bg-base-300/50"></div>
+          <span class="text-xs text-base-content/40">3</span>
+        </div>
+        
+        
+        <div class="space-y-2">
+          
+          
+          
+          
+          
+          
+          
+          
+          <article class="group">
+            <a href="/en/portfolio/prostavki/" 
+               class="block p-3 sm:p-4 
+                      rounded-xl
+                      bg-base-200/50 dark:bg-base-200/10
+                      border border-transparent
+                      hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
+                      hover:shadow-md
+                      transition-all duration-200
+                      no-underline
+                      ring-1 ring-accent/10">
+              
+              <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                
+                
+                <time datetime="2025-01-27" 
+                      class="text-xs text-base-content/50 font-mono shrink-0 
+                             flex items-center gap-1.5 tabular-nums">
+                  <ion-icon name="calendar-clear-outline" class="text-xs opacity-50"></ion-icon>
+                  27
+                </time>
+                
+                
+                <div class="hidden sm:flex items-center justify-center w-8 h-8 rounded-lg shrink-0
+                            bg-accent/10
+                            group-hover:bg-primary/10 transition-colors">
+                  <ion-icon name="briefcase-outline" 
+                            class="text-base transition-colors
+                                   text-accent
+                                   group-hover:text-primary"></ion-icon>
+                </div>
+                
+                
+                <div class="flex-1 min-w-0">
+                  
+                  
+                  <div class="sm:hidden mb-1">
+                    <span class="badge badge-xs badge-accent badge-outline">
+                      Project
+                    </span>
+                  </div>
+                  
+                  <h4 class="text-sm sm:text-base font-medium 
+                             group-hover:text-primary transition-colors duration-200
+                             line-clamp-2 sm:line-clamp-1">
+                    Landing Page ProStavki
+                  </h4>
+                  
+                  
+                  <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-base-content/40">
+                    
+                    
+                    <span class="hidden sm:flex items-center gap-1 text-accent">
+                      <ion-icon name="briefcase-outline" class="text-xs"></ion-icon>
+                      Project
+                    </span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="pricetag-outline" class="text-xs"></ion-icon>
+                      Web-Development
+                    </span>
+                    
+                    
+                    
+                    
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="time-outline" class="text-xs"></ion-icon>
+                      2 min
+                    </span>
+                    
+                    
+                    
+                    
+                    
+                    
+                  </div>
+                </div>
+                
+                
+                <ion-icon name="arrow-forward" 
+                          class="hidden sm:block text-base-content/30 
+                                 group-hover:text-primary group-hover:translate-x-1
+                                 transition-all duration-200 shrink-0"></ion-icon>
+              </div>
+              
+              
+              
+              <p class="hidden md:block text-xs text-base-content/50 mt-2 ml-0 sm:ml-12 line-clamp-1">
+                Landing Page development for a sports analytics project, including Google Sheets integration and unique visual style.
+              </p>
+              
+            </a>
             
-            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+            
+            
+            
               
-              <time datetime="2025-01-12" 
-                    class="text-xs sm:text-sm text-base-content/50 font-mono shrink-0 
-                           flex items-center gap-1.5">
-                <ion-icon name="calendar-clear-outline" class="text-xs sm:hidden"></ion-icon>
-                12 Jan
-              </time>
-              
-              
-              <h3 class="text-sm sm:text-base font-medium 
-                         group-hover:text-primary transition-colors duration-200
-                         line-clamp-2 sm:line-clamp-1">
-                Role of the .htaccess file in Apache server configuration
-              </h3>
+            
+            
+            <div class="flex flex-wrap gap-1.5 mt-2 ml-1 sm:ml-12">
               
               
-              <ion-icon name="arrow-forward" 
-                        class="hidden sm:block ml-auto text-base-content/30 
-                               group-hover:text-primary group-hover:translate-x-1
-                               transition-all duration-200 shrink-0"></ion-icon>
+              <span class="badge badge-sm badge-ghost">
+                Figma
+              </span>
+              
+              
+              
+              <span class="badge badge-sm badge-ghost">
+                HTML
+              </span>
+              
+              
+              
+              <span class="badge badge-sm badge-ghost">
+                CSS
+              </span>
+              
+              
+              
+              <span class="badge badge-sm badge-ghost">
+                JavaScript
+              </span>
+              
+              
+              
+              <span class="badge badge-sm badge-ghost opacity-60">+1</span>
+              
             </div>
             
-            
-            
-          </a>
+          </article>
           
           
           
-          <div class="flex flex-wrap gap-1.5 mt-2 ml-1">
-            
-            
-            <a href="/en/tags/servers/" 
-               class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200"
-               rel="tag" 
-               aria-label="Servers"
-               data-tag="servers">
-              Servers
+          
+          
+          
+          
+          
+          <article class="group">
+            <a href="/en/portfolio/pbpack/" 
+               class="block p-3 sm:p-4 
+                      rounded-xl
+                      bg-base-200/50 dark:bg-base-200/10
+                      border border-transparent
+                      hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
+                      hover:shadow-md
+                      transition-all duration-200
+                      no-underline
+                      ring-1 ring-accent/10">
+              
+              <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                
+                
+                <time datetime="2025-01-19" 
+                      class="text-xs text-base-content/50 font-mono shrink-0 
+                             flex items-center gap-1.5 tabular-nums">
+                  <ion-icon name="calendar-clear-outline" class="text-xs opacity-50"></ion-icon>
+                  19
+                </time>
+                
+                
+                <div class="hidden sm:flex items-center justify-center w-8 h-8 rounded-lg shrink-0
+                            bg-accent/10
+                            group-hover:bg-primary/10 transition-colors">
+                  <ion-icon name="briefcase-outline" 
+                            class="text-base transition-colors
+                                   text-accent
+                                   group-hover:text-primary"></ion-icon>
+                </div>
+                
+                
+                <div class="flex-1 min-w-0">
+                  
+                  
+                  <div class="sm:hidden mb-1">
+                    <span class="badge badge-xs badge-accent badge-outline">
+                      Project
+                    </span>
+                  </div>
+                  
+                  <h4 class="text-sm sm:text-base font-medium 
+                             group-hover:text-primary transition-colors duration-200
+                             line-clamp-2 sm:line-clamp-1">
+                    Social media design PBPack
+                  </h4>
+                  
+                  
+                  <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-base-content/40">
+                    
+                    
+                    <span class="hidden sm:flex items-center gap-1 text-accent">
+                      <ion-icon name="briefcase-outline" class="text-xs"></ion-icon>
+                      Project
+                    </span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="pricetag-outline" class="text-xs"></ion-icon>
+                      Social-Media
+                    </span>
+                    
+                    
+                    
+                    
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="time-outline" class="text-xs"></ion-icon>
+                      1 min
+                    </span>
+                    
+                    
+                    
+                    
+                    
+                    
+                  </div>
+                </div>
+                
+                
+                <ion-icon name="arrow-forward" 
+                          class="hidden sm:block text-base-content/30 
+                                 group-hover:text-primary group-hover:translate-x-1
+                                 transition-all duration-200 shrink-0"></ion-icon>
+              </div>
+              
+              
+              
+              <p class="hidden md:block text-xs text-base-content/50 mt-2 ml-0 sm:ml-12 line-clamp-1">
+                Developed visual identity for PBPack&#39;s social media brand, including YouTube and Telegram.
+              </p>
+              
             </a>
             
             
-            <a href="/en/tags/apache/" 
-               class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200"
-               rel="tag" 
-               aria-label="Apache"
-               data-tag="apache">
-              Apache
-            </a>
             
             
-            <a href="/en/tags/.htaccess/" 
-               class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200"
-               rel="tag" 
-               aria-label=".htaccess"
-               data-tag=".htaccess">
-              .htaccess
-            </a>
+              
             
             
-            <span class="badge badge-sm badge-ghost">+2</span>
+            <div class="flex flex-wrap gap-1.5 mt-2 ml-1 sm:ml-12">
+              
+              
+              <span class="badge badge-sm badge-ghost">
+                Photoshop
+              </span>
+              
+              
+              
+              <span class="badge badge-sm badge-ghost">
+                After Effects
+              </span>
+              
+              
+              
+            </div>
             
-          </div>
+          </article>
           
-        </article>
-        
+          
+          
+          
+          
+          
+          
+          
+          <article class="group">
+            <a href="/en/posts/role-htaccess/" 
+               class="block p-3 sm:p-4 
+                      rounded-xl
+                      bg-base-200/50 dark:bg-base-200/10
+                      border border-transparent
+                      hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
+                      hover:shadow-md
+                      transition-all duration-200
+                      no-underline
+                      ">
+              
+              <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                
+                
+                <time datetime="2025-01-12" 
+                      class="text-xs text-base-content/50 font-mono shrink-0 
+                             flex items-center gap-1.5 tabular-nums">
+                  <ion-icon name="calendar-clear-outline" class="text-xs opacity-50"></ion-icon>
+                  12
+                </time>
+                
+                
+                <div class="hidden sm:flex items-center justify-center w-8 h-8 rounded-lg shrink-0
+                            bg-base-300/50
+                            group-hover:bg-primary/10 transition-colors">
+                  <ion-icon name="document-text-outline" 
+                            class="text-base transition-colors
+                                   text-base-content/50
+                                   group-hover:text-primary"></ion-icon>
+                </div>
+                
+                
+                <div class="flex-1 min-w-0">
+                  
+                  
+                  <div class="sm:hidden mb-1">
+                    <span class="badge badge-xs badge-secondary badge-outline">
+                      Post
+                    </span>
+                  </div>
+                  
+                  <h4 class="text-sm sm:text-base font-medium 
+                             group-hover:text-primary transition-colors duration-200
+                             line-clamp-2 sm:line-clamp-1">
+                    Role of the .htaccess file in Apache server configuration
+                  </h4>
+                  
+                  
+                  <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-base-content/40">
+                    
+                    
+                    <span class="hidden sm:flex items-center gap-1 text-secondary">
+                      <ion-icon name="document-text-outline" class="text-xs"></ion-icon>
+                      Post
+                    </span>
+                    
+                    
+                    
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="folder-outline" class="text-xs"></ion-icon>
+                      Administration
+                    </span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <span class="flex items-center gap-1">
+                      <ion-icon name="time-outline" class="text-xs"></ion-icon>
+                      5 min
+                    </span>
+                    
+                    
+                    
+                    
+                  </div>
+                </div>
+                
+                
+                <ion-icon name="arrow-forward" 
+                          class="hidden sm:block text-base-content/30 
+                                 group-hover:text-primary group-hover:translate-x-1
+                                 transition-all duration-200 shrink-0"></ion-icon>
+              </div>
+              
+              
+              
+            </a>
+            
+            
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5 mt-2 ml-1 sm:ml-12">
+              
+              
+              
+              <a href="/en/tags/servers/" 
+                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
+                 rel="tag">
+                Servers
+              </a>
+              
+              
+              
+              
+              <a href="/en/tags/apache/" 
+                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
+                 rel="tag">
+                Apache
+              </a>
+              
+              
+              
+              
+              <a href="/en/tags/.htaccess/" 
+                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
+                 rel="tag">
+                .htaccess
+              </a>
+              
+              
+              
+              
+              <a href="/en/tags/web-security/" 
+                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
+                 rel="tag">
+                Web Security
+              </a>
+              
+              
+              
+              <span class="badge badge-sm badge-ghost opacity-60">+1</span>
+              
+            </div>
+            
+          </article>
+          
+        </div>
       </div>
+      
+      
+    </section>
+    
+    
+    
+    
+    <div class="relative pl-6 sm:pl-10">
+      <div class="absolute -left-[9px] sm:-left-[13px] top-0">
+        <div class="w-4 h-4 sm:w-6 sm:h-6 
+                    rounded-full bg-base-300 
+                    flex items-center justify-center">
+          <ion-icon name="flag" class="text-xs text-base-content/50"></ion-icon>
+        </div>
+      </div>
+      <p class="text-sm text-base-content/40 italic py-4">
+        The beginning...
+      </p>
     </div>
-    
-    
   </div>
   
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
   
   document.querySelectorAll('a[href^="#year-"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', function(e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         history.pushState(null, null, this.getAttribute('href'));
+        
+        
+        target.classList.add('highlight');
+        setTimeout(() => target.classList.remove('highlight'), 1500);
       }
     });
   });
+  
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-fade-in');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  document.querySelectorAll('section[id^="year-"]').forEach(section => {
+    observer.observe(section);
+  });
+});
 </script>
+
+<style>
+   
+  section.highlight {
+    animation: highlight-pulse 1.5s ease-out;
+  }
+  
+  @keyframes highlight-pulse {
+    0% { background-color: oklch(var(--p) / 0.1); }
+    100% { background-color: transparent; }
+  }
+  
+   
+  .animate-fade-in {
+    animation: fade-in-up 0.5s ease-out forwards;
+  }
+  
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+   
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
 
 
             
@@ -1317,20 +2244,6 @@
 
 <script src="/js/main.min.js"></script>
 
-
-	
-	
-	  
-	
-<script src="/js/backToTop.min.js"></script>
-<script>
-  commonJsStrict.addBackToTop({
-    diameter: 50,
-    scrollContainer: document.body,
-    innerHTML: '<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 244l144-144 144 144M256 120v292"/></svg>',
-    className: 'h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary',
-  });
-</script>
 
      
 

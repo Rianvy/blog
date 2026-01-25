@@ -85,12 +85,29 @@
   
    
   .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: oklch(var(--p)); z-index: 9999; transition: width 0.1s ease-out; }
+  .reading-progress-text { position: fixed; top: 0.75rem; right: 1rem; z-index: 9999; font-size: 0.75rem; font-weight: 600; color: oklch(var(--p)); background: oklch(var(--b1) / 0.9); backdrop-filter: blur(8px); padding: 0.25rem 0.75rem; border-radius: 1rem; opacity: 0; transition: opacity 0.3s ease; }
+  .reading-progress-text.visible { opacity: 1; }
+  
+   
+  pre { position: relative; }
+  .copy-code-btn { position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.75rem; background: oklch(var(--b3)); border-radius: 0.25rem; cursor: pointer; opacity: 0; transition: opacity 0.2s, background 0.2s; }
+  pre:hover .copy-code-btn { opacity: 1; }
+  .copy-code-btn:hover { background: oklch(var(--p)); color: oklch(var(--pc)); }
+  .copy-code-btn.copied { background: oklch(var(--su)); color: oklch(var(--suc)); }
   
    
   html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
   
    
-  #TableOfContents { position: sticky; top: 5rem; max-height: calc(100vh - 6rem); overflow-y: auto; }
+  #TableOfContents { 
+    max-height: calc(100vh - 12rem); 
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  #TableOfContents::-webkit-scrollbar { width: 6px; }
+  #TableOfContents::-webkit-scrollbar-track { background: transparent; }
+  #TableOfContents::-webkit-scrollbar-thumb { background: oklch(var(--b3)); border-radius: 3px; }
+  #TableOfContents::-webkit-scrollbar-thumb:hover { background: oklch(var(--bc) / 0.3); }
   #TableOfContents a.active { color: oklch(var(--p)); font-weight: 600; }
   #TableOfContents ul { border-left: 2px solid oklch(var(--b3)); }
   
@@ -108,6 +125,28 @@
     transition: background-size 0.3s ease;
   }
   #dream-single-post-content a:not(.badge):not(.btn):not(.lg-item):hover { background-size: 100% 2px; }
+  
+   
+  body.focus-mode aside.right-sidebar { 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.3s ease; 
+  }
+  body.focus-mode article { 
+    max-width: 65ch; 
+    margin: 0 auto; 
+  }
+  
+   
+  aside.left-sidebar {
+    transition: opacity 0.3s ease;
+  }
+  
+   
+  body.focus-mode #focus-mode-btn {
+    background: oklch(var(--p) / 0.2);
+    color: oklch(var(--p));
+  }
   
    
   .lg-sub-html { backdrop-filter: blur(16px); }
@@ -134,48 +173,60 @@
 
     
 <nav x-data="{ isSticky: false, mobileMenuOpen: false }"
-  x-init="
-    window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
-    $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
-  "
-  class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
-  :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
+     x-init="
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     "
+     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300"
+     :class="{ 'bg-base-100/95 backdrop-blur-md shadow-lg dark:border-b dark:border-base-content/20': isSticky }">
 
 
   
-  <div class="container flex justify-between px-4">
+  <div class="container flex items-center justify-between px-4">
   
   
-    <section class="flex items-center gap-4">
-      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Повернуть!">
-        <div class="h-10 rounded-full">
-          <img src="/img/avatar.jpg" alt="0x69.ru &lt;/&gt;" />
+    
+    
+    
+    <section class="flex items-center gap-3">
+      <button class="avatar cursor-pointer transition-all duration-200 group" 
+              @click="flip = !flip" 
+              title="Повернуть!"
+              aria-label="Повернуть!">
+        <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+          <img src="/img/avatar.jpg" 
+               alt="0x69.ru &lt;/&gt;" 
+               class="rounded-full" 
+               loading="eager" />
         </div>
-      </div>
+      </button>
 
       
-      <div>
+      <div class="flex flex-col">
         
-        <a href="/ru/" class="text-lg font-semibold cursor-pointer">
+        <a href="/ru/" 
+           class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
           0x69.ru &lt;/&gt;
         </a>
         
         
-        <div class="text-base-content/60 text-sm">Документируй сегодня то, что забудешь завтра</div>
+        <span class="text-sm text-base-content/60 hidden sm:block">Документируй сегодня то, что забудешь завтра</span>
         
       </div>
       
     </section>
 
     
+    
+    
     <div class="sm:hidden">
       
       <button @click="mobileMenuOpen = !mobileMenuOpen" 
-              class="btn btn-ghost btn-square"
-              :class="{ 'bg-primary text-primary-content': mobileMenuOpen }"
+              class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+              :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
               aria-label="Открыть меню"
               :aria-expanded="mobileMenuOpen">
-        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-2xl"></ion-icon>
+        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
       </button>
       
       
@@ -187,7 +238,7 @@
            x-transition:leave-start="opacity-100"
            x-transition:leave-end="opacity-0"
            @click="mobileMenuOpen = false"
-           class="fixed inset-0 z-40 bg-base-100/70 backdrop-blur-md"
+           class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm"
            aria-hidden="true">
       </div>
       
@@ -201,17 +252,13 @@
            x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
            @click.outside="mobileMenuOpen = false"
            @keydown.escape.window="mobileMenuOpen = false"
-           class="absolute right-4 top-full mt-0 z-50 
-                  w-72 max-w-[calc(100vw-2rem)]
-                  bg-base-100 rounded-2xl shadow-2xl
-                  border border-base-200 dark:border-base-content/10
-                  overflow-hidden">
+           class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden">
         
         
-        <div class="flex items-center justify-between p-4 border-b border-base-200 dark:border-base-content/10">
-          <span class="font-semibold">Меню</span>
+        <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+          <span class="font-semibold text-base-content">Меню</span>
           <button @click="mobileMenuOpen = false" 
-                  class="btn btn-ghost btn-circle btn-sm"
+                  class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
                   aria-label="Закрыть">
             <ion-icon name="close" class="text-lg"></ion-icon>
           </button>
@@ -221,24 +268,22 @@
         
           
           
-          <div class="p-4 border-b border-base-200 dark:border-base-content/10">
+          <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
             <button type="button"
-                    class="inline-flex items-center gap-2 w-full p-3 rounded-lg
-                           cursor-pointer transition-all duration-200
-                           hover:bg-base-200 active:scale-[0.98]"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                     @click="flip = !flip; mobileMenuOpen = false"
                     title="Обо мне"
                     aria-label="Обо мне">
-              <ion-icon name="information-circle-outline" class="text-lg text-primary"></ion-icon>
-              <span class="flex-1 text-left font-medium">Обо мне</span>
-              <ion-icon name="chevron-forward-outline" class="text-base-content/50"></ion-icon>
+              <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+              <span class="flex-1 text-left">Обо мне</span>
+              <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
             </button>
           </div>
           
         
         
         
-        <div class="p-4 max-h-[60vh] overflow-y-auto">
+        <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
           
 
 
@@ -325,108 +370,164 @@
     <ul class="space-y-1">
       
         
-<li>
+
+
+
+
+
+<li role="none">
   <a href="/ru/search" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="Поиск">
-    <ion-icon name="search-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>Поиск</span>
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Поиск</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
   </a>
 </li>
 
 
+
+
+
       
         
-<li>
+
+
+
+
+<li role="none">
   <a href="/ru/categories" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="Категории">
-    <ion-icon name="folder-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>Категории</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      3
-    </span>
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Категории</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
   </a>
 </li>
 
 
+
+
+
       
         
-<li>
+
+
+
+
+<li role="none">
   <a href="/ru/portfolio" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="Портфолио">
-    <ion-icon name="briefcase-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>Портфолио</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      3
-    </span>
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Портфолио</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
   </a>
 </li>
 
 
+
+
+
       
         
-<li>
+
+
+
+
+<li role="none">
   <a href="/ru/posts" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="Архивы">
-    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>Архивы</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      3
-    </span>
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
   </a>
 </li>
 
 
+
+
+
       
         
-<li>
+
+
+
+
+<li role="none">
   <a href="/ru/tags" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="Все теги">
-    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>Все теги</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      51
-    </span>
-  </a>
-</li>
-
-
-      
-        
-<li>
-  <a href="https://github.com/rianvy" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
-     target="_blank"
-     rel="noopener noreferrer"
-     title="GitHub">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
     
-    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
-    
-    <span>GitHub</span>
-    
-    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    <span class="badge badge-sm badge-ghost font-normal">51</span>
     
   </a>
 </li>
 
 
+
+
+
       
         
-<li>
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
   <a href="/ru/index.xml" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="RSS"
      target="_blank"
      rel="noopener noreferrer">
-    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
-    <span>RSS</span>
-    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
   </a>
 </li>
+
+
+
 
 
       
@@ -447,25 +548,24 @@
     </ul>
   </div>
 
-  
-  
-
 </nav>
         </div>
       </div>
     </div>
 
     
-    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+    
+    
+    <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
       
       
       
-      <div role="link" tabindex="0"
-        class="text-sm font-semibold cursor-pointer hover:underline"
-        @click="flip = !flip"
-        title="Обо мне"
-      >Обо мне</div>
-      
+        
+        
+        <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                @click="flip = !flip"
+                title="Обо мне">Обо мне</button>
+        
       
 
       
@@ -474,186 +574,260 @@
       
 
       
+        
+        
+        
+        
+        
+          
 
-      
-      
-      
-      
-<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/ru/search" title="Поиск">
-  <ion-icon class="group-hover:text-primary-content" name="search"></ion-icon>
+
+
+
+
+
+
+<a href="/ru/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Поиск"
+   aria-label="Поиск">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
 </a>
 
 
-      
-      
-<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/ru/categories" title="Категории">
-  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+
+
+
+        
+          
+
+
+
+
+
+
+
+<a href="/ru/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Категории"
+   aria-label="Категории">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
 </a>
 
 
-      
-      
-<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/ru/portfolio" title="Портфолио">
-  <ion-icon class="group-hover:text-primary-content" name="sparkles"></ion-icon>
+
+
+
+        
+          
+
+
+
+
+
+
+
+<a href="/ru/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Портфолио"
+   aria-label="Портфолио">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
 </a>
 
 
+
+
+
+        
       
-      
-      
-      <div class="dropdown dropdown-end dropdown-hover">
-        <div tabindex="0" role="button" 
-             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
-                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
-             aria-label="Выбрать язык">
-          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
-                    name="language-outline"></ion-icon>
+        
+        
+        
+        <div class="dropdown dropdown-end dropdown-hover">
+          <button tabindex="0" 
+                  class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                  aria-label="Выбрать язык"
+                  aria-haspopup="true">
+            <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+          </button>
+          <ul tabindex="0" 
+              class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+              role="menu">
+            
+              
+              
+              
+              
+
+              
+              
+                
+              
+
+              <li role="none">
+                <a href="https://0x69.ru/en/portfolio/pbpack/" 
+                   hreflang="en"
+                   role="menuitem"
+                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                   >
+                  <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                  <span class="flex-1">English</span>
+                  
+                </a>
+              </li>
+            
+              
+              
+              
+              
+
+              
+              
+                
+                
+              
+
+              <li role="none">
+                <a href="https://0x69.ru/ru/portfolio/pbpack/" 
+                   hreflang="ru"
+                   role="menuitem"
+                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                   aria-current="true">
+                  <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                  <span class="flex-1">Русский</span>
+                  
+                  <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                  
+                </a>
+              </li>
+            
+          </ul>
         </div>
-        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-xl z-[1] shadow-xl 
-                                border border-base-200 dark:border-base-content/10 p-2 min-w-[160px]">
           
-            
-            
-            
-            
-
-            
+        
+        
+        
+        <div class="dropdown dropdown-end dropdown-hover">
+          <button tabindex="0" 
+                  class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                  aria-label="Ещё"
+                  aria-haspopup="true">
+            <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+          </button>
+          <ul tabindex="0" 
+              class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+              role="menu">
             
               
-            
 
-            <li>
-              <a href="https://0x69.ru/en/portfolio/pbpack/" 
-                 hreflang="en"
-                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
-                        "
-                 >
-                <ion-icon name="language" class="text-lg"></ion-icon>
-                <span class="flex-1">English</span>
-                
-              </a>
-            </li>
-          
-            
-            
-            
-            
 
-            
-            
-              
-              
-            
 
-            <li>
-              <a href="https://0x69.ru/ru/portfolio/pbpack/" 
-                 hreflang="ru"
-                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
-                        bg-primary/10 text-primary font-medium"
-                 aria-current="true">
-                <ion-icon name="language" class="text-lg"></ion-icon>
-                <span class="flex-1">Русский</span>
-                
-                <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
-                
-              </a>
-            </li>
-          
-        </ul>
-      </div>
-          
-      
-      <div class="dropdown dropdown-end dropdown-hover">
-        <div tabindex="0" role="button" 
-             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
-                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
-             aria-label="Ещё">
-          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
-                    name="ellipsis-horizontal"></ion-icon>
-        </div>
-        <ul tabindex="0" class="dropdown-content menu w-44 bg-base-100 rounded-xl z-[1] shadow-xl 
-                                border border-base-200 dark:border-base-content/10 p-2">
-          
-          
-<li>
+
+<li role="none">
   <a href="/ru/posts" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="Архивы">
-    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>Архивы</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      3
-    </span>
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
   </a>
 </li>
 
 
-          
-          
-<li>
+
+
+
+            
+              
+
+
+
+
+<li role="none">
   <a href="/ru/tags" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="Все теги">
-    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
-    <span>Все теги</span>
-    <span class="badge badge-sm badge-ghost ml-auto">
-      51
-    </span>
-  </a>
-</li>
-
-
-          
-          
-<li>
-  <a href="https://github.com/rianvy" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
-     target="_blank"
-     rel="noopener noreferrer"
-     title="GitHub">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
     
-    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
-    
-    <span>GitHub</span>
-    
-    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    <span class="badge badge-sm badge-ghost font-normal">51</span>
     
   </a>
 </li>
 
 
-          
-          
-<li>
+
+
+
+            
+              
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+            
+              
+
+
+
+
+
+<li role="none">
   <a href="/ru/index.xml" 
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
      title="RSS"
      target="_blank"
      rel="noopener noreferrer">
-    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
-    <span>RSS</span>
-    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
   </a>
 </li>
 
 
-          
-
-          
-          
 
 
 
+            
 
-
+            
+              
 
 
 
 
 
-          
-        </ul>
-      </div>
+
+
+
+
+
+            
+          </ul>
+        </div>
       
     </section>
   </div>
@@ -679,23 +853,28 @@
             
 
 <div class="reading-progress" id="reading-progress"></div>
+<div class="reading-progress-text" id="reading-progress-text">0%</div>
 
-<div class="lg:grid lg:grid-cols-4 gap-6 mt-4 px-4 max-w-screen-2xl mx-auto">
+<div class="lg:grid lg:grid-cols-12 gap-6 mt-4 px-4 max-w-screen-2xl mx-auto">
   
-  <aside class="hidden lg:block">
+  <aside class="hidden lg:block lg:col-span-2 left-sidebar">
     <div class="sticky top-20 space-y-4">
       
       <div class="flex flex-col gap-2">
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn btn-ghost btn-sm gap-2" aria-label="Back to top">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn btn-ghost btn-sm gap-2" aria-label="Наверх">
           <ion-icon name="arrow-up-outline"></ion-icon>
-          <span class="text-xs">Top</span>
+          <span class="text-xs">Наверх</span>
+        </button>
+        <button onclick="toggleFocusMode()" class="btn btn-ghost btn-sm gap-2" id="focus-mode-btn" aria-label="Focus Mode">
+          <ion-icon name="eye-outline" id="focus-mode-icon"></ion-icon>
+          <span class="text-xs" id="focus-mode-text">Фокус</span>
         </button>
       </div>
     </div>
   </aside>
 
   
-  <article class="lg:col-span-2 mx-auto prose prose-quoteless dark:prose-invert w-full" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+  <article class="lg:col-span-7 mx-auto prose prose-quoteless dark:prose-invert w-full max-w-4xl" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
     
   <meta itemprop="name" content="Social media design PBPack">
   <meta itemprop="description" content="Разработка визуального стиля для бренда PBPack в социальных сетях, включая YouTube и Telegram.">
@@ -705,33 +884,52 @@
   <meta itemprop="image" content="https://0x69.ru/ru/portfolio/pbpack/Cover.png">
   <meta itemprop="keywords" content="Дизайн,Брендинг,Айдентика,Telegram,Анимированный Логотип,Визуальный Стиль">
 
-    <header class="not-prose mb-8">
+    <header class="not-prose mb-6 sm:mb-8">
+      
+      <nav class="text-xs sm:text-sm breadcrumbs mb-3 sm:mb-4 overflow-x-auto scrollbar-none">
+        <ul class="flex-nowrap">
+          <li class="shrink-0"><a href="/ru/">Главная</a></li>
+          
+          <li class="shrink-0"><a href="/ru/portfolio">Portfolio</a></li>
+          
+          
+          <li class="truncate max-w-[150px] sm:max-w-[200px] md:max-w-none">Social media design PBPack</li>
+        </ul>
+      </nav>
+
       
       
 
       
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4" itemprop="headline">Social media design PBPack</h1>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight sm:leading-snug mb-3 sm:mb-4 break-words hyphens-auto" 
+          itemprop="headline">
+        Social media design PBPack
+      </h1>
 
       
-      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-base-content/70 mb-6">
+      <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-xs sm:text-sm text-base-content/70 mb-4 sm:mb-6">
         
-        <time datetime="2025-01-19" class="flex items-center gap-1">
-          <ion-icon name="calendar-outline" class="text-base"></ion-icon>
-          
-          <span data-format="luxon">2025-01-19T20:25:20&#43;03:00</span>
-          
+        <time datetime="2025-01-19" class="flex items-center gap-1 min-w-0">
+          <ion-icon name="calendar-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          <span class="truncate">
+            
+            <span data-format="luxon">2025-01-19T20:25:20&#43;03:00</span>
+            
+          </span>
         </time>
 
         
         <span class="flex items-center gap-1">
-          <ion-icon name="time-outline" class="text-base"></ion-icon>
-          1  минута чтения
+          <ion-icon name="time-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          <span class="truncate">
+            1<span class="hidden xs:inline">  минута чтения</span><span class="xs:hidden"> мин</span>
+          </span>
         </span>
 
         
-        <span class="flex items-center gap-1">
-          <ion-icon name="document-text-outline" class="text-base"></ion-icon>
-          161 words
+        <span class="hidden sm:flex items-center gap-1">
+          <ion-icon name="document-text-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          161 слов
         </span>
 
         
@@ -739,8 +937,9 @@
       </div>
 
       
-      <div class="flex flex-wrap justify-between items-center gap-4 py-4 border-y border-base-300">
-        <div class="flex items-center">
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4 py-3 sm:py-4 border-y border-base-300">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center">
   
   <div class="avatar mr-1">
     <div class="w-8 rounded-full">
@@ -758,7 +957,9 @@
   </span>
 </div>
 
-        <div class="flex items-center gap-2">
+        </div>
+        <div class="flex justify-start sm:justify-end shrink-0">
+          <div class="flex items-center gap-2">
   
   
 
@@ -796,6 +997,7 @@
   
 </div>
 
+        </div>
       </div>
     </header>
 
@@ -847,7 +1049,8 @@
 
     
     
-    <div class="not-prose my-4">
+
+      <div class="not-prose my-4">
   
   <div class="mb-8">
     <div class="flex items-center gap-3 mb-2">
@@ -962,13 +1165,12 @@
   </div>
 </div>
 
-    
-    
+      
 
     
 
     
-    <section id="dream-single-post-content" itemprop="articleBody">
+    <section id="dream-single-post-content" class="fade-in-up" itemprop="articleBody">
       <p>Разработка визуального стиля для бренда PBPack в социальных сетях, включая YouTube и Telegram.</p>
 <p><img src="/ru/portfolio/pbpack/work/Header.png" alt="Яркий заголовок проекта"></p>
 <h2 id="-о-проекте-pbpack">📌 О проекте PBPack</h2>
@@ -1058,6 +1260,10 @@
 
     
     
+    
+
+    
+    
     <footer class="not-prose mt-12 pt-6 border-t border-base-300">
       <div class="flex flex-wrap items-center gap-2">
         <ion-icon name="pricetags-outline" class="text-lg text-base-content/60"></ion-icon>
@@ -1118,8 +1324,8 @@
   </article>
 
   
-  <aside class="hidden lg:block">
-    <div class="sticky top-20 space-y-6">
+  <aside class="hidden lg:block lg:col-span-3 right-sidebar">
+    <div class="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto space-y-6 pr-2">
       
       
 
@@ -1128,7 +1334,7 @@
       <div class="card bg-base-200 p-4">
         <h3 class="font-semibold mb-3 flex items-center gap-2">
           <ion-icon name="list-outline"></ion-icon>
-          Contents
+          Содержание
         </h3>
         <nav class="text-sm">
           <nav id="TableOfContents">
@@ -1184,7 +1390,7 @@
     <div class="flex items-center justify-between mb-6">
       <h3 class="font-bold text-lg flex items-center gap-2">
         <ion-icon name="apps-outline" class="text-primary"></ion-icon>
-        Quick Actions
+        Быстрые действия
       </h3>
       <button onclick="document.getElementById('mobile-actions-modal').close()" 
               class="btn btn-circle btn-ghost btn-sm">
@@ -1200,7 +1406,7 @@
         <div class="w-12 h-12 rounded-full bg-info/20 flex items-center justify-center">
           <ion-icon name="arrow-up" class="text-2xl text-info"></ion-icon>
         </div>
-        <span class="text-xs">Top</span>
+        <span class="text-xs">Наверх</span>
       </button>
       
       
@@ -1210,7 +1416,7 @@
         <div class="w-12 h-12 rounded-full bg-success/20 flex items-center justify-center">
           <ion-icon name="list" class="text-2xl text-success"></ion-icon>
         </div>
-        <span class="text-xs">Contents</span>
+        <span class="text-xs">Содержание</span>
       </button>
       
       
@@ -1220,7 +1426,7 @@
         <div class="w-12 h-12 rounded-full bg-warning/20 flex items-center justify-center">
           <ion-icon name="share-social" class="text-2xl text-warning"></ion-icon>
         </div>
-        <span class="text-xs">Share</span>
+        <span class="text-xs">Поделиться</span>
       </button>
       
       
@@ -1229,7 +1435,7 @@
         <div class="w-12 h-12 rounded-full bg-error/20 flex items-center justify-center">
           <ion-icon name="copy" class="text-2xl text-error"></ion-icon>
         </div>
-        <span class="text-xs">Copy</span>
+        <span class="text-xs">Копировать</span>
       </button>
     </div>
   </div>
@@ -1248,7 +1454,7 @@
     </div>
     
     <div class="flex items-center justify-between mb-4">
-      <h3 class="font-bold text-lg">Contents</h3>
+      <h3 class="font-bold text-lg">Содержание</h3>
       <button onclick="document.getElementById('mobile-toc-modal').close()" class="btn btn-circle btn-ghost btn-sm">
         <ion-icon name="close" class="text-xl"></ion-icon>
       </button>
@@ -1652,25 +1858,43 @@
 <script src="/js/main.min.js"></script>
 
 
-	
-	
-	  
-	
-<script src="/js/backToTop.min.js"></script>
-<script>
-  commonJsStrict.addBackToTop({
-    diameter: 50,
-    scrollContainer: document.body,
-    innerHTML: '<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 244l144-144 144 144M256 120v292"/></svg>',
-    className: 'h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary',
-  });
-</script>
-
     
 <script>
+
+function toggleFocusMode() {
+  const body = document.body;
+  const icon = document.getElementById('focus-mode-icon');
+  const text = document.getElementById('focus-mode-text');
+  
+  body.classList.toggle('focus-mode');
+  
+  const isFocusMode = body.classList.contains('focus-mode');
+  
+  if (icon) {
+    icon.setAttribute('name', isFocusMode ? 'eye-off-outline' : 'eye-outline');
+  }
+  
+  if (text) {
+    text.textContent = isFocusMode ? 'Exit' : 'Фокус';
+  }
+  
+  
+  localStorage.setItem('focusMode', isFocusMode ? 'on' : 'off');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   
+  if (localStorage.getItem('focusMode') === 'on') {
+    document.body.classList.add('focus-mode');
+    const icon = document.getElementById('focus-mode-icon');
+    const text = document.getElementById('focus-mode-text');
+    if (icon) icon.setAttribute('name', 'eye-off-outline');
+    if (text) text.textContent = 'Exit';
+  }
+
+  
   const progressBar = document.getElementById('reading-progress');
+  const progressText = document.getElementById('reading-progress-text');
   const article = document.getElementById('dream-single-post-main');
   
   if (progressBar && article) {
@@ -1678,8 +1902,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = article.getBoundingClientRect();
       const scrolled = Math.max(0, -rect.top);
       const total = rect.height - window.innerHeight;
-      const progress = Math.min(100, (scrolled / total) * 100);
+      const progress = Math.min(100, Math.max(0, (scrolled / total) * 100));
       progressBar.style.width = `${progress}%`;
+      
+      if (progressText) {
+        progressText.textContent = `${Math.round(progress)}%`;
+        progressText.classList.toggle('visible', progress > 5 && progress < 95);
+      }
     };
     
     window.addEventListener('scroll', updateProgress, { passive: true });
@@ -1687,11 +1916,42 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  
+  const savePosition = () => {
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    localStorage.setItem(`reading-pos-${window.location.pathname}`, scrollPercent);
+  };
+  
+  const restorePosition = () => {
+    const saved = localStorage.getItem(`reading-pos-${window.location.pathname}`);
+    if (saved && parseFloat(saved) > 10) {
+      const scrollTo = (parseFloat(saved) / 100) * (document.documentElement.scrollHeight - window.innerHeight);
+      window.scrollTo({ top: scrollTo, behavior: 'smooth' });
+    }
+  };
+  
+  window.addEventListener('scroll', savePosition, { passive: true });
+  setTimeout(restorePosition, 100);
+
+  
   const tocLinks = document.querySelectorAll('#TableOfContents a');
   const headings = document.querySelectorAll('#dream-single-post-content h1, #dream-single-post-content h2, #dream-single-post-content h3');
   
   if (tocLinks.length && headings.length) {
-    const observer = new IntersectionObserver((entries) => {
+    const tocObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           tocLinks.forEach(link => link.classList.remove('active'));
@@ -1701,7 +1961,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, { rootMargin: '-20% 0% -60% 0%' });
     
-    headings.forEach(h => observer.observe(h));
+    headings.forEach(h => tocObserver.observe(h));
   }
 });
 </script>
@@ -1733,7 +1993,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('span[data-format="luxon"]').forEach(el => {
       const date = el.textContent
 
-      el.textContent = luxon.DateTime.fromISO(date, { locale: "ru" }).toFormat("HH:mm, dd MMMM")
+      el.textContent = luxon.DateTime.fromISO(date, { locale: "ru" }).toFormat("dd.MM.yyyy, HH:mm")
     })
   }
 </script>
@@ -1782,49 +2042,262 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-fullscreen.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-thumbnail.min.css">
+
+
+<style>
+   
+  .lg-backdrop {
+    background-color: rgba(0, 0, 0, 0.95) !important;
+  }
+  
+   
+  .lg-sub-html {
+    background: linear-gradient(transparent, rgba(0,0,0,0.8)) !important;
+    padding: 20px 40px !important;
+    text-align: left !important;
+  }
+  
+  .lg-sub-html h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  
+  .lg-sub-html h2 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.8);
+  }
+  
+  .lg-sub-html .project-meta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.6);
+  }
+  
+  .lg-sub-html .project-link {
+    color: #60a5fa;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .lg-sub-html .project-link:hover {
+    color: #93c5fd;
+  }
+  
+   
+  .lg-item img {
+    transition: transform 0.3s ease;
+  }
+  
+   
+  .lg-progress-bar {
+    background-color: #3b82f6 !important;
+    height: 3px !important;
+  }
+  
+   
+  .lg-thumb-item {
+    border-radius: 4px;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  
+  .lg-thumb-item.active,
+  .lg-thumb-item:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  
+   
+  .lg-toolbar .lg-icon {
+    font-size: 1.5rem;
+  }
+</style>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/fullscreen/lg-fullscreen.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const galleryContainer = document.querySelector("#dream-single-post-content");
-    const images = galleryContainer?.querySelectorAll("img");
+document.addEventListener("DOMContentLoaded", () => {
+  const galleryContainer = document.querySelector("#dream-single-post-content");
+  const images = galleryContainer?.querySelectorAll("img");
 
-    if (galleryContainer && images?.length > 0) {
-      galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
+  if (!galleryContainer || !images?.length) return;
 
-      images.forEach(img => {
-        if (!img.closest("a")) {
-          const wrapper = document.createElement("a");
-          wrapper.href = img.src;
-          wrapper.classList.add("lg-item", "not-prose");
+  
+  galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
 
-          const title = img.title ? `<h2 class="text-lg">${img.title}</h2>` : "";
-          const alt = img.alt ? `<h1 class="text-2xl">${img.alt}</h1>` : "";
-          wrapper.dataset.subHtml = `${alt}${title}`;
+  images.forEach((img, index) => {
+    if (img.closest("a.lg-item")) return;
 
-          img.parentNode.insertBefore(wrapper, img);
-          wrapper.appendChild(img);
-        }
-      });
+    const wrapper = document.createElement("a");
+    wrapper.href = img.src;
+    wrapper.classList.add("lg-item", "not-prose");
+    
+    
+    wrapper.style.cursor = "zoom-in";
 
-      lightGallery(galleryContainer, {
-        selector: "a.lg-item",
-        plugins: [lgZoom, lgFullscreen],
-        speed: 500,
-        download: false,
-        counter: true,
-        mousewheel: true,
-        closeOnTap: true,
-        subHtmlSelectorRelative: true
-      });
+    
+    const alt = img.alt || "";
+    const title = img.title || "";
+    
+    
+    const projectUrl = img.dataset.projectUrl || "";
+    const projectYear = img.dataset.year || "";
+    const projectTech = img.dataset.tech || "";
+
+    let subHtml = "";
+    
+    if (alt) {
+      subHtml += `<h1>${alt}</h1>`;
+    }
+    
+    if (title) {
+      subHtml += `<h2>${title}</h2>`;
+    }
+    
+    
+    if (projectUrl || projectYear || projectTech) {
+      subHtml += `<div class="project-meta">`;
+      
+      if (projectYear) {
+        subHtml += `<span>📅 ${projectYear}</span>`;
+      }
+      
+      if (projectTech) {
+        subHtml += `<span>🛠️ ${projectTech}</span>`;
+      }
+      
+      if (projectUrl) {
+        subHtml += `<a href="${projectUrl}" target="_blank" rel="noopener" class="project-link">🔗 Открыть проект</a>`;
+      }
+      
+      subHtml += `</div>`;
+    }
+
+    wrapper.dataset.subHtml = subHtml;
+    
+    
+    wrapper.dataset.src = img.src;
+    
+    
+    if (img.dataset.srcLarge) {
+      wrapper.dataset.src = img.dataset.srcLarge;
+    }
+
+    img.parentNode.insertBefore(wrapper, img);
+    wrapper.appendChild(img);
+  });
+
+  
+  const gallery = lightGallery(galleryContainer, {
+    selector: "a.lg-item",
+    plugins: [lgZoom, lgFullscreen, lgThumbnail],
+    
+    
+    speed: 400,
+    backdropDuration: 300,
+    startAnimationDuration: 400,
+    endAnimationDuration: 300,
+    
+    
+    loop: true,
+    slideShowAutoplay: false,
+    slideShowInterval: 4000,
+    mousewheel: true,
+    hideScrollbar: true,
+    
+    
+    closeOnTap: true,
+    closable: true,
+    escKey: true,
+    
+    
+    counter: true,
+    download: false,
+    getCaptionFromTitleOrAlt: false,
+    subHtmlSelectorRelative: true,
+    
+    
+    mobileSettings: {
+      controls: true,
+      showCloseIcon: true,
+      download: false
+    },
+    
+    
+    swipeThreshold: 50,
+    enableSwipe: true,
+    enableDrag: true,
+    
+    
+    zoomFromOrigin: true,
+    actualSize: true,
+    showZoomInOutIcons: true,
+    actualSizeIcons: {
+      zoomIn: "lg-zoom-in",
+      zoomOut: "lg-zoom-out"
+    },
+    scale: 1,
+    zoom: true,
+    
+    
+    thumbnail: true,
+    thumbWidth: 100,
+    thumbHeight: "80px",
+    thumbMargin: 5,
+    toggleThumb: true,
+    animateThumb: true,
+    
+    
+    fullScreen: true,
+    
+    
+    preload: 2,
+    
+    
+    ariaLabelledby: "lg-slide-title",
+    ariaDescribedby: "lg-slide-desc"
+  });
+
+  
+  
+  
+  galleryContainer.addEventListener("lgAfterOpen", () => {
+    console.log("Gallery opened");
+    
+  });
+
+  
+  galleryContainer.addEventListener("lgAfterSlide", (event) => {
+    const { index } = event.detail;
+    console.log(`Viewing slide ${index + 1}`);
+  });
+
+  
+  document.addEventListener("keydown", (e) => {
+    if (!document.querySelector(".lg-container")) return;
+    
+    if (e.key === "+" || e.key === "=") {
+      gallery.zoomIn();
+    } else if (e.key === "-") {
+      gallery.zoomOut();
     }
   });
+});
 </script>
 
 

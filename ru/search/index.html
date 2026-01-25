@@ -62,13 +62,18 @@
     <div id="dream-global-bg"></div>
 
     
-<nav x-data="{ isSticky: false }"
-  x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })"
+<nav x-data="{ isSticky: false, mobileMenuOpen: false }"
+  x-init="
+    window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+    $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+  "
   class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
   :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
 
+
   
   <div class="container flex justify-between px-4">
+  
   
     <section class="flex items-center gap-4">
       <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Повернуть!">
@@ -91,39 +96,94 @@
       
     </section>
 
-    <div class="dropdown dropdown-end sm:hidden">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
-        <ion-icon name="menu" class="text-2xl"></ion-icon>
-      </div>
-      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-md">
-        
-  
-  
-    <li>
-      <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="Обо мне">
-        <ion-icon name="information-circle"></ion-icon>Обо мне</div>
-    </li>
-  
-
-
-
-
-  
-
-
-<ul class="p-0 m-0 list-none">
-
-<style>
-.menu-title {
-    margin-bottom: 4px;
-}
-</style>
-
-  
-  <li>
-    <div class="menu-title">Язык</div>
-    <ul class="p-0 m-0 list-none">
+    
+    <div class="sm:hidden">
       
+      <button @click="mobileMenuOpen = !mobileMenuOpen" 
+              class="btn btn-ghost btn-square"
+              :class="{ 'bg-primary text-primary-content': mobileMenuOpen }"
+              aria-label="Открыть меню"
+              :aria-expanded="mobileMenuOpen">
+        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-2xl"></ion-icon>
+      </button>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"
+           @click="mobileMenuOpen = false"
+           class="fixed inset-0 z-40 bg-base-100/70 backdrop-blur-md"
+           aria-hidden="true">
+      </div>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+           x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+           x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+           @click.outside="mobileMenuOpen = false"
+           @keydown.escape.window="mobileMenuOpen = false"
+           class="absolute right-4 top-full mt-0 z-50 
+                  w-72 max-w-[calc(100vw-2rem)]
+                  bg-base-100 rounded-2xl shadow-2xl
+                  border border-base-200 dark:border-base-content/10
+                  overflow-hidden">
+        
+        
+        <div class="flex items-center justify-between p-4 border-b border-base-200 dark:border-base-content/10">
+          <span class="font-semibold">Меню</span>
+          <button @click="mobileMenuOpen = false" 
+                  class="btn btn-ghost btn-circle btn-sm"
+                  aria-label="Закрыть">
+            <ion-icon name="close" class="text-lg"></ion-icon>
+          </button>
+        </div>
+        
+        
+        
+          
+          
+          <div class="p-4 border-b border-base-200 dark:border-base-content/10">
+            <button type="button"
+                    class="inline-flex items-center gap-2 w-full p-3 rounded-lg
+                           cursor-pointer transition-all duration-200
+                           hover:bg-base-200 active:scale-[0.98]"
+                    @click="flip = !flip; mobileMenuOpen = false"
+                    title="Обо мне"
+                    aria-label="Обо мне">
+              <ion-icon name="information-circle-outline" class="text-lg text-primary"></ion-icon>
+              <span class="flex-1 text-left font-medium">Обо мне</span>
+              <ion-icon name="chevron-forward-outline" class="text-base-content/50"></ion-icon>
+            </button>
+          </div>
+          
+        
+        
+        
+        <div class="p-4 max-h-[60vh] overflow-y-auto">
+          
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
         
         
         
@@ -136,14 +196,21 @@
         
         <li>
           <a href="https://0x69.ru/en/search/" 
-             title="English" 
-             class="inline-flex items-center p-2 ">
-            <ion-icon name="language" role="img" class="md hydrated"></ion-icon> 
-            English
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
             
           </a>
         </li>
       
+        
         
         
         
@@ -157,107 +224,141 @@
         
         <li>
           <a href="https://0x69.ru/ru/search/" 
-             title="Русский" 
-             class="inline-flex items-center p-2 active">
-            <ion-icon name="language" role="img" class="md hydrated"></ion-icon> 
-            Русский
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
             
-              <ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
             
           </a>
         </li>
       
     </ul>
-  </li>
+  </div>
 
   
-  <li>
-    <div class="menu-title">Меню</div>
-    <ul class="p-0 m-0 list-none">
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/search" title="Поиск">
-      <ion-icon name="search" role="img" class="md hydrated"></ion-icon> Поиск
-    </a>
-  
+  <a href="/ru/search" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Поиск</span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/categories" title="Категории">
-      <ion-icon name="grid" role="img" class="md hydrated"></ion-icon> Категории
-    </a>
-  
+  <a href="/ru/categories" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Категории</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/portfolio" title="Портфолио">
-      <ion-icon name="sparkles" role="img" class="md hydrated"></ion-icon> Портфолио
-    </a>
-  
+  <a href="/ru/portfolio" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Портфолио</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/posts" title="Архивы">
-      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> Архивы
-    </a>
-  
+  <a href="/ru/posts" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Архивы</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/tags" title="Все теги">
-      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> Все теги
-    </a>
-  
+  <a href="/ru/tags" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Все теги</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      51
+    </span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
+  <a href="https://github.com/rianvy" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     target="_blank"
+     rel="noopener noreferrer"
+     title="GitHub">
     
+    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
     
+    <span>GitHub</span>
     
-      <a class="inline-flex items-center p-2" href="https://github.com/rianvy" target="_blank" title="GitHub">
-        
-          <ion-icon name="logo-github" role="img" class="md hydrated"></ion-icon>
-        
-        GitHub
-      </a>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
     
-  
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/index.xml" title="RSS">
-      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
-    </a>
-  
+  <a href="/ru/index.xml" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
+    <span>RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+  </a>
 </li>
+
+
+      
       
       
         
@@ -273,10 +374,17 @@
 
       
     </ul>
-  </li>
-</ul>
-      </ul>
+  </div>
+
+  
+  
+
+</nav>
+        </div>
+      </div>
     </div>
+
+    
     <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
       
       
@@ -320,112 +428,144 @@
 
 
       
-	  
-	
-	<div class="dropdown dropdown-end dropdown-hover">
-	  <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select language">
-		<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
-	  </div>
-	  <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl">
-		
-		  
-		  
-		  
-		  
-
-		  
-		  
-			
-		  
-
-		  <li>
-			<a href="https://0x69.ru/en/search/" class="">
-			  <ion-icon name="language" role="img" class="md hydrated"></ion-icon>
-			  English
-			  
-			</a>
-		  </li>
-		
-		  
-		  
-		  
-		  
-
-		  
-		  
-			
-			
-		  
-
-		  <li>
-			<a href="https://0x69.ru/ru/search/" class="active">
-			  <ion-icon name="language" role="img" class="md hydrated"></ion-icon>
-			  Русский
-			  
-				<ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
-			  
-			</a>
-		  </li>
-		
-	  </ul>
-	</div>
-     	  
+      
+      
       <div class="dropdown dropdown-end dropdown-hover">
-        <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
-          <ion-icon class="group-hover:text-primary-content text-xl" name="menu"></ion-icon>
+        <div tabindex="0" role="button" 
+             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
+                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
+             aria-label="Выбрать язык">
+          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
+                    name="language-outline"></ion-icon>
         </div>
-        <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-xl z-[1] shadow-xl 
+                                border border-base-200 dark:border-base-content/10 p-2 min-w-[160px]">
+          
+            
+            
+            
+            
+
+            
+            
+              
+            
+
+            <li>
+              <a href="https://0x69.ru/en/search/" 
+                 hreflang="en"
+                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
+                        "
+                 >
+                <ion-icon name="language" class="text-lg"></ion-icon>
+                <span class="flex-1">English</span>
+                
+              </a>
+            </li>
+          
+            
+            
+            
+            
+
+            
+            
+              
+              
+            
+
+            <li>
+              <a href="https://0x69.ru/ru/search/" 
+                 hreflang="ru"
+                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
+                        bg-primary/10 text-primary font-medium"
+                 aria-current="true">
+                <ion-icon name="language" class="text-lg"></ion-icon>
+                <span class="flex-1">Русский</span>
+                
+                <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+          
+      
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" 
+             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
+                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
+             aria-label="Ещё">
+          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
+                    name="ellipsis-horizontal"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu w-44 bg-base-100 rounded-xl z-[1] shadow-xl 
+                                border border-base-200 dark:border-base-content/10 p-2">
           
           
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/posts" title="Архивы">
-      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> Архивы
-    </a>
-  
+  <a href="/ru/posts" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Архивы</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
 </li>
-          
-          
 
 
+          
+          
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/tags" title="Все теги">
-      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> Все теги
-    </a>
-  
+  <a href="/ru/tags" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Все теги</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      51
+    </span>
+  </a>
 </li>
-          
-          
 
 
+          
+          
 <li>
-  
+  <a href="https://github.com/rianvy" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     target="_blank"
+     rel="noopener noreferrer"
+     title="GitHub">
     
+    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
     
+    <span>GitHub</span>
     
-      <a class="inline-flex items-center p-2" href="https://github.com/rianvy" target="_blank" title="GitHub">
-        
-          <ion-icon name="logo-github" role="img" class="md hydrated"></ion-icon>
-        
-        GitHub
-      </a>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
     
-  
+  </a>
 </li>
-          
-          
 
 
+          
+          
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/index.xml" title="RSS">
-      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
-    </a>
-  
+  <a href="/ru/index.xml" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
+    <span>RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+  </a>
 </li>
+
+
           
 
           
@@ -467,54 +607,200 @@
           <div class="container">
             
 
-<div class="mt-8 lg:mt-12 px-4"
+<div class="mt-8 lg:mt-12 px-4 sm:px-6"
 x-data="{
   search: '',
+  isLoading: false,
   get results() {
-    return this.search !== '' ? window.fuse.search(this.search) : [];
+    return this.search.trim() !== '' ? window.fuse.search(this.search) : [];
   },
-}">
-  
-  <label for="search" class="input input-bordered flex items-center gap-2">
-    <input id="search" name="search" type="text" class="grow" placeholder="Поиск" x-model.debounce="search" />
-    <ion-icon name="search"></ion-icon>
-  </label>
+  get hasResults() {
+    return this.results.length > 0;
+  },
+  get showEmpty() {
+    return this.search.trim() !== '' && !this.hasResults;
+  },
+  clearSearch() {
+    this.search = '';
+    this.$refs.searchInput.focus();
+  }
+}"
+x-init="$refs.searchInput.focus()">
 
-  
-  <div class="mt-8 space-y-4">
-    <template x-for="result in results">
-      <a class="card card-compact bg-base-100 hover:bg-base-content/10 cursor-pointer border border-base-content/30" :href="result.item.url">
-        <div class="card-body">
-          <h2 class="card-title" x-text="result.item.title"></h2>
-          <div x-html="result.item.description"></div>
-          <div class="card-actions justify-between items-center mt-4">
-            <div class="flex items-center">
-              <template x-if="result.item.avatar">
-                <div class="avatar mr-1">
-                  <div class="w-8 rounded-full">
-                    <img class="my-0" :src="result.item.avatar" :alt="result.item.author" />
-                  </div>
+  <div class="max-w-2xl mx-auto">
+    
+    
+    <div class="text-center mb-6 sm:mb-8">
+      <h1 class="text-2xl sm:text-3xl font-bold mb-2">Поиск</h1>
+      <p class="text-sm text-base-content/60">Поиск по заголовкам, описаниям и тегам</p>
+    </div>
+
+    
+    <div class="relative">
+      <label for="search" class="input input-bordered input-lg flex items-center gap-2 
+                                  focus-within:input-primary transition-colors duration-200">
+        <ion-icon name="search" class="text-base-content/50 text-lg"></ion-icon>
+        <input id="search" 
+               name="search" 
+               type="text" 
+               class="grow bg-transparent" 
+               placeholder="Введите запрос..." 
+               x-model.debounce.300ms="search"
+               x-ref="searchInput"
+               autocomplete="off" />
+        
+        
+        <button x-show="search.length > 0" 
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 scale-75"
+                x-transition:enter-end="opacity-100 scale-100"
+                @click="clearSearch()"
+                class="btn btn-ghost btn-circle btn-sm"
+                aria-label="Очистить">
+          <ion-icon name="close" class="text-lg"></ion-icon>
+        </button>
+      </label>
+      
+      
+      <div class="absolute -bottom-6 left-0 text-xs text-base-content/50"
+           x-show="search.trim() !== ''"
+           x-transition>
+        <span x-text="results.length"></span> найдено
+      </div>
+    </div>
+
+    
+    <div class="mt-10 sm:mt-12 space-y-3 sm:space-y-4">
+      
+      
+      <div x-show="search.trim() === ''" 
+           x-transition
+           class="text-center py-12 sm:py-16">
+        <ion-icon name="search-outline" class="text-6xl sm:text-7xl text-base-content/20 mb-4"></ion-icon>
+        <p class="text-base-content/50">Начните вводить для поиска</p>
+      </div>
+      
+      
+      <div x-show="showEmpty" 
+           x-transition
+           class="text-center py-12 sm:py-16">
+        <ion-icon name="sad-outline" class="text-6xl sm:text-7xl text-base-content/20 mb-4"></ion-icon>
+        <p class="text-base-content/60 mb-2">Ничего не найдено</p>
+        <p class="text-sm text-base-content/40">Попробуйте другой запрос</p>
+      </div>
+
+      
+      <template x-for="(result, index) in results" :key="result.item.url">
+        <a class="block group" :href="result.item.url"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 translate-y-4"
+           x-transition:enter-end="opacity-100 translate-y-0"
+           :style="{ transitionDelay: `${index * 50}ms` }">
+          <article class="card card-compact 
+                          bg-base-200/50 dark:bg-base-200/10
+                          hover:bg-base-200 dark:hover:bg-base-200/20
+                          border border-transparent hover:border-primary/30
+                          hover:shadow-md
+                          transition-all duration-200">
+            <div class="card-body p-4 sm:p-5">
+              
+              
+              <h2 class="card-title text-base sm:text-lg group-hover:text-primary transition-colors duration-200">
+                <span x-text="result.item.title"></span>
+                <ion-icon name="arrow-forward" 
+                          class="text-base-content/30 group-hover:text-primary 
+                                 group-hover:translate-x-1 transition-all duration-200 ml-auto shrink-0"></ion-icon>
+              </h2>
+              
+              
+              <div class="text-sm text-base-content/70 line-clamp-2 sm:line-clamp-3" 
+                   x-html="result.item.description"></div>
+              
+              
+              <template x-if="result.item.tags && result.item.tags.length > 0">
+                <div class="flex flex-wrap gap-1.5 mt-2">
+                  <template x-for="tag in result.item.tags.slice(0, 3)" :key="tag">
+                    <span class="badge badge-sm badge-outline opacity-60" x-text="tag"></span>
+                  </template>
+                  <template x-if="result.item.tags.length > 3">
+                    <span class="badge badge-sm badge-ghost" x-text="'+' + (result.item.tags.length - 3)"></span>
+                  </template>
                 </div>
               </template>
-              <template x-if="!result.item.avatar">
-                <span>@</span>
-              </template>
+              
+              
+              <div class="card-actions justify-between items-center mt-3 pt-3 
+                          border-t border-base-content/10">
+                
+                
+                <div class="flex items-center gap-2 text-sm text-base-content/60">
+                  <template x-if="result.item.avatar">
+                    <div class="avatar">
+                      <div class="w-6 h-6 rounded-full ring-1 ring-base-content/10">
+                        <img class="my-0" :src="result.item.avatar" :alt="result.item.author" />
+                      </div>
+                    </div>
+                  </template>
+                  <template x-if="!result.item.avatar">
+                    <div class="avatar placeholder">
+                      <div class="w-6 h-6 rounded-full bg-base-300">
+                        <ion-icon name="person" class="text-xs"></ion-icon>
+                      </div>
+                    </div>
+                  </template>
+                  
+                  <span x-text="result.item.author || 'Rianvy'"></span>
+                </div>
+                
+                
+                <div class="flex items-center gap-1 text-xs text-base-content/50">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <span>
+                    <span x-text="result.item.readingTime"></span> мин
+                  </span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </a>
+      </template>
+    </div>
+    
+    
+    <div x-show="search.trim() === ''" 
+         x-transition
+         class="mt-8 sm:mt-12">
+      <p class="text-xs text-base-content/40 text-center mb-3">Популярные запросы</p>
+      <div class="flex flex-wrap justify-center gap-2">
+        
+        <button @click="search = 'Figma'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
+          Figma
+        </button>
+        
+        <button @click="search = 'Веб-Разработка'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
+          Веб-Разработка
+        </button>
+        
+        <button @click="search = 'Дизайн'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
+          Дизайн
+        </button>
+        
+        <button @click="search = '.Htaccess'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
+          .Htaccess
+        </button>
+        
+        <button @click="search = '4K'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
+          4K
+        </button>
+        
+      </div>
+    </div>
 
-              <template x-if="result.item.author">
-                <span x-text="result.item.author"></span>
-              </template>
-              <template x-if="!result.item.author">
-                <span>Rianvy</span>
-              </template>
-            </div>
-            <div class="inline-flex items-center">
-              <ion-icon name="time" class="mr-1"></ion-icon>
-              <span><span x-text="result.item.readingTime"></span> минут чтения</span>
-            </div>
-          </div>
-        </div>
-      </a>
-    </template>
   </div>
 </div>
 
@@ -917,18 +1203,22 @@ x-data="{
 
 
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js" integrity="sha256-42IbU8t3tOwwbexB7ZVRHm3YDRf65aBPPjRtIUufj5I=" crossorigin="anonymous"></script>
 <script>
-  var fuseData = [{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Инструкции","Нейросети"],"description":"\u003cp\u003eКорректная настройка DNS для стабильного доступа к AI-сервисам — через DNS, hosts или AdGuard.\u003c/p\u003e","readingTime":17,"tags":["DNS","Нейросети","ChatGPT","Gemini","Claude","AdGuard","Comss.one DNS","Руководство","AI","OpenAI","Anthropic","Google AI","Microsoft Copilot","GitHub Copilot","DNS-фильтрация"],"title":"ChatGPT, Claude и Gemini — корректная настройка DNS для доступа к AI-сервисам","url":"/ru/posts/chatgpt-claude-gemini-dns-dostup/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Администрирование"],"description":"\u003cp\u003e.htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга.\u003c/p\u003e","readingTime":5,"tags":["Серверы","Apache",".htaccess","Веб-безопасность","Производительность"],"title":"Роль файла .htaccess в настройке сервера Apache","url":"/ru/posts/role-htaccess/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","description":"\u003cp\u003eCodeSqueeze — современный веб-инструмент для минификации HTML, CSS и JavaScript, ориентированный на скорость, приватность и комфортную работу прямо в браузере.\u003c/p\u003e","readingTime":2,"title":"CodeSqueeze — Online Code Minifier","url":"/ru/portfolio/codesqueeze/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","description":"\u003cp\u003eРазработка лендинга для проекта спортивной аналитики, включая интеграцию с Google Sheets и уникальный визуальный стиль.\u003c/p\u003e","readingTime":2,"title":"Landing Page ProStavki","url":"/ru/portfolio/prostavki/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","description":"\u003cp\u003eРазработка визуального стиля для бренда PBPack в социальных сетях, включая YouTube и Telegram.\u003c/p\u003e","readingTime":1,"title":"Social media design PBPack","url":"/ru/portfolio/pbpack/"}];
+  var fuseData = [{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Инструкции"],"date":"2026-01-25","description":"Полное руководство по стримингу торрентов для тех, кто ценит качество и своё время\n","readingTime":16,"tags":["Lampa","TorrServer","Android TV","Apple TV","Smart TV","Xbox","стриминг","торренты","4K","HDR","медиацентр","домашний кинотеатр","IPTV"],"title":"Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer","url":"/ru/posts/kak-smotret-filmy-4k-lampa-torrserver/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Инструкции","Нейросети"],"date":"2026-01-17","description":"Корректная настройка DNS для стабильного доступа к AI-сервисам — через DNS, hosts или AdGuard.\n","readingTime":17,"tags":["DNS","Нейросети","ChatGPT","Gemini","Claude","AdGuard","Comss.one DNS","Руководство","AI","OpenAI","Anthropic","Google AI","Microsoft Copilot","GitHub Copilot","DNS-фильтрация"],"title":"ChatGPT, Claude и Gemini — корректная настройка DNS для доступа к AI-сервисам","url":"/ru/posts/chatgpt-claude-gemini-dns-dostup/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Администрирование"],"date":"2025-01-12","description":".htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга.\n","readingTime":5,"tags":["Серверы","Apache",".htaccess","Веб-безопасность","Производительность"],"title":"Роль файла .htaccess в настройке сервера Apache","url":"/ru/posts/role-htaccess/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-19","description":"CodeSqueeze — современный веб-инструмент для минификации HTML, CSS и JavaScript, ориентированный на скорость, приватность и комфортную работу прямо в браузере.\n","readingTime":2,"tags":["Веб-разработка","UI/UX","Frontend","JavaScript","Оптимизация","Web Tools","Figma"],"title":"CodeSqueeze — Online Code Minifier","url":"/ru/portfolio/codesqueeze/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2025-01-27","description":"Разработка лендинга для проекта спортивной аналитики, включая интеграцию с Google Sheets и уникальный визуальный стиль.\n","readingTime":2,"tags":["Дизайн","Адаптивный Лендинг","Разработка лендинга","Веб-разработка","Дизайн лендинга","Интерактивный лендинг","Адаптация","Figma"],"title":"Landing Page ProStavki","url":"/ru/portfolio/prostavki/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2025-01-19","description":"Разработка визуального стиля для бренда PBPack в социальных сетях, включая YouTube и Telegram.\n","readingTime":1,"tags":["Дизайн","Брендинг","Айдентика","Telegram","Анимированный Логотип","Визуальный Стиль"],"title":"Social media design PBPack","url":"/ru/portfolio/pbpack/"}];
   var fuseOptions = {
     keys: [
-      "title",
-      "description",
-      "categories",
-      "tags"
+      { name: "title", weight: 2 },
+      { name: "description", weight: 1 },
+      { name: "categories", weight: 1.5 },
+      { name: "tags", weight: 1.5 }
     ],
     includeMatches: true,
-    threshold: 0.3
+    threshold: 0.3,
+    ignoreLocation: true,
+    minMatchCharLength: 2
   };
 
   var fuse = new Fuse(fuseData, fuseOptions);

@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="ru"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стриминг | 0x69.ru</title>
+
+    
+<meta name="google-site-verification" content="SX8wwAcRfmBYPxrIA69UFfuq8DDa2GxWVBzVj9tucMA" />
+<link rel="canonical" href="https://0x69.ru/ru/tags/%D1%81%D1%82%D1%80%D0%B8%D0%BC%D0%B8%D0%BD%D0%B3/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/ru/tags/%D1%81%D1%82%D1%80%D0%B8%D0%BC%D0%B8%D0%BD%D0%B3/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="Стриминг">
+  <meta property="og:description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет.">
+  <meta property="og:locale" content="ru">
+  <meta property="og:type" content="website">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Стриминг">
+  <meta name="twitter:description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет.">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+
+
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav x-data="{ isSticky: false, mobileMenuOpen: false }"
+  x-init="
+    window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+    $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+  "
+  class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
+  :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
+
+
+  
+  <div class="container flex justify-between px-4">
+  
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Повернуть!">
+        <div class="h-10 rounded-full">
+          <img src="/img/avatar.jpg" alt="0x69.ru &lt;/&gt;" />
+        </div>
+      </div>
+
+      
+      <div>
+        
+        <a href="/ru/" class="text-lg font-semibold cursor-pointer">
+          0x69.ru &lt;/&gt;
+        </a>
+        
+        
+        <div class="text-base-content/60 text-sm">Документируй сегодня то, что забудешь завтра</div>
+        
+      </div>
+      
+    </section>
+
+    
+    <div class="sm:hidden">
+      
+      <button @click="mobileMenuOpen = !mobileMenuOpen" 
+              class="btn btn-ghost btn-square"
+              :class="{ 'bg-primary text-primary-content': mobileMenuOpen }"
+              aria-label="Открыть меню"
+              :aria-expanded="mobileMenuOpen">
+        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-2xl"></ion-icon>
+      </button>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"
+           @click="mobileMenuOpen = false"
+           class="fixed inset-0 z-40 bg-base-100/70 backdrop-blur-md"
+           aria-hidden="true">
+      </div>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+           x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+           x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+           @click.outside="mobileMenuOpen = false"
+           @keydown.escape.window="mobileMenuOpen = false"
+           class="absolute right-4 top-full mt-0 z-50 
+                  w-72 max-w-[calc(100vw-2rem)]
+                  bg-base-100 rounded-2xl shadow-2xl
+                  border border-base-200 dark:border-base-content/10
+                  overflow-hidden">
+        
+        
+        <div class="flex items-center justify-between p-4 border-b border-base-200 dark:border-base-content/10">
+          <span class="font-semibold">Меню</span>
+          <button @click="mobileMenuOpen = false" 
+                  class="btn btn-ghost btn-circle btn-sm"
+                  aria-label="Закрыть">
+            <ion-icon name="close" class="text-lg"></ion-icon>
+          </button>
+        </div>
+        
+        
+        
+          
+          
+          <div class="p-4 border-b border-base-200 dark:border-base-content/10">
+            <button type="button"
+                    class="inline-flex items-center gap-2 w-full p-3 rounded-lg
+                           cursor-pointer transition-all duration-200
+                           hover:bg-base-200 active:scale-[0.98]"
+                    @click="flip = !flip; mobileMenuOpen = false"
+                    title="Обо мне"
+                    aria-label="Обо мне">
+              <ion-icon name="information-circle-outline" class="text-lg text-primary"></ion-icon>
+              <span class="flex-1 text-left font-medium">Обо мне</span>
+              <ion-icon name="chevron-forward-outline" class="text-base-content/50"></ion-icon>
+            </button>
+          </div>
+          
+        
+        
+        
+        <div class="p-4 max-h-[60vh] overflow-y-auto">
+          
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/tags/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/tags/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
+      
+        
+<li>
+  <a href="/ru/search" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Поиск</span>
+  </a>
+</li>
+
+
+      
+        
+<li>
+  <a href="/ru/categories" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Категории</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
+</li>
+
+
+      
+        
+<li>
+  <a href="/ru/portfolio" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Портфолио</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
+</li>
+
+
+      
+        
+<li>
+  <a href="/ru/posts" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Архивы</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
+</li>
+
+
+      
+        
+<li>
+  <a href="/ru/tags" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Все теги</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      51
+    </span>
+  </a>
+</li>
+
+
+      
+        
+<li>
+  <a href="https://github.com/rianvy" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     target="_blank"
+     rel="noopener noreferrer"
+     title="GitHub">
+    
+    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
+    
+    <span>GitHub</span>
+    
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    
+  </a>
+</li>
+
+
+      
+        
+<li>
+  <a href="/ru/index.xml" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
+    <span>RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+  </a>
+</li>
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+  
+  
+
+</nav>
+        </div>
+      </div>
+    </div>
+
+    
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+      
+      <div role="link" tabindex="0"
+        class="text-sm font-semibold cursor-pointer hover:underline"
+        @click="flip = !flip"
+        title="Обо мне"
+      >Обо мне</div>
+      
+      
+
+      
+      
+        
+      
+
+      
+
+      
+      
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/ru/search" title="Поиск">
+  <ion-icon class="group-hover:text-primary-content" name="search"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/ru/categories" title="Категории">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/ru/portfolio" title="Портфолио">
+  <ion-icon class="group-hover:text-primary-content" name="sparkles"></ion-icon>
+</a>
+
+
+      
+      
+      
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" 
+             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
+                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
+             aria-label="Выбрать язык">
+          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
+                    name="language-outline"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-xl z-[1] shadow-xl 
+                                border border-base-200 dark:border-base-content/10 p-2 min-w-[160px]">
+          
+            
+            
+            
+            
+
+            
+            
+              
+              
+            
+
+            <li>
+              <a href="https://0x69.ru/en/tags/" 
+                 hreflang="en"
+                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
+                        "
+                 >
+                <ion-icon name="language" class="text-lg"></ion-icon>
+                <span class="flex-1">English</span>
+                
+              </a>
+            </li>
+          
+            
+            
+            
+            
+
+            
+            
+              
+              
+            
+
+            <li>
+              <a href="https://0x69.ru/ru/tags/" 
+                 hreflang="ru"
+                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
+                        bg-primary/10 text-primary font-medium"
+                 aria-current="true">
+                <ion-icon name="language" class="text-lg"></ion-icon>
+                <span class="flex-1">Русский</span>
+                
+                <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+          
+      
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" 
+             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
+                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
+             aria-label="Ещё">
+          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
+                    name="ellipsis-horizontal"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu w-44 bg-base-100 rounded-xl z-[1] shadow-xl 
+                                border border-base-200 dark:border-base-content/10 p-2">
+          
+          
+<li>
+  <a href="/ru/posts" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Архивы</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a href="/ru/tags" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Все теги</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      51
+    </span>
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a href="https://github.com/rianvy" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     target="_blank"
+     rel="noopener noreferrer"
+     title="GitHub">
+    
+    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
+    
+    <span>GitHub</span>
+    
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a href="/ru/index.xml" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
+    <span>RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+  </a>
+</li>
+
+
+          
+
+          
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </ul>
+      </div>
+      
+    </section>
+  </div>
+</nav>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+
+<div class="flex flex-col md:flex-row mt-4">
+
+  <div class="md:basis-[200px] lg:basis-[300px] p-4 prose dark:prose-invert">
+    <h1 class="text-2xl">Стриминг</h1>
+    <p class="text-sm">1 статья</p>
+    <div class="flex flex-wrap gap-4 mt-6">
+      
+
+      
+      
+      <a href="/ru/tags/.htaccess/" class="badge h-6 no-underline hover:badge-primary">
+        .Htaccess
+      </a>
+      
+      
+      
+      <a href="/ru/tags/4k/" class="badge h-6 no-underline hover:badge-primary">
+        4K
+      </a>
+      
+      
+      
+      <a href="/ru/tags/adguard/" class="badge h-6 no-underline hover:badge-primary">
+        AdGuard
+      </a>
+      
+      
+      
+      <a href="/ru/tags/ai/" class="badge h-6 no-underline hover:badge-primary">
+        AI
+      </a>
+      
+      
+      
+      <a href="/ru/tags/android-tv/" class="badge h-6 no-underline hover:badge-primary">
+        Android TV
+      </a>
+      
+      
+      
+      <a href="/ru/tags/anthropic/" class="badge h-6 no-underline hover:badge-primary">
+        Anthropic
+      </a>
+      
+      
+      
+      <a href="/ru/tags/apache/" class="badge h-6 no-underline hover:badge-primary">
+        Apache
+      </a>
+      
+      
+      
+      <a href="/ru/tags/apple-tv/" class="badge h-6 no-underline hover:badge-primary">
+        Apple TV
+      </a>
+      
+      
+      
+      <a href="/ru/tags/chatgpt/" class="badge h-6 no-underline hover:badge-primary">
+        ChatGPT
+      </a>
+      
+      
+      
+      <a href="/ru/tags/claude/" class="badge h-6 no-underline hover:badge-primary">
+        Claude
+      </a>
+      
+      
+      
+      <a href="/ru/tags/comss.one-dns/" class="badge h-6 no-underline hover:badge-primary">
+        Comss.one DNS
+      </a>
+      
+      
+      
+      <a href="/ru/tags/dns/" class="badge h-6 no-underline hover:badge-primary">
+        DNS
+      </a>
+      
+      
+      
+      <a href="/ru/tags/dns-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F/" class="badge h-6 no-underline hover:badge-primary">
+        DNS-Фильтрация
+      </a>
+      
+      
+      
+      <a href="/ru/tags/figma/" class="badge h-6 no-underline hover:badge-primary">
+        Figma
+      </a>
+      
+      
+      
+      <a href="/ru/tags/frontend/" class="badge h-6 no-underline hover:badge-primary">
+        Frontend
+      </a>
+      
+      
+      
+      <a href="/ru/tags/gemini/" class="badge h-6 no-underline hover:badge-primary">
+        Gemini
+      </a>
+      
+      
+      
+      <a href="/ru/tags/github-copilot/" class="badge h-6 no-underline hover:badge-primary">
+        GitHub Copilot
+      </a>
+      
+      
+      
+      <a href="/ru/tags/google-ai/" class="badge h-6 no-underline hover:badge-primary">
+        Google AI
+      </a>
+      
+      
+      
+      <a href="/ru/tags/hdr/" class="badge h-6 no-underline hover:badge-primary">
+        HDR
+      </a>
+      
+      
+      
+      <a href="/ru/tags/iptv/" class="badge h-6 no-underline hover:badge-primary">
+        IPTV
+      </a>
+      
+      
+      
+      <a href="/ru/tags/javascript/" class="badge h-6 no-underline hover:badge-primary">
+        JavaScript
+      </a>
+      
+      
+      
+      <a href="/ru/tags/lampa/" class="badge h-6 no-underline hover:badge-primary">
+        Lampa
+      </a>
+      
+      
+      
+      <a href="/ru/tags/microsoft-copilot/" class="badge h-6 no-underline hover:badge-primary">
+        Microsoft Copilot
+      </a>
+      
+      
+      
+      <a href="/ru/tags/openai/" class="badge h-6 no-underline hover:badge-primary">
+        OpenAI
+      </a>
+      
+      
+      
+      <a href="/ru/tags/smart-tv/" class="badge h-6 no-underline hover:badge-primary">
+        Smart TV
+      </a>
+      
+      
+      
+      <a href="/ru/tags/telegram/" class="badge h-6 no-underline hover:badge-primary">
+        Telegram
+      </a>
+      
+      
+      
+      <a href="/ru/tags/torrserver/" class="badge h-6 no-underline hover:badge-primary">
+        TorrServer
+      </a>
+      
+      
+      
+      <a href="/ru/tags/ui/ux/" class="badge h-6 no-underline hover:badge-primary">
+        UI/UX
+      </a>
+      
+      
+      
+      <a href="/ru/tags/web-tools/" class="badge h-6 no-underline hover:badge-primary">
+        Web Tools
+      </a>
+      
+      
+      
+      <a href="/ru/tags/xbox/" class="badge h-6 no-underline hover:badge-primary">
+        Xbox
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B0%D1%86%D0%B8%D1%8F/" class="badge h-6 no-underline hover:badge-primary">
+        Адаптация
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/" class="badge h-6 no-underline hover:badge-primary">
+        Адаптивный Лендинг
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%B0%D0%B9%D0%B4%D0%B5%D0%BD%D1%82%D0%B8%D0%BA%D0%B0/" class="badge h-6 no-underline hover:badge-primary">
+        Айдентика
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%B0%D0%BD%D0%B8%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D1%8B%D0%B9-%D0%BB%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF/" class="badge h-6 no-underline hover:badge-primary">
+        Анимированный Логотип
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%B1%D1%80%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/" class="badge h-6 no-underline hover:badge-primary">
+        Брендинг
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%B2%D0%B5%D0%B1-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C/" class="badge h-6 no-underline hover:badge-primary">
+        Веб-Безопасность
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%B2%D0%B5%D0%B1-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/" class="badge h-6 no-underline hover:badge-primary">
+        Веб-Разработка
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%B2%D0%B8%D0%B7%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D1%81%D1%82%D0%B8%D0%BB%D1%8C/" class="badge h-6 no-underline hover:badge-primary">
+        Визуальный Стиль
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD/" class="badge h-6 no-underline hover:badge-primary">
+        Дизайн
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B0/" class="badge h-6 no-underline hover:badge-primary">
+        Дизайн Лендинга
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%B4%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D0%B8%D0%B9-%D0%BA%D0%B8%D0%BD%D0%BE%D1%82%D0%B5%D0%B0%D1%82%D1%80/" class="badge h-6 no-underline hover:badge-primary">
+        Домашний Кинотеатр
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/" class="badge h-6 no-underline hover:badge-primary">
+        Интерактивный Лендинг
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%BC%D0%B5%D0%B4%D0%B8%D0%B0%D1%86%D0%B5%D0%BD%D1%82%D1%80/" class="badge h-6 no-underline hover:badge-primary">
+        Медиацентр
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%BD%D0%B5%D0%B9%D1%80%D0%BE%D1%81%D0%B5%D1%82%D0%B8/" class="badge h-6 no-underline hover:badge-primary">
+        Нейросети
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%BE%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F/" class="badge h-6 no-underline hover:badge-primary">
+        Оптимизация
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C/" class="badge h-6 no-underline hover:badge-primary">
+        Производительность
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B0/" class="badge h-6 no-underline hover:badge-primary">
+        Разработка Лендинга
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D1%80%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE/" class="badge h-6 no-underline hover:badge-primary">
+        Руководство
+      </a>
+      
+      
+      
+      <a href="/ru/tags/%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D1%8B/" class="badge h-6 no-underline hover:badge-primary">
+        Серверы
+      </a>
+      
+      
+      
+      <span class="badge h-6 badge-primary">
+        Стриминг
+      </span>
+      
+      
+      
+      <a href="/ru/tags/%D1%82%D0%BE%D1%80%D1%80%D0%B5%D0%BD%D1%82%D1%8B/" class="badge h-6 no-underline hover:badge-primary">
+        Торренты
+      </a>
+      
+      
+    </div>
+  </div>
+  
+  <div class="divider divider-vertical md:divider-horizontal px-4 md:px-0"></div>
+  
+  <div class="flex-1">
+    
+
+    
+    <div class="dream-grid">
+    
+      <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+        <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/ru/posts/kak-smotret-filmy-4k-lampa-torrserver/">
+  
+  <figure>
+    
+    
+      
+      <picture>
+        <source srcset="/ru/posts/kak-smotret-filmy-4k-lampa-torrserver/Cover_hu_8675157aa1aff8b8.webp" type="image/webp" />
+        <img src="/ru/posts/kak-smotret-filmy-4k-lampa-torrserver/Cover.png" alt="Cover.png" />
+      </picture>
+    
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer</h2>
+
+    <p class="date text-base-content/60">
+    
+      <span data-format="luxon">2026-01-25T00:09:23&#43;03:00</span>
+    
+	<span>
+	&nbsp;
+	
+		<ion-icon name="document-text" class="mr-1"></ion-icon><span>Пост</span>
+	
+	</span>
+    </p>
+	
+    <p>Полное руководство по стримингу торрентов для тех, кто ценит качество и своё время</p>
+	
+    <div class="card-actions justify-between items-center mt-4">
+      <div class="flex items-center">
+  
+  <div class="avatar mr-1">
+    <div class="w-8 rounded-full">
+      <img class="my-0" src="/img/avatar.jpg" alt="Rianvy" />
+    </div>
+  </div>
+  
+
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+  
+    
+      <span itemprop="name">Rianvy</span>
+    
+  
+  </span>
+</div>
+
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>16 минут чтения</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+      </div>
+    
+    </div>
+    
+
+    
+  </div>
+</div>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Максим Александров<br>
+<strong>Age:</strong> 28
+<strong>Location:</strong> Тула, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>Этот блог — мой personal knowledge base, где я пушу заметки про tech stack, life experience и всё, что триггерит мой interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — готов к мёрджу идей и совместным проектам.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-яп">💻 ЯП</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Адаптивная вёрстка (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST API</strong></li>
+</ul>
+<h2 id="-базы-данных">🗄️ Базы данных</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-дизайн-и-графика">🎨 Дизайн и графика</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX дизайн и прототипирование</li>
+<li><strong>Photoshop</strong> — графика и обработка изображений</li>
+<li><strong>After Effects</strong> — моушн-дизайн и анимация 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои Open Source проекты 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          🚧 WIP
+        </td>
+        
+        <td 
+          class=""
+        >
+          Пока нет проектов для вашего внимания. Stay tuned!
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          🚧 WIP
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Пока нет проектов для вашего внимания. Stay tuned!
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои проекты 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN-сервис в Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN-сервис в Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Социальные сети</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "forest"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+	
+	
+	  
+	
+<script src="/js/backToTop.min.js"></script>
+<script>
+  commonJsStrict.addBackToTop({
+    diameter: 50,
+    scrollContainer: document.body,
+    innerHTML: '<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 244l144-144 144 144M256 120v292"/></svg>',
+    className: 'h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary',
+  });
+</script>
+
+    
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
+  integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
+  crossorigin="anonymous"
+></script>
+<script>
+  format()
+
+  function format() {
+    document.querySelectorAll('span[data-format="luxon"]').forEach(el => {
+      const date = el.textContent
+
+      el.textContent = luxon.DateTime.fromISO(date, { locale: "ru" }).toFormat("HH:mm, dd MMMM")
+    })
+  }
+</script>
+
+
+
+
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

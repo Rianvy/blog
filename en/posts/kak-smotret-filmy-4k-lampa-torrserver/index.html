@@ -1,0 +1,5390 @@
+<!DOCTYPE html>
+<html lang="en"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Watch Movies and TV Shows in 4K via Lampa and TorrServer | 0x69.ru</title>
+
+    
+<meta name="google-site-verification" content="SX8wwAcRfmBYPxrIA69UFfuq8DDa2GxWVBzVj9tucMA" />
+<link rel="canonical" href="https://0x69.ru/en/posts/kak-smotret-filmy-4k-lampa-torrserver/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="A complete guide to torrent streaming for those who value quality and their time
+" />
+
+
+<meta name="keywords" content="Lampa,TorrServer,Android TV,Apple TV,Smart TV,Xbox,Streaming,Torrents,4K,HDR,Media Center,Home Theater,IPTV">
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/en/posts/kak-smotret-filmy-4k-lampa-torrserver/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="How to Watch Movies and TV Shows in 4K via Lampa and TorrServer">
+  <meta property="og:description" content="A complete guide to torrent streaming for those who value quality and their time">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-01-25T00:09:23+03:00">
+    <meta property="article:modified_time" content="2026-01-25T00:09:23+03:00">
+    <meta property="article:tag" content="Lampa">
+    <meta property="article:tag" content="TorrServer">
+    <meta property="article:tag" content="Android TV">
+    <meta property="article:tag" content="Apple TV">
+    <meta property="article:tag" content="Smart TV">
+    <meta property="article:tag" content="Xbox">
+    <meta property="og:image" content="https://0x69.ru/en/posts/kak-smotret-filmy-4k-lampa-torrserver/Cover.png">
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://0x69.ru/en/posts/kak-smotret-filmy-4k-lampa-torrserver/Cover.png">
+  <meta name="twitter:title" content="How to Watch Movies and TV Shows in 4K via Lampa and TorrServer">
+  <meta name="twitter:description" content="A complete guide to torrent streaming for those who value quality and their time">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+
+
+
+    
+
+
+<link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css" data-syntax-highlight="true" id="syntax-theme">
+
+
+
+
+
+
+
+
+<style>
+   
+  pre { border-radius: 0.5rem;  }
+  
+   
+  
+  
+   
+  .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: oklch(var(--p)); z-index: 9999; transition: width 0.1s ease-out; }
+  
+   
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  
+   
+  #TableOfContents { position: sticky; top: 5rem; max-height: calc(100vh - 6rem); overflow-y: auto; }
+  #TableOfContents a.active { color: oklch(var(--p)); font-weight: 600; }
+  #TableOfContents ul { border-left: 2px solid oklch(var(--b3)); }
+  
+   
+  #dream-single-post-content img { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  #dream-single-post-content img:hover { transform: scale(1.02); box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
+  
+   
+  #dream-single-post-content a:not(.badge):not(.btn):not(.lg-item) { 
+    text-decoration: none; 
+    background-image: linear-gradient(oklch(var(--p)), oklch(var(--p)));
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease;
+  }
+  #dream-single-post-content a:not(.badge):not(.btn):not(.lg-item):hover { background-size: 100% 2px; }
+  
+   
+  .lg-sub-html { backdrop-filter: blur(16px); }
+</style>
+
+
+
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav x-data="{ isSticky: false, mobileMenuOpen: false }"
+  x-init="
+    window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+    $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+  "
+  class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
+  :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
+
+
+  
+  <div class="container flex justify-between px-4">
+  
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/img/avatar.jpg" alt="0x69.ru &lt;/&gt;" />
+        </div>
+      </div>
+
+      
+      <div>
+        
+        <a href="/en/" class="text-lg font-semibold cursor-pointer">
+          0x69.ru &lt;/&gt;
+        </a>
+        
+        
+        <div class="text-base-content/60 text-sm">To iterate is human, to recurse divine</div>
+        
+      </div>
+      
+    </section>
+
+    
+    <div class="sm:hidden">
+      
+      <button @click="mobileMenuOpen = !mobileMenuOpen" 
+              class="btn btn-ghost btn-square"
+              :class="{ 'bg-primary text-primary-content': mobileMenuOpen }"
+              aria-label="Открыть меню"
+              :aria-expanded="mobileMenuOpen">
+        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-2xl"></ion-icon>
+      </button>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"
+           @click="mobileMenuOpen = false"
+           class="fixed inset-0 z-40 bg-base-100/70 backdrop-blur-md"
+           aria-hidden="true">
+      </div>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+           x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+           x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+           @click.outside="mobileMenuOpen = false"
+           @keydown.escape.window="mobileMenuOpen = false"
+           class="absolute right-4 top-full mt-0 z-50 
+                  w-72 max-w-[calc(100vw-2rem)]
+                  bg-base-100 rounded-2xl shadow-2xl
+                  border border-base-200 dark:border-base-content/10
+                  overflow-hidden">
+        
+        
+        <div class="flex items-center justify-between p-4 border-b border-base-200 dark:border-base-content/10">
+          <span class="font-semibold">Menu</span>
+          <button @click="mobileMenuOpen = false" 
+                  class="btn btn-ghost btn-circle btn-sm"
+                  aria-label="Закрыть">
+            <ion-icon name="close" class="text-lg"></ion-icon>
+          </button>
+        </div>
+        
+        
+        
+          
+          
+          <div class="p-4 border-b border-base-200 dark:border-base-content/10">
+            <button type="button"
+                    class="inline-flex items-center gap-2 w-full p-3 rounded-lg
+                           cursor-pointer transition-all duration-200
+                           hover:bg-base-200 active:scale-[0.98]"
+                    @click="flip = !flip; mobileMenuOpen = false"
+                    title="About"
+                    aria-label="About">
+              <ion-icon name="information-circle-outline" class="text-lg text-primary"></ion-icon>
+              <span class="flex-1 text-left font-medium">About</span>
+              <ion-icon name="chevron-forward-outline" class="text-base-content/50"></ion-icon>
+            </button>
+          </div>
+          
+        
+        
+        
+        <div class="p-4 max-h-[60vh] overflow-y-auto">
+          
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Languages
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/posts/kak-smotret-filmy-4k-lampa-torrserver/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/posts/kak-smotret-filmy-4k-lampa-torrserver/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Menu
+    </h3>
+    <ul class="space-y-1">
+      
+        
+<li>
+  <a href="/en/search" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Search">
+    <ion-icon name="search-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Search</span>
+  </a>
+</li>
+
+
+      
+        
+<li>
+  <a href="/en/categories" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="All Categories">
+    <ion-icon name="folder-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>All Categories</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
+</li>
+
+
+      
+        
+<li>
+  <a href="/en/portfolio" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Portfolio">
+    <ion-icon name="briefcase-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Portfolio</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
+</li>
+
+
+      
+        
+<li>
+  <a href="/en/posts" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Archives</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
+</li>
+
+
+      
+        
+<li>
+  <a href="/en/tags" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>All Tags</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      51
+    </span>
+  </a>
+</li>
+
+
+      
+        
+<li>
+  <a href="https://github.com/rianvy" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     target="_blank"
+     rel="noopener noreferrer"
+     title="GitHub">
+    
+    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
+    
+    <span>GitHub</span>
+    
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    
+  </a>
+</li>
+
+
+      
+        
+<li>
+  <a href="/en/index.xml" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
+    <span>RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+  </a>
+</li>
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+  
+  
+
+</nav>
+        </div>
+      </div>
+    </div>
+
+    
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+      
+      <div role="link" tabindex="0"
+        class="text-sm font-semibold cursor-pointer hover:underline"
+        @click="flip = !flip"
+        title="About"
+      >About</div>
+      
+      
+
+      
+      
+        
+      
+
+      
+
+      
+      
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/search" title="Search">
+  <ion-icon class="group-hover:text-primary-content" name="search"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/en/portfolio" title="Portfolio">
+  <ion-icon class="group-hover:text-primary-content" name="sparkles"></ion-icon>
+</a>
+
+
+      
+      
+      
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" 
+             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
+                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
+             aria-label="Выбрать язык">
+          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
+                    name="language-outline"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-xl z-[1] shadow-xl 
+                                border border-base-200 dark:border-base-content/10 p-2 min-w-[160px]">
+          
+            
+            
+            
+            
+
+            
+            
+              
+              
+            
+
+            <li>
+              <a href="https://0x69.ru/en/posts/kak-smotret-filmy-4k-lampa-torrserver/" 
+                 hreflang="en"
+                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
+                        bg-primary/10 text-primary font-medium"
+                 aria-current="true">
+                <ion-icon name="language" class="text-lg"></ion-icon>
+                <span class="flex-1">English</span>
+                
+                <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+                
+              </a>
+            </li>
+          
+            
+            
+            
+            
+
+            
+            
+              
+            
+
+            <li>
+              <a href="https://0x69.ru/ru/posts/kak-smotret-filmy-4k-lampa-torrserver/" 
+                 hreflang="ru"
+                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
+                        "
+                 >
+                <ion-icon name="language" class="text-lg"></ion-icon>
+                <span class="flex-1">Русский</span>
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+          
+      
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" 
+             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
+                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
+             aria-label="Ещё">
+          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
+                    name="ellipsis-horizontal"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu w-44 bg-base-100 rounded-xl z-[1] shadow-xl 
+                                border border-base-200 dark:border-base-content/10 p-2">
+          
+          
+<li>
+  <a href="/en/posts" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Archives</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a href="/en/tags" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>All Tags</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      51
+    </span>
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a href="https://github.com/rianvy" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     target="_blank"
+     rel="noopener noreferrer"
+     title="GitHub">
+    
+    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
+    
+    <span>GitHub</span>
+    
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+    
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a href="/en/index.xml" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
+    <span>RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+  </a>
+</li>
+
+
+          
+
+          
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </ul>
+      </div>
+      
+    </section>
+  </div>
+</nav>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="reading-progress" id="reading-progress"></div>
+
+<div class="lg:grid lg:grid-cols-4 gap-6 mt-4 px-4 max-w-screen-2xl mx-auto">
+  
+  <aside class="hidden lg:block">
+    <div class="sticky top-20 space-y-4">
+      
+      <div class="flex flex-col gap-2">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn btn-ghost btn-sm gap-2" aria-label="Back to top">
+          <ion-icon name="arrow-up-outline"></ion-icon>
+          <span class="text-xs">Top</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  
+  <article class="lg:col-span-2 mx-auto prose prose-quoteless dark:prose-invert w-full" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+    
+  <meta itemprop="name" content="How to Watch Movies and TV Shows in 4K via Lampa and TorrServer">
+  <meta itemprop="description" content="A complete guide to torrent streaming for those who value quality and their time">
+  <meta itemprop="datePublished" content="2026-01-25T00:09:23+03:00">
+  <meta itemprop="dateModified" content="2026-01-25T00:09:23+03:00">
+  <meta itemprop="wordCount" content="3620">
+  <meta itemprop="image" content="https://0x69.ru/en/posts/kak-smotret-filmy-4k-lampa-torrserver/Cover.png">
+  <meta itemprop="keywords" content="Lampa,TorrServer,Android TV,Apple TV,Smart TV,Xbox,Streaming,Torrents,4K,HDR,Media Center,Home Theater,IPTV">
+
+    <header class="not-prose mb-8">
+      
+      
+      <div class="flex flex-wrap gap-2 mb-4">
+        
+        
+        <a href="/en/categories/guides/" class="badge badge-outline badge-sm hover:badge-primary transition-all" rel="category">
+          Guides
+        </a>
+        
+      </div>
+      
+
+      
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4" itemprop="headline">How to Watch Movies and TV Shows in 4K via Lampa and TorrServer</h1>
+
+      
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-base-content/70 mb-6">
+        
+        <time datetime="2026-01-25" class="flex items-center gap-1">
+          <ion-icon name="calendar-outline" class="text-base"></ion-icon>
+          
+          <span data-format="luxon">2026-01-25T00:09:23&#43;03:00</span>
+          
+        </time>
+
+        
+        <span class="flex items-center gap-1">
+          <ion-icon name="time-outline" class="text-base"></ion-icon>
+          17  minute read
+        </span>
+
+        
+        <span class="flex items-center gap-1">
+          <ion-icon name="document-text-outline" class="text-base"></ion-icon>
+          3620 words
+        </span>
+
+        
+        
+      </div>
+
+      
+      <div class="flex flex-wrap justify-between items-center gap-4 py-4 border-y border-base-300">
+        <div class="flex items-center">
+  
+  <div class="avatar mr-1">
+    <div class="w-8 rounded-full">
+      <img class="my-0" src="/img/avatar.jpg" alt="Rianvy" />
+    </div>
+  </div>
+  
+
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+  
+    
+      <span itemprop="name">Rianvy</span>
+    
+  
+  </span>
+</div>
+
+        <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=How%20to%20Watch%20Movies%20and%20TV%20Shows%20in%204K%20via%20Lampa%20and%20TorrServer&amp;url=https://0x69.ru/en/posts/kak-smotret-filmy-4k-lampa-torrserver/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=https://0x69.ru/en/posts/kak-smotret-filmy-4k-lampa-torrserver/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=How%20to%20Watch%20Movies%20and%20TV%20Shows%20in%204K%20via%20Lampa%20and%20TorrServer%20https://0x69.ru/en/posts/kak-smotret-filmy-4k-lampa-torrserver/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://t.me/share/url?url=https://0x69.ru/en/posts/kak-smotret-filmy-4k-lampa-torrserver/&amp;resubmit=true&amp;title=How%20to%20Watch%20Movies%20and%20TV%20Shows%20in%204K%20via%20Lampa%20and%20TorrServer" target="_blank" rel="noopener noreferrer"
+      title="Share on Telegram">
+      <ion-icon class="group-hover:text-primary-content" name="send"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+      </div>
+    </header>
+
+    
+    
+    <div class="not-prose mb-8">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-4 rounded-xl border border-base-300 bg-base-200/50">
+        
+        <div class="flex items-center gap-2 text-base-content/70">
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+          </span>
+          <ion-icon name="language-outline" class="text-xl"></ion-icon>
+          <span class="text-sm whitespace-nowrap">This post is also available in</span>
+        </div>
+        
+        
+        <div class="hidden sm:block w-px h-6 bg-base-300"></div>
+        
+        
+        <div class="flex flex-wrap gap-2">
+          
+          <a href="https://0x69.ru/ru/posts/kak-smotret-filmy-4k-lampa-torrserver/" 
+            class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm 
+                    bg-base-100 hover:bg-primary hover:text-primary-content 
+                    border border-base-300 hover:border-primary
+                    transition-all duration-200 no-underline"
+            rel="noopener noreferrer"
+            hreflang="ru">
+            <span class="opacity-70 group-hover:opacity-100">
+              🇷🇺
+            </span>
+            Русский
+            <ion-icon name="arrow-forward" class="text-xs opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-0 transition-all"></ion-icon>
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    
+
+    
+    
+    <figure class="not-prose mb-8">
+      <img src="https://0x69.ru/en/posts/kak-smotret-filmy-4k-lampa-torrserver/Cover.png" alt="How to Watch Movies and TV Shows in 4K via Lampa and TorrServer" class="w-full rounded-xl shadow-lg" loading="lazy"/>
+    </figure>
+    
+
+    
+    
+
+    
+
+    
+    <section id="dream-single-post-content" itemprop="articleBody">
+      <p>A complete guide to torrent streaming for those who value quality and their time</p>
+<h2 id="introduction-torrents-have-changed">Introduction: Torrents Have Changed</h2>
+<p>Hey there! Today I want to share a technology that has literally transformed my approach to home theater.</p>
+<p>Forget about waiting hours for a movie to download. Forget about cluttered hard drives and folders full of half-forgotten torrents. Modern technology allows you to watch torrents right now — just like a regular streaming service, but with a library that no studio can limit.</p>
+<p>The <strong>Lampa + TorrServer</strong> combo turns the chaotic world of torrents into a convenient media center with beautiful covers, descriptions, and instant playback. Let&rsquo;s break down how it works and who it&rsquo;s for!</p>
+<hr>
+<h2 id="what-is-torrserver-and-why-its-a-game-changer">What Is TorrServer and Why It&rsquo;s a Game Changer</h2>
+<h3 id="the-core-technology">The Core Technology</h3>
+<p>TorrServer is a local server that converts torrent files into a video stream. Instead of downloading the entire file, it loads data sequentially and on demand — only the chunks that the player needs at any given moment.</p>
+<h3 id="how-it-works-technically-in-simple-terms">How It Works Technically (In Simple Terms)</h3>
+<ol>
+<li>You select a movie and press &ldquo;Play&rdquo;</li>
+<li>TorrServer receives the magnet link or torrent file</li>
+<li>Connects to peers (other users who have the file)</li>
+<li>Starts downloading data from the beginning of the file, not in random chunks</li>
+<li>Immediately delivers the stream to your player</li>
+<li>Buffer is minimal — usually 30–60 seconds of video</li>
+</ol>
+<p>Essentially, TorrServer acts as a translator between the chaotic torrent world and your familiar video player.</p>
+<h3 id="why-this-isnt-just-background-downloading">Why This Isn&rsquo;t Just &ldquo;Background Downloading&rdquo;</h3>
+<p>A classic torrent client downloads file parts in random order — you might get the final scene first, then the middle. TorrServer uses prioritization: it literally &ldquo;requests&rdquo; exactly the fragments needed right now from the network. A smart preloading algorithm makes viewing smooth.</p>
+<p><strong>By the way!</strong> TorrServer can run not only locally but also on a home server or NAS — I&rsquo;ll cover this in more detail in the next article.</p>
+<hr>
+<h2 id="lampa-your-personal-movie-catalog">Lampa: Your Personal Movie Catalog</h2>
+<h3 id="what-it-is">What It Is</h3>
+<p>Lampa is a media shell application that doesn&rsquo;t store any content itself. Its job is to provide a beautiful interface for searching, cataloging, and launching playback.</p>
+<p>Imagine Netflix, but instead of a built-in library — connectable sources: online cinemas, torrent tracker parsers, your local files.</p>
+<h3 id="what-lampa-can-do">What Lampa Can Do</h3>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Feature
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Catalog with metadata</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Covers, descriptions, ratings, actors — all pulled automatically
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Collections and recommendations</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          New releases, popular titles, personal lists
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Tracker search</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Finds torrents on various trackers via plugins
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>TorrServer integration</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          One button — and the movie plays
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Multi-platform</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Android TV, Smart TV, Apple TV, Xbox, smartphones, PC
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Feature
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Catalog with metadata</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Covers, descriptions, ratings, actors — all pulled automatically
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Feature
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Collections and recommendations</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          New releases, popular titles, personal lists
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Feature
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Tracker search</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Finds torrents on various trackers via plugins
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Feature
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>TorrServer integration</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          One button — and the movie plays
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Feature
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Multi-platform</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Android TV, Smart TV, Apple TV, Xbox, smartphones, PC
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><h3 id="lampa-versions-which-to-choose">Lampa Versions: Which to Choose</h3>
+<p>There are several Lampa variants:</p>
+<ul>
+<li><strong>Lampa (official)</strong> — base version from developers, requires manual plugin installation</li>
+<li><strong>Lampa UNCENSORED</strong> — modified version with pre-installed content sources</li>
+</ul>
+<p>For the official version, plugins are added manually through settings. The UNCENSORED version works &ldquo;out of the box&rdquo; but requires changing the server address.</p>
+<h3 id="key-advantage">Key Advantage</h3>
+<p>Lampa abstracts the complexity. Users see a movie cover, press &ldquo;Watch,&rdquo; choose quality (1080p, 4K, with or without dubbing) — that&rsquo;s it. No magnet links, no copying between apps.</p>
+<hr>
+<h2 id="how-it-works-from-choosing-a-movie-to-playback">How It Works: From Choosing a Movie to Playback</h2>
+<p>Let&rsquo;s break down the user journey step by step:</p>
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│  1. SEARCH                                                      │
+│     User opens Lampa → enters movie title                       │
+│                              ↓                                  │
+│  2. SOURCE SELECTION                                            │
+│     Lampa shows available options:                              │
+│     • Online cinemas (if connected)                             │
+│     • Torrent releases (via parsers)                            │
+│                              ↓                                  │
+│  3. PASSING TO TORRSERVER                                       │
+│     User selects a torrent →                                    │
+│     Lampa sends magnet link to TorrServer                       │
+│                              ↓                                  │
+│  4. STREAMING                                                   │
+│     TorrServer connects to peers →                              │
+│     creates video stream →                                      │
+│     delivers to Lampa player                                    │
+│                              ↓                                  │
+│  5. VIEWING                                                     │
+│     Movie plays after 10–30 seconds of buffering                │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Important:</strong> TorrServer can run on the same device (e.g., Android TV) or on a separate server in your home network (NAS, Raspberry Pi, old PC). The second option is more convenient if you watch content on multiple devices.</p>
+<hr>
+<h2 id="advantages-why-this-is-convenient">Advantages: Why This Is Convenient</h2>
+<h3 id="1-instant-4k-content-playback">1. Instant 4K Content Playback</h3>
+<p>A quality 4K HDR release weighs 40–80 GB. At 100 Mbps internet speed, downloading takes 1–2 hours. With TorrServer streaming — playback starts in 30 seconds.</p>
+<h3 id="2-disk-space-savings">2. Disk Space Savings</h3>
+<p>TorrServer only stores a small buffer (configurable, usually 1–4 GB max). After viewing — data is automatically deleted. No terabytes &ldquo;for later.&rdquo;</p>
+<h3 id="3-access-to-rare-content">3. Access to Rare Content</h3>
+<p>Streaming services are limited by licenses. On torrents you can find:</p>
+<ul>
+<li>Director&rsquo;s cuts</li>
+<li>Uncensored films</li>
+<li>Rare subtitles</li>
+<li>Content not released in your region</li>
+<li>Remux versions with maximum quality</li>
+</ul>
+<h3 id="4-flexible-quality-selection">4. Flexible Quality Selection</h3>
+<p>The same movie is available in different variants:</p>
+<ul>
+<li>720p for slow internet</li>
+<li>1080p for balance</li>
+<li>4K HDR for maximum experience</li>
+<li>Different audio tracks (original, dubbing, voiceover)</li>
+</ul>
+<h3 id="5-user-friendly-interface-for-the-whole-family">5. User-Friendly Interface for the Whole Family</h3>
+<p>Lampa looks like a regular streaming service. No need to explain to parents what a magnet link is — they just choose a movie and watch.</p>
+<hr>
+<h2 id="internet-and-device-requirements">Internet and Device Requirements</h2>
+<h3 id="internet-speed">Internet Speed</h3>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Content Quality
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Minimum Speed
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Recommended
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          720p
+        </td>
+        
+        <td 
+          class=""
+        >
+          10 Mbps
+        </td>
+        
+        <td 
+          class=""
+        >
+          20 Mbps
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          1080p
+        </td>
+        
+        <td 
+          class=""
+        >
+          20 Mbps
+        </td>
+        
+        <td 
+          class=""
+        >
+          40 Mbps
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          1080p Remux
+        </td>
+        
+        <td 
+          class=""
+        >
+          40 Mbps
+        </td>
+        
+        <td 
+          class=""
+        >
+          60 Mbps
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          4K SDR
+        </td>
+        
+        <td 
+          class=""
+        >
+          40 Mbps
+        </td>
+        
+        <td 
+          class=""
+        >
+          60 Mbps
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          4K HDR/Remux
+        </td>
+        
+        <td 
+          class=""
+        >
+          80 Mbps
+        </td>
+        
+        <td 
+          class=""
+        >
+          100+ Mbps
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Content Quality
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          720p
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Minimum Speed
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          10 Mbps
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Recommended
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          20 Mbps
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Content Quality
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          1080p
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Minimum Speed
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          20 Mbps
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Recommended
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          40 Mbps
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Content Quality
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          1080p Remux
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Minimum Speed
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          40 Mbps
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Recommended
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          60 Mbps
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Content Quality
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          4K SDR
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Minimum Speed
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          40 Mbps
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Recommended
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          60 Mbps
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Content Quality
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          4K HDR/Remux
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Minimum Speed
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          80 Mbps
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Recommended
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          100+ Mbps
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><p><strong>Note:</strong> Actual requirements depend on torrent health. A popular movie with hundreds of seeders will work even on slow internet. A rare release with 2–3 peers may buffer even at 200 Mbps.</p>
+<h3 id="supported-devices">Supported Devices</h3>
+<p><strong>Android TV / Google TV</strong></p>
+<ul>
+<li>Best option: native Lampa app + TorrServer</li>
+<li>Compatible: Xiaomi Mi Box, NVIDIA Shield, Ugoos, Sony, Philips, TCL TVs with Android TV</li>
+<li><a href="https://github.com/lampa-app/LAMPA/releases" target="_blank">Download Lampa for Android TV</a>
+</li>
+</ul>
+<p><strong>Regular Smart TVs (Samsung Tizen, LG webOS)</strong></p>
+<ul>
+<li>Lampa works via browser or special apps</li>
+<li>TorrServer — on a separate device in the network</li>
+<li>Requires additional setup</li>
+</ul>
+<p><strong>Apple TV (tvOS)</strong></p>
+<ul>
+<li>Can be installed using the <strong>Luxo</strong> app (available only in App Store on Apple TV) — just enter the address <code>lampa.mx</code> or an alternative</li>
+<li>More details in the Apple TV section below</li>
+</ul>
+<p><strong>Xbox</strong></p>
+<ul>
+<li>Can be installed using <strong>Media Station X</strong> app</li>
+<li><a href="https://apps.microsoft.com/detail/9P4Z98MLJPLZ" target="_blank">Download Media Station X from Microsoft Store</a>
+</li>
+<li>Great option for those who already have a console</li>
+</ul>
+<p><strong>PC (Windows, macOS, Linux)</strong></p>
+<ul>
+<li>TorrServer runs as a background service (we recommend TorrServe MatriX)</li>
+<li>Lampa opens in browser</li>
+<li>Playback — via built-in player or VLC/mpv</li>
+</ul>
+<p><strong>Smartphones and Tablets</strong></p>
+<ul>
+<li>Android: Lampa app from APK</li>
+<li>iOS: via web version (with limitations)</li>
+</ul>
+<h3 id="to-run-torrserver-youll-need">To Run TorrServer You&rsquo;ll Need</h3>
+<ul>
+<li><strong>Minimum:</strong> the viewing device itself (Android TV)</li>
+<li><strong>Optimal:</strong> separate mini-PC, NAS, or Raspberry Pi 4</li>
+<li><strong>Resources:</strong> 512 MB RAM, any processor, stable internet</li>
+</ul>
+<hr>
+<h2 id="apple-tv-tvos-a-special-case">Apple TV (tvOS): A Special Case</h2>
+<h3 id="is-lampa-supported-on-apple-tv">Is Lampa Supported on Apple TV?</h3>
+<p>Not directly through the App Store — no. Apple strictly controls what can be installed on tvOS. However, there&rsquo;s a convenient solution!</p>
+<h3 id="installation-via-luxo">Installation via Luxo</h3>
+<p>The simplest and working method for Apple TV:</p>
+<ol>
+<li>Open <strong>App Store</strong> directly on Apple TV</li>
+<li>Find and install the <strong>Luxo</strong> app</li>
+<li>Open Luxo and find the address input field</li>
+<li>Enter the address: <code>lampa.mx</code> or an alternative (e.g., <code>bylampa.online</code>)</li>
+<li>Done! Lampa will load inside Luxo</li>
+</ol>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>No jailbreak required</li>
+<li>Official app from the App Store</li>
+<li>Works stably</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>TorrServer still needs to run on a separate device</li>
+<li>Dependent on Luxo&rsquo;s functionality</li>
+</ul>
+<h3 id="alternative-methods">Alternative Methods</h3>
+<p><strong>Via AirPlay / Screen Mirroring:</strong></p>
+<ul>
+<li>Open Lampa on iPhone/iPad or Mac</li>
+<li>Mirror your screen to Apple TV</li>
+<li>Watch content on the big screen</li>
+</ul>
+<p><strong>Via Infuse + TorrServer:</strong></p>
+<ul>
+<li>TorrServer on a separate device (NAS, PC, Raspberry Pi)</li>
+<li>On Apple TV — the <a href="https://apps.apple.com/app/infuse-7/id1136220934" target="_blank">Infuse</a>
+ media player</li>
+<li>The player connects to TorrServer over the network</li>
+<li>Use Lampa on another device for navigation</li>
+</ul>
+<h3 id="tvos-limitations-compared-to-other-platforms">tvOS Limitations Compared to Other Platforms</h3>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Aspect
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Android TV
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Smart TV
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Apple TV
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Lampa installation
+        </td>
+        
+        <td 
+          class=""
+        >
+          Easy (APK)
+        </td>
+        
+        <td 
+          class=""
+        >
+          Medium (browser)
+        </td>
+        
+        <td 
+          class=""
+        >
+          Via Luxo
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Native app
+        </td>
+        
+        <td 
+          class=""
+        >
+          Yes
+        </td>
+        
+        <td 
+          class=""
+        >
+          Partially
+        </td>
+        
+        <td 
+          class=""
+        >
+          Via wrapper
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          TorrServer on device
+        </td>
+        
+        <td 
+          class=""
+        >
+          Yes
+        </td>
+        
+        <td 
+          class=""
+        >
+          No
+        </td>
+        
+        <td 
+          class=""
+        >
+          No
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          4K HDR support
+        </td>
+        
+        <td 
+          class=""
+        >
+          Yes
+        </td>
+        
+        <td 
+          class=""
+        >
+          Depends on model
+        </td>
+        
+        <td 
+          class=""
+        >
+          Yes
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Control convenience
+        </td>
+        
+        <td 
+          class=""
+        >
+          High
+        </td>
+        
+        <td 
+          class=""
+        >
+          Medium
+        </td>
+        
+        <td 
+          class=""
+        >
+          Good via Luxo
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Aspect
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Lampa installation
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Android TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Easy (APK)
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Smart TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Medium (browser)
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Apple TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Via Luxo
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Aspect
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Native app
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Android TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Yes
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Smart TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Partially
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Apple TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Via wrapper
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Aspect
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          TorrServer on device
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Android TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Yes
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Smart TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          No
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Apple TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          No
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Aspect
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          4K HDR support
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Android TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Yes
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Smart TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Depends on model
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Apple TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Yes
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Aspect
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Control convenience
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Android TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          High
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Smart TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Medium
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Apple TV
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Good via Luxo
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><h3 id="who-apple-tv-will-suit-and-who-it-wont">Who Apple TV Will Suit and Who It Won&rsquo;t</h3>
+<p><strong>Will suit:</strong></p>
+<ul>
+<li>Those who already have Apple TV and the Apple ecosystem</li>
+<li>Users willing to use Luxo</li>
+<li>Fans of AirPlay streaming from other Apple devices</li>
+</ul>
+<p><strong>Won&rsquo;t suit:</strong></p>
+<ul>
+<li>Those who want to set everything up in 5 minutes without additional devices</li>
+<li>Users without a separate device for TorrServer</li>
+</ul>
+<hr>
+<h2 id="xbox-an-unexpected-option-for-gamers">Xbox: An Unexpected Option for Gamers</h2>
+<p>If you have an Xbox, you can turn it into a full-fledged media center!</p>
+<h3 id="installation-via-media-station-x">Installation via Media Station X</h3>
+<ol>
+<li>Find and install <strong><a href="https://apps.microsoft.com/detail/9P4Z98MLJPLZ" target="_blank">Media Station X</a>
+</strong> from the Microsoft Store</li>
+<li>Open the app and go to settings</li>
+<li>Add a source with the Lampa address (<code>lampa.mx</code> or <code>bylampa.online</code>)</li>
+<li>Enjoy watching!</li>
+</ol>
+<p>This is a great solution for those who already own a console and don&rsquo;t want to buy a separate TV box.</p>
+<hr>
+<h2 id="installing-lampa-on-different-devices">Installing Lampa on Different Devices</h2>
+<h3 id="android-tv--google-tv--native-installation">Android TV / Google TV — Native Installation</h3>
+<p>This is the best platform for Lampa. Full-featured app, convenient remote control, ability to install TorrServer directly on the device.</p>
+<h4 id="what-youll-need">What You&rsquo;ll Need</h4>
+<ul>
+<li>Device on Android TV 7.0+ (Xiaomi Mi Box, NVIDIA Shield, Ugoos, Sony/Philips/TCL TVs)</li>
+<li>Unknown sources installation enabled</li>
+<li>Lampa APK file</li>
+</ul>
+<h4 id="step-by-step-installation">Step-by-Step Installation</h4>
+<p><strong>Step 1.</strong> Allow installation from unknown sources</p>
+<p>Go to: <strong>Settings → Security &amp; Restrictions → Unknown Sources</strong></p>
+<p>Enable permission for the file manager or browser you&rsquo;ll use for installation.</p>
+<p><strong>Step 2.</strong> Download the Lampa APK file</p>
+<p>Options:</p>
+<ul>
+<li>Via built-in browser: go to <a href="https://github.com/lampa-app/LAMPA/releases" target="_blank">GitHub Lampa</a>
+</li>
+<li>Via <strong><a href="https://play.google.com/store/apps/details?id=com.esaba.downloader" target="_blank">Downloader</a>
+</strong> app from Google Play: enter the download URL</li>
+<li>Via <strong><a href="https://play.google.com/store/apps/details?id=de.benzac.msx&amp;hl=ru" target="_blank">Media Station X</a>
+</strong> app from Google Play</li>
+<li>Transfer APK from computer to USB drive</li>
+</ul>
+<p><strong>Step 3.</strong> Install the application</p>
+<p>Open the downloaded file via file manager and confirm installation.</p>
+<p><strong>Step 4.</strong> First launch and setup</p>
+<p>On first launch, Lampa will ask to:</p>
+<ul>
+<li>Choose interface language</li>
+<li>Specify server address</li>
+</ul>
+<p><strong>Step 5.</strong> Add plugins (for official version)</p>
+<p>Go to: <strong>Settings → Extensions → Add Plugin</strong></p>
+<p>Enter the plugin address:</p>
+<pre><code>https://skaztv.online/store.js
+</code></pre>
+<p>Press &ldquo;Add&rdquo; and <strong>completely restart the application</strong> (not just minimize!).</p>
+<p><strong>Step 6.</strong> Install TorrServer</p>
+<p>For torrent streaming, install TorrServer as a separate application. APK is available on <a href="https://github.com/YouROK/TorrServer/releases" target="_blank">the project&rsquo;s GitHub</a>
+.</p>
+<p>After installation, specify the TorrServer address in Lampa settings:</p>
+<pre><code>http://127.0.0.1:8090
+</code></pre>
+<p>(if TorrServer is running on the same device)</p>
+<h4 id="alternative-lampa-uncensored">Alternative: Lampa UNCENSORED</h4>
+<p>If you don&rsquo;t want to manually add plugins:</p>
+<ol>
+<li>Install standard Lampa</li>
+<li>Go to <strong>Settings → General → Server Address</strong></li>
+<li>Replace the address with:
+<ul>
+<li><code>bylampa.online</code> (short variant)</li>
+<li><code>https://bylampa.online/</code> (full address needed for Android TV)</li>
+<li><code>http://bylampa.online/</code> (for older devices)</li>
+</ul>
+</li>
+<li>Restart the application</li>
+</ol>
+<p><strong>Note:</strong> the address <code>http://lampa.mx</code> is the standard server without pre-installed plugins.</p>
+<hr>
+<h3 id="smart-tv-samsung-tizen-lg-webos">Smart TV (Samsung Tizen, LG webOS)</h3>
+<p>On Samsung and LG TVs, there&rsquo;s no way to install APK directly.</p>
+<h4 id="method-1-built-in-browser">Method 1: Built-in Browser</h4>
+<p><strong>For Samsung:</strong></p>
+<ol>
+<li>Open the <strong>Internet</strong> app (browser)</li>
+<li>Go to: <code>bylampa.online</code> or <code>lampa.mx</code></li>
+<li>Add the page to bookmarks</li>
+</ol>
+<p><strong>For LG:</strong></p>
+<ol>
+<li>Open <strong>Web Browser</strong></li>
+<li>Enter the Lampa address</li>
+<li>Save to favorites</li>
+</ol>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li>Inconvenient cursor control</li>
+<li>Possible playback issues with some formats</li>
+<li>No background mode</li>
+</ul>
+<h4 id="method-2-apps-from-official-stores">Method 2: Apps from Official Stores</h4>
+<p>For Samsung (Tizen App Store) and LG (LG Content Store), there are Lampa versions available. They already have the &ldquo;Parser&rdquo; option — no additional plugins needed.</p>
+<h4 id="important-torrserver-on-a-separate-device">Important: TorrServer on a Separate Device</h4>
+<p>Smart TVs cannot run TorrServer locally. You&rsquo;ll need:</p>
+<ul>
+<li>A computer on the same network</li>
+<li>NAS (Synology, QNAP)</li>
+<li>Raspberry Pi</li>
+<li>Router with Entware support</li>
+</ul>
+<p>In Lampa settings, specify the IP address of the device with TorrServer:</p>
+<pre><code>http://192.168.1.100:8090
+</code></pre>
+<p>(replace with your IP)</p>
+<hr>
+<h3 id="pc-windows--macos--linux--detailed-guide">PC (Windows / macOS / Linux) — Detailed Guide</h3>
+<p>On a computer, Lampa works through a browser, and TorrServer runs as a local server. For Windows, I recommend using <strong>TorrServe MatriX</strong> — a convenient version with a graphical interface.</p>
+<h4 id="installing-torrserve-matrix-windows">Installing TorrServe MatriX (Windows)</h4>
+<p><strong>Step 1.</strong> Download TorrServe MatriX</p>
+<p>Go to <a href="https://github.com/YouROK/TorrServer/releases" target="_blank">GitHub TorrServe MatriX</a>
+ and download the <code>TorrServer-windows-amd64.exe</code> file for Windows.</p>
+<p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_88lcabrkFw.png" alt="TorrServer releases page on GitHub"></p>
+<p><strong>Step 2.</strong> Launch TorrServer</p>
+<p>Run the downloaded file. Windows may show a SmartScreen warning — click &ldquo;More info&rdquo; → &ldquo;Run anyway.&rdquo;</p>
+<p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_AQPjffiJw4.png" alt="Windows SmartScreen warning"></p>
+<p><strong>Step 3.</strong> Verify the server is working</p>
+<p>Open a browser and go to:</p>
+<pre><code>http://127.0.0.1:8090
+</code></pre>
+<p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_qYZ3xl871M.png" alt="TorrServer web interface in browser. Here you can manually add torrents, see active releases, and configure caching parameters."></p>
+<p><strong>Step 4.</strong> Open Lampa in browser</p>
+<p>In a new tab, go to:</p>
+<ul>
+<li><a href="https://bylampa.online/" target="_blank">bylampa.online</a>
+ — version with pre-installed plugins</li>
+<li><a href="http://lampa.mx" target="_blank">lampa.mx</a>
+ — clean version</li>
+</ul>
+<p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_dZKMz7CBAg.jpg" alt="Lampa main page in browser"></p>
+<p><strong>Step 5.</strong> Configure TorrServer connection</p>
+<p>Go to <strong>Settings</strong> (gear icon) → <strong>General</strong> → <strong>TorrServer</strong></p>
+<p>Enter the address:</p>
+<pre><code>127.0.0.1:8090
+</code></pre>
+
+
+
+  <blockquote>
+    <p><strong>💡 Important:</strong> The address <code>127.0.0.1</code> only works if Lampa is opened on the same computer where TorrServer is running.</p>
+<p>If you want to connect from another device on your local network (e.g., from a TV or phone), you need to find the <strong>local IPv4 address</strong> of the computer with TorrServer:</p>
+<p><strong>Windows:</strong> open Command Prompt (Win+R → <code>cmd</code>) and enter:</p>
+<pre><code>ipconfig
+</code></pre>
+<p>Find the <strong>IPv4 Address</strong> line (usually looks like <code>192.168.X.X</code>) and use it instead of <code>127.0.0.1</code>:</p>
+<pre><code>192.168.1.100:8090
+</code></pre>
+  </blockquote>
+
+<p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_5uOWx31rS0.jpg" alt="TorrServer settings in Lampa"></p>
+<p><strong>Step 6.</strong> Install a parser (torrent source)</p>
+<p>A parser is a plugin that searches for torrents for movies and TV shows. <strong>Without an installed parser, Lampa cannot find releases</strong> — when trying to open torrents, you&rsquo;ll see an empty list.</p>
+<p><strong>6.1.</strong> First, add the parser plugin:</p>
+<p>Go to: <strong>Settings → Extensions → Add Plugin</strong></p>
+<p>Enter one of the addresses:</p>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Parser
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Plugin Address
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Jackett (public)
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>https://bylampa.github.io/jackett.js</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          PubTorr
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>https://lampame.github.io/main/pubtorr.js</code>
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Parser
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Jackett (public)
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>https://bylampa.github.io/jackett.js</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Parser
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          PubTorr
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>https://lampame.github.io/main/pubtorr.js</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_rMqfTLXNqs.png" alt="Adding a parser plugin in the Extensions section"></p>
+<p>Click <strong>&ldquo;Add&rdquo;</strong> and refresh the page.</p>
+<p><strong>6.2.</strong> Then activate the parser in settings:</p>
+<p>Go to: <strong>Settings → Parser</strong></p>
+<p>Select the installed parser from the list.</p>
+<p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_hfz8ZhII9j.jpg" alt="Selecting active parser in settings"></p>
+<p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_MfZOh7fllt.png" alt="Selecting active parser in settings"></p>
+<p><strong>6.3.</strong> Test the parser:</p>
+<p>Open any movie and go to the <strong>&ldquo;Torrents&rdquo;</strong> section. If everything is configured correctly, you&rsquo;ll see a list of releases with quality, size, and seeder count.</p>
+<p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_cJ3zJsTV9p.png" alt="Torrent list from parser — releases are shown with quality, size, and seeder count"></p>
+
+
+
+  <blockquote>
+    <p><strong>💡 Tip:</strong> If one parser doesn&rsquo;t work or shows few results — try installing a different one.</p>
+  </blockquote>
+
+<p><strong>Step 7.</strong> Add plugin catalog (optional)</p>
+<p>If you&rsquo;re using the clean lampa.mx version and want access to additional plugins, you can add a third-party catalog.</p>
+<p>Go to: <strong>Settings → Extensions → Add Plugin</strong></p>
+<p>Enter:</p>
+<pre><code>https://skaztv.online/store.js
+</code></pre>
+<p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_WnY8oRozZH.png" alt="Adding plugin catalog to Lampa"></p>
+
+
+
+  <blockquote>
+    <p><strong>⚠️ Note:</strong> This is an unofficial catalog of third-party plugins that includes pirated content sources. Use at your own discretion and be aware of legal aspects in your country.</p>
+  </blockquote>
+
+<p><strong>Step 8.</strong> Done! Choose a movie and watch</p>
+<p>Find a movie through search or catalog, click on it, select &ldquo;Torrents&rdquo; source, choose quality — playback will start in a few seconds.</p>
+<p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_fW89Eij9qq.jpg" alt="Choosing a movie"></p>
+<p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_fBuQrEPaNw.jpg" alt="Watching via torrents"></p>
+<p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_snXljSsI2a.png" alt="List of available releases with quality, size, and seeder count. Choose a release with more seeders for stable playback."></p>
+<p><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/img/comet_CNwK885iak.jpg" alt="Movie playback through Lampa"></p>
+<h4 id="installation-on-macos">Installation on macOS</h4>
+<ol>
+<li>Download <code>TorrServer-darwin-amd64</code> from <a href="https://github.com/YouROK/TorrServer/releases" target="_blank">GitHub</a>
+</li>
+<li>Open <strong>System Preferences → Security &amp; Privacy</strong></li>
+<li>Allow running the downloaded file</li>
+<li>Run via terminal or double-click</li>
+<li>Open Lampa in browser and configure as described above</li>
+</ol>
+<h4 id="installation-on-linux">Installation on Linux</h4>
+<pre><code class="language-bash">wget https://github.com/YouROK/TorrServer/releases/latest/download/TorrServer-linux-amd64
+chmod +x TorrServer-linux-amd64
+./TorrServer-linux-amd64
+</code></pre>
+<p>Then open Lampa in browser and configure connection to <code>http://127.0.0.1:8090</code>.</p>
+<hr>
+<h3 id="smartphones-and-tablets">Smartphones and Tablets</h3>
+<h4 id="android">Android</h4>
+<ol>
+<li>Download APK from <a href="https://github.com/lampa-app/LAMPA/releases" target="_blank">GitHub Lampa</a>
+</li>
+<li>Allow installation from unknown sources</li>
+<li>Install and configure as on Android TV</li>
+</ol>
+<p>TorrServer can run directly on the phone (there&rsquo;s a mobile version), but it heavily drains battery. Better to use a server on another device.</p>
+<h4 id="ios--ipados">iOS / iPadOS</h4>
+<p>No native app available. Options:</p>
+<ul>
+<li><strong>Web version in Safari:</strong> open <a href="https://bylampa.online" target="_blank">bylampa.online</a>
+, add to home screen</li>
+<li><strong>AirPlay</strong> to Apple TV or TV</li>
+</ul>
+<hr>
+<h2 id="useful-plugins-for-lampa">Useful Plugins for Lampa</h2>
+<p>Here&rsquo;s a list of verified plugins that will extend Lampa&rsquo;s capabilities. Add them via <strong>Settings → Extensions → Add Plugin</strong>.</p>
+<h3 id="torrent-plugins">Torrent Plugins</h3>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Plugin
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Address
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Adds &ldquo;Parser&rdquo; item</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          For smart TVs from official stores
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>http://cub.rip/plugin/etor</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Parser switching</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Server selection for torrent search with status display
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>https://bylampa.github.io/jackett.js</code> or <code>https://lampame.github.io/main/pubtorr.js</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Tracks</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Audio track and subtitle selection in torrents
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>http://cub.rip/plugin/tracks</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Local TorrServer search</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Automatic TorrServer discovery in local network
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>http://193.233.134.21/plugins/checker.js</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Torrent download</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          qBittorrent and Transmission connection
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>https://lampame.github.io/main/torrentmanager/torrentmanager.js</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Second Torrents button</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Additional button with parser selection
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>https://github.freebie.tom.ru/torrents.js</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Free Torrserver</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Free TorrServers online (if you don&rsquo;t have your own)
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>https://bylampa.github.io/freetorr.js</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Loading visualization</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Beautiful preloader before video starts
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>https://plugin.rootu.top/ts-preload.js</code>
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Adds &ldquo;Parser&rdquo; item</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          For smart TVs from official stores
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>http://cub.rip/plugin/etor</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Parser switching</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Server selection for torrent search with status display
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>https://bylampa.github.io/jackett.js</code> or <code>https://lampame.github.io/main/pubtorr.js</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Tracks</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Audio track and subtitle selection in torrents
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>http://cub.rip/plugin/tracks</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Local TorrServer search</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Automatic TorrServer discovery in local network
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>http://193.233.134.21/plugins/checker.js</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Torrent download</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          qBittorrent and Transmission connection
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>https://lampame.github.io/main/torrentmanager/torrentmanager.js</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Second Torrents button</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Additional button with parser selection
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>https://github.freebie.tom.ru/torrents.js</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Free Torrserver</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Free TorrServers online (if you don&rsquo;t have your own)
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>https://bylampa.github.io/freetorr.js</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Loading visualization</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Beautiful preloader before video starts
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>https://plugin.rootu.top/ts-preload.js</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><h3 id="tv-plugins">TV Plugins</h3>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Plugin
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Address
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Diesel TV</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Free TV channels with program guide and archive
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>https://andreyurl54.github.io/diesel5/diesel.js</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Kulik TV</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          IPTV channels (requires activation via Telegram bot @kuliktv_bot)
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>http://cdn.kulik.uz/cors</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>IPTV</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          IPTV viewing with your own playlists
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>http://cub.rip/plugin/iptv</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Hack TV</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Free channels (quality may vary)
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>https://bylampa.github.io/tv.js</code>
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Diesel TV</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Free TV channels with program guide and archive
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>https://andreyurl54.github.io/diesel5/diesel.js</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Kulik TV</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          IPTV channels (requires activation via Telegram bot @kuliktv_bot)
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>http://cdn.kulik.uz/cors</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>IPTV</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          IPTV viewing with your own playlists
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>http://cub.rip/plugin/iptv</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Hack TV</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Free channels (quality may vary)
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>https://bylampa.github.io/tv.js</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><h3 id="18-plugins">18+ Plugins</h3>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Plugin
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Address
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Strawberry</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Content from Pornhub, Xvideos and others
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>https://bwa.to/s</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Strawberry (Bwa Cloud)</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Alternative version for older devices
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>http://bwa-cloud.cfhttp.top/sisi.js</code>
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Strawberry</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Content from Pornhub, Xvideos and others
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>https://bwa.to/s</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Plugin
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Strawberry (Bwa Cloud)</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Alternative version for older devices
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>http://bwa-cloud.cfhttp.top/sisi.js</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><hr>
+<h2 id="limitations-and-risks-what-you-should-know">Limitations and Risks: What You Should Know</h2>
+<h3 id="technical-limitations">Technical Limitations</h3>
+<p><strong>Dependency on Seeders</strong>
+If a release is &ldquo;dead&rdquo; (no users sharing the file) — you won&rsquo;t be able to watch. This applies to rare and old content.</p>
+<p><strong>Buffering When Seeking</strong>
+Jumping 30 minutes forward = new data request. You&rsquo;ll have to wait a few seconds.</p>
+<p><strong>Format Compatibility</strong>
+Not all players correctly play HDR, Dolby Vision, multichannel audio. On cheap boxes, 4K may stutter.</p>
+<p><strong>Plugin Instability</strong>
+Content sources may stop working, addresses change. Plugins need periodic updating.</p>
+<hr>
+<h2 id="who-this-viewing-method-suits">Who This Viewing Method Suits</h2>
+<h3 id="ideally-suits">Ideally Suits:</h3>
+<p><strong>Quality Enthusiasts</strong>
+Those who won&rsquo;t settle for Netflix compression and want Remux versions.</p>
+<p><strong>Users with Limited Storage</strong>
+If your TV box has 8 GB of memory — traditional downloading isn&rsquo;t an option.</p>
+<p><strong>Home Media Server Owners</strong>
+TorrServer fits perfectly into an ecosystem with Plex, Jellyfin, NAS.</p>
+<p><strong>Rare Content Viewers</strong>
+Art house cinema, old TV shows, foreign shows without localization.</p>
+<p><strong>Android TV Users</strong>
+Maximum simple setup, everything works natively.</p>
+<h3 id="may-not-suit">May Not Suit:</h3>
+<p><strong>With Unstable Internet</strong>
+Frequent disconnections = constant buffering.</p>
+<p><strong>For Background Viewing</strong>
+If content is just background, easier to turn on YouTube.</p>
+<p><strong>Those Not Ready for Minimal Setup</strong>
+Initial configuration will require 20–30 minutes.</p>
+<hr>
+<h2 id="quick-installation-reference">Quick Installation Reference</h2>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Platform
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Difficulty
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Recommendation
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Android TV
+        </td>
+        
+        <td 
+          class=""
+        >
+          ★☆☆☆☆
+        </td>
+        
+        <td 
+          class=""
+        >
+          Best choice — APK + TorrServer on device
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Smart TV (Samsung/LG)
+        </td>
+        
+        <td 
+          class=""
+        >
+          ★★★☆☆
+        </td>
+        
+        <td 
+          class=""
+        >
+          Browser or app from store + TorrServer separately
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Apple TV
+        </td>
+        
+        <td 
+          class=""
+        >
+          ★★☆☆☆
+        </td>
+        
+        <td 
+          class=""
+        >
+          Luxo (from App Store on Apple TV) + TorrServer on separate device
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Xbox
+        </td>
+        
+        <td 
+          class=""
+        >
+          ★★☆☆☆
+        </td>
+        
+        <td 
+          class=""
+        >
+          Media Station X + TorrServer separately
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Windows/macOS/Linux
+        </td>
+        
+        <td 
+          class=""
+        >
+          ★★☆☆☆
+        </td>
+        
+        <td 
+          class=""
+        >
+          Browser + TorrServe MatriX
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Android smartphone
+        </td>
+        
+        <td 
+          class=""
+        >
+          ★★☆☆☆
+        </td>
+        
+        <td 
+          class=""
+        >
+          APK, TorrServer better on server
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          iPhone/iPad
+        </td>
+        
+        <td 
+          class=""
+        >
+          ★★★☆☆
+        </td>
+        
+        <td 
+          class=""
+        >
+          Web version only
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Platform
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Android TV
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Difficulty
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          ★☆☆☆☆
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Recommendation
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Best choice — APK + TorrServer on device
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Platform
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Smart TV (Samsung/LG)
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Difficulty
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          ★★★☆☆
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Recommendation
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Browser or app from store + TorrServer separately
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Platform
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Apple TV
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Difficulty
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          ★★☆☆☆
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Recommendation
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Luxo (from App Store on Apple TV) + TorrServer on separate device
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Platform
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Xbox
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Difficulty
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          ★★☆☆☆
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Recommendation
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Media Station X + TorrServer separately
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Platform
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Windows/macOS/Linux
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Difficulty
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          ★★☆☆☆
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Recommendation
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Browser + TorrServe MatriX
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Platform
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Android smartphone
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Difficulty
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          ★★☆☆☆
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Recommendation
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          APK, TorrServer better on server
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Platform
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          iPhone/iPad
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Difficulty
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          ★★★☆☆
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Recommendation
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Web version only
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><hr>
+<h2 id="conclusion">Conclusion</h2>
+<p>The Lampa + TorrServer combo is truly a convenient tool for organizing a home theater. The technology has become more accessible: installation has been simplified, new plugins have appeared, buffering has improved.</p>
+<p>For those who value freedom of choice and picture quality — this is one of the best options. And the ability to install on Xbox and Apple TV makes the system even more universal!</p>
+<p>In the next article, I&rsquo;ll tell you more about running TorrServer on a remote server — this will open up even more possibilities for multi-room viewing.</p>
+<hr>
+<h2 id="useful-links">Useful Links</h2>
+<h3 id="official-resources">Official Resources</h3>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Resource
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Link
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Lampa (official site)</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://lampa.mx" target="_blank">lampa.mx</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Lampa (GitHub, APK)</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/lampa-app/LAMPA/releases" target="_blank">github.com/lampa-app/LAMPA/releases</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Lampa UNCENSORED</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://bylampa.online" target="_blank">bylampa.online</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>TorrServer (GitHub)</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/YouROK/TorrServer" target="_blank">github.com/YouROK/TorrServer</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>TorrServer (releases)</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/YouROK/TorrServer/releases" target="_blank">GitHub Releases</a>
+
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Resource
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Lampa (official site)</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Link
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://lampa.mx" target="_blank">lampa.mx</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Resource
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Lampa (GitHub, APK)</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Link
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/lampa-app/LAMPA/releases" target="_blank">github.com/lampa-app/LAMPA/releases</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Resource
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Lampa UNCENSORED</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Link
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://bylampa.online" target="_blank">bylampa.online</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Resource
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>TorrServer (GitHub)</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Link
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/YouROK/TorrServer" target="_blank">github.com/YouROK/TorrServer</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Resource
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>TorrServer (releases)</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Link
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/YouROK/TorrServer/releases" target="_blank">GitHub Releases</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><h3 id="apps-for-devices">Apps for Devices</h3>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Platform
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          App
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Link
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Apple TV</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Infuse
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://apps.apple.com/app/infuse-7/id1136220934" target="_blank">App Store</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Xbox</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Media Station X
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://apps.microsoft.com/detail/9P4Z98MLJPLZ" target="_blank">Microsoft Store</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Android TV</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Media Station X
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://play.google.com/store/apps/details?id=de.benzac.msx&amp;hl=ru" target="_blank">Google Play</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Android TV</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Downloader
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://play.google.com/store/apps/details?id=com.esaba.downloader" target="_blank">Google Play</a>
+
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Platform
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Apple TV</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          App
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Infuse
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Link
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://apps.apple.com/app/infuse-7/id1136220934" target="_blank">App Store</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Platform
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Xbox</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          App
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Media Station X
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Link
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://apps.microsoft.com/detail/9P4Z98MLJPLZ" target="_blank">Microsoft Store</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Platform
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Android TV</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          App
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Media Station X
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Link
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://play.google.com/store/apps/details?id=de.benzac.msx&amp;hl=ru" target="_blank">Google Play</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Platform
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Android TV</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          App
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Downloader
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Link
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://play.google.com/store/apps/details?id=com.esaba.downloader" target="_blank">Google Play</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><h3 id="plugin-store">Plugin Store</h3>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Address
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Main plugin store</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <code>https://skaztv.online/store.js</code>
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>cub.rip (authorization)</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://cub.rip" target="_blank">cub.rip</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>cub.rip IPTV</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://cub.rip/iptv/" target="_blank">cub.rip/iptv</a>
+
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Main plugin store</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <code>https://skaztv.online/store.js</code>
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>cub.rip (authorization)</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://cub.rip" target="_blank">cub.rip</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>cub.rip IPTV</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Address
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://cub.rip/iptv/" target="_blank">cub.rip/iptv</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><div class="divider my-8 text-base-content/20"></div>
+
+<div class="flex justify-center my-6">
+  <button onclick="document.getElementById('donation-modal').showModal()"
+          class="btn btn-lg btn-primary rounded-full shadow-lg hover:shadow-xl 
+                 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] 
+                 active:scale-[0.98] gap-2 px-8 border-0 no-underline">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+    </svg>
+    <span>Support the project</span>
+  </button>
+</div>
+
+<div class="divider my-8 text-base-content/20"></div>
+
+
+<dialog id="donation-modal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box bg-base-100 p-0 overflow-hidden shadow-2xl max-w-md">
+    
+    
+    <div class="bg-primary p-6 relative">
+      <form method="dialog" class="absolute top-4 right-4">
+        <button class="btn btn-sm btn-circle btn-ghost text-primary-content/70 
+                       hover:text-primary-content hover:bg-primary-content/10">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </form>
+      
+      <div class="flex items-center gap-4">
+        <div class="bg-primary-content/15 p-3 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-content" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-primary-content">Support the Project</h3>
+          <p class="text-primary-content/80 text-sm mt-1">Choose a convenient method</p>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="p-6 space-y-4">
+      
+      
+      <a href="https://pay.cloudtips.ru/p/b59e1765" 
+         target="_blank"
+         rel="noopener noreferrer"
+         class="group flex items-center gap-4 p-4 rounded-xl border-2 border-base-300 
+                hover:border-primary hover:shadow-lg hover:bg-base-200/50
+                transition-all duration-200 no-underline block">
+        <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-xl 
+                    flex items-center justify-center shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z" />
+          </svg>
+        </div>
+        <div class="flex-grow min-w-0">
+          <h4 class="font-semibold text-base text-base-content">Cloudtips</h4>
+          <p class="text-sm text-base-content/60 mt-0.5">For users from Russia</p>
+        </div>
+        <div class="flex-shrink-0 text-base-content/30 group-hover:text-primary 
+                    transition-all group-hover:translate-x-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+      </a>
+      
+      
+      <a href="https://t.me/tribute/app?startapp=dE4k" 
+         target="_blank"
+         rel="noopener noreferrer"
+         class="group flex items-center gap-4 p-4 rounded-xl border-2 border-base-300 
+                hover:border-primary hover:shadow-lg hover:bg-base-200/50
+                transition-all duration-200 no-underline block">
+        <div class="flex-shrink-0 w-12 h-12 bg-purple-600 rounded-xl 
+                    flex items-center justify-center shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+          </svg>
+        </div>
+        <div class="flex-grow min-w-0">
+          <h4 class="font-semibold text-base text-base-content">Tribute</h4>
+          <p class="text-sm text-base-content/60 mt-0.5">International cards, Telegram Stars, USDT, Bitcoin, Toncoin, Notcoin</p>
+        </div>
+        <div class="flex-shrink-0 text-base-content/30 group-hover:text-primary 
+                    transition-all group-hover:translate-x-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+      </a>
+      
+      
+      <div class="mt-6 p-4 bg-base-200/50 rounded-xl">
+        <div class="flex items-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+          </svg>
+          <p class="text-sm text-base-content/70">
+            All payments are secure. Any support helps develop the project and create new content ❤️
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <form method="dialog" class="modal-backdrop bg-black/50">
+    <button>Close</button>
+  </form>
+</dialog>
+<p><em>Information current as of: January 2026. Plugin and server addresses may change — check for current data in thematic communities.</em></p>
+    </section>
+
+    
+    
+    <footer class="not-prose mt-12 pt-6 border-t border-base-300">
+      <div class="flex flex-wrap items-center gap-2">
+        <ion-icon name="pricetags-outline" class="text-lg text-base-content/60"></ion-icon>
+        
+        
+        <a href="/en/tags/lampa/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Lampa
+        </a>
+        
+        <a href="/en/tags/torrserver/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #TorrServer
+        </a>
+        
+        <a href="/en/tags/android-tv/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Android TV
+        </a>
+        
+        <a href="/en/tags/apple-tv/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Apple TV
+        </a>
+        
+        <a href="/en/tags/smart-tv/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Smart TV
+        </a>
+        
+        <a href="/en/tags/xbox/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Xbox
+        </a>
+        
+        <a href="/en/tags/streaming/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #streaming
+        </a>
+        
+        <a href="/en/tags/torrents/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #torrents
+        </a>
+        
+        <a href="/en/tags/4k/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #4K
+        </a>
+        
+        <a href="/en/tags/hdr/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #HDR
+        </a>
+        
+        <a href="/en/tags/media-center/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #media center
+        </a>
+        
+        <a href="/en/tags/home-theater/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #home theater
+        </a>
+        
+        <a href="/en/tags/iptv/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #IPTV
+        </a>
+        
+      </div>
+    </footer>
+    
+
+    
+    
+    <nav class="not-prose mt-8" aria-label="Post navigation">
+      <div class="divider"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div></div>
+
+        
+        <a href="/en/posts/chatgpt-claude-gemini-dns-dostup/" class="group card bg-base-200 hover:bg-base-300 transition-colors p-4 md:text-right">
+          <div class="flex items-center gap-3 md:flex-row-reverse">
+            <ion-icon name="chevron-forward" class="text-xl text-base-content/50 group-hover:text-primary transition-colors"></ion-icon>
+            <div class="min-w-0">
+              <span class="text-xs text-base-content/60 uppercase tracking-wide">Next page</span>
+              <p class="font-medium truncate">ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services</p>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+    </nav>
+    
+
+    
+    
+  </article>
+
+  
+  <aside class="hidden lg:block">
+    <div class="sticky top-20 space-y-6">
+      
+      
+
+      
+      
+      <div class="card bg-base-200 p-4">
+        <h3 class="font-semibold mb-3 flex items-center gap-2">
+          <ion-icon name="list-outline"></ion-icon>
+          Contents
+        </h3>
+        <nav class="text-sm">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-torrents-have-changed">Introduction: Torrents Have Changed</a></li>
+    <li><a href="#what-is-torrserver-and-why-its-a-game-changer">What Is TorrServer and Why It&rsquo;s a Game Changer</a>
+      <ul>
+        <li><a href="#the-core-technology">The Core Technology</a></li>
+        <li><a href="#how-it-works-technically-in-simple-terms">How It Works Technically (In Simple Terms)</a></li>
+        <li><a href="#why-this-isnt-just-background-downloading">Why This Isn&rsquo;t Just &ldquo;Background Downloading&rdquo;</a></li>
+      </ul>
+    </li>
+    <li><a href="#lampa-your-personal-movie-catalog">Lampa: Your Personal Movie Catalog</a>
+      <ul>
+        <li><a href="#what-it-is">What It Is</a></li>
+        <li><a href="#what-lampa-can-do">What Lampa Can Do</a></li>
+        <li><a href="#lampa-versions-which-to-choose">Lampa Versions: Which to Choose</a></li>
+        <li><a href="#key-advantage">Key Advantage</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-it-works-from-choosing-a-movie-to-playback">How It Works: From Choosing a Movie to Playback</a></li>
+    <li><a href="#advantages-why-this-is-convenient">Advantages: Why This Is Convenient</a>
+      <ul>
+        <li><a href="#1-instant-4k-content-playback">1. Instant 4K Content Playback</a></li>
+        <li><a href="#2-disk-space-savings">2. Disk Space Savings</a></li>
+        <li><a href="#3-access-to-rare-content">3. Access to Rare Content</a></li>
+        <li><a href="#4-flexible-quality-selection">4. Flexible Quality Selection</a></li>
+        <li><a href="#5-user-friendly-interface-for-the-whole-family">5. User-Friendly Interface for the Whole Family</a></li>
+      </ul>
+    </li>
+    <li><a href="#internet-and-device-requirements">Internet and Device Requirements</a>
+      <ul>
+        <li><a href="#internet-speed">Internet Speed</a></li>
+        <li><a href="#supported-devices">Supported Devices</a></li>
+        <li><a href="#to-run-torrserver-youll-need">To Run TorrServer You&rsquo;ll Need</a></li>
+      </ul>
+    </li>
+    <li><a href="#apple-tv-tvos-a-special-case">Apple TV (tvOS): A Special Case</a>
+      <ul>
+        <li><a href="#is-lampa-supported-on-apple-tv">Is Lampa Supported on Apple TV?</a></li>
+        <li><a href="#installation-via-luxo">Installation via Luxo</a></li>
+        <li><a href="#alternative-methods">Alternative Methods</a></li>
+        <li><a href="#tvos-limitations-compared-to-other-platforms">tvOS Limitations Compared to Other Platforms</a></li>
+        <li><a href="#who-apple-tv-will-suit-and-who-it-wont">Who Apple TV Will Suit and Who It Won&rsquo;t</a></li>
+      </ul>
+    </li>
+    <li><a href="#xbox-an-unexpected-option-for-gamers">Xbox: An Unexpected Option for Gamers</a>
+      <ul>
+        <li><a href="#installation-via-media-station-x">Installation via Media Station X</a></li>
+      </ul>
+    </li>
+    <li><a href="#installing-lampa-on-different-devices">Installing Lampa on Different Devices</a>
+      <ul>
+        <li><a href="#android-tv--google-tv--native-installation">Android TV / Google TV — Native Installation</a></li>
+        <li><a href="#smart-tv-samsung-tizen-lg-webos">Smart TV (Samsung Tizen, LG webOS)</a></li>
+        <li><a href="#pc-windows--macos--linux--detailed-guide">PC (Windows / macOS / Linux) — Detailed Guide</a></li>
+        <li><a href="#smartphones-and-tablets">Smartphones and Tablets</a></li>
+      </ul>
+    </li>
+    <li><a href="#useful-plugins-for-lampa">Useful Plugins for Lampa</a>
+      <ul>
+        <li><a href="#torrent-plugins">Torrent Plugins</a></li>
+        <li><a href="#tv-plugins">TV Plugins</a></li>
+        <li><a href="#18-plugins">18+ Plugins</a></li>
+      </ul>
+    </li>
+    <li><a href="#limitations-and-risks-what-you-should-know">Limitations and Risks: What You Should Know</a>
+      <ul>
+        <li><a href="#technical-limitations">Technical Limitations</a></li>
+      </ul>
+    </li>
+    <li><a href="#who-this-viewing-method-suits">Who This Viewing Method Suits</a>
+      <ul>
+        <li><a href="#ideally-suits">Ideally Suits:</a></li>
+        <li><a href="#may-not-suit">May Not Suit:</a></li>
+      </ul>
+    </li>
+    <li><a href="#quick-installation-reference">Quick Installation Reference</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#useful-links">Useful Links</a>
+      <ul>
+        <li><a href="#official-resources">Official Resources</a></li>
+        <li><a href="#apps-for-devices">Apps for Devices</a></li>
+        <li><a href="#plugin-store">Plugin Store</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </nav>
+      </div>
+      
+    </div>
+  </aside>
+</div>
+
+
+<div class="lg:hidden sticky bottom-6 z-50 pointer-events-none">
+  <div class="flex justify-end pr-6">
+    <button onclick="document.getElementById('mobile-actions-modal').showModal()" 
+            class="pointer-events-auto btn btn-circle btn-primary shadow-2xl w-14 h-14 group">
+      <ion-icon name="apps" class="text-2xl transition-transform duration-300 group-active:scale-90"></ion-icon>
+    </button>
+  </div>
+</div>
+
+
+<dialog id="mobile-actions-modal" class="modal modal-bottom lg:hidden">
+  <div class="modal-box rounded-t-3xl pb-8">
+    
+    <div class="flex justify-center mb-4">
+      <div class="w-12 h-1.5 bg-base-300 rounded-full"></div>
+    </div>
+    
+    
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="font-bold text-lg flex items-center gap-2">
+        <ion-icon name="apps-outline" class="text-primary"></ion-icon>
+        Quick Actions
+      </h3>
+      <button onclick="document.getElementById('mobile-actions-modal').close()" 
+              class="btn btn-circle btn-ghost btn-sm">
+        <ion-icon name="close" class="text-xl"></ion-icon>
+      </button>
+    </div>
+    
+    
+    <div class="grid grid-cols-4 gap-3">
+      
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-info/20 flex items-center justify-center">
+          <ion-icon name="arrow-up" class="text-2xl text-info"></ion-icon>
+        </div>
+        <span class="text-xs">Top</span>
+      </button>
+      
+      
+      
+      <button onclick="document.getElementById('mobile-actions-modal').close(); setTimeout(() => document.getElementById('mobile-toc-modal').showModal(), 150);"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-success/20 flex items-center justify-center">
+          <ion-icon name="list" class="text-2xl text-success"></ion-icon>
+        </div>
+        <span class="text-xs">Contents</span>
+      </button>
+      
+      
+      
+      <button onclick="navigator.share({title: 'How to Watch Movies and TV Shows in 4K via Lampa and TorrServer', url: 'https:\/\/0x69.ru\/en\/posts\/kak-smotret-filmy-4k-lampa-torrserver\/'}).catch(() => {}); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-warning/20 flex items-center justify-center">
+          <ion-icon name="share-social" class="text-2xl text-warning"></ion-icon>
+        </div>
+        <span class="text-xs">Share</span>
+      </button>
+      
+      
+      <button onclick="navigator.clipboard.writeText('https:\/\/0x69.ru\/en\/posts\/kak-smotret-filmy-4k-lampa-torrserver\/'); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-error/20 flex items-center justify-center">
+          <ion-icon name="copy" class="text-2xl text-error"></ion-icon>
+        </div>
+        <span class="text-xs">Copy</span>
+      </button>
+    </div>
+  </div>
+  
+  <form method="dialog" class="modal-backdrop bg-black/50">
+    <button>close</button>
+  </form>
+</dialog>
+
+
+
+<dialog id="mobile-toc-modal" class="modal modal-bottom">
+  <div class="modal-box rounded-t-3xl max-h-[75vh]">
+    <div class="flex justify-center mb-4">
+      <div class="w-12 h-1.5 bg-base-300 rounded-full"></div>
+    </div>
+    
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-bold text-lg">Contents</h3>
+      <button onclick="document.getElementById('mobile-toc-modal').close()" class="btn btn-circle btn-ghost btn-sm">
+        <ion-icon name="close" class="text-xl"></ion-icon>
+      </button>
+    </div>
+    
+    <nav class="overflow-y-auto" onclick="if(event.target.tagName === 'A') document.getElementById('mobile-toc-modal').close();">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-torrents-have-changed">Introduction: Torrents Have Changed</a></li>
+    <li><a href="#what-is-torrserver-and-why-its-a-game-changer">What Is TorrServer and Why It&rsquo;s a Game Changer</a>
+      <ul>
+        <li><a href="#the-core-technology">The Core Technology</a></li>
+        <li><a href="#how-it-works-technically-in-simple-terms">How It Works Technically (In Simple Terms)</a></li>
+        <li><a href="#why-this-isnt-just-background-downloading">Why This Isn&rsquo;t Just &ldquo;Background Downloading&rdquo;</a></li>
+      </ul>
+    </li>
+    <li><a href="#lampa-your-personal-movie-catalog">Lampa: Your Personal Movie Catalog</a>
+      <ul>
+        <li><a href="#what-it-is">What It Is</a></li>
+        <li><a href="#what-lampa-can-do">What Lampa Can Do</a></li>
+        <li><a href="#lampa-versions-which-to-choose">Lampa Versions: Which to Choose</a></li>
+        <li><a href="#key-advantage">Key Advantage</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-it-works-from-choosing-a-movie-to-playback">How It Works: From Choosing a Movie to Playback</a></li>
+    <li><a href="#advantages-why-this-is-convenient">Advantages: Why This Is Convenient</a>
+      <ul>
+        <li><a href="#1-instant-4k-content-playback">1. Instant 4K Content Playback</a></li>
+        <li><a href="#2-disk-space-savings">2. Disk Space Savings</a></li>
+        <li><a href="#3-access-to-rare-content">3. Access to Rare Content</a></li>
+        <li><a href="#4-flexible-quality-selection">4. Flexible Quality Selection</a></li>
+        <li><a href="#5-user-friendly-interface-for-the-whole-family">5. User-Friendly Interface for the Whole Family</a></li>
+      </ul>
+    </li>
+    <li><a href="#internet-and-device-requirements">Internet and Device Requirements</a>
+      <ul>
+        <li><a href="#internet-speed">Internet Speed</a></li>
+        <li><a href="#supported-devices">Supported Devices</a></li>
+        <li><a href="#to-run-torrserver-youll-need">To Run TorrServer You&rsquo;ll Need</a></li>
+      </ul>
+    </li>
+    <li><a href="#apple-tv-tvos-a-special-case">Apple TV (tvOS): A Special Case</a>
+      <ul>
+        <li><a href="#is-lampa-supported-on-apple-tv">Is Lampa Supported on Apple TV?</a></li>
+        <li><a href="#installation-via-luxo">Installation via Luxo</a></li>
+        <li><a href="#alternative-methods">Alternative Methods</a></li>
+        <li><a href="#tvos-limitations-compared-to-other-platforms">tvOS Limitations Compared to Other Platforms</a></li>
+        <li><a href="#who-apple-tv-will-suit-and-who-it-wont">Who Apple TV Will Suit and Who It Won&rsquo;t</a></li>
+      </ul>
+    </li>
+    <li><a href="#xbox-an-unexpected-option-for-gamers">Xbox: An Unexpected Option for Gamers</a>
+      <ul>
+        <li><a href="#installation-via-media-station-x">Installation via Media Station X</a></li>
+      </ul>
+    </li>
+    <li><a href="#installing-lampa-on-different-devices">Installing Lampa on Different Devices</a>
+      <ul>
+        <li><a href="#android-tv--google-tv--native-installation">Android TV / Google TV — Native Installation</a></li>
+        <li><a href="#smart-tv-samsung-tizen-lg-webos">Smart TV (Samsung Tizen, LG webOS)</a></li>
+        <li><a href="#pc-windows--macos--linux--detailed-guide">PC (Windows / macOS / Linux) — Detailed Guide</a></li>
+        <li><a href="#smartphones-and-tablets">Smartphones and Tablets</a></li>
+      </ul>
+    </li>
+    <li><a href="#useful-plugins-for-lampa">Useful Plugins for Lampa</a>
+      <ul>
+        <li><a href="#torrent-plugins">Torrent Plugins</a></li>
+        <li><a href="#tv-plugins">TV Plugins</a></li>
+        <li><a href="#18-plugins">18+ Plugins</a></li>
+      </ul>
+    </li>
+    <li><a href="#limitations-and-risks-what-you-should-know">Limitations and Risks: What You Should Know</a>
+      <ul>
+        <li><a href="#technical-limitations">Technical Limitations</a></li>
+      </ul>
+    </li>
+    <li><a href="#who-this-viewing-method-suits">Who This Viewing Method Suits</a>
+      <ul>
+        <li><a href="#ideally-suits">Ideally Suits:</a></li>
+        <li><a href="#may-not-suit">May Not Suit:</a></li>
+      </ul>
+    </li>
+    <li><a href="#quick-installation-reference">Quick Installation Reference</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#useful-links">Useful Links</a>
+      <ul>
+        <li><a href="#official-resources">Official Resources</a></li>
+        <li><a href="#apps-for-devices">Apps for Devices</a></li>
+        <li><a href="#plugin-store">Plugin Store</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </nav>
+  </div>
+  
+  <form method="dialog" class="modal-backdrop bg-black/50">
+    <button>close</button>
+  </form>
+</dialog>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Maksim Alexandrov<br>
+<strong>Age:</strong> 28<br>
+<strong>Location:</strong> Tula, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>This blog is my personal knowledge base, where I push notes about my tech stack, life experience, and everything that triggers my interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — ready to merge ideas and work on joint projects.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-programming-languages">💻 Programming Languages</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Responsive layout (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST APIs</strong></li>
+</ul>
+<h2 id="-databases">🗄️ Databases</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-design--graphics">🎨 Design &amp; Graphics</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX design and prototyping</li>
+<li><strong>Photoshop</strong> — graphics and image editing</li>
+<li><strong>After Effects</strong> — motion design and animation 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Open Source Projects 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          🚧 WIP
+        </td>
+        
+        <td 
+          class=""
+        >
+          No projects to showcase yet. Stay tuned!
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          🚧 WIP
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          No projects to showcase yet. Stay tuned!
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Projects 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN service in Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN service in Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Social Links</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "forest"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+	
+	
+	  
+	
+<script src="/js/backToTop.min.js"></script>
+<script>
+  commonJsStrict.addBackToTop({
+    diameter: 50,
+    scrollContainer: document.body,
+    innerHTML: '<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 244l144-144 144 144M256 120v292"/></svg>',
+    className: 'h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full hover:bg-primary',
+  });
+</script>
+
+    
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  
+  const progressBar = document.getElementById('reading-progress');
+  const article = document.getElementById('dream-single-post-main');
+  
+  if (progressBar && article) {
+    const updateProgress = () => {
+      const rect = article.getBoundingClientRect();
+      const scrolled = Math.max(0, -rect.top);
+      const total = rect.height - window.innerHeight;
+      const progress = Math.min(100, (scrolled / total) * 100);
+      progressBar.style.width = `${progress}%`;
+    };
+    
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  
+  const tocLinks = document.querySelectorAll('#TableOfContents a');
+  const headings = document.querySelectorAll('#dream-single-post-content h1, #dream-single-post-content h2, #dream-single-post-content h3');
+  
+  if (tocLinks.length && headings.length) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => link.classList.remove('active'));
+          const activeLink = document.querySelector(`#TableOfContents a[href="#${entry.target.id}"]`);
+          activeLink?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0% -60% 0%' });
+    
+    headings.forEach(h => observer.observe(h));
+  }
+});
+</script>
+
+
+
+
+
+
+
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
+  integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
+  crossorigin="anonymous"
+></script>
+<script>
+  format()
+
+  function format() {
+    document.querySelectorAll('span[data-format="luxon"]').forEach(el => {
+      const date = el.textContent
+
+      el.textContent = luxon.DateTime.fromISO(date, { locale: "en" }).toFormat("HH:mm, dd MMMM")
+    })
+  }
+</script>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/apache.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script><script>
+  hljs.highlightAll();
+  hljs.addPlugin(new CopyButtonPlugin());
+
+  document.addEventListener('alpine:initialized', () => {
+    window.customSyntaxHighlighting = {
+      dark: 'a11y-dark',
+      light: 'atom-one-dark'
+    };
+
+    const updateSyntaxTheme = () => {
+      try {
+        const isDark = Alpine.store('darkMode').isDark();
+        const currentTheme = isDark ? 
+          window.customSyntaxHighlighting.dark : 
+          window.customSyntaxHighlighting.light;
+
+        let link = document.querySelector('link[data-syntax-highlight]');
+        if (link) {
+          const currentHref = link.href;
+          const updatedHref = currentHref.replace(/styles\/[^/]+\.min\.css/, `styles/${currentTheme}.min.css`);
+          link.href = updatedHref;
+        }
+      } catch (error) {
+        console.warn('Error updating syntax theme:', error);
+      }
+    };
+
+    updateSyntaxTheme();
+    Alpine.effect(() => {
+      updateSyntaxTheme();
+    });
+  });
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-fullscreen.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/fullscreen/lg-fullscreen.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const galleryContainer = document.querySelector("#dream-single-post-content");
+    const images = galleryContainer?.querySelectorAll("img");
+
+    if (galleryContainer && images?.length > 0) {
+      galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
+
+      images.forEach(img => {
+        if (!img.closest("a")) {
+          const wrapper = document.createElement("a");
+          wrapper.href = img.src;
+          wrapper.classList.add("lg-item", "not-prose");
+
+          const title = img.title ? `<h2 class="text-lg">${img.title}</h2>` : "";
+          const alt = img.alt ? `<h1 class="text-2xl">${img.alt}</h1>` : "";
+          wrapper.dataset.subHtml = `${alt}${title}`;
+
+          img.parentNode.insertBefore(wrapper, img);
+          wrapper.appendChild(img);
+        }
+      });
+
+      lightGallery(galleryContainer, {
+        selector: "a.lg-item",
+        plugins: [lgZoom, lgFullscreen],
+        speed: 500,
+        download: false,
+        counter: true,
+        mousewheel: true,
+        closeOnTap: true,
+        subHtmlSelectorRelative: true
+      });
+    }
+  });
+</script>
+
+
+
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

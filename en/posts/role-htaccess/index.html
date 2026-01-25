@@ -65,17 +65,50 @@
 
 <link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css" data-syntax-highlight="true" id="syntax-theme">
+
+
+
+
+
+
+
+
 <style>
-  pre {
-   border-radius: 6px;
+   
+  pre { border-radius: 0.5rem;  }
+  
+   
+  
+  
+   
+  .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: oklch(var(--p)); z-index: 9999; transition: width 0.1s ease-out; }
+  
+   
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  
+   
+  #TableOfContents { position: sticky; top: 5rem; max-height: calc(100vh - 6rem); overflow-y: auto; }
+  #TableOfContents a.active { color: oklch(var(--p)); font-weight: 600; }
+  #TableOfContents ul { border-left: 2px solid oklch(var(--b3)); }
+  
+   
+  #dream-single-post-content img { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  #dream-single-post-content img:hover { transform: scale(1.02); box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
+  
+   
+  #dream-single-post-content a:not(.badge):not(.btn):not(.lg-item) { 
+    text-decoration: none; 
+    background-image: linear-gradient(oklch(var(--p)), oklch(var(--p)));
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease;
   }
+  #dream-single-post-content a:not(.badge):not(.btn):not(.lg-item):hover { background-size: 100% 2px; }
+  
+   
+  .lg-sub-html { backdrop-filter: blur(16px); }
 </style>
-
-
-
-
-
-
 
 
 
@@ -97,13 +130,18 @@
     <div id="dream-global-bg"></div>
 
     
-<nav x-data="{ isSticky: false }"
-  x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })"
+<nav x-data="{ isSticky: false, mobileMenuOpen: false }"
+  x-init="
+    window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+    $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+  "
   class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
   :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
 
+
   
   <div class="container flex justify-between px-4">
+  
   
     <section class="flex items-center gap-4">
       <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
@@ -126,39 +164,94 @@
       
     </section>
 
-    <div class="dropdown dropdown-end sm:hidden">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
-        <ion-icon name="menu" class="text-2xl"></ion-icon>
-      </div>
-      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-md">
-        
-  
-  
-    <li>
-      <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="About">
-        <ion-icon name="information-circle"></ion-icon>About</div>
-    </li>
-  
-
-
-
-
-  
-
-
-<ul class="p-0 m-0 list-none">
-
-<style>
-.menu-title {
-    margin-bottom: 4px;
-}
-</style>
-
-  
-  <li>
-    <div class="menu-title">Languages</div>
-    <ul class="p-0 m-0 list-none">
+    
+    <div class="sm:hidden">
       
+      <button @click="mobileMenuOpen = !mobileMenuOpen" 
+              class="btn btn-ghost btn-square"
+              :class="{ 'bg-primary text-primary-content': mobileMenuOpen }"
+              aria-label="Открыть меню"
+              :aria-expanded="mobileMenuOpen">
+        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-2xl"></ion-icon>
+      </button>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"
+           @click="mobileMenuOpen = false"
+           class="fixed inset-0 z-40 bg-base-100/70 backdrop-blur-md"
+           aria-hidden="true">
+      </div>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+           x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+           x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+           @click.outside="mobileMenuOpen = false"
+           @keydown.escape.window="mobileMenuOpen = false"
+           class="absolute right-4 top-full mt-0 z-50 
+                  w-72 max-w-[calc(100vw-2rem)]
+                  bg-base-100 rounded-2xl shadow-2xl
+                  border border-base-200 dark:border-base-content/10
+                  overflow-hidden">
+        
+        
+        <div class="flex items-center justify-between p-4 border-b border-base-200 dark:border-base-content/10">
+          <span class="font-semibold">Menu</span>
+          <button @click="mobileMenuOpen = false" 
+                  class="btn btn-ghost btn-circle btn-sm"
+                  aria-label="Закрыть">
+            <ion-icon name="close" class="text-lg"></ion-icon>
+          </button>
+        </div>
+        
+        
+        
+          
+          
+          <div class="p-4 border-b border-base-200 dark:border-base-content/10">
+            <button type="button"
+                    class="inline-flex items-center gap-2 w-full p-3 rounded-lg
+                           cursor-pointer transition-all duration-200
+                           hover:bg-base-200 active:scale-[0.98]"
+                    @click="flip = !flip; mobileMenuOpen = false"
+                    title="About"
+                    aria-label="About">
+              <ion-icon name="information-circle-outline" class="text-lg text-primary"></ion-icon>
+              <span class="flex-1 text-left font-medium">About</span>
+              <ion-icon name="chevron-forward-outline" class="text-base-content/50"></ion-icon>
+            </button>
+          </div>
+          
+        
+        
+        
+        <div class="p-4 max-h-[60vh] overflow-y-auto">
+          
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Languages
+    </h3>
+    <ul class="space-y-1">
+      
+        
         
         
         
@@ -172,16 +265,23 @@
         
         <li>
           <a href="https://0x69.ru/en/posts/role-htaccess/" 
-             title="English" 
-             class="inline-flex items-center p-2 active">
-            <ion-icon name="language" role="img" class="md hydrated"></ion-icon> 
-            English
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
             
-              <ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
             
           </a>
         </li>
       
+        
         
         
         
@@ -194,105 +294,139 @@
         
         <li>
           <a href="https://0x69.ru/ru/posts/role-htaccess/" 
-             title="Русский" 
-             class="inline-flex items-center p-2 ">
-            <ion-icon name="language" role="img" class="md hydrated"></ion-icon> 
-            Русский
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
             
           </a>
         </li>
       
     </ul>
-  </li>
+  </div>
 
   
-  <li>
-    <div class="menu-title">Menu</div>
-    <ul class="p-0 m-0 list-none">
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Menu
+    </h3>
+    <ul class="space-y-1">
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/en/search" title="Search">
-      <ion-icon name="search" role="img" class="md hydrated"></ion-icon> Search
-    </a>
-  
+  <a href="/en/search" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Search">
+    <ion-icon name="search-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Search</span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/en/categories" title="All Categories">
-      <ion-icon name="grid" role="img" class="md hydrated"></ion-icon> All Categories
-    </a>
-  
+  <a href="/en/categories" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="All Categories">
+    <ion-icon name="folder-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>All Categories</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/en/portfolio" title="Portfolio">
-      <ion-icon name="sparkles" role="img" class="md hydrated"></ion-icon> Portfolio
-    </a>
-  
+  <a href="/en/portfolio" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Portfolio">
+    <ion-icon name="briefcase-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Portfolio</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/en/posts" title="Archives">
-      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> Archives
-    </a>
-  
+  <a href="/en/posts" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Archives</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/en/tags" title="All Tags">
-      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> All Tags
-    </a>
-  
+  <a href="/en/tags" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>All Tags</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      51
+    </span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
+  <a href="https://github.com/rianvy" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     target="_blank"
+     rel="noopener noreferrer"
+     title="GitHub">
     
+    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
     
+    <span>GitHub</span>
     
-      <a class="inline-flex items-center p-2" href="https://github.com/rianvy" target="_blank" title="GitHub">
-        
-          <ion-icon name="logo-github" role="img" class="md hydrated"></ion-icon>
-        
-        GitHub
-      </a>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
     
-  
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/en/index.xml" title="RSS">
-      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
-    </a>
-  
+  <a href="/en/index.xml" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
+    <span>RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+  </a>
 </li>
+
+
+      
       
       
         
@@ -308,10 +442,17 @@
 
       
     </ul>
-  </li>
-</ul>
-      </ul>
+  </div>
+
+  
+  
+
+</nav>
+        </div>
+      </div>
     </div>
+
+    
     <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
       
       
@@ -355,112 +496,144 @@
 
 
       
-	  
-	
-	<div class="dropdown dropdown-end dropdown-hover">
-	  <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select language">
-		<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
-	  </div>
-	  <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl">
-		
-		  
-		  
-		  
-		  
-
-		  
-		  
-			
-			
-		  
-
-		  <li>
-			<a href="https://0x69.ru/en/posts/role-htaccess/" class="active">
-			  <ion-icon name="language" role="img" class="md hydrated"></ion-icon>
-			  English
-			  
-				<ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
-			  
-			</a>
-		  </li>
-		
-		  
-		  
-		  
-		  
-
-		  
-		  
-			
-		  
-
-		  <li>
-			<a href="https://0x69.ru/ru/posts/role-htaccess/" class="">
-			  <ion-icon name="language" role="img" class="md hydrated"></ion-icon>
-			  Русский
-			  
-			</a>
-		  </li>
-		
-	  </ul>
-	</div>
-     	  
+      
+      
       <div class="dropdown dropdown-end dropdown-hover">
-        <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
-          <ion-icon class="group-hover:text-primary-content text-xl" name="menu"></ion-icon>
+        <div tabindex="0" role="button" 
+             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
+                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
+             aria-label="Выбрать язык">
+          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
+                    name="language-outline"></ion-icon>
         </div>
-        <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-xl z-[1] shadow-xl 
+                                border border-base-200 dark:border-base-content/10 p-2 min-w-[160px]">
+          
+            
+            
+            
+            
+
+            
+            
+              
+              
+            
+
+            <li>
+              <a href="https://0x69.ru/en/posts/role-htaccess/" 
+                 hreflang="en"
+                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
+                        bg-primary/10 text-primary font-medium"
+                 aria-current="true">
+                <ion-icon name="language" class="text-lg"></ion-icon>
+                <span class="flex-1">English</span>
+                
+                <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+                
+              </a>
+            </li>
+          
+            
+            
+            
+            
+
+            
+            
+              
+            
+
+            <li>
+              <a href="https://0x69.ru/ru/posts/role-htaccess/" 
+                 hreflang="ru"
+                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
+                        "
+                 >
+                <ion-icon name="language" class="text-lg"></ion-icon>
+                <span class="flex-1">Русский</span>
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+          
+      
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" 
+             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
+                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
+             aria-label="Ещё">
+          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
+                    name="ellipsis-horizontal"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu w-44 bg-base-100 rounded-xl z-[1] shadow-xl 
+                                border border-base-200 dark:border-base-content/10 p-2">
           
           
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/en/posts" title="Archives">
-      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> Archives
-    </a>
-  
+  <a href="/en/posts" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Archives</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
 </li>
-          
-          
 
 
+          
+          
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/en/tags" title="All Tags">
-      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> All Tags
-    </a>
-  
+  <a href="/en/tags" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>All Tags</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      51
+    </span>
+  </a>
 </li>
-          
-          
 
 
+          
+          
 <li>
-  
+  <a href="https://github.com/rianvy" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     target="_blank"
+     rel="noopener noreferrer"
+     title="GitHub">
     
+    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
     
+    <span>GitHub</span>
     
-      <a class="inline-flex items-center p-2" href="https://github.com/rianvy" target="_blank" title="GitHub">
-        
-          <ion-icon name="logo-github" role="img" class="md hydrated"></ion-icon>
-        
-        GitHub
-      </a>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
     
-  
+  </a>
 </li>
-          
-          
 
 
+          
+          
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/en/index.xml" title="RSS">
-      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
-    </a>
-  
+  <a href="/en/index.xml" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
+    <span>RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+  </a>
 </li>
+
+
           
 
           
@@ -501,12 +674,26 @@
         <div class="front">
           <div class="container">
             
-<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
-  <div class="hidden lg:block"></div>
 
-  <div class="lg:col-span-2">
-    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+<div class="reading-progress" id="reading-progress"></div>
+
+<div class="lg:grid lg:grid-cols-4 gap-6 mt-4 px-4 max-w-screen-2xl mx-auto">
+  
+  <aside class="hidden lg:block">
+    <div class="sticky top-20 space-y-4">
       
+      <div class="flex flex-col gap-2">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn btn-ghost btn-sm gap-2" aria-label="Back to top">
+          <ion-icon name="arrow-up-outline"></ion-icon>
+          <span class="text-xs">Top</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  
+  <article class="lg:col-span-2 mx-auto prose prose-quoteless dark:prose-invert w-full" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+    
   <meta itemprop="name" content="Role of the .htaccess file in Apache server configuration">
   <meta itemprop="description" content=".htaccess allows you to create your own Apache server management configuration in directories or hosting settings.">
   <meta itemprop="datePublished" content="2025-01-12T21:27:20+03:00">
@@ -515,41 +702,51 @@
   <meta itemprop="image" content="https://0x69.ru/en/posts/role-htaccess/Cover.png">
   <meta itemprop="keywords" content="Servers,Apache,.Htaccess,Web Security,Performance">
 
-      <header>
-        <h1 itemprop="headline">Role of the .htaccess file in Apache server configuration</h1>
-        <p class="text-sm">
-          
-            <span data-format="luxon">2025-01-12T21:27:20&#43;03:00</span>
-          
+    <header class="not-prose mb-8">
+      
+      
+      <div class="flex flex-wrap gap-2 mb-4">
+        
+        
+        <a href="/en/categories/administration/" class="badge badge-outline badge-sm hover:badge-primary transition-all" rel="category">
+          Administration
+        </a>
+        
+      </div>
+      
 
-          | <span>5 minute read</span>
+      
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4" itemprop="headline">Role of the .htaccess file in Apache server configuration</h1>
 
+      
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-base-content/70 mb-6">
+        
+        <time datetime="2025-01-12" class="flex items-center gap-1">
+          <ion-icon name="calendar-outline" class="text-base"></ion-icon>
           
-          | <span>Updated at
-            
-              <span data-format="luxon">2025-01-12T21:27:20&#43;03:00</span>
-            </span>
+          <span data-format="luxon">2025-01-12T21:27:20&#43;03:00</span>
           
-        </p>
-		<div class="categories mt-4 mb-4">
-		  <div class="flex items-center gap-2">
-			<ion-icon 
-			  class="text-lg opacity-80 hover:text-primary-content transition-colors"
-			  name="grid"
-			  aria-hidden="true"
-			></ion-icon>
-			  <a
-				href="/en/categories/administration/"
-				class="badge no-underline hover:badge-primary transition-all duration-200"
-				rel="category"
-				aria-label="Administration"
-				data-category="administration"
-			  >Administration</a>
-		  </div>
-		</div>
+        </time>
 
-        <div class="flex justify-between">
-          <div class="flex items-center">
+        
+        <span class="flex items-center gap-1">
+          <ion-icon name="time-outline" class="text-base"></ion-icon>
+          5  minute read
+        </span>
+
+        
+        <span class="flex items-center gap-1">
+          <ion-icon name="document-text-outline" class="text-base"></ion-icon>
+          1050 words
+        </span>
+
+        
+        
+      </div>
+
+      
+      <div class="flex flex-wrap justify-between items-center gap-4 py-4 border-y border-base-300">
+        <div class="flex items-center">
   
   <div class="avatar mr-1">
     <div class="w-8 rounded-full">
@@ -567,8 +764,7 @@
   </span>
 </div>
 
-
-          <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2">
   
   
 
@@ -606,34 +802,63 @@
   
 </div>
 
+      </div>
+    </header>
+
+    
+    
+    <div class="not-prose mb-8">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-4 rounded-xl border border-base-300 bg-base-200/50">
+        
+        <div class="flex items-center gap-2 text-base-content/70">
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+          </span>
+          <ion-icon name="language-outline" class="text-xl"></ion-icon>
+          <span class="text-sm whitespace-nowrap">This post is also available in</span>
         </div>
-      </header>
-
-      <section id="dream-single-post-content" itemprop="articleBody">
         
-        <img src="https://0x69.ru/en/posts/role-htaccess/Cover.png" alt="Role of the .htaccess file in Apache server configuration" class="my-4"/>
         
-		
-		
-		
-		
-		<blockquote class="dream-alert tip">
-		  <p class="heading">
-			<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
-			This post is also available in
-			
-			  
-			  <a href="https://0x69.ru/ru/posts/role-htaccess/" 
-				 class="badge h-6 no-underline hover:badge-primary mr-2"
-				 rel="noopener noreferrer">
-				Русский
-			  </a>
-			
-		  </p>
-		</blockquote>
-		
+        <div class="hidden sm:block w-px h-6 bg-base-300"></div>
+        
+        
+        <div class="flex flex-wrap gap-2">
+          
+          <a href="https://0x69.ru/ru/posts/role-htaccess/" 
+            class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm 
+                    bg-base-100 hover:bg-primary hover:text-primary-content 
+                    border border-base-300 hover:border-primary
+                    transition-all duration-200 no-underline"
+            rel="noopener noreferrer"
+            hreflang="ru">
+            <span class="opacity-70 group-hover:opacity-100">
+              🇷🇺
+            </span>
+            Русский
+            <ion-icon name="arrow-forward" class="text-xs opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-0 transition-all"></ion-icon>
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    
 
-        <p>.htaccess allows you to create your own Apache server management configuration in directories or hosting settings.</p>
+    
+    
+    <figure class="not-prose mb-8">
+      <img src="https://0x69.ru/en/posts/role-htaccess/Cover.png" alt="Role of the .htaccess file in Apache server configuration" class="w-full rounded-xl shadow-lg" loading="lazy"/>
+    </figure>
+    
+
+    
+    
+
+    
+
+    
+    <section id="dream-single-post-content" itemprop="articleBody">
+      <p>.htaccess allows you to create your own Apache server management configuration in directories or hosting settings.</p>
 <h2 id="introduction-to-htaccess">Introduction to .htaccess</h2>
 
 
@@ -942,73 +1167,242 @@ php_value error_reporting E_ALL
 <li><a href="https://htaccess.madewithlove.com/" target="_blank">.htaccess Rule Generator</a>
 </li>
 </ul>
-      </section>
-	  <div class="tags mt-4 flex flex-wrap gap-2">
-	  <ion-icon name="pricetags" class="text-lg opacity-75 mr-1"></ion-icon>
-		  <a 
-			href="/en/tags/servers/" 
-			class="badge no-underline hover:badge-primary transition-colors duration-200"
-			rel="tag"
-			aria-label="Servers"
-			data-tag="servers"
-		  >Servers</a>
-		  <a 
-			href="/en/tags/apache/" 
-			class="badge no-underline hover:badge-primary transition-colors duration-200"
-			rel="tag"
-			aria-label="Apache"
-			data-tag="apache"
-		  >Apache</a>
-		  <a 
-			href="/en/tags/htaccess/" 
-			class="badge no-underline hover:badge-primary transition-colors duration-200"
-			rel="tag"
-			aria-label=".htaccess"
-			data-tag=".htaccess"
-		  >.htaccess</a>
-		  <a 
-			href="/en/tags/web-security/" 
-			class="badge no-underline hover:badge-primary transition-colors duration-200"
-			rel="tag"
-			aria-label="Web Security"
-			data-tag="web security"
-		  >Web Security</a>
-		  <a 
-			href="/en/tags/performance/" 
-			class="badge no-underline hover:badge-primary transition-colors duration-200"
-			rel="tag"
-			aria-label="Performance"
-			data-tag="performance"
-		  >Performance</a>
-	  </div>
+    </section>
 
-      
-      <div class="divider"></div>
-      <div class="flex flex-col md:flex-row justify-between gap-4 py-4">
+    
+    
+    <footer class="not-prose mt-12 pt-6 border-t border-base-300">
+      <div class="flex flex-wrap items-center gap-2">
+        <ion-icon name="pricetags-outline" class="text-lg text-base-content/60"></ion-icon>
         
-        <a class="group btn btn-outline" href="/en/posts/chatgpt-claude-gemini-dns-dostup/" title="ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services">
-          <ion-icon name="chevron-back"></ion-icon>
-          <div class="inline-flex flex-col items-start">
-            <span class="text-base-content/60 group-hover:text-neutral-content/60 text-xs font-normal">Previous page</span>
-            <span class="max-w-48 truncate">ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services</span>
+        
+        <a href="/en/tags/servers/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Servers
+        </a>
+        
+        <a href="/en/tags/apache/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Apache
+        </a>
+        
+        <a href="/en/tags/htaccess/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #.htaccess
+        </a>
+        
+        <a href="/en/tags/web-security/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Web Security
+        </a>
+        
+        <a href="/en/tags/performance/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Performance
+        </a>
+        
+      </div>
+    </footer>
+    
+
+    
+    
+    <nav class="not-prose mt-8" aria-label="Post navigation">
+      <div class="divider"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <a href="/en/posts/chatgpt-claude-gemini-dns-dostup/" class="group card bg-base-200 hover:bg-base-300 transition-colors p-4">
+          <div class="flex items-center gap-3">
+            <ion-icon name="chevron-back" class="text-xl text-base-content/50 group-hover:text-primary transition-colors"></ion-icon>
+            <div class="min-w-0">
+              <span class="text-xs text-base-content/60 uppercase tracking-wide">Previous page</span>
+              <p class="font-medium truncate">ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services</p>
+            </div>
           </div>
         </a>
         
 
-        
         <div></div>
-        
+      </div>
+    </nav>
+    
+
+    
+    
+  </article>
+
+  
+  <aside class="hidden lg:block">
+    <div class="sticky top-20 space-y-6">
+      
+      
+
+      
+      
+      <div class="card bg-base-200 p-4">
+        <h3 class="font-semibold mb-3 flex items-center gap-2">
+          <ion-icon name="list-outline"></ion-icon>
+          Contents
+        </h3>
+        <nav class="text-sm">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-to-htaccess">Introduction to .htaccess</a>
+      <ul>
+        <li><a href="#features-of-htaccess">Features of .htaccess:</a></li>
+      </ul>
+    </li>
+    <li><a href="#basic-configuration">Basic configuration</a>
+      <ul>
+        <li><a href="#enabling-the-rewrite-module">Enabling the Rewrite module</a></li>
+      </ul>
+    </li>
+    <li><a href="#access-control">Access Control</a>
+      <ul>
+        <li><a href="#restrict-access-by-ip">Restrict access by IP</a></li>
+      </ul>
+    </li>
+    <li><a href="#encoding-and-language-settings">Encoding and language settings</a>
+      <ul>
+        <li><a href="#default-encoding">Default encoding</a></li>
+      </ul>
+    </li>
+    <li><a href="#error-handling">Error handling</a>
+      <ul>
+        <li><a href="#custom-error-pages">Custom error pages</a></li>
+      </ul>
+    </li>
+    <li><a href="#manage-urls-and-redirects">Manage URLs and redirects</a>
+      <ul>
+        <li><a href="#redirect-to-html">Redirect to .html</a></li>
+        <li><a href="#managing-slashes-in-urls">Managing slashes in URLs</a></li>
+        <li><a href="#handling-www-and-no-www">Handling www and no www</a></li>
+      </ul>
+    </li>
+    <li><a href="#security">Security</a>
+      <ul>
+        <li><a href="#hotlink-protection">Hotlink protection</a></li>
+        <li><a href="#bruteforce-protection">Bruteforce protection</a></li>
+      </ul>
+    </li>
+    <li><a href="#performance-optimization">Performance optimization</a>
+      <ul>
+        <li><a href="#static-content-caching">Static Content Caching</a></li>
+        <li><a href="#gzip-compression">GZIP compression</a></li>
+        <li><a href="#optimization-for-spa">Optimization for SPA</a></li>
+      </ul>
+    </li>
+    <li><a href="#debugging-and-monitoring">Debugging and monitoring</a>
+      <ul>
+        <li><a href="#error-logging">Error Logging</a></li>
+        <li><a href="#customization-for-development">Customization for development</a></li>
+      </ul>
+    </li>
+    <li><a href="#recommendations-for-use">Recommendations for use</a>
+      <ul>
+        <li><a href="#best-practices">Best Practices</a></li>
+        <li><a href="#typical-errors">Typical errors</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#useful-resources">Useful Resources</a></li>
+  </ul>
+</nav>
+        </nav>
       </div>
       
+    </div>
+  </aside>
+</div>
 
-      
-    </article>
+
+<div class="lg:hidden sticky bottom-6 z-50 pointer-events-none">
+  <div class="flex justify-end pr-6">
+    <button onclick="document.getElementById('mobile-actions-modal').showModal()" 
+            class="pointer-events-auto btn btn-circle btn-primary shadow-2xl w-14 h-14 group">
+      <ion-icon name="apps" class="text-2xl transition-transform duration-300 group-active:scale-90"></ion-icon>
+    </button>
   </div>
+</div>
 
-  <div class="hidden lg:flex lg:flex-col lg:items-end">
-    
 
+<dialog id="mobile-actions-modal" class="modal modal-bottom lg:hidden">
+  <div class="modal-box rounded-t-3xl pb-8">
     
+    <div class="flex justify-center mb-4">
+      <div class="w-12 h-1.5 bg-base-300 rounded-full"></div>
+    </div>
+    
+    
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="font-bold text-lg flex items-center gap-2">
+        <ion-icon name="apps-outline" class="text-primary"></ion-icon>
+        Quick Actions
+      </h3>
+      <button onclick="document.getElementById('mobile-actions-modal').close()" 
+              class="btn btn-circle btn-ghost btn-sm">
+        <ion-icon name="close" class="text-xl"></ion-icon>
+      </button>
+    </div>
+    
+    
+    <div class="grid grid-cols-4 gap-3">
+      
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-info/20 flex items-center justify-center">
+          <ion-icon name="arrow-up" class="text-2xl text-info"></ion-icon>
+        </div>
+        <span class="text-xs">Top</span>
+      </button>
+      
+      
+      
+      <button onclick="document.getElementById('mobile-actions-modal').close(); setTimeout(() => document.getElementById('mobile-toc-modal').showModal(), 150);"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-success/20 flex items-center justify-center">
+          <ion-icon name="list" class="text-2xl text-success"></ion-icon>
+        </div>
+        <span class="text-xs">Contents</span>
+      </button>
+      
+      
+      
+      <button onclick="navigator.share({title: 'Role of the .htaccess file in Apache server configuration', url: 'https:\/\/0x69.ru\/en\/posts\/role-htaccess\/'}).catch(() => {}); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-warning/20 flex items-center justify-center">
+          <ion-icon name="share-social" class="text-2xl text-warning"></ion-icon>
+        </div>
+        <span class="text-xs">Share</span>
+      </button>
+      
+      
+      <button onclick="navigator.clipboard.writeText('https:\/\/0x69.ru\/en\/posts\/role-htaccess\/'); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-error/20 flex items-center justify-center">
+          <ion-icon name="copy" class="text-2xl text-error"></ion-icon>
+        </div>
+        <span class="text-xs">Copy</span>
+      </button>
+    </div>
+  </div>
+  
+  <form method="dialog" class="modal-backdrop bg-black/50">
+    <button>close</button>
+  </form>
+</dialog>
+
+
+
+<dialog id="mobile-toc-modal" class="modal modal-bottom">
+  <div class="modal-box rounded-t-3xl max-h-[75vh]">
+    <div class="flex justify-center mb-4">
+      <div class="w-12 h-1.5 bg-base-300 rounded-full"></div>
+    </div>
+    
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-bold text-lg">Contents</h3>
+      <button onclick="document.getElementById('mobile-toc-modal').close()" class="btn btn-circle btn-ghost btn-sm">
+        <ion-icon name="close" class="text-xl"></ion-icon>
+      </button>
+    </div>
+    
+    <nav class="overflow-y-auto" onclick="if(event.target.tagName === 'A') document.getElementById('mobile-toc-modal').close();">
       <nav id="TableOfContents">
   <ul>
     <li><a href="#introduction-to-htaccess">Introduction to .htaccess</a>
@@ -1072,9 +1466,14 @@ php_value error_reporting E_ALL
     <li><a href="#useful-resources">Useful Resources</a></li>
   </ul>
 </nav>
-    
+    </nav>
   </div>
-</div>
+  
+  <form method="dialog" class="modal-backdrop bg-black/50">
+    <button>close</button>
+  </form>
+</dialog>
+
 
 
             
@@ -1455,13 +1854,54 @@ php_value error_reporting E_ALL
 </script>
 
     
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  
+  const progressBar = document.getElementById('reading-progress');
+  const article = document.getElementById('dream-single-post-main');
+  
+  if (progressBar && article) {
+    const updateProgress = () => {
+      const rect = article.getBoundingClientRect();
+      const scrolled = Math.max(0, -rect.top);
+      const total = rect.height - window.innerHeight;
+      const progress = Math.min(100, (scrolled / total) * 100);
+      progressBar.style.width = `${progress}%`;
+    };
+    
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
 
-	
-	
-	
+  
+  const tocLinks = document.querySelectorAll('#TableOfContents a');
+  const headings = document.querySelectorAll('#dream-single-post-content h1, #dream-single-post-content h2, #dream-single-post-content h3');
+  
+  if (tocLinks.length && headings.length) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => link.classList.remove('active'));
+          const activeLink = document.querySelector(`#TableOfContents a[href="#${entry.target.id}"]`);
+          activeLink?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0% -60% 0%' });
+    
+    headings.forEach(h => observer.observe(h));
+  }
+});
+</script>
 
-	
-	<script
+
+
+
+
+
+
+
+
+<script
   src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
   integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
   crossorigin="anonymous"
@@ -1478,7 +1918,8 @@ php_value error_reporting E_ALL
   }
 </script>
 
-	
+
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -1487,72 +1928,47 @@ php_value error_reporting E_ALL
   hljs.addPlugin(new CopyButtonPlugin());
 
   document.addEventListener('alpine:initialized', () => {
-    
     window.customSyntaxHighlighting = {
-        dark: 'a11y-dark',
-        light: 'atom-one-dark'
+      dark: 'a11y-dark',
+      light: 'atom-one-dark'
     };
 
-    
     const updateSyntaxTheme = () => {
-        try {
-            
-            const isDark = Alpine.store('darkMode').isDark();
-            const currentTheme = isDark ? 
-                window.customSyntaxHighlighting.dark : 
-                window.customSyntaxHighlighting.light;
+      try {
+        const isDark = Alpine.store('darkMode').isDark();
+        const currentTheme = isDark ? 
+          window.customSyntaxHighlighting.dark : 
+          window.customSyntaxHighlighting.light;
 
-            
-            let link = document.querySelector('link[data-syntax-highlight]');
-            if (link) {
-                
-                const currentHref = link.href;
-
-                
-                const updatedHref = currentHref.replace(/styles\/[^/]+\.min\.css/, `styles/${currentTheme}.min.css`);
-
-                
-                link.href = updatedHref;
-            }
-        } catch (error) {
-            console.warn('Error updating syntax theme:', error);
+        let link = document.querySelector('link[data-syntax-highlight]');
+        if (link) {
+          const currentHref = link.href;
+          const updatedHref = currentHref.replace(/styles\/[^/]+\.min\.css/, `styles/${currentTheme}.min.css`);
+          link.href = updatedHref;
         }
+      } catch (error) {
+        console.warn('Error updating syntax theme:', error);
+      }
     };
 
-    
     updateSyntaxTheme();
-
-    
     Alpine.effect(() => {
-        updateSyntaxTheme();
+      updateSyntaxTheme();
     });
-});
+  });
 </script>
 
 
 
-  
- 
+
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-rotate.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-fullscreen.min.css">
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/rotate/lg-rotate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/fullscreen/lg-fullscreen.min.js"></script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
-
-<style>
-  .lg-sub-html {
-    backdrop-filter: blur(16px);
-  }
-</style>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -1565,19 +1981,13 @@ php_value error_reporting E_ALL
       images.forEach(img => {
         if (!img.closest("a")) {
           const wrapper = document.createElement("a");
-          wrapper.href = img.getAttribute("data-src") || img.src; 
+          wrapper.href = img.src;
           wrapper.classList.add("lg-item", "not-prose");
 
           const title = img.title ? `<h2 class="text-lg">${img.title}</h2>` : "";
           const alt = img.alt ? `<h1 class="text-2xl">${img.alt}</h1>` : "";
           wrapper.dataset.subHtml = `${alt}${title}`;
 
-          
-          img.setAttribute("data-src", img.src); 
-          img.removeAttribute("src"); 
-          img.classList.add("lazyload"); 
-
-          
           img.parentNode.insertBefore(wrapper, img);
           wrapper.appendChild(img);
         }
@@ -1585,30 +1995,17 @@ php_value error_reporting E_ALL
 
       lightGallery(galleryContainer, {
         selector: "a.lg-item",
-        plugins: [lgZoom, lgRotate, lgFullscreen],
+        plugins: [lgZoom, lgFullscreen],
         speed: 500,
-        zoom: true,
-        fullScreen: true,
         download: false,
         counter: true,
         mousewheel: true,
-        zoomFromOrigin: true,
-        scale: 1,
-        rotate: true,
-        hideControlOnEnd: false,
         closeOnTap: true,
         subHtmlSelectorRelative: true
-      });
-
-      const lazyLoadInstance = new LazyLoad({
-        elements_selector: ".lazyload",
-        threshold: 300, 
       });
     }
   });
 </script>
-
-  
 
 
 

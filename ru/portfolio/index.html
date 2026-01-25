@@ -67,13 +67,18 @@
     <div id="dream-global-bg"></div>
 
     
-<nav x-data="{ isSticky: false }"
-  x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })"
+<nav x-data="{ isSticky: false, mobileMenuOpen: false }"
+  x-init="
+    window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+    $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+  "
   class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
   :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
 
+
   
   <div class="container flex justify-between px-4">
+  
   
     <section class="flex items-center gap-4">
       <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Повернуть!">
@@ -96,39 +101,94 @@
       
     </section>
 
-    <div class="dropdown dropdown-end sm:hidden">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
-        <ion-icon name="menu" class="text-2xl"></ion-icon>
-      </div>
-      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-md">
-        
-  
-  
-    <li>
-      <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="Обо мне">
-        <ion-icon name="information-circle"></ion-icon>Обо мне</div>
-    </li>
-  
-
-
-
-
-  
-
-
-<ul class="p-0 m-0 list-none">
-
-<style>
-.menu-title {
-    margin-bottom: 4px;
-}
-</style>
-
-  
-  <li>
-    <div class="menu-title">Язык</div>
-    <ul class="p-0 m-0 list-none">
+    
+    <div class="sm:hidden">
       
+      <button @click="mobileMenuOpen = !mobileMenuOpen" 
+              class="btn btn-ghost btn-square"
+              :class="{ 'bg-primary text-primary-content': mobileMenuOpen }"
+              aria-label="Открыть меню"
+              :aria-expanded="mobileMenuOpen">
+        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-2xl"></ion-icon>
+      </button>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"
+           @click="mobileMenuOpen = false"
+           class="fixed inset-0 z-40 bg-base-100/70 backdrop-blur-md"
+           aria-hidden="true">
+      </div>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+           x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+           x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+           @click.outside="mobileMenuOpen = false"
+           @keydown.escape.window="mobileMenuOpen = false"
+           class="absolute right-4 top-full mt-0 z-50 
+                  w-72 max-w-[calc(100vw-2rem)]
+                  bg-base-100 rounded-2xl shadow-2xl
+                  border border-base-200 dark:border-base-content/10
+                  overflow-hidden">
+        
+        
+        <div class="flex items-center justify-between p-4 border-b border-base-200 dark:border-base-content/10">
+          <span class="font-semibold">Меню</span>
+          <button @click="mobileMenuOpen = false" 
+                  class="btn btn-ghost btn-circle btn-sm"
+                  aria-label="Закрыть">
+            <ion-icon name="close" class="text-lg"></ion-icon>
+          </button>
+        </div>
+        
+        
+        
+          
+          
+          <div class="p-4 border-b border-base-200 dark:border-base-content/10">
+            <button type="button"
+                    class="inline-flex items-center gap-2 w-full p-3 rounded-lg
+                           cursor-pointer transition-all duration-200
+                           hover:bg-base-200 active:scale-[0.98]"
+                    @click="flip = !flip; mobileMenuOpen = false"
+                    title="Обо мне"
+                    aria-label="Обо мне">
+              <ion-icon name="information-circle-outline" class="text-lg text-primary"></ion-icon>
+              <span class="flex-1 text-left font-medium">Обо мне</span>
+              <ion-icon name="chevron-forward-outline" class="text-base-content/50"></ion-icon>
+            </button>
+          </div>
+          
+        
+        
+        
+        <div class="p-4 max-h-[60vh] overflow-y-auto">
+          
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
         
         
         
@@ -141,14 +201,21 @@
         
         <li>
           <a href="https://0x69.ru/en/portfolio/" 
-             title="English" 
-             class="inline-flex items-center p-2 ">
-            <ion-icon name="language" role="img" class="md hydrated"></ion-icon> 
-            English
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
             
           </a>
         </li>
       
+        
         
         
         
@@ -162,107 +229,141 @@
         
         <li>
           <a href="https://0x69.ru/ru/portfolio/" 
-             title="Русский" 
-             class="inline-flex items-center p-2 active">
-            <ion-icon name="language" role="img" class="md hydrated"></ion-icon> 
-            Русский
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
             
-              <ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
             
           </a>
         </li>
       
     </ul>
-  </li>
+  </div>
 
   
-  <li>
-    <div class="menu-title">Меню</div>
-    <ul class="p-0 m-0 list-none">
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/search" title="Поиск">
-      <ion-icon name="search" role="img" class="md hydrated"></ion-icon> Поиск
-    </a>
-  
+  <a href="/ru/search" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Поиск</span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/categories" title="Категории">
-      <ion-icon name="grid" role="img" class="md hydrated"></ion-icon> Категории
-    </a>
-  
+  <a href="/ru/categories" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Категории</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/portfolio" title="Портфолио">
-      <ion-icon name="sparkles" role="img" class="md hydrated"></ion-icon> Портфолио
-    </a>
-  
+  <a href="/ru/portfolio" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Портфолио</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/posts" title="Архивы">
-      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> Архивы
-    </a>
-  
+  <a href="/ru/posts" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Архивы</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/tags" title="Все теги">
-      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> Все теги
-    </a>
-  
+  <a href="/ru/tags" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Все теги</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      51
+    </span>
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
+  <a href="https://github.com/rianvy" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     target="_blank"
+     rel="noopener noreferrer"
+     title="GitHub">
     
+    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
     
+    <span>GitHub</span>
     
-      <a class="inline-flex items-center p-2" href="https://github.com/rianvy" target="_blank" title="GitHub">
-        
-          <ion-icon name="logo-github" role="img" class="md hydrated"></ion-icon>
-        
-        GitHub
-      </a>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
     
-  
+  </a>
 </li>
+
+
       
         
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/index.xml" title="RSS">
-      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
-    </a>
-  
+  <a href="/ru/index.xml" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
+    <span>RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+  </a>
 </li>
+
+
+      
       
       
         
@@ -278,10 +379,17 @@
 
       
     </ul>
-  </li>
-</ul>
-      </ul>
+  </div>
+
+  
+  
+
+</nav>
+        </div>
+      </div>
     </div>
+
+    
     <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
       
       
@@ -325,112 +433,144 @@
 
 
       
-	  
-	
-	<div class="dropdown dropdown-end dropdown-hover">
-	  <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select language">
-		<ion-icon class="group-hover:text-primary-content text-xl md hydrated" name="language" role="img"></ion-icon>
-	  </div>
-	  <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl">
-		
-		  
-		  
-		  
-		  
-
-		  
-		  
-			
-		  
-
-		  <li>
-			<a href="https://0x69.ru/en/portfolio/" class="">
-			  <ion-icon name="language" role="img" class="md hydrated"></ion-icon>
-			  English
-			  
-			</a>
-		  </li>
-		
-		  
-		  
-		  
-		  
-
-		  
-		  
-			
-			
-		  
-
-		  <li>
-			<a href="https://0x69.ru/ru/portfolio/" class="active">
-			  <ion-icon name="language" role="img" class="md hydrated"></ion-icon>
-			  Русский
-			  
-				<ion-icon name="checkmark-circle" role="img" class="md hydrated"></ion-icon>
-			  
-			</a>
-		  </li>
-		
-	  </ul>
-	</div>
-     	  
+      
+      
       <div class="dropdown dropdown-end dropdown-hover">
-        <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
-          <ion-icon class="group-hover:text-primary-content text-xl" name="menu"></ion-icon>
+        <div tabindex="0" role="button" 
+             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
+                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
+             aria-label="Выбрать язык">
+          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
+                    name="language-outline"></ion-icon>
         </div>
-        <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-xl z-[1] shadow-xl 
+                                border border-base-200 dark:border-base-content/10 p-2 min-w-[160px]">
+          
+            
+            
+            
+            
+
+            
+            
+              
+            
+
+            <li>
+              <a href="https://0x69.ru/en/portfolio/" 
+                 hreflang="en"
+                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
+                        "
+                 >
+                <ion-icon name="language" class="text-lg"></ion-icon>
+                <span class="flex-1">English</span>
+                
+              </a>
+            </li>
+          
+            
+            
+            
+            
+
+            
+            
+              
+              
+            
+
+            <li>
+              <a href="https://0x69.ru/ru/portfolio/" 
+                 hreflang="ru"
+                 class="flex items-center gap-2 rounded-lg transition-colors duration-200
+                        bg-primary/10 text-primary font-medium"
+                 aria-current="true">
+                <ion-icon name="language" class="text-lg"></ion-icon>
+                <span class="flex-1">Русский</span>
+                
+                <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+          
+      
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" 
+             class="group inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer 
+                    transition-all duration-200 hover:bg-primary hover:shadow-md active:scale-95" 
+             aria-label="Ещё">
+          <ion-icon class="group-hover:text-primary-content text-xl transition-colors duration-200" 
+                    name="ellipsis-horizontal"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu w-44 bg-base-100 rounded-xl z-[1] shadow-xl 
+                                border border-base-200 dark:border-base-content/10 p-2">
           
           
-
-
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/posts" title="Архивы">
-      <ion-icon name="archive" role="img" class="md hydrated"></ion-icon> Архивы
-    </a>
-  
+  <a href="/ru/posts" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Архивы</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      3
+    </span>
+  </a>
 </li>
-          
-          
 
 
+          
+          
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/tags" title="Все теги">
-      <ion-icon name="pricetags" role="img" class="md hydrated"></ion-icon> Все теги
-    </a>
-  
+  <a href="/ru/tags" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg text-base-content/70"></ion-icon>
+    <span>Все теги</span>
+    <span class="badge badge-sm badge-ghost ml-auto">
+      51
+    </span>
+  </a>
 </li>
-          
-          
 
 
+          
+          
 <li>
-  
+  <a href="https://github.com/rianvy" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     target="_blank"
+     rel="noopener noreferrer"
+     title="GitHub">
     
+    <ion-icon name="logo-github" class="text-lg text-base-content/70"></ion-icon>
     
+    <span>GitHub</span>
     
-      <a class="inline-flex items-center p-2" href="https://github.com/rianvy" target="_blank" title="GitHub">
-        
-          <ion-icon name="logo-github" role="img" class="md hydrated"></ion-icon>
-        
-        GitHub
-      </a>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
     
-  
+  </a>
 </li>
-          
-          
 
 
+          
+          
 <li>
-  
-    <a class="inline-flex items-center p-2" href="/ru/index.xml" title="RSS">
-      <ion-icon name="logo-rss" role="img" class="md hydrated"></ion-icon> RSS
-    </a>
-  
+  <a href="/ru/index.xml" 
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-base-200 active:scale-[0.98]"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg text-base-content/70"></ion-icon>
+    <span>RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 ml-auto"></ion-icon>
+  </a>
 </li>
+
+
           
 
           
@@ -474,37 +614,58 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const grid = document.querySelector(".dream-grid");
-  const iso = new Isotope(grid, {
-    itemSelector: ".dream-column",
-    layoutMode: "fitRows",
-  });
+<div class="mt-8 lg:mt-12 px-4 sm:px-6">
+  <div class="max-w-7xl mx-auto">
 
-  const filterButtons = document.querySelectorAll(".filter-button");
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const filterValue = button.getAttribute("data-filter");
-      iso.arrange({ filter: filterValue });
+    
+    <div class="text-center mb-8 lg:mb-12">
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">
+        Портфолио
+      </h1>
+      
+      
+      
+      <div class="flex justify-center items-center gap-4 sm:gap-6 mt-4 text-sm text-base-content/60">
+        <div class="flex items-center gap-1.5">
+          <ion-icon name="folder-outline" class="text-base"></ion-icon>
+          <span>3 проектов</span>
+        </div>
+        
+        
+        
+          
+            
+              
+            
+          
+        
+          
+            
+              
+            
+          
+        
+          
+            
+              
+            
+          
+        
+        
+        
+        
+        <div class="w-1 h-1 rounded-full bg-base-content/30"></div>
+        <div class="flex items-center gap-1.5">
+          <ion-icon name="pricetags-outline" class="text-base"></ion-icon>
+          <span>2 категорий</span>
+        </div>
+        
+      </div>
+    </div>
 
-      filterButtons.forEach((btn) => btn.setAttribute("data-state", "unchecked"));
+    
+    
 
-      button.setAttribute("data-state", "checked");
-    });
-  });
-});
-</script>
-
-<div class="container flex justify-between px-4 mt-4 mb-4">
-  <div class="filters-button-group text-center my-4">
-    <button 
-      class="filter-button badge h-6 no-underline hover:badge-primary mr-2 data-checked:badge-primary" 
-      data-filter="*" 
-      data-state="checked">
-	  Все
-    </button>
     
     
       
@@ -526,28 +687,201 @@ document.addEventListener("DOMContentLoaded", function () {
       
     
     
-      <button 
-        class="filter-button badge h-6 no-underline hover:badge-primary mr-2 data-checked:badge-primary" 
-        data-filter=".Web-Development" 
-        data-state="unchecked">
-        Web development
-      </button>
-    
-      <button 
-        class="filter-button badge h-6 no-underline hover:badge-primary mr-2 data-checked:badge-primary" 
-        data-filter=".Social-Media" 
-        data-state="unchecked">
-        Social media
-      </button>
-    
-  </div>
-</div>
 
-  
-<div class="dream-grid">
-  
-    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column Web-Development ">
-      <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/ru/portfolio/codesqueeze/">
+    
+    <div class="mb-6 sm:mb-8">
+      
+      
+      <div class="sm:hidden overflow-x-auto scrollbar-hide -mx-4 px-4">
+        <div class="flex gap-2 pb-2 w-max" role="group" aria-label="Фильтр по категориям">
+          <button 
+            class="filter-button badge badge-md h-8 px-3
+                  no-underline cursor-pointer whitespace-nowrap
+                  transition-all duration-200
+                  hover:badge-primary
+                  data-[state=checked]:badge-primary data-[state=checked]:shadow-sm" 
+            data-filter="*" 
+            data-state="checked"
+            aria-pressed="true">
+            <ion-icon name="apps-outline" class="mr-1 text-sm"></ion-icon>
+            Все
+            <span class="ml-1 opacity-60">(3)</span>
+          </button>
+          
+          
+          
+          
+            
+            
+              
+                
+              
+            
+          
+            
+            
+              
+                
+              
+            
+          
+            
+            
+              
+            
+          
+          <button 
+            class="filter-button badge badge-md h-8 px-3
+                  no-underline cursor-pointer whitespace-nowrap
+                  transition-all duration-200
+                  hover:badge-primary
+                  data-[state=checked]:badge-primary data-[state=checked]:shadow-sm" 
+            data-filter=".web-development" 
+            data-state="unchecked"
+            aria-pressed="false">
+            Web development
+            <span class="ml-1 opacity-60">(2)</span>
+          </button>
+          
+          
+          
+            
+            
+              
+            
+          
+            
+            
+              
+            
+          
+            
+            
+              
+                
+              
+            
+          
+          <button 
+            class="filter-button badge badge-md h-8 px-3
+                  no-underline cursor-pointer whitespace-nowrap
+                  transition-all duration-200
+                  hover:badge-primary
+                  data-[state=checked]:badge-primary data-[state=checked]:shadow-sm" 
+            data-filter=".social-media" 
+            data-state="unchecked"
+            aria-pressed="false">
+            Social media
+            <span class="ml-1 opacity-60">(1)</span>
+          </button>
+          
+        </div>
+      </div>
+      
+      
+      <div class="sm:hidden flex justify-center gap-1 mt-2">
+        <span class="text-xs text-base-content/40 flex items-center gap-1">
+          <ion-icon name="swap-horizontal-outline"></ion-icon>
+          Листайте для выбора
+        </span>
+      </div>
+      
+      
+      <div class="hidden sm:flex flex-wrap justify-center gap-2" role="group" aria-label="Фильтр по категориям">
+        <button 
+          class="filter-button badge badge-lg h-9 px-4
+                no-underline cursor-pointer
+                transition-all duration-200
+                hover:badge-primary
+                data-[state=checked]:badge-primary data-[state=checked]:shadow-sm" 
+          data-filter="*" 
+          data-state="checked"
+          aria-pressed="true">
+          <ion-icon name="apps-outline" class="mr-1.5 text-sm"></ion-icon>
+          Все
+          <span class="ml-1.5 opacity-60">(3)</span>
+        </button>
+        
+        
+        
+        
+          
+          
+            
+              
+            
+          
+        
+          
+          
+            
+              
+            
+          
+        
+          
+          
+            
+          
+        
+        <button 
+          class="filter-button badge badge-lg h-9 px-4
+                no-underline cursor-pointer
+                transition-all duration-200
+                hover:badge-primary
+                data-[state=checked]:badge-primary data-[state=checked]:shadow-sm" 
+          data-filter=".web-development" 
+          data-state="unchecked"
+          aria-pressed="false">
+          Web development
+          <span class="ml-1.5 opacity-60">(2)</span>
+        </button>
+        
+        
+        
+          
+          
+            
+          
+        
+          
+          
+            
+          
+        
+          
+          
+            
+              
+            
+          
+        
+        <button 
+          class="filter-button badge badge-lg h-9 px-4
+                no-underline cursor-pointer
+                transition-all duration-200
+                hover:badge-primary
+                data-[state=checked]:badge-primary data-[state=checked]:shadow-sm" 
+          data-filter=".social-media" 
+          data-state="unchecked"
+          aria-pressed="false">
+          Social media
+          <span class="ml-1.5 opacity-60">(1)</span>
+        </button>
+        
+      </div>
+      
+    </div>
+    
+
+    
+    
+    
+    
+    <div class="dream-grid" id="portfolio-grid">
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2 sm:p-3 lg:p-4 dream-column web-development ">
+        <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/ru/portfolio/codesqueeze/">
   
   <figure>
     
@@ -607,10 +941,10 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </a>
 
-    </div>
-  
-    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column Web-Development ">
-      <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/ru/portfolio/prostavki/">
+      </div>
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2 sm:p-3 lg:p-4 dream-column web-development ">
+        <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/ru/portfolio/prostavki/">
   
   <figure>
     
@@ -670,10 +1004,10 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </a>
 
-    </div>
-  
-    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column Social-Media ">
-      <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/ru/portfolio/pbpack/">
+      </div>
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2 sm:p-3 lg:p-4 dream-column social-media ">
+        <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/ru/portfolio/pbpack/">
   
   <figure>
     
@@ -733,10 +1067,78 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </a>
 
+      </div>
+      
     </div>
-  
+    
+    
+    <div id="no-results" class="hidden text-center py-12 sm:py-16">
+      <ion-icon name="folder-open-outline" class="text-6xl sm:text-7xl text-base-content/20 mb-4"></ion-icon>
+      <p class="text-base-content/60 mb-2">Проектов не найдено</p>
+      <p class="text-sm text-base-content/40">Попробуйте другой фильтр</p>
+    </div>
+    
+    
+
+  </div>
 </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const grid = document.querySelector(".dream-grid");
+  if (!grid) return;
   
+  const noResults = document.getElementById("no-results");
+  
+  const iso = new Isotope(grid, {
+    itemSelector: ".dream-column",
+    layoutMode: "fitRows",
+    transitionDuration: '0.4s',
+    stagger: 30,
+    hiddenStyle: {
+      opacity: 0,
+      transform: 'scale(0.9)'
+    },
+    visibleStyle: {
+      opacity: 1,
+      transform: 'scale(1)'
+    }
+  });
+
+  const filterButtons = document.querySelectorAll(".filter-button");
+  
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const filterValue = button.getAttribute("data-filter");
+      
+      iso.arrange({ filter: filterValue });
+
+      
+      filterButtons.forEach((btn) => {
+        btn.setAttribute("data-state", "unchecked");
+        btn.setAttribute("aria-pressed", "false");
+      });
+      button.setAttribute("data-state", "checked");
+      button.setAttribute("aria-pressed", "true");
+    });
+  });
+  
+  
+  iso.on('arrangeComplete', function(filteredItems) {
+    if (noResults) {
+      if (filteredItems.length === 0) {
+        noResults.classList.remove('hidden');
+        grid.classList.add('hidden');
+      } else {
+        noResults.classList.add('hidden');
+        grid.classList.remove('hidden');
+      }
+    }
+  });
+});
+</script>
 
 
 
@@ -1120,8 +1522,8 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
     
-  
-    <script
+
+  <script
   src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
   integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
   crossorigin="anonymous"
@@ -1138,7 +1540,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 </script>
 
-  
+
 
 
     

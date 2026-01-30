@@ -277,6 +277,58 @@
     {{/* Portfolio Tools & Actions */}}
     {{ if eq .Section "portfolio" }}
 
+      {{/* Статус проекта - детальный */}}
+      {{ with .Params.status }}
+      <div class="not-prose mb-6">
+        {{ $statusColor := "primary" }}
+        {{ $statusIcon := "ellipse" }}
+        {{ $statusText := . }}
+        {{ $statusDescription := "" }}
+        
+        {{ if eq . "completed" }}
+          {{ $statusColor = "success" }}
+          {{ $statusIcon = "checkmark-circle" }}
+          {{ $statusText = i18n "portfolio.statusCompleted" | default "Завершён" }}
+          {{ $statusDescription = i18n "portfolio.statusCompletedDesc" | default "Проект успешно завершён и работает" }}
+        {{ else if eq . "in-progress" }}
+          {{ $statusColor = "warning" }}
+          {{ $statusIcon = "hourglass" }}
+          {{ $statusText = i18n "portfolio.statusInProgress" | default "В работе" }}
+          {{ $statusDescription = i18n "portfolio.statusInProgressDesc" | default "Активная разработка, скоро будет готов" }}
+        {{ else if eq . "archived" }}
+          {{ $statusColor = "neutral" }}
+          {{ $statusIcon = "archive" }}
+          {{ $statusText = i18n "portfolio.statusArchived" | default "Архив" }}
+          {{ $statusDescription = i18n "portfolio.statusArchivedDesc" | default "Проект завершён и больше не поддерживается" }}
+        {{ else if eq . "planned" }}
+          {{ $statusColor = "info" }}
+          {{ $statusIcon = "calendar" }}
+          {{ $statusText = i18n "portfolio.statusPlanned" | default "Планируется" }}
+          {{ $statusDescription = i18n "portfolio.statusPlannedDesc" | default "Проект в стадии планирования" }}
+        {{ else if eq . "paused" }}
+          {{ $statusColor = "error" }}
+          {{ $statusIcon = "pause-circle" }}
+          {{ $statusText = i18n "portfolio.statusPaused" | default "Приостановлен" }}
+          {{ $statusDescription = i18n "portfolio.statusPausedDesc" | default "Разработка временно приостановлена" }}
+        {{ end }}
+        
+        <div class="flex items-center gap-3 p-4 rounded-xl bg-{{ $statusColor }}/10 border border-{{ $statusColor }}/30">
+          <div class="flex items-center justify-center w-10 h-10 rounded-full bg-{{ $statusColor }}/30">
+            <ion-icon name="{{ $statusIcon }}-outline" class="text-xl text-{{ $statusColor }}"></ion-icon>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-semibold text-{{ $statusColor }}">{{ $statusText }}</span>
+              {{ with $.Params.completedDate }}
+              <span class="text-xs text-base-content/50">• {{ . }}</span>
+              {{ end }}
+            </div>
+            <p class="text-sm text-base-content/60">{{ $statusDescription }}</p>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+
       {{ partial "portfolio/toolsUsed.html" . }}
 
       {{ if or .Params.github .Params.demo }}
@@ -331,6 +383,11 @@
     <section id="dream-single-post-content" class="fade-in-up" itemprop="articleBody">
       {{ .Content }}
     </section>
+
+    {{/* Related Projects (for portfolio) */}}
+    {{ if eq .Section "portfolio" }}
+    {{ partial "portfolio/relatedProjects.html" . }}
+    {{ end }}
 
     {{/* Related Posts */}}
     {{ $related := .Site.RegularPages.Related . | first 3 }}
@@ -614,23 +671,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, observerOptions);
 
-  // Save reading position
-  const savePosition = () => {
-    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-    localStorage.setItem(`reading-pos-${window.location.pathname}`, scrollPercent);
-  };
-  
-  const restorePosition = () => {
-    const saved = localStorage.getItem(`reading-pos-${window.location.pathname}`);
-    if (saved && parseFloat(saved) > 10) {
-      const scrollTo = (parseFloat(saved) / 100) * (document.documentElement.scrollHeight - window.innerHeight);
-      window.scrollTo({ top: scrollTo, behavior: 'smooth' });
-    }
-  };
-  
-  window.addEventListener('scroll', savePosition, { passive: true });
-  setTimeout(restorePosition, 100);
-
   // Active TOC Highlight
   const tocLinks = document.querySelectorAll('#TableOfContents a');
   const headings = document.querySelectorAll('#dream-single-post-content h1, #dream-single-post-content h2, #dream-single-post-content h3');
@@ -832,6 +872,7 @@ document.addEventListener("DOMContentLoaded", () => {
   galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
 
   images.forEach((img, index) => {
+    if (img.closest('[data-tc-exclude]')) return;
     if (img.closest("a.lg-item")) return;
 
     const wrapper = document.createElement("a");

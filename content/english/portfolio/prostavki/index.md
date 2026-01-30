@@ -1,6 +1,7 @@
 ---
 title: Landing Page ProStavki
 date: 2025-01-27T18:00:34+03:00
+status: completed  # completed | in-progress | archived | planned | paused
 author: Rianvy
 avatar: /img/avatar.jpg
 # authorlink: https://author.site

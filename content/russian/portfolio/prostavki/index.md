@@ -2,6 +2,7 @@
 title: Landing Page ProStavki
 date: 2025-01-27T18:00:34+03:00
 author: Rianvy
+status: completed  # completed | in-progress | archived | planned | paused
 avatar: /img/avatar.jpg
 # authorlink: https://author.site
 description: Разработка лендинга для проекта спортивной аналитики, включая интеграцию с Google Sheets и уникальный визуальный стиль.

@@ -1,6 +1,7 @@
 ---
 title: "Social media design PBPack"
 date: 2025-01-19T20:25:20+03:00
+status: completed  # completed | in-progress | archived | planned | paused
 author: Rianvy
 avatar: /img/avatar.jpg
 description: "Разработка визуального стиля для бренда PBPack в социальных сетях, включая YouTube и Telegram."

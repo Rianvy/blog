@@ -1,0 +1,142 @@
+{{/* Связанные проекты */}}
+{{ $currentPage := . }}
+{{ $relatedSlugs := .Params.relatedProjects }}
+
+{{ if $relatedSlugs }}
+{{ $relatedPages := slice }}
+
+{{/* Находим страницы по slug */}}
+{{ range $relatedSlugs }}
+  {{ $slug := . }}
+  {{ range where site.RegularPages "Type" "portfolio" }}
+    {{ if eq .File.ContentBaseName $slug }}
+      {{ $relatedPages = $relatedPages | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if gt (len $relatedPages) 0 }}
+<section class="not-prose mt-12 pt-8 border-t border-base-300">
+  
+  <div class="flex items-center gap-3 mb-6">
+    <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-primary/10">
+      <ion-icon name="git-branch-outline" class="text-xl text-primary"></ion-icon>
+    </div>
+    <div>
+      <h3 class="text-xl font-bold">{{ i18n "portfolio.relatedProjectsTitle" | default "Связанные проекты" }}</h3>
+      <p class="text-sm text-base-content/60">{{ i18n "portfolio.relatedProjectsDescription" | default "Другие части этого проекта" }}</p>
+    </div>
+  </div>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    {{ range $relatedPages }}
+    <a href="{{ .RelPermalink }}" 
+       class="group flex gap-4 p-4 rounded-2xl
+              bg-base-200/50 dark:bg-base-200/10
+              border border-transparent
+              hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
+              hover:shadow-lg
+              transition-all duration-300">
+      
+      {{/* Миниатюра */}}
+      <div class="relative shrink-0 w-20 h-20 rounded-xl overflow-hidden bg-base-300">
+        {{ if .Params.cover }}
+          {{ with .Resources.Get .Params.cover }}
+            {{ if eq .MediaType.SubType "svg" }}
+              <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+            {{ else }}
+              {{ $thumb := .Fill "160x160 webp" }}
+              <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" loading="lazy" />
+            {{ end }}
+          {{ else }}
+            <img src="{{ .Params.cover }}" alt="{{ .Title }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" loading="lazy" />
+          {{ end }}
+        {{ else }}
+          <div class="w-full h-full flex items-center justify-center">
+            <ion-icon name="image-outline" class="text-2xl text-base-content/20"></ion-icon>
+          </div>
+        {{ end }}
+        
+        {{/* Статус бейдж */}}
+        {{ with .Params.status }}
+        <div class="absolute bottom-1 right-1">
+          {{ $statusColor := "primary" }}
+          {{ if eq . "completed" }}
+            {{ $statusColor = "success" }}
+          {{ else if eq . "in-progress" }}
+            {{ $statusColor = "warning" }}
+          {{ else if eq . "archived" }}
+            {{ $statusColor = "neutral" }}
+          {{ end }}
+          <span class="flex h-2.5 w-2.5 rounded-full bg-{{ $statusColor }} ring-2 ring-base-100"></span>
+        </div>
+        {{ end }}
+      </div>
+      
+      {{/* Контент */}}
+      <div class="flex-1 min-w-0">
+        {{/* Тип связи */}}
+        {{ with .Params.projectType }}
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 mb-1.5 text-xs font-medium rounded-full bg-base-300/50 text-base-content/70">
+          {{ $icon := "cube-outline" }}
+          {{ $typeText := . }}
+          {{ if eq . "extension" }}
+            {{ $icon = "extension-puzzle-outline" }}
+            {{ $typeText = i18n "portfolio.typeExtension" | default "Расширение" }}
+          {{ else if eq . "website" }}
+            {{ $icon = "globe-outline" }}
+            {{ $typeText = i18n "portfolio.typeWebsite" | default "Сайт" }}
+          {{ else if eq . "mobile" }}
+            {{ $icon = "phone-portrait-outline" }}
+            {{ $typeText = i18n "portfolio.typeMobile" | default "Мобильное приложение" }}
+          {{ else if eq . "design" }}
+            {{ $icon = "color-palette-outline" }}
+            {{ $typeText = i18n "portfolio.typeDesign" | default "Дизайн" }}
+          {{ else if eq . "api" }}
+            {{ $icon = "server-outline" }}
+            {{ $typeText = i18n "portfolio.typeAPI" | default "API" }}
+          {{ else if eq . "bot" }}
+            {{ $icon = "chatbubble-ellipses-outline" }}
+            {{ $typeText = i18n "portfolio.typeBot" | default "Бот" }}
+          {{ end }}
+          <ion-icon name="{{ $icon }}" class="text-xs"></ion-icon>
+          {{ $typeText }}
+        </span>
+        {{ end }}
+        
+        {{/* Заголовок */}}
+        <h4 class="font-bold text-base line-clamp-1 group-hover:text-primary transition-colors">
+          {{ .Title }}
+        </h4>
+        
+        {{/* Описание */}}
+        {{ with .Summary }}
+        <p class="text-sm text-base-content/60 line-clamp-2 mt-1">
+          {{ . | plainify | truncate 80 }}
+        </p>
+        {{ end }}
+        
+        {{/* Технологии */}}
+        {{ with .Params.tools }}
+        <div class="flex flex-wrap gap-1 mt-2">
+          {{ range first 3 . }}
+          <span class="text-xs px-1.5 py-0.5 rounded bg-base-300/50 text-base-content/50">{{ . }}</span>
+          {{ end }}
+          {{ if gt (len .) 3 }}
+          <span class="text-xs px-1.5 py-0.5 rounded bg-base-300/50 text-base-content/40">+{{ sub (len .) 3 }}</span>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+      
+      {{/* Стрелка */}}
+      <div class="flex items-center shrink-0">
+        <ion-icon name="arrow-forward" class="text-base-content/30 group-hover:text-primary group-hover:translate-x-1 transition-all"></ion-icon>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+  
+</section>
+{{ end }}
+{{ end }}

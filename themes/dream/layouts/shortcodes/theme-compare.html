@@ -1,0 +1,276 @@
+{{- $lightImage := .Get "light" -}}
+{{- $darkImage := .Get "dark" -}}
+{{- $title := .Get "title" | default "" -}}
+{{- $caption := .Get "caption" | default "" -}}
+{{- $mode := .Get "mode" | default "toggle" -}}
+
+{{- $id := delimit (shuffle (seq 1 9)) "" -}}
+
+<div class="theme-compare-{{ $id }} my-8 not-prose" data-mode="{{ $mode }}" {{ if eq $mode "slider" }}data-tc-exclude{{ end }}>
+  {{- if $title }}
+  <h4 class="text-center text-lg font-semibold mb-4 text-base-content">{{ $title }}</h4>
+  {{- end }}
+
+  {{- if eq $mode "toggle" }}
+  <!-- Toggle Mode -->
+  <div class="tc-toggle-{{ $id }}">
+    <div class="flex justify-center mb-4">
+      <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
+        <button 
+          class="tc-btn-{{ $id }} active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="light"
+          aria-label="{{ i18n "themeCompare.showLight" }}"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          {{ i18n "themeCompare.lightTheme" }}
+        </button>
+        <button 
+          class="tc-btn-{{ $id }} px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="dark"
+          aria-label="{{ i18n "themeCompare.showDark" }}"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+          {{ i18n "themeCompare.darkTheme" }}
+        </button>
+      </div>
+    </div>
+    
+    <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
+      <!-- Контейнер для светлого изображения -->
+      <div class="tc-light-wrap-{{ $id }} relative leading-[0] transition-opacity duration-500">
+        <img 
+          src="{{ $lightImage }}" 
+          alt="{{ $title }} - {{ i18n "themeCompare.lightTheme" }}"
+          title="{{ i18n "themeCompare.lightTheme" }}"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+      <!-- Контейнер для тёмного изображения (абсолютно позиционирован) -->
+      <div class="tc-dark-wrap-{{ $id }} absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+        <img 
+          src="{{ $darkImage }}" 
+          alt="{{ $title }} - {{ i18n "themeCompare.darkTheme" }}"
+          title="{{ i18n "themeCompare.darkTheme" }}"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+
+  {{- else if eq $mode "side-by-side" }}
+  <!-- Side by Side Mode -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="tc-card-{{ $id }} rounded-xl overflow-hidden shadow-lg border border-base-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 px-4 py-2 flex items-center gap-2 border-b border-base-300">
+        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+        <span class="text-sm font-medium text-amber-700 dark:text-amber-300">{{ i18n "themeCompare.lightTheme" }}</span>
+      </div>
+      <img 
+        src="{{ $lightImage }}" 
+        alt="{{ $title }} - {{ i18n "themeCompare.lightTheme" }}"
+        title="{{ i18n "themeCompare.lightTheme" }}"
+        class="w-full block"
+        loading="lazy"
+      />
+    </div>
+    
+    <div class="tc-card-{{ $id }} rounded-xl overflow-hidden shadow-lg border border-base-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <div class="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 px-4 py-2 flex items-center gap-2 border-b border-base-300">
+        <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+        </svg>
+        <span class="text-sm font-medium text-indigo-700 dark:text-indigo-300">{{ i18n "themeCompare.darkTheme" }}</span>
+      </div>
+      <img 
+        src="{{ $darkImage }}" 
+        alt="{{ $title }} - {{ i18n "themeCompare.darkTheme" }}"
+        title="{{ i18n "themeCompare.darkTheme" }}"
+        class="w-full block"
+        loading="lazy"
+      />
+    </div>
+  </div>
+
+  {{- else if eq $mode "slider" }}
+  <!-- Slider Mode - LightGallery ОТКЛЮЧЕНА -->
+  <div class="tc-slider-{{ $id }} relative overflow-hidden rounded-xl shadow-lg border border-base-300">
+    <div class="tc-slider-container-{{ $id }} relative select-none" style="--pos: 50%;">
+      <!-- Dark Image (Background) -->
+      <img 
+        src="{{ $darkImage }}" 
+        alt="{{ $title }} - {{ i18n "themeCompare.darkTheme" }}"
+        class="w-full block"
+        loading="lazy"
+        draggable="false"
+      />
+      
+      <!-- Light Image (Overlay) -->
+      <div class="tc-overlay-{{ $id }} absolute inset-0 overflow-hidden" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0);">
+        <img 
+          src="{{ $lightImage }}" 
+          alt="{{ $title }} - {{ i18n "themeCompare.lightTheme" }}"
+          class="w-full block"
+          loading="lazy"
+          draggable="false"
+        />
+      </div>
+      
+      <!-- Slider Handle -->
+      <div class="tc-handle-{{ $id }} absolute top-0 bottom-0 cursor-ew-resize z-10 flex items-center justify-center" style="left: var(--pos); transform: translateX(-50%); width: 44px;">
+        <div class="absolute top-0 bottom-0 w-0.5 bg-white" style="box-shadow: 0 0 10px rgba(0,0,0,0.5);"></div>
+        <div class="relative w-11 h-11 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-white/50" style="box-shadow: 0 2px 20px rgba(0,0,0,0.3);">
+          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+          </svg>
+          <svg class="w-5 h-5 text-gray-600 -ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Labels -->
+      <div class="absolute top-3 left-3 px-2.5 py-1 bg-white/95 backdrop-blur-sm rounded-lg text-xs font-medium text-gray-700 shadow-sm pointer-events-none">
+        {{ i18n "themeCompare.lightLabel" }}
+      </div>
+      <div class="absolute top-3 right-3 px-2.5 py-1 bg-gray-900/90 backdrop-blur-sm rounded-lg text-xs font-medium text-white shadow-sm pointer-events-none">
+        {{ i18n "themeCompare.darkLabel" }}
+      </div>
+    </div>
+  </div>
+  {{- end }}
+
+  {{- if $caption }}
+  <p class="text-center text-sm text-base-content/60 mt-3 italic">{{ $caption }}</p>
+  {{- end }}
+</div>
+
+<style>
+  /* Toggle Mode */
+  .tc-btn-{{ $id }} {
+    color: oklch(var(--bc) / 0.7);
+    background: transparent;
+  }
+  
+  .tc-btn-{{ $id }}.active {
+    background: oklch(var(--b1));
+    color: oklch(var(--bc));
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+  
+  .tc-btn-{{ $id }}:hover:not(.active) {
+    background: oklch(var(--b1) / 0.5);
+  }
+
+  /* Slider Mode */
+  .tc-slider-container-{{ $id }} {
+    touch-action: pan-y pinch-zoom;
+  }
+  
+  .tc-slider-container-{{ $id }} img {
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .tc-handle-{{ $id }}:hover > div:last-child,
+  .tc-handle-{{ $id }}:active > div:last-child {
+    transform: scale(1.1);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+  }
+  
+  .tc-handle-{{ $id }} > div:last-child {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .tc-overlay-{{ $id }} {
+    will-change: clip-path;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+(function() {
+  const id = '{{ $id }}';
+  const mode = '{{ $mode }}';
+  
+  {{- if eq $mode "toggle" }}
+  const buttons = document.querySelectorAll('.tc-btn-' + id);
+  const lightWrap = document.querySelector('.tc-light-wrap-' + id);
+  const darkWrap = document.querySelector('.tc-dark-wrap-' + id);
+  
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      if (btn.dataset.theme === 'dark') {
+        lightWrap.style.opacity = '0';
+        lightWrap.style.pointerEvents = 'none';
+        darkWrap.style.opacity = '1';
+        darkWrap.style.pointerEvents = 'auto';
+      } else {
+        lightWrap.style.opacity = '1';
+        lightWrap.style.pointerEvents = 'auto';
+        darkWrap.style.opacity = '0';
+        darkWrap.style.pointerEvents = 'none';
+      }
+    });
+  });
+  
+  {{- else if eq $mode "slider" }}
+  const sliderContainer = document.querySelector('.tc-slider-container-' + id);
+  const handle = document.querySelector('.tc-handle-' + id);
+  let isDragging = false;
+  
+  const updatePosition = (clientX) => {
+    const rect = sliderContainer.getBoundingClientRect();
+    let pos = ((clientX - rect.left) / rect.width) * 100;
+    pos = Math.max(2, Math.min(98, pos));
+    sliderContainer.style.setProperty('--pos', pos + '%');
+  };
+  
+  const startDrag = (e) => {
+    isDragging = true;
+    document.body.style.cursor = 'ew-resize';
+    document.body.style.userSelect = 'none';
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  
+  const stopDrag = () => {
+    if (isDragging) {
+      isDragging = false;
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    }
+  };
+  
+  const onMove = (e) => {
+    if (!isDragging) return;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    updatePosition(clientX);
+  };
+  
+  handle.addEventListener('mousedown', startDrag);
+  handle.addEventListener('touchstart', startDrag, { passive: false });
+  
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('touchmove', onMove, { passive: true });
+  
+  document.addEventListener('mouseup', stopDrag);
+  document.addEventListener('touchend', stopDrag);
+  
+  sliderContainer.addEventListener('click', (e) => {
+    if (e.target.closest('.tc-handle-' + id)) return;
+    updatePosition(e.clientX);
+  });
+  {{- end }}
+})();
+</script>

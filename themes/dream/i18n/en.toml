@@ -136,11 +136,40 @@ heroDescription = "Each project is a unique story. Here are the works into which
 statsProjects = "projects"
 statsCategories = "categories"
 statsTools = "technologies"
+statsCompleted = "completed"
+statsInProgress = "in progress"
 all = "All"
 swipeToFilter = "Swipe to filter"
+
+# Project statuses
 statusCompleted = "Completed"
+statusCompletedDesc = "Project successfully completed and operational"
 statusInProgress = "In Progress"
+statusInProgressDesc = "Active development, coming soon"
 statusArchived = "Archived"
+statusArchivedDesc = "Project completed and no longer maintained"
+statusPlanned = "Planned"
+statusPlannedDesc = "Project in planning stage"
+statusPaused = "Paused"
+statusPausedDesc = "Development temporarily paused"
+
+# Related projects
+relatedProjects = "Related projects"
+relatedProjectsTitle = "Related Projects"
+relatedProjectsDescription = "Other parts of this project"
+
+# Project types
+typeExtension = "Extension"
+typeWebsite = "Website"
+typeMobile = "Mobile App"
+typeDesign = "Design"
+typeAPI = "API"
+typeBot = "Bot"
+typeLibrary = "Library"
+typePlugin = "Plugin"
+typeTheme = "Theme"
+typeGame = "Game"
+
 toolsUsed = "Tools used"
 viewProject = "View project"
 sourceCode = "Source Code"
@@ -151,18 +180,12 @@ viewDemo = "View Demo"
 noProjects = "No projects found"
 tryOtherFilter = "Try another category"
 resetFilter = "Show all"
-processTitle = "How I Work"
-processDescription = "A simple and clear project workflow"
-step1Title = "Discussion"
-step1Description = "Getting to know the project, defining goals and requirements"
-step2Title = "Planning"
-step2Description = "Developing strategy, design and technical architecture"
-step3Title = "Development"
-step3Description = "Building the product with regular progress demos"
-step4Title = "Launch"
-step4Description = "Project deployment and post-launch support"
+
+# Technologies
 techTitle = "Technologies"
 techDescription = "Tools I use in my work"
+
+# FAQ
 faqTitle = "Frequently Asked Questions"
 faqDescription = "Answers to common questions about collaboration"
 faq1Question = "How much does project development cost?"
@@ -173,10 +196,58 @@ faq3Question = "What guarantees do you provide?"
 faq3Answer = "I provide warranty support after project launch, bug fixes and assistance if you have questions. Terms are discussed in the contract."
 faq4Question = "Do you work with international clients?"
 faq4Answer = "Yes, I work with clients from any country. Communication is possible in Russian and English via convenient messengers."
+
+# CTA section
 ctaTitle = "Have an interesting project?"
-ctaDescription = "Let's discuss your idea. The first consultation is free."
+ctaDescription = "Let's discuss your idea via messages. The first consultation is free."
 ctaButton = "Contact me"
 ctaEmail = "Email"
+
+# "How I Work" section (Accordion)
+[process]
+title = "How I Work"
+subtitle = "4 stages → finished product"
+duration = "Usually 4-10 weeks"
+
+[process.step1]
+title = "Discussion"
+subtitle = "Getting to know the project"
+duration = "1-2 days"
+item1 = "Communication via Telegram or Email"
+item2 = "Filling out a brief with key questions"
+item3 = "Preliminary estimate of time and cost"
+badge = "Free"
+note = "No obligations"
+
+[process.step2]
+title = "Planning"
+subtitle = "Prototype, specs & contract"
+duration = "3-7 days"
+item1 = "Interactive prototype in Figma"
+item2 = "Detailed technical specification"
+item3 = "Exact timeline and cost"
+item4 = "Contract signing"
+badge = "30% upfront"
+
+[process.step3]
+title = "Development"
+subtitle = "Sprints with weekly demos"
+duration = "2-8 weeks"
+item1 = "Work in 1-2 week sprints"
+item2 = "Demo version every Friday"
+item3 = "Access to dev version 24/7"
+item4 = "Communication via Telegram/Slack"
+badge = "Payment after each sprint"
+
+[process.step4]
+title = "Launch"
+subtitle = "Deployment and support"
+guarantee = "Warranty"
+item1 = "Deployment to your hosting"
+item2 = "Handover of access and documentation"
+item3 = "System training"
+item4 = "30 days of free support"
+bonus = "Bonus: Free revisions within a month after launch"
 
 # Summary
 [summary]
@@ -201,3 +272,12 @@ close = "Close"
 info = "All payments are secure. Any support helps develop the project and create new content ❤️"
 cloudtips_description = "For users from Russia"
 tribute_description = "International cards, Telegram Stars, USDT, Bitcoin, Toncoin, Notcoin"
+
+# Theme Compare template
+[themeCompare]
+lightTheme = "Light"
+darkTheme = "Dark"
+showLight = "Show light theme"
+showDark = "Show dark theme"
+lightLabel = "☀️ Light"
+darkLabel = "🌙 Dark"

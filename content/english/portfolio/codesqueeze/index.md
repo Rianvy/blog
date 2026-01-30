@@ -1,6 +1,7 @@
 ---
 title: CodeSqueeze — Online Code Minifier
 date: 2026-01-19T08:05:59+03:00
+status: in-progress  # completed | in-progress | archived | planned | paused
 author: Rianvy
 avatar: /img/avatar.jpg
 description: A modern online HTML, CSS, and JavaScript minifier with offline support, detailed statistics, and a thoughtfully designed interface.

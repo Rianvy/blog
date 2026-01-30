@@ -67,8 +67,8 @@
        window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
        $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
      "
-     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300"
-     :class="{ 'bg-base-100/95 backdrop-blur-md shadow-lg dark:border-b dark:border-base-content/20': isSticky }">
+     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+     :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
 
 
   
@@ -318,7 +318,7 @@
     <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Portfolio</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
     
   </a>
 </li>
@@ -364,7 +364,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">All Tags</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -646,7 +646,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">All Tags</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -821,6 +821,38 @@
           
           
           
+          <a href="/en/tags/web-development/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    ">
+            <span class="font-medium">Web Development</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              4
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/ui/ux/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    ">
+            <span class="font-medium">UI/UX</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              3
+            </span>
+          </a>
+          
+          
+          
+          
+          
           <a href="/en/tags/design/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
@@ -853,13 +885,29 @@
           
           
           
-          <a href="/en/tags/web-development/" 
+          <a href="/en/tags/javascript/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
                     hover:border-primary hover:bg-primary hover:text-primary-content
                     transition-all duration-200 no-underline text-sm
                     ">
-            <span class="font-medium">Web Development</span>
+            <span class="font-medium">JavaScript</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              2
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/react/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    ">
+            <span class="font-medium">React</span>
             <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
               2
             </span>
@@ -1061,6 +1109,22 @@
           
           
           
+          <a href="/en/tags/browser-extension/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Browser Extension</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
           <a href="/en/tags/chatgpt/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
@@ -1109,6 +1173,22 @@
           
           
           
+          <a href="/en/tags/customization/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Customization</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
           <a href="/en/tags/dns/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
@@ -1132,6 +1212,22 @@
                     transition-all duration-200 no-underline text-sm
                     opacity-70">
             <span class="font-medium">DNS Filtering</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/framer-motion/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Framer Motion</span>
             <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
               1
             </span>
@@ -1301,22 +1397,6 @@
           
           
           
-          <a href="/en/tags/javascript/" 
-             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
-                    bg-base-100 border border-base-300
-                    hover:border-primary hover:bg-primary hover:text-primary-content
-                    transition-all duration-200 no-underline text-sm
-                    opacity-70">
-            <span class="font-medium">JavaScript</span>
-            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
-              1
-            </span>
-          </a>
-          
-          
-          
-          
-          
           <a href="/en/tags/lampa/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
@@ -1356,6 +1436,22 @@
                     transition-all duration-200 no-underline text-sm
                     opacity-70">
             <span class="font-medium">Landing Development</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/landing-page/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Landing Page</span>
             <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
               1
             </span>
@@ -1457,6 +1553,22 @@
           
           
           
+          <a href="/en/tags/seo/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">SEO</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
           <a href="/en/tags/servers/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
@@ -1496,6 +1608,22 @@
                     transition-all duration-200 no-underline text-sm
                     opacity-70">
             <span class="font-medium">Streaming</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/tailwind-css/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Tailwind CSS</span>
             <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
               1
             </span>
@@ -1553,13 +1681,13 @@
           
           
           
-          <a href="/en/tags/ui/ux/" 
+          <a href="/en/tags/visual-style/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
                     hover:border-primary hover:bg-primary hover:text-primary-content
                     transition-all duration-200 no-underline text-sm
                     opacity-70">
-            <span class="font-medium">UI/UX</span>
+            <span class="font-medium">Visual Style</span>
             <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
               1
             </span>
@@ -1569,13 +1697,13 @@
           
           
           
-          <a href="/en/tags/visual-style/" 
+          <a href="/en/tags/vkontakte/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
                     hover:border-primary hover:bg-primary hover:text-primary-content
                     transition-all duration-200 no-underline text-sm
                     opacity-70">
-            <span class="font-medium">Visual Style</span>
+            <span class="font-medium">VKontakte</span>
             <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
               1
             </span>
@@ -1888,13 +2016,14 @@
         <td 
           class=""
         >
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </td>
         
         <td 
           class=""
         >
-          No projects to showcase yet. Stay tuned!
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
         </td>
         
       </tr>
@@ -1914,7 +2043,8 @@
           Name
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </span>
       </div>
       
@@ -1923,7 +2053,7 @@
           Description
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          No projects to showcase yet. Stay tuned!
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
         </span>
       </div>
       

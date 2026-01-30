@@ -177,8 +177,8 @@
        window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
        $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
      "
-     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300"
-     :class="{ 'bg-base-100/95 backdrop-blur-md shadow-lg dark:border-b dark:border-base-content/20': isSticky }">
+     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+     :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
 
 
   
@@ -427,7 +427,7 @@
     <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Портфолио</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
     
   </a>
 </li>
@@ -473,7 +473,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Все теги</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -754,7 +754,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Все теги</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -1050,6 +1050,36 @@
     
     
 
+      
+      
+      <div class="not-prose mb-6">
+        
+        
+        
+        
+        
+        
+          
+          
+          
+          
+        
+        
+        <div class="flex items-center gap-3 p-4 rounded-xl bg-success/10 border border-success/30">
+          <div class="flex items-center justify-center w-10 h-10 rounded-full bg-success/30">
+            <ion-icon name="checkmark-circle-outline" class="text-xl text-success"></ion-icon>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-semibold text-success">Завершён</span>
+              
+            </div>
+            <p class="text-sm text-base-content/60">Проект успешно завершён и работает</p>
+          </div>
+        </div>
+      </div>
+      
+
       <div class="not-prose my-4">
   
   <div class="mb-8">
@@ -1257,6 +1287,15 @@
 </li>
 </ul>
     </section>
+
+    
+    
+    
+
+
+
+
+    
 
     
     
@@ -1644,13 +1683,14 @@
         <td 
           class=""
         >
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </td>
         
         <td 
           class=""
         >
-          Пока нет проектов для вашего внимания. Stay tuned!
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
         </td>
         
       </tr>
@@ -1670,7 +1710,8 @@
           Название
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </span>
       </div>
       
@@ -1679,7 +1720,7 @@
           Описание
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          Пока нет проектов для вашего внимания. Stay tuned!
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
         </span>
       </div>
       
@@ -1930,23 +1971,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, observerOptions);
 
   
-  const savePosition = () => {
-    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-    localStorage.setItem(`reading-pos-${window.location.pathname}`, scrollPercent);
-  };
-  
-  const restorePosition = () => {
-    const saved = localStorage.getItem(`reading-pos-${window.location.pathname}`);
-    if (saved && parseFloat(saved) > 10) {
-      const scrollTo = (parseFloat(saved) / 100) * (document.documentElement.scrollHeight - window.innerHeight);
-      window.scrollTo({ top: scrollTo, behavior: 'smooth' });
-    }
-  };
-  
-  window.addEventListener('scroll', savePosition, { passive: true });
-  setTimeout(restorePosition, 100);
-
-  
   const tocLinks = document.querySelectorAll('#TableOfContents a');
   const headings = document.querySelectorAll('#dream-single-post-content h1, #dream-single-post-content h2, #dream-single-post-content h3');
   
@@ -2141,6 +2165,7 @@ document.addEventListener("DOMContentLoaded", () => {
   galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
 
   images.forEach((img, index) => {
+    if (img.closest('[data-tc-exclude]')) return;
     if (img.closest("a.lg-item")) return;
 
     const wrapper = document.createElement("a");

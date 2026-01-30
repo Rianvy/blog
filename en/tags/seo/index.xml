@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SEO on 0x69.ru</title>
+    <link>https://0x69.ru/en/tags/seo/</link>
+    <description>Recent content in SEO on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 28 Jan 2026 00:35:23 +0300</lastBuildDate>
+    <atom:link href="https://0x69.ru/en/tags/seo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VKify Website — Landing Page for Browser Extension</title>
+      <link>https://0x69.ru/en/portfolio/vkify-website-extension-landing/</link>
+      <pubDate>Wed, 28 Jan 2026 00:35:23 +0300</pubDate>
+      <guid>https://0x69.ru/en/portfolio/vkify-website-extension-landing/</guid>
+      <description>&lt;p&gt;Development of a modern landing page for the VKify browser extension — from a creative homepage to onboarding and changelog service pages.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,2272 @@
+<!DOCTYPE html>
+<html lang="en"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Extension | 0x69.ru</title>
+
+    
+<meta name="google-site-verification" content="SX8wwAcRfmBYPxrIA69UFfuq8DDa2GxWVBzVj9tucMA" />
+<link rel="canonical" href="https://0x69.ru/en/tags/browser-extension/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/en/tags/browser-extension/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="Browser Extension">
+  <meta property="og:description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="website">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Browser Extension">
+  <meta name="twitter:description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет.">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+
+
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     "
+     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+     :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+
+
+  
+  <div class="container flex items-center justify-between px-4">
+  
+  
+    
+    
+    
+    <section class="flex items-center gap-3">
+      <button class="avatar cursor-pointer transition-all duration-200 group" 
+              @click="flip = !flip" 
+              title="Flip it!"
+              aria-label="Flip it!">
+        <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+          <img src="/img/avatar.jpg" 
+               alt="0x69.ru &lt;/&gt;" 
+               class="rounded-full" 
+               loading="eager" />
+        </div>
+      </button>
+
+      
+      <div class="flex flex-col">
+        
+        <a href="/en/" 
+           class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+          0x69.ru &lt;/&gt;
+        </a>
+        
+        
+        <span class="text-sm text-base-content/60 hidden sm:block">To iterate is human, to recurse divine</span>
+        
+      </div>
+      
+    </section>
+
+    
+    
+    
+    <div class="sm:hidden">
+      
+      <button @click="mobileMenuOpen = !mobileMenuOpen" 
+              class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+              :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+              aria-label="Открыть меню"
+              :aria-expanded="mobileMenuOpen">
+        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+      </button>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"
+           @click="mobileMenuOpen = false"
+           class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm"
+           aria-hidden="true">
+      </div>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+           x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+           x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+           @click.outside="mobileMenuOpen = false"
+           @keydown.escape.window="mobileMenuOpen = false"
+           class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+        
+        
+        <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+          <span class="font-semibold text-base-content">Menu</span>
+          <button @click="mobileMenuOpen = false" 
+                  class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+                  aria-label="Закрыть">
+            <ion-icon name="close" class="text-lg"></ion-icon>
+          </button>
+        </div>
+        
+        
+        
+          
+          
+          <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+            <button type="button"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                    @click="flip = !flip; mobileMenuOpen = false"
+                    title="About"
+                    aria-label="About">
+              <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+              <span class="flex-1 text-left">About</span>
+              <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+            </button>
+          </div>
+          
+        
+        
+        
+        <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+          
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Languages
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/tags/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/tags/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Menu
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Search">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Search</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Categories">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Categories</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Portfolio">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Portfolio</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+        </div>
+      </div>
+    </div>
+
+    
+    
+    
+    <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+      
+      
+      
+        
+        
+        <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                @click="flip = !flip"
+                title="About">About</button>
+        
+      
+
+      
+      
+        
+      
+
+      
+        
+        
+        
+        
+        
+          
+
+
+
+
+
+
+
+<a href="/en/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Search"
+   aria-label="Search">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+        
+          
+
+
+
+
+
+
+
+<a href="/en/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="All Categories"
+   aria-label="All Categories">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+        
+          
+
+
+
+
+
+
+
+<a href="/en/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Portfolio"
+   aria-label="Portfolio">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+        
+      
+        
+        
+        
+        <div class="dropdown dropdown-end dropdown-hover">
+          <button tabindex="0" 
+                  class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                  aria-label="Выбрать язык"
+                  aria-haspopup="true">
+            <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+          </button>
+          <ul tabindex="0" 
+              class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+              role="menu">
+            
+              
+              
+              
+              
+
+              
+              
+                
+                
+              
+
+              <li role="none">
+                <a href="https://0x69.ru/en/tags/" 
+                   hreflang="en"
+                   role="menuitem"
+                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                   aria-current="true">
+                  <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                  <span class="flex-1">English</span>
+                  
+                  <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                  
+                </a>
+              </li>
+            
+              
+              
+              
+              
+
+              
+              
+                
+                
+              
+
+              <li role="none">
+                <a href="https://0x69.ru/ru/tags/" 
+                   hreflang="ru"
+                   role="menuitem"
+                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                   >
+                  <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                  <span class="flex-1">Русский</span>
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+          
+        
+        
+        
+        <div class="dropdown dropdown-end dropdown-hover">
+          <button tabindex="0" 
+                  class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                  aria-label="Ещё"
+                  aria-haspopup="true">
+            <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+          </button>
+          <ul tabindex="0" 
+              class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+              role="menu">
+            
+              
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
+  </a>
+</li>
+
+
+
+
+
+            
+              
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
+    
+  </a>
+</li>
+
+
+
+
+
+            
+              
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+            
+              
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+            
+
+            
+              
+
+
+
+
+
+
+
+
+
+
+            
+          </ul>
+        </div>
+      
+    </section>
+  </div>
+</nav>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+
+
+
+
+
+<div class="mt-8 lg:mt-12 px-4 sm:px-6">
+  <div class="max-w-7xl mx-auto">
+
+    
+    <section class="text-center mb-10 lg:mb-14">
+      
+      
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 text-primary mb-4">
+        
+        <ion-icon name="pricetag-outline" class="text-3xl"></ion-icon>
+        
+      </div>
+      
+      
+      <div class="mb-3">
+        <span class="badge badge-outline badge-sm">
+          
+            Tag
+          
+        </span>
+      </div>
+      
+      
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+        Browser Extension
+      </h1>
+      
+      
+      <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-6">
+        
+        <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
+          <ion-icon name="document-text-outline" class="text-lg text-primary"></ion-icon>
+          <span class="font-bold">1</span>
+          <span class="text-sm text-base-content/60">
+            1 article
+          </span>
+        </div>
+        
+      </div>
+      
+      
+      <a href="/en/tags/" 
+         class="inline-flex items-center gap-2 text-sm text-base-content/60 hover:text-primary transition-colors no-underline">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        
+          All tags
+        
+      </a>
+    </section>
+
+    
+    
+    <section class="mb-10 lg:mb-14">
+      <div class="p-4 sm:p-6 rounded-2xl bg-base-200/30 border border-base-300">
+        
+        
+        <div class="flex items-center gap-2 mb-4">
+          <ion-icon name="git-branch-outline" class="text-base-content/50"></ion-icon>
+          <span class="text-sm font-medium text-base-content/50">
+            
+              Other tags
+            
+          </span>
+          <div class="flex-1 h-px bg-base-300"></div>
+        </div>
+        
+        
+        <div class="flex flex-wrap gap-2">
+          
+          
+          
+          
+          <a href="/en/tags/web-development/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    ">
+            <span class="font-medium">Web Development</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              4
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/ui/ux/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    ">
+            <span class="font-medium">UI/UX</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              3
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/design/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    ">
+            <span class="font-medium">Design</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              2
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/figma/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    ">
+            <span class="font-medium">Figma</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              2
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/javascript/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    ">
+            <span class="font-medium">JavaScript</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              2
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/react/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    ">
+            <span class="font-medium">React</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              2
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/.htaccess/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">.Htaccess</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/4k/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">4K</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/adaptation-for-mobile-devices/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Adaptation for Mobile Devices</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/adaptive-landing/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Adaptive Landing</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/adguard/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">AdGuard</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/ai/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">AI</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/android-tv/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Android TV</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/animated-logo/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Animated Logo</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/anthropic/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Anthropic</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/apache/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Apache</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/apple-tv/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Apple TV</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/branding/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Branding</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                       bg-primary text-primary-content font-medium text-sm">
+            Browser Extension
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-primary-content/20">
+              1
+            </span>
+          </span>
+          
+          
+          
+          
+          
+          <a href="/en/tags/chatgpt/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">ChatGPT</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/claude/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Claude</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/comss.one-dns/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Comss.one DNS</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/customization/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Customization</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/dns/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">DNS</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/dns-filtering/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">DNS Filtering</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/framer-motion/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Framer Motion</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/frontend/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Frontend</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/gemini/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Gemini</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/github-copilot/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">GitHub Copilot</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/google-ai/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Google AI</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/guide/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Guide</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/hdr/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">HDR</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/home-theater/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Home Theater</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/identity/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Identity</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/interactive-landing/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Interactive Landing</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/iptv/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">IPTV</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/lampa/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Lampa</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/landing-design/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Landing Design</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/landing-development/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Landing Development</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/landing-page/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Landing Page</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/media-center/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Media Center</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/microsoft-copilot/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Microsoft Copilot</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/neural-networks/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Neural Networks</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/openai/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">OpenAI</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/optimization/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Optimization</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/performance/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Performance</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/seo/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">SEO</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/servers/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Servers</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/smart-tv/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Smart TV</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/streaming/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Streaming</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/tailwind-css/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Tailwind CSS</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/telegram/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Telegram</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/torrents/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Torrents</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/torrserver/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">TorrServer</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/visual-style/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Visual Style</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/vkontakte/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">VKontakte</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/web-security/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Web Security</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/web-tools/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Web Tools</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/en/tags/xbox/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Xbox</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+        </div>
+        
+      </div>
+    </section>
+    
+
+    <div class="divider"></div>
+
+    
+    <section>
+      
+
+      
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-bold flex items-center gap-2">
+          <ion-icon name="newspaper-outline" class="text-xl text-primary"></ion-icon>
+          Posts in
+          <span class="text-primary">Browser Extension</span>
+        </h2>
+        <span class="text-sm text-base-content/50">
+          1 total
+        </span>
+      </div>
+
+      
+      
+      
+      <div class="dream-grid">
+        
+        <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 dream-column">
+          <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/en/portfolio/vkify-vkontakte-extension/">
+  
+  <figure>
+    
+    
+      
+      <picture>
+        <source srcset="/en/portfolio/vkify-vkontakte-extension/Cover_hu_2cf413fff24db313.webp" type="image/webp" />
+        <img src="/en/portfolio/vkify-vkontakte-extension/Cover.png" alt="Cover.png" />
+      </picture>
+    
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">VKify — Extension for VKontakte</h2>
+
+    <p class="date text-base-content/60">
+    
+      <span data-format="luxon">2026-01-27T17:35:43&#43;03:00</span>
+    
+	<span>
+	&nbsp;
+	
+		<ion-icon name="sparkles" class="mr-1"></ion-icon><span>Portfolio</span>
+	
+	</span>
+    </p>
+	
+    <p>VKify is a browser extension that makes VKontakte more convenient: ad blocking, interface customization, privacy mode, and much more.</p>
+	
+    <div class="card-actions justify-between items-center mt-4">
+      <div class="flex items-center">
+  
+  <div class="avatar mr-1">
+    <div class="w-8 rounded-full">
+      <img class="my-0" src="/img/avatar.jpg" alt="Rianvy" />
+    </div>
+  </div>
+  
+
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+  
+    
+      <span itemprop="name">Rianvy</span>
+    
+  
+  </span>
+</div>
+
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>7 minutes read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+        </div>
+        
+      </div>
+      
+      
+
+      
+      
+
+      
+      
+      
+    </section>
+
+  </div>
+</div>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Maksim Alexandrov<br>
+<strong>Age:</strong> 28<br>
+<strong>Location:</strong> Tula, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>This blog is my personal knowledge base, where I push notes about my tech stack, life experience, and everything that triggers my interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — ready to merge ideas and work on joint projects.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-programming-languages">💻 Programming Languages</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Responsive layout (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST APIs</strong></li>
+</ul>
+<h2 id="-databases">🗄️ Databases</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-design--graphics">🎨 Design &amp; Graphics</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX design and prototyping</li>
+<li><strong>Photoshop</strong> — graphics and image editing</li>
+<li><strong>After Effects</strong> — motion design and animation 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Open Source Projects 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Projects 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN service in Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN service in Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Social Links</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "forest"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+    
+
+<script
+  src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
+  integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
+  crossorigin="anonymous"
+></script>
+<script>
+  format()
+
+  function format() {
+    document.querySelectorAll('span[data-format="luxon"]').forEach(el => {
+      const date = el.textContent
+
+      el.textContent = luxon.DateTime.fromISO(date, { locale: "en" }).toFormat("dd.MM.yyyy, HH:mm")
+    })
+  }
+</script>
+
+
+
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

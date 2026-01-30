@@ -67,8 +67,8 @@
        window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
        $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
      "
-     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300"
-     :class="{ 'bg-base-100/95 backdrop-blur-md shadow-lg dark:border-b dark:border-base-content/20': isSticky }">
+     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+     :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
 
 
   
@@ -317,7 +317,7 @@
     <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Portfolio</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
     
   </a>
 </li>
@@ -363,7 +363,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">All Tags</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -644,7 +644,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">All Tags</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -908,6 +908,16 @@ x-init="$refs.searchInput.focus()">
       <p class="text-xs text-base-content/40 text-center mb-3">Popular searches</p>
       <div class="flex flex-wrap justify-center gap-2">
         
+        <button @click="search = 'Web Development'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
+          Web Development
+        </button>
+        
+        <button @click="search = 'UI/UX'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
+          UI/UX
+        </button>
+        
         <button @click="search = 'Design'" 
                 class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
           Design
@@ -918,19 +928,9 @@ x-init="$refs.searchInput.focus()">
           Figma
         </button>
         
-        <button @click="search = 'Web Development'" 
+        <button @click="search = 'JavaScript'" 
                 class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
-          Web Development
-        </button>
-        
-        <button @click="search = '.Htaccess'" 
-                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
-          .Htaccess
-        </button>
-        
-        <button @click="search = '4K'" 
-                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
-          4K
+          JavaScript
         </button>
         
       </div>
@@ -1090,13 +1090,14 @@ x-init="$refs.searchInput.focus()">
         <td 
           class=""
         >
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </td>
         
         <td 
           class=""
         >
-          No projects to showcase yet. Stay tuned!
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
         </td>
         
       </tr>
@@ -1116,7 +1117,8 @@ x-init="$refs.searchInput.focus()">
           Name
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </span>
       </div>
       
@@ -1125,7 +1127,7 @@ x-init="$refs.searchInput.focus()">
           Description
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          No projects to showcase yet. Stay tuned!
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
         </span>
       </div>
       
@@ -1326,9 +1328,13 @@ x-init="$refs.searchInput.focus()">
 
 
 
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js" integrity="sha256-42IbU8t3tOwwbexB7ZVRHm3YDRf65aBPPjRtIUufj5I=" crossorigin="anonymous"></script>
 <script>
-  var fuseData = [{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Guides"],"date":"2026-01-25","description":"A complete guide to torrent streaming for those who value quality and their time\n","readingTime":17,"tags":["Lampa","TorrServer","Android TV","Apple TV","Smart TV","Xbox","streaming","torrents","4K","HDR","media center","home theater","IPTV"],"title":"How to Watch Movies and TV Shows in 4K via Lampa and TorrServer","url":"/en/posts/kak-smotret-filmy-4k-lampa-torrserver/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Guides","Neural Networks"],"date":"2026-01-17","description":"Proper DNS configuration for stable access to AI services – via DNS, hosts file, or AdGuard.\n","readingTime":19,"tags":["DNS","Neural Networks","ChatGPT","Gemini","Claude","AdGuard","Comss.one DNS","Guide","AI","OpenAI","Anthropic","Google AI","Microsoft Copilot","GitHub Copilot","DNS Filtering"],"title":"ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services","url":"/en/posts/chatgpt-claude-gemini-dns-dostup/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Administration"],"date":"2025-01-12","description":".htaccess allows you to create your own Apache server management configuration in directories or hosting settings.\n","readingTime":5,"tags":["Servers","Apache",".htaccess","Web Security","Performance"],"title":"Role of the .htaccess file in Apache server configuration","url":"/en/posts/role-htaccess/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-19","description":"CodeSqueeze is a modern web tool for minifying HTML, CSS, and JavaScript, focused on speed, privacy, and a comfortable in-browser workflow.\n","readingTime":2,"tags":["Web Development","UI/UX","Frontend","JavaScript","Optimization","Web Tools","Figma"],"title":"CodeSqueeze — Online Code Minifier","url":"/en/portfolio/codesqueeze/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2025-01-27","description":"Landing Page development for a sports analytics project, including Google Sheets integration and unique visual style.\n","readingTime":2,"tags":["Design","Adaptive Landing","Landing development","Web Development","Landing design","Interactive Landing","Adaptation for mobile devices","Figma"],"title":"Landing Page ProStavki","url":"/en/portfolio/prostavki/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2025-01-19","description":"Developed visual identity for PBPack\u0026rsquo;s social media brand, including YouTube and Telegram.\n","readingTime":1,"tags":["Design","Branding","Identity","Telegram","Animated Logo","Visual Style"],"title":"Social media design PBPack","url":"/en/portfolio/pbpack/"}];
+  var fuseData = [{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Guides"],"date":"2026-01-25","description":"A complete guide to torrent streaming for those who value quality and their time\n","readingTime":17,"tags":["Lampa","TorrServer","Android TV","Apple TV","Smart TV","Xbox","streaming","torrents","4K","HDR","media center","home theater","IPTV"],"title":"How to Watch Movies and TV Shows in 4K via Lampa and TorrServer","url":"/en/posts/kak-smotret-filmy-4k-lampa-torrserver/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Guides","Neural Networks"],"date":"2026-01-17","description":"Proper DNS configuration for stable access to AI services – via DNS, hosts file, or AdGuard.\n","readingTime":19,"tags":["DNS","Neural Networks","ChatGPT","Gemini","Claude","AdGuard","Comss.one DNS","Guide","AI","OpenAI","Anthropic","Google AI","Microsoft Copilot","GitHub Copilot","DNS Filtering"],"title":"ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services","url":"/en/posts/chatgpt-claude-gemini-dns-dostup/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Administration"],"date":"2025-01-12","description":".htaccess allows you to create your own Apache server management configuration in directories or hosting settings.\n","readingTime":5,"tags":["Servers","Apache",".htaccess","Web Security","Performance"],"title":"Role of the .htaccess file in Apache server configuration","url":"/en/posts/role-htaccess/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-28","description":"Development of a modern landing page for the VKify browser extension — from a creative homepage to onboarding and changelog service pages.\n","readingTime":5,"tags":["Web Development","React","Landing Page","UI/UX","Tailwind CSS","Framer Motion","SEO"],"title":"VKify Website — Landing Page for Browser Extension","url":"/en/portfolio/vkify-website-extension-landing/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-27","description":"VKify is a browser extension that makes VKontakte more convenient: ad blocking, interface customization, privacy mode, and much more.\n","readingTime":7,"tags":["Web Development","Browser Extension","React","JavaScript","UI/UX","VKontakte","Customization"],"title":"VKify — Extension for VKontakte","url":"/en/portfolio/vkify-vkontakte-extension/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-19","description":"CodeSqueeze is a modern web tool for minifying HTML, CSS, and JavaScript, focused on speed, privacy, and a comfortable in-browser workflow.\n","readingTime":2,"tags":["Web Development","UI/UX","Frontend","JavaScript","Optimization","Web Tools","Figma"],"title":"CodeSqueeze — Online Code Minifier","url":"/en/portfolio/codesqueeze/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2025-01-27","description":"Landing Page development for a sports analytics project, including Google Sheets integration and unique visual style.\n","readingTime":2,"tags":["Design","Adaptive Landing","Landing development","Web Development","Landing design","Interactive Landing","Adaptation for mobile devices","Figma"],"title":"Landing Page ProStavki","url":"/en/portfolio/prostavki/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2025-01-19","description":"Developed visual identity for PBPack\u0026rsquo;s social media brand, including YouTube and Telegram.\n","readingTime":1,"tags":["Design","Branding","Identity","Telegram","Animated Logo","Visual Style"],"title":"Social media design PBPack","url":"/en/portfolio/pbpack/"}];
   var fuseOptions = {
     keys: [
       { name: "title", weight: 2 },

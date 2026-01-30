@@ -6,8 +6,22 @@
     <description>Recent content in Portfolios on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 19 Jan 2026 08:05:59 +0300</lastBuildDate>
+    <lastBuildDate>Wed, 28 Jan 2026 00:35:23 +0300</lastBuildDate>
     <atom:link href="https://0x69.ru/en/portfolio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VKify Website — Landing Page for Browser Extension</title>
+      <link>https://0x69.ru/en/portfolio/vkify-website-extension-landing/</link>
+      <pubDate>Wed, 28 Jan 2026 00:35:23 +0300</pubDate>
+      <guid>https://0x69.ru/en/portfolio/vkify-website-extension-landing/</guid>
+      <description>&lt;p&gt;Development of a modern landing page for the VKify browser extension — from a creative homepage to onboarding and changelog service pages.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VKify — Extension for VKontakte</title>
+      <link>https://0x69.ru/en/portfolio/vkify-vkontakte-extension/</link>
+      <pubDate>Tue, 27 Jan 2026 17:35:43 +0300</pubDate>
+      <guid>https://0x69.ru/en/portfolio/vkify-vkontakte-extension/</guid>
+      <description>&lt;p&gt;VKify is a browser extension that makes VKontakte more convenient: ad blocking, interface customization, privacy mode, and much more.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>CodeSqueeze — Online Code Minifier</title>
       <link>https://0x69.ru/en/portfolio/codesqueeze/</link>

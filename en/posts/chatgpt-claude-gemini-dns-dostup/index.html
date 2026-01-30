@@ -183,8 +183,8 @@
        window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
        $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
      "
-     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300"
-     :class="{ 'bg-base-100/95 backdrop-blur-md shadow-lg dark:border-b dark:border-base-content/20': isSticky }">
+     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+     :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
 
 
   
@@ -433,7 +433,7 @@
     <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Portfolio</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
     
   </a>
 </li>
@@ -479,7 +479,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">All Tags</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -760,7 +760,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">All Tags</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -3258,6 +3258,9 @@ But for most users, <strong>Comss.one DNS is the optimal compromise</strong> bet
 
     
     
+
+    
+    
     
 
     
@@ -3774,13 +3777,14 @@ But for most users, <strong>Comss.one DNS is the optimal compromise</strong> bet
         <td 
           class=""
         >
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </td>
         
         <td 
           class=""
         >
-          No projects to showcase yet. Stay tuned!
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
         </td>
         
       </tr>
@@ -3800,7 +3804,8 @@ But for most users, <strong>Comss.one DNS is the optimal compromise</strong> bet
           Name
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </span>
       </div>
       
@@ -3809,7 +3814,7 @@ But for most users, <strong>Comss.one DNS is the optimal compromise</strong> bet
           Description
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          No projects to showcase yet. Stay tuned!
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
         </span>
       </div>
       
@@ -4060,23 +4065,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, observerOptions);
 
   
-  const savePosition = () => {
-    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-    localStorage.setItem(`reading-pos-${window.location.pathname}`, scrollPercent);
-  };
-  
-  const restorePosition = () => {
-    const saved = localStorage.getItem(`reading-pos-${window.location.pathname}`);
-    if (saved && parseFloat(saved) > 10) {
-      const scrollTo = (parseFloat(saved) / 100) * (document.documentElement.scrollHeight - window.innerHeight);
-      window.scrollTo({ top: scrollTo, behavior: 'smooth' });
-    }
-  };
-  
-  window.addEventListener('scroll', savePosition, { passive: true });
-  setTimeout(restorePosition, 100);
-
-  
   const tocLinks = document.querySelectorAll('#TableOfContents a');
   const headings = document.querySelectorAll('#dream-single-post-content h1, #dream-single-post-content h2, #dream-single-post-content h3');
   
@@ -4280,6 +4268,7 @@ document.addEventListener("DOMContentLoaded", () => {
   galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
 
   images.forEach((img, index) => {
+    if (img.closest('[data-tc-exclude]')) return;
     if (img.closest("a.lg-item")) return;
 
     const wrapper = document.createElement("a");

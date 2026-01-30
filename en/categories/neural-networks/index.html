@@ -67,8 +67,8 @@
        window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
        $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
      "
-     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300"
-     :class="{ 'bg-base-100/95 backdrop-blur-md shadow-lg dark:border-b dark:border-base-content/20': isSticky }">
+     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+     :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
 
 
   
@@ -318,7 +318,7 @@
     <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Portfolio</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
     
   </a>
 </li>
@@ -364,7 +364,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">All Tags</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -646,7 +646,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">All Tags</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -1120,13 +1120,14 @@
         <td 
           class=""
         >
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </td>
         
         <td 
           class=""
         >
-          No projects to showcase yet. Stay tuned!
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
         </td>
         
       </tr>
@@ -1146,7 +1147,8 @@
           Name
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </span>
       </div>
       
@@ -1155,7 +1157,7 @@
           Description
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          No projects to showcase yet. Stay tuned!
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
         </span>
       </div>
       

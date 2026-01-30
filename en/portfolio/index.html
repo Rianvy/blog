@@ -72,8 +72,8 @@ Portfolio
        window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
        $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
      "
-     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300"
-     :class="{ 'bg-base-100/95 backdrop-blur-md shadow-lg dark:border-b dark:border-base-content/20': isSticky }">
+     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+     :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
 
 
   
@@ -322,7 +322,7 @@ Portfolio
     <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Portfolio</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
     
   </a>
 </li>
@@ -368,7 +368,7 @@ Portfolio
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">All Tags</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -649,7 +649,7 @@ Portfolio
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">All Tags</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -797,6 +797,18 @@ Portfolio
       
     
   
+    
+      
+        
+      
+    
+  
+    
+      
+        
+      
+    
+  
   
   
   
@@ -836,17 +848,86 @@ Portfolio
       
         
       
+        
+      
+        
+      
+        
+      
     
   
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+  
+    
+      
+        
+      
+        
+      
+    
+  
+  
+  
+  
+  
+  
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
   
   
   <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
     
     <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
       <ion-icon name="briefcase-outline" class="text-lg text-primary"></ion-icon>
-      <span class="font-bold">3</span>
+      <span class="font-bold">5</span>
       <span class="text-sm text-base-content/60">projects</span>
     </div>
+    
+    
+    <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-success/10 border border-success/30">
+      <ion-icon name="checkmark-circle-outline" class="text-lg text-success"></ion-icon>
+      <span class="font-bold text-success">3</span>
+      <span class="text-sm text-success/70">completed</span>
+    </div>
+    
+    
+    
+    <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-warning/10 border border-warning/30">
+      <ion-icon name="hourglass-outline" class="text-lg text-warning"></ion-icon>
+      <span class="font-bold text-warning">2</span>
+      <span class="text-sm text-warning/70">in progress</span>
+    </div>
+    
     
     <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
       <ion-icon name="folder-outline" class="text-lg text-secondary"></ion-icon>
@@ -857,7 +938,7 @@ Portfolio
     
     <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
       <ion-icon name="code-slash-outline" class="text-lg text-accent"></ion-icon>
-      <span class="font-bold">8+</span>
+      <span class="font-bold">12+</span>
       <span class="text-sm text-base-content/60">technologies</span>
     </div>
     
@@ -878,7 +959,7 @@ Portfolio
         <div class="overflow-x-auto scrollbar-hide -mx-4 px-4">
           <div class="flex gap-2 pb-2 w-max" role="group">
             <button 
-              class="filter-button flex items-center gap-1.5 px-4 py-2 rounded-full
+              class="portfolio-filter-btn flex items-center gap-1.5 px-4 py-2 rounded-full
                     bg-base-200 hover:bg-primary hover:text-primary-content
                     transition-all duration-200 whitespace-nowrap font-medium
                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content" 
@@ -886,7 +967,7 @@ Portfolio
               data-state="checked">
               <ion-icon name="apps" class="text-base"></ion-icon>
               All
-              <span class="opacity-70">(3)</span>
+              <span class="opacity-70">(5)</span>
             </button>
             
             
@@ -909,20 +990,44 @@ Portfolio
               
               
                 
+                  
+                
+              
+            
+              
+              
+                
+                  
+                
+              
+            
+              
+              
+                
               
             
             <button 
-              class="filter-button flex items-center gap-1.5 px-4 py-2 rounded-full
+              class="portfolio-filter-btn flex items-center gap-1.5 px-4 py-2 rounded-full
                     bg-base-200 hover:bg-primary hover:text-primary-content
                     transition-all duration-200 whitespace-nowrap font-medium
                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content" 
               data-filter=".web-development" 
               data-state="unchecked">
               Web development
-              <span class="opacity-70">(2)</span>
+              <span class="opacity-70">(4)</span>
             </button>
             
             
+            
+              
+              
+                
+              
+            
+              
+              
+                
+              
             
               
               
@@ -942,7 +1047,7 @@ Portfolio
               
             
             <button 
-              class="filter-button flex items-center gap-1.5 px-4 py-2 rounded-full
+              class="portfolio-filter-btn flex items-center gap-1.5 px-4 py-2 rounded-full
                     bg-base-200 hover:bg-primary hover:text-primary-content
                     transition-all duration-200 whitespace-nowrap font-medium
                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content" 
@@ -966,7 +1071,7 @@ Portfolio
       
       <div class="hidden sm:flex flex-wrap justify-center gap-2" role="group">
         <button 
-          class="filter-button flex items-center gap-2 px-4 py-2 rounded-full
+          class="portfolio-filter-btn flex items-center gap-2 px-4 py-2 rounded-full
                 bg-base-200 hover:bg-primary hover:text-primary-content
                 transition-all duration-200 font-medium
                 data-[state=checked]:bg-primary data-[state=checked]:text-primary-content" 
@@ -974,7 +1079,7 @@ Portfolio
           data-state="checked">
           <ion-icon name="apps"></ion-icon>
           All
-          <span class="opacity-70">(3)</span>
+          <span class="opacity-70">(5)</span>
         </button>
         
         
@@ -997,20 +1102,44 @@ Portfolio
           
           
             
+              
+            
+          
+        
+          
+          
+            
+              
+            
+          
+        
+          
+          
+            
           
         
         <button 
-          class="filter-button flex items-center gap-2 px-4 py-2 rounded-full
+          class="portfolio-filter-btn flex items-center gap-2 px-4 py-2 rounded-full
                 bg-base-200 hover:bg-primary hover:text-primary-content
                 transition-all duration-200 font-medium
                 data-[state=checked]:bg-primary data-[state=checked]:text-primary-content" 
           data-filter=".web-development" 
           data-state="unchecked">
           Web development
-          <span class="opacity-70">(2)</span>
+          <span class="opacity-70">(4)</span>
         </button>
         
         
+        
+          
+          
+            
+          
+        
+          
+          
+            
+          
         
           
           
@@ -1030,7 +1159,7 @@ Portfolio
           
         
         <button 
-          class="filter-button flex items-center gap-2 px-4 py-2 rounded-full
+          class="portfolio-filter-btn flex items-center gap-2 px-4 py-2 rounded-full
                 bg-base-200 hover:bg-primary hover:text-primary-content
                 transition-all duration-200 font-medium
                 data-[state=checked]:bg-primary data-[state=checked]:text-primary-content" 
@@ -1048,9 +1177,287 @@ Portfolio
     
     
     
-    <div class="dream-grid" id="portfolio-grid">
+    <div class="portfolio-grid" id="portfolio-grid">
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 dream-column web-development ">
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 portfolio-item web-development ">
+        
+        
+        <a class="group block bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
+                  border border-base-200 dark:border-base-content/10
+                  transition-all duration-300 hover:-translate-y-2" 
+           href="/en/portfolio/vkify-website-extension-landing/">
+          
+          
+          <div class="relative overflow-hidden aspect-video bg-base-200">
+            
+              
+                
+                  
+                  <picture>
+                    <source srcset="/en/portfolio/vkify-website-extension-landing/Cover_hu_7fe98d5ccbfed8a9.webp" type="image/webp" />
+                    <img src="/en/portfolio/vkify-website-extension-landing/Cover.png" alt="Portfolios" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                  </picture>
+                
+              
+            
+            
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            
+            
+            <div class="absolute top-3 left-3">
+              
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                            bg-success/20 text-success backdrop-blur-md border border-success/30 shadow-sm">
+                  <ion-icon name="checkmark-circle-outline" class="text-sm"></ion-icon>
+                  Completed
+                </span>
+              
+            </div>
+            
+            
+            
+            
+            
+            
+            <div class="absolute top-3 right-3">
+              <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-base-100/90 text-base-content shadow-lg backdrop-blur-sm" title="Related projects: 1">
+                <ion-icon name="git-branch-outline" class="text-sm"></ion-icon>
+                1
+              </span>
+            </div>
+            
+            
+          </div>
+
+          
+          <div class="p-5 space-y-3">
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="badge badge-ghost badge-sm">Web development</span>
+              
+              
+            </div>
+            
+            
+            
+            <h2 class="text-xl font-bold line-clamp-2 group-hover:text-primary transition-colors">
+              VKify Website — Landing Page for Browser Extension
+            </h2>
+
+            
+            
+            <p class="text-sm text-base-content/70 line-clamp-2">
+              Development of a modern landing page for the VKify browser extension — from a creative homepage to …
+            </p>
+            
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                React
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Tailwind CSS
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Framer Motion
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Vite
+              </span>
+              
+              
+              <span class="inline-flex items-center px-2 py-1 text-xs bg-base-200 rounded-md text-base-content/60">
+                +1
+              </span>
+              
+            </div>
+            
+
+            
+            <div class="flex items-center justify-between pt-3 border-t border-base-200">
+              
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="calendar-outline" class="text-sm"></ion-icon>
+                
+                  <span data-format="luxon">2026-01-28T00:35:23&#43;03:00</span>
+                
+              </div>
+
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="time-outline" class="text-sm"></ion-icon>
+                <span>5  minutes read</span>
+              </div>
+            </div>
+            
+            
+            <div class="pt-2">
+              <span class="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
+                View project
+                <ion-icon name="arrow-forward" class="text-base"></ion-icon>
+              </span>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 portfolio-item web-development ">
+        
+        
+        <a class="group block bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
+                  border border-base-200 dark:border-base-content/10
+                  transition-all duration-300 hover:-translate-y-2" 
+           href="/en/portfolio/vkify-vkontakte-extension/">
+          
+          
+          <div class="relative overflow-hidden aspect-video bg-base-200">
+            
+              
+                
+                  
+                  <picture>
+                    <source srcset="/en/portfolio/vkify-vkontakte-extension/Cover_hu_2cf413fff24db313.webp" type="image/webp" />
+                    <img src="/en/portfolio/vkify-vkontakte-extension/Cover.png" alt="Portfolios" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                  </picture>
+                
+              
+            
+            
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            
+            
+            <div class="absolute top-3 left-3">
+              
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                            bg-warning/20 text-warning backdrop-blur-md border border-warning/30 shadow-sm">
+                  <ion-icon name="hourglass-outline" class="text-sm"></ion-icon>
+                  In Progress
+                </span>
+              
+            </div>
+            
+            
+            
+            
+            
+            
+            <div class="absolute top-3 right-3">
+              <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-base-100/90 text-base-content shadow-lg backdrop-blur-sm" title="Related projects: 1">
+                <ion-icon name="git-branch-outline" class="text-sm"></ion-icon>
+                1
+              </span>
+            </div>
+            
+            
+          </div>
+
+          
+          <div class="p-5 space-y-3">
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="badge badge-ghost badge-sm">Web development</span>
+              
+              
+            </div>
+            
+            
+            
+            <h2 class="text-xl font-bold line-clamp-2 group-hover:text-primary transition-colors">
+              VKify — Extension for VKontakte
+            </h2>
+
+            
+            
+            <p class="text-sm text-base-content/70 line-clamp-2">
+              VKify is a browser extension that makes VKontakte more convenient: ad blocking, interface …
+            </p>
+            
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                React
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Tailwind CSS
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Chrome Extension API
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Figma
+              </span>
+              
+              
+              <span class="inline-flex items-center px-2 py-1 text-xs bg-base-200 rounded-md text-base-content/60">
+                +1
+              </span>
+              
+            </div>
+            
+
+            
+            <div class="flex items-center justify-between pt-3 border-t border-base-200">
+              
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="calendar-outline" class="text-sm"></ion-icon>
+                
+                  <span data-format="luxon">2026-01-27T17:35:43&#43;03:00</span>
+                
+              </div>
+
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="time-outline" class="text-sm"></ion-icon>
+                <span>7  minutes read</span>
+              </div>
+            </div>
+            
+            
+            <div class="pt-2">
+              <span class="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
+                View project
+                <ion-icon name="arrow-forward" class="text-base"></ion-icon>
+              </span>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 portfolio-item web-development ">
         
         
         <a class="group block bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
@@ -1074,6 +1481,19 @@ Portfolio
             
             
             <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            
+            
+            <div class="absolute top-3 left-3">
+              
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                            bg-warning/20 text-warning backdrop-blur-md border border-warning/30 shadow-sm">
+                  <ion-icon name="hourglass-outline" class="text-sm"></ion-icon>
+                  In Progress
+                </span>
+              
+            </div>
+            
             
             
             
@@ -1166,7 +1586,7 @@ Portfolio
         
       </div>
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 dream-column web-development ">
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 portfolio-item web-development ">
         
         
         <a class="group block bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
@@ -1190,6 +1610,19 @@ Portfolio
             
             
             <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            
+            
+            <div class="absolute top-3 left-3">
+              
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                            bg-success/20 text-success backdrop-blur-md border border-success/30 shadow-sm">
+                  <ion-icon name="checkmark-circle-outline" class="text-sm"></ion-icon>
+                  Completed
+                </span>
+              
+            </div>
+            
             
             
             
@@ -1282,7 +1715,7 @@ Portfolio
         
       </div>
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 dream-column social-media ">
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 portfolio-item social-media ">
         
         
         <a class="group block bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
@@ -1306,6 +1739,19 @@ Portfolio
             
             
             <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            
+            
+            <div class="absolute top-3 left-3">
+              
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                            bg-success/20 text-success backdrop-blur-md border border-success/30 shadow-sm">
+                  <ion-icon name="checkmark-circle-outline" class="text-sm"></ion-icon>
+                  Completed
+                </span>
+              
+            </div>
+            
             
             
             
@@ -1388,11 +1834,11 @@ Portfolio
     </div>
     
     
-    <div id="no-results" class="hidden text-center py-12">
+    <div id="portfolio-no-results" class="hidden text-center py-12">
       <ion-icon name="search-outline" class="text-4xl text-base-content/30 mb-3"></ion-icon>
       <h3 class="text-lg font-bold mb-2">No projects found</h3>
       <p class="text-base-content/60 text-sm mb-4">Try another category</p>
-      <button onclick="document.querySelector('[data-filter=\'*\']').click()" class="btn btn-sm btn-primary">
+      <button onclick="document.querySelector('.portfolio-filter-btn[data-filter=\'*\']').click()" class="btn btn-sm btn-primary">
         Show all
       </button>
     </div>
@@ -1403,150 +1849,291 @@ Portfolio
 </div>
 
 
-<section class="py-10 sm:py-12">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+<section class="py-12 sm:py-16 lg:py-20">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6">
     
-    <div class="text-center mb-8">
-      <h2 class="text-xl sm:text-2xl font-bold mb-2">
-        How I Work
-      </h2>
-      <p class="text-sm text-base-content/60">
-        A simple and clear project workflow
-      </p>
+    
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold">How I Work</h2>
+        <p class="text-base-content/60 mt-1">4 stages → finished product</p>
+      </div>
+      <div class="flex items-center gap-2 text-sm text-base-content/50">
+        <ion-icon name="time-outline"></ion-icon>
+        <span>Usually 4-10 weeks</span>
+      </div>
     </div>
+    
     
     <div class="space-y-3">
       
       
-      <div class="group">
-        <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl
-                    bg-base-200/50 dark:bg-base-200/10
-                    border border-transparent
-                    hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
-                    hover:shadow-sm
-                    transition-all duration-200">
-          <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+      <div class="group rounded-xl border border-base-200 dark:border-base-content/10
+                  bg-base-100 dark:bg-base-200/30
+                  overflow-hidden transition-all
+                  hover:border-primary/30 hover:shadow-md">
+        <details class="group/details">
+          <summary class="flex items-center gap-4 p-4 sm:p-5 cursor-pointer
+                         select-none list-none
+                         [&::-webkit-details-marker]:hidden">
             
-            <div class="flex items-center gap-3 shrink-0">
-              <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary font-bold text-sm">
-                1
-              </span>
-              <ion-icon name="chatbubbles-outline" class="text-xl text-primary sm:hidden"></ion-icon>
-            </div>
+            <span class="flex items-center justify-center shrink-0
+                        w-10 h-10 rounded-xl
+                        bg-primary text-primary-content font-bold
+                        group-open/details:rotate-0
+                        transition-transform">
+              1
+            </span>
             
-            <ion-icon name="chatbubbles-outline" class="hidden sm:block text-xl text-base-content/40 group-hover:text-primary transition-colors"></ion-icon>
-            
-            <div class="flex-1">
-              <h3 class="font-medium group-hover:text-primary transition-colors">
+            <div class="flex-1 min-w-0">
+              <h3 class="font-semibold group-hover:text-primary transition-colors">
                 Discussion
               </h3>
-              <p class="text-sm text-base-content/60 mt-0.5">
-                Getting to know the project, defining goals and requirements
+              <p class="text-sm text-base-content/50 truncate">
+                Getting to know the project
               </p>
             </div>
             
-            <ion-icon name="arrow-forward" class="hidden sm:block text-base-content/30 group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0"></ion-icon>
+            <span class="hidden sm:flex items-center gap-1 text-xs text-base-content/40 shrink-0">
+              <ion-icon name="time-outline"></ion-icon>
+              1-2 days
+            </span>
+            
+            <ion-icon name="chevron-down" 
+                      class="text-xl text-base-content/30 shrink-0
+                             group-open/details:rotate-180 transition-transform duration-200">
+            </ion-icon>
+          </summary>
+          
+          <div class="px-4 sm:px-5 pb-5 pt-0 ml-14">
+            <div class="pt-4 border-t border-base-200 dark:border-base-content/10">
+              <ul class="space-y-2 text-sm text-base-content/70">
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-primary mt-0.5 shrink-0"></ion-icon>
+                  Communication via Telegram or Email
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-primary mt-0.5 shrink-0"></ion-icon>
+                  Filling out a brief with key questions
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-primary mt-0.5 shrink-0"></ion-icon>
+                  Preliminary estimate of time and cost
+                </li>
+              </ul>
+              
+              <div class="mt-4 flex items-center gap-4">
+                <span class="text-xs px-2 py-1 rounded bg-primary/10 text-primary">
+                  Free
+                </span>
+                <span class="text-xs text-base-content/40">
+                  No obligations
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
+        </details>
       </div>
       
       
-      <div class="group">
-        <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl
-                    bg-base-200/50 dark:bg-base-200/10
-                    border border-transparent
-                    hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
-                    hover:shadow-sm
-                    transition-all duration-200">
-          <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+      <div class="group rounded-xl border border-base-200 dark:border-base-content/10
+                  bg-base-100 dark:bg-base-200/30
+                  overflow-hidden transition-all
+                  hover:border-secondary/30 hover:shadow-md">
+        <details class="group/details">
+          <summary class="flex items-center gap-4 p-4 sm:p-5 cursor-pointer
+                         select-none list-none
+                         [&::-webkit-details-marker]:hidden">
             
-            <div class="flex items-center gap-3 shrink-0">
-              <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-secondary/10 text-secondary font-bold text-sm">
-                2
-              </span>
-              <ion-icon name="bulb-outline" class="text-xl text-secondary sm:hidden"></ion-icon>
-            </div>
+            <span class="flex items-center justify-center shrink-0
+                        w-10 h-10 rounded-xl
+                        bg-secondary text-secondary-content font-bold">
+              2
+            </span>
             
-            <ion-icon name="bulb-outline" class="hidden sm:block text-xl text-base-content/40 group-hover:text-secondary transition-colors"></ion-icon>
-            
-            <div class="flex-1">
-              <h3 class="font-medium group-hover:text-primary transition-colors">
+            <div class="flex-1 min-w-0">
+              <h3 class="font-semibold group-hover:text-secondary transition-colors">
                 Planning
               </h3>
-              <p class="text-sm text-base-content/60 mt-0.5">
-                Developing strategy, design and technical architecture
+              <p class="text-sm text-base-content/50 truncate">
+                Prototype, specs &amp; contract
               </p>
             </div>
             
-            <ion-icon name="arrow-forward" class="hidden sm:block text-base-content/30 group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0"></ion-icon>
+            <span class="hidden sm:flex items-center gap-1 text-xs text-base-content/40 shrink-0">
+              <ion-icon name="time-outline"></ion-icon>
+              3-7 days
+            </span>
+            
+            <ion-icon name="chevron-down" 
+                      class="text-xl text-base-content/30 shrink-0
+                             group-open/details:rotate-180 transition-transform duration-200">
+            </ion-icon>
+          </summary>
+          
+          <div class="px-4 sm:px-5 pb-5 pt-0 ml-14">
+            <div class="pt-4 border-t border-base-200 dark:border-base-content/10">
+              <ul class="space-y-2 text-sm text-base-content/70">
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-secondary mt-0.5 shrink-0"></ion-icon>
+                  Interactive prototype in Figma
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-secondary mt-0.5 shrink-0"></ion-icon>
+                  Detailed technical specification
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-secondary mt-0.5 shrink-0"></ion-icon>
+                  Exact timeline and cost
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-secondary mt-0.5 shrink-0"></ion-icon>
+                  Contract signing
+                </li>
+              </ul>
+              
+              <div class="mt-4 flex items-center gap-4">
+                <span class="text-xs px-2 py-1 rounded bg-secondary/10 text-secondary">
+                  30% upfront
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
+        </details>
       </div>
       
       
-      <div class="group">
-        <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl
-                    bg-base-200/50 dark:bg-base-200/10
-                    border border-transparent
-                    hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
-                    hover:shadow-sm
-                    transition-all duration-200">
-          <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+      <div class="group rounded-xl border border-base-200 dark:border-base-content/10
+                  bg-base-100 dark:bg-base-200/30
+                  overflow-hidden transition-all
+                  hover:border-accent/30 hover:shadow-md">
+        <details class="group/details">
+          <summary class="flex items-center gap-4 p-4 sm:p-5 cursor-pointer
+                         select-none list-none
+                         [&::-webkit-details-marker]:hidden">
             
-            <div class="flex items-center gap-3 shrink-0">
-              <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-accent/10 text-accent font-bold text-sm">
-                3
-              </span>
-              <ion-icon name="code-slash-outline" class="text-xl text-accent sm:hidden"></ion-icon>
-            </div>
+            <span class="flex items-center justify-center shrink-0
+                        w-10 h-10 rounded-xl
+                        bg-accent text-accent-content font-bold">
+              3
+            </span>
             
-            <ion-icon name="code-slash-outline" class="hidden sm:block text-xl text-base-content/40 group-hover:text-accent transition-colors"></ion-icon>
-            
-            <div class="flex-1">
-              <h3 class="font-medium group-hover:text-primary transition-colors">
+            <div class="flex-1 min-w-0">
+              <h3 class="font-semibold group-hover:text-accent transition-colors">
                 Development
               </h3>
-              <p class="text-sm text-base-content/60 mt-0.5">
-                Building the product with regular progress demos
+              <p class="text-sm text-base-content/50 truncate">
+                Sprints with weekly demos
               </p>
             </div>
             
-            <ion-icon name="arrow-forward" class="hidden sm:block text-base-content/30 group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0"></ion-icon>
+            <span class="hidden sm:flex items-center gap-1 text-xs text-base-content/40 shrink-0">
+              <ion-icon name="time-outline"></ion-icon>
+              2-8 weeks
+            </span>
+            
+            <ion-icon name="chevron-down" 
+                      class="text-xl text-base-content/30 shrink-0
+                             group-open/details:rotate-180 transition-transform duration-200">
+            </ion-icon>
+          </summary>
+          
+          <div class="px-4 sm:px-5 pb-5 pt-0 ml-14">
+            <div class="pt-4 border-t border-base-200 dark:border-base-content/10">
+              <ul class="space-y-2 text-sm text-base-content/70">
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-accent mt-0.5 shrink-0"></ion-icon>
+                  Work in 1-2 week sprints
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-accent mt-0.5 shrink-0"></ion-icon>
+                  Demo version every Friday
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-accent mt-0.5 shrink-0"></ion-icon>
+                  Access to dev version 24/7
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-accent mt-0.5 shrink-0"></ion-icon>
+                  Communication via Telegram/Slack
+                </li>
+              </ul>
+              
+              <div class="mt-4 flex items-center gap-4">
+                <span class="text-xs px-2 py-1 rounded bg-accent/10 text-accent">
+                  Payment after each sprint
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
+        </details>
       </div>
       
       
-      <div class="group">
-        <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl
-                    bg-base-200/50 dark:bg-base-200/10
-                    border border-transparent
-                    hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
-                    hover:shadow-sm
-                    transition-all duration-200">
-          <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+      <div class="group rounded-xl border-2 border-success/30
+                  bg-success/5 dark:bg-success/10
+                  overflow-hidden transition-all
+                  hover:border-success/50 hover:shadow-md hover:shadow-success/10">
+        <details class="group/details" open>
+          <summary class="flex items-center gap-4 p-4 sm:p-5 cursor-pointer
+                         select-none list-none
+                         [&::-webkit-details-marker]:hidden">
             
-            <div class="flex items-center gap-3 shrink-0">
-              <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-success/10 text-success font-bold text-sm">
-                4
-              </span>
-              <ion-icon name="rocket-outline" class="text-xl text-success sm:hidden"></ion-icon>
-            </div>
+            <span class="flex items-center justify-center shrink-0
+                        w-10 h-10 rounded-xl
+                        bg-success text-success-content font-bold">
+              <ion-icon name="checkmark" class="text-lg"></ion-icon>
+            </span>
             
-            <ion-icon name="rocket-outline" class="hidden sm:block text-xl text-base-content/40 group-hover:text-success transition-colors"></ion-icon>
-            
-            <div class="flex-1">
-              <h3 class="font-medium group-hover:text-primary transition-colors">
-                Launch
+            <div class="flex-1 min-w-0">
+              <h3 class="font-semibold text-success">
+                Launch 🚀
               </h3>
-              <p class="text-sm text-base-content/60 mt-0.5">
-                Project deployment and post-launch support
+              <p class="text-sm text-base-content/50 truncate">
+                Deployment and support
               </p>
             </div>
             
-            <ion-icon name="checkmark-circle" class="hidden sm:block text-success shrink-0"></ion-icon>
+            <span class="hidden sm:flex items-center gap-1 text-xs text-success shrink-0 font-medium">
+              <ion-icon name="shield-checkmark"></ion-icon>
+              Warranty
+            </span>
+            
+            <ion-icon name="chevron-down" 
+                      class="text-xl text-success/50 shrink-0
+                             group-open/details:rotate-180 transition-transform duration-200">
+            </ion-icon>
+          </summary>
+          
+          <div class="px-4 sm:px-5 pb-5 pt-0 ml-14">
+            <div class="pt-4 border-t border-success/20">
+              <ul class="space-y-2 text-sm text-base-content/70">
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-success mt-0.5 shrink-0"></ion-icon>
+                  Deployment to your hosting
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-success mt-0.5 shrink-0"></ion-icon>
+                  Handover of access and documentation
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-success mt-0.5 shrink-0"></ion-icon>
+                  System training
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-success mt-0.5 shrink-0"></ion-icon>
+                  <strong>30 days of free support</strong>
+                </li>
+              </ul>
+              
+              <div class="mt-4 p-3 rounded-lg bg-success/10 border border-success/20">
+                <p class="text-xs text-success font-medium">
+                  ✨ Bonus: Free revisions within a month after launch
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
+        </details>
       </div>
       
     </div>
@@ -1570,7 +2157,31 @@ Portfolio
     <div class="flex flex-wrap justify-center gap-2">
       
       <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        React
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        Tailwind CSS
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        Framer Motion
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        Vite
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
         Figma
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        Chrome Extension API
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        JavaScript
       </span>
       
       <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
@@ -1579,14 +2190,6 @@ Portfolio
       
       <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
         CSS
-      </span>
-      
-      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
-        Tailwind CSS
-      </span>
-      
-      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
-        JavaScript
       </span>
       
       <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
@@ -1692,7 +2295,7 @@ Portfolio
       </h2>
       
       <p class="text-base-content/60 mb-6 max-w-md mx-auto">
-        Let&#39;s discuss your idea. The first consultation is free.
+        Let&#39;s discuss your idea via messages. The first consultation is free.
       </p>
       
       <div class="flex flex-wrap justify-center gap-3">
@@ -1701,15 +2304,11 @@ Portfolio
         
         
         
-        
-        
-          
           
         
         
         <a href="https://t.me/cyber_way" class="btn btn-primary gap-2" target="_blank" rel="noopener">
           
-            
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
             </svg>
@@ -1725,54 +2324,135 @@ Portfolio
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const grid = document.querySelector(".dream-grid");
+(function() {
+  'use strict';
+  
+  
+  var grid = document.getElementById('portfolio-grid');
   if (!grid) return;
   
-  const noResults = document.getElementById("no-results");
+  var noResults = document.getElementById('portfolio-no-results');
+  var iso = null;
   
-  const iso = new Isotope(grid, {
-    itemSelector: ".dream-column",
-    layoutMode: "fitRows",
-    transitionDuration: '0.4s',
-    stagger: 30
-  });
-
-  const filterButtons = document.querySelectorAll(".filter-button");
-  
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const filterValue = button.getAttribute("data-filter");
-      
-      iso.arrange({ filter: filterValue });
-
-      filterButtons.forEach((btn) => {
-        btn.setAttribute("data-state", "unchecked");
+  function initIsotope() {
+    if (iso) return;
+    
+    try {
+      iso = new Isotope(grid, {
+        itemSelector: '.portfolio-item',
+        layoutMode: 'fitRows',
+        transitionDuration: '0.4s',
+        stagger: 30,
+        percentPosition: true,
+        fitRows: {
+          gutter: 0
+        }
       });
-      button.setAttribute("data-state", "checked");
       
-      if (window.innerWidth < 640) {
-        setTimeout(() => {
-          grid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 100);
-      }
-    });
-  });
+      grid.classList.add('is-loaded');
+      
+      
+      var filterButtons = document.querySelectorAll('.portfolio-filter-btn');
+      
+      filterButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          var filterValue = this.getAttribute('data-filter');
+          
+          if (iso) {
+            iso.arrange({ filter: filterValue });
+          }
+
+          
+          filterButtons.forEach(function(btn) {
+            btn.setAttribute('data-state', 'unchecked');
+          });
+          this.setAttribute('data-state', 'checked');
+        });
+      });
+      
+      
+      iso.on('arrangeComplete', function(filteredItems) {
+        if (noResults) {
+          if (filteredItems.length === 0) {
+            noResults.classList.remove('hidden');
+            grid.style.display = 'none';
+          } else {
+            noResults.classList.add('hidden');
+            grid.style.display = '';
+          }
+        }
+      });
+      
+    } catch (e) {
+      console.error('Portfolio Isotope init error:', e);
+    }
+  }
   
-  iso.on('arrangeComplete', function(filteredItems) {
-    if (noResults) {
-      if (filteredItems.length === 0) {
-        noResults.classList.remove('hidden');
-        grid.classList.add('hidden');
-      } else {
-        noResults.classList.add('hidden');
-        grid.classList.remove('hidden');
+  function relayout() {
+    if (iso) {
+      try {
+        iso.layout();
+      } catch (e) {
+        
       }
     }
+  }
+  
+  function startInit() {
+    if (typeof imagesLoaded === 'undefined') {
+      setTimeout(startInit, 100);
+      return;
+    }
+    
+    imagesLoaded(grid, function() {
+      setTimeout(function() {
+        initIsotope();
+        setTimeout(relayout, 100);
+        setTimeout(relayout, 300);
+      }, 50);
+    });
+  }
+  
+  
+  if (document.readyState === 'complete') {
+    startInit();
+  } else {
+    window.addEventListener('load', startInit);
+  }
+  
+  
+  if ('fonts' in document) {
+    document.fonts.ready.then(function() {
+      setTimeout(relayout, 50);
+    });
+  }
+  
+  
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(relayout, 250);
   });
-});
+  
+})();
 </script>
+
+<style>
+  .portfolio-grid {
+    display: flex;
+    flex-wrap: wrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .portfolio-grid.is-loaded {
+    opacity: 1;
+  }
+  .portfolio-item {
+    box-sizing: border-box;
+  }
+</style>
 
 
 
@@ -1927,13 +2607,14 @@ document.addEventListener("DOMContentLoaded", function () {
         <td 
           class=""
         >
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </td>
         
         <td 
           class=""
         >
-          No projects to showcase yet. Stay tuned!
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
         </td>
         
       </tr>
@@ -1953,7 +2634,8 @@ document.addEventListener("DOMContentLoaded", function () {
           Name
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </span>
       </div>
       
@@ -1962,7 +2644,7 @@ document.addEventListener("DOMContentLoaded", function () {
           Description
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          No projects to showcase yet. Stay tuned!
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
         </span>
       </div>
       

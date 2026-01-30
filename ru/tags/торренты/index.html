@@ -67,8 +67,8 @@
        window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
        $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
      "
-     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300"
-     :class="{ 'bg-base-100/95 backdrop-blur-md shadow-lg dark:border-b dark:border-base-content/20': isSticky }">
+     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+     :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
 
 
   
@@ -318,7 +318,7 @@
     <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Портфолио</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
     
   </a>
 </li>
@@ -364,7 +364,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Все теги</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -646,7 +646,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Все теги</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">51</span>
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
     
   </a>
 </li>
@@ -821,6 +821,38 @@
           
           
           
+          <a href="/ru/tags/%D0%B2%D0%B5%D0%B1-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    ">
+            <span class="font-medium">Веб-Разработка</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              4
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/ru/tags/ui/ux/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    ">
+            <span class="font-medium">UI/UX</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              3
+            </span>
+          </a>
+          
+          
+          
+          
+          
           <a href="/ru/tags/figma/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
@@ -837,13 +869,29 @@
           
           
           
-          <a href="/ru/tags/%D0%B2%D0%B5%D0%B1-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/" 
+          <a href="/ru/tags/javascript/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
                     hover:border-primary hover:bg-primary hover:text-primary-content
                     transition-all duration-200 no-underline text-sm
                     ">
-            <span class="font-medium">Веб-Разработка</span>
+            <span class="font-medium">JavaScript</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              2
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/ru/tags/react/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    ">
+            <span class="font-medium">React</span>
             <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
               2
             </span>
@@ -997,6 +1045,22 @@
           
           
           
+          <a href="/ru/tags/browser-extension/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Browser Extension</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
           <a href="/ru/tags/chatgpt/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
@@ -1068,6 +1132,22 @@
                     transition-all duration-200 no-underline text-sm
                     opacity-70">
             <span class="font-medium">DNS-Фильтрация</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/ru/tags/framer-motion/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Framer Motion</span>
             <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
               1
             </span>
@@ -1173,13 +1253,13 @@
           
           
           
-          <a href="/ru/tags/javascript/" 
+          <a href="/ru/tags/lampa/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
                     hover:border-primary hover:bg-primary hover:text-primary-content
                     transition-all duration-200 no-underline text-sm
                     opacity-70">
-            <span class="font-medium">JavaScript</span>
+            <span class="font-medium">Lampa</span>
             <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
               1
             </span>
@@ -1189,13 +1269,13 @@
           
           
           
-          <a href="/ru/tags/lampa/" 
+          <a href="/ru/tags/landing-page/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
                     hover:border-primary hover:bg-primary hover:text-primary-content
                     transition-all duration-200 no-underline text-sm
                     opacity-70">
-            <span class="font-medium">Lampa</span>
+            <span class="font-medium">Landing Page</span>
             <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
               1
             </span>
@@ -1237,6 +1317,22 @@
           
           
           
+          <a href="/ru/tags/seo/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">SEO</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
           <a href="/ru/tags/smart-tv/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
@@ -1244,6 +1340,22 @@
                     transition-all duration-200 no-underline text-sm
                     opacity-70">
             <span class="font-medium">Smart TV</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/ru/tags/tailwind-css/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Tailwind CSS</span>
             <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
               1
             </span>
@@ -1276,22 +1388,6 @@
                     transition-all duration-200 no-underline text-sm
                     opacity-70">
             <span class="font-medium">TorrServer</span>
-            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
-              1
-            </span>
-          </a>
-          
-          
-          
-          
-          
-          <a href="/ru/tags/ui/ux/" 
-             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
-                    bg-base-100 border border-base-300
-                    hover:border-primary hover:bg-primary hover:text-primary-content
-                    transition-all duration-200 no-underline text-sm
-                    opacity-70">
-            <span class="font-medium">UI/UX</span>
             <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
               1
             </span>
@@ -1445,6 +1541,22 @@
           
           
           
+          <a href="/ru/tags/%D0%B2%D0%BA%D0%BE%D0%BD%D1%82%D0%B0%D0%BA%D1%82%D0%B5/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">ВКонтакте</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
           <a href="/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B0/" 
              class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
                     bg-base-100 border border-base-300
@@ -1484,6 +1596,22 @@
                     transition-all duration-200 no-underline text-sm
                     opacity-70">
             <span class="font-medium">Интерактивный Лендинг</span>
+            <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
+              1
+            </span>
+          </a>
+          
+          
+          
+          
+          
+          <a href="/ru/tags/%D0%BA%D0%B0%D1%81%D1%82%D0%BE%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F/" 
+             class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                    bg-base-100 border border-base-300
+                    hover:border-primary hover:bg-primary hover:text-primary-content
+                    transition-all duration-200 no-underline text-sm
+                    opacity-70">
+            <span class="font-medium">Кастомизация</span>
             <span class="text-xs px-1.5 py-0.5 rounded-full bg-base-200 group-hover:bg-primary-content/20 transition-colors">
               1
             </span>
@@ -1888,13 +2016,14 @@
         <td 
           class=""
         >
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </td>
         
         <td 
           class=""
         >
-          Пока нет проектов для вашего внимания. Stay tuned!
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
         </td>
         
       </tr>
@@ -1914,7 +2043,8 @@
           Название
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          🚧 WIP
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
         </span>
       </div>
       
@@ -1923,7 +2053,7 @@
           Описание
         </span>
         <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
-          Пока нет проектов для вашего внимания. Stay tuned!
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
         </span>
       </div>
       

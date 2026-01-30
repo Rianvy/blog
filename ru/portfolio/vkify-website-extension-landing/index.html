@@ -1,0 +1,4920 @@
+<!DOCTYPE html>
+<html lang="ru"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VKify Website — Лендинг для браузерного расширения | 0x69.ru</title>
+
+    
+<meta name="google-site-verification" content="SX8wwAcRfmBYPxrIA69UFfuq8DDa2GxWVBzVj9tucMA" />
+<link rel="canonical" href="https://0x69.ru/ru/portfolio/vkify-website-extension-landing/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="Разработка современного лендинга для браузерного расширения VKify — от креативной главной страницы до служебных страниц onboarding и changelog.
+" />
+
+
+<meta name="keywords" content="Веб-Разработка,React,Landing Page,UI/UX,Tailwind CSS,Framer Motion,SEO">
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/ru/portfolio/vkify-website-extension-landing/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="VKify Website — Лендинг для браузерного расширения">
+  <meta property="og:description" content="Современный лендинг для расширения VKify с анимациями, адаптивным дизайном, поддержкой тем и полным набором служебных страниц.">
+  <meta property="og:locale" content="ru">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="portfolio">
+    <meta property="article:published_time" content="2026-01-28T00:35:23+03:00">
+    <meta property="article:modified_time" content="2026-01-28T00:35:23+03:00">
+    <meta property="article:tag" content="Веб-Разработка">
+    <meta property="article:tag" content="React">
+    <meta property="article:tag" content="Landing Page">
+    <meta property="article:tag" content="UI/UX">
+    <meta property="article:tag" content="Tailwind CSS">
+    <meta property="article:tag" content="Framer Motion">
+    <meta property="og:image" content="https://0x69.ru/ru/portfolio/vkify-website-extension-landing/Cover.png">
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://0x69.ru/ru/portfolio/vkify-website-extension-landing/Cover.png">
+  <meta name="twitter:title" content="VKify Website — Лендинг для браузерного расширения">
+  <meta name="twitter:description" content="Современный лендинг для расширения VKify с анимациями, адаптивным дизайном, поддержкой тем и полным набором служебных страниц.">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+
+
+
+    
+
+
+<link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css" data-syntax-highlight="true" id="syntax-theme">
+
+
+
+
+
+
+
+
+<style>
+   
+  pre { border-radius: 0.5rem;  }
+  
+   
+  
+  
+   
+  .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: oklch(var(--p)); z-index: 9999; transition: width 0.1s ease-out; }
+  .reading-progress-text { position: fixed; top: 0.75rem; right: 1rem; z-index: 9999; font-size: 0.75rem; font-weight: 600; color: oklch(var(--p)); background: oklch(var(--b1) / 0.9); backdrop-filter: blur(8px); padding: 0.25rem 0.75rem; border-radius: 1rem; opacity: 0; transition: opacity 0.3s ease; }
+  .reading-progress-text.visible { opacity: 1; }
+  
+   
+  pre { position: relative; }
+  .copy-code-btn { position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.75rem; background: oklch(var(--b3)); border-radius: 0.25rem; cursor: pointer; opacity: 0; transition: opacity 0.2s, background 0.2s; }
+  pre:hover .copy-code-btn { opacity: 1; }
+  .copy-code-btn:hover { background: oklch(var(--p)); color: oklch(var(--pc)); }
+  .copy-code-btn.copied { background: oklch(var(--su)); color: oklch(var(--suc)); }
+  
+   
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  
+   
+  #TableOfContents { 
+    max-height: calc(100vh - 12rem); 
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  #TableOfContents::-webkit-scrollbar { width: 6px; }
+  #TableOfContents::-webkit-scrollbar-track { background: transparent; }
+  #TableOfContents::-webkit-scrollbar-thumb { background: oklch(var(--b3)); border-radius: 3px; }
+  #TableOfContents::-webkit-scrollbar-thumb:hover { background: oklch(var(--bc) / 0.3); }
+  #TableOfContents a.active { color: oklch(var(--p)); font-weight: 600; }
+  #TableOfContents ul { border-left: 2px solid oklch(var(--b3)); }
+  
+   
+  #dream-single-post-content img { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  #dream-single-post-content img:hover { transform: scale(1.02); box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
+  
+   
+  #dream-single-post-content a:not(.badge):not(.btn):not(.lg-item) { 
+    text-decoration: none; 
+    background-image: linear-gradient(oklch(var(--p)), oklch(var(--p)));
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease;
+  }
+  #dream-single-post-content a:not(.badge):not(.btn):not(.lg-item):hover { background-size: 100% 2px; }
+  
+   
+  body.focus-mode aside.right-sidebar { 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.3s ease; 
+  }
+  body.focus-mode article { 
+    max-width: 65ch; 
+    margin: 0 auto; 
+  }
+  
+   
+  aside.left-sidebar {
+    transition: opacity 0.3s ease;
+  }
+  
+   
+  body.focus-mode #focus-mode-btn {
+    background: oklch(var(--p) / 0.2);
+    color: oklch(var(--p));
+  }
+  
+   
+  .lg-sub-html { backdrop-filter: blur(16px); }
+</style>
+
+
+
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     "
+     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+     :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+
+
+  
+  <div class="container flex items-center justify-between px-4">
+  
+  
+    
+    
+    
+    <section class="flex items-center gap-3">
+      <button class="avatar cursor-pointer transition-all duration-200 group" 
+              @click="flip = !flip" 
+              title="Повернуть!"
+              aria-label="Повернуть!">
+        <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+          <img src="/img/avatar.jpg" 
+               alt="0x69.ru &lt;/&gt;" 
+               class="rounded-full" 
+               loading="eager" />
+        </div>
+      </button>
+
+      
+      <div class="flex flex-col">
+        
+        <a href="/ru/" 
+           class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+          0x69.ru &lt;/&gt;
+        </a>
+        
+        
+        <span class="text-sm text-base-content/60 hidden sm:block">Документируй сегодня то, что забудешь завтра</span>
+        
+      </div>
+      
+    </section>
+
+    
+    
+    
+    <div class="sm:hidden">
+      
+      <button @click="mobileMenuOpen = !mobileMenuOpen" 
+              class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+              :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+              aria-label="Открыть меню"
+              :aria-expanded="mobileMenuOpen">
+        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+      </button>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"
+           @click="mobileMenuOpen = false"
+           class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm"
+           aria-hidden="true">
+      </div>
+      
+      
+      <div x-show="mobileMenuOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+           x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+           x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+           @click.outside="mobileMenuOpen = false"
+           @keydown.escape.window="mobileMenuOpen = false"
+           class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+        
+        
+        <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+          <span class="font-semibold text-base-content">Меню</span>
+          <button @click="mobileMenuOpen = false" 
+                  class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+                  aria-label="Закрыть">
+            <ion-icon name="close" class="text-lg"></ion-icon>
+          </button>
+        </div>
+        
+        
+        
+          
+          
+          <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+            <button type="button"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                    @click="flip = !flip; mobileMenuOpen = false"
+                    title="Обо мне"
+                    aria-label="Обо мне">
+              <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+              <span class="flex-1 text-left">Обо мне</span>
+              <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+            </button>
+          </div>
+          
+        
+        
+        
+        <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+          
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/portfolio/vkify-website-extension-landing/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/portfolio/vkify-website-extension-landing/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/ru/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Поиск</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Категории</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Портфолио</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/ru/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+        </div>
+      </div>
+    </div>
+
+    
+    
+    
+    <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+      
+      
+      
+        
+        
+        <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                @click="flip = !flip"
+                title="Обо мне">Обо мне</button>
+        
+      
+
+      
+      
+        
+      
+
+      
+        
+        
+        
+        
+        
+          
+
+
+
+
+
+
+
+<a href="/ru/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Поиск"
+   aria-label="Поиск">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+        
+          
+
+
+
+
+
+
+
+<a href="/ru/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Категории"
+   aria-label="Категории">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+        
+          
+
+
+
+
+
+
+
+<a href="/ru/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Портфолио"
+   aria-label="Портфолио">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+        
+      
+        
+        
+        
+        <div class="dropdown dropdown-end dropdown-hover">
+          <button tabindex="0" 
+                  class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                  aria-label="Выбрать язык"
+                  aria-haspopup="true">
+            <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+          </button>
+          <ul tabindex="0" 
+              class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+              role="menu">
+            
+              
+              
+              
+              
+
+              
+              
+                
+              
+
+              <li role="none">
+                <a href="https://0x69.ru/en/portfolio/vkify-website-extension-landing/" 
+                   hreflang="en"
+                   role="menuitem"
+                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                   >
+                  <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                  <span class="flex-1">English</span>
+                  
+                </a>
+              </li>
+            
+              
+              
+              
+              
+
+              
+              
+                
+                
+              
+
+              <li role="none">
+                <a href="https://0x69.ru/ru/portfolio/vkify-website-extension-landing/" 
+                   hreflang="ru"
+                   role="menuitem"
+                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                   aria-current="true">
+                  <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                  <span class="flex-1">Русский</span>
+                  
+                  <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+          
+        
+        
+        
+        <div class="dropdown dropdown-end dropdown-hover">
+          <button tabindex="0" 
+                  class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                  aria-label="Ещё"
+                  aria-haspopup="true">
+            <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+          </button>
+          <ul tabindex="0" 
+              class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+              role="menu">
+            
+              
+
+
+
+
+<li role="none">
+  <a href="/ru/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    
+  </a>
+</li>
+
+
+
+
+
+            
+              
+
+
+
+
+<li role="none">
+  <a href="/ru/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">59</span>
+    
+  </a>
+</li>
+
+
+
+
+
+            
+              
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+            
+              
+
+
+
+
+
+<li role="none">
+  <a href="/ru/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+            
+
+            
+              
+
+
+
+
+
+
+
+
+
+
+            
+          </ul>
+        </div>
+      
+    </section>
+  </div>
+</nav>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="reading-progress" id="reading-progress"></div>
+<div class="reading-progress-text" id="reading-progress-text">0%</div>
+
+<div class="lg:grid lg:grid-cols-12 gap-6 mt-4 px-4 max-w-screen-2xl mx-auto">
+  
+  <aside class="hidden lg:block lg:col-span-2 left-sidebar">
+    <div class="sticky top-20 space-y-4">
+      
+      <div class="flex flex-col gap-2">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn btn-ghost btn-sm gap-2" aria-label="Наверх">
+          <ion-icon name="arrow-up-outline"></ion-icon>
+          <span class="text-xs">Наверх</span>
+        </button>
+        <button onclick="toggleFocusMode()" class="btn btn-ghost btn-sm gap-2" id="focus-mode-btn" aria-label="Focus Mode">
+          <ion-icon name="eye-outline" id="focus-mode-icon"></ion-icon>
+          <span class="text-xs" id="focus-mode-text">Фокус</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  
+  <article class="lg:col-span-7 mx-auto prose prose-quoteless dark:prose-invert w-full max-w-4xl" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+    
+  <meta itemprop="name" content="VKify Website — Лендинг для браузерного расширения">
+  <meta itemprop="description" content="Современный лендинг для расширения VKify с анимациями, адаптивным дизайном, поддержкой тем и полным набором служебных страниц.">
+  <meta itemprop="datePublished" content="2026-01-28T00:35:23+03:00">
+  <meta itemprop="dateModified" content="2026-01-28T00:35:23+03:00">
+  <meta itemprop="wordCount" content="896">
+  <meta itemprop="image" content="https://0x69.ru/ru/portfolio/vkify-website-extension-landing/Cover.png">
+  <meta itemprop="keywords" content="Веб-Разработка,React,Landing Page,UI/UX,Tailwind CSS,Framer Motion,SEO">
+
+    <header class="not-prose mb-6 sm:mb-8">
+      
+      <nav class="text-xs sm:text-sm breadcrumbs mb-3 sm:mb-4 overflow-x-auto scrollbar-none">
+        <ul class="flex-nowrap">
+          <li class="shrink-0"><a href="/ru/">Главная</a></li>
+          
+          <li class="shrink-0"><a href="/ru/portfolio">Portfolio</a></li>
+          
+          
+          <li class="truncate max-w-[150px] sm:max-w-[200px] md:max-w-none">VKify Website — Лендинг для браузерного расширения</li>
+        </ul>
+      </nav>
+
+      
+      
+
+      
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight sm:leading-snug mb-3 sm:mb-4 break-words hyphens-auto" 
+          itemprop="headline">
+        VKify Website — Лендинг для браузерного расширения
+      </h1>
+
+      
+      <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-xs sm:text-sm text-base-content/70 mb-4 sm:mb-6">
+        
+        <time datetime="2026-01-28" class="flex items-center gap-1 min-w-0">
+          <ion-icon name="calendar-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          <span class="truncate">
+            
+            <span data-format="luxon">2026-01-28T00:35:23&#43;03:00</span>
+            
+          </span>
+        </time>
+
+        
+        <span class="flex items-center gap-1">
+          <ion-icon name="time-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          <span class="truncate">
+            5<span class="hidden xs:inline">  минут чтения</span><span class="xs:hidden"> мин</span>
+          </span>
+        </span>
+
+        
+        <span class="hidden sm:flex items-center gap-1">
+          <ion-icon name="document-text-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          896 слов
+        </span>
+
+        
+        
+      </div>
+
+      
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4 py-3 sm:py-4 border-y border-base-300">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center">
+  
+  <div class="avatar mr-1">
+    <div class="w-8 rounded-full">
+      <img class="my-0" src="/img/avatar.jpg" alt="Rianvy" />
+    </div>
+  </div>
+  
+
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+  
+    
+      <span itemprop="name">Rianvy</span>
+    
+  
+  </span>
+</div>
+
+        </div>
+        <div class="flex justify-start sm:justify-end shrink-0">
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=VKify%20Website%20%e2%80%94%20%d0%9b%d0%b5%d0%bd%d0%b4%d0%b8%d0%bd%d0%b3%20%d0%b4%d0%bb%d1%8f%20%d0%b1%d1%80%d0%b0%d1%83%d0%b7%d0%b5%d1%80%d0%bd%d0%be%d0%b3%d0%be%20%d1%80%d0%b0%d1%81%d1%88%d0%b8%d1%80%d0%b5%d0%bd%d0%b8%d1%8f&amp;url=https://0x69.ru/ru/portfolio/vkify-website-extension-landing/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=https://0x69.ru/ru/portfolio/vkify-website-extension-landing/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=VKify%20Website%20%e2%80%94%20%d0%9b%d0%b5%d0%bd%d0%b4%d0%b8%d0%bd%d0%b3%20%d0%b4%d0%bb%d1%8f%20%d0%b1%d1%80%d0%b0%d1%83%d0%b7%d0%b5%d1%80%d0%bd%d0%be%d0%b3%d0%be%20%d1%80%d0%b0%d1%81%d1%88%d0%b8%d1%80%d0%b5%d0%bd%d0%b8%d1%8f%20https://0x69.ru/ru/portfolio/vkify-website-extension-landing/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://t.me/share/url?url=https://0x69.ru/ru/portfolio/vkify-website-extension-landing/&amp;resubmit=true&amp;title=VKify%20Website%20%e2%80%94%20%d0%9b%d0%b5%d0%bd%d0%b4%d0%b8%d0%bd%d0%b3%20%d0%b4%d0%bb%d1%8f%20%d0%b1%d1%80%d0%b0%d1%83%d0%b7%d0%b5%d1%80%d0%bd%d0%be%d0%b3%d0%be%20%d1%80%d0%b0%d1%81%d1%88%d0%b8%d1%80%d0%b5%d0%bd%d0%b8%d1%8f" target="_blank" rel="noopener noreferrer"
+      title="Share on Telegram">
+      <ion-icon class="group-hover:text-primary-content" name="send"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </div>
+    </header>
+
+    
+    
+    <div class="not-prose mb-8">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-4 rounded-xl border border-base-300 bg-base-200/50">
+        
+        <div class="flex items-center gap-2 text-base-content/70">
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+          </span>
+          <ion-icon name="language-outline" class="text-xl"></ion-icon>
+          <span class="text-sm whitespace-nowrap">Эта запись также доступна на</span>
+        </div>
+        
+        
+        <div class="hidden sm:block w-px h-6 bg-base-300"></div>
+        
+        
+        <div class="flex flex-wrap gap-2">
+          
+          <a href="https://0x69.ru/en/portfolio/vkify-website-extension-landing/" 
+            class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm 
+                    bg-base-100 hover:bg-primary hover:text-primary-content 
+                    border border-base-300 hover:border-primary
+                    transition-all duration-200 no-underline"
+            rel="noopener noreferrer"
+            hreflang="en">
+            <span class="opacity-70 group-hover:opacity-100">
+              🇬🇧
+            </span>
+            English
+            <ion-icon name="arrow-forward" class="text-xs opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-0 transition-all"></ion-icon>
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    
+
+    
+    
+    <figure class="not-prose mb-8">
+      <img src="https://0x69.ru/ru/portfolio/vkify-website-extension-landing/Cover.png" alt="VKify Website — Лендинг для браузерного расширения" class="w-full rounded-xl shadow-lg" loading="lazy"/>
+    </figure>
+    
+
+    
+    
+
+      
+      
+      <div class="not-prose mb-6">
+        
+        
+        
+        
+        
+        
+          
+          
+          
+          
+        
+        
+        <div class="flex items-center gap-3 p-4 rounded-xl bg-success/10 border border-success/30">
+          <div class="flex items-center justify-center w-10 h-10 rounded-full bg-success/30">
+            <ion-icon name="checkmark-circle-outline" class="text-xl text-success"></ion-icon>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-semibold text-success">Завершён</span>
+              
+              <span class="text-xs text-base-content/50">• Январь 2026</span>
+              
+            </div>
+            <p class="text-sm text-base-content/60">Проект успешно завершён и работает</p>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="not-prose my-4">
+  
+  <div class="mb-8">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </div>
+      <h3 class="text-2xl md:text-3xl font-bold text-base-content">Используемые инструменты</h3>
+    </div>
+  </div>
+  
+  <div class="grid grid-cols-2 gap-3 md:hidden">
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-6 h-6 flex-shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348" class="w-full h-full">
+          <circle cx="0" cy="0" r="2.05" fill="#61dafb" />
+          <g stroke="#61dafb" stroke-width="1" fill="none">
+            <ellipse rx="11" ry="4.2" />
+            <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+            <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+          </g>
+        </svg>
+      </div>
+      
+      <span class="font-medium text-sm text-base-content">React</span>
+    </div>
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-6 h-6 flex-shrink-0">
+        <svg viewBox=".15 .13 799.7 479.69" xmlns="http://www.w3.org/2000/svg" class="toolsUsed">
+          <path d="m400 .13c-106.63 0-173.27 53.3-199.93 159.89 39.99-53.3 86.64-73.28 139.95-59.96 30.42 7.6 52.16 29.67 76.23 54.09 39.2 39.78 84.57 85.82 183.68 85.82 106.62 0 173.27-53.3 199.92-159.9-39.98 53.3-86.63 73.29-139.95 59.97-30.41-7.6-52.15-29.67-76.22-54.09-39.2-39.78-84.58-85.82-183.68-85.82zm-199.93 239.84c-106.62 0-173.27 53.3-199.92 159.9 39.98-53.3 86.63-73.29 139.95-59.96 30.41 7.61 52.15 29.67 76.22 54.08 39.2 39.78 84.58 85.83 183.68 85.83 106.63 0 173.27-53.3 199.93-159.9-39.99 53.3-86.64 73.29-139.95 59.96-30.42-7.59-52.16-29.67-76.23-54.08-39.2-39.78-84.57-85.83-183.68-85.83z" fill="#06b6d4" />
+        </svg>
+      </div>
+      
+      <span class="font-medium text-sm text-base-content">Tailwind CSS</span>
+    </div>
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></div>
+      
+      <span class="font-medium text-sm text-base-content">Framer Motion</span>
+    </div>
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></div>
+      
+      <span class="font-medium text-sm text-base-content">Vite</span>
+    </div>
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-6 h-6 flex-shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 57" class="w-full h-full">
+          <path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" />
+          <path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" />
+          <path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" />
+          <path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" />
+          <path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" />
+        </svg>
+      </div>
+      
+      <span class="font-medium text-sm text-base-content">Figma</span>
+    </div>
+    
+  </div>
+  
+  <div class="hidden md:block overflow-hidden rounded-xl border border-base-300 bg-base-100">
+    <table class="w-full">
+      <tbody class="divide-y divide-base-300">
+               
+        <tr class="group hover:bg-base-200/50 transition-colors">
+                 
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-5 h-5 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348" class="w-full h-full">
+                  <circle cx="0" cy="0" r="2.05" fill="#61dafb" />
+                  <g stroke="#61dafb" stroke-width="1" fill="none">
+                    <ellipse rx="11" ry="4.2" />
+                    <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+                    <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+                  </g>
+                </svg>
+              </div>
+              
+              <span class="font-medium text-base-content">React</span>
+            </div>
+          </td>
+                   
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-5 h-5 flex-shrink-0">
+                <svg viewBox=".15 .13 799.7 479.69" xmlns="http://www.w3.org/2000/svg" class="toolsUsed">
+                  <path d="m400 .13c-106.63 0-173.27 53.3-199.93 159.89 39.99-53.3 86.64-73.28 139.95-59.96 30.42 7.6 52.16 29.67 76.23 54.09 39.2 39.78 84.57 85.82 183.68 85.82 106.62 0 173.27-53.3 199.92-159.9-39.98 53.3-86.63 73.29-139.95 59.97-30.41-7.6-52.15-29.67-76.22-54.09-39.2-39.78-84.58-85.82-183.68-85.82zm-199.93 239.84c-106.62 0-173.27 53.3-199.92 159.9 39.98-53.3 86.63-73.29 139.95-59.96 30.41 7.61 52.15 29.67 76.22 54.08 39.2 39.78 84.58 85.83 183.68 85.83 106.63 0 173.27-53.3 199.93-159.9-39.99 53.3-86.64 73.29-139.95 59.96-30.42-7.59-52.16-29.67-76.23-54.08-39.2-39.78-84.57-85.83-183.68-85.83z" fill="#06b6d4" />
+                </svg>
+              </div>
+              
+              <span class="font-medium text-base-content">Tailwind CSS</span>
+            </div>
+          </td>
+                   
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 group-hover:scale-125 transition-transform"></div>
+              
+              <span class="font-medium text-base-content">Framer Motion</span>
+            </div>
+          </td>
+            
+        </tr>
+             
+        <tr class="group hover:bg-base-200/50 transition-colors">
+                 
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 group-hover:scale-125 transition-transform"></div>
+              
+              <span class="font-medium text-base-content">Vite</span>
+            </div>
+          </td>
+                     
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" colspan="2" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-5 h-5 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 57" class="w-full h-full">
+                  <path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" />
+                  <path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" />
+                  <path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" />
+                  <path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" />
+                  <path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" />
+                </svg>
+              </div>
+              
+              <span class="font-medium text-base-content">Figma</span>
+            </div>
+          </td>
+               
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+      
+      <div class="not-prose mb-8 space-y-2">
+        
+        
+        <a href="https://github.com/VKify/frontend" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="group flex items-center gap-3 p-3 rounded-xl
+                  bg-base-200/50 dark:bg-base-200/10
+                  border border-transparent
+                  hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
+                  transition-all duration-200">
+          <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-base-300/50 group-hover:bg-primary/10 transition-colors">
+            <ion-icon name="logo-github" class="text-xl group-hover:text-primary transition-colors"></ion-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-medium group-hover:text-primary transition-colors">Исходный код</div>
+            <div class="text-xs text-base-content/50 truncate">https://github.com/VKify/frontend</div>
+          </div>
+          <ion-icon name="arrow-forward" class="text-base-content/30 group-hover:text-primary group-hover:translate-x-1 transition-all"></ion-icon>
+        </a>
+        
+        
+        
+        <a href="https://vkify.ru" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="group flex items-center gap-3 p-3 rounded-xl
+                  bg-primary/5 dark:bg-primary/10
+                  border border-primary/20
+                  hover:border-primary/40 hover:bg-primary/10
+                  transition-all duration-200">
+          <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+            <ion-icon name="rocket-outline" class="text-xl text-primary"></ion-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-medium text-primary">Открыть демо</div>
+            <div class="text-xs text-base-content/50 truncate">https://vkify.ru</div>
+          </div>
+          <ion-icon name="open-outline" class="text-primary group-hover:translate-x-1 transition-all"></ion-icon>
+        </a>
+        
+        
+      </div>
+      
+
+    
+
+    
+    <section id="dream-single-post-content" class="fade-in-up" itemprop="articleBody">
+      <p>Разработка современного лендинга для браузерного расширения VKify — от креативной главной страницы до служебных страниц onboarding и changelog.</p>
+<h2 id="-о-проекте">📌 О проекте</h2>
+<p><strong>VKify Website</strong> — официальный сайт браузерного расширения VKify, разработанный для презентации продукта, привлечения пользователей и поддержки полного жизненного цикла взаимодействия: от первого знакомства до обновлений и обратной связи.</p>
+<p>Ключевая задача — создать <strong>визуально привлекательный и информативный ресурс</strong>, который отражает возможности расширения и обеспечивает seamless-опыт на всех этапах пользовательского пути.</p>
+<hr>
+<h2 id="-что-было-сделано">✨ Что было сделано</h2>
+<h3 id="дизайн-и-ux">Дизайн и UX</h3>
+<ul>
+<li>Разработан креативный дизайн с акцентом на визуальную привлекательность</li>
+<li>Реализована полная поддержка светлой и тёмной темы с плавными переходами</li>
+<li>Созданы микроанимации и hover-эффекты для интерактивности</li>
+<li>Применён mobile-first подход для идеальной адаптивности</li>
+</ul>
+<h3 id="структура-сайта">Структура сайта</h3>
+<h4 id="-главная-страница">🏠 Главная страница</h4>
+<ul>
+<li>Hero-секция с анимированным заголовком и 3D-mockup расширения</li>
+<li>Floating-элементы с параллакс-эффектом</li>
+<li>Сетка преимуществ с категориями функций</li>
+<li>Пошаговый блок «Как это работает»</li>
+<li>Анимированные счётчики статистики</li>
+<li>Карусель скриншотов интерфейса</li>
+<li>Финальный CTA-блок с призывом к установке</li>
+</ul>
+<h4 id="-страница-приветствия-welcome">👋 Страница приветствия (Welcome)</h4>
+<ul>
+<li>Анимированное приветствие после установки расширения</li>
+<li>Onboarding в 3 шага с визуальными подсказками</li>
+<li>Быстрые ссылки на сообщества и поддержку</li>
+<li>Кнопка перехода к использованию</li>
+</ul>
+<h4 id="-страница-после-удаления-uninstall">😢 Страница после удаления (Uninstall)</h4>
+<ul>
+<li>Форма обратной связи с причинами удаления</li>
+<li>Опрос с вариантами ответов и полем для комментария</li>
+<li>Предложение переустановить расширение</li>
+<li>Контакты для связи с разработчиком</li>
+</ul>
+<h4 id="-история-обновлений-changelog">📋 История обновлений (Changelog)</h4>
+<ul>
+<li>Timeline всех версий с фильтрацией</li>
+<li>Цветовая маркировка: новое, исправления, улучшения</li>
+<li>Раскрывающиеся карточки с деталями</li>
+<li>Отдельные страницы для крупных обновлений</li>
+</ul>
+<h4 id="-правовые-страницы">📄 Правовые страницы</h4>
+<ul>
+<li>Privacy Policy с описанием политики данных</li>
+<li>Terms of Service с условиями использования</li>
+<li>Единый стиль оформления юридических текстов</li>
+</ul>
+<hr>
+<h2 id="-интерфейс-сайта">🖼️ Интерфейс сайта</h2>
+<p>Сайт полностью поддерживает светлую и тёмную тему. Используйте переключатели для сравнения:</p>
+<h3 id="главная-страница">Главная страница</h3>
+<div class="theme-compare-314276859 my-8 not-prose" data-mode="toggle" >
+  <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Лендинг VKify</h4>
+  
+  <div class="tc-toggle-314276859">
+    <div class="flex justify-center mb-4">
+      <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
+        <button 
+          class="tc-btn-314276859 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="light"
+          aria-label="Показать светлую тему"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          Светлая
+        </button>
+        <button 
+          class="tc-btn-314276859 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="dark"
+          aria-label="Показать тёмную тему"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+          Тёмная
+        </button>
+      </div>
+    </div>
+    
+    <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
+      
+      <div class="tc-light-wrap-314276859 relative leading-[0] transition-opacity duration-500">
+        <img 
+          src="work/home-light.png" 
+          alt="Лендинг VKify - Светлая"
+          title="Светлая"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+      
+      <div class="tc-dark-wrap-314276859 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+        <img 
+          src="work/home-dark.png" 
+          alt="Лендинг VKify - Тёмная"
+          title="Тёмная"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+  <p class="text-center text-sm text-base-content/60 mt-3 italic">Hero-секция с преимуществами расширения</p>
+</div>
+
+<style>
+   
+  .tc-btn-314276859 {
+    color: oklch(var(--bc) / 0.7);
+    background: transparent;
+  }
+  
+  .tc-btn-314276859.active {
+    background: oklch(var(--b1));
+    color: oklch(var(--bc));
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+  
+  .tc-btn-314276859:hover:not(.active) {
+    background: oklch(var(--b1) / 0.5);
+  }
+
+   
+  .tc-slider-container-314276859 {
+    touch-action: pan-y pinch-zoom;
+  }
+  
+  .tc-slider-container-314276859 img {
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .tc-handle-314276859:hover > div:last-child,
+  .tc-handle-314276859:active > div:last-child {
+    transform: scale(1.1);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+  }
+  
+  .tc-handle-314276859 > div:last-child {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .tc-overlay-314276859 {
+    will-change: clip-path;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+(function() {
+  const id = '314276859';
+  const mode = 'toggle';
+  const buttons = document.querySelectorAll('.tc-btn-' + id);
+  const lightWrap = document.querySelector('.tc-light-wrap-' + id);
+  const darkWrap = document.querySelector('.tc-dark-wrap-' + id);
+  
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      if (btn.dataset.theme === 'dark') {
+        lightWrap.style.opacity = '0';
+        lightWrap.style.pointerEvents = 'none';
+        darkWrap.style.opacity = '1';
+        darkWrap.style.pointerEvents = 'auto';
+      } else {
+        lightWrap.style.opacity = '1';
+        lightWrap.style.pointerEvents = 'auto';
+        darkWrap.style.opacity = '0';
+        darkWrap.style.pointerEvents = 'none';
+      }
+    });
+  });
+})();
+</script>
+<h3 id="история-обновлений">История обновлений</h3>
+<div class="theme-compare-813629475 my-8 not-prose" data-mode="slider" data-tc-exclude>
+  <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Changelog</h4>
+  
+  <div class="tc-slider-813629475 relative overflow-hidden rounded-xl shadow-lg border border-base-300">
+    <div class="tc-slider-container-813629475 relative select-none" style="--pos: 50%;">
+      
+      <img 
+        src="work/changelog-dark.png" 
+        alt="Changelog - Тёмная"
+        class="w-full block"
+        loading="lazy"
+        draggable="false"
+      />
+      
+      
+      <div class="tc-overlay-813629475 absolute inset-0 overflow-hidden" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0);">
+        <img 
+          src="work/changelog-light.png" 
+          alt="Changelog - Светлая"
+          class="w-full block"
+          loading="lazy"
+          draggable="false"
+        />
+      </div>
+      
+      
+      <div class="tc-handle-813629475 absolute top-0 bottom-0 cursor-ew-resize z-10 flex items-center justify-center" style="left: var(--pos); transform: translateX(-50%); width: 44px;">
+        <div class="absolute top-0 bottom-0 w-0.5 bg-white" style="box-shadow: 0 0 10px rgba(0,0,0,0.5);"></div>
+        <div class="relative w-11 h-11 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-white/50" style="box-shadow: 0 2px 20px rgba(0,0,0,0.3);">
+          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+          </svg>
+          <svg class="w-5 h-5 text-gray-600 -ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </div>
+      
+      
+      <div class="absolute top-3 left-3 px-2.5 py-1 bg-white/95 backdrop-blur-sm rounded-lg text-xs font-medium text-gray-700 shadow-sm pointer-events-none">
+        ☀️ Светлая
+      </div>
+      <div class="absolute top-3 right-3 px-2.5 py-1 bg-gray-900/90 backdrop-blur-sm rounded-lg text-xs font-medium text-white shadow-sm pointer-events-none">
+        🌙 Тёмная
+      </div>
+    </div>
+  </div>
+  <p class="text-center text-sm text-base-content/60 mt-3 italic">История обновлений</p>
+</div>
+
+<style>
+   
+  .tc-btn-813629475 {
+    color: oklch(var(--bc) / 0.7);
+    background: transparent;
+  }
+  
+  .tc-btn-813629475.active {
+    background: oklch(var(--b1));
+    color: oklch(var(--bc));
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+  
+  .tc-btn-813629475:hover:not(.active) {
+    background: oklch(var(--b1) / 0.5);
+  }
+
+   
+  .tc-slider-container-813629475 {
+    touch-action: pan-y pinch-zoom;
+  }
+  
+  .tc-slider-container-813629475 img {
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .tc-handle-813629475:hover > div:last-child,
+  .tc-handle-813629475:active > div:last-child {
+    transform: scale(1.1);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+  }
+  
+  .tc-handle-813629475 > div:last-child {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .tc-overlay-813629475 {
+    will-change: clip-path;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+(function() {
+  const id = '813629475';
+  const mode = 'slider';
+  const sliderContainer = document.querySelector('.tc-slider-container-' + id);
+  const handle = document.querySelector('.tc-handle-' + id);
+  let isDragging = false;
+  
+  const updatePosition = (clientX) => {
+    const rect = sliderContainer.getBoundingClientRect();
+    let pos = ((clientX - rect.left) / rect.width) * 100;
+    pos = Math.max(2, Math.min(98, pos));
+    sliderContainer.style.setProperty('--pos', pos + '%');
+  };
+  
+  const startDrag = (e) => {
+    isDragging = true;
+    document.body.style.cursor = 'ew-resize';
+    document.body.style.userSelect = 'none';
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  
+  const stopDrag = () => {
+    if (isDragging) {
+      isDragging = false;
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    }
+  };
+  
+  const onMove = (e) => {
+    if (!isDragging) return;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    updatePosition(clientX);
+  };
+  
+  handle.addEventListener('mousedown', startDrag);
+  handle.addEventListener('touchstart', startDrag, { passive: false });
+  
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('touchmove', onMove, { passive: true });
+  
+  document.addEventListener('mouseup', stopDrag);
+  document.addEventListener('touchend', stopDrag);
+  
+  sliderContainer.addEventListener('click', (e) => {
+    if (e.target.closest('.tc-handle-' + id)) return;
+    updatePosition(e.clientX);
+  });
+})();
+</script>
+<h3 id="подробности-обновления">Подробности обновления</h3>
+<div class="theme-compare-385961724 my-8 not-prose" data-mode="side-by-side" >
+  <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Детали релиза</h4>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="tc-card-385961724 rounded-xl overflow-hidden shadow-lg border border-base-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 px-4 py-2 flex items-center gap-2 border-b border-base-300">
+        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+        <span class="text-sm font-medium text-amber-700 dark:text-amber-300">Светлая</span>
+      </div>
+      <img 
+        src="work/changelog-detail-light.png" 
+        alt="Детали релиза - Светлая"
+        title="Светлая"
+        class="w-full block"
+        loading="lazy"
+      />
+    </div>
+    
+    <div class="tc-card-385961724 rounded-xl overflow-hidden shadow-lg border border-base-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <div class="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 px-4 py-2 flex items-center gap-2 border-b border-base-300">
+        <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+        </svg>
+        <span class="text-sm font-medium text-indigo-700 dark:text-indigo-300">Тёмная</span>
+      </div>
+      <img 
+        src="work/changelog-detail-dark.png" 
+        alt="Детали релиза - Тёмная"
+        title="Тёмная"
+        class="w-full block"
+        loading="lazy"
+      />
+    </div>
+  </div>
+  <p class="text-center text-sm text-base-content/60 mt-3 italic">Подробности обновления</p>
+</div>
+
+<style>
+   
+  .tc-btn-385961724 {
+    color: oklch(var(--bc) / 0.7);
+    background: transparent;
+  }
+  
+  .tc-btn-385961724.active {
+    background: oklch(var(--b1));
+    color: oklch(var(--bc));
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+  
+  .tc-btn-385961724:hover:not(.active) {
+    background: oklch(var(--b1) / 0.5);
+  }
+
+   
+  .tc-slider-container-385961724 {
+    touch-action: pan-y pinch-zoom;
+  }
+  
+  .tc-slider-container-385961724 img {
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .tc-handle-385961724:hover > div:last-child,
+  .tc-handle-385961724:active > div:last-child {
+    transform: scale(1.1);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+  }
+  
+  .tc-handle-385961724 > div:last-child {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .tc-overlay-385961724 {
+    will-change: clip-path;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+(function() {
+  const id = '385961724';
+  const mode = 'side-by-side';
+})();
+</script>
+<h3 id="политика-конфиденциальности">Политика конфиденциальности</h3>
+<div class="theme-compare-821547693 my-8 not-prose" data-mode="toggle" >
+  <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Privacy Policy</h4>
+  
+  <div class="tc-toggle-821547693">
+    <div class="flex justify-center mb-4">
+      <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
+        <button 
+          class="tc-btn-821547693 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="light"
+          aria-label="Показать светлую тему"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          Светлая
+        </button>
+        <button 
+          class="tc-btn-821547693 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="dark"
+          aria-label="Показать тёмную тему"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+          Тёмная
+        </button>
+      </div>
+    </div>
+    
+    <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
+      
+      <div class="tc-light-wrap-821547693 relative leading-[0] transition-opacity duration-500">
+        <img 
+          src="work/privacy-light.png" 
+          alt="Privacy Policy - Светлая"
+          title="Светлая"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+      
+      <div class="tc-dark-wrap-821547693 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+        <img 
+          src="work/privacy-dark.png" 
+          alt="Privacy Policy - Тёмная"
+          title="Тёмная"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+  <p class="text-center text-sm text-base-content/60 mt-3 italic">Политика конфиденциальности</p>
+</div>
+
+<style>
+   
+  .tc-btn-821547693 {
+    color: oklch(var(--bc) / 0.7);
+    background: transparent;
+  }
+  
+  .tc-btn-821547693.active {
+    background: oklch(var(--b1));
+    color: oklch(var(--bc));
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+  
+  .tc-btn-821547693:hover:not(.active) {
+    background: oklch(var(--b1) / 0.5);
+  }
+
+   
+  .tc-slider-container-821547693 {
+    touch-action: pan-y pinch-zoom;
+  }
+  
+  .tc-slider-container-821547693 img {
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .tc-handle-821547693:hover > div:last-child,
+  .tc-handle-821547693:active > div:last-child {
+    transform: scale(1.1);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+  }
+  
+  .tc-handle-821547693 > div:last-child {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .tc-overlay-821547693 {
+    will-change: clip-path;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+(function() {
+  const id = '821547693';
+  const mode = 'toggle';
+  const buttons = document.querySelectorAll('.tc-btn-' + id);
+  const lightWrap = document.querySelector('.tc-light-wrap-' + id);
+  const darkWrap = document.querySelector('.tc-dark-wrap-' + id);
+  
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      if (btn.dataset.theme === 'dark') {
+        lightWrap.style.opacity = '0';
+        lightWrap.style.pointerEvents = 'none';
+        darkWrap.style.opacity = '1';
+        darkWrap.style.pointerEvents = 'auto';
+      } else {
+        lightWrap.style.opacity = '1';
+        lightWrap.style.pointerEvents = 'auto';
+        darkWrap.style.opacity = '0';
+        darkWrap.style.pointerEvents = 'none';
+      }
+    });
+  });
+})();
+</script>
+<h3 id="условия-использования">Условия использования</h3>
+<div class="theme-compare-382195746 my-8 not-prose" data-mode="toggle" >
+  <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Terms of Service</h4>
+  
+  <div class="tc-toggle-382195746">
+    <div class="flex justify-center mb-4">
+      <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
+        <button 
+          class="tc-btn-382195746 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="light"
+          aria-label="Показать светлую тему"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          Светлая
+        </button>
+        <button 
+          class="tc-btn-382195746 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="dark"
+          aria-label="Показать тёмную тему"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+          Тёмная
+        </button>
+      </div>
+    </div>
+    
+    <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
+      
+      <div class="tc-light-wrap-382195746 relative leading-[0] transition-opacity duration-500">
+        <img 
+          src="work/terms-light.png" 
+          alt="Terms of Service - Светлая"
+          title="Светлая"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+      
+      <div class="tc-dark-wrap-382195746 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+        <img 
+          src="work/terms-dark.png" 
+          alt="Terms of Service - Тёмная"
+          title="Тёмная"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+  <p class="text-center text-sm text-base-content/60 mt-3 italic">Условия использования</p>
+</div>
+
+<style>
+   
+  .tc-btn-382195746 {
+    color: oklch(var(--bc) / 0.7);
+    background: transparent;
+  }
+  
+  .tc-btn-382195746.active {
+    background: oklch(var(--b1));
+    color: oklch(var(--bc));
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+  
+  .tc-btn-382195746:hover:not(.active) {
+    background: oklch(var(--b1) / 0.5);
+  }
+
+   
+  .tc-slider-container-382195746 {
+    touch-action: pan-y pinch-zoom;
+  }
+  
+  .tc-slider-container-382195746 img {
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .tc-handle-382195746:hover > div:last-child,
+  .tc-handle-382195746:active > div:last-child {
+    transform: scale(1.1);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+  }
+  
+  .tc-handle-382195746 > div:last-child {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .tc-overlay-382195746 {
+    will-change: clip-path;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+(function() {
+  const id = '382195746';
+  const mode = 'toggle';
+  const buttons = document.querySelectorAll('.tc-btn-' + id);
+  const lightWrap = document.querySelector('.tc-light-wrap-' + id);
+  const darkWrap = document.querySelector('.tc-dark-wrap-' + id);
+  
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      if (btn.dataset.theme === 'dark') {
+        lightWrap.style.opacity = '0';
+        lightWrap.style.pointerEvents = 'none';
+        darkWrap.style.opacity = '1';
+        darkWrap.style.pointerEvents = 'auto';
+      } else {
+        lightWrap.style.opacity = '1';
+        lightWrap.style.pointerEvents = 'auto';
+        darkWrap.style.opacity = '0';
+        darkWrap.style.pointerEvents = 'none';
+      }
+    });
+  });
+})();
+</script>
+<h3 id="страница-после-установки">Страница после установки</h3>
+<div class="theme-compare-197362845 my-8 not-prose" data-mode="toggle" >
+  <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Welcome / Onboarding</h4>
+  
+  <div class="tc-toggle-197362845">
+    <div class="flex justify-center mb-4">
+      <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
+        <button 
+          class="tc-btn-197362845 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="light"
+          aria-label="Показать светлую тему"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          Светлая
+        </button>
+        <button 
+          class="tc-btn-197362845 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="dark"
+          aria-label="Показать тёмную тему"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+          Тёмная
+        </button>
+      </div>
+    </div>
+    
+    <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
+      
+      <div class="tc-light-wrap-197362845 relative leading-[0] transition-opacity duration-500">
+        <img 
+          src="work/welcome-light.png" 
+          alt="Welcome / Onboarding - Светлая"
+          title="Светлая"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+      
+      <div class="tc-dark-wrap-197362845 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+        <img 
+          src="work/welcome-dark.png" 
+          alt="Welcome / Onboarding - Тёмная"
+          title="Тёмная"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+  <p class="text-center text-sm text-base-content/60 mt-3 italic">Страница после установки</p>
+</div>
+
+<style>
+   
+  .tc-btn-197362845 {
+    color: oklch(var(--bc) / 0.7);
+    background: transparent;
+  }
+  
+  .tc-btn-197362845.active {
+    background: oklch(var(--b1));
+    color: oklch(var(--bc));
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+  
+  .tc-btn-197362845:hover:not(.active) {
+    background: oklch(var(--b1) / 0.5);
+  }
+
+   
+  .tc-slider-container-197362845 {
+    touch-action: pan-y pinch-zoom;
+  }
+  
+  .tc-slider-container-197362845 img {
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .tc-handle-197362845:hover > div:last-child,
+  .tc-handle-197362845:active > div:last-child {
+    transform: scale(1.1);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+  }
+  
+  .tc-handle-197362845 > div:last-child {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .tc-overlay-197362845 {
+    will-change: clip-path;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+(function() {
+  const id = '197362845';
+  const mode = 'toggle';
+  const buttons = document.querySelectorAll('.tc-btn-' + id);
+  const lightWrap = document.querySelector('.tc-light-wrap-' + id);
+  const darkWrap = document.querySelector('.tc-dark-wrap-' + id);
+  
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      if (btn.dataset.theme === 'dark') {
+        lightWrap.style.opacity = '0';
+        lightWrap.style.pointerEvents = 'none';
+        darkWrap.style.opacity = '1';
+        darkWrap.style.pointerEvents = 'auto';
+      } else {
+        lightWrap.style.opacity = '1';
+        lightWrap.style.pointerEvents = 'auto';
+        darkWrap.style.opacity = '0';
+        darkWrap.style.pointerEvents = 'none';
+      }
+    });
+  });
+})();
+</script>
+<h3 id="страница-после-удаления">Страница после удаления</h3>
+<div class="theme-compare-813457296 my-8 not-prose" data-mode="toggle" >
+  <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Uninstall Feedback</h4>
+  
+  <div class="tc-toggle-813457296">
+    <div class="flex justify-center mb-4">
+      <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
+        <button 
+          class="tc-btn-813457296 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="light"
+          aria-label="Показать светлую тему"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          Светлая
+        </button>
+        <button 
+          class="tc-btn-813457296 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="dark"
+          aria-label="Показать тёмную тему"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+          Тёмная
+        </button>
+      </div>
+    </div>
+    
+    <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
+      
+      <div class="tc-light-wrap-813457296 relative leading-[0] transition-opacity duration-500">
+        <img 
+          src="work/uninstall-light.png" 
+          alt="Uninstall Feedback - Светлая"
+          title="Светлая"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+      
+      <div class="tc-dark-wrap-813457296 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+        <img 
+          src="work/uninstall-dark.png" 
+          alt="Uninstall Feedback - Тёмная"
+          title="Тёмная"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+  <p class="text-center text-sm text-base-content/60 mt-3 italic">Страница после удаления</p>
+</div>
+
+<style>
+   
+  .tc-btn-813457296 {
+    color: oklch(var(--bc) / 0.7);
+    background: transparent;
+  }
+  
+  .tc-btn-813457296.active {
+    background: oklch(var(--b1));
+    color: oklch(var(--bc));
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+  
+  .tc-btn-813457296:hover:not(.active) {
+    background: oklch(var(--b1) / 0.5);
+  }
+
+   
+  .tc-slider-container-813457296 {
+    touch-action: pan-y pinch-zoom;
+  }
+  
+  .tc-slider-container-813457296 img {
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .tc-handle-813457296:hover > div:last-child,
+  .tc-handle-813457296:active > div:last-child {
+    transform: scale(1.1);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+  }
+  
+  .tc-handle-813457296 > div:last-child {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .tc-overlay-813457296 {
+    will-change: clip-path;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+(function() {
+  const id = '813457296';
+  const mode = 'toggle';
+  const buttons = document.querySelectorAll('.tc-btn-' + id);
+  const lightWrap = document.querySelector('.tc-light-wrap-' + id);
+  const darkWrap = document.querySelector('.tc-dark-wrap-' + id);
+  
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      if (btn.dataset.theme === 'dark') {
+        lightWrap.style.opacity = '0';
+        lightWrap.style.pointerEvents = 'none';
+        darkWrap.style.opacity = '1';
+        darkWrap.style.pointerEvents = 'auto';
+      } else {
+        lightWrap.style.opacity = '1';
+        lightWrap.style.pointerEvents = 'auto';
+        darkWrap.style.opacity = '0';
+        darkWrap.style.pointerEvents = 'none';
+      }
+    });
+  });
+})();
+</script>
+<h3 id="страница-404">Страница 404</h3>
+<div class="theme-compare-423897561 my-8 not-prose" data-mode="toggle" >
+  <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Страница ошибки</h4>
+  
+  <div class="tc-toggle-423897561">
+    <div class="flex justify-center mb-4">
+      <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
+        <button 
+          class="tc-btn-423897561 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="light"
+          aria-label="Показать светлую тему"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          Светлая
+        </button>
+        <button 
+          class="tc-btn-423897561 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          data-theme="dark"
+          aria-label="Показать тёмную тему"
+        >
+          <svg class="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+          Тёмная
+        </button>
+      </div>
+    </div>
+    
+    <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
+      
+      <div class="tc-light-wrap-423897561 relative leading-[0] transition-opacity duration-500">
+        <img 
+          src="work/404-light.png" 
+          alt="Страница ошибки - Светлая"
+          title="Светлая"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+      
+      <div class="tc-dark-wrap-423897561 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+        <img 
+          src="work/404-dark.png" 
+          alt="Страница ошибки - Тёмная"
+          title="Тёмная"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+  <p class="text-center text-sm text-base-content/60 mt-3 italic">Страница ошибки</p>
+</div>
+
+<style>
+   
+  .tc-btn-423897561 {
+    color: oklch(var(--bc) / 0.7);
+    background: transparent;
+  }
+  
+  .tc-btn-423897561.active {
+    background: oklch(var(--b1));
+    color: oklch(var(--bc));
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+  
+  .tc-btn-423897561:hover:not(.active) {
+    background: oklch(var(--b1) / 0.5);
+  }
+
+   
+  .tc-slider-container-423897561 {
+    touch-action: pan-y pinch-zoom;
+  }
+  
+  .tc-slider-container-423897561 img {
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .tc-handle-423897561:hover > div:last-child,
+  .tc-handle-423897561:active > div:last-child {
+    transform: scale(1.1);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+  }
+  
+  .tc-handle-423897561 > div:last-child {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .tc-overlay-423897561 {
+    will-change: clip-path;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+(function() {
+  const id = '423897561';
+  const mode = 'toggle';
+  const buttons = document.querySelectorAll('.tc-btn-' + id);
+  const lightWrap = document.querySelector('.tc-light-wrap-' + id);
+  const darkWrap = document.querySelector('.tc-dark-wrap-' + id);
+  
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      if (btn.dataset.theme === 'dark') {
+        lightWrap.style.opacity = '0';
+        lightWrap.style.pointerEvents = 'none';
+        darkWrap.style.opacity = '1';
+        darkWrap.style.pointerEvents = 'auto';
+      } else {
+        lightWrap.style.opacity = '1';
+        lightWrap.style.pointerEvents = 'auto';
+        darkWrap.style.opacity = '0';
+        darkWrap.style.pointerEvents = 'none';
+      }
+    });
+  });
+})();
+</script>
+<hr>
+<h2 id="-адаптивная-версия">📱 Адаптивная версия</h2>
+<div class="not-prose">
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 xl:gap-10"><article class="group relative cursor-pointer">
+        
+        <div
+          class="absolute inset-x-4 bottom-0 h-1/2
+                 bg-gradient-to-t from-black/25 to-transparent
+                 dark:from-black/50
+                 rounded-3xl blur-2xl
+                 scale-90 opacity-0
+                 group-hover:opacity-100 group-hover:scale-95
+                 transition-all duration-500 ease-out"
+          aria-hidden="true">
+        </div>
+
+        
+        <div
+          class="relative
+                 transform-gpu
+                 group-hover:-translate-y-2 group-hover:scale-[1.02]
+                 transition-all duration-300 ease-out">
+          
+          <div class="rounded-2xl sm:rounded-3xl overflow-hidden
+                      bg-neutral-100 dark:bg-neutral-800/80
+                      ring-1 ring-neutral-200/80 dark:ring-neutral-700/50
+                      shadow-lg shadow-neutral-200/50 dark:shadow-black/20
+                      group-hover:shadow-2xl group-hover:shadow-neutral-300/50
+                      dark:group-hover:shadow-black/40
+                      group-hover:ring-neutral-300 dark:group-hover:ring-neutral-600
+                      transition-all duration-300">
+
+            
+            <div class="relative aspect-[9/16] sm:aspect-[9/17] md:aspect-[9/18] lg:aspect-[9/19] xl:aspect-[9/20] w-full overflow-hidden">
+              
+              
+              <img
+                src="work/home-mobile.png"
+                alt="Скриншот мобильной версии Home"
+                class="w-full h-full object-cover object-top
+                       transform-gpu
+                       group-hover:scale-105
+                       transition-transform duration-500 ease-out"
+                loading="lazy"
+                decoding="async"
+              >
+
+              
+              <div
+                class="absolute inset-0
+                       bg-gradient-to-t from-black/60 via-transparent to-transparent
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300
+                       pointer-events-none"
+                aria-hidden="true">
+              </div>
+
+              
+              <div
+                class="absolute inset-0 flex items-center justify-center
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300 delay-75
+                       pointer-events-none">
+                <span class="p-3 sm:p-4 rounded-full bg-white/90 dark:bg-neutral-900/90
+                             shadow-lg backdrop-blur-sm
+                             transform scale-75 group-hover:scale-100
+                             transition-transform duration-300">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-neutral-700 dark:text-neutral-200" 
+                       fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                  </svg>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="mt-3 sm:mt-4 text-center pointer-events-none">
+          <h3 class="text-sm sm:text-base font-medium 
+                     text-neutral-600 dark:text-neutral-400
+                     group-hover:text-neutral-900 dark:group-hover:text-neutral-200
+                     transition-colors duration-300 capitalize">
+            Home
+          </h3>
+          
+          
+          <div class="mt-1.5 mx-auto w-8 h-0.5 rounded-full
+                      bg-neutral-300 dark:bg-neutral-700
+                      group-hover:w-16 group-hover:bg-primary-500 dark:group-hover:bg-primary-400
+                      transition-all duration-300"
+               aria-hidden="true">
+          </div>
+        </div>
+
+      </article><article class="group relative cursor-pointer">
+        
+        <div
+          class="absolute inset-x-4 bottom-0 h-1/2
+                 bg-gradient-to-t from-black/25 to-transparent
+                 dark:from-black/50
+                 rounded-3xl blur-2xl
+                 scale-90 opacity-0
+                 group-hover:opacity-100 group-hover:scale-95
+                 transition-all duration-500 ease-out"
+          aria-hidden="true">
+        </div>
+
+        
+        <div
+          class="relative
+                 transform-gpu
+                 group-hover:-translate-y-2 group-hover:scale-[1.02]
+                 transition-all duration-300 ease-out">
+          
+          <div class="rounded-2xl sm:rounded-3xl overflow-hidden
+                      bg-neutral-100 dark:bg-neutral-800/80
+                      ring-1 ring-neutral-200/80 dark:ring-neutral-700/50
+                      shadow-lg shadow-neutral-200/50 dark:shadow-black/20
+                      group-hover:shadow-2xl group-hover:shadow-neutral-300/50
+                      dark:group-hover:shadow-black/40
+                      group-hover:ring-neutral-300 dark:group-hover:ring-neutral-600
+                      transition-all duration-300">
+
+            
+            <div class="relative aspect-[9/16] sm:aspect-[9/17] md:aspect-[9/18] lg:aspect-[9/19] xl:aspect-[9/20] w-full overflow-hidden">
+              
+              
+              <img
+                src="work/welcome-mobile.png"
+                alt="Скриншот мобильной версии Welcome"
+                class="w-full h-full object-cover object-top
+                       transform-gpu
+                       group-hover:scale-105
+                       transition-transform duration-500 ease-out"
+                loading="lazy"
+                decoding="async"
+              >
+
+              
+              <div
+                class="absolute inset-0
+                       bg-gradient-to-t from-black/60 via-transparent to-transparent
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300
+                       pointer-events-none"
+                aria-hidden="true">
+              </div>
+
+              
+              <div
+                class="absolute inset-0 flex items-center justify-center
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300 delay-75
+                       pointer-events-none">
+                <span class="p-3 sm:p-4 rounded-full bg-white/90 dark:bg-neutral-900/90
+                             shadow-lg backdrop-blur-sm
+                             transform scale-75 group-hover:scale-100
+                             transition-transform duration-300">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-neutral-700 dark:text-neutral-200" 
+                       fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                  </svg>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="mt-3 sm:mt-4 text-center pointer-events-none">
+          <h3 class="text-sm sm:text-base font-medium 
+                     text-neutral-600 dark:text-neutral-400
+                     group-hover:text-neutral-900 dark:group-hover:text-neutral-200
+                     transition-colors duration-300 capitalize">
+            Welcome
+          </h3>
+          
+          
+          <div class="mt-1.5 mx-auto w-8 h-0.5 rounded-full
+                      bg-neutral-300 dark:bg-neutral-700
+                      group-hover:w-16 group-hover:bg-primary-500 dark:group-hover:bg-primary-400
+                      transition-all duration-300"
+               aria-hidden="true">
+          </div>
+        </div>
+
+      </article><article class="group relative cursor-pointer">
+        
+        <div
+          class="absolute inset-x-4 bottom-0 h-1/2
+                 bg-gradient-to-t from-black/25 to-transparent
+                 dark:from-black/50
+                 rounded-3xl blur-2xl
+                 scale-90 opacity-0
+                 group-hover:opacity-100 group-hover:scale-95
+                 transition-all duration-500 ease-out"
+          aria-hidden="true">
+        </div>
+
+        
+        <div
+          class="relative
+                 transform-gpu
+                 group-hover:-translate-y-2 group-hover:scale-[1.02]
+                 transition-all duration-300 ease-out">
+          
+          <div class="rounded-2xl sm:rounded-3xl overflow-hidden
+                      bg-neutral-100 dark:bg-neutral-800/80
+                      ring-1 ring-neutral-200/80 dark:ring-neutral-700/50
+                      shadow-lg shadow-neutral-200/50 dark:shadow-black/20
+                      group-hover:shadow-2xl group-hover:shadow-neutral-300/50
+                      dark:group-hover:shadow-black/40
+                      group-hover:ring-neutral-300 dark:group-hover:ring-neutral-600
+                      transition-all duration-300">
+
+            
+            <div class="relative aspect-[9/16] sm:aspect-[9/17] md:aspect-[9/18] lg:aspect-[9/19] xl:aspect-[9/20] w-full overflow-hidden">
+              
+              
+              <img
+                src="work/uninstall-mobile.png"
+                alt="Скриншот мобильной версии Uninstall"
+                class="w-full h-full object-cover object-top
+                       transform-gpu
+                       group-hover:scale-105
+                       transition-transform duration-500 ease-out"
+                loading="lazy"
+                decoding="async"
+              >
+
+              
+              <div
+                class="absolute inset-0
+                       bg-gradient-to-t from-black/60 via-transparent to-transparent
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300
+                       pointer-events-none"
+                aria-hidden="true">
+              </div>
+
+              
+              <div
+                class="absolute inset-0 flex items-center justify-center
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300 delay-75
+                       pointer-events-none">
+                <span class="p-3 sm:p-4 rounded-full bg-white/90 dark:bg-neutral-900/90
+                             shadow-lg backdrop-blur-sm
+                             transform scale-75 group-hover:scale-100
+                             transition-transform duration-300">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-neutral-700 dark:text-neutral-200" 
+                       fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                  </svg>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="mt-3 sm:mt-4 text-center pointer-events-none">
+          <h3 class="text-sm sm:text-base font-medium 
+                     text-neutral-600 dark:text-neutral-400
+                     group-hover:text-neutral-900 dark:group-hover:text-neutral-200
+                     transition-colors duration-300 capitalize">
+            Uninstall
+          </h3>
+          
+          
+          <div class="mt-1.5 mx-auto w-8 h-0.5 rounded-full
+                      bg-neutral-300 dark:bg-neutral-700
+                      group-hover:w-16 group-hover:bg-primary-500 dark:group-hover:bg-primary-400
+                      transition-all duration-300"
+               aria-hidden="true">
+          </div>
+        </div>
+
+      </article>
+  </div>
+</div>
+<hr>
+<h2 id="-дизайн-система">🎨 Дизайн-система</h2>
+<h3 id="светлая-тема">Светлая тема</h3>
+<div class="not-prose">
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #FFFFFF;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Background Primary
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #FFFFFF;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #FFFFFF
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#FFFFFF', this, 'Background Primary')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #F5F5F7;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Background Secondary
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #F5F5F7;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #F5F5F7
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#F5F5F7', this, 'Background Secondary')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #E8E8ED;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Background Tertiary
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #E8E8ED;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #E8E8ED
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#E8E8ED', this, 'Background Tertiary')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #1D1D1F;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Text Primary
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #1D1D1F;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #1D1D1F
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#1D1D1F', this, 'Text Primary')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #6E6E73;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Text Secondary
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #6E6E73;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #6E6E73
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#6E6E73', this, 'Text Secondary')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<script>
+  function copyColorCode(colorCode, button, colorName) {
+    navigator.clipboard.writeText(colorCode).then(() => {
+      
+      const icon = button.querySelector('svg');
+      const buttonText = button.querySelector('span');
+      const originalPath = icon.innerHTML;
+      const originalText = buttonText ? buttonText.textContent : '';
+      
+      icon.innerHTML = `
+      
+	<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+            d="M5 13l4 4L19 7" />
+    `;
+      if (buttonText) {
+        buttonText.textContent = 'Скопировано!';
+      }
+      button.classList.add('btn-success');
+      
+      setTimeout(() => {
+        icon.innerHTML = originalPath;
+        if (buttonText) {
+          buttonText.textContent = originalText;
+        }
+        button.classList.remove('btn-success');
+      }, 2000);
+    }).catch(err => {
+      console.error("Copy Error: ", err);
+    });
+  }
+</script>
+<h3 id="тёмная-тема">Тёмная тема</h3>
+<div class="not-prose">
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #1C1C1E;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Background Primary
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #1C1C1E;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #1C1C1E
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#1C1C1E', this, 'Background Primary')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #000000;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Background Secondary
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #000000;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #000000
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#000000', this, 'Background Secondary')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #2C2C2E;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Background Tertiary
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #2C2C2E;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #2C2C2E
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#2C2C2E', this, 'Background Tertiary')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #F5F5F7;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Text Primary
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #F5F5F7;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #F5F5F7
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#F5F5F7', this, 'Text Primary')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #A1A1A6;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Text Secondary
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #A1A1A6;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #A1A1A6
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#A1A1A6', this, 'Text Secondary')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<script>
+  function copyColorCode(colorCode, button, colorName) {
+    navigator.clipboard.writeText(colorCode).then(() => {
+      
+      const icon = button.querySelector('svg');
+      const buttonText = button.querySelector('span');
+      const originalPath = icon.innerHTML;
+      const originalText = buttonText ? buttonText.textContent : '';
+      
+      icon.innerHTML = `
+      
+	<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+            d="M5 13l4 4L19 7" />
+    `;
+      if (buttonText) {
+        buttonText.textContent = 'Скопировано!';
+      }
+      button.classList.add('btn-success');
+      
+      setTimeout(() => {
+        icon.innerHTML = originalPath;
+        if (buttonText) {
+          buttonText.textContent = originalText;
+        }
+        button.classList.remove('btn-success');
+      }, 2000);
+    }).catch(err => {
+      console.error("Copy Error: ", err);
+    });
+  }
+</script>
+<h3 id="акцентные-цвета">Акцентные цвета</h3>
+<div class="not-prose">
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #0077FF;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Primary / VK Blue
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #0077FF;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #0077FF
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#0077FF', this, 'Primary \/ VK Blue')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #0066DD;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Primary Hover
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #0066DD;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #0066DD
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#0066DD', this, 'Primary Hover')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #34C759;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Success
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #34C759;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #34C759
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#34C759', this, 'Success')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #FF3B30;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Error
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #FF3B30;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #FF3B30
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#FF3B30', this, 'Error')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="group relative overflow-hidden rounded-xl border border-base-300 bg-base-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+      
+      <div class="h-20 relative overflow-hidden">
+        
+        <div class="h-full transition-transform duration-300 group-hover:scale-105" style="background-color: #FF9500;"></div>
+        
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-base-100/20"></div>
+      </div>
+      
+      <div class="p-4">
+        
+        <h4 class="font-semibold text-base-content mb-3 truncate">
+          Warning
+        </h4>
+        <div class="flex items-center gap-2 mb-3">
+          
+          <div class="flex-shrink-0">
+            
+            <div class="w-10 h-10 rounded-full border-2 border-base-300 shadow-sm" style="background-color: #FF9500;"></div>
+            
+          </div>
+          
+          <code class="flex-1 px-2.5 py-1.5 bg-base-200 rounded text-xs font-mono text-base-content/80 truncate">
+            #FF9500
+          </code>
+        </div>
+        
+        <button class="btn btn-sm btn-block btn-ghost hover:btn-primary transition-colors gap-2" onclick="copyColorCode('#FF9500', this, 'Warning')" aria-label="Copy color code">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span class="text-xs">Копировать</span>
+        </button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<script>
+  function copyColorCode(colorCode, button, colorName) {
+    navigator.clipboard.writeText(colorCode).then(() => {
+      
+      const icon = button.querySelector('svg');
+      const buttonText = button.querySelector('span');
+      const originalPath = icon.innerHTML;
+      const originalText = buttonText ? buttonText.textContent : '';
+      
+      icon.innerHTML = `
+      
+	<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+            d="M5 13l4 4L19 7" />
+    `;
+      if (buttonText) {
+        buttonText.textContent = 'Скопировано!';
+      }
+      button.classList.add('btn-success');
+      
+      setTimeout(() => {
+        icon.innerHTML = originalPath;
+        if (buttonText) {
+          buttonText.textContent = originalText;
+        }
+        button.classList.remove('btn-success');
+      }, 2000);
+    }).catch(err => {
+      console.error("Copy Error: ", err);
+    });
+  }
+</script>
+<ul>
+<li><strong>Типографика:</strong> SF Pro Display / System UI для заголовков и текста</li>
+<li><strong>Иконки:</strong> Lucide React — единый стиль с расширением</li>
+<li><strong>Анимации:</strong> Framer Motion для плавных переходов и появлений</li>
+<li><strong>Тени:</strong> Многослойные с разной интенсивностью для глубины</li>
+</ul>
+<hr>
+<h2 id="-техническая-реализация">🛠️ Техническая реализация</h2>
+<h3 id="архитектура-проекта">Архитектура проекта</h3>
+<p>Сайт построен на React 18 с React Router v6 для маршрутизации. Используется компонентный подход с разделением на общие UI-компоненты и страничные модули. Состояние темы управляется через Context API с сохранением выбора в localStorage.</p>
+<h3 id="система-тем">Система тем</h3>
+<p>Реализован переключатель с тремя режимами: светлая, тёмная и автоматическая (по системным настройкам). Тема применяется мгновенно без мерцания благодаря синхронному чтению из localStorage до первого рендера. Все цвета заданы через CSS-переменные для централизованного управления.</p>
+<h3 id="анимации">Анимации</h3>
+<p>Использован Framer Motion для создания плавных анимаций: fade-in при появлении секций, stagger-эффект для карточек, параллакс для floating-элементов в hero-секции. Анимации запускаются при попадании элементов в viewport через Intersection Observer.</p>
+<h3 id="seo-оптимизация">SEO-оптимизация</h3>
+<p>Каждая страница имеет уникальные мета-теги, настроенные через React Helmet Async. Реализованы Open Graph и Twitter Card теги для корректного отображения при шаринге. Добавлена структурированная разметка JSON-LD для браузерного расширения. Созданы sitemap.xml и robots.txt.</p>
+<h3 id="производительность">Производительность</h3>
+<p>Применён code splitting для ленивой загрузки страниц. Изображения оптимизированы и конвертированы в WebP с lazy loading. Шрифты подключены с preload для ускорения отрисовки. Результат — Lighthouse score выше 90 по всем метрикам.</p>
+<h3 id="адаптивность">Адаптивность</h3>
+<p>Использован mobile-first подход с breakpoints: mobile (&lt;640px), tablet (640-1024px), desktop (&gt;1024px). На мобильных устройствах навигация трансформируется в hamburger-меню. Все интерактивные элементы имеют touch-friendly размеры (минимум 44px).</p>
+<h3 id="форма-обратной-связи">Форма обратной связи</h3>
+<p>На странице uninstall реализована форма с опросом причин удаления. Данные отправляются на сервер для анализа и улучшения продукта. Форма включает валидацию и состояния загрузки/успеха/ошибки.</p>
+<h3 id="интеграция-с-расширением">Интеграция с расширением</h3>
+<p>Страницы welcome и uninstall открываются автоматически расширением при соответствующих событиях через chrome.tabs API. URL-параметры позволяют передавать версию расширения и другие данные для персонализации контента.</p>
+<hr>
+<h2 id="-стек-технологий">🛠️ Стек технологий</h2>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Категория
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Технологии
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Framework</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          React 18, React Router v6
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Styling</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Tailwind CSS, CSS Variables
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Анимации</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Framer Motion
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>SEO</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          React Helmet Async, JSON-LD
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Сборка</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Vite, PostCSS
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Деплой</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          Vercel
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Категория
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Framework</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Технологии
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          React 18, React Router v6
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Категория
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Styling</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Технологии
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Tailwind CSS, CSS Variables
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Категория
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Анимации</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Технологии
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Framer Motion
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Категория
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>SEO</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Технологии
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          React Helmet Async, JSON-LD
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Категория
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Сборка</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Технологии
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Vite, PostCSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Категория
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Деплой</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Технологии
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Vercel
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><hr>
+<h2 id="-ключевые-метрики">📊 Ключевые метрики</h2>
+<ul>
+<li><strong>6</strong> уникальных страниц</li>
+<li><strong>3</strong> режима темы оформления</li>
+<li><strong>90+</strong> баллов Lighthouse</li>
+<li><strong>&lt;2s</strong> время загрузки</li>
+<li><strong>100%</strong> адаптивность</li>
+</ul>
+<hr>
+<h2 id="-особенности-реализации">🔧 Особенности реализации</h2>
+<h3 id="анимированные-счётчики">Анимированные счётчики</h3>
+<p>Числа в секции статистики анимируются от нуля до целевого значения при появлении в viewport. Использована библиотека для плавной интерполяции с easing-функцией.</p>
+<h3 id="карусель-скриншотов">Карусель скриншотов</h3>
+<p>Слайдер с автопрокруткой и ручным управлением. На мобильных — свайп-жесты. Lightbox для просмотра в полном размере с клавиатурной навигацией.</p>
+<h3 id="changelog-с-фильтрацией">Changelog с фильтрацией</h3>
+<p>Список версий загружается из JSON-файла. Реализованы фильтры по типу изменений с анимацией появления/исчезновения карточек. URL обновляется при фильтрации для возможности шаринга.</p>
+<h3 id="плавный-переход-между-темами">Плавный переход между темами</h3>
+<p>При смене темы применяется CSS-transition для background-color и color с длительностью 300ms. Иконка переключателя плавно поворачивается между состояниями солнце/луна.</p>
+<hr>
+<h2 id="-итог">🌐 Итог</h2>
+<ul>
+<li>Современный креативный лендинг с продуманной структурой</li>
+<li>Полная поддержка светлой и тёмной темы</li>
+<li>Служебные страницы для полного жизненного цикла пользователя</li>
+<li>Высокая производительность и SEO-оптимизация</li>
+<li>Адаптивный дизайн для всех устройств</li>
+<li>Интеграция с браузерным расширением</li>
+</ul>
+<hr>
+    </section>
+
+    
+    
+    
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+    
+      
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+
+<section class="not-prose mt-12 pt-8 border-t border-base-300">
+  
+  <div class="flex items-center gap-3 mb-6">
+    <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-primary/10">
+      <ion-icon name="git-branch-outline" class="text-xl text-primary"></ion-icon>
+    </div>
+    <div>
+      <h3 class="text-xl font-bold">Связанные проекты</h3>
+      <p class="text-sm text-base-content/60">Другие части этого проекта</p>
+    </div>
+  </div>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    
+    <a href="/ru/portfolio/vkify-vkontakte-extension/" 
+       class="group flex gap-4 p-4 rounded-2xl
+              bg-base-200/50 dark:bg-base-200/10
+              border border-transparent
+              hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
+              hover:shadow-lg
+              transition-all duration-300">
+      
+      
+      <div class="relative shrink-0 w-20 h-20 rounded-xl overflow-hidden bg-base-300">
+        
+          
+            
+              
+              <img src="/ru/portfolio/vkify-vkontakte-extension/Cover_hu_72b86333b1e9afa5.webp" alt="VKify Website — Лендинг для браузерного расширения" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" loading="lazy" />
+            
+          
+        
+        
+        
+        
+        <div class="absolute bottom-1 right-1">
+          
+          
+            
+          
+          <span class="flex h-2.5 w-2.5 rounded-full bg-warning ring-2 ring-base-100"></span>
+        </div>
+        
+      </div>
+      
+      
+      <div class="flex-1 min-w-0">
+        
+        
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 mb-1.5 text-xs font-medium rounded-full bg-base-300/50 text-base-content/70">
+          
+          
+          
+            
+            
+          
+          <ion-icon name="extension-puzzle-outline" class="text-xs"></ion-icon>
+          Расширение
+        </span>
+        
+        
+        
+        <h4 class="font-bold text-base line-clamp-1 group-hover:text-primary transition-colors">
+          VKify — Расширение для ВКонтакте
+        </h4>
+        
+        
+        
+        <p class="text-sm text-base-content/60 line-clamp-2 mt-1">
+          VKify — браузерное расширение, которое делает ВКонтакте удобнее: блокировка …
+        </p>
+        
+        
+        
+        
+        <div class="flex flex-wrap gap-1 mt-2">
+          
+          <span class="text-xs px-1.5 py-0.5 rounded bg-base-300/50 text-base-content/50">React</span>
+          
+          <span class="text-xs px-1.5 py-0.5 rounded bg-base-300/50 text-base-content/50">Tailwind CSS</span>
+          
+          <span class="text-xs px-1.5 py-0.5 rounded bg-base-300/50 text-base-content/50">Chrome Extension API</span>
+          
+          
+          <span class="text-xs px-1.5 py-0.5 rounded bg-base-300/50 text-base-content/40">+2</span>
+          
+        </div>
+        
+      </div>
+      
+      
+      <div class="flex items-center shrink-0">
+        <ion-icon name="arrow-forward" class="text-base-content/30 group-hover:text-primary group-hover:translate-x-1 transition-all"></ion-icon>
+      </div>
+    </a>
+    
+  </div>
+  
+</section>
+
+
+    
+
+    
+    
+    
+    <div class="not-prose mt-12 pt-6 border-t border-base-300 fade-in-up">
+      <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+        <ion-icon name="reader-outline" class="text-2xl"></ion-icon>
+        Читайте также
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <a href="/ru/portfolio/vkify-vkontakte-extension/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+          
+          <figure class="overflow-hidden">
+            <img src="https://0x69.ru/ru/portfolio/vkify-vkontakte-extension/Cover.png" alt="VKify — Расширение для ВКонтакте" class="w-full h-32 object-cover transition-transform group-hover:scale-105" loading="lazy"/>
+          </figure>
+          
+          <div class="card-body p-4">
+            <h4 class="card-title text-sm line-clamp-2">VKify — Расширение для ВКонтакте</h4>
+            <p class="text-xs text-base-content/60">6  минут чтения</p>
+          </div>
+        </a>
+        
+        <a href="/ru/portfolio/codesqueeze/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+          
+          <figure class="overflow-hidden">
+            <img src="https://0x69.ru/ru/portfolio/codesqueeze/Cover.png" alt="CodeSqueeze — Online Code Minifier" class="w-full h-32 object-cover transition-transform group-hover:scale-105" loading="lazy"/>
+          </figure>
+          
+          <div class="card-body p-4">
+            <h4 class="card-title text-sm line-clamp-2">CodeSqueeze — Online Code Minifier</h4>
+            <p class="text-xs text-base-content/60">2  минуты чтения</p>
+          </div>
+        </a>
+        
+        <a href="/ru/portfolio/prostavki/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+          
+          <figure class="overflow-hidden">
+            <img src="https://0x69.ru/ru/portfolio/prostavki/Cover.png" alt="Landing Page ProStavki" class="w-full h-32 object-cover transition-transform group-hover:scale-105" loading="lazy"/>
+          </figure>
+          
+          <div class="card-body p-4">
+            <h4 class="card-title text-sm line-clamp-2">Landing Page ProStavki</h4>
+            <p class="text-xs text-base-content/60">2  минуты чтения</p>
+          </div>
+        </a>
+        
+      </div>
+    </div>
+    
+
+    
+    
+    <footer class="not-prose mt-12 pt-6 border-t border-base-300">
+      <div class="flex flex-wrap items-center gap-2">
+        <ion-icon name="pricetags-outline" class="text-lg text-base-content/60"></ion-icon>
+        
+        
+        <a href="/ru/tags/%d0%b2%d0%b5%d0%b1-%d1%80%d0%b0%d0%b7%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b0/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Веб-разработка
+        </a>
+        
+        <a href="/ru/tags/react/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #React
+        </a>
+        
+        <a href="/ru/tags/landing-page/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Landing Page
+        </a>
+        
+        <a href="/ru/tags/uiux/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #UI/UX
+        </a>
+        
+        <a href="/ru/tags/tailwind-css/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Tailwind CSS
+        </a>
+        
+        <a href="/ru/tags/framer-motion/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Framer Motion
+        </a>
+        
+        <a href="/ru/tags/seo/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #SEO
+        </a>
+        
+      </div>
+    </footer>
+    
+
+    
+    
+    <nav class="not-prose mt-8" aria-label="Post navigation">
+      <div class="divider"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div></div>
+
+        
+        <a href="/ru/portfolio/vkify-vkontakte-extension/" class="group card bg-base-200 hover:bg-base-300 transition-colors p-4 md:text-right">
+          <div class="flex items-center gap-3 md:flex-row-reverse">
+            <ion-icon name="chevron-forward" class="text-xl text-base-content/50 group-hover:text-primary transition-colors"></ion-icon>
+            <div class="min-w-0">
+              <span class="text-xs text-base-content/60 uppercase tracking-wide">Следующая</span>
+              <p class="font-medium truncate">VKify — Расширение для ВКонтакте</p>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+    </nav>
+    
+
+    
+    
+  </article>
+
+  
+  <aside class="hidden lg:block lg:col-span-3 right-sidebar">
+    <div class="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto space-y-6 pr-2">
+      
+      
+
+      
+      
+      <div class="card bg-base-200 p-4">
+        <h3 class="font-semibold mb-3 flex items-center gap-2">
+          <ion-icon name="list-outline"></ion-icon>
+          Содержание
+        </h3>
+        <nav class="text-sm">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-о-проекте">📌 О проекте</a></li>
+    <li><a href="#-что-было-сделано">✨ Что было сделано</a>
+      <ul>
+        <li><a href="#дизайн-и-ux">Дизайн и UX</a></li>
+        <li><a href="#структура-сайта">Структура сайта</a></li>
+      </ul>
+    </li>
+    <li><a href="#-интерфейс-сайта">🖼️ Интерфейс сайта</a>
+      <ul>
+        <li><a href="#главная-страница">Главная страница</a></li>
+        <li><a href="#история-обновлений">История обновлений</a></li>
+        <li><a href="#подробности-обновления">Подробности обновления</a></li>
+        <li><a href="#политика-конфиденциальности">Политика конфиденциальности</a></li>
+        <li><a href="#условия-использования">Условия использования</a></li>
+        <li><a href="#страница-после-установки">Страница после установки</a></li>
+        <li><a href="#страница-после-удаления">Страница после удаления</a></li>
+        <li><a href="#страница-404">Страница 404</a></li>
+      </ul>
+    </li>
+    <li><a href="#-адаптивная-версия">📱 Адаптивная версия</a></li>
+    <li><a href="#-дизайн-система">🎨 Дизайн-система</a>
+      <ul>
+        <li><a href="#светлая-тема">Светлая тема</a></li>
+        <li><a href="#тёмная-тема">Тёмная тема</a></li>
+        <li><a href="#акцентные-цвета">Акцентные цвета</a></li>
+      </ul>
+    </li>
+    <li><a href="#-техническая-реализация">🛠️ Техническая реализация</a>
+      <ul>
+        <li><a href="#архитектура-проекта">Архитектура проекта</a></li>
+        <li><a href="#система-тем">Система тем</a></li>
+        <li><a href="#анимации">Анимации</a></li>
+        <li><a href="#seo-оптимизация">SEO-оптимизация</a></li>
+        <li><a href="#производительность">Производительность</a></li>
+        <li><a href="#адаптивность">Адаптивность</a></li>
+        <li><a href="#форма-обратной-связи">Форма обратной связи</a></li>
+        <li><a href="#интеграция-с-расширением">Интеграция с расширением</a></li>
+      </ul>
+    </li>
+    <li><a href="#-стек-технологий">🛠️ Стек технологий</a></li>
+    <li><a href="#-ключевые-метрики">📊 Ключевые метрики</a></li>
+    <li><a href="#-особенности-реализации">🔧 Особенности реализации</a>
+      <ul>
+        <li><a href="#анимированные-счётчики">Анимированные счётчики</a></li>
+        <li><a href="#карусель-скриншотов">Карусель скриншотов</a></li>
+        <li><a href="#changelog-с-фильтрацией">Changelog с фильтрацией</a></li>
+        <li><a href="#плавный-переход-между-темами">Плавный переход между темами</a></li>
+      </ul>
+    </li>
+    <li><a href="#-итог">🌐 Итог</a></li>
+  </ul>
+</nav>
+        </nav>
+      </div>
+      
+    </div>
+  </aside>
+</div>
+
+
+<div class="lg:hidden sticky bottom-6 z-50 pointer-events-none">
+  <div class="flex justify-end pr-6">
+    <button onclick="document.getElementById('mobile-actions-modal').showModal()" 
+            class="pointer-events-auto btn btn-circle btn-primary shadow-2xl w-14 h-14 group">
+      <ion-icon name="apps" class="text-2xl transition-transform duration-300 group-active:scale-90"></ion-icon>
+    </button>
+  </div>
+</div>
+
+
+<dialog id="mobile-actions-modal" class="modal modal-bottom lg:hidden">
+  <div class="modal-box rounded-t-3xl pb-8">
+    
+    <div class="flex justify-center mb-4">
+      <div class="w-12 h-1.5 bg-base-300 rounded-full"></div>
+    </div>
+    
+    
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="font-bold text-lg flex items-center gap-2">
+        <ion-icon name="apps-outline" class="text-primary"></ion-icon>
+        Быстрые действия
+      </h3>
+      <button onclick="document.getElementById('mobile-actions-modal').close()" 
+              class="btn btn-circle btn-ghost btn-sm">
+        <ion-icon name="close" class="text-xl"></ion-icon>
+      </button>
+    </div>
+    
+    
+    <div class="grid grid-cols-4 gap-3">
+      
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-info/20 flex items-center justify-center">
+          <ion-icon name="arrow-up" class="text-2xl text-info"></ion-icon>
+        </div>
+        <span class="text-xs">Наверх</span>
+      </button>
+      
+      
+      
+      <button onclick="document.getElementById('mobile-actions-modal').close(); setTimeout(() => document.getElementById('mobile-toc-modal').showModal(), 150);"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-success/20 flex items-center justify-center">
+          <ion-icon name="list" class="text-2xl text-success"></ion-icon>
+        </div>
+        <span class="text-xs">Содержание</span>
+      </button>
+      
+      
+      
+      <button onclick="navigator.share({title: 'VKify Website — Лендинг для браузерного расширения', url: 'https:\/\/0x69.ru\/ru\/portfolio\/vkify-website-extension-landing\/'}).catch(() => {}); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-warning/20 flex items-center justify-center">
+          <ion-icon name="share-social" class="text-2xl text-warning"></ion-icon>
+        </div>
+        <span class="text-xs">Поделиться</span>
+      </button>
+      
+      
+      <button onclick="navigator.clipboard.writeText('https:\/\/0x69.ru\/ru\/portfolio\/vkify-website-extension-landing\/'); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-error/20 flex items-center justify-center">
+          <ion-icon name="copy" class="text-2xl text-error"></ion-icon>
+        </div>
+        <span class="text-xs">Копировать</span>
+      </button>
+    </div>
+  </div>
+  
+  <form method="dialog" class="modal-backdrop bg-black/50">
+    <button>close</button>
+  </form>
+</dialog>
+
+
+
+<dialog id="mobile-toc-modal" class="modal modal-bottom">
+  <div class="modal-box rounded-t-3xl max-h-[75vh]">
+    <div class="flex justify-center mb-4">
+      <div class="w-12 h-1.5 bg-base-300 rounded-full"></div>
+    </div>
+    
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-bold text-lg">Содержание</h3>
+      <button onclick="document.getElementById('mobile-toc-modal').close()" class="btn btn-circle btn-ghost btn-sm">
+        <ion-icon name="close" class="text-xl"></ion-icon>
+      </button>
+    </div>
+    
+    <nav class="overflow-y-auto" onclick="if(event.target.tagName === 'A') document.getElementById('mobile-toc-modal').close();">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-о-проекте">📌 О проекте</a></li>
+    <li><a href="#-что-было-сделано">✨ Что было сделано</a>
+      <ul>
+        <li><a href="#дизайн-и-ux">Дизайн и UX</a></li>
+        <li><a href="#структура-сайта">Структура сайта</a></li>
+      </ul>
+    </li>
+    <li><a href="#-интерфейс-сайта">🖼️ Интерфейс сайта</a>
+      <ul>
+        <li><a href="#главная-страница">Главная страница</a></li>
+        <li><a href="#история-обновлений">История обновлений</a></li>
+        <li><a href="#подробности-обновления">Подробности обновления</a></li>
+        <li><a href="#политика-конфиденциальности">Политика конфиденциальности</a></li>
+        <li><a href="#условия-использования">Условия использования</a></li>
+        <li><a href="#страница-после-установки">Страница после установки</a></li>
+        <li><a href="#страница-после-удаления">Страница после удаления</a></li>
+        <li><a href="#страница-404">Страница 404</a></li>
+      </ul>
+    </li>
+    <li><a href="#-адаптивная-версия">📱 Адаптивная версия</a></li>
+    <li><a href="#-дизайн-система">🎨 Дизайн-система</a>
+      <ul>
+        <li><a href="#светлая-тема">Светлая тема</a></li>
+        <li><a href="#тёмная-тема">Тёмная тема</a></li>
+        <li><a href="#акцентные-цвета">Акцентные цвета</a></li>
+      </ul>
+    </li>
+    <li><a href="#-техническая-реализация">🛠️ Техническая реализация</a>
+      <ul>
+        <li><a href="#архитектура-проекта">Архитектура проекта</a></li>
+        <li><a href="#система-тем">Система тем</a></li>
+        <li><a href="#анимации">Анимации</a></li>
+        <li><a href="#seo-оптимизация">SEO-оптимизация</a></li>
+        <li><a href="#производительность">Производительность</a></li>
+        <li><a href="#адаптивность">Адаптивность</a></li>
+        <li><a href="#форма-обратной-связи">Форма обратной связи</a></li>
+        <li><a href="#интеграция-с-расширением">Интеграция с расширением</a></li>
+      </ul>
+    </li>
+    <li><a href="#-стек-технологий">🛠️ Стек технологий</a></li>
+    <li><a href="#-ключевые-метрики">📊 Ключевые метрики</a></li>
+    <li><a href="#-особенности-реализации">🔧 Особенности реализации</a>
+      <ul>
+        <li><a href="#анимированные-счётчики">Анимированные счётчики</a></li>
+        <li><a href="#карусель-скриншотов">Карусель скриншотов</a></li>
+        <li><a href="#changelog-с-фильтрацией">Changelog с фильтрацией</a></li>
+        <li><a href="#плавный-переход-между-темами">Плавный переход между темами</a></li>
+      </ul>
+    </li>
+    <li><a href="#-итог">🌐 Итог</a></li>
+  </ul>
+</nav>
+    </nav>
+  </div>
+  
+  <form method="dialog" class="modal-backdrop bg-black/50">
+    <button>close</button>
+  </form>
+</dialog>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Максим Александров<br>
+<strong>Age:</strong> 28
+<strong>Location:</strong> Тула, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>Этот блог — мой personal knowledge base, где я пушу заметки про tech stack, life experience и всё, что триггерит мой interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — готов к мёрджу идей и совместным проектам.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-яп">💻 ЯП</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Адаптивная вёрстка (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST API</strong></li>
+</ul>
+<h2 id="-базы-данных">🗄️ Базы данных</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-дизайн-и-графика">🎨 Дизайн и графика</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX дизайн и прототипирование</li>
+<li><strong>Photoshop</strong> — графика и обработка изображений</li>
+<li><strong>After Effects</strong> — моушн-дизайн и анимация 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои Open Source проекты 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои проекты 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN-сервис в Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN-сервис в Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Социальные сети</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "forest"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+    
+<script>
+
+function toggleFocusMode() {
+  const body = document.body;
+  const icon = document.getElementById('focus-mode-icon');
+  const text = document.getElementById('focus-mode-text');
+  
+  body.classList.toggle('focus-mode');
+  
+  const isFocusMode = body.classList.contains('focus-mode');
+  
+  if (icon) {
+    icon.setAttribute('name', isFocusMode ? 'eye-off-outline' : 'eye-outline');
+  }
+  
+  if (text) {
+    text.textContent = isFocusMode ? 'Exit' : 'Фокус';
+  }
+  
+  
+  localStorage.setItem('focusMode', isFocusMode ? 'on' : 'off');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  
+  if (localStorage.getItem('focusMode') === 'on') {
+    document.body.classList.add('focus-mode');
+    const icon = document.getElementById('focus-mode-icon');
+    const text = document.getElementById('focus-mode-text');
+    if (icon) icon.setAttribute('name', 'eye-off-outline');
+    if (text) text.textContent = 'Exit';
+  }
+
+  
+  const progressBar = document.getElementById('reading-progress');
+  const progressText = document.getElementById('reading-progress-text');
+  const article = document.getElementById('dream-single-post-main');
+  
+  if (progressBar && article) {
+    const updateProgress = () => {
+      const rect = article.getBoundingClientRect();
+      const scrolled = Math.max(0, -rect.top);
+      const total = rect.height - window.innerHeight;
+      const progress = Math.min(100, Math.max(0, (scrolled / total) * 100));
+      progressBar.style.width = `${progress}%`;
+      
+      if (progressText) {
+        progressText.textContent = `${Math.round(progress)}%`;
+        progressText.classList.toggle('visible', progress > 5 && progress < 95);
+      }
+    };
+    
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  
+  const tocLinks = document.querySelectorAll('#TableOfContents a');
+  const headings = document.querySelectorAll('#dream-single-post-content h1, #dream-single-post-content h2, #dream-single-post-content h3');
+  
+  if (tocLinks.length && headings.length) {
+    const tocObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => link.classList.remove('active'));
+          const activeLink = document.querySelector(`#TableOfContents a[href="#${entry.target.id}"]`);
+          activeLink?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0% -60% 0%' });
+    
+    headings.forEach(h => tocObserver.observe(h));
+  }
+});
+</script>
+
+
+
+
+
+
+
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
+  integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
+  crossorigin="anonymous"
+></script>
+<script>
+  format()
+
+  function format() {
+    document.querySelectorAll('span[data-format="luxon"]').forEach(el => {
+      const date = el.textContent
+
+      el.textContent = luxon.DateTime.fromISO(date, { locale: "ru" }).toFormat("dd.MM.yyyy, HH:mm")
+    })
+  }
+</script>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/apache.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script><script>
+  hljs.highlightAll();
+  hljs.addPlugin(new CopyButtonPlugin());
+
+  document.addEventListener('alpine:initialized', () => {
+    window.customSyntaxHighlighting = {
+      dark: 'a11y-dark',
+      light: 'atom-one-dark'
+    };
+
+    const updateSyntaxTheme = () => {
+      try {
+        const isDark = Alpine.store('darkMode').isDark();
+        const currentTheme = isDark ? 
+          window.customSyntaxHighlighting.dark : 
+          window.customSyntaxHighlighting.light;
+
+        let link = document.querySelector('link[data-syntax-highlight]');
+        if (link) {
+          const currentHref = link.href;
+          const updatedHref = currentHref.replace(/styles\/[^/]+\.min\.css/, `styles/${currentTheme}.min.css`);
+          link.href = updatedHref;
+        }
+      } catch (error) {
+        console.warn('Error updating syntax theme:', error);
+      }
+    };
+
+    updateSyntaxTheme();
+    Alpine.effect(() => {
+      updateSyntaxTheme();
+    });
+  });
+</script>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-fullscreen.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-thumbnail.min.css">
+
+
+<style>
+   
+  .lg-backdrop {
+    background-color: rgba(0, 0, 0, 0.95) !important;
+  }
+  
+   
+  .lg-sub-html {
+    background: linear-gradient(transparent, rgba(0,0,0,0.8)) !important;
+    padding: 20px 40px !important;
+    text-align: left !important;
+  }
+  
+  .lg-sub-html h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  
+  .lg-sub-html h2 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.8);
+  }
+  
+  .lg-sub-html .project-meta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.6);
+  }
+  
+  .lg-sub-html .project-link {
+    color: #60a5fa;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .lg-sub-html .project-link:hover {
+    color: #93c5fd;
+  }
+  
+   
+  .lg-item img {
+    transition: transform 0.3s ease;
+  }
+  
+   
+  .lg-progress-bar {
+    background-color: #3b82f6 !important;
+    height: 3px !important;
+  }
+  
+   
+  .lg-thumb-item {
+    border-radius: 4px;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  
+  .lg-thumb-item.active,
+  .lg-thumb-item:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  
+   
+  .lg-toolbar .lg-icon {
+    font-size: 1.5rem;
+  }
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/fullscreen/lg-fullscreen.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const galleryContainer = document.querySelector("#dream-single-post-content");
+  const images = galleryContainer?.querySelectorAll("img");
+
+  if (!galleryContainer || !images?.length) return;
+
+  
+  galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
+
+  images.forEach((img, index) => {
+    if (img.closest('[data-tc-exclude]')) return;
+    if (img.closest("a.lg-item")) return;
+
+    const wrapper = document.createElement("a");
+    wrapper.href = img.src;
+    wrapper.classList.add("lg-item", "not-prose");
+    
+    
+    wrapper.style.cursor = "zoom-in";
+
+    
+    const alt = img.alt || "";
+    const title = img.title || "";
+    
+    
+    const projectUrl = img.dataset.projectUrl || "";
+    const projectYear = img.dataset.year || "";
+    const projectTech = img.dataset.tech || "";
+
+    let subHtml = "";
+    
+    if (alt) {
+      subHtml += `<h1>${alt}</h1>`;
+    }
+    
+    if (title) {
+      subHtml += `<h2>${title}</h2>`;
+    }
+    
+    
+    if (projectUrl || projectYear || projectTech) {
+      subHtml += `<div class="project-meta">`;
+      
+      if (projectYear) {
+        subHtml += `<span>📅 ${projectYear}</span>`;
+      }
+      
+      if (projectTech) {
+        subHtml += `<span>🛠️ ${projectTech}</span>`;
+      }
+      
+      if (projectUrl) {
+        subHtml += `<a href="${projectUrl}" target="_blank" rel="noopener" class="project-link">🔗 Открыть проект</a>`;
+      }
+      
+      subHtml += `</div>`;
+    }
+
+    wrapper.dataset.subHtml = subHtml;
+    
+    
+    wrapper.dataset.src = img.src;
+    
+    
+    if (img.dataset.srcLarge) {
+      wrapper.dataset.src = img.dataset.srcLarge;
+    }
+
+    img.parentNode.insertBefore(wrapper, img);
+    wrapper.appendChild(img);
+  });
+
+  
+  const gallery = lightGallery(galleryContainer, {
+    selector: "a.lg-item",
+    plugins: [lgZoom, lgFullscreen, lgThumbnail],
+    
+    
+    speed: 400,
+    backdropDuration: 300,
+    startAnimationDuration: 400,
+    endAnimationDuration: 300,
+    
+    
+    loop: true,
+    slideShowAutoplay: false,
+    slideShowInterval: 4000,
+    mousewheel: true,
+    hideScrollbar: true,
+    
+    
+    closeOnTap: true,
+    closable: true,
+    escKey: true,
+    
+    
+    counter: true,
+    download: false,
+    getCaptionFromTitleOrAlt: false,
+    subHtmlSelectorRelative: true,
+    
+    
+    mobileSettings: {
+      controls: true,
+      showCloseIcon: true,
+      download: false
+    },
+    
+    
+    swipeThreshold: 50,
+    enableSwipe: true,
+    enableDrag: true,
+    
+    
+    zoomFromOrigin: true,
+    actualSize: true,
+    showZoomInOutIcons: true,
+    actualSizeIcons: {
+      zoomIn: "lg-zoom-in",
+      zoomOut: "lg-zoom-out"
+    },
+    scale: 1,
+    zoom: true,
+    
+    
+    thumbnail: true,
+    thumbWidth: 100,
+    thumbHeight: "80px",
+    thumbMargin: 5,
+    toggleThumb: true,
+    animateThumb: true,
+    
+    
+    fullScreen: true,
+    
+    
+    preload: 2,
+    
+    
+    ariaLabelledby: "lg-slide-title",
+    ariaDescribedby: "lg-slide-desc"
+  });
+
+  
+  
+  
+  galleryContainer.addEventListener("lgAfterOpen", () => {
+    console.log("Gallery opened");
+    
+  });
+
+  
+  galleryContainer.addEventListener("lgAfterSlide", (event) => {
+    const { index } = event.detail;
+    console.log(`Viewing slide ${index + 1}`);
+  });
+
+  
+  document.addEventListener("keydown", (e) => {
+    if (!document.querySelector(".lg-container")) return;
+    
+    if (e.key === "+" || e.key === "=") {
+      gallery.zoomIn();
+    } else if (e.key === "-") {
+      gallery.zoomOut();
+    }
+  });
+});
+</script>
+
+
+
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

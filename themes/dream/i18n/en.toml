@@ -208,6 +208,8 @@ ctaEmail = "Email"
 title = "How I Work"
 subtitle = "4 stages → finished product"
 duration = "Usually 4-10 weeks"
+cta = "Discuss Project"
+ctaNote = "First consultation is free"
 
 [process.step1]
 title = "Discussion"

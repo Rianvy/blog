@@ -413,12 +413,10 @@
   <div class="max-w-3xl mx-auto px-4 sm:px-6">
     
     <!-- Заголовок -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-      <div>
-        <h2 class="text-2xl sm:text-3xl font-bold">{{ i18n "process.title" | default "Как я работаю" }}</h2>
-        <p class="text-base-content/60 mt-1">{{ i18n "process.subtitle" | default "4 этапа → готовый продукт" }}</p>
-      </div>
-      <div class="flex items-center gap-2 text-sm text-base-content/50">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl sm:text-3xl font-bold">{{ i18n "process.title" | default "Как я работаю" }}</h2>
+      <p class="text-base-content/60 mt-1">{{ i18n "process.subtitle" | default "4 этапа → готовый продукт" }}</p>
+      <div class="flex items-center justify-center gap-2 text-sm text-base-content/50 mt-3">
         <ion-icon name="time-outline"></ion-icon>
         <span>{{ i18n "process.duration" | default "Обычно 4-10 недель" }}</span>
       </div>
@@ -697,6 +695,48 @@
       </div>
       
     </div>
+    
+    <!-- CTA кнопка -->
+    <div class="mt-8 text-center">
+      {{- $contactLink := "https://t.me/cyber_way" -}}
+      {{- $useTelegram := true -}}
+      {{- $contactText := i18n "process.cta" | default "Обсудить проект" -}}
+      
+      {{ with site.GetPage "/contact" }}
+        {{- $contactLink = .RelPermalink -}}
+        {{- $useTelegram = false -}}
+      {{ else }}
+        {{ with site.Params.contact }}
+          {{- $contactLink = . -}}
+          {{ if strings.Contains . "t.me" }}
+            {{- $useTelegram = true -}}
+          {{ else }}
+            {{- $useTelegram = false -}}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      
+      <a href="{{ $contactLink }}" 
+         class="btn btn-primary btn-lg gap-2 shadow-lg shadow-primary/25 
+                hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5
+                transition-all duration-200"
+         {{ if not (hasPrefix $contactLink "/") }}target="_blank" rel="noopener"{{ end }}>
+        {{ if $useTelegram }}
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+          </svg>
+        {{ else }}
+          <ion-icon name="chatbubbles-outline" class="text-xl"></ion-icon>
+        {{ end }}
+        {{ $contactText }}
+        <ion-icon name="arrow-forward-outline" class="text-lg"></ion-icon>
+      </a>
+      
+      <p class="text-sm text-base-content/50 mt-3">
+        {{ i18n "process.ctaNote" | default "Первая консультация бесплатно" }}
+      </p>
+    </div>
+    
   </div>
 </section>
 

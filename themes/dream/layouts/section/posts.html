@@ -128,7 +128,7 @@
             {{ len .Pages }} {{ T "archives.entries" | default "записей" }}
           </span>
           {{ if eq $index 0 }}
-          <span class="badge badge-success badge-sm gap-1">
+          <span class="badge badge-primary badge-outline">
             <ion-icon name="flash" class="text-xs"></ion-icon>
             {{ T "archives.latest" | default "Новое" }}
           </span>
@@ -160,6 +160,12 @@
           {{ $typeColor := cond $isPortfolio "accent" "secondary" }}
           {{ $typeIcon := cond $isPortfolio "briefcase-outline" "document-text-outline" }}
           {{ $typeLabel := cond $isPortfolio (T "archives.project" | default "Проект") (T "archives.post" | default "Пост") }}
+          
+          {{/* Собираем теги/инструменты */}}
+          {{ $tags := .Params.tags }}
+          {{ if $isPortfolio }}
+            {{ $tags = .Params.tools }}
+          {{ end }}
           
           <article class="group">
             <a href="{{ .RelPermalink }}" 
@@ -254,7 +260,7 @@
                       {{ $statusColor = "warning" }}
                       {{ $statusText = T "portfolio.statusInProgress" | default "В работе" }}
                     {{ end }}
-                    <span class="badge badge-xs badge-{{ $statusColor }}">{{ $statusText }}</span>
+                    <span class="badge text-xs badge-outline badge-{{ $statusColor }}">{{ $statusText }}</span>
                     {{ end }}
                     {{ end }}
                     
@@ -274,34 +280,24 @@
                 {{ . }}
               </p>
               {{ end }}
+              
+              <!-- Теги / Инструменты (внутри ссылки) -->
+              {{ with $tags }}
+              <div class="flex flex-wrap gap-1.5 mt-2 ml-0 sm:ml-12">
+                {{ range first 4 . }}
+                <span class="badge badge-sm badge-ghost 
+                             group-hover:badge-primary/20
+                             transition-colors duration-200">
+                  {{ . }}
+                </span>
+                {{ end }}
+                {{ if gt (len .) 4 }}
+                <span class="badge badge-sm badge-ghost opacity-60">+{{ sub (len .) 4 }}</span>
+                {{ end }}
+              </div>
+              {{ end }}
+              
             </a>
-            
-            <!-- Теги / Инструменты -->
-            {{ $tags := .Params.tags }}
-            {{ if $isPortfolio }}
-              {{ $tags = .Params.tools }}
-            {{ end }}
-            {{ with $tags }}
-            <div class="flex flex-wrap gap-1.5 mt-2 ml-1 sm:ml-12">
-              {{ range first 4 . }}
-              {{ if $isPortfolio }}
-              <span class="badge badge-sm badge-ghost">
-                {{ . }}
-              </span>
-              {{ else }}
-              {{ $tagURL := printf "/tags/%s/" (. | urlize) }}
-              <a href="{{ $tagURL | relLangURL }}" 
-                 class="badge badge-sm badge-ghost no-underline hover:badge-primary transition-colors duration-200"
-                 rel="tag">
-                {{ . }}
-              </a>
-              {{ end }}
-              {{ end }}
-              {{ if gt (len .) 4 }}
-              <span class="badge badge-sm badge-ghost opacity-60">+{{ sub (len .) 4 }}</span>
-              {{ end }}
-            </div>
-            {{ end }}
           </article>
           {{ end }}
         </div>

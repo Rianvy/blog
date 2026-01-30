@@ -48,6 +48,8 @@
 {{/* ═══════════════════════════════════════════════════════════════════════ */}}
 {{ else if and (eq $item "posts") (gt (len (where $site.RegularPages "Type" "posts")) 0) }}
 {{- $postsCount := len (where $site.RegularPages "Type" "posts") -}}
+{{- $portfolioCount := len (where $site.RegularPages "Type" "portfolio") -}}
+{{- $archivesCount := add $postsCount $portfolioCount -}}
 <li role="none">
   <a href="{{ "posts" | relLangURL }}" 
      role="menuitem"
@@ -55,8 +57,8 @@
      title="{{ T "archives" }}">
     <ion-icon name="library-outline" class="{{ $menuIconClass }}"></ion-icon>
     <span class="flex-1">{{ T "archives" }}</span>
-    {{ if gt $postsCount 0 }}
-    <span class="{{ $badgeClass }}">{{ $postsCount }}</span>
+    {{ if gt $archivesCount 0 }}
+    <span class="{{ $badgeClass }}">{{ $archivesCount }}</span>
     {{ end }}
   </a>
 </li>

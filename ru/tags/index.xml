@@ -6,8 +6,64 @@
     <description>Recent content in Tags on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>ru</language>
-    <lastBuildDate>Wed, 28 Jan 2026 00:35:23 +0300</lastBuildDate>
+    <lastBuildDate>Wed, 04 Feb 2026 13:52:09 +0300</lastBuildDate>
     <atom:link href="https://0x69.ru/ru/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Browser-Extension</title>
+      <link>https://0x69.ru/ru/tags/browser-extension/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/browser-extension/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Javascript</title>
+      <link>https://0x69.ru/ru/tags/javascript/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/javascript/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Long-Poll</title>
+      <link>https://0x69.ru/ru/tags/long-poll/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/long-poll/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Reverse-Engineering</title>
+      <link>https://0x69.ru/ru/tags/reverse-engineering/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/reverse-engineering/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VK-Api</title>
+      <link>https://0x69.ru/ru/tags/vk-api/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/vk-api/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Websocket</title>
+      <link>https://0x69.ru/ru/tags/websocket/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/websocket/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Перехват-Трафика</title>
+      <link>https://0x69.ru/ru/tags/%D0%BF%D0%B5%D1%80%D0%B5%D1%85%D0%B2%D0%B0%D1%82-%D1%82%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/%D0%BF%D0%B5%D1%80%D0%B5%D1%85%D0%B2%D0%B0%D1%82-%D1%82%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Сниффер</title>
+      <link>https://0x69.ru/ru/tags/%D1%81%D0%BD%D0%B8%D1%84%D1%84%D0%B5%D1%80/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/%D1%81%D0%BD%D0%B8%D1%84%D1%84%D0%B5%D1%80/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Framer Motion</title>
       <link>https://0x69.ru/ru/tags/framer-motion/</link>
@@ -55,20 +111,6 @@
       <link>https://0x69.ru/ru/tags/%D0%B2%D0%B5%D0%B1-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/</link>
       <pubDate>Wed, 28 Jan 2026 00:35:23 +0300</pubDate>
       <guid>https://0x69.ru/ru/tags/%D0%B2%D0%B5%D0%B1-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Browser Extension</title>
-      <link>https://0x69.ru/ru/tags/browser-extension/</link>
-      <pubDate>Tue, 27 Jan 2026 17:35:43 +0300</pubDate>
-      <guid>https://0x69.ru/ru/tags/browser-extension/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>JavaScript</title>
-      <link>https://0x69.ru/ru/tags/javascript/</link>
-      <pubDate>Tue, 27 Jan 2026 17:35:43 +0300</pubDate>
-      <guid>https://0x69.ru/ru/tags/javascript/</guid>
       <description></description>
     </item>
     <item>

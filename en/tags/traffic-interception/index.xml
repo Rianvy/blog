@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Traffic-Interception on 0x69.ru</title>
+    <link>https://0x69.ru/en/tags/traffic-interception/</link>
+    <description>Recent content in Traffic-Interception on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 04 Feb 2026 13:52:09 +0300</lastBuildDate>
+    <atom:link href="https://0x69.ru/en/tags/traffic-interception/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reverse Engineering VK Long Poll: Building a Sniffer, Discovering Hidden Events, and WebSocket Mysteries</title>
+      <link>https://0x69.ru/en/posts/reverse-engineering-vk-long-poll/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/en/posts/reverse-engineering-vk-long-poll/</guid>
+      <description>&lt;p&gt;A deep dive into how VK&amp;rsquo;s Long Poll works, building a sniffer to intercept events, and discovering undocumented event codes.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

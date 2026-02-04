@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://0x69.ru/en/</loc>
-    <lastmod>2026-01-28T00:35:23+03:00</lastmod>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
@@ -13,6 +13,148 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://0x69.ru/en/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/browser-extension/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/browser-extension/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/browser-extension/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/categories/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/categories/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/categories/development/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/javascript/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/javascript/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/javascript/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/long-poll/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/long-poll/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/long-poll/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/posts/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/posts/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/categories/reverse-engineering/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/posts/reverse-engineering-vk-long-poll/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/posts/reverse-engineering-vk-long-poll/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/posts/reverse-engineering-vk-long-poll/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/reverse-engineering/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/reverse-engineering/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/reverse-engineering/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/sniffer/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/traffic-interception/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/vk-api/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/vk-api/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/vk-api/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/websocket/</loc>
+    <lastmod>2026-02-04T13:52:09+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/websocket/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/websocket/"
                 />
   </url><url>
     <loc>https://0x69.ru/en/tags/framer-motion/</loc>
@@ -80,19 +222,6 @@
                 href="https://0x69.ru/en/tags/seo/"
                 />
   </url><url>
-    <loc>https://0x69.ru/en/tags/</loc>
-    <lastmod>2026-01-28T00:35:23+03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.ru/ru/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.ru/en/tags/"
-                />
-  </url><url>
     <loc>https://0x69.ru/en/tags/tailwind-css/</loc>
     <lastmod>2026-01-28T00:35:23+03:00</lastmod>
     <xhtml:link
@@ -135,34 +264,8 @@
     <loc>https://0x69.ru/en/tags/web-development/</loc>
     <lastmod>2026-01-28T00:35:23+03:00</lastmod>
   </url><url>
-    <loc>https://0x69.ru/en/tags/browser-extension/</loc>
-    <lastmod>2026-01-27T17:35:43+03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.ru/ru/tags/browser-extension/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.ru/en/tags/browser-extension/"
-                />
-  </url><url>
     <loc>https://0x69.ru/en/tags/customization/</loc>
     <lastmod>2026-01-27T17:35:43+03:00</lastmod>
-  </url><url>
-    <loc>https://0x69.ru/en/tags/javascript/</loc>
-    <lastmod>2026-01-27T17:35:43+03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.ru/ru/tags/javascript/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.ru/en/tags/javascript/"
-                />
   </url><url>
     <loc>https://0x69.ru/en/portfolio/vkify-vkontakte-extension/</loc>
     <lastmod>2026-01-27T17:35:43+03:00</lastmod>
@@ -217,19 +320,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://0x69.ru/en/tags/apple-tv/"
-                />
-  </url><url>
-    <loc>https://0x69.ru/en/categories/</loc>
-    <lastmod>2026-01-25T00:09:23+03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.ru/ru/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.ru/en/categories/"
                 />
   </url><url>
     <loc>https://0x69.ru/en/categories/guides/</loc>
@@ -292,19 +382,6 @@
   </url><url>
     <loc>https://0x69.ru/en/tags/media-center/</loc>
     <lastmod>2026-01-25T00:09:23+03:00</lastmod>
-  </url><url>
-    <loc>https://0x69.ru/en/posts/</loc>
-    <lastmod>2026-01-25T00:09:23+03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.ru/ru/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.ru/en/posts/"
-                />
   </url><url>
     <loc>https://0x69.ru/en/tags/smart-tv/</loc>
     <lastmod>2026-01-25T00:09:23+03:00</lastmod>

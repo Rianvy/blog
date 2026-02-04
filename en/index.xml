@@ -6,8 +6,15 @@
     <description>Recent content on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 28 Jan 2026 00:35:23 +0300</lastBuildDate>
+    <lastBuildDate>Wed, 04 Feb 2026 13:52:09 +0300</lastBuildDate>
     <atom:link href="https://0x69.ru/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reverse Engineering VK Long Poll: Building a Sniffer, Discovering Hidden Events, and WebSocket Mysteries</title>
+      <link>https://0x69.ru/en/posts/reverse-engineering-vk-long-poll/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/en/posts/reverse-engineering-vk-long-poll/</guid>
+      <description>&lt;p&gt;A deep dive into how VK&amp;rsquo;s Long Poll works, building a sniffer to intercept events, and discovering undocumented event codes.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>VKify Website — Landing Page for Browser Extension</title>
       <link>https://0x69.ru/en/portfolio/vkify-website-extension-landing/</link>

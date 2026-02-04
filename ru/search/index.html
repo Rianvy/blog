@@ -294,7 +294,7 @@
     <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Категории</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">3</span>
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
     
   </a>
 </li>
@@ -340,7 +340,7 @@
     <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Архивы</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">8</span>
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
     
   </a>
 </li>
@@ -363,7 +363,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Все теги</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">59</span>
+    <span class="badge badge-sm badge-ghost font-normal">65</span>
     
   </a>
 </li>
@@ -621,7 +621,7 @@
     <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Архивы</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">8</span>
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
     
   </a>
 </li>
@@ -644,7 +644,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Все теги</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">59</span>
+    <span class="badge badge-sm badge-ghost font-normal">65</span>
     
   </a>
 </li>
@@ -913,24 +913,24 @@ x-init="$refs.searchInput.focus()">
           Веб-Разработка
         </button>
         
+        <button @click="search = 'Javascript'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
+          Javascript
+        </button>
+        
         <button @click="search = 'UI/UX'" 
                 class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
           UI/UX
         </button>
         
+        <button @click="search = 'Browser-Extension'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
+          Browser-Extension
+        </button>
+        
         <button @click="search = 'Figma'" 
                 class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
           Figma
-        </button>
-        
-        <button @click="search = 'JavaScript'" 
-                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
-          JavaScript
-        </button>
-        
-        <button @click="search = 'React'" 
-                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
-          React
         </button>
         
       </div>
@@ -1332,9 +1332,11 @@ x-init="$refs.searchInput.focus()">
 
 
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js" integrity="sha256-42IbU8t3tOwwbexB7ZVRHm3YDRf65aBPPjRtIUufj5I=" crossorigin="anonymous"></script>
 <script>
-  var fuseData = [{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Инструкции"],"date":"2026-01-25","description":"Полное руководство по стримингу торрентов для тех, кто ценит качество и своё время\n","readingTime":16,"tags":["Lampa","TorrServer","Android TV","Apple TV","Smart TV","Xbox","стриминг","торренты","4K","HDR","медиацентр","домашний кинотеатр","IPTV"],"title":"Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer","url":"/ru/posts/kak-smotret-filmy-4k-lampa-torrserver/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Инструкции","Нейросети"],"date":"2026-01-17","description":"Корректная настройка DNS для стабильного доступа к AI-сервисам — через DNS, hosts или AdGuard.\n","readingTime":17,"tags":["DNS","Нейросети","ChatGPT","Gemini","Claude","AdGuard","Comss.one DNS","Руководство","AI","OpenAI","Anthropic","Google AI","Microsoft Copilot","GitHub Copilot","DNS-фильтрация"],"title":"ChatGPT, Claude и Gemini — корректная настройка DNS для доступа к AI-сервисам","url":"/ru/posts/chatgpt-claude-gemini-dns-dostup/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Администрирование"],"date":"2025-01-12","description":".htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга.\n","readingTime":5,"tags":["Серверы","Apache",".htaccess","Веб-безопасность","Производительность"],"title":"Роль файла .htaccess в настройке сервера Apache","url":"/ru/posts/role-htaccess/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-28","description":"Разработка современного лендинга для браузерного расширения VKify — от креативной главной страницы до служебных страниц onboarding и changelog.\n","readingTime":5,"tags":["Веб-разработка","React","Landing Page","UI/UX","Tailwind CSS","Framer Motion","SEO"],"title":"VKify Website — Лендинг для браузерного расширения","url":"/ru/portfolio/vkify-website-extension-landing/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-27","description":"VKify — браузерное расширение, которое делает ВКонтакте удобнее: блокировка рекламы, кастомизация интерфейса, режим приватности и многое другое.\n","readingTime":6,"tags":["Веб-разработка","Browser Extension","React","JavaScript","UI/UX","ВКонтакте","Кастомизация"],"title":"VKify — Расширение для ВКонтакте","url":"/ru/portfolio/vkify-vkontakte-extension/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-19","description":"CodeSqueeze — современный веб-инструмент для минификации HTML, CSS и JavaScript, ориентированный на скорость, приватность и комфортную работу прямо в браузере.\n","readingTime":2,"tags":["Веб-разработка","UI/UX","Frontend","JavaScript","Оптимизация","Web Tools","Figma"],"title":"CodeSqueeze — Online Code Minifier","url":"/ru/portfolio/codesqueeze/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2025-01-27","description":"Разработка лендинга для проекта спортивной аналитики, включая интеграцию с Google Sheets и уникальный визуальный стиль.\n","readingTime":2,"tags":["Дизайн","Адаптивный Лендинг","Разработка лендинга","Веб-разработка","Дизайн лендинга","Интерактивный лендинг","Адаптация","Figma"],"title":"Landing Page ProStavki","url":"/ru/portfolio/prostavki/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2025-01-19","description":"Разработка визуального стиля для бренда PBPack в социальных сетях, включая YouTube и Telegram.\n","readingTime":1,"tags":["Дизайн","Брендинг","Айдентика","Telegram","Анимированный Логотип","Визуальный Стиль"],"title":"Social media design PBPack","url":"/ru/portfolio/pbpack/"}];
+  var fuseData = [{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Разработка","Реверс-инжиниринг"],"date":"2026-02-04","description":"Разбираюсь как работает Long Poll ВКонтакте, пишу сниффер для перехвата событий и нахожу недокументированные коды.\n","readingTime":12,"tags":["Javascript","VK-api","Long-poll","Websocket","Reverse-engineering","Browser-extension","Сниффер","Перехват-трафика"],"title":"Реверс-инжиниринг Long Poll ВКонтакте: сниффер, скрытые события и WebSocket","url":"/ru/posts/reverse-engineering-vk-long-poll/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Инструкции"],"date":"2026-01-25","description":"Полное руководство по стримингу торрентов для тех, кто ценит качество и своё время\n","readingTime":16,"tags":["Lampa","TorrServer","Android TV","Apple TV","Smart TV","Xbox","стриминг","торренты","4K","HDR","медиацентр","домашний кинотеатр","IPTV"],"title":"Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer","url":"/ru/posts/kak-smotret-filmy-4k-lampa-torrserver/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Инструкции","Нейросети"],"date":"2026-01-17","description":"Корректная настройка DNS для стабильного доступа к AI-сервисам — через DNS, hosts или AdGuard.\n","readingTime":17,"tags":["DNS","Нейросети","ChatGPT","Gemini","Claude","AdGuard","Comss.one DNS","Руководство","AI","OpenAI","Anthropic","Google AI","Microsoft Copilot","GitHub Copilot","DNS-фильтрация"],"title":"ChatGPT, Claude и Gemini — корректная настройка DNS для доступа к AI-сервисам","url":"/ru/posts/chatgpt-claude-gemini-dns-dostup/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Администрирование"],"date":"2025-01-12","description":".htaccess позволяет создать собственную конфигурацию управлением сервера Apache в директориях или настройках хостинга.\n","readingTime":5,"tags":["Серверы","Apache",".htaccess","Веб-безопасность","Производительность"],"title":"Роль файла .htaccess в настройке сервера Apache","url":"/ru/posts/role-htaccess/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-28","description":"Разработка современного лендинга для браузерного расширения VKify — от креативной главной страницы до служебных страниц onboarding и changelog.\n","readingTime":5,"tags":["Веб-разработка","React","Landing Page","UI/UX","Tailwind CSS","Framer Motion","SEO"],"title":"VKify Website — Лендинг для браузерного расширения","url":"/ru/portfolio/vkify-website-extension-landing/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-27","description":"VKify — браузерное расширение, которое делает ВКонтакте удобнее: блокировка рекламы, кастомизация интерфейса, режим приватности и многое другое.\n","readingTime":6,"tags":["Веб-разработка","Browser Extension","React","JavaScript","UI/UX","ВКонтакте","Кастомизация"],"title":"VKify — Расширение для ВКонтакте","url":"/ru/portfolio/vkify-vkontakte-extension/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-19","description":"CodeSqueeze — современный веб-инструмент для минификации HTML, CSS и JavaScript, ориентированный на скорость, приватность и комфортную работу прямо в браузере.\n","readingTime":2,"tags":["Веб-разработка","UI/UX","Frontend","JavaScript","Оптимизация","Web Tools","Figma"],"title":"CodeSqueeze — Online Code Minifier","url":"/ru/portfolio/codesqueeze/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2025-01-27","description":"Разработка лендинга для проекта спортивной аналитики, включая интеграцию с Google Sheets и уникальный визуальный стиль.\n","readingTime":2,"tags":["Дизайн","Адаптивный Лендинг","Разработка лендинга","Веб-разработка","Дизайн лендинга","Интерактивный лендинг","Адаптация","Figma"],"title":"Landing Page ProStavki","url":"/ru/portfolio/prostavki/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2025-01-19","description":"Разработка визуального стиля для бренда PBPack в социальных сетях, включая YouTube и Telegram.\n","readingTime":1,"tags":["Дизайн","Брендинг","Айдентика","Telegram","Анимированный Логотип","Визуальный Стиль"],"title":"Social media design PBPack","url":"/ru/portfolio/pbpack/"}];
   var fuseOptions = {
     keys: [
       { name: "title", weight: 2 },

@@ -723,4 +723,12 @@ And don't use it for:
 
 ---
 
+{{< donate_button     
+    "https://pay.cloudtips.ru/p/b59e1765" 
+    "https://t.me/tribute/app?startapp=dE4k"
+    "Cloudtips" 
+    "Tribute"
+    "Support the project"
+>}}
+
 *Article written as part of [VKify](https://0x69.ru/en/portfolio/vkify-vkontakte-extension/) development*

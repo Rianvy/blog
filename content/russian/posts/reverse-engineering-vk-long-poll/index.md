@@ -723,4 +723,12 @@ WebSocket — это другой протокол, и перехватыват�
 
 ---
 
+{{< donate_button     
+    "https://pay.cloudtips.ru/p/b59e1765" 
+    "https://t.me/tribute/app?startapp=dE4k"
+    "Cloudtips" 
+    "Tribute"
+    "Поддержать проект"
+>}}
+
 *Статья написана в рамках разработки [VKify](https://0x69.ru/ru/portfolio/vkify-vkontakte-extension/)*

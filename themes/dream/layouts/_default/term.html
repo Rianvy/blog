@@ -15,7 +15,6 @@
     <!-- Hero секция -->
     <section class="text-center mb-10 lg:mb-14">
       
-      <!-- Иконка -->
       <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 text-primary mb-4">
         {{ if eq $taxonomyPlural "tags" }}
         <ion-icon name="pricetag-outline" class="text-3xl"></ion-icon>
@@ -26,7 +25,6 @@
         {{ end }}
       </div>
       
-      <!-- Бейдж типа -->
       <div class="mb-3">
         <span class="badge badge-outline badge-sm">
           {{ if eq $taxonomyPlural "tags" }}
@@ -39,14 +37,11 @@
         </span>
       </div>
       
-      <!-- Заголовок -->
       <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
         {{ .Title }}
       </h1>
       
-      <!-- Статистика -->
       <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-6">
-        
         <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200/50 border border-base-300">
           <ion-icon name="document-text-outline" class="text-lg text-primary"></ion-icon>
           <span class="font-bold">{{ $termCount }}</span>
@@ -54,10 +49,8 @@
             {{ i18n "article" $termCount | default (printf "%d записей" $termCount) }}
           </span>
         </div>
-        
       </div>
       
-      <!-- Навигация: назад к списку -->
       <a href="{{ printf "/%s/" $taxonomyPlural | relLangURL }}" 
          class="inline-flex items-center gap-2 text-sm text-base-content/60 hover:text-primary transition-colors no-underline">
         <ion-icon name="arrow-back-outline"></ion-icon>
@@ -76,7 +69,6 @@
     <section class="mb-10 lg:mb-14">
       <div class="p-4 sm:p-6 rounded-2xl bg-base-200/30 border border-base-300">
         
-        <!-- Заголовок секции -->
         <div class="flex items-center gap-2 mb-4">
           <ion-icon name="git-branch-outline" class="text-base-content/50"></ion-icon>
           <span class="text-sm font-medium text-base-content/50">
@@ -89,7 +81,6 @@
           <div class="flex-1 h-px bg-base-300"></div>
         </div>
         
-        <!-- Теги/Категории -->
         <div class="flex flex-wrap gap-2">
           {{ range $allTerms.ByCount }}
           {{ $isActive := eq .Page.Title $currentTitle }}
@@ -126,54 +117,399 @@
 
     <!-- Контент -->
     <section>
-      {{ $paginator := .Paginate .Pages }}
+      
+      {{ $allPages := .Pages }}
+      
+      <!-- Разделяем по секциям -->
+      {{ $posts := where $allPages "Section" "posts" }}
+      {{ $utilities := where $allPages "Section" "utilities" }}
+      {{ $portfolio := where $allPages "Section" "portfolio" }}
+      {{ $otherPages := $allPages }}
+      {{ $otherPages = where $otherPages "Section" "ne" "posts" }}
+      {{ $otherPages = where $otherPages "Section" "ne" "utilities" }}
+      {{ $otherPages = where $otherPages "Section" "ne" "portfolio" }}
 
-      <!-- Заголовок списка -->
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-lg font-bold flex items-center gap-2">
-          <ion-icon name="newspaper-outline" class="text-xl text-primary"></ion-icon>
-          {{ i18n "taxonomy.postsIn" | default "Записи в" }}
-          <span class="text-primary">{{ .Title }}</span>
-        </h2>
-        <span class="text-sm text-base-content/50">
-          {{ $paginator.TotalNumberOfElements }} {{ i18n "taxonomy.total" | default "всего" }}
-        </span>
-      </div>
+      <!-- ============================================ -->
+      <!-- ПОСТЫ                                        -->
+      <!-- ============================================ -->
+      {{ if $posts }}
+      <div class="mb-14">
+        
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg font-bold flex items-center gap-2">
+            <ion-icon name="newspaper-outline" class="text-xl text-primary"></ion-icon>
+            {{ i18n "taxonomy.postsTitle" | default "Записи" }}
+          </h2>
+          <span class="text-sm text-base-content/50">
+            {{ len $posts }} {{ i18n "taxonomy.total" | default "всего" }}
+          </span>
+        </div>
 
-      {{ if site.Params.zenMode }}
-      
-      <!-- Zen Mode -->
-      <div class="dream-zen-posts max-w-[65ch] mx-auto space-y-6">
-        {{ range $paginator.Pages }}
-          {{ .Render "zen-summary" }}
-        {{ end }}
-      </div>
-      
-      {{ else }}
-      
-      <!-- Grid Mode -->
-      <div class="dream-grid">
-        {{ range $paginator.Pages }}
-        <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 dream-column">
-          {{ .Render "summary" }}
+        {{ if site.Params.zenMode }}
+        <div class="dream-zen-posts max-w-[65ch] mx-auto space-y-6">
+          {{ range $posts }}
+            {{ .Render "zen-summary" }}
+          {{ end }}
+        </div>
+        {{ else }}
+        <div class="dream-grid">
+          {{ range $posts }}
+          <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 dream-column">
+            {{ .Render "summary" }}
+          </div>
+          {{ end }}
         </div>
         {{ end }}
+        
       </div>
-      
+      {{ end }}
+
+      <!-- ============================================ -->
+      <!-- ПОРТФОЛИО                                    -->
+      <!-- ============================================ -->
+      {{ if $portfolio }}
+      <div class="mb-14">
+        
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg font-bold flex items-center gap-2">
+            <ion-icon name="briefcase-outline" class="text-xl text-accent"></ion-icon>
+            {{ i18n "taxonomy.portfolio" | default "Портфолио" }}
+          </h2>
+          <span class="text-sm text-base-content/50">
+            {{ len $portfolio }} {{ i18n "taxonomy.total" | default "всего" }}
+          </span>
+        </div>
+
+        <div class="flex flex-wrap">
+          {{ range $portfolio }}
+          <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3">
+            
+            <a class="group block h-full bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
+                      border border-base-200 dark:border-base-content/10
+                      transition-all duration-300 hover:-translate-y-2 no-underline" 
+               href="{{ .RelPermalink }}">
+              
+              <!-- Изображение -->
+              <div class="relative overflow-hidden aspect-video bg-base-200">
+                {{ if .Params.cover }}
+                  {{ with .Resources.Get .Params.cover }}
+                    {{ if eq .MediaType.SubType "svg" }}
+                      <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" 
+                           class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    {{ else }}
+                      {{ $webp := .Resize (printf "%dx%d webp" .Width .Height) }}
+                      <picture>
+                        <source srcset="{{ $webp.RelPermalink }}" type="image/webp" />
+                        <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                      </picture>
+                    {{ end }}
+                  {{ else }}
+                    <img src="{{ .Params.cover }}" alt="{{ .Title }}" 
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                  {{ end }}
+                {{ else }}
+                  <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-base-200 to-base-300">
+                    <ion-icon name="briefcase-outline" class="text-4xl text-base-content/20"></ion-icon>
+                  </div>
+                {{ end }}
+                
+                <!-- Градиентный оверлей -->
+                <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent 
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <!-- Статус бейдж -->
+                {{ with .Params.status }}
+                <div class="absolute top-3 left-3">
+                  {{ if eq . "completed" }}
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                                bg-success/20 text-success backdrop-blur-md border border-success/30 shadow-sm">
+                      <ion-icon name="checkmark-circle-outline" class="text-sm"></ion-icon>
+                      {{ i18n "portfolio.statusCompleted" | default "Завершён" }}
+                    </span>
+                  {{ else if eq . "in-progress" }}
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                                bg-warning/20 text-warning backdrop-blur-md border border-warning/30 shadow-sm">
+                      <ion-icon name="hourglass-outline" class="text-sm"></ion-icon>
+                      {{ i18n "portfolio.statusInProgress" | default "В работе" }}
+                    </span>
+                  {{ else if eq . "archived" }}
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                                bg-base-content/10 text-base-content/70 backdrop-blur-md border border-base-content/20 shadow-sm">
+                      <ion-icon name="archive-outline" class="text-sm"></ion-icon>
+                      {{ i18n "portfolio.statusArchived" | default "Архив" }}
+                    </span>
+                  {{ else if eq . "planned" }}
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                                bg-info/20 text-info backdrop-blur-md border border-info/30 shadow-sm">
+                      <ion-icon name="calendar-outline" class="text-sm"></ion-icon>
+                      {{ i18n "portfolio.statusPlanned" | default "Планируется" }}
+                    </span>
+                  {{ else if eq . "paused" }}
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                                bg-error/20 text-error backdrop-blur-md border border-error/30 shadow-sm">
+                      <ion-icon name="pause-circle-outline" class="text-sm"></ion-icon>
+                      {{ i18n "portfolio.statusPaused" | default "Приостановлен" }}
+                    </span>
+                  {{ else }}
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                                bg-primary/20 text-primary backdrop-blur-md border border-primary/30 shadow-sm">
+                      <ion-icon name="ellipse-outline" class="text-sm"></ion-icon>
+                      {{ . }}
+                    </span>
+                  {{ end }}
+                </div>
+                {{ end }}
+                
+                <!-- Связанные проекты -->
+                {{ with .Params.relatedProjects }}
+                {{ $relatedCount := len . }}
+                {{ if gt $relatedCount 0 }}
+                <div class="absolute top-3 right-3">
+                  <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium 
+                              bg-base-100/90 text-base-content shadow-lg backdrop-blur-sm"
+                        title="{{ i18n "portfolio.relatedProjects" | default "Связанные проекты" }}: {{ $relatedCount }}">
+                    <ion-icon name="git-branch-outline" class="text-sm"></ion-icon>
+                    {{ $relatedCount }}
+                  </span>
+                </div>
+                {{ end }}
+                {{ end }}
+              </div>
+
+              <!-- Контент карточки -->
+              <div class="p-5 space-y-3">
+                
+                <!-- Фильтры -->
+                {{ with .Params.filters }}
+                <div class="flex flex-wrap gap-1.5">
+                  {{ range first 3 . }}
+                  <span class="badge badge-ghost badge-sm">{{ . | humanize }}</span>
+                  {{ end }}
+                  {{ if gt (len .) 3 }}
+                  <span class="badge badge-ghost badge-sm">+{{ sub (len .) 3 }}</span>
+                  {{ end }}
+                </div>
+                {{ end }}
+                
+                <!-- Заголовок -->
+                <h3 class="text-xl font-bold line-clamp-2 group-hover:text-primary transition-colors">
+                  {{ .Title }}
+                </h3>
+
+                <!-- Описание -->
+                {{ with .Summary }}
+                <p class="text-sm text-base-content/70 line-clamp-2">
+                  {{ . | plainify | truncate 100 }}
+                </p>
+                {{ end }}
+                
+                <!-- Технологии -->
+                {{ with .Params.tools }}
+                <div class="flex flex-wrap gap-1.5">
+                  {{ range first 4 . }}
+                  <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                    <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                    {{ . }}
+                  </span>
+                  {{ end }}
+                  {{ if gt (len .) 4 }}
+                  <span class="inline-flex items-center px-2 py-1 text-xs bg-base-200 rounded-md text-base-content/60">
+                    +{{ sub (len .) 4 }}
+                  </span>
+                  {{ end }}
+                </div>
+                {{ end }}
+
+                <!-- Футер -->
+                <div class="flex items-center justify-between pt-3 border-t border-base-200">
+                  <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                    <ion-icon name="calendar-outline" class="text-sm"></ion-icon>
+                    {{ if site.Params.Experimental.jsDate }}
+                      <span data-format="luxon">{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}</span>
+                    {{ else }}
+                      {{ .Date | time.Format ":date_medium" }}
+                    {{ end }}
+                  </div>
+                  <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                    <ion-icon name="time-outline" class="text-sm"></ion-icon>
+                    <span>{{ .ReadingTime }} {{ i18n "minuteRead" .ReadingTime | default "мин" }}</span>
+                  </div>
+                </div>
+                
+                <!-- Кнопка -->
+                <div class="pt-2">
+                  <span class="inline-flex items-center gap-2 text-sm font-medium text-primary 
+                              group-hover:gap-3 transition-all">
+                    {{ i18n "portfolio.viewProject" | default "Смотреть проект" }}
+                    <ion-icon name="arrow-forward" class="text-base"></ion-icon>
+                  </span>
+                </div>
+              </div>
+            </a>
+            
+          </div>
+          {{ end }}
+        </div>
+        
+      </div>
+      {{ end }}
+
+      <!-- ============================================ -->
+      <!-- УТИЛИТЫ                                      -->
+      <!-- ============================================ -->
+      {{ if $utilities }}
+      <div class="mb-14">
+        
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg font-bold flex items-center gap-2">
+            <ion-icon name="build-outline" class="text-xl text-secondary"></ion-icon>
+            {{ i18n "taxonomy.utilities" | default "Утилиты" }}
+          </h2>
+          <span class="text-sm text-base-content/50">
+            {{ len $utilities }} {{ i18n "taxonomy.total" | default "всего" }}
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          {{ range $utilities }}
+          
+          {{ $iconBg := "from-primary/10 to-primary/5" }}
+          {{ with .Params.category }}
+            {{ if eq . "formatters" }}{{ $iconBg = "from-blue-500/15 to-blue-500/5" }}
+            {{ else if eq . "encoders" }}{{ $iconBg = "from-purple-500/15 to-purple-500/5" }}
+            {{ else if eq . "generators" }}{{ $iconBg = "from-amber-500/15 to-amber-500/5" }}
+            {{ else if eq . "converters" }}{{ $iconBg = "from-emerald-500/15 to-emerald-500/5" }}
+            {{ else if eq . "validators" }}{{ $iconBg = "from-rose-500/15 to-rose-500/5" }}
+            {{ else if eq . "crypto" }}{{ $iconBg = "from-cyan-500/15 to-cyan-500/5" }}
+            {{ else if eq . "comparison" }}{{ $iconBg = "from-indigo-500/15 to-indigo-500/5" }}
+            {{ else if eq . "security" }}{{ $iconBg = "from-red-500/15 to-red-500/5" }}
+            {{ end }}
+          {{ end }}
+          
+          <a href="{{ .RelPermalink }}" 
+             class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                    border border-base-200 dark:border-base-content/10
+                    shadow-lg hover:shadow-2xl
+                    transition-all duration-300 hover:-translate-y-2 no-underline">
+            
+            <div class="p-5 sm:p-6">
+              
+              <div class="flex items-start gap-4">
+                
+                <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br {{ $iconBg }} 
+                            flex items-center justify-center text-2xl sm:text-3xl
+                            group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                  {{ with .Params.icon }}{{ . }}{{ else }}🔧{{ end }}
+                </div>
+                
+                <div class="flex-1 min-w-0">
+                  
+                  <h3 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                             group-hover:text-primary transition-colors line-clamp-1">
+                    {{ .Title }}
+                  </h3>
+                  
+                  <div class="flex items-center gap-2">
+                    {{ with .Params.category }}
+                    <span class="text-xs text-base-content/50">
+                      {{ . | humanize }}
+                    </span>
+                    {{ end }}
+                    
+                    {{ $days := div (sub now.Unix .Date.Unix) 86400 }}
+                    {{ if lt $days 14 }}
+                    <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                                uppercase tracking-wide bg-success/15 text-success">
+                      new
+                    </span>
+                    {{ end }}
+                  </div>
+                  
+                </div>
+                
+              </div>
+              
+              <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+                {{ .Description | default (.Summary | plainify | truncate 100) }}
+              </p>
+              
+            </div>
+            
+            <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                        bg-base-200/30 flex items-center justify-between">
+              
+              <div class="flex items-center gap-1.5 overflow-hidden">
+                {{ with .Params.tags }}
+                  {{ range first 2 . }}
+                  <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                    {{ . }}
+                  </span>
+                  {{ end }}
+                  {{ if gt (len .) 2 }}
+                  <span class="text-xs text-base-content/40">+{{ sub (len .) 2 }}</span>
+                  {{ end }}
+                {{ end }}
+              </div>
+              
+              <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                          group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <span class="hidden sm:inline">{{ i18n "utilities.open" | default "Открыть" }}</span>
+                <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+              </div>
+              
+            </div>
+            
+          </a>
+          {{ end }}
+        </div>
+        
+      </div>
+      {{ end }}
+
+      <!-- ============================================ -->
+      <!-- ПРОЧЕЕ                                       -->
+      <!-- ============================================ -->
+      {{ if $otherPages }}
+      <div class="mb-14">
+        
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg font-bold flex items-center gap-2">
+            <ion-icon name="documents-outline" class="text-xl text-base-content/60"></ion-icon>
+            {{ i18n "taxonomy.other" | default "Другое" }}
+          </h2>
+          <span class="text-sm text-base-content/50">
+            {{ len $otherPages }} {{ i18n "taxonomy.total" | default "всего" }}
+          </span>
+        </div>
+
+        {{ if site.Params.zenMode }}
+        <div class="dream-zen-posts max-w-[65ch] mx-auto space-y-6">
+          {{ range $otherPages }}
+            {{ .Render "zen-summary" }}
+          {{ end }}
+        </div>
+        {{ else }}
+        <div class="dream-grid">
+          {{ range $otherPages }}
+          <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 dream-column">
+            {{ .Render "summary" }}
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+        
+      </div>
       {{ end }}
 
       <!-- Пустое состояние -->
-      {{ if eq (len $paginator.Pages) 0 }}
-      <div class="text-center py-12">
-        <ion-icon name="document-outline" class="text-4xl text-base-content/30 mb-3"></ion-icon>
-        <p class="text-base-content/60">{{ i18n "taxonomy.noPosts" | default "Записей пока нет" }}</p>
-      </div>
-      {{ end }}
-
-      <!-- Пагинация -->
-      {{ if gt $paginator.TotalPages 1 }}
-      <div class="flex justify-center pt-10">
-        {{ partial "paginator.html" (dict "paginator" $paginator) }}
+      {{ if and (not $posts) (not $portfolio) (not $utilities) (not $otherPages) }}
+      <div class="py-20 text-center">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-base-200 mb-6">
+          <ion-icon name="document-outline" class="text-4xl text-base-content/30"></ion-icon>
+        </div>
+        <h3 class="text-xl font-bold mb-2">{{ i18n "taxonomy.noContent" | default "Пока пусто" }}</h3>
+        <p class="text-base-content/60">{{ i18n "taxonomy.noContentDesc" | default "В этом разделе пока нет материалов" }}</p>
       </div>
       {{ end }}
       

@@ -7,9 +7,14 @@
 <div class="mt-8 lg:mt-12 px-4 sm:px-6"
 x-data="{
   search: '',
+  activeFilter: 'all',
   isLoading: false,
-  get results() {
+  get allResults() {
     return this.search.trim() !== '' ? window.fuse.search(this.search) : [];
+  },
+  get results() {
+    if (this.activeFilter === 'all') return this.allResults;
+    return this.allResults.filter(r => r.item.type === this.activeFilter);
   },
   get hasResults() {
     return this.results.length > 0;
@@ -17,36 +22,85 @@ x-data="{
   get showEmpty() {
     return this.search.trim() !== '' && !this.hasResults;
   },
+  get counts() {
+    const all = this.allResults;
+    return {
+      all: all.length,
+      posts: all.filter(r => r.item.type === 'posts').length,
+      portfolio: all.filter(r => r.item.type === 'portfolio').length,
+      utilities: all.filter(r => r.item.type === 'utilities').length
+    };
+  },
   clearSearch() {
     this.search = '';
+    this.activeFilter = 'all';
     this.$refs.searchInput.focus();
+  },
+  setFilter(f) {
+    this.activeFilter = f;
+  },
+  typeIcon(type) {
+    const icons = {
+      posts: 'newspaper-outline',
+      portfolio: 'briefcase-outline',
+      utilities: 'build-outline'
+    };
+    return icons[type] || 'document-outline';
+  },
+  typeLabel(type) {
+    const labels = {
+      posts: '{{ T "search.typePost" | default "Запись" }}',
+      portfolio: '{{ T "search.typeProject" | default "Проект" }}',
+      utilities: '{{ T "search.typeUtility" | default "Утилита" }}'
+    };
+    return labels[type] || type;
+  },
+  typeColor(type) {
+    const colors = {
+      posts: 'badge-primary',
+      portfolio: 'badge-accent',
+      utilities: 'badge-secondary'
+    };
+    return colors[type] || 'badge-ghost';
   }
 }"
-x-init="$refs.searchInput.focus()">
+x-init="$refs.searchInput.focus()"
+@keydown.escape.window="clearSearch()">
 
   <div class="max-w-2xl mx-auto">
     
     <!-- Заголовок -->
     <div class="text-center mb-6 sm:mb-8">
       <h1 class="text-2xl sm:text-3xl font-bold mb-2">{{ T "search" }}</h1>
-      <p class="text-sm text-base-content/60">{{ T "searchHint" | default "Поиск по заголовкам, описаниям и тегам" }}</p>
+      <p class="text-sm text-base-content/60">{{ T "searchHint" | default "Поиск по статьям, проектам, утилитам и тегам" }}</p>
     </div>
 
     <!-- Поле поиска -->
     <div class="relative">
       <label for="search" class="input input-bordered input-lg flex items-center gap-2 
-                                  focus-within:input-primary transition-colors duration-200">
-        <ion-icon name="search" class="text-base-content/50 text-lg"></ion-icon>
+                                  focus-within:input-primary transition-colors duration-200
+                                  shadow-sm focus-within:shadow-md">
+        
+        <div class="w-5 h-5 flex items-center justify-center">
+          <ion-icon x-show="!isLoading" name="search" class="text-base-content/50 text-lg"></ion-icon>
+          <span x-show="isLoading" class="loading loading-spinner loading-xs text-primary"></span>
+        </div>
+        
         <input id="search" 
                name="search" 
                type="text" 
                class="grow bg-transparent" 
-               placeholder="{{ T "searchPlaceholder" | default "Введите запрос..." }}" 
-               x-model.debounce.300ms="search"
+               placeholder="{{ T "searchPlaceholder" | default "Статьи, проекты, утилиты..." }}" 
+               x-model.debounce.200ms="search"
                x-ref="searchInput"
-               autocomplete="off" />
+               autocomplete="off"
+               spellcheck="false" />
         
-        <!-- Кнопка очистки -->
+        <kbd x-show="search.length === 0" 
+             class="hidden sm:inline-flex kbd kbd-sm text-base-content/30">
+          Esc
+        </kbd>
+        
         <button x-show="search.length > 0" 
                 x-transition:enter="transition ease-out duration-200"
                 x-transition:enter-start="opacity-0 scale-75"
@@ -58,107 +112,312 @@ x-init="$refs.searchInput.focus()">
         </button>
       </label>
       
-      <!-- Счётчик результатов -->
-      <div class="absolute -bottom-6 left-0 text-xs text-base-content/50"
+      <div class="absolute -bottom-6 left-0 right-0 flex items-center justify-between text-xs text-base-content/50"
            x-show="search.trim() !== ''"
            x-transition>
-        <span x-text="results.length"></span> {{ T "resultsFound" | default "найдено" }}
+        <span>
+          <span x-text="results.length" class="font-medium"></span> {{ T "resultsFound" | default "найдено" }}
+        </span>
+        <span x-show="activeFilter !== 'all'" 
+              @click="activeFilter = 'all'" 
+              class="cursor-pointer hover:text-primary transition-colors">
+          {{ T "search.showAll" | default "Показать все" }} →
+        </span>
+      </div>
+    </div>
+
+    <!-- Фильтры по типу контента -->
+    <div class="mt-10 sm:mt-12"
+         x-show="search.trim() !== '' && allResults.length > 0"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 -translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0">
+      
+      <div class="flex flex-wrap items-center gap-2 mb-6">
+        
+        <span class="text-xs text-base-content/40 mr-1 hidden sm:inline">
+          <ion-icon name="filter-outline" class="align-middle"></ion-icon>
+        </span>
+        
+        <button @click="setFilter('all')"
+                class="btn btn-xs gap-1.5 transition-all"
+                :class="activeFilter === 'all' ? 'btn-primary' : 'btn-ghost bg-base-200/50'">
+          <ion-icon name="apps-outline"></ion-icon>
+          {{ T "search.all" | default "Все" }}
+          <span class="opacity-70" x-text="counts.all"></span>
+        </button>
+        
+        <button @click="setFilter('posts')"
+                x-show="counts.posts > 0"
+                class="btn btn-xs gap-1.5 transition-all"
+                :class="activeFilter === 'posts' ? 'btn-primary' : 'btn-ghost bg-base-200/50'">
+          <ion-icon name="newspaper-outline"></ion-icon>
+          {{ T "search.posts" | default "Записи" }}
+          <span class="opacity-70" x-text="counts.posts"></span>
+        </button>
+        
+        <button @click="setFilter('portfolio')"
+                x-show="counts.portfolio > 0"
+                class="btn btn-xs gap-1.5 transition-all"
+                :class="activeFilter === 'portfolio' ? 'btn-accent' : 'btn-ghost bg-base-200/50'">
+          <ion-icon name="briefcase-outline"></ion-icon>
+          {{ T "search.portfolio" | default "Проекты" }}
+          <span class="opacity-70" x-text="counts.portfolio"></span>
+        </button>
+        
+        <button @click="setFilter('utilities')"
+                x-show="counts.utilities > 0"
+                class="btn btn-xs gap-1.5 transition-all"
+                :class="activeFilter === 'utilities' ? 'btn-secondary' : 'btn-ghost bg-base-200/50'">
+          <ion-icon name="build-outline"></ion-icon>
+          {{ T "search.utilities" | default "Утилиты" }}
+          <span class="opacity-70" x-text="counts.utilities"></span>
+        </button>
+        
       </div>
     </div>
 
     <!-- Результаты поиска -->
-    <div class="mt-10 sm:mt-12 space-y-3 sm:space-y-4">
+    <div class="space-y-3 sm:space-y-4"
+         :class="{ 'mt-10 sm:mt-12': search.trim() === '' || allResults.length === 0 }">
       
-      <!-- Пустое состояние - начало поиска -->
+      <!-- Пустое состояние -->
       <div x-show="search.trim() === ''" 
            x-transition
            class="text-center py-12 sm:py-16">
-        <ion-icon name="search-outline" class="text-6xl sm:text-7xl text-base-content/20 mb-4"></ion-icon>
-        <p class="text-base-content/50">{{ T "searchStart" | default "Начните вводить для поиска" }}</p>
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-base-200/50 mb-4">
+          <ion-icon name="search-outline" class="text-4xl text-base-content/20"></ion-icon>
+        </div>
+        <p class="text-base-content/50 mb-1">{{ T "searchStart" | default "Начните вводить для поиска" }}</p>
+        <p class="text-xs text-base-content/30">{{ T "search.scopeHint" | default "Ищем по статьям, проектам и утилитам" }}</p>
       </div>
       
       <!-- Ничего не найдено -->
       <div x-show="showEmpty" 
            x-transition
            class="text-center py-12 sm:py-16">
-        <ion-icon name="sad-outline" class="text-6xl sm:text-7xl text-base-content/20 mb-4"></ion-icon>
-        <p class="text-base-content/60 mb-2">{{ T "noResults" | default "Ничего не найдено" }}</p>
-        <p class="text-sm text-base-content/40">{{ T "tryAnother" | default "Попробуйте другой запрос" }}</p>
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-base-200/50 mb-4">
+          <ion-icon name="sad-outline" class="text-4xl text-base-content/20"></ion-icon>
+        </div>
+        <p class="text-base-content/60 mb-1">{{ T "noResults" | default "Ничего не найдено" }}</p>
+        <p class="text-sm text-base-content/40 mb-4">{{ T "tryAnother" | default "Попробуйте другой запрос" }}</p>
+        
+        <button x-show="activeFilter !== 'all' && allResults.length > 0"
+                @click="activeFilter = 'all'"
+                class="btn btn-sm btn-outline btn-primary gap-1">
+          <ion-icon name="apps-outline"></ion-icon>
+          {{ T "search.searchAllTypes" | default "Искать во всех разделах" }}
+          <span class="opacity-70" x-text="'(' + allResults.length + ')'"></span>
+        </button>
       </div>
 
       <!-- Список результатов -->
-      <template x-for="(result, index) in results" :key="result.item.url">
-        <a class="block group" :href="result.item.url"
+      <template x-for="(result, index) in results" :key="result.item.url + activeFilter">
+        <a class="block group no-underline" :href="result.item.url"
            x-transition:enter="transition ease-out duration-300"
            x-transition:enter-start="opacity-0 translate-y-4"
            x-transition:enter-end="opacity-100 translate-y-0"
-           :style="{ transitionDelay: `${index * 50}ms` }">
-          <article class="card card-compact 
-                          bg-base-200/50 dark:bg-base-200/10
-                          hover:bg-base-200 dark:hover:bg-base-200/20
-                          border border-transparent hover:border-primary/30
-                          hover:shadow-md
-                          transition-all duration-200">
-            <div class="card-body p-4 sm:p-5">
+           :style="{ transitionDelay: `${Math.min(index * 40, 300)}ms` }">
+          
+          <!-- Карточка для утилит -->
+          <template x-if="result.item.type === 'utilities'">
+            <article class="flex items-start gap-4 p-4 sm:p-5 rounded-2xl
+                            bg-base-200/50 dark:bg-base-200/10
+                            hover:bg-base-200 dark:hover:bg-base-200/20
+                            border border-transparent hover:border-secondary/30
+                            hover:shadow-md transition-all duration-200">
               
-              <!-- Заголовок -->
-              <h2 class="card-title text-base sm:text-lg group-hover:text-primary transition-colors duration-200">
-                <span x-text="result.item.title"></span>
-                <ion-icon name="arrow-forward" 
-                          class="text-base-content/30 group-hover:text-primary 
-                                 group-hover:translate-x-1 transition-all duration-200 ml-auto shrink-0"></ion-icon>
-              </h2>
+              <div class="flex-shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-xl 
+                          bg-gradient-to-br from-secondary/15 to-secondary/5
+                          flex items-center justify-center text-xl sm:text-2xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                <span x-text="result.item.icon || '🔧'"></span>
+              </div>
               
-              <!-- Описание -->
-              <div class="text-sm text-base-content/70 line-clamp-2 sm:line-clamp-3" 
-                   x-html="result.item.description"></div>
-              
-              <!-- Теги (если есть) -->
-              <template x-if="result.item.tags && result.item.tags.length > 0">
-                <div class="flex flex-wrap gap-1.5 mt-2">
-                  <template x-for="tag in result.item.tags.slice(0, 3)" :key="tag">
-                    <span class="badge badge-sm badge-outline opacity-60" x-text="tag"></span>
-                  </template>
-                  <template x-if="result.item.tags.length > 3">
-                    <span class="badge badge-sm badge-ghost" x-text="'+' + (result.item.tags.length - 3)"></span>
-                  </template>
-                </div>
-              </template>
-              
-              <!-- Мета информация -->
-              <div class="card-actions justify-between items-center mt-3 pt-3 
-                          border-t border-base-content/10">
+              <div class="flex-1 min-w-0">
                 
-                <!-- Автор -->
-                <div class="flex items-center gap-2 text-sm text-base-content/60">
-                  <template x-if="result.item.avatar">
-                    <div class="avatar">
-                      <div class="w-6 h-6 rounded-full ring-1 ring-base-content/10">
-                        <img class="my-0" :src="result.item.avatar" :alt="result.item.author" />
-                      </div>
-                    </div>
-                  </template>
-                  <template x-if="!result.item.avatar">
-                    <div class="avatar placeholder">
-                      <div class="w-6 h-6 rounded-full bg-base-300">
-                        <ion-icon name="person" class="text-xs"></ion-icon>
-                      </div>
-                    </div>
-                  </template>
-                  
-                  <span x-text="result.item.author || '{{ site.Params.author }}'"></span>
-                </div>
-                
-                <!-- Время чтения -->
-                <div class="flex items-center gap-1 text-xs text-base-content/50">
-                  <ion-icon name="time-outline"></ion-icon>
-                  <span>
-                    <span x-text="result.item.readingTime"></span> {{ T "minRead" | default "мин" }}
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="badge badge-secondary badge-xs gap-1">
+                    <ion-icon name="build-outline" class="text-[10px]"></ion-icon>
+                    {{ T "search.typeUtility" | default "Утилита" }}
                   </span>
+                  
+                  <template x-if="result.item.utilityCategory">
+                    <span class="text-[11px] text-base-content/40" 
+                          x-text="result.item.utilityCategory"></span>
+                  </template>
+                </div>
+                
+                <h2 class="font-bold text-base leading-tight mb-1 
+                           group-hover:text-secondary transition-colors line-clamp-1"
+                    x-text="result.item.title"></h2>
+                
+                <p class="text-sm text-base-content/60 line-clamp-2 leading-relaxed"
+                   x-text="result.item.description"></p>
+                
+                <template x-if="result.item.tags && result.item.tags.length > 0">
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    <template x-for="tag in result.item.tags.slice(0, 3)" :key="tag">
+                      <span class="inline-block px-1.5 py-0.5 text-[11px] rounded 
+                                  bg-base-300/50 text-base-content/50" x-text="tag"></span>
+                    </template>
+                  </div>
+                </template>
+              </div>
+              
+              <div class="flex-shrink-0 self-center opacity-0 -translate-x-2
+                          group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <ion-icon name="arrow-forward" class="text-secondary text-lg"></ion-icon>
+              </div>
+            </article>
+          </template>
+          
+          <!-- Карточка для портфолио -->
+          <template x-if="result.item.type === 'portfolio'">
+            <article class="flex items-start gap-4 p-4 sm:p-5 rounded-2xl
+                            bg-base-200/50 dark:bg-base-200/10
+                            hover:bg-base-200 dark:hover:bg-base-200/20
+                            border border-transparent hover:border-accent/30
+                            hover:shadow-md transition-all duration-200">
+              
+              <div class="flex-shrink-0 w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden bg-base-300">
+                <template x-if="result.item.cover">
+                  <img :src="result.item.cover" :alt="result.item.title" 
+                       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </template>
+                <template x-if="!result.item.cover">
+                  <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-base-200 to-base-300">
+                    <ion-icon name="briefcase-outline" class="text-xl text-base-content/20"></ion-icon>
+                  </div>
+                </template>
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="badge badge-accent badge-xs gap-1">
+                    <ion-icon name="briefcase-outline" class="text-[10px]"></ion-icon>
+                    {{ T "search.typeProject" | default "Проект" }}
+                  </span>
+                  
+                  <template x-if="result.item.status">
+                    <span class="text-[11px] text-base-content/40" x-text="result.item.status"></span>
+                  </template>
+                </div>
+                
+                <h2 class="font-bold text-base leading-tight mb-1 
+                           group-hover:text-accent transition-colors line-clamp-1"
+                    x-text="result.item.title"></h2>
+                
+                <p class="text-sm text-base-content/60 line-clamp-2"
+                   x-text="result.item.description"></p>
+                
+                <template x-if="result.item.tools && result.item.tools.length > 0">
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    <template x-for="tool in result.item.tools.slice(0, 3)" :key="tool">
+                      <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[11px] 
+                                  bg-base-300/50 rounded text-base-content/50">
+                        <ion-icon name="code-slash-outline" class="text-[9px]"></ion-icon>
+                        <span x-text="tool"></span>
+                      </span>
+                    </template>
+                    <template x-if="result.item.tools.length > 3">
+                      <span class="text-[11px] text-base-content/40" 
+                            x-text="'+' + (result.item.tools.length - 3)"></span>
+                    </template>
+                  </div>
+                </template>
+              </div>
+              
+              <div class="flex-shrink-0 self-center opacity-0 -translate-x-2
+                          group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <ion-icon name="arrow-forward" class="text-accent text-lg"></ion-icon>
+              </div>
+            </article>
+          </template>
+          
+          <!-- Карточка для постов -->
+          <template x-if="result.item.type !== 'utilities' && result.item.type !== 'portfolio'">
+            <article class="flex items-start gap-4 p-4 sm:p-5 rounded-2xl
+                            bg-base-200/50 dark:bg-base-200/10
+                            hover:bg-base-200 dark:hover:bg-base-200/20
+                            border border-transparent hover:border-primary/30
+                            hover:shadow-md transition-all duration-200">
+              
+              <!-- Превью поста -->
+              <div class="flex-shrink-0 w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden bg-base-300">
+                <template x-if="result.item.cover">
+                  <img :src="result.item.cover" :alt="result.item.title" 
+                       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </template>
+                <template x-if="!result.item.cover">
+                  <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-base-200 to-base-300">
+                    <ion-icon name="newspaper-outline" class="text-xl text-base-content/20"></ion-icon>
+                  </div>
+                </template>
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="badge badge-primary badge-xs gap-1">
+                    <ion-icon name="newspaper-outline" class="text-[10px]"></ion-icon>
+                    {{ T "search.typePost" | default "Запись" }}
+                  </span>
+                  
+                  <template x-if="result.item.date">
+                    <span class="text-[11px] text-base-content/40" x-text="result.item.date"></span>
+                  </template>
+                </div>
+                
+                <h2 class="font-bold text-base leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1"
+                    x-text="result.item.title"></h2>
+                
+                <p class="text-sm text-base-content/60 line-clamp-2"
+                   x-text="result.item.description"></p>
+                
+                <!-- Теги -->
+                <template x-if="result.item.tags && result.item.tags.length > 0">
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    <template x-for="tag in result.item.tags.slice(0, 3)" :key="tag">
+                      <span class="badge badge-sm badge-outline opacity-60" x-text="tag"></span>
+                    </template>
+                    <template x-if="result.item.tags.length > 3">
+                      <span class="badge badge-sm badge-ghost" x-text="'+' + (result.item.tags.length - 3)"></span>
+                    </template>
+                  </div>
+                </template>
+                
+                <!-- Мета -->
+                <div class="flex items-center gap-3 mt-2 text-xs text-base-content/50">
+                  <div class="flex items-center gap-1.5">
+                    <template x-if="result.item.avatar">
+                      <div class="avatar">
+                        <div class="w-5 h-5 rounded-full ring-1 ring-base-content/10">
+                          <img class="my-0" :src="result.item.avatar" :alt="result.item.author" />
+                        </div>
+                      </div>
+                    </template>
+                    <span x-text="result.item.author || '{{ site.Params.author }}'"></span>
+                  </div>
+                  
+                  <div class="flex items-center gap-1">
+                    <ion-icon name="time-outline"></ion-icon>
+                    <span>
+                      <span x-text="result.item.readingTime"></span> {{ T "minRead" | default "мин" }}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
+              
+              <div class="flex-shrink-0 self-center opacity-0 -translate-x-2
+                          group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <ion-icon name="arrow-forward" class="text-primary text-lg"></ion-icon>
+              </div>
+            </article>
+          </template>
+          
         </a>
       </template>
     </div>
@@ -167,15 +426,51 @@ x-init="$refs.searchInput.focus()">
     <div x-show="search.trim() === ''" 
          x-transition
          class="mt-8 sm:mt-12">
+      
       <p class="text-xs text-base-content/40 text-center mb-3">{{ T "popularSearches" | default "Популярные запросы" }}</p>
       <div class="flex flex-wrap justify-center gap-2">
         {{ range first 5 (site.Taxonomies.tags.ByCount) }}
         <button @click="search = '{{ .Page.Title }}'" 
-                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200 cursor-pointer">
           {{ .Page.Title }}
         </button>
         {{ end }}
       </div>
+      
+      <!-- Быстрые ссылки на разделы -->
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        
+        {{ with site.GetPage "/posts" }}
+        <a href="{{ .RelPermalink }}" 
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
+                  bg-primary/10 text-primary hover:bg-primary/20 transition-colors no-underline">
+          <ion-icon name="newspaper-outline"></ion-icon>
+          {{ T "search.browsePosts" | default "Все записи" }}
+        </a>
+        {{ end }}
+        
+        {{ if site.Params.portfolio }}
+        {{ with site.GetPage "/portfolio" }}
+        <a href="{{ .RelPermalink }}" 
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
+                  bg-accent/10 text-accent hover:bg-accent/20 transition-colors no-underline">
+          <ion-icon name="briefcase-outline"></ion-icon>
+          {{ T "search.browsePortfolio" | default "Портфолио" }}
+        </a>
+        {{ end }}
+        {{ end }}
+        
+        {{ with site.GetPage "/utilities" }}
+        <a href="{{ .RelPermalink }}" 
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
+                  bg-secondary/10 text-secondary hover:bg-secondary/20 transition-colors no-underline">
+          <ion-icon name="build-outline"></ion-icon>
+          {{ T "search.browseUtilities" | default "Утилиты" }}
+        </a>
+        {{ end }}
+        
+      </div>
+      
     </div>
 
   </div>
@@ -189,31 +484,68 @@ x-init="$refs.searchInput.focus()">
 
 <!-- Сбор данных из постов -->
 {{ range (where site.RegularPages "Type" "posts") }}
+
+{{ $page := . }}
+{{ $coverURL := "" }}
+{{ with $page.Params.Cover }}
+  {{ $coverURL = printf "%s%s" $page.RelPermalink . | absURL }}
+{{ end }}
+
 {{ $data = $data | append (dict 
-  "title" .Title 
-  "url" .RelPermalink 
-  "author" .Params.author 
-  "avatar" .Params.avatar 
-  "categories" .Params.categories 
-  "tags" .Params.tags 
-  "description" (.Summary | plainify | truncate 200) 
-  "readingTime" .ReadingTime
-  "date" (.Date.Format "2006-01-02")
+  "title" $page.Title 
+  "url" $page.RelPermalink 
+  "type" "posts"
+  "author" $page.Params.author 
+  "avatar" $page.Params.avatar 
+  "categories" $page.Params.categories 
+  "tags" $page.Params.tags 
+  "cover" $coverURL
+  "description" ($page.Summary | plainify | truncate 200) 
+  "readingTime" $page.ReadingTime
+  "date" ($page.Date.Format "2006-01-02")
 ) }}
 {{ end }}
 
 <!-- Сбор данных из портфолио -->
 {{ range (where site.RegularPages "Type" "portfolio") }}
+
+{{ $page := . }}
+{{ $coverURL := "" }}
+{{ with $page.Params.Cover }}
+  {{ $coverURL = printf "%s%s" $page.RelPermalink . | absURL }}
+{{ end }}
+
 {{ $data = $data | append (dict 
-  "title" .Title 
-  "url" .RelPermalink 
-  "author" .Params.author 
-  "avatar" .Params.avatar 
-  "categories" .Params.categories
-  "tags" .Params.tags
-  "description" (.Summary | plainify | truncate 200) 
-  "readingTime" .ReadingTime
-  "date" (.Date.Format "2006-01-02")
+  "title" $page.Title 
+  "url" $page.RelPermalink 
+  "type" "portfolio"
+  "author" $page.Params.author 
+  "avatar" $page.Params.avatar 
+  "categories" $page.Params.categories
+  "tags" $page.Params.tags
+  "tools" $page.Params.tools
+  "filters" $page.Params.filters
+  "status" $page.Params.status
+  "cover" $coverURL
+  "description" ($page.Summary | plainify | truncate 200) 
+  "readingTime" $page.ReadingTime
+  "date" ($page.Date.Format "2006-01-02")
+) }}
+{{ end }}
+
+<!-- Сбор данных из утилит -->
+{{ range (where site.RegularPages "Type" "utilities") }}
+
+{{ $page := . }}
+{{ $data = $data | append (dict 
+  "title" $page.Title 
+  "url" $page.RelPermalink 
+  "type" "utilities"
+  "icon" (default "🔧" $page.Params.icon)
+  "utilityCategory" $page.Params.category
+  "tags" $page.Params.tags
+  "description" ($page.Description | default ($page.Summary | plainify | truncate 200))
+  "date" ($page.Date.Format "2006-01-02")
 ) }}
 {{ end }}
 
@@ -222,10 +554,13 @@ x-init="$refs.searchInput.focus()">
   var fuseData = {{ $data }};
   var fuseOptions = {
     keys: [
-      { name: "title", weight: 2 },
+      { name: "title", weight: 2.5 },
       { name: "description", weight: 1 },
       { name: "categories", weight: 1.5 },
-      { name: "tags", weight: 1.5 }
+      { name: "tags", weight: 1.5 },
+      { name: "tools", weight: 1.2 },
+      { name: "filters", weight: 1.2 },
+      { name: "utilityCategory", weight: 1.3 }
     ],
     includeMatches: true,
     threshold: 0.3,
@@ -233,7 +568,7 @@ x-init="$refs.searchInput.focus()">
     minMatchCharLength: 2
   };
 
-  var fuse = new Fuse(fuseData, fuseOptions);
+  window.fuse = new Fuse(fuseData, fuseOptions);
 </script>
 
 {{ end }}

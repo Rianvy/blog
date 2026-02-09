@@ -1,0 +1,981 @@
+{{ define "title" }}
+{{ default "JSON to Types" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">🔄</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">{{ .Description }}</p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-blue-500/10 text-blue-500 border border-blue-500/20">
+        TypeScript
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">
+        Go
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-500 border border-purple-500/20">
+        Zod
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-orange-500/10 text-orange-500 border border-orange-500/20">
+        JSON Schema
+      </span>
+    </div>
+  </div>
+
+  <!-- Основной контент -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <!-- ========== ЛЕВАЯ ПАНЕЛЬ: ВВОД ========== -->
+    <div class="space-y-4">
+
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold flex items-center gap-2">
+            <ion-icon name="code-slash-outline" class="text-primary"></ion-icon>
+            {{ T "jsonToTypes.jsonInput" }}
+          </h2>
+          <div class="flex items-center gap-1">
+            <button id="paste-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="clipboard-outline"></ion-icon>
+              {{ T "jsonToTypes.paste" }}
+            </button>
+            <button id="sample-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="document-text-outline"></ion-icon>
+              {{ T "jsonToTypes.sample" }}
+            </button>
+            <button id="clear-btn" class="btn btn-ghost btn-xs gap-1 text-error">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Editor -->
+        <div class="relative">
+          <textarea 
+            id="json-input" 
+            class="w-full h-[400px] lg:h-[500px] p-4 font-mono text-sm bg-transparent border-0 focus:outline-none focus:ring-0 resize-none"
+            placeholder="{{ T "jsonToTypes.inputPlaceholder" }}"
+            spellcheck="false"
+          ></textarea>
+          
+          <div class="absolute bottom-2 right-2 flex items-center gap-2 text-xs text-base-content/40">
+            <span id="json-status" class="hidden px-2 py-1 rounded bg-success/20 text-success">
+              ✓ {{ T "jsonToTypes.validJson" }}
+            </span>
+            <span id="json-error" class="hidden px-2 py-1 rounded bg-error/20 text-error">
+              ✗ {{ T "jsonToTypes.invalidJson" }}
+            </span>
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- Настройки -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              {{ T "jsonToTypes.settings" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          
+          <div class="p-4 pt-0 space-y-4">
+            
+            <!-- Root Name -->
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">{{ T "jsonToTypes.rootTypeName" }}</span>
+              </label>
+              <input type="text" id="root-name" class="input input-bordered input-sm font-mono" value="Root" placeholder="Root" />
+            </div>
+            
+            <!-- Options Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              
+              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+                <input type="checkbox" id="opt-optional" class="checkbox checkbox-sm checkbox-primary" />
+                <div>
+                  <span class="text-sm font-medium">{{ T "jsonToTypes.optionalProperties" }}</span>
+                  <p class="text-xs text-base-content/60">{{ T "jsonToTypes.optionalPropertiesDesc" }}</p>
+                </div>
+              </label>
+              
+              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+                <input type="checkbox" id="opt-readonly" class="checkbox checkbox-sm checkbox-primary" />
+                <div>
+                  <span class="text-sm font-medium">{{ T "jsonToTypes.readonly" }}</span>
+                  <p class="text-xs text-base-content/60">{{ T "jsonToTypes.readonlyDesc" }}</p>
+                </div>
+              </label>
+              
+              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+                <input type="checkbox" id="opt-export" class="checkbox checkbox-sm checkbox-primary" checked />
+                <div>
+                  <span class="text-sm font-medium">{{ T "jsonToTypes.export" }}</span>
+                  <p class="text-xs text-base-content/60">{{ T "jsonToTypes.exportDesc" }}</p>
+                </div>
+              </label>
+              
+              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+                <input type="checkbox" id="opt-inline" class="checkbox checkbox-sm checkbox-primary" />
+                <div>
+                  <span class="text-sm font-medium">{{ T "jsonToTypes.inlineTypes" }}</span>
+                  <p class="text-xs text-base-content/60">{{ T "jsonToTypes.inlineTypesDesc" }}</p>
+                </div>
+              </label>
+              
+            </div>
+            
+          </div>
+        </details>
+      </div>
+
+      <!-- Кнопка генерации -->
+      <button id="generate-btn" class="btn btn-primary btn-lg w-full gap-2">
+        <ion-icon name="flash-outline" class="text-xl"></ion-icon>
+        {{ T "jsonToTypes.generate" }}
+      </button>
+
+    </div>
+
+    <!-- ========== ПРАВАЯ ПАНЕЛЬ: РЕЗУЛЬТАТ ========== -->
+    <div class="space-y-4">
+
+      <!-- Табы выбора формата -->
+      <div class="tabs tabs-boxed bg-base-200 p-1 rounded-xl">
+        <button class="tab tab-lg flex-1 gap-2 format-tab tab-active" data-format="typescript">
+          <span class="text-blue-500 font-bold">TS</span>
+          TypeScript
+        </button>
+        <button class="tab tab-lg flex-1 gap-2 format-tab" data-format="go">
+          <span class="text-cyan-500 font-bold">Go</span>
+          Go
+        </button>
+        <button class="tab tab-lg flex-1 gap-2 format-tab" data-format="zod">
+          <span class="text-purple-500 font-bold">Z</span>
+          Zod
+        </button>
+        <button class="tab tab-lg flex-1 gap-2 format-tab" data-format="jsonschema">
+          <span class="text-orange-500 font-bold">{}</span>
+          Schema
+        </button>
+      </div>
+
+      <!-- Результат -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        
+        <div class="flex items-center justify-between p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold flex items-center gap-2">
+            <ion-icon name="document-text-outline" class="text-success"></ion-icon>
+            <span id="output-title">{{ T "jsonToTypes.typescriptInterface" }}</span>
+          </h2>
+          <div class="flex items-center gap-1">
+            <button id="copy-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="copy-outline"></ion-icon>
+              {{ T "jsonToTypes.copy" }}
+            </button>
+            <button id="download-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="download-outline"></ion-icon>
+              {{ T "jsonToTypes.download" }}
+            </button>
+          </div>
+        </div>
+        
+        <div class="relative">
+          <pre id="output" class="h-[400px] lg:h-[500px] p-4 font-mono text-sm overflow-auto"><code class="text-base-content/50">// {{ T "jsonToTypes.enterJsonAndGenerate" }}</code></pre>
+        </div>
+        
+      </div>
+
+      <!-- Статистика -->
+      <div id="stats" class="hidden grid grid-cols-4 gap-3">
+        <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-xl font-bold text-primary" id="stat-types">0</div>
+          <div class="text-xs text-base-content/60">{{ T "jsonToTypes.types" }}</div>
+        </div>
+        <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-xl font-bold text-secondary" id="stat-props">0</div>
+          <div class="text-xs text-base-content/60">{{ T "jsonToTypes.properties" }}</div>
+        </div>
+        <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-xl font-bold text-accent" id="stat-nested">0</div>
+          <div class="text-xs text-base-content/60">{{ T "jsonToTypes.nested" }}</div>
+        </div>
+        <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-xl font-bold text-info" id="stat-lines">0</div>
+          <div class="text-xs text-base-content/60">{{ T "jsonToTypes.lines" }}</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Примеры использования -->
+  <div class="mt-8 bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <h3 class="font-semibold flex items-center gap-2">
+          <ion-icon name="book-outline" class="text-primary"></ion-icon>
+          {{ T "jsonToTypes.usageExamples" }}
+        </h3>
+        <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+      </summary>
+      
+      <div class="p-4 pt-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
+          <div class="font-semibold text-blue-500 mb-2">TypeScript</div>
+          <pre class="text-xs font-mono text-base-content/70">interface User {
+  id: number;
+  name: string;
+}</pre>
+        </div>
+        
+        <div class="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+          <div class="font-semibold text-cyan-500 mb-2">Go</div>
+          <pre class="text-xs font-mono text-base-content/70">type User struct {
+  ID   int    `json:"id"`
+  Name string `json:"name"`
+}</pre>
+        </div>
+        
+        <div class="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20">
+          <div class="font-semibold text-purple-500 mb-2">Zod</div>
+          <pre class="text-xs font-mono text-base-content/70">const UserSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+});</pre>
+        </div>
+        
+        <div class="p-4 rounded-xl bg-orange-500/10 border border-orange-500/20">
+          <div class="font-semibold text-orange-500 mb-2">JSON Schema</div>
+          <pre class="text-xs font-mono text-base-content/70">{
+  "type": "object",
+  "properties": { ... }
+}</pre>
+        </div>
+        
+      </div>
+    </details>
+  </div>
+
+  <!-- Горячие клавиши -->
+  <div class="mt-4 p-4 rounded-2xl bg-base-200/30 border border-base-200 dark:border-base-content/10">
+    <div class="flex items-center gap-2 mb-3">
+      <ion-icon name="keypad-outline" class="text-lg text-base-content/60"></ion-icon>
+      <span class="text-sm font-medium text-base-content/60">{{ T "jsonToTypes.hotkeys" }}</span>
+    </div>
+    <div class="flex flex-wrap gap-4 text-sm text-base-content/60">
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>
+        <span>+</span>
+        <kbd class="kbd kbd-sm">Enter</kbd>
+        <span class="ml-1">→ {{ T "jsonToTypes.generate" }}</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>
+        <span>+</span>
+        <kbd class="kbd kbd-sm">1</kbd>
+        <span class="ml-1">→ TypeScript</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>
+        <span>+</span>
+        <kbd class="kbd kbd-sm">2</kbd>
+        <span class="ml-1">→ Go</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>
+        <span>+</span>
+        <kbd class="kbd kbd-sm">3</kbd>
+        <span class="ml-1">→ Zod</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>
+        <span>+</span>
+        <kbd class="kbd kbd-sm">4</kbd>
+        <span class="ml-1">→ Schema</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>
+        <span>+</span>
+        <kbd class="kbd kbd-sm">S</kbd>
+        <span class="ml-1">→ {{ T "jsonToTypes.copy" }}</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  // ========== I18N ==========
+  const i18n = {
+    enterJsonAndGenerate: {{ T "jsonToTypes.enterJsonAndGenerate" | jsonify }},
+    parseError: {{ T "jsonToTypes.parseError" | jsonify }},
+    copied: {{ T "jsonToTypes.copied" | jsonify }},
+    typescriptInterface: {{ T "jsonToTypes.typescriptInterface" | jsonify }},
+    goStruct: {{ T "jsonToTypes.goStruct" | jsonify }},
+    zodSchema: {{ T "jsonToTypes.zodSchema" | jsonify }},
+    jsonSchemaTitle: {{ T "jsonToTypes.jsonSchemaTitle" | jsonify }}
+  };
+  
+  // ========== STATE ==========
+  let currentFormat = 'typescript';
+  let parsedJson = null;
+  let generatedCode = {
+    typescript: '',
+    go: '',
+    zod: '',
+    jsonschema: ''
+  };
+  
+  // ========== ELEMENTS ==========
+  const jsonInput = document.getElementById('json-input');
+  const output = document.getElementById('output');
+  const outputTitle = document.getElementById('output-title');
+  const generateBtn = document.getElementById('generate-btn');
+  const jsonStatus = document.getElementById('json-status');
+  const jsonError = document.getElementById('json-error');
+  const stats = document.getElementById('stats');
+  
+  // ========== UTILITIES ==========
+  
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  
+  function toPascalCase(str) {
+    return str
+      .replace(/[-_](.)/g, (_, c) => c.toUpperCase())
+      .replace(/^(.)/, (_, c) => c.toUpperCase());
+  }
+  
+  function toCamelCase(str) {
+    return str
+      .replace(/[-_](.)/g, (_, c) => c.toUpperCase())
+      .replace(/^(.)/, (_, c) => c.toLowerCase());
+  }
+  
+  function getType(value) {
+    if (value === null) return 'null';
+    if (Array.isArray(value)) return 'array';
+    return typeof value;
+  }
+  
+  function inferArrayType(arr) {
+    if (arr.length === 0) return { type: 'unknown', items: [] };
+    
+    const types = new Set();
+    const objectSamples = [];
+    
+    arr.forEach(item => {
+      const t = getType(item);
+      types.add(t);
+      if (t === 'object' && item !== null) {
+        objectSamples.push(item);
+      }
+    });
+    
+    if (types.size === 1) {
+      const t = [...types][0];
+      if (t === 'object' && objectSamples.length > 0) {
+        const merged = {};
+        objectSamples.forEach(obj => {
+          Object.keys(obj).forEach(key => {
+            if (!merged[key]) {
+              merged[key] = obj[key];
+            }
+          });
+        });
+        return { type: 'object', sample: merged };
+      }
+      return { type: t, items: arr };
+    }
+    
+    return { type: 'mixed', types: [...types] };
+  }
+  
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  // ========== TYPESCRIPT GENERATOR ==========
+  
+  function generateTypeScript(data, name, options = {}) {
+    const { optional = false, readonly = false, exportKw = true, inline = false } = options;
+    const type = getType(data);
+    const interfaces = [];
+    let mainInterface = '';
+    
+    if (type === 'object' && data !== null) {
+      const props = [];
+      
+      Object.entries(data).forEach(([key, value]) => {
+        const propType = getType(value);
+        const optMark = optional ? '?' : '';
+        const readonlyMark = readonly ? 'readonly ' : '';
+        
+        let tsType;
+        
+        if (propType === 'object' && value !== null) {
+          const nestedName = toPascalCase(key);
+          if (inline) {
+            const nestedProps = Object.entries(value).map(([k, v]) => {
+              return `${k}${optMark}: ${getSimpleTsType(v)}`;
+            }).join('; ');
+            tsType = `{ ${nestedProps} }`;
+          } else {
+            const nested = generateTypeScript(value, nestedName, options);
+            interfaces.push(...nested.interfaces, nested.main);
+            tsType = nestedName;
+          }
+        } else if (propType === 'array') {
+          const arrInfo = inferArrayType(value);
+          if (arrInfo.type === 'object' && arrInfo.sample) {
+            const nestedName = toPascalCase(key) + 'Item';
+            if (!inline) {
+              const nested = generateTypeScript(arrInfo.sample, nestedName, options);
+              interfaces.push(...nested.interfaces, nested.main);
+            }
+            tsType = inline ? 'object[]' : `${nestedName}[]`;
+          } else {
+            tsType = `${getTsArrayItemType(arrInfo)}[]`;
+          }
+        } else {
+          tsType = getSimpleTsType(value);
+        }
+        
+        props.push(`  ${readonlyMark}${key}${optMark}: ${tsType};`);
+      });
+      
+      const exportStr = exportKw ? 'export ' : '';
+      mainInterface = `${exportStr}interface ${name} {\n${props.join('\n')}\n}`;
+    } else if (type === 'array') {
+      const arrInfo = inferArrayType(data);
+      const exportStr = exportKw ? 'export ' : '';
+      mainInterface = `${exportStr}type ${name} = ${getTsArrayItemType(arrInfo)}[];`;
+    } else {
+      const exportStr = exportKw ? 'export ' : '';
+      mainInterface = `${exportStr}type ${name} = ${getSimpleTsType(data)};`;
+    }
+    
+    return { interfaces, main: mainInterface };
+  }
+  
+  function getSimpleTsType(value) {
+    const type = getType(value);
+    switch (type) {
+      case 'string': return 'string';
+      case 'number': return 'number';
+      case 'boolean': return 'boolean';
+      case 'null': return 'null';
+      case 'undefined': return 'undefined';
+      case 'object': return 'object';
+      case 'array': return 'unknown[]';
+      default: return 'unknown';
+    }
+  }
+  
+  function getTsArrayItemType(arrInfo) {
+    switch (arrInfo.type) {
+      case 'string': return 'string';
+      case 'number': return 'number';
+      case 'boolean': return 'boolean';
+      case 'null': return 'null';
+      case 'object': return 'object';
+      case 'mixed': return arrInfo.types.map(t => t === 'object' ? 'object' : t).join(' | ');
+      default: return 'unknown';
+    }
+  }
+  
+  // ========== GO GENERATOR ==========
+  
+  function generateGo(data, name, options = {}) {
+    const type = getType(data);
+    const structs = [];
+    let mainStruct = '';
+    
+    if (type === 'object' && data !== null) {
+      const fields = [];
+      
+      Object.entries(data).forEach(([key, value]) => {
+        const fieldName = toPascalCase(key);
+        const propType = getType(value);
+        const jsonTag = '`json:"' + key + '"`';
+        
+        let goType;
+        
+        if (propType === 'object' && value !== null) {
+          const nestedName = toPascalCase(key);
+          const nested = generateGo(value, nestedName, options);
+          structs.push(...nested.structs, nested.main);
+          goType = nestedName;
+        } else if (propType === 'array') {
+          const arrInfo = inferArrayType(value);
+          if (arrInfo.type === 'object' && arrInfo.sample) {
+            const nestedName = toPascalCase(key) + 'Item';
+            const nested = generateGo(arrInfo.sample, nestedName, options);
+            structs.push(...nested.structs, nested.main);
+            goType = '[]' + nestedName;
+          } else {
+            goType = '[]' + getGoArrayItemType(arrInfo);
+          }
+        } else {
+          goType = getSimpleGoType(value);
+        }
+        
+        fields.push('\t' + fieldName + ' ' + goType + ' ' + jsonTag);
+      });
+      
+      mainStruct = 'type ' + name + ' struct {\n' + fields.join('\n') + '\n}';
+    } else if (type === 'array') {
+      const arrInfo = inferArrayType(data);
+      mainStruct = 'type ' + name + ' []' + getGoArrayItemType(arrInfo);
+    } else {
+      mainStruct = 'type ' + name + ' ' + getSimpleGoType(data);
+    }
+    
+    return { structs: structs, main: mainStruct };
+  }
+  
+  function getSimpleGoType(value) {
+    const type = getType(value);
+    switch (type) {
+      case 'string': return 'string';
+      case 'number': return Number.isInteger(value) ? 'int' : 'float64';
+      case 'boolean': return 'bool';
+      case 'null': return 'interface{}';
+      default: return 'interface{}';
+    }
+  }
+  
+  function getGoArrayItemType(arrInfo) {
+    switch (arrInfo.type) {
+      case 'string': return 'string';
+      case 'number': 
+        var allInts = arrInfo.items && arrInfo.items.every(function(n) { return Number.isInteger(n); });
+        return allInts ? 'int' : 'float64';
+      case 'boolean': return 'bool';
+      case 'object': return 'interface{}';
+      default: return 'interface{}';
+    }
+  }
+  
+  // ========== ZOD GENERATOR ==========
+  
+  function generateZod(data, name, options = {}) {
+    const type = getType(data);
+    const schemas = [];
+    let mainSchema = '';
+    
+    if (type === 'object' && data !== null) {
+      const props = [];
+      
+      Object.entries(data).forEach(([key, value]) => {
+        const propType = getType(value);
+        let zodType;
+        
+        if (propType === 'object' && value !== null) {
+          const nestedName = toPascalCase(key) + 'Schema';
+          const nested = generateZod(value, nestedName, options);
+          schemas.push(...nested.schemas, nested.main);
+          zodType = nestedName;
+        } else if (propType === 'array') {
+          const arrInfo = inferArrayType(value);
+          if (arrInfo.type === 'object' && arrInfo.sample) {
+            const nestedName = toPascalCase(key) + 'ItemSchema';
+            const nested = generateZod(arrInfo.sample, nestedName, options);
+            schemas.push(...nested.schemas, nested.main);
+            zodType = 'z.array(' + nestedName + ')';
+          } else {
+            zodType = 'z.array(' + getZodArrayItemType(arrInfo) + ')';
+          }
+        } else {
+          zodType = getSimpleZodType(value);
+        }
+        
+        props.push('  ' + key + ': ' + zodType + ',');
+      });
+      
+      mainSchema = 'const ' + name + ' = z.object({\n' + props.join('\n') + '\n});';
+    } else if (type === 'array') {
+      const arrInfo = inferArrayType(data);
+      mainSchema = 'const ' + name + ' = z.array(' + getZodArrayItemType(arrInfo) + ');';
+    } else {
+      mainSchema = 'const ' + name + ' = ' + getSimpleZodType(data) + ';';
+    }
+    
+    return { schemas: schemas, main: mainSchema };
+  }
+  
+  function getSimpleZodType(value) {
+    const type = getType(value);
+    switch (type) {
+      case 'string': return 'z.string()';
+      case 'number': return Number.isInteger(value) ? 'z.number().int()' : 'z.number()';
+      case 'boolean': return 'z.boolean()';
+      case 'null': return 'z.null()';
+      default: return 'z.unknown()';
+    }
+  }
+  
+  function getZodArrayItemType(arrInfo) {
+    switch (arrInfo.type) {
+      case 'string': return 'z.string()';
+      case 'number': return 'z.number()';
+      case 'boolean': return 'z.boolean()';
+      case 'object': return 'z.object({})';
+      case 'mixed': return 'z.unknown()';
+      default: return 'z.unknown()';
+    }
+  }
+  
+  // ========== JSON SCHEMA GENERATOR ==========
+  
+  function generateJsonSchema(data, name) {
+    const type = getType(data);
+    
+    var schema = {
+      '$schema': 'http://json-schema.org/draft-07/schema#',
+      'title': name
+    };
+    
+    if (type === 'object' && data !== null) {
+      schema.type = 'object';
+      schema.properties = {};
+      schema.required = [];
+      
+      Object.entries(data).forEach(([key, value]) => {
+        schema.properties[key] = getJsonSchemaType(value, key);
+        schema.required.push(key);
+      });
+    } else if (type === 'array') {
+      schema.type = 'array';
+      const arrInfo = inferArrayType(data);
+      if (arrInfo.type === 'object' && arrInfo.sample) {
+        schema.items = getJsonSchemaType(arrInfo.sample, 'item');
+      } else {
+        schema.items = { type: arrInfo.type === 'mixed' ? 'string' : arrInfo.type };
+      }
+    } else {
+      Object.assign(schema, getJsonSchemaType(data, name));
+    }
+    
+    return JSON.stringify(schema, null, 2);
+  }
+  
+  function getJsonSchemaType(value, key) {
+    const type = getType(value);
+    
+    switch (type) {
+      case 'string':
+        return { type: 'string' };
+      case 'number':
+        return Number.isInteger(value) ? { type: 'integer' } : { type: 'number' };
+      case 'boolean':
+        return { type: 'boolean' };
+      case 'null':
+        return { type: 'null' };
+      case 'array':
+        var arrInfo = inferArrayType(value);
+        if (arrInfo.type === 'object' && arrInfo.sample) {
+          return {
+            type: 'array',
+            items: getJsonSchemaType(arrInfo.sample, key + 'Item')
+          };
+        }
+        return {
+          type: 'array',
+          items: { type: arrInfo.type }
+        };
+      case 'object':
+        if (value === null) return { type: 'null' };
+        var props = {};
+        var required = [];
+        Object.entries(value).forEach(([k, v]) => {
+          props[k] = getJsonSchemaType(v, k);
+          required.push(k);
+        });
+        return { type: 'object', properties: props, required: required };
+      default:
+        return {};
+    }
+  }
+  
+  // ========== MAIN GENERATE FUNCTION ==========
+  
+  function generate() {
+    var input = jsonInput.value.trim();
+    
+    if (!input) {
+      output.innerHTML = '<code class="text-base-content/50">// ' + i18n.enterJsonAndGenerate + '</code>';
+      return;
+    }
+    
+    try {
+      parsedJson = JSON.parse(input);
+      jsonStatus.classList.remove('hidden');
+      jsonError.classList.add('hidden');
+    } catch (e) {
+      jsonStatus.classList.add('hidden');
+      jsonError.classList.remove('hidden');
+      output.innerHTML = '<code class="text-error">// ' + i18n.parseError + ':\n// ' + e.message + '</code>';
+      return;
+    }
+    
+    var rootName = document.getElementById('root-name').value || 'Root';
+    var options = {
+      optional: document.getElementById('opt-optional').checked,
+      readonly: document.getElementById('opt-readonly').checked,
+      exportKw: document.getElementById('opt-export').checked,
+      inline: document.getElementById('opt-inline').checked
+    };
+    
+    // Generate TypeScript
+    var tsResult = generateTypeScript(parsedJson, rootName, options);
+    generatedCode.typescript = tsResult.interfaces.concat([tsResult.main]).join('\n\n');
+    
+    // Generate Go
+    var goResult = generateGo(parsedJson, rootName, options);
+    generatedCode.go = goResult.structs.concat([goResult.main]).join('\n\n');
+    
+    // Generate Zod
+    var zodResult = generateZod(parsedJson, rootName + 'Schema', options);
+    generatedCode.zod = "import { z } from 'zod';\n\n" + 
+      zodResult.schemas.concat([zodResult.main]).join('\n\n') + 
+      '\n\ntype ' + rootName + ' = z.infer<typeof ' + rootName + 'Schema>;';
+    
+    // Generate JSON Schema
+    generatedCode.jsonschema = generateJsonSchema(parsedJson, rootName);
+    
+    // Show current format
+    showOutput();
+    
+    // Update stats
+    updateStats();
+  }
+  
+  function showOutput() {
+    var code = generatedCode[currentFormat];
+    output.innerHTML = '<code>' + escapeHtml(code) + '</code>';
+    
+    var titles = {
+      typescript: i18n.typescriptInterface,
+      go: i18n.goStruct,
+      zod: i18n.zodSchema,
+      jsonschema: i18n.jsonSchemaTitle
+    };
+    outputTitle.textContent = titles[currentFormat];
+  }
+  
+  function updateStats() {
+    if (!generatedCode.typescript) return;
+    
+    stats.classList.remove('hidden');
+    
+    var code = generatedCode.typescript;
+    var interfaceMatches = code.match(/interface/g) || [];
+    var typeMatches = code.match(/type \w+ =/g) || [];
+    var interfaceCount = interfaceMatches.length + typeMatches.length;
+    var propMatches = code.match(/^\s+\w+[\?]?:/gm) || [];
+    var propCount = propMatches.length;
+    var nestedCount = Math.max(0, interfaceCount - 1);
+    var lineCount = code.split('\n').length;
+    
+    document.getElementById('stat-types').textContent = interfaceCount;
+    document.getElementById('stat-props').textContent = propCount;
+    document.getElementById('stat-nested').textContent = nestedCount;
+    document.getElementById('stat-lines').textContent = lineCount;
+  }
+  
+  function switchFormat(format) {
+    currentFormat = format;
+    
+    // Update tabs
+    document.querySelectorAll('.format-tab').forEach(function(t) {
+      t.classList.remove('tab-active');
+    });
+    var activeTab = document.querySelector('[data-format="' + format + '"]');
+    if (activeTab) {
+      activeTab.classList.add('tab-active');
+    }
+    
+    if (generatedCode[currentFormat]) {
+      showOutput();
+    }
+  }
+  
+  function copyResult() {
+    var code = generatedCode[currentFormat];
+    if (code) {
+      navigator.clipboard.writeText(code).then(function() {
+        var btn = document.getElementById('copy-btn');
+        var originalHtml = btn.innerHTML;
+        btn.innerHTML = '<ion-icon name="checkmark-outline" class="text-success"></ion-icon> ' + i18n.copied;
+        setTimeout(function() {
+          btn.innerHTML = originalHtml;
+        }, 2000);
+      });
+    }
+  }
+  
+  // ========== EVENT LISTENERS ==========
+  
+  // Format tabs
+  document.querySelectorAll('.format-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      switchFormat(tab.dataset.format);
+    });
+  });
+  
+  // Generate button
+  generateBtn.addEventListener('click', generate);
+  
+  // Live validation
+  jsonInput.addEventListener('input', function() {
+    try {
+      JSON.parse(jsonInput.value);
+      jsonStatus.classList.remove('hidden');
+      jsonError.classList.add('hidden');
+    } catch (e) {
+      jsonStatus.classList.add('hidden');
+      if (jsonInput.value.trim()) {
+        jsonError.classList.remove('hidden');
+      } else {
+        jsonError.classList.add('hidden');
+      }
+    }
+  });
+  
+  // Paste button
+  document.getElementById('paste-btn').addEventListener('click', function() {
+    navigator.clipboard.readText().then(function(text) {
+      jsonInput.value = text;
+      jsonInput.dispatchEvent(new Event('input'));
+    }).catch(function() {});
+  });
+  
+  // Sample button
+  document.getElementById('sample-btn').addEventListener('click', function() {
+    var sample = {
+      id: 1,
+      name: "John Doe",
+      email: "john@example.com",
+      isActive: true,
+      roles: ["admin", "user"],
+      profile: {
+        age: 30,
+        city: "Moscow",
+        interests: ["coding", "music"]
+      },
+      createdAt: "2024-01-15T10:30:00Z"
+    };
+    jsonInput.value = JSON.stringify(sample, null, 2);
+    jsonInput.dispatchEvent(new Event('input'));
+  });
+  
+  // Clear button
+  document.getElementById('clear-btn').addEventListener('click', function() {
+    jsonInput.value = '';
+    output.innerHTML = '<code class="text-base-content/50">// ' + i18n.enterJsonAndGenerate + '</code>';
+    jsonStatus.classList.add('hidden');
+    jsonError.classList.add('hidden');
+    stats.classList.add('hidden');
+    generatedCode = { typescript: '', go: '', zod: '', jsonschema: '' };
+  });
+  
+  // Copy button
+  document.getElementById('copy-btn').addEventListener('click', copyResult);
+  
+  // Download button
+  document.getElementById('download-btn').addEventListener('click', function() {
+    var code = generatedCode[currentFormat];
+    if (!code) return;
+    
+    var extensions = {
+      typescript: 'ts',
+      go: 'go',
+      zod: 'ts',
+      jsonschema: 'json'
+    };
+    
+    var blob = new Blob([code], { type: 'text/plain' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'types.' + extensions[currentFormat];
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+  
+  // ========== KEYBOARD SHORTCUTS ==========
+  
+  window.addEventListener('keydown', function(e) {
+    var isCtrl = e.ctrlKey || e.metaKey;
+    
+    if (!isCtrl) return;
+    
+    var key = e.key;
+    var code = e.code;
+    
+    if (key === 'Enter') {
+      e.preventDefault();
+      generate();
+      return;
+    }
+    
+    if (key === 's' || key === 'S' || code === 'KeyS') {
+      e.preventDefault();
+      copyResult();
+      return;
+    }
+    
+    if (key === '1' || code === 'Digit1' || code === 'Numpad1') {
+      e.preventDefault();
+      switchFormat('typescript');
+      return;
+    }
+    
+    if (key === '2' || code === 'Digit2' || code === 'Numpad2') {
+      e.preventDefault();
+      switchFormat('go');
+      return;
+    }
+    
+    if (key === '3' || code === 'Digit3' || code === 'Numpad3') {
+      e.preventDefault();
+      switchFormat('zod');
+      return;
+    }
+    
+    if (key === '4' || code === 'Digit4' || code === 'Numpad4') {
+      e.preventDefault();
+      switchFormat('jsonschema');
+      return;
+    }
+  }, true);
+  
+  console.log('JSON to Types: Keyboard shortcuts initialized');
+  
+})();
+</script>
+
+{{ end }}

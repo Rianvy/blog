@@ -1,5 +1,3 @@
-{{/* layouts/partials/renderNavItem.html */}}
-
 {{/* ═══════════════════════════════════════════════════════════════════════ */}}
 {{/* ЕДИНЫЕ КЛАССЫ (синхронизированы с header.html и renderMobileNavItem)    */}}
 {{/* ═══════════════════════════════════════════════════════════════════════ */}}
@@ -51,6 +49,17 @@
    title="{{ i18n "portfolio.title" }}"
    aria-label="{{ i18n "portfolio.title" }}">
   <ion-icon name="briefcase-outline" class="{{ $navIconClass }}"></ion-icon>
+</a>
+
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
+{{/* UTILITIES                                                                */}}
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
+{{ else if and (eq . "utilities") (site.Params.utilities) (gt (len (where site.RegularPages "Type" "utilities")) 0) }}
+<a href="{{ "utilities" | relLangURL }}" 
+   class="{{ $navBtnClass }}"
+   title="{{ i18n "utilities.title" | default "Utilities" }}"
+   aria-label="{{ i18n "utilities.title" | default "Utilities" }}">
+  <ion-icon name="grid-outline" class="{{ $navIconClass }}"></ion-icon>
 </a>
 
 {{/* ═══════════════════════════════════════════════════════════════════════ */}}

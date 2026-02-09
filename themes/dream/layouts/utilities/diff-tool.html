@@ -1,0 +1,1029 @@
+{{ define "title" }}
+{{ default "Diff Tool" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero секция -->
+  <div class="text-center mb-8 sm:mb-12">
+    
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}📊{{ end }}</span>
+    </div>
+    
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">
+      {{ .Description }}
+    </p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        {{ i18n "diffTool.worksLocally" | default "Работает локально" }}
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="git-compare-outline"></ion-icon>
+        {{ i18n "diffTool.gitStyleDiff" | default "Git-style diff" }}
+      </span>
+    </div>
+    
+  </div>
+
+  <!-- Основной контент -->
+  <div class="max-w-7xl mx-auto">
+    
+    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      
+      <!-- Панель инструментов -->
+      <div class="flex flex-wrap items-center justify-between gap-3 p-4 bg-base-200/50 border-b border-base-200 dark:border-base-content/10">
+        
+        <!-- Левая часть: действия -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="compare-btn" class="btn btn-primary btn-sm gap-1.5">
+            <ion-icon name="git-compare-outline"></ion-icon>
+            <span class="hidden sm:inline">{{ i18n "diffTool.compare" | default "Сравнить" }}</span>
+          </button>
+          <button id="swap-btn" class="btn btn-ghost btn-sm gap-1.5">
+            <ion-icon name="swap-horizontal-outline"></ion-icon>
+            <span class="hidden sm:inline">{{ i18n "diffTool.swap" | default "Поменять" }}</span>
+          </button>
+          <button id="clear-btn" class="btn btn-ghost btn-sm gap-1.5 text-error hover:bg-error/10">
+            <ion-icon name="trash-outline"></ion-icon>
+            <span class="hidden sm:inline">{{ i18n "diffTool.clear" | default "Очистить" }}</span>
+          </button>
+        </div>
+        
+        <!-- Правая часть: режим отображения -->
+        <div class="flex items-center gap-2">
+          <span class="text-sm text-base-content/60 hidden sm:inline">{{ i18n "diffTool.mode" | default "Режим:" }}</span>
+          <div class="join">
+            <button class="join-item btn btn-sm view-mode-btn" data-mode="split" data-active="true">
+              <ion-icon name="albums-outline"></ion-icon>
+              <span class="hidden md:inline ml-1">Split</span>
+            </button>
+            <button class="join-item btn btn-sm view-mode-btn" data-mode="unified" data-active="false">
+              <ion-icon name="document-text-outline"></ion-icon>
+              <span class="hidden md:inline ml-1">Unified</span>
+            </button>
+            <button class="join-item btn btn-sm view-mode-btn" data-mode="inline" data-active="false">
+              <ion-icon name="code-outline"></ion-icon>
+              <span class="hidden md:inline ml-1">Inline</span>
+            </button>
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- Редакторы (Split View) -->
+      <div id="editors-split" class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-base-200 dark:divide-base-content/10">
+        
+        <!-- Левый текст (Original) -->
+        <div class="flex flex-col">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-error"></span>
+              <span class="font-medium text-sm">{{ i18n "diffTool.original" | default "Оригинал" }}</span>
+              <span class="text-xs text-base-content/40" id="original-label">{{ i18n "diffTool.originalLabel" | default "(старая версия)" }}</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <button id="paste-original-btn" class="btn btn-ghost btn-xs gap-1 hover:bg-primary/10 hover:text-primary">
+                <ion-icon name="clipboard-outline"></ion-icon>
+                {{ i18n "diffTool.paste" | default "Вставить" }}
+              </button>
+              <button id="sample-original-btn" class="btn btn-ghost btn-xs gap-1">
+                <ion-icon name="document-text-outline"></ion-icon>
+                {{ i18n "diffTool.sample" | default "Пример" }}
+              </button>
+            </div>
+          </div>
+          
+          <div class="relative flex-1">
+            <div class="absolute top-2 left-2 z-10 flex gap-1" id="original-line-numbers"></div>
+            <textarea 
+              id="original-text" 
+              class="w-full h-64 lg:h-96 p-4 pl-12 font-mono text-sm bg-transparent border-0 focus:outline-none focus:ring-0 resize-none leading-6"
+              placeholder="{{ i18n "diffTool.enterOriginal" | default "Вставьте оригинальный текст..." }}"
+              spellcheck="false"
+            ></textarea>
+            <div class="absolute bottom-2 right-2 text-xs text-base-content/40 bg-base-100/80 backdrop-blur px-2 py-1 rounded">
+              <span id="original-lines">0</span> {{ i18n "diffTool.lines" | default "строк" }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Правый текст (Modified) -->
+        <div class="flex flex-col">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-success"></span>
+              <span class="font-medium text-sm">{{ i18n "diffTool.modified" | default "Изменённый" }}</span>
+              <span class="text-xs text-base-content/40" id="modified-label">{{ i18n "diffTool.modifiedLabel" | default "(новая версия)" }}</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <button id="paste-modified-btn" class="btn btn-ghost btn-xs gap-1 hover:bg-primary/10 hover:text-primary">
+                <ion-icon name="clipboard-outline"></ion-icon>
+                {{ i18n "diffTool.paste" | default "Вставить" }}
+              </button>
+              <button id="sample-modified-btn" class="btn btn-ghost btn-xs gap-1">
+                <ion-icon name="document-text-outline"></ion-icon>
+                {{ i18n "diffTool.sample" | default "Пример" }}
+              </button>
+            </div>
+          </div>
+          
+          <div class="relative flex-1">
+            <textarea 
+              id="modified-text" 
+              class="w-full h-64 lg:h-96 p-4 pl-12 font-mono text-sm bg-transparent border-0 focus:outline-none focus:ring-0 resize-none leading-6"
+              placeholder="{{ i18n "diffTool.enterModified" | default "Вставьте изменённый текст..." }}"
+              spellcheck="false"
+            ></textarea>
+            <div class="absolute bottom-2 right-2 text-xs text-base-content/40 bg-base-100/80 backdrop-blur px-2 py-1 rounded">
+              <span id="modified-lines">0</span> {{ i18n "diffTool.lines" | default "строк" }}
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- Статус -->
+      <div id="status" class="hidden px-4 py-3 border-t border-base-200 dark:border-base-content/10">
+        <div class="flex items-center gap-2">
+          <ion-icon id="status-icon" name="information-circle" class="text-lg"></ion-icon>
+          <span id="status-text" class="text-sm"></span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Результат сравнения -->
+    <div id="diff-result" class="hidden mt-6">
+      
+      <!-- Статистика изменений -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+        <div class="p-4 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-2xl font-bold text-success" id="stat-added">0</div>
+          <div class="text-xs text-base-content/60 flex items-center justify-center gap-1">
+            <ion-icon name="add-circle-outline"></ion-icon>
+            {{ i18n "diffTool.added" | default "Добавлено" }}
+          </div>
+        </div>
+        <div class="p-4 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-2xl font-bold text-error" id="stat-removed">0</div>
+          <div class="text-xs text-base-content/60 flex items-center justify-center gap-1">
+            <ion-icon name="remove-circle-outline"></ion-icon>
+            {{ i18n "diffTool.removed" | default "Удалено" }}
+          </div>
+        </div>
+        <div class="p-4 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-2xl font-bold text-warning" id="stat-changed">0</div>
+          <div class="text-xs text-base-content/60 flex items-center justify-center gap-1">
+            <ion-icon name="create-outline"></ion-icon>
+            {{ i18n "diffTool.changed" | default "Изменено" }}
+          </div>
+        </div>
+        <div class="p-4 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-2xl font-bold text-base-content/60" id="stat-unchanged">0</div>
+          <div class="text-xs text-base-content/60 flex items-center justify-center gap-1">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            {{ i18n "diffTool.unchanged" | default "Без изменений" }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Панель результата -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        
+        <div class="flex items-center justify-between px-4 py-3 bg-base-200/50 border-b border-base-200 dark:border-base-content/10">
+          <div class="flex items-center gap-2">
+            <ion-icon name="git-compare-outline" class="text-lg text-primary"></ion-icon>
+            <span class="font-medium">{{ i18n "diffTool.comparisonResult" | default "Результат сравнения" }}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="copy-diff-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="copy-outline"></ion-icon>
+              {{ i18n "diffTool.copy" | default "Копировать" }}
+            </button>
+            <button id="download-diff-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="download-outline"></ion-icon>
+              {{ i18n "diffTool.downloadDiff" | default "Скачать .diff" }}
+            </button>
+          </div>
+        </div>
+        
+        <!-- Diff Output -->
+        <div id="diff-output" class="p-4 font-mono text-sm overflow-x-auto max-h-[600px] overflow-y-auto">
+          <!-- Diff будет здесь -->
+        </div>
+        
+      </div>
+      
+    </div>
+
+    <!-- Опции и информация -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+      
+      <!-- Настройки -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-base-200">
+                <ion-icon name="settings-outline" class="text-xl"></ion-icon>
+              </div>
+              <div>
+                <h3 class="font-semibold">{{ i18n "diffTool.settings" | default "Настройки" }}</h3>
+                <p class="text-xs text-base-content/60">{{ i18n "diffTool.settingsDesc" | default "Параметры сравнения" }}</p>
+              </div>
+            </div>
+            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          
+          <div class="px-4 pb-4 space-y-3">
+            <div class="divider my-0"></div>
+            
+            <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+              <input type="checkbox" id="opt-ignore-case" class="checkbox checkbox-sm checkbox-primary" />
+              <div>
+                <span class="text-sm font-medium">{{ i18n "diffTool.ignoreCase" | default "Игнорировать регистр" }}</span>
+                <p class="text-xs text-base-content/60">{{ i18n "diffTool.ignoreCaseDesc" | default "A == a" }}</p>
+              </div>
+            </label>
+            
+            <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+              <input type="checkbox" id="opt-ignore-whitespace" class="checkbox checkbox-sm checkbox-primary" />
+              <div>
+                <span class="text-sm font-medium">{{ i18n "diffTool.ignoreWhitespace" | default "Игнорировать пробелы" }}</span>
+                <p class="text-xs text-base-content/60">{{ i18n "diffTool.ignoreWhitespaceDesc" | default "Не учитывать пробелы в начале/конце" }}</p>
+              </div>
+            </label>
+            
+            <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+              <input type="checkbox" id="opt-trim-lines" class="checkbox checkbox-sm checkbox-primary" />
+              <div>
+                <span class="text-sm font-medium">{{ i18n "diffTool.trimLines" | default "Trim строки" }}</span>
+                <p class="text-xs text-base-content/60">{{ i18n "diffTool.trimLinesDesc" | default "Убрать пробелы по краям" }}</p>
+              </div>
+            </label>
+            
+            <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+              <input type="checkbox" id="opt-word-diff" class="checkbox checkbox-sm checkbox-primary" />
+              <div>
+                <span class="text-sm font-medium">{{ i18n "diffTool.wordDiff" | default "Пословный diff" }}</span>
+                <p class="text-xs text-base-content/60">{{ i18n "diffTool.wordDiffDesc" | default "Показать изменения по словам" }}</p>
+              </div>
+            </label>
+          </div>
+        </details>
+      </div>
+      
+      <!-- Контекстные строки -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 p-4">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-info/10 text-info">
+            <ion-icon name="layers-outline" class="text-xl"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold">{{ i18n "diffTool.context" | default "Контекст" }}</h3>
+            <p class="text-xs text-base-content/60">{{ i18n "diffTool.contextDesc" | default "Строки вокруг изменений" }}</p>
+          </div>
+        </div>
+        
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">{{ i18n "diffTool.contextLines" | default "Количество строк контекста:" }}</span>
+            <span class="label-text-alt" id="context-value">3</span>
+          </label>
+          <input type="range" id="context-lines" min="0" max="10" value="3" class="range range-primary range-sm" />
+          <div class="flex justify-between text-xs text-base-content/40 px-1 mt-1">
+            <span>0</span>
+            <span>5</span>
+            <span>10</span>
+          </div>
+        </div>
+        
+        <!-- Легенда -->
+        <div class="mt-6 pt-4 border-t border-base-200">
+          <h4 class="text-sm font-medium mb-3">{{ i18n "diffTool.legend" | default "Легенда:" }}</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-center gap-2">
+              <span class="w-4 h-4 rounded bg-success/30 border-l-4 border-success"></span>
+              <span class="text-base-content/70">{{ i18n "diffTool.legendAdded" | default "Добавленные строки" }}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-4 h-4 rounded bg-error/30 border-l-4 border-error"></span>
+              <span class="text-base-content/70">{{ i18n "diffTool.legendRemoved" | default "Удалённые строки" }}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-4 h-4 rounded bg-warning/30 border-l-4 border-warning"></span>
+              <span class="text-base-content/70">{{ i18n "diffTool.legendChanged" | default "Изменённые строки" }}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-4 h-4 rounded bg-base-200"></span>
+              <span class="text-base-content/70">{{ i18n "diffTool.legendUnchanged" | default "Без изменений" }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Горячие клавиши -->
+    <div class="mt-6 p-4 rounded-2xl bg-base-200/30 border border-base-200 dark:border-base-content/10">
+      <div class="flex items-center gap-2 mb-3">
+        <ion-icon name="keypad-outline" class="text-lg text-base-content/60"></ion-icon>
+        <span class="text-sm font-medium text-base-content/60">{{ i18n "diffTool.hotkeys" | default "Горячие клавиши" }}</span>
+      </div>
+      <div class="flex flex-wrap gap-4 text-sm text-base-content/60">
+        <div class="flex items-center gap-2">
+          <kbd class="kbd kbd-sm">Ctrl</kbd>
+          <span>+</span>
+          <kbd class="kbd kbd-sm">Enter</kbd>
+          <span>→ {{ i18n "diffTool.hotkeyCompare" | default "Сравнить" }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <kbd class="kbd kbd-sm">Ctrl</kbd>
+          <span>+</span>
+          <kbd class="kbd kbd-sm">Shift</kbd>
+          <span>+</span>
+          <kbd class="kbd kbd-sm">S</kbd>
+          <span>→ {{ i18n "diffTool.hotkeySwap" | default "Поменять местами" }}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+  /* Diff стили */
+  .diff-line {
+    display: flex;
+    min-height: 24px;
+    line-height: 24px;
+  }
+  
+  .diff-line-num {
+    min-width: 40px;
+    padding: 0 8px;
+    text-align: right;
+    color: oklch(var(--bc) / 0.4);
+    user-select: none;
+    font-size: 12px;
+  }
+  
+  .diff-line-content {
+    flex: 1;
+    padding: 0 8px;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  
+  .diff-line-prefix {
+    min-width: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .diff-added {
+    background-color: oklch(var(--su) / 0.15);
+    border-left: 3px solid oklch(var(--su));
+  }
+  
+  .diff-added .diff-line-prefix {
+    color: oklch(var(--su));
+  }
+  
+  .diff-removed {
+    background-color: oklch(var(--er) / 0.15);
+    border-left: 3px solid oklch(var(--er));
+  }
+  
+  .diff-removed .diff-line-prefix {
+    color: oklch(var(--er));
+  }
+  
+  .diff-changed {
+    background-color: oklch(var(--wa) / 0.15);
+    border-left: 3px solid oklch(var(--wa));
+  }
+  
+  .diff-unchanged {
+    background-color: transparent;
+    border-left: 3px solid transparent;
+  }
+  
+  .diff-unchanged .diff-line-content {
+    color: oklch(var(--bc) / 0.6);
+  }
+  
+  .diff-header {
+    background-color: oklch(var(--p) / 0.1);
+    color: oklch(var(--p));
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .diff-word-added {
+    background-color: oklch(var(--su) / 0.3);
+    border-radius: 2px;
+    padding: 0 2px;
+  }
+  
+  .diff-word-removed {
+    background-color: oklch(var(--er) / 0.3);
+    border-radius: 2px;
+    padding: 0 2px;
+    text-decoration: line-through;
+  }
+  
+  /* Split view styles */
+  .split-view {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background-color: oklch(var(--b3));
+  }
+  
+  .split-view .diff-side {
+    background-color: oklch(var(--b1));
+  }
+</style>
+
+<!-- JavaScript -->
+<script>
+(function() {
+  'use strict';
+  
+  // Локализация
+  const i18n = {
+    enterTexts: {{ i18n "diffTool.js.enterTexts" | default "Введите тексты для сравнения" | jsonify }},
+    textsIdentical: {{ i18n "diffTool.js.textsIdentical" | default "Тексты идентичны! Различий не найдено." | jsonify }},
+    textsMatch: {{ i18n "diffTool.js.textsMatch" | default "Тексты полностью совпадают!" | jsonify }},
+    comparisonDone: {{ i18n "diffTool.js.comparisonDone" | default "✅ Сравнение завершено!" | jsonify }},
+    swapped: {{ i18n "diffTool.js.swapped" | default "↔️ Тексты поменялись местами" | jsonify }},
+    pasted: {{ i18n "diffTool.js.pasted" | default "📋 Вставлено!" | jsonify }},
+    noClipboardAccess: {{ i18n "diffTool.js.noClipboardAccess" | default "Нет доступа к буферу" | jsonify }},
+    diffCopied: {{ i18n "diffTool.js.diffCopied" | default "📋 Diff скопирован!" | jsonify }},
+    unifiedDiff: {{ i18n "diffTool.js.unifiedDiff" | default "Unified Diff" | jsonify }},
+    inlineDiff: {{ i18n "diffTool.js.inlineDiff" | default "Inline Diff (word-level)" | jsonify }}
+  };
+  
+  // ========== ЭЛЕМЕНТЫ ==========
+  const originalText = document.getElementById('original-text');
+  const modifiedText = document.getElementById('modified-text');
+  const diffOutput = document.getElementById('diff-output');
+  const diffResult = document.getElementById('diff-result');
+  const status = document.getElementById('status');
+  const statusIcon = document.getElementById('status-icon');
+  const statusText = document.getElementById('status-text');
+  
+  // Stats
+  const statAdded = document.getElementById('stat-added');
+  const statRemoved = document.getElementById('stat-removed');
+  const statChanged = document.getElementById('stat-changed');
+  const statUnchanged = document.getElementById('stat-unchanged');
+  
+  // Options
+  const optIgnoreCase = document.getElementById('opt-ignore-case');
+  const optIgnoreWhitespace = document.getElementById('opt-ignore-whitespace');
+  const optTrimLines = document.getElementById('opt-trim-lines');
+  const optWordDiff = document.getElementById('opt-word-diff');
+  const contextLines = document.getElementById('context-lines');
+  const contextValue = document.getElementById('context-value');
+  
+  // View mode
+  let currentViewMode = 'split';
+  
+  // ========== УТИЛИТЫ ==========
+  function showStatus(message, type) {
+    const icons = {
+      success: 'checkmark-circle',
+      error: 'alert-circle',
+      warning: 'warning',
+      info: 'information-circle'
+    };
+    const colors = {
+      success: 'text-success bg-success/10',
+      error: 'text-error bg-error/10',
+      warning: 'text-warning bg-warning/10',
+      info: 'text-info bg-info/10'
+    };
+    
+    status.className = `px-4 py-3 border-t border-base-200 dark:border-base-content/10 ${colors[type]}`;
+    statusIcon.setAttribute('name', icons[type]);
+    statusText.textContent = message;
+    status.classList.remove('hidden');
+    
+    if (type === 'success' || type === 'info') {
+      setTimeout(() => status.classList.add('hidden'), 3000);
+    }
+  }
+  
+  function updateLineCount() {
+    const origLines = originalText.value ? originalText.value.split('\n').length : 0;
+    const modLines = modifiedText.value ? modifiedText.value.split('\n').length : 0;
+    document.getElementById('original-lines').textContent = origLines;
+    document.getElementById('modified-lines').textContent = modLines;
+  }
+  
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  // ========== DIFF ALGORITHM (Simple LCS-based) ==========
+  function computeDiff(original, modified, options = {}) {
+    let origLines = original.split('\n');
+    let modLines = modified.split('\n');
+    
+    // Apply options
+    if (options.trimLines) {
+      origLines = origLines.map(l => l.trim());
+      modLines = modLines.map(l => l.trim());
+    }
+    
+    const compareLines = (a, b) => {
+      if (options.ignoreCase) {
+        a = a.toLowerCase();
+        b = b.toLowerCase();
+      }
+      if (options.ignoreWhitespace) {
+        a = a.replace(/\s+/g, ' ').trim();
+        b = b.replace(/\s+/g, ' ').trim();
+      }
+      return a === b;
+    };
+    
+    // LCS-based diff
+    const m = origLines.length;
+    const n = modLines.length;
+    
+    // Build LCS table
+    const dp = Array(m + 1).fill(null).map(() => Array(n + 1).fill(0));
+    
+    for (let i = 1; i <= m; i++) {
+      for (let j = 1; j <= n; j++) {
+        if (compareLines(origLines[i - 1], modLines[j - 1])) {
+          dp[i][j] = dp[i - 1][j - 1] + 1;
+        } else {
+          dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+        }
+      }
+    }
+    
+    // Backtrack to get diff
+    const diff = [];
+    let idx_i = m, idx_j = n;
+    
+    while (idx_i > 0 || idx_j > 0) {
+      if (idx_i > 0 && idx_j > 0 && compareLines(origLines[idx_i - 1], modLines[idx_j - 1])) {
+        diff.unshift({
+          type: 'unchanged',
+          origLine: idx_i,
+          modLine: idx_j,
+          origContent: origLines[idx_i - 1],
+          modContent: modLines[idx_j - 1]
+        });
+        idx_i--;
+        idx_j--;
+      } else if (idx_j > 0 && (idx_i === 0 || dp[idx_i][idx_j - 1] >= dp[idx_i - 1][idx_j])) {
+        diff.unshift({
+          type: 'added',
+          origLine: null,
+          modLine: idx_j,
+          content: modLines[idx_j - 1]
+        });
+        idx_j--;
+      } else {
+        diff.unshift({
+          type: 'removed',
+          origLine: idx_i,
+          modLine: null,
+          content: origLines[idx_i - 1]
+        });
+        idx_i--;
+      }
+    }
+    
+    return diff;
+  }
+  
+  // ========== WORD DIFF ==========
+  function computeWordDiff(oldText, newText) {
+    const oldWords = oldText.split(/(\s+)/);
+    const newWords = newText.split(/(\s+)/);
+    
+    // Simple word-level diff
+    const m = oldWords.length;
+    const n = newWords.length;
+    const dp = Array(m + 1).fill(null).map(() => Array(n + 1).fill(0));
+    
+    for (let idx_i = 1; idx_i <= m; idx_i++) {
+      for (let idx_j = 1; idx_j <= n; idx_j++) {
+        if (oldWords[idx_i - 1] === newWords[idx_j - 1]) {
+          dp[idx_i][idx_j] = dp[idx_i - 1][idx_j - 1] + 1;
+        } else {
+          dp[idx_i][idx_j] = Math.max(dp[idx_i - 1][idx_j], dp[idx_i][idx_j - 1]);
+        }
+      }
+    }
+    
+    // Backtrack
+    let result = [];
+    let idx_i = m, idx_j = n;
+    
+    while (idx_i > 0 || idx_j > 0) {
+      if (idx_i > 0 && idx_j > 0 && oldWords[idx_i - 1] === newWords[idx_j - 1]) {
+        result.unshift({ type: 'unchanged', text: oldWords[idx_i - 1] });
+        idx_i--; idx_j--;
+      } else if (idx_j > 0 && (idx_i === 0 || dp[idx_i][idx_j - 1] >= dp[idx_i - 1][idx_j])) {
+        result.unshift({ type: 'added', text: newWords[idx_j - 1] });
+        idx_j--;
+      } else {
+        result.unshift({ type: 'removed', text: oldWords[idx_i - 1] });
+        idx_i--;
+      }
+    }
+    
+    return result;
+  }
+  
+  // ========== RENDER DIFF ==========
+  function renderDiff(diff, viewMode, options = {}) {
+    const context = parseInt(contextLines.value);
+    let html = '';
+    
+    // Count stats
+    let added = 0, removed = 0, unchanged = 0;
+    diff.forEach(d => {
+      if (d.type === 'added') added++;
+      else if (d.type === 'removed') removed++;
+      else unchanged++;
+    });
+    
+    statAdded.textContent = added;
+    statRemoved.textContent = removed;
+    statChanged.textContent = Math.min(added, removed);
+    statUnchanged.textContent = unchanged;
+    
+    if (viewMode === 'unified') {
+      html = renderUnifiedDiff(diff, context, options);
+    } else if (viewMode === 'inline') {
+      html = renderInlineDiff(diff, context, options);
+    } else {
+      html = renderSplitDiff(diff, context, options);
+    }
+    
+    diffOutput.innerHTML = html;
+    diffResult.classList.remove('hidden');
+  }
+  
+  function renderUnifiedDiff(diff, context, options) {
+    let html = '<div class="diff-header">@@ ' + i18n.unifiedDiff + ' @@</div>';
+    
+    // Apply context filtering
+    const showLines = new Set();
+    diff.forEach((d, idx) => {
+      if (d.type !== 'unchanged') {
+        for (let j = Math.max(0, idx - context); j <= Math.min(diff.length - 1, idx + context); j++) {
+          showLines.add(j);
+        }
+      }
+    });
+    
+    let lastShown = -1;
+    diff.forEach((d, idx) => {
+      if (!showLines.has(idx) && context > 0) {
+        if (lastShown === idx - 1) {
+          html += '<div class="diff-line text-center text-base-content/40 py-2">...</div>';
+        }
+        return;
+      }
+      lastShown = idx;
+      
+      const prefix = d.type === 'added' ? '+' : d.type === 'removed' ? '-' : ' ';
+      const lineClass = d.type === 'added' ? 'diff-added' : d.type === 'removed' ? 'diff-removed' : 'diff-unchanged';
+      const lineNum = d.type === 'added' ? d.modLine : d.origLine || d.modLine;
+      const content = d.content || d.origContent || '';
+      
+      html += `<div class="diff-line ${lineClass}">
+        <span class="diff-line-num">${lineNum || ''}</span>
+        <span class="diff-line-prefix">${prefix}</span>
+        <span class="diff-line-content">${escapeHtml(content)}</span>
+      </div>`;
+    });
+    
+    return html;
+  }
+  
+  function renderSplitDiff(diff, context, options) {
+    let leftHtml = '';
+    let rightHtml = '';
+    
+    diff.forEach(d => {
+      if (d.type === 'unchanged') {
+        leftHtml += `<div class="diff-line diff-unchanged">
+          <span class="diff-line-num">${d.origLine}</span>
+          <span class="diff-line-content">${escapeHtml(d.origContent)}</span>
+        </div>`;
+        rightHtml += `<div class="diff-line diff-unchanged">
+          <span class="diff-line-num">${d.modLine}</span>
+          <span class="diff-line-content">${escapeHtml(d.modContent)}</span>
+        </div>`;
+      } else if (d.type === 'removed') {
+        leftHtml += `<div class="diff-line diff-removed">
+          <span class="diff-line-num">${d.origLine}</span>
+          <span class="diff-line-content">${escapeHtml(d.content)}</span>
+        </div>`;
+        rightHtml += `<div class="diff-line diff-unchanged" style="opacity:0.3">
+          <span class="diff-line-num"></span>
+          <span class="diff-line-content"></span>
+        </div>`;
+      } else if (d.type === 'added') {
+        leftHtml += `<div class="diff-line diff-unchanged" style="opacity:0.3">
+          <span class="diff-line-num"></span>
+          <span class="diff-line-content"></span>
+        </div>`;
+        rightHtml += `<div class="diff-line diff-added">
+          <span class="diff-line-num">${d.modLine}</span>
+          <span class="diff-line-content">${escapeHtml(d.content)}</span>
+        </div>`;
+      }
+    });
+    
+    return `<div class="split-view">
+      <div class="diff-side">${leftHtml}</div>
+      <div class="diff-side">${rightHtml}</div>
+    </div>`;
+  }
+  
+  function renderInlineDiff(diff, context, options) {
+    let html = '<div class="diff-header">@@ ' + i18n.inlineDiff + ' @@</div>';
+    
+    // Group consecutive unchanged lines
+    let idx = 0;
+    while (idx < diff.length) {
+      const d = diff[idx];
+      
+      if (d.type === 'unchanged') {
+        html += `<div class="diff-line diff-unchanged">
+          <span class="diff-line-num">${d.origLine}</span>
+          <span class="diff-line-content">${escapeHtml(d.origContent)}</span>
+        </div>`;
+        idx++;
+      } else {
+        // Collect consecutive removed/added for inline comparison
+        const removed = [];
+        const added = [];
+        
+        while (idx < diff.length && diff[idx].type === 'removed') {
+          removed.push(diff[idx]);
+          idx++;
+        }
+        while (idx < diff.length && diff[idx].type === 'added') {
+          added.push(diff[idx]);
+          idx++;
+        }
+        
+        // If we have both removed and added, do word-level diff
+        if (removed.length > 0 && added.length > 0 && options.wordDiff) {
+          const oldText = removed.map(r => r.content).join('\n');
+          const newText = added.map(a => a.content).join('\n');
+          const wordDiff = computeWordDiff(oldText, newText);
+          
+          let inlineContent = '';
+          wordDiff.forEach(w => {
+            if (w.type === 'removed') {
+              inlineContent += `<span class="diff-word-removed">${escapeHtml(w.text)}</span>`;
+            } else if (w.type === 'added') {
+              inlineContent += `<span class="diff-word-added">${escapeHtml(w.text)}</span>`;
+            } else {
+              inlineContent += escapeHtml(w.text);
+            }
+          });
+          
+          html += `<div class="diff-line diff-changed">
+            <span class="diff-line-num">${removed[0]?.origLine || ''}</span>
+            <span class="diff-line-content">${inlineContent}</span>
+          </div>`;
+        } else {
+          // Just show removed and added separately
+          removed.forEach(r => {
+            html += `<div class="diff-line diff-removed">
+              <span class="diff-line-num">${r.origLine}</span>
+              <span class="diff-line-prefix">-</span>
+              <span class="diff-line-content">${escapeHtml(r.content)}</span>
+            </div>`;
+          });
+          added.forEach(a => {
+            html += `<div class="diff-line diff-added">
+              <span class="diff-line-num">${a.modLine}</span>
+              <span class="diff-line-prefix">+</span>
+              <span class="diff-line-content">${escapeHtml(a.content)}</span>
+            </div>`;
+          });
+        }
+      }
+    }
+    
+    return html;
+  }
+  
+  // ========== MAIN COMPARE FUNCTION ==========
+  function compare() {
+    const original = originalText.value;
+    const modified = modifiedText.value;
+    
+    if (!original && !modified) {
+      showStatus(i18n.enterTexts, 'warning');
+      return;
+    }
+    
+    if (original === modified) {
+      showStatus(i18n.textsIdentical, 'success');
+      statAdded.textContent = '0';
+      statRemoved.textContent = '0';
+      statChanged.textContent = '0';
+      statUnchanged.textContent = original.split('\n').length;
+      diffResult.classList.remove('hidden');
+      diffOutput.innerHTML = '<div class="text-center py-8 text-success"><ion-icon name="checkmark-circle" class="text-4xl mb-2"></ion-icon><br>' + i18n.textsMatch + '</div>';
+      return;
+    }
+    
+    const options = {
+      ignoreCase: optIgnoreCase.checked,
+      ignoreWhitespace: optIgnoreWhitespace.checked,
+      trimLines: optTrimLines.checked,
+      wordDiff: optWordDiff.checked
+    };
+    
+    const diff = computeDiff(original, modified, options);
+    renderDiff(diff, currentViewMode, options);
+    
+    showStatus(i18n.comparisonDone, 'success');
+  }
+  
+  // ========== EVENT HANDLERS ==========
+  document.getElementById('compare-btn').onclick = compare;
+  
+  document.getElementById('swap-btn').onclick = () => {
+    [originalText.value, modifiedText.value] = [modifiedText.value, originalText.value];
+    updateLineCount();
+    showStatus(i18n.swapped, 'info');
+  };
+  
+  document.getElementById('clear-btn').onclick = () => {
+    originalText.value = '';
+    modifiedText.value = '';
+    diffResult.classList.add('hidden');
+    updateLineCount();
+  };
+  
+  // Paste buttons
+  document.getElementById('paste-original-btn').onclick = async () => {
+    try {
+      originalText.value = await navigator.clipboard.readText();
+      updateLineCount();
+      showStatus(i18n.pasted, 'info');
+    } catch {
+      showStatus(i18n.noClipboardAccess, 'warning');
+    }
+  };
+  
+  document.getElementById('paste-modified-btn').onclick = async () => {
+    try {
+      modifiedText.value = await navigator.clipboard.readText();
+      updateLineCount();
+      showStatus(i18n.pasted, 'info');
+    } catch {
+      showStatus(i18n.noClipboardAccess, 'warning');
+    }
+  };
+  
+  // Sample data
+  const sampleOriginal = `function greet(name) {
+  console.log("Hello, " + name);
+  return true;
+}
+
+const user = "World";
+greet(user);`;
+
+  const sampleModified = `function greet(name, greeting = "Hello") {
+  console.log(greeting + ", " + name + "!");
+  return true;
+}
+
+const user = "Universe";
+const message = greet(user, "Hi");
+console.log(message);`;
+
+  document.getElementById('sample-original-btn').onclick = () => {
+    originalText.value = sampleOriginal;
+    updateLineCount();
+  };
+  
+  document.getElementById('sample-modified-btn').onclick = () => {
+    modifiedText.value = sampleModified;
+    updateLineCount();
+  };
+  
+  // View mode buttons
+  document.querySelectorAll('.view-mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.view-mode-btn').forEach(b => {
+        b.dataset.active = 'false';
+        b.classList.remove('btn-active');
+      });
+      btn.dataset.active = 'true';
+      btn.classList.add('btn-active');
+      currentViewMode = btn.dataset.mode;
+      
+      // Re-render if we have results
+      if (!diffResult.classList.contains('hidden')) {
+        compare();
+      }
+    });
+  });
+  
+  // Context lines slider
+  contextLines.addEventListener('input', () => {
+    contextValue.textContent = contextLines.value;
+    if (!diffResult.classList.contains('hidden')) {
+      compare();
+    }
+  });
+  
+  // Copy diff
+  document.getElementById('copy-diff-btn').onclick = async () => {
+    const text = diffOutput.innerText;
+    await navigator.clipboard.writeText(text);
+    showStatus(i18n.diffCopied, 'success');
+  };
+  
+  // Download diff
+  document.getElementById('download-diff-btn').onclick = () => {
+    const original = originalText.value;
+    const modified = modifiedText.value;
+    
+    let diffText = `--- Original\n+++ Modified\n`;
+    const diff = computeDiff(original, modified, {
+      ignoreCase: optIgnoreCase.checked,
+      ignoreWhitespace: optIgnoreWhitespace.checked,
+      trimLines: optTrimLines.checked
+    });
+    
+    diff.forEach(d => {
+      if (d.type === 'unchanged') {
+        diffText += ` ${d.origContent}\n`;
+      } else if (d.type === 'removed') {
+        diffText += `-${d.content}\n`;
+      } else if (d.type === 'added') {
+        diffText += `+${d.content}\n`;
+      }
+    });
+    
+    const blob = new Blob([diffText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'changes.diff';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+  
+  // Line count updates
+  originalText.addEventListener('input', updateLineCount);
+  modifiedText.addEventListener('input', updateLineCount);
+  
+  // Hotkeys
+  document.addEventListener('keydown', (e) => {
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    const modifier = isMac ? e.metaKey : e.ctrlKey;
+    
+    if (modifier && e.key === 'Enter') {
+      e.preventDefault();
+      compare();
+    }
+    
+    if (modifier && e.shiftKey && (e.key === 's' || e.key === 'S' || e.key === 'ы' || e.key === 'Ы')) {
+      e.preventDefault();
+      document.getElementById('swap-btn').click();
+    }
+  });
+  
+  // Init
+  updateLineCount();
+  
+})();
+</script>
+
+{{ end }}

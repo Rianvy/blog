@@ -22,3 +22,5 @@ $ cat /etc/profile
 
 
 Open for collaboration 🤝 — готов к мёрджу идей и совместным проектам.
+
+![meme](/img/meme.webp)

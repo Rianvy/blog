@@ -1,0 +1,802 @@
+{{ define "title" }}
+{{ .Title | default "Утилиты" }}
+{{ end }}
+
+{{ define "main" }}
+
+{{ $allUtilities := .Pages }}
+
+<!-- Собираем данные -->
+{{ $categories := slice }}
+{{ range $allUtilities }}
+  {{ with .Params.category }}
+    {{ $categories = $categories | append . }}
+  {{ end }}
+{{ end }}
+{{ $uniqueCategories := uniq $categories }}
+
+<!-- Hero секция -->
+<section class="relative overflow-hidden">
+  
+  <!-- Анимированный фон -->
+  <div class="absolute inset-0 -z-10 overflow-hidden">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/8 rounded-full blur-3xl animate-pulse" 
+         style="animation-duration: 4s;"></div>
+    <div class="absolute top-40 right-20 w-96 h-96 bg-secondary/6 rounded-full blur-3xl animate-pulse" 
+         style="animation-duration: 6s; animation-delay: 1s;"></div>
+    <div class="absolute -bottom-20 left-1/3 w-80 h-80 bg-accent/5 rounded-full blur-3xl animate-pulse" 
+         style="animation-duration: 5s; animation-delay: 2s;"></div>
+    
+    <!-- Плавающие частицы -->
+    <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/20 rounded-full animate-bounce" 
+         style="animation-duration: 3s;"></div>
+    <div class="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-secondary/25 rounded-full animate-bounce" 
+         style="animation-duration: 4s; animation-delay: 0.5s;"></div>
+    <div class="absolute bottom-1/3 left-1/2 w-1 h-1 bg-accent/30 rounded-full animate-bounce" 
+         style="animation-duration: 3.5s; animation-delay: 1s;"></div>
+    
+    <!-- Сетка на фоне -->
+    <div class="absolute inset-0 opacity-[0.02] dark:opacity-[0.04]" 
+         style="background-image: 
+           radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); 
+           background-size: 40px 40px;">
+    </div>
+  </div>
+  
+  <!-- Градиенты по бокам -->
+  <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
+              bg-gradient-to-r from-base-100 via-base-100/80 to-transparent 
+              z-0 pointer-events-none"></div>
+  <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
+              bg-gradient-to-l from-base-100 via-base-100/80 to-transparent 
+              z-0 pointer-events-none"></div>
+  
+  <!-- Градиенты сверху и снизу -->
+  <div class="absolute left-0 right-0 top-0 h-20 sm:h-32 
+              bg-gradient-to-b from-base-100 to-transparent 
+              z-0 pointer-events-none"></div>
+  <div class="absolute left-0 right-0 bottom-0 h-20 sm:h-32 
+              bg-gradient-to-t from-base-100 to-transparent 
+              z-0 pointer-events-none"></div>
+  
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-10 sm:pt-20 pb-14 sm:pb-24">
+    
+    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+      
+      <!-- Текстовый блок -->
+      <div class="flex-1 text-center lg:text-left">
+        
+        <!-- Лейбл -->
+        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full 
+                    bg-base-100/80 backdrop-blur-sm shadow-lg shadow-base-content/5 
+                    border border-base-200 dark:border-base-content/10 mb-8
+                    hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-success"></span>
+          </span>
+          <span class="text-sm font-semibold text-base-content/70">
+            {{ len $allUtilities }} {{ i18n "utilities.toolsAvailable" | default "инструментов доступно" }}
+          </span>
+          <ion-icon name="arrow-forward" class="text-xs text-base-content/40"></ion-icon>
+        </div>
+        
+        <!-- Заголовок -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 leading-[1.05] tracking-tight">
+          <span class="block">
+            {{ i18n "utilities.heroTitle1" | default "Инструменты" }}
+          </span>
+          <span class="relative inline-block mt-1">
+            <span class="relative z-10 bg-gradient-to-r from-primary via-secondary to-accent 
+                         bg-clip-text text-transparent
+                         bg-[length:200%_auto] animate-[gradient-shift_3s_ease-in-out_infinite]">
+              {{ i18n "utilities.heroTitle2" | default "для разработчиков" }}
+            </span>
+            <!-- Улучшенная волнистая линия -->
+            <svg class="absolute -bottom-2 left-0 w-full h-4 text-primary/30" 
+                 viewBox="0 0 300 16" preserveAspectRatio="none">
+              <path d="M0,12 C50,4 100,16 150,8 C200,0 250,14 300,8" 
+                    fill="none" stroke="currentColor" stroke-width="3" 
+                    stroke-linecap="round" stroke-dasharray="300"
+                    stroke-dashoffset="300"
+                    style="animation: draw-line 1.5s ease-out 0.5s forwards;">
+              </path>
+            </svg>
+          </span>
+        </h1>
+        
+        <!-- Описание -->
+        <p class="text-lg sm:text-xl text-base-content/55 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+          {{ .Description | default "Форматируйте, кодируйте, генерируйте и конвертируйте — прямо в браузере. Никаких серверов, полная приватность." }}
+        </p>
+        
+        <!-- Фичи-пилюли -->
+        <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+          <div class="group flex items-center gap-2 px-5 py-2.5 rounded-full 
+                      bg-success/10 text-success text-sm font-semibold
+                      border border-success/10
+                      hover:bg-success/15 hover:border-success/20 hover:shadow-lg hover:shadow-success/10
+                      hover:scale-105 transition-all duration-300 cursor-default">
+            <ion-icon name="shield-checkmark" class="text-base group-hover:scale-110 transition-transform"></ion-icon>
+            {{ i18n "utilities.featurePrivate" | default "Данные не уходят" }}
+          </div>
+          <div class="group flex items-center gap-2 px-5 py-2.5 rounded-full 
+                      bg-primary/10 text-primary text-sm font-semibold
+                      border border-primary/10
+                      hover:bg-primary/15 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/10
+                      hover:scale-105 transition-all duration-300 cursor-default">
+            <ion-icon name="flash" class="text-base group-hover:scale-110 transition-transform"></ion-icon>
+            {{ i18n "utilities.featureInstant" | default "Мгновенно" }}
+          </div>
+          <div class="group flex items-center gap-2 px-5 py-2.5 rounded-full 
+                      bg-secondary/10 text-secondary text-sm font-semibold
+                      border border-secondary/10
+                      hover:bg-secondary/15 hover:border-secondary/20 hover:shadow-lg hover:shadow-secondary/10
+                      hover:scale-105 transition-all duration-300 cursor-default">
+            <ion-icon name="cloud-offline" class="text-base group-hover:scale-110 transition-transform"></ion-icon>
+            {{ i18n "utilities.featureOffline" | default "Работает офлайн" }}
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Визуальный блок -->
+      <div class="flex-shrink-0 w-full max-w-sm lg:max-w-md xl:max-w-lg">
+        <div class="relative group">
+          
+          <!-- Декоративные карточки на фоне с анимацией -->
+          <div class="absolute -top-4 -left-4 w-full h-full rounded-3xl 
+                      bg-gradient-to-br from-primary/8 to-secondary/5 
+                      rotate-3 group-hover:rotate-4 transition-transform duration-500"></div>
+          <div class="absolute -top-2 -left-2 w-full h-full rounded-3xl 
+                      bg-gradient-to-br from-secondary/6 to-accent/4 
+                      rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+          
+          <!-- Декоративное свечение за карточкой -->
+          <div class="absolute -inset-4 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 
+                      rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+          
+          <!-- Основная карточка -->
+          <div class="relative bg-base-100/90 backdrop-blur-sm rounded-3xl p-6 sm:p-8 
+                      shadow-2xl shadow-base-content/5 
+                      border border-base-200 dark:border-base-content/10
+                      group-hover:shadow-3xl group-hover:shadow-base-content/10 
+                      transition-all duration-500">
+            
+            <!-- Строка заголовка "окна" -->
+            <div class="flex items-center gap-2 mb-5">
+              <div class="flex gap-1.5">
+                <div class="w-3 h-3 rounded-full bg-error/60"></div>
+                <div class="w-3 h-3 rounded-full bg-warning/60"></div>
+                <div class="w-3 h-3 rounded-full bg-success/60"></div>
+              </div>
+              <div class="flex-1 h-6 rounded-lg bg-base-200/60 dark:bg-base-content/5 mx-2 
+                          flex items-center justify-center">
+                <span class="text-[10px] text-base-content/30 font-mono tracking-wider">
+                  {{ i18n "utilities.toolbox" | default "toolbox" }}
+                </span>
+              </div>
+            </div>
+            
+            <!-- Мини-превью утилит -->
+            <div class="grid grid-cols-3 gap-3 mb-6">
+              {{ range $index, $utility := first 6 $allUtilities }}
+              <div class="group/card aspect-square rounded-2xl 
+                          bg-gradient-to-br from-base-200/80 to-base-300/60 
+                          dark:from-base-content/5 dark:to-base-content/10
+                          flex flex-col items-center justify-center gap-1
+                          hover:scale-110 hover:-translate-y-1 
+                          hover:shadow-lg hover:shadow-primary/10
+                          transition-all duration-300 cursor-pointer
+                          border border-transparent hover:border-primary/20"
+                   style="animation-delay: {{ mul $index 100 }}ms;"
+                   title="{{ .Title }}">
+                <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
+                  {{ with .Params.icon }}{{ . }}{{ else }}🔧{{ end }}
+                </span>
+                <span class="text-[9px] text-base-content/40 font-medium truncate w-full text-center px-1 
+                             group-hover/card:text-base-content/70 transition-colors">
+                  {{ .Title | truncate 10 }}
+                </span>
+              </div>
+              {{ end }}
+            </div>
+            
+            <!-- Разделитель -->
+            <div class="h-px bg-gradient-to-r from-transparent via-base-content/10 to-transparent mb-5"></div>
+            
+            <!-- Статистика -->
+            <div class="grid grid-cols-2 gap-4">
+              <div class="text-center p-4 rounded-2xl 
+                          bg-gradient-to-br from-primary/5 to-primary/10 
+                          border border-primary/10
+                          hover:border-primary/20 transition-colors duration-300">
+                <div class="text-3xl sm:text-4xl font-black bg-gradient-to-br from-primary to-primary/70 
+                            bg-clip-text text-transparent mb-1">
+                  {{ len $allUtilities }}
+                </div>
+                <div class="text-[11px] text-base-content/50 uppercase tracking-widest font-semibold">
+                  {{ i18n "utilities.tools" | default "Утилит" }}
+                </div>
+              </div>
+              <div class="text-center p-4 rounded-2xl 
+                          bg-gradient-to-br from-secondary/5 to-secondary/10 
+                          border border-secondary/10
+                          hover:border-secondary/20 transition-colors duration-300">
+                <div class="text-3xl sm:text-4xl font-black bg-gradient-to-br from-secondary to-secondary/70 
+                            bg-clip-text text-transparent mb-1">
+                  {{ len $uniqueCategories }}
+                </div>
+                <div class="text-[11px] text-base-content/50 uppercase tracking-widest font-semibold">
+                  {{ i18n "utilities.categories" | default "Категорий" }}
+                </div>
+              </div>
+            </div>
+          
+            
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<!-- Фильтры -->
+{{ if gt (len $uniqueCategories) 0 }}
+<section class="relative bg-base-100/50 backdrop-blur-sm overflow-hidden">
+  
+  <!-- Затемнение по бокам -->
+  <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
+              bg-gradient-to-r from-base-100 via-base-100/80 to-transparent 
+              z-20 pointer-events-none"></div>
+  <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
+              bg-gradient-to-l from-base-100 via-base-100/80 to-transparent 
+              z-20 pointer-events-none"></div>
+  
+  <!-- Затемнённые бордеры сверху и снизу -->
+  <div class="absolute left-0 right-0 top-0 h-px">
+    <div class="absolute inset-0 bg-base-300 dark:bg-base-content/10"></div>
+    <div class="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 xl:w-64 bg-gradient-to-r from-base-100 to-transparent"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 xl:w-64 bg-gradient-to-l from-base-100 to-transparent"></div>
+  </div>
+  <div class="absolute left-0 right-0 bottom-0 h-px">
+    <div class="absolute inset-0 bg-base-300 dark:bg-base-content/10"></div>
+    <div class="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 xl:w-64 bg-gradient-to-r from-base-100 to-transparent"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 xl:w-64 bg-gradient-to-l from-base-100 to-transparent"></div>
+  </div>
+  
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+    
+    <div class="py-5">
+      
+      <div class="flex items-center gap-4">
+        
+        <!-- Лейбл -->
+        <div class="hidden sm:flex items-center gap-2 text-sm text-base-content/50 font-medium shrink-0">
+          <ion-icon name="filter-outline"></ion-icon>
+          {{ i18n "utilities.filterBy" | default "Фильтр:" }}
+        </div>
+        
+        <!-- Кнопка скролла влево -->
+        <button id="scroll-left" class="hidden sm:flex shrink-0 w-8 h-8 items-center justify-center rounded-lg
+                                        bg-base-200 hover:bg-base-300 text-base-content/60 transition-all
+                                        disabled:opacity-30 disabled:cursor-not-allowed" disabled>
+          <ion-icon name="chevron-back"></ion-icon>
+        </button>
+        
+        <!-- Контейнер табов -->
+        <div id="filters-container" class="flex-1 overflow-hidden relative">
+          
+          <!-- Градиенты для индикации скролла -->
+          <div id="fade-left" class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-base-100 to-transparent z-10 pointer-events-none opacity-0 transition-opacity"></div>
+          <div id="fade-right" class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-base-100 to-transparent z-10 pointer-events-none opacity-0 transition-opacity"></div>
+          
+          <!-- Скроллируемые табы -->
+          <div id="filters-scroll" class="flex items-center gap-2 overflow-x-auto scrollbar-hide scroll-smooth py-1">
+            
+            <!-- Все -->
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter="*"
+              data-state="checked">
+              <ion-icon name="apps-outline"></ion-icon>
+              <span>{{ i18n "utilities.all" | default "Все" }}</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                {{ len $allUtilities }}
+              </span>
+            </button>
+            
+            {{ range $index, $category := $uniqueCategories }}
+            {{ $count := 0 }}
+            {{ $icon := "folder-outline" }}
+            {{ range $allUtilities }}
+              {{ if eq .Params.category $category }}{{ $count = add $count 1 }}{{ end }}
+            {{ end }}
+            
+            {{ if eq $category "formatters" }}{{ $icon = "code-slash-outline" }}
+            {{ else if eq $category "encoders" }}{{ $icon = "key-outline" }}
+            {{ else if eq $category "generators" }}{{ $icon = "dice-outline" }}
+            {{ else if eq $category "converters" }}{{ $icon = "swap-horizontal-outline" }}
+            {{ else if eq $category "validators" }}{{ $icon = "checkmark-done-outline" }}
+            {{ else if eq $category "text" }}{{ $icon = "text-outline" }}
+            {{ else if eq $category "crypto" }}{{ $icon = "lock-closed-outline" }}
+            {{ else if eq $category "network" }}{{ $icon = "globe-outline" }}
+            {{ else if eq $category "images" }}{{ $icon = "image-outline" }}
+            {{ else if eq $category "comparison" }}{{ $icon = "git-compare-outline" }}
+            {{ else if eq $category "security" }}{{ $icon = "shield-outline" }}
+            {{ end }}
+            
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".cat-{{ $index }}"
+              data-state="unchecked">
+              <ion-icon name="{{ $icon }}"></ion-icon>
+              <span>{{ $category | humanize }}</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                {{ $count }}
+              </span>
+            </button>
+            {{ end }}
+            
+          </div>
+        </div>
+        
+        <!-- Кнопка скролла вправо -->
+        <button id="scroll-right" class="hidden sm:flex shrink-0 w-8 h-8 items-center justify-center rounded-lg
+                                         bg-base-200 hover:bg-base-300 text-base-content/60 transition-all
+                                         disabled:opacity-30 disabled:cursor-not-allowed">
+          <ion-icon name="chevron-forward"></ion-icon>
+        </button>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+{{ end }}
+
+<!-- Сетка утилит -->
+<section class="py-10 sm:py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    
+    {{ if $allUtilities }}
+    
+    <!-- Isotope Grid -->
+    <div id="utilities-grid" class="utilities-grid">
+      
+      {{ range $index, $utility := $allUtilities }}
+      
+      <!-- Находим индекс категории для CSS-класса -->
+      {{ $catClass := "" }}
+      {{ $currentCat := .Params.category }}
+      {{ range $i, $cat := $uniqueCategories }}
+        {{ if eq $cat $currentCat }}
+          {{ $catClass = printf "cat-%d" $i }}
+        {{ end }}
+      {{ end }}
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item {{ $catClass }}">
+        
+        <a href="{{ .RelPermalink }}" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          <!-- Заголовок карточки -->
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              <!-- Иконка -->
+              {{ $iconBg := "from-primary/10 to-primary/5" }}
+              {{ with .Params.category }}
+                {{ if eq . "formatters" }}{{ $iconBg = "from-blue-500/15 to-blue-500/5" }}
+                {{ else if eq . "encoders" }}{{ $iconBg = "from-purple-500/15 to-purple-500/5" }}
+                {{ else if eq . "generators" }}{{ $iconBg = "from-amber-500/15 to-amber-500/5" }}
+                {{ else if eq . "converters" }}{{ $iconBg = "from-emerald-500/15 to-emerald-500/5" }}
+                {{ else if eq . "validators" }}{{ $iconBg = "from-rose-500/15 to-rose-500/5" }}
+                {{ else if eq . "crypto" }}{{ $iconBg = "from-cyan-500/15 to-cyan-500/5" }}
+                {{ else if eq . "comparison" }}{{ $iconBg = "from-indigo-500/15 to-indigo-500/5" }}
+                {{ else if eq . "security" }}{{ $iconBg = "from-red-500/15 to-red-500/5" }}
+                {{ end }}
+              {{ end }}
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br {{ $iconBg }} 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                {{ with .Params.icon }}{{ . }}{{ else }}🔧{{ end }}
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                <!-- Название -->
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  {{ .Title }}
+                </h2>
+                
+                <!-- Категория + бейдж NEW -->
+                <div class="flex items-center gap-2">
+                  {{ with .Params.category }}
+                  <span class="text-xs text-base-content/50">
+                    {{ . | humanize }}
+                  </span>
+                  {{ end }}
+                  
+                  {{ $days := div (sub now.Unix .Date.Unix) 86400 }}
+                  {{ if lt $days 14 }}
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  {{ end }}
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            <!-- Описание -->
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              {{ .Description | default (.Summary | plainify | truncate 100) }}
+            </p>
+            
+          </div>
+          
+          <!-- Футер -->
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            <!-- Теги -->
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              {{ with .Params.tags }}
+                {{ range first 2 . }}
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  {{ . }}
+                </span>
+                {{ end }}
+                {{ if gt (len .) 2 }}
+                <span class="text-xs text-base-content/40">+{{ sub (len .) 2 }}</span>
+                {{ end }}
+              {{ end }}
+            </div>
+            
+            <!-- Стрелка -->
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">{{ i18n "utilities.open" | default "Открыть" }}</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      {{ end }}
+      
+    </div>
+    
+    <!-- Пустое состояние -->
+    <div id="utilities-no-results" class="hidden py-20 text-center">
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-base-200 mb-6">
+        <ion-icon name="search-outline" class="text-4xl text-base-content/30"></ion-icon>
+      </div>
+      <h3 class="text-xl font-bold mb-2">{{ i18n "utilities.noResults" | default "Ничего не найдено" }}</h3>
+      <p class="text-base-content/60 mb-6">{{ i18n "utilities.noResultsDesc" | default "В этой категории пока нет утилит" }}</p>
+      <button id="show-all-btn" class="btn btn-primary btn-sm gap-2">
+        <ion-icon name="apps-outline"></ion-icon>
+        {{ i18n "utilities.showAll" | default "Показать все" }}
+      </button>
+    </div>
+    
+    {{ else }}
+    
+    <!-- Нет утилит -->
+    <div class="py-24 text-center">
+      <div class="inline-flex items-center justify-center w-28 h-28 rounded-full 
+                  bg-gradient-to-br from-primary/10 to-secondary/10 mb-8">
+        <ion-icon name="construct-outline" class="text-6xl text-primary/40"></ion-icon>
+      </div>
+      <h3 class="text-2xl font-bold mb-4">{{ i18n "utilities.emptyTitle" | default "Раздел в разработке" }}</h3>
+      <p class="text-base-content/60 max-w-md mx-auto mb-8">
+        {{ i18n "utilities.emptyDesc" | default "Скоро здесь появятся полезные инструменты для разработчиков" }}
+      </p>
+      <a href="{{ "/" | relURL }}" class="btn btn-primary gap-2">
+        <ion-icon name="home-outline"></ion-icon>
+        {{ i18n "utilities.backHome" | default "На главную" }}
+      </a>
+    </div>
+    
+    {{ end }}
+    
+  </div>
+</section>
+
+<!-- Преимущества -->
+<section class="py-16 sm:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    
+    <!-- Заголовок -->
+    <div class="text-center mb-12 sm:mb-16">
+      <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+        {{ i18n "utilities.whyBadge" | default "Преимущества" }}
+      </span>
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+        {{ i18n "utilities.whyTitle" | default "Почему наши утилиты?" }}
+      </h2>
+      <p class="text-base-content/60 max-w-2xl mx-auto text-lg">
+        {{ i18n "utilities.whyDesc" | default "Инструменты, которые уважают вашу приватность и экономят время" }}
+      </p>
+    </div>
+    
+    <!-- Карточки -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+      
+      <!-- 1. Быстро -->
+      <div class="group relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative p-6 sm:p-8 rounded-2xl border border-base-200 dark:border-base-content/10 
+                    bg-base-100 hover:border-blue-500/30 transition-colors h-full">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 
+                      flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <ion-icon name="flash" class="text-2xl text-blue-500"></ion-icon>
+          </div>
+          <h3 class="text-lg font-bold mb-2">{{ i18n "utilities.benefit1Title" | default "Молниеносно" }}</h3>
+          <p class="text-sm text-base-content/60 leading-relaxed">
+            {{ i18n "utilities.benefit1Desc" | default "Всё работает локально. Никаких задержек на отправку данных на сервер" }}
+          </p>
+        </div>
+      </div>
+      
+      <!-- 2. Приватно -->
+      <div class="group relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative p-6 sm:p-8 rounded-2xl border border-base-200 dark:border-base-content/10 
+                    bg-base-100 hover:border-green-500/30 transition-colors h-full">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 
+                      flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <ion-icon name="shield-checkmark" class="text-2xl text-green-500"></ion-icon>
+          </div>
+          <h3 class="text-lg font-bold mb-2">{{ i18n "utilities.benefit2Title" | default "Приватно" }}</h3>
+          <p class="text-sm text-base-content/60 leading-relaxed">
+            {{ i18n "utilities.benefit2Desc" | default "Данные обрабатываются только в вашем браузере. Мы ничего не храним" }}
+          </p>
+        </div>
+      </div>
+      
+      <!-- 3. Офлайн -->
+      <div class="group relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative p-6 sm:p-8 rounded-2xl border border-base-200 dark:border-base-content/10 
+                    bg-base-100 hover:border-purple-500/30 transition-colors h-full">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 
+                      flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <ion-icon name="cloud-offline" class="text-2xl text-purple-500"></ion-icon>
+          </div>
+          <h3 class="text-lg font-bold mb-2">{{ i18n "utilities.benefit3Title" | default "Работает офлайн" }}</h3>
+          <p class="text-sm text-base-content/60 leading-relaxed">
+            {{ i18n "utilities.benefit3Desc" | default "После загрузки страницы интернет больше не нужен" }}
+          </p>
+        </div>
+      </div>
+      
+      <!-- 4. Бесплатно -->
+      <div class="group relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative p-6 sm:p-8 rounded-2xl border border-base-200 dark:border-base-content/10 
+                    bg-base-100 hover:border-amber-500/30 transition-colors h-full">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 
+                      flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <ion-icon name="heart" class="text-2xl text-amber-500"></ion-icon>
+          </div>
+          <h3 class="text-lg font-bold mb-2">{{ i18n "utilities.benefit4Title" | default "Бесплатно" }}</h3>
+          <p class="text-sm text-base-content/60 leading-relaxed">
+            {{ i18n "utilities.benefit4Desc" | default "Никаких подписок, регистраций и рекламы. Навсегда" }}
+          </p>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+<!-- Isotope JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+<script>
+(function() {
+  'use strict';
+  
+  var grid = document.getElementById('utilities-grid');
+  if (!grid) return;
+  
+  var noResults = document.getElementById('utilities-no-results');
+  var showAllBtn = document.getElementById('show-all-btn');
+  var iso = null;
+  
+  // Скролл фильтров
+  var filtersScroll = document.getElementById('filters-scroll');
+  var scrollLeftBtn = document.getElementById('scroll-left');
+  var scrollRightBtn = document.getElementById('scroll-right');
+  var fadeLeft = document.getElementById('fade-left');
+  var fadeRight = document.getElementById('fade-right');
+  
+  function updateScrollButtons() {
+    if (!filtersScroll || !scrollLeftBtn || !scrollRightBtn) return;
+    
+    var scrollLeft = filtersScroll.scrollLeft;
+    var maxScroll = filtersScroll.scrollWidth - filtersScroll.clientWidth;
+    
+    scrollLeftBtn.disabled = scrollLeft <= 0;
+    scrollRightBtn.disabled = scrollLeft >= maxScroll - 1;
+    
+    if (fadeLeft) fadeLeft.style.opacity = scrollLeft > 0 ? '1' : '0';
+    if (fadeRight) fadeRight.style.opacity = scrollLeft < maxScroll - 1 ? '1' : '0';
+  }
+  
+  if (scrollLeftBtn && filtersScroll) {
+    scrollLeftBtn.addEventListener('click', function() {
+      filtersScroll.scrollBy({ left: -200, behavior: 'smooth' });
+    });
+  }
+  
+  if (scrollRightBtn && filtersScroll) {
+    scrollRightBtn.addEventListener('click', function() {
+      filtersScroll.scrollBy({ left: 200, behavior: 'smooth' });
+    });
+  }
+  
+  if (filtersScroll) {
+    filtersScroll.addEventListener('scroll', updateScrollButtons);
+    window.addEventListener('resize', updateScrollButtons);
+    setTimeout(updateScrollButtons, 100);
+  }
+  
+  function initIsotope() {
+    if (iso) return;
+    
+    try {
+      iso = new Isotope(grid, {
+        itemSelector: '.utility-item',
+        layoutMode: 'fitRows',
+        transitionDuration: '0.4s',
+        stagger: 30,
+        percentPosition: true,
+        fitRows: {
+          gutter: 0
+        }
+      });
+      
+      grid.classList.add('is-loaded');
+      
+      var filterButtons = document.querySelectorAll('.utility-filter-btn');
+      
+      filterButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          var filterValue = this.getAttribute('data-filter');
+          
+          if (iso) {
+            iso.arrange({ filter: filterValue });
+          }
+
+          filterButtons.forEach(function(btn) {
+            btn.setAttribute('data-state', 'unchecked');
+          });
+          this.setAttribute('data-state', 'checked');
+          
+          if (filtersScroll) {
+            var btnRect = this.getBoundingClientRect();
+            var containerRect = filtersScroll.getBoundingClientRect();
+            
+            if (btnRect.left < containerRect.left || btnRect.right > containerRect.right) {
+              this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+          }
+        });
+      });
+      
+      iso.on('arrangeComplete', function(filteredItems) {
+        if (noResults) {
+          if (filteredItems.length === 0) {
+            noResults.classList.remove('hidden');
+            grid.style.display = 'none';
+          } else {
+            noResults.classList.add('hidden');
+            grid.style.display = '';
+          }
+        }
+      });
+      
+      if (showAllBtn) {
+        showAllBtn.addEventListener('click', function() {
+          var allBtn = document.querySelector('.utility-filter-btn[data-filter="*"]');
+          if (allBtn) {
+            allBtn.click();
+          }
+        });
+      }
+      
+    } catch (e) {
+      console.error('Utilities Isotope init error:', e);
+    }
+  }
+  
+  function relayout() {
+    if (iso) {
+      try {
+        iso.layout();
+      } catch (e) {}
+    }
+  }
+  
+  function startInit() {
+    setTimeout(function() {
+      initIsotope();
+      setTimeout(relayout, 100);
+      setTimeout(relayout, 300);
+    }, 50);
+  }
+  
+  if (document.readyState === 'complete') {
+    startInit();
+  } else {
+    window.addEventListener('load', startInit);
+  }
+  
+  if ('fonts' in document) {
+    document.fonts.ready.then(function() {
+      setTimeout(relayout, 50);
+    });
+  }
+  
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(relayout, 250);
+  });
+  
+})();
+</script>
+
+<style>
+.utilities-grid {
+  display: flex;
+  flex-wrap: wrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.utilities-grid.is-loaded {
+  opacity: 1;
+}
+
+.utility-item {
+  box-sizing: border-box;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+</style>
+
+{{ end }}

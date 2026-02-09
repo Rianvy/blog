@@ -1,0 +1,761 @@
+{{ define "title" }}
+{{ default "Image Upscaler" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">🔍</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">{{ .Description }}</p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        {{ i18n "imageUpscaler.inBrowser" | default "100% в браузере" }}
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="resize-outline"></ion-icon>
+        {{ i18n "imageUpscaler.lanczos" | default "Lanczos Resampling" }}
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="expand-outline"></ion-icon>
+        {{ i18n "imageUpscaler.upTo4x" | default "До 4x" }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Основной контент -->
+  <div class="max-w-5xl mx-auto">
+
+    <!-- Загрузка изображения -->
+    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden mb-6">
+      <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+        <h2 class="font-semibold flex items-center gap-2">
+          <ion-icon name="cloud-upload-outline" class="text-primary"></ion-icon>
+          {{ i18n "imageUpscaler.uploadImage" | default "Загрузка изображения" }}
+        </h2>
+      </div>
+      
+      <div class="p-4">
+        
+        <!-- Dropzone -->
+        <div 
+          id="dropzone"
+          class="relative p-8 sm:p-12 border-2 border-dashed border-base-300 rounded-xl
+                 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer
+                 flex flex-col items-center justify-center text-center min-h-[200px]"
+        >
+          <div id="dropzone-empty">
+            <div class="w-20 h-20 rounded-2xl bg-base-200 flex items-center justify-center mb-4 mx-auto">
+              <ion-icon name="image-outline" class="text-4xl text-base-content/50"></ion-icon>
+            </div>
+            <p class="font-medium mb-1">{{ i18n "imageUpscaler.dropImage" | default "Перетащите изображение сюда" }}</p>
+            <p class="text-sm text-base-content/60 mb-3">{{ i18n "imageUpscaler.orClickToSelect" | default "или нажмите для выбора" }}</p>
+            <div class="flex justify-center gap-2 text-xs text-base-content/40">
+              <span class="px-2 py-1 bg-base-200 rounded">PNG</span>
+              <span class="px-2 py-1 bg-base-200 rounded">JPG</span>
+              <span class="px-2 py-1 bg-base-200 rounded">WebP</span>
+              <span class="px-2 py-1 bg-base-200 rounded">{{ i18n "imageUpscaler.upToMb" | default "до 5 MB" }}</span>
+            </div>
+          </div>
+          
+          <!-- Preview -->
+          <div id="dropzone-preview" class="hidden w-full">
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+              <div class="relative">
+                <img id="source-preview" src="" alt="Source" class="max-w-[200px] max-h-[200px] rounded-xl shadow-lg" />
+                <button id="remove-image" class="absolute -top-2 -right-2 btn btn-circle btn-error btn-sm">
+                  <ion-icon name="close-outline"></ion-icon>
+                </button>
+              </div>
+              <div class="text-left">
+                <div class="font-medium" id="source-name">image.png</div>
+                <div class="text-sm text-base-content/60" id="source-info">1920 × 1080 • 2.4 MB</div>
+                <div class="text-sm text-base-content/60" id="source-dimensions"></div>
+              </div>
+            </div>
+          </div>
+          
+          <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp" class="hidden" />
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- Настройки -->
+    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden mb-6">
+      <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+        <h2 class="font-semibold flex items-center gap-2">
+          <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+          {{ i18n "imageUpscaler.settings" | default "Настройки" }}
+        </h2>
+      </div>
+      
+      <div class="p-4 space-y-6">
+        
+        <!-- Масштаб -->
+        <div>
+          <label class="label py-1">
+            <span class="label-text font-medium">{{ i18n "imageUpscaler.scaleTitle" | default "Масштаб увеличения" }}</span>
+          </label>
+          <div class="grid grid-cols-3 gap-3">
+            <label class="flex flex-col items-center gap-2 p-4 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="scale" value="2" class="hidden" checked />
+              <span class="text-2xl font-bold">2x</span>
+              <span class="text-xs text-base-content/60">{{ i18n "imageUpscaler.fast" | default "Быстро" }}</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-4 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="scale" value="3" class="hidden" />
+              <span class="text-2xl font-bold">3x</span>
+              <span class="text-xs text-base-content/60">{{ i18n "imageUpscaler.medium" | default "Средне" }}</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-4 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="scale" value="4" class="hidden" />
+              <span class="text-2xl font-bold">4x</span>
+              <span class="text-xs text-base-content/60">{{ i18n "imageUpscaler.slow" | default "Долго" }}</span>
+            </label>
+          </div>
+        </div>
+        
+        <!-- Тип изображения -->
+        <div>
+          <label class="label py-1">
+            <span class="label-text font-medium">{{ i18n "imageUpscaler.imageType" | default "Тип изображения" }}</span>
+            <span class="label-text-alt text-base-content/50">{{ i18n "imageUpscaler.affectsSharpness" | default "влияет на резкость" }}</span>
+          </label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="type" value="auto" class="hidden" checked />
+              <ion-icon name="options-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">{{ i18n "imageUpscaler.auto" | default "Авто" }}</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="type" value="anime" class="hidden" />
+              <ion-icon name="happy-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">{{ i18n "imageUpscaler.animeArt" | default "Аниме/Арт" }}</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="type" value="photo" class="hidden" />
+              <ion-icon name="camera-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">{{ i18n "imageUpscaler.photo" | default "Фото" }}</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="type" value="cg" class="hidden" />
+              <ion-icon name="cube-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">{{ i18n "imageUpscaler.cg3d" | default "CG/3D" }}</span>
+            </label>
+          </div>
+        </div>
+        
+        <!-- Сглаживание -->
+        <div>
+          <label class="label py-1">
+            <span class="label-text font-medium">{{ i18n "imageUpscaler.smoothing" | default "Сглаживание" }}</span>
+            <span class="label-text-alt text-base-content/50">{{ i18n "imageUpscaler.reducesNoise" | default "уменьшает шум и артефакты" }}</span>
+          </label>
+          <div class="grid grid-cols-4 gap-3">
+            <label class="flex flex-col items-center gap-1 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="denoise" value="0" class="hidden" checked />
+              <span class="text-sm font-bold">{{ i18n "imageUpscaler.none" | default "Нет" }}</span>
+            </label>
+            <label class="flex flex-col items-center gap-1 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="denoise" value="1" class="hidden" />
+              <span class="text-sm font-bold">{{ i18n "imageUpscaler.light" | default "Лёгкое" }}</span>
+            </label>
+            <label class="flex flex-col items-center gap-1 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="denoise" value="2" class="hidden" />
+              <span class="text-sm font-bold">{{ i18n "imageUpscaler.mediumSmooth" | default "Среднее" }}</span>
+            </label>
+            <label class="flex flex-col items-center gap-1 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="denoise" value="3" class="hidden" />
+              <span class="text-sm font-bold">{{ i18n "imageUpscaler.strong" | default "Сильное" }}</span>
+            </label>
+          </div>
+        </div>
+        
+        <!-- Предпросмотр результата -->
+        <div id="result-preview-info" class="p-4 bg-base-200/50 rounded-xl">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-sm text-base-content/60">{{ i18n "imageUpscaler.originalSize" | default "Исходный размер:" }}</span>
+              <span class="font-mono font-medium ml-2" id="original-size">— × —</span>
+            </div>
+            <ion-icon name="arrow-forward-outline" class="text-xl text-base-content/40"></ion-icon>
+            <div>
+              <span class="text-sm text-base-content/60">{{ i18n "imageUpscaler.resultSize" | default "Результат:" }}</span>
+              <span class="font-mono font-medium ml-2 text-primary" id="result-size">— × —</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Кнопка обработки -->
+        <button id="process-btn" class="btn btn-primary btn-lg w-full gap-2" disabled>
+          <ion-icon name="resize-outline" class="text-xl"></ion-icon>
+          {{ i18n "imageUpscaler.upscaleImage" | default "Увеличить изображение" }}
+        </button>
+        
+      </div>
+    </div>
+
+    <!-- Прогресс -->
+    <div id="progress-section" class="hidden bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden mb-6">
+      <div class="p-6">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="loading loading-spinner loading-lg text-primary"></div>
+          <div>
+            <h3 class="font-semibold" id="progress-title">{{ i18n "imageUpscaler.processing" | default "Обработка..." }}</h3>
+            <p class="text-sm text-base-content/60" id="progress-status">{{ i18n "imageUpscaler.preparingImage" | default "Подготовка изображения" }}</p>
+          </div>
+        </div>
+        
+        <progress id="progress-bar" class="progress progress-primary w-full" value="0" max="100"></progress>
+        <div class="flex justify-between text-xs text-base-content/50 mt-2">
+          <span id="progress-percent">0%</span>
+          <span id="progress-time">{{ i18n "imageUpscaler.remaining" | default "Осталось:" }} ~</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Результат -->
+    <div id="result-section" class="hidden bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden mb-6">
+      <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between">
+        <h2 class="font-semibold flex items-center gap-2">
+          <ion-icon name="checkmark-circle-outline" class="text-success"></ion-icon>
+          {{ i18n "imageUpscaler.result" | default "Результат" }}
+        </h2>
+        <div class="flex gap-2">
+          <button id="download-result" class="btn btn-primary btn-sm gap-1">
+            <ion-icon name="download-outline"></ion-icon>
+            {{ i18n "imageUpscaler.download" | default "Скачать" }}
+          </button>
+        </div>
+      </div>
+      
+      <div class="p-4">
+        
+        <!-- Сравнение -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          
+          <!-- До -->
+          <div class="text-center">
+            <div class="text-sm text-base-content/60 mb-2">{{ i18n "imageUpscaler.before" | default "До" }}</div>
+            <div class="bg-[repeating-conic-gradient(#80808015_0%_25%,transparent_0%_50%)] bg-[length:16px_16px] rounded-xl p-4 flex items-center justify-center min-h-[200px]">
+              <img id="compare-before" src="" alt="Before" class="max-w-full max-h-[300px] rounded-lg shadow-lg" />
+            </div>
+            <div class="text-xs text-base-content/50 mt-2" id="before-dimensions">— × —</div>
+          </div>
+          
+          <!-- После -->
+          <div class="text-center">
+            <div class="text-sm text-base-content/60 mb-2">{{ i18n "imageUpscaler.after" | default "После" }}</div>
+            <div class="bg-[repeating-conic-gradient(#80808015_0%_25%,transparent_0%_50%)] bg-[length:16px_16px] rounded-xl p-4 flex items-center justify-center min-h-[200px]">
+              <img id="compare-after" src="" alt="After" class="max-w-full max-h-[300px] rounded-lg shadow-lg" />
+            </div>
+            <div class="text-xs text-base-content/50 mt-2" id="after-dimensions">— × —</div>
+          </div>
+          
+        </div>
+        
+        <!-- Статистика -->
+        <div class="grid grid-cols-3 gap-3">
+          <div class="p-3 rounded-xl bg-base-200/50 text-center">
+            <div class="text-xl font-bold text-primary" id="stat-scale">2x</div>
+            <div class="text-xs text-base-content/60">{{ i18n "imageUpscaler.scale" | default "Масштаб" }}</div>
+          </div>
+          <div class="p-3 rounded-xl bg-base-200/50 text-center">
+            <div class="text-xl font-bold text-secondary" id="stat-time">0.0s</div>
+            <div class="text-xs text-base-content/60">{{ i18n "imageUpscaler.time" | default "Время" }}</div>
+          </div>
+          <div class="p-3 rounded-xl bg-base-200/50 text-center">
+            <div class="text-xl font-bold text-accent" id="stat-size">0 KB</div>
+            <div class="text-xs text-base-content/60">{{ i18n "imageUpscaler.fileSize" | default "Размер файла" }}</div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- Информация -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-success/10 flex items-center justify-center mb-3">
+          <ion-icon name="shield-checkmark-outline" class="text-2xl text-success"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">{{ i18n "imageUpscaler.privacy" | default "Приватность" }}</h3>
+        <p class="text-sm text-base-content/60">{{ i18n "imageUpscaler.privacyDesc" | default "Изображения обрабатываются локально в вашем браузере и никуда не отправляются." }}</p>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+          <ion-icon name="analytics-outline" class="text-2xl text-primary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">{{ i18n "imageUpscaler.lanczosAlgorithm" | default "Алгоритм Lanczos" }}</h3>
+        <p class="text-sm text-base-content/60">{{ i18n "imageUpscaler.lanczosDesc" | default "Высококачественный алгоритм интерполяции для увеличения без сильной пикселизации." }}</p>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-3">
+          <ion-icon name="color-wand-outline" class="text-2xl text-secondary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">{{ i18n "imageUpscaler.postProcessing" | default "Пост-обработка" }}</h3>
+        <p class="text-sm text-base-content/60">{{ i18n "imageUpscaler.postProcessingDesc" | default "Автоматическое повышение резкости и сглаживание для лучшего результата." }}</p>
+      </div>
+      
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Локализация
+  var i18n = {
+    fileTooLarge: {{ i18n "imageUpscaler.fileTooLarge" | default "Файл слишком большой. Максимум 5 MB." | jsonify }},
+    failedToLoad: {{ i18n "imageUpscaler.failedToLoad" | default "Не удалось загрузить изображение" | jsonify }},
+    fileReadError: {{ i18n "imageUpscaler.fileReadError" | default "Ошибка чтения файла" | jsonify }},
+    selectImage: {{ i18n "imageUpscaler.selectImage" | default "Выберите изображение (PNG, JPG, WebP)" | jsonify }},
+    processingImage: {{ i18n "imageUpscaler.processingImage" | default "Обработка изображения..." | jsonify }},
+    initialization: {{ i18n "imageUpscaler.initialization" | default "Инициализация" | jsonify }},
+    smoothingProcess: {{ i18n "imageUpscaler.smoothingProcess" | default "Сглаживание..." | jsonify }},
+    upscalingLanczos: {{ i18n "imageUpscaler.upscalingLanczos" | default "Увеличение (Lanczos)..." | jsonify }},
+    sharpening: {{ i18n "imageUpscaler.sharpening" | default "Повышение резкости..." | jsonify }},
+    done: {{ i18n "imageUpscaler.done" | default "Готово!" | jsonify }},
+    remaining: {{ i18n "imageUpscaler.remaining" | default "Осталось:" | jsonify }},
+    processingError: {{ i18n "imageUpscaler.processingError" | default "Ошибка обработки:" | jsonify }}
+  };
+  
+  // ========== STATE ==========
+  var sourceImage = null;
+  var sourceWidth = 0;
+  var sourceHeight = 0;
+  var resultDataUrl = null;
+  var processing = false;
+  
+  // ========== ELEMENTS ==========
+  var dropzone = document.getElementById('dropzone');
+  var fileInput = document.getElementById('file-input');
+  var dropzoneEmpty = document.getElementById('dropzone-empty');
+  var dropzonePreview = document.getElementById('dropzone-preview');
+  var sourcePreview = document.getElementById('source-preview');
+  var processBtn = document.getElementById('process-btn');
+  var progressSection = document.getElementById('progress-section');
+  var resultSection = document.getElementById('result-section');
+  
+  // ========== UTILITIES ==========
+  
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    var k = 1024;
+    var sizes = ['B', 'KB', 'MB'];
+    var idx = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, idx)).toFixed(1)) + ' ' + sizes[idx];
+  }
+  
+  // ========== IMAGE LOADING ==========
+  
+  function loadImage(file) {
+    return new Promise(function(resolve, reject) {
+      if (file.size > 5 * 1024 * 1024) {
+        reject(new Error(i18n.fileTooLarge));
+        return;
+      }
+      
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var img = new Image();
+        img.onload = function() {
+          resolve({ image: img, dataUrl: e.target.result, file: file });
+        };
+        img.onerror = function() {
+          reject(new Error(i18n.failedToLoad));
+        };
+        img.src = e.target.result;
+      };
+      reader.onerror = function() {
+        reject(new Error(i18n.fileReadError));
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  
+  function handleFile(file) {
+    if (!file || !file.type.startsWith('image/')) {
+      alert(i18n.selectImage);
+      return;
+    }
+    
+    loadImage(file).then(function(result) {
+      sourceImage = result.image;
+      sourceWidth = result.image.width;
+      sourceHeight = result.image.height;
+      
+      dropzoneEmpty.classList.add('hidden');
+      dropzonePreview.classList.remove('hidden');
+      sourcePreview.src = result.dataUrl;
+      document.getElementById('source-name').textContent = file.name;
+      document.getElementById('source-info').textContent = 
+        sourceWidth + ' × ' + sourceHeight + ' • ' + formatBytes(file.size);
+      
+      updateResultPreview();
+      processBtn.disabled = false;
+      resultSection.classList.add('hidden');
+      
+    }).catch(function(err) {
+      alert(err.message);
+    });
+  }
+  
+  function removeImage() {
+    sourceImage = null;
+    sourceWidth = 0;
+    sourceHeight = 0;
+    resultDataUrl = null;
+    
+    dropzoneEmpty.classList.remove('hidden');
+    dropzonePreview.classList.add('hidden');
+    processBtn.disabled = true;
+    resultSection.classList.add('hidden');
+    fileInput.value = '';
+    
+    updateResultPreview();
+  }
+  
+  function updateResultPreview() {
+    var scale = parseInt(document.querySelector('input[name="scale"]:checked').value);
+    
+    if (sourceWidth && sourceHeight) {
+      document.getElementById('original-size').textContent = sourceWidth + ' × ' + sourceHeight;
+      document.getElementById('result-size').textContent = (sourceWidth * scale) + ' × ' + (sourceHeight * scale);
+    } else {
+      document.getElementById('original-size').textContent = '— × —';
+      document.getElementById('result-size').textContent = '— × —';
+    }
+  }
+  
+  // ========== UPSCALING (Lanczos + Sharpening) ==========
+  
+  function lanczosKernel(x, a) {
+    if (x === 0) return 1;
+    if (Math.abs(x) >= a) return 0;
+    var pix = Math.PI * x;
+    return (a * Math.sin(pix) * Math.sin(pix / a)) / (pix * pix);
+  }
+  
+  function upscaleLanczos(sourceCanvas, scale, onProgress) {
+    return new Promise(function(resolve) {
+      var sw = sourceCanvas.width;
+      var sh = sourceCanvas.height;
+      var dw = Math.floor(sw * scale);
+      var dh = Math.floor(sh * scale);
+      
+      var destCanvas = document.createElement('canvas');
+      destCanvas.width = dw;
+      destCanvas.height = dh;
+      var destCtx = destCanvas.getContext('2d');
+      
+      var srcCtx = sourceCanvas.getContext('2d');
+      var srcData = srcCtx.getImageData(0, 0, sw, sh);
+      var destData = destCtx.createImageData(dw, dh);
+      
+      var a = 3;
+      var totalPixels = dw * dh;
+      var lastProgress = 0;
+      
+      var chunkSize = 1000;
+      var currentPixel = 0;
+      
+      function processChunk() {
+        var endPixel = Math.min(currentPixel + chunkSize, totalPixels);
+        
+        for (var idx = currentPixel; idx < endPixel; idx++) {
+          var dx = idx % dw;
+          var dy = Math.floor(idx / dw);
+          
+          var sx = dx / scale;
+          var sy = dy / scale;
+          
+          var r = 0, g = 0, b = 0, alpha = 0, totalWeight = 0;
+          
+          var x0 = Math.floor(sx) - a + 1;
+          var x1 = Math.floor(sx) + a;
+          var y0 = Math.floor(sy) - a + 1;
+          var y1 = Math.floor(sy) + a;
+          
+          for (var y = y0; y <= y1; y++) {
+            for (var x = x0; x <= x1; x++) {
+              var px = Math.max(0, Math.min(sw - 1, x));
+              var py = Math.max(0, Math.min(sh - 1, y));
+              
+              var weight = lanczosKernel(sx - x, a) * lanczosKernel(sy - y, a);
+              
+              var srcIdx = (py * sw + px) * 4;
+              r += srcData.data[srcIdx] * weight;
+              g += srcData.data[srcIdx + 1] * weight;
+              b += srcData.data[srcIdx + 2] * weight;
+              alpha += srcData.data[srcIdx + 3] * weight;
+              totalWeight += weight;
+            }
+          }
+          
+          var destIdx = idx * 4;
+          if (totalWeight > 0) {
+            destData.data[destIdx] = Math.max(0, Math.min(255, Math.round(r / totalWeight)));
+            destData.data[destIdx + 1] = Math.max(0, Math.min(255, Math.round(g / totalWeight)));
+            destData.data[destIdx + 2] = Math.max(0, Math.min(255, Math.round(b / totalWeight)));
+            destData.data[destIdx + 3] = Math.max(0, Math.min(255, Math.round(alpha / totalWeight)));
+          }
+        }
+        
+        currentPixel = endPixel;
+        
+        var progress = Math.round((currentPixel / totalPixels) * 100);
+        if (progress !== lastProgress) {
+          onProgress(progress);
+          lastProgress = progress;
+        }
+        
+        if (currentPixel < totalPixels) {
+          setTimeout(processChunk, 0);
+        } else {
+          destCtx.putImageData(destData, 0, 0);
+          resolve(destCanvas);
+        }
+      }
+      
+      processChunk();
+    });
+  }
+  
+  function applySharpen(canvas, amount) {
+    if (amount <= 0) return canvas;
+    
+    var ctx = canvas.getContext('2d');
+    var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var data = imageData.data;
+    var w = canvas.width;
+    var h = canvas.height;
+    
+    var factor = amount * 0.3;
+    var copy = new Uint8ClampedArray(data);
+    
+    for (var y = 1; y < h - 1; y++) {
+      for (var x = 1; x < w - 1; x++) {
+        var idx = (y * w + x) * 4;
+        
+        for (var c = 0; c < 3; c++) {
+          var center = copy[idx + c] * (1 + 4 * factor);
+          var neighbors = (
+            copy[((y - 1) * w + x) * 4 + c] +
+            copy[((y + 1) * w + x) * 4 + c] +
+            copy[(y * w + x - 1) * 4 + c] +
+            copy[(y * w + x + 1) * 4 + c]
+          ) * factor;
+          
+          data[idx + c] = Math.max(0, Math.min(255, Math.round(center - neighbors)));
+        }
+      }
+    }
+    
+    ctx.putImageData(imageData, 0, 0);
+    return canvas;
+  }
+  
+  function applySmoothing(canvas, level) {
+    if (level <= 0) return canvas;
+    
+    var ctx = canvas.getContext('2d');
+    var w = canvas.width;
+    var h = canvas.height;
+    
+    var radius = level;
+    var imageData = ctx.getImageData(0, 0, w, h);
+    var data = imageData.data;
+    var copy = new Uint8ClampedArray(data);
+    
+    for (var y = radius; y < h - radius; y++) {
+      for (var x = radius; x < w - radius; x++) {
+        var idx = (y * w + x) * 4;
+        
+        for (var c = 0; c < 3; c++) {
+          var sum = 0;
+          var count = 0;
+          
+          for (var dy = -radius; dy <= radius; dy++) {
+            for (var dx = -radius; dx <= radius; dx++) {
+              var nidx = ((y + dy) * w + (x + dx)) * 4 + c;
+              sum += copy[nidx];
+              count++;
+            }
+          }
+          
+          var blurred = sum / count;
+          var blend = level * 0.2;
+          data[idx + c] = Math.round(copy[idx + c] * (1 - blend) + blurred * blend);
+        }
+      }
+    }
+    
+    ctx.putImageData(imageData, 0, 0);
+    return canvas;
+  }
+  
+  // ========== PROCESS ==========
+  
+  function processImage() {
+    if (!sourceImage || processing) return;
+    
+    processing = true;
+    var startTime = Date.now();
+    
+    var scale = parseInt(document.querySelector('input[name="scale"]:checked').value);
+    var smoothing = parseInt(document.querySelector('input[name="denoise"]:checked').value);
+    var imageType = document.querySelector('input[name="type"]:checked').value;
+    
+    progressSection.classList.remove('hidden');
+    resultSection.classList.add('hidden');
+    processBtn.disabled = true;
+    
+    document.getElementById('progress-title').textContent = i18n.processingImage;
+    document.getElementById('progress-status').textContent = i18n.initialization;
+    document.getElementById('progress-bar').value = 0;
+    document.getElementById('progress-percent').textContent = '0%';
+    
+    var sourceCanvas = document.createElement('canvas');
+    sourceCanvas.width = sourceWidth;
+    sourceCanvas.height = sourceHeight;
+    var sourceCtx = sourceCanvas.getContext('2d');
+    sourceCtx.drawImage(sourceImage, 0, 0);
+    
+    if (smoothing > 0) {
+      document.getElementById('progress-status').textContent = i18n.smoothingProcess;
+      sourceCanvas = applySmoothing(sourceCanvas, smoothing);
+    }
+    
+    document.getElementById('progress-status').textContent = i18n.upscalingLanczos;
+    
+    upscaleLanczos(sourceCanvas, scale, function(progress) {
+      document.getElementById('progress-bar').value = progress * 0.9;
+      document.getElementById('progress-percent').textContent = Math.round(progress * 0.9) + '%';
+      
+      var elapsed = (Date.now() - startTime) / 1000;
+      var estimated = (elapsed / progress) * (100 - progress);
+      document.getElementById('progress-time').textContent = i18n.remaining + ' ~' + Math.round(estimated) + 's';
+    }).then(function(resultCanvas) {
+      
+      document.getElementById('progress-status').textContent = i18n.sharpening;
+      document.getElementById('progress-bar').value = 95;
+      
+      var sharpenAmount = 0;
+      if (imageType === 'anime' || imageType === 'cg') {
+        sharpenAmount = 1.5;
+      } else if (imageType === 'photo') {
+        sharpenAmount = 0.8;
+      } else {
+        sharpenAmount = 1.0;
+      }
+      
+      resultCanvas = applySharpen(resultCanvas, sharpenAmount);
+      
+      document.getElementById('progress-bar').value = 100;
+      document.getElementById('progress-percent').textContent = '100%';
+      document.getElementById('progress-status').textContent = i18n.done;
+      
+      resultDataUrl = resultCanvas.toDataURL('image/png');
+      var endTime = Date.now();
+      var duration = ((endTime - startTime) / 1000).toFixed(1);
+      
+      document.getElementById('compare-before').src = sourceCanvas.toDataURL('image/png');
+      document.getElementById('compare-after').src = resultDataUrl;
+      document.getElementById('before-dimensions').textContent = sourceWidth + ' × ' + sourceHeight;
+      document.getElementById('after-dimensions').textContent = resultCanvas.width + ' × ' + resultCanvas.height;
+      
+      document.getElementById('stat-scale').textContent = scale + 'x';
+      document.getElementById('stat-time').textContent = duration + 's';
+      
+      var base64Length = resultDataUrl.length - 'data:image/png;base64,'.length;
+      var fileSize = Math.round(base64Length * 0.75);
+      document.getElementById('stat-size').textContent = formatBytes(fileSize);
+      
+      setTimeout(function() {
+        progressSection.classList.add('hidden');
+        resultSection.classList.remove('hidden');
+        processBtn.disabled = false;
+        processing = false;
+      }, 500);
+      
+    }).catch(function(err) {
+      console.error('Processing error:', err);
+      alert(i18n.processingError + ' ' + err.message);
+      progressSection.classList.add('hidden');
+      processBtn.disabled = false;
+      processing = false;
+    });
+  }
+  
+  function downloadResult() {
+    if (!resultDataUrl) return;
+    
+    var link = document.createElement('a');
+    link.download = 'upscaled-image.png';
+    link.href = resultDataUrl;
+    link.click();
+  }
+  
+  // ========== EVENT LISTENERS ==========
+  
+  dropzone.addEventListener('click', function(e) {
+    if (!e.target.closest('#remove-image')) {
+      fileInput.click();
+    }
+  });
+  
+  dropzone.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    this.classList.add('border-primary', 'bg-primary/5');
+  });
+  
+  dropzone.addEventListener('dragleave', function() {
+    this.classList.remove('border-primary', 'bg-primary/5');
+  });
+  
+  dropzone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    this.classList.remove('border-primary', 'bg-primary/5');
+    if (e.dataTransfer.files[0]) {
+      handleFile(e.dataTransfer.files[0]);
+    }
+  });
+  
+  fileInput.addEventListener('change', function(e) {
+    if (e.target.files[0]) {
+      handleFile(e.target.files[0]);
+    }
+  });
+  
+  document.getElementById('remove-image').addEventListener('click', function(e) {
+    e.stopPropagation();
+    removeImage();
+  });
+  
+  document.querySelectorAll('input[name="scale"]').forEach(function(radio) {
+    radio.addEventListener('change', updateResultPreview);
+  });
+  
+  processBtn.addEventListener('click', processImage);
+  
+  document.getElementById('download-result').addEventListener('click', downloadResult);
+  
+})();
+</script>
+
+{{ end }}

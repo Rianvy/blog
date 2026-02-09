@@ -1,5 +1,3 @@
-{{/* layouts/partials/renderMobileNavItem.html */}}
-
 {{- $item := .item -}}
 {{- $site := .site -}}
 
@@ -77,6 +75,24 @@
     <span class="flex-1">{{ i18n "portfolio.title" }}</span>
     {{ if gt $portfolioCount 0 }}
     <span class="{{ $badgeClass }}">{{ $portfolioCount }}</span>
+    {{ end }}
+  </a>
+</li>
+
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
+{{/* UTILITIES                                                                */}}
+{{/* ═══════════════════════════════════════════════════════════════════════ */}}
+{{ else if and (eq $item "utilities") ($site.Params.utilities) (gt (len (where $site.RegularPages "Type" "utilities")) 0) }}
+{{- $utilitiesCount := len (where $site.RegularPages "Type" "utilities") -}}
+<li role="none">
+  <a href="{{ "utilities" | relLangURL }}" 
+     role="menuitem"
+     class="{{ $menuItemClass }}"
+     title="{{ i18n "utilities.title" | default "Utilities" }}">
+    <ion-icon name="grid-outline" class="{{ $menuIconClass }}"></ion-icon>
+    <span class="flex-1">{{ i18n "utilities.title" | default "Утилиты" }}</span>
+    {{ if gt $utilitiesCount 0 }}
+    <span class="{{ $badgeClass }}">{{ $utilitiesCount }}</span>
     {{ end }}
   </a>
 </li>

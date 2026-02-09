@@ -1,0 +1,970 @@
+{{ define "title" }}
+{{ i18n "base64.title" | default "Base64 Encoder/Decoder" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero секция -->
+  <div class="text-center mb-8 sm:mb-12">
+    
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}🔐{{ end }}</span>
+    </div>
+    
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">
+      {{ .Description | default "Кодирование и декодирование текста и файлов в Base64" }}
+    </p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        {{ i18n "base64.securityBadge" | default "Данные не отправляются на сервер" }}
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="flash-outline"></ion-icon>
+        {{ i18n "base64.speedBadge" | default "Мгновенная обработка" }}
+      </span>
+    </div>
+    
+  </div>
+
+  <!-- Табы режимов -->
+  <div class="max-w-6xl mx-auto">
+    
+    <div class="tabs tabs-boxed justify-center mb-6 bg-base-200 p-1 rounded-xl">
+      <button class="tab tab-lg gap-2 mode-tab data-[active=true]:tab-active" data-mode="text" data-active="true">
+        <ion-icon name="text-outline"></ion-icon>
+        {{ i18n "base64.modeText" | default "Текст" }}
+      </button>
+      <button class="tab tab-lg gap-2 mode-tab" data-mode="file" data-active="false">
+        <ion-icon name="document-outline"></ion-icon>
+        {{ i18n "base64.modeFile" | default "Файл" }}
+      </button>
+      <button class="tab tab-lg gap-2 mode-tab" data-mode="image" data-active="false">
+        <ion-icon name="image-outline"></ion-icon>
+        {{ i18n "base64.modeImage" | default "Изображение" }}
+      </button>
+    </div>
+
+    <!-- ==================== РЕЖИМ: ТЕКСТ ==================== -->
+    <div id="mode-text" class="mode-content">
+      
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        
+        <!-- Панель инструментов -->
+        <div class="flex flex-wrap items-center justify-between gap-3 p-4 bg-base-200/50 border-b border-base-200 dark:border-base-content/10">
+          
+          <div class="flex flex-wrap items-center gap-2">
+            <button id="text-encode-btn" class="btn btn-primary btn-sm gap-1.5">
+              <ion-icon name="lock-closed-outline"></ion-icon>
+              <span class="hidden sm:inline">{{ i18n "base64.encode" | default "Encode" }}</span>
+            </button>
+            <button id="text-decode-btn" class="btn btn-secondary btn-sm gap-1.5">
+              <ion-icon name="lock-open-outline"></ion-icon>
+              <span class="hidden sm:inline">{{ i18n "base64.decode" | default "Decode" }}</span>
+            </button>
+            <button id="text-swap-btn" class="btn btn-ghost btn-sm gap-1.5">
+              <ion-icon name="swap-vertical-outline"></ion-icon>
+              <span class="hidden sm:inline">{{ i18n "base64.swap" | default "Поменять" }}</span>
+            </button>
+          </div>
+          
+          <div class="flex items-center gap-2">
+            <button id="text-sample-btn" class="btn btn-ghost btn-sm gap-1.5">
+              <ion-icon name="document-text-outline"></ion-icon>
+              <span class="hidden md:inline">{{ i18n "base64.sample" | default "Пример" }}</span>
+            </button>
+            <button id="text-clear-btn" class="btn btn-ghost btn-sm gap-1.5 text-error hover:bg-error/10">
+              <ion-icon name="trash-outline"></ion-icon>
+              <span class="hidden md:inline">{{ i18n "base64.clear" | default "Очистить" }}</span>
+            </button>
+          </div>
+          
+        </div>
+
+        <!-- Редакторы -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-base-200 dark:divide-base-content/10">
+          
+          <!-- Текст -->
+          <div class="flex flex-col">
+            <div class="flex items-center justify-between px-4 py-2.5 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+              <div class="flex items-center gap-2">
+                <ion-icon name="text-outline" class="text-lg text-primary"></ion-icon>
+                <span class="font-medium text-sm">{{ i18n "base64.textLabel" | default "Текст" }}</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <button id="text-paste-btn" class="btn btn-ghost btn-xs gap-1 hover:bg-primary/10 hover:text-primary">
+                  <ion-icon name="clipboard-outline"></ion-icon>
+                  {{ i18n "base64.paste" | default "Вставить" }}
+                </button>
+              </div>
+            </div>
+            
+            <div class="relative flex-1">
+              <textarea 
+                id="text-input" 
+                class="w-full h-64 lg:h-80 p-4 font-mono text-sm bg-transparent border-0 focus:outline-none focus:ring-0 resize-none placeholder:text-base-content/30"
+                placeholder="{{ i18n "base64.textPlaceholder" | default "Введите текст для кодирования..." }}"
+                spellcheck="false"
+              ></textarea>
+              <div class="absolute bottom-2 right-2 text-xs text-base-content/40 bg-base-100/80 backdrop-blur px-2 py-1 rounded">
+                <span id="text-input-chars">0</span> {{ i18n "base64.characters" | default "символов" }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Base64 -->
+          <div class="flex flex-col">
+            <div class="flex items-center justify-between px-4 py-2.5 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+              <div class="flex items-center gap-2">
+                <ion-icon name="key-outline" class="text-lg text-secondary"></ion-icon>
+                <span class="font-medium text-sm">Base64</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <button id="text-copy-btn" class="btn btn-ghost btn-xs gap-1 hover:bg-success/10 hover:text-success">
+                  <ion-icon name="copy-outline"></ion-icon>
+                  {{ i18n "base64.copy" | default "Копировать" }}
+                </button>
+              </div>
+            </div>
+            
+            <div class="relative flex-1">
+              <textarea 
+                id="text-output" 
+                class="w-full h-64 lg:h-80 p-4 font-mono text-sm bg-base-200/20 border-0 focus:outline-none focus:ring-0 resize-none"
+                placeholder="{{ i18n "base64.resultPlaceholder" | default "Результат появится здесь..." }}"
+              ></textarea>
+              <div class="absolute bottom-2 right-2 text-xs text-base-content/40 bg-base-100/80 backdrop-blur px-2 py-1 rounded">
+                <span id="text-output-chars">0</span> {{ i18n "base64.characters" | default "символов" }}
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+        <!-- Статус -->
+        <div id="text-status" class="hidden px-4 py-3 border-t border-base-200 dark:border-base-content/10">
+          <div class="flex items-center gap-2">
+            <ion-icon id="text-status-icon" name="information-circle" class="text-lg"></ion-icon>
+            <span id="text-status-text" class="text-sm"></span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Опции -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        
+        <!-- Настройки кодирования -->
+        <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 p-4">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-base-200">
+              <ion-icon name="settings-outline" class="text-xl"></ion-icon>
+            </div>
+            <div>
+              <h3 class="font-semibold">{{ i18n "base64.settings" | default "Настройки" }}</h3>
+              <p class="text-xs text-base-content/60">{{ i18n "base64.settingsDesc" | default "Параметры кодирования" }}</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3">
+            <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+              <input type="checkbox" id="text-url-safe" class="checkbox checkbox-sm checkbox-primary" />
+              <div>
+                <span class="text-sm font-medium">{{ i18n "base64.urlSafe" | default "URL-safe Base64" }}</span>
+                <p class="text-xs text-base-content/60">{{ i18n "base64.urlSafeDesc" | default "Заменяет + на - и / на _" }}</p>
+              </div>
+            </label>
+            
+            <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+              <input type="checkbox" id="text-line-break" class="checkbox checkbox-sm checkbox-primary" />
+              <div>
+                <span class="text-sm font-medium">{{ i18n "base64.lineBreak" | default "Разбивать на строки" }}</span>
+                <p class="text-xs text-base-content/60">{{ i18n "base64.lineBreakDesc" | default "76 символов в строке (MIME)" }}</p>
+              </div>
+            </label>
+          </div>
+        </div>
+        
+        <!-- Статистика -->
+        <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 p-4">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-info/10 text-info">
+              <ion-icon name="analytics-outline" class="text-xl"></ion-icon>
+            </div>
+            <div>
+              <h3 class="font-semibold">{{ i18n "base64.statistics" | default "Статистика" }}</h3>
+              <p class="text-xs text-base-content/60">{{ i18n "base64.statisticsDesc" | default "Информация о данных" }}</p>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3 rounded-xl bg-base-200/50">
+              <div class="text-2xl font-bold text-primary" id="text-stat-original">—</div>
+              <div class="text-xs text-base-content/60">{{ i18n "base64.originalSize" | default "Исходный размер" }}</div>
+            </div>
+            <div class="p-3 rounded-xl bg-base-200/50">
+              <div class="text-2xl font-bold text-secondary" id="text-stat-encoded">—</div>
+              <div class="text-xs text-base-content/60">{{ i18n "base64.encodedSize" | default "Base64 размер" }}</div>
+            </div>
+            <div class="p-3 rounded-xl bg-base-200/50 col-span-2">
+              <div class="text-2xl font-bold text-accent" id="text-stat-ratio">—</div>
+              <div class="text-xs text-base-content/60">{{ i18n "base64.sizeIncrease" | default "Увеличение размера" }}</div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+
+    <!-- ==================== РЕЖИМ: ФАЙЛ ==================== -->
+    <div id="mode-file" class="mode-content hidden">
+      
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        
+        <!-- Dropzone -->
+        <div 
+          id="file-dropzone"
+          class="p-8 sm:p-12 border-2 border-dashed border-base-300 rounded-xl m-4 
+                 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer
+                 flex flex-col items-center justify-center text-center"
+        >
+          <div class="w-16 h-16 rounded-2xl bg-base-200 flex items-center justify-center mb-4">
+            <ion-icon name="cloud-upload-outline" class="text-3xl text-base-content/50"></ion-icon>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">{{ i18n "base64.dropFile" | default "Перетащите файл сюда" }}</h3>
+          <p class="text-sm text-base-content/60 mb-4">{{ i18n "base64.orClickToSelect" | default "или нажмите для выбора" }}</p>
+          <p class="text-xs text-base-content/40">{{ i18n "base64.maxFileSize" | default "Максимум 10 MB" }}</p>
+          <input type="file" id="file-input" class="hidden" />
+        </div>
+
+        <!-- Информация о файле -->
+        <div id="file-info" class="hidden p-4 border-t border-base-200 dark:border-base-content/10">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                <ion-icon id="file-icon" name="document-outline" class="text-2xl text-primary"></ion-icon>
+              </div>
+              <div>
+                <div class="font-medium" id="file-name">filename.txt</div>
+                <div class="text-sm text-base-content/60" id="file-size">0 KB</div>
+              </div>
+            </div>
+            <button id="file-remove-btn" class="btn btn-ghost btn-sm btn-circle text-error">
+              <ion-icon name="close-outline" class="text-xl"></ion-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Результат -->
+        <div id="file-result" class="hidden">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-base-200/30 border-t border-base-200 dark:border-base-content/10">
+            <div class="flex items-center gap-2">
+              <ion-icon name="key-outline" class="text-lg text-secondary"></ion-icon>
+              <span class="font-medium text-sm">{{ i18n "base64.base64Result" | default "Base64 результат" }}</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <button id="file-copy-btn" class="btn btn-ghost btn-xs gap-1 hover:bg-success/10 hover:text-success">
+                <ion-icon name="copy-outline"></ion-icon>
+                {{ i18n "base64.copy" | default "Копировать" }}
+              </button>
+              <button id="file-download-btn" class="btn btn-ghost btn-xs gap-1 hover:bg-primary/10 hover:text-primary">
+                <ion-icon name="download-outline"></ion-icon>
+                {{ i18n "base64.downloadTxt" | default "Скачать .txt" }}
+              </button>
+            </div>
+          </div>
+          
+          <div class="relative">
+            <textarea 
+              id="file-output" 
+              class="w-full h-48 p-4 font-mono text-xs bg-base-200/20 border-0 focus:outline-none focus:ring-0 resize-none"
+              readonly
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Статус -->
+        <div id="file-status" class="hidden px-4 py-3 border-t border-base-200 dark:border-base-content/10">
+          <div class="flex items-center gap-2">
+            <ion-icon id="file-status-icon" name="information-circle" class="text-lg"></ion-icon>
+            <span id="file-status-text" class="text-sm"></span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Data URL опция -->
+      <div class="mt-6 p-4 bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10">
+        <label class="flex items-center gap-3 cursor-pointer">
+          <input type="checkbox" id="file-data-url" class="checkbox checkbox-primary" checked />
+          <div>
+            <span class="font-medium">{{ i18n "base64.addDataUrl" | default "Добавить Data URL префикс" }}</span>
+            <p class="text-sm text-base-content/60">data:mime/type;base64,...</p>
+          </div>
+        </label>
+      </div>
+      
+    </div>
+
+    <!-- ==================== РЕЖИМ: ИЗОБРАЖЕНИЕ ==================== -->
+    <div id="mode-image" class="mode-content hidden">
+      
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        
+        <!-- Dropzone -->
+        <div 
+          id="image-dropzone"
+          class="p-8 sm:p-12 border-2 border-dashed border-base-300 rounded-xl m-4 
+                 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer
+                 flex flex-col items-center justify-center text-center"
+        >
+          <div class="w-16 h-16 rounded-2xl bg-base-200 flex items-center justify-center mb-4">
+            <ion-icon name="image-outline" class="text-3xl text-base-content/50"></ion-icon>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">{{ i18n "base64.dropImage" | default "Перетащите изображение сюда" }}</h3>
+          <p class="text-sm text-base-content/60 mb-4">PNG, JPG, GIF, SVG, WebP</p>
+          <p class="text-xs text-base-content/40">{{ i18n "base64.maxImageSize" | default "Максимум 5 MB" }}</p>
+          <input type="file" id="image-input" accept="image/*" class="hidden" />
+        </div>
+
+        <!-- Превью изображения -->
+        <div id="image-preview-container" class="hidden p-4 border-t border-base-200 dark:border-base-content/10">
+          <div class="flex flex-col sm:flex-row items-start gap-4">
+            <div class="w-full sm:w-48 h-48 rounded-xl bg-base-200 overflow-hidden flex items-center justify-center">
+              <img id="image-preview" src="" alt="Preview" class="max-w-full max-h-full object-contain" />
+            </div>
+            <div class="flex-1">
+              <div class="font-medium mb-1" id="image-name">image.png</div>
+              <div class="text-sm text-base-content/60 space-y-1">
+                <div id="image-size">0 KB</div>
+                <div id="image-dimensions">0 × 0 px</div>
+                <div id="image-type">image/png</div>
+              </div>
+              <button id="image-remove-btn" class="btn btn-ghost btn-sm text-error mt-3">
+                <ion-icon name="trash-outline" class="mr-1"></ion-icon>
+                {{ i18n "base64.remove" | default "Удалить" }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Результат -->
+        <div id="image-result" class="hidden">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-base-200/30 border-t border-base-200 dark:border-base-content/10">
+            <div class="flex items-center gap-2">
+              <ion-icon name="key-outline" class="text-lg text-secondary"></ion-icon>
+              <span class="font-medium text-sm">Base64 / Data URL</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <button id="image-copy-btn" class="btn btn-ghost btn-xs gap-1 hover:bg-success/10 hover:text-success">
+                <ion-icon name="copy-outline"></ion-icon>
+                {{ i18n "base64.copy" | default "Копировать" }}
+              </button>
+              <button id="image-copy-css-btn" class="btn btn-ghost btn-xs gap-1 hover:bg-accent/10 hover:text-accent">
+                <ion-icon name="code-slash-outline"></ion-icon>
+                CSS
+              </button>
+              <button id="image-copy-html-btn" class="btn btn-ghost btn-xs gap-1 hover:bg-primary/10 hover:text-primary">
+                <ion-icon name="code-outline"></ion-icon>
+                HTML
+              </button>
+            </div>
+          </div>
+          
+          <div class="relative">
+            <textarea 
+              id="image-output" 
+              class="w-full h-32 p-4 font-mono text-xs bg-base-200/20 border-0 focus:outline-none focus:ring-0 resize-none"
+              readonly
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Статус -->
+        <div id="image-status" class="hidden px-4 py-3 border-t border-base-200 dark:border-base-content/10">
+          <div class="flex items-center gap-2">
+            <ion-icon id="image-status-icon" name="information-circle" class="text-lg"></ion-icon>
+            <span id="image-status-text" class="text-sm"></span>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+
+    <!-- Decode Base64 to File -->
+    <div class="mt-8">
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-secondary/10 text-secondary">
+                <ion-icon name="lock-open-outline" class="text-xl"></ion-icon>
+              </div>
+              <div>
+                <h3 class="font-semibold">{{ i18n "base64.decodeToFile" | default "Декодировать Base64 в файл" }}</h3>
+                <p class="text-xs text-base-content/60">{{ i18n "base64.decodeToFileDesc" | default "Вставьте Base64 строку и скачайте файл" }}</p>
+              </div>
+            </div>
+            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          
+          <div class="p-4 border-t border-base-200 dark:border-base-content/10">
+            <textarea 
+              id="decode-input" 
+              class="textarea textarea-bordered w-full h-32 font-mono text-sm"
+              placeholder="{{ i18n "base64.decodePlaceholder" | default "Вставьте Base64 строку (с data:... префиксом или без)..." }}"
+            ></textarea>
+            
+            <div class="flex flex-wrap items-center gap-3 mt-4">
+              <div class="form-control">
+                <label class="label py-0">
+                  <span class="label-text text-sm">{{ i18n "base64.filename" | default "Имя файла:" }}</span>
+                </label>
+                <input type="text" id="decode-filename" class="input input-bordered input-sm w-48" value="decoded-file" />
+              </div>
+              
+              <button id="decode-btn" class="btn btn-secondary btn-sm gap-1.5 mt-auto">
+                <ion-icon name="download-outline"></ion-icon>
+                {{ i18n "base64.decodeAndDownload" | default "Декодировать и скачать" }}
+              </button>
+            </div>
+            
+            <!-- Превью если изображение -->
+            <div id="decode-preview" class="hidden mt-4 p-4 bg-base-200/50 rounded-xl">
+              <p class="text-sm text-base-content/60 mb-2">{{ i18n "base64.preview" | default "Превью:" }}</p>
+              <img id="decode-preview-img" src="" alt="Decoded preview" class="max-w-xs max-h-48 rounded-lg" />
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Горячие клавиши -->
+    <div class="mt-6 p-4 rounded-2xl bg-base-200/30 border border-base-200 dark:border-base-content/10">
+      <div class="flex items-center gap-2 mb-3">
+        <ion-icon name="keypad-outline" class="text-lg text-base-content/60"></ion-icon>
+        <span class="text-sm font-medium text-base-content/60">{{ i18n "base64.hotkeys" | default "Горячие клавиши" }}</span>
+      </div>
+      <div class="flex flex-wrap gap-4 text-sm text-base-content/60">
+        <div class="flex items-center gap-2">
+          <kbd class="kbd kbd-sm">Ctrl</kbd>
+          <span>+</span>
+          <kbd class="kbd kbd-sm">Enter</kbd>
+          <span>→ Encode</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <kbd class="kbd kbd-sm">Ctrl</kbd>
+          <span>+</span>
+          <kbd class="kbd kbd-sm">Shift</kbd>
+          <span>+</span>
+          <kbd class="kbd kbd-sm">Enter</kbd>
+          <span>→ Decode</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- JavaScript -->
+<script>
+(function() {
+  'use strict';
+  
+  // Локализованные сообщения
+  const i18n = {
+    enterTextToEncode: {{ i18n "base64.js.enterTextToEncode" | default "Введите текст для кодирования" | jsonify }},
+    textEncoded: {{ i18n "base64.js.textEncoded" | default "🔒 Текст закодирован в Base64!" | jsonify }},
+    error: {{ i18n "base64.js.error" | default "❌ Ошибка: " | jsonify }},
+    enterBase64ToDecode: {{ i18n "base64.js.enterBase64ToDecode" | default "Введите Base64 для декодирования" | jsonify }},
+    base64Decoded: {{ i18n "base64.js.base64Decoded" | default "🔓 Base64 декодирован!" | jsonify }},
+    invalidBase64: {{ i18n "base64.js.invalidBase64" | default "❌ Невалидный Base64: " | jsonify }},
+    pasted: {{ i18n "base64.js.pasted" | default "📋 Вставлено!" | jsonify }},
+    noClipboardAccess: {{ i18n "base64.js.noClipboardAccess" | default "Нет доступа к буферу" | jsonify }},
+    copied: {{ i18n "base64.js.copied" | default "📋 Скопировано!" | jsonify }},
+    fileTooLarge: {{ i18n "base64.js.fileTooLarge" | default "Файл слишком большой (макс. 10 MB)" | jsonify }},
+    fileEncoded: {{ i18n "base64.js.fileEncoded" | default "✅ Файл закодирован!" | jsonify }},
+    selectImage: {{ i18n "base64.js.selectImage" | default "Выберите изображение" | jsonify }},
+    imageTooLarge: {{ i18n "base64.js.imageTooLarge" | default "Изображение слишком большое (макс. 5 MB)" | jsonify }},
+    imageEncoded: {{ i18n "base64.js.imageEncoded" | default "✅ Изображение закодировано!" | jsonify }},
+    dataUrlCopied: {{ i18n "base64.js.dataUrlCopied" | default "📋 Data URL скопирован!" | jsonify }},
+    cssCopied: {{ i18n "base64.js.cssCopied" | default "📋 CSS скопирован!" | jsonify }},
+    htmlCopied: {{ i18n "base64.js.htmlCopied" | default "📋 HTML скопирован!" | jsonify }},
+    decodeError: {{ i18n "base64.js.decodeError" | default "Ошибка декодирования: " | jsonify }},
+    sampleText: {{ i18n "base64.js.sampleText" | default "Привет, мир! Hello, World! 🌍\nBase64 кодирует любой текст." | jsonify }}
+  };
+  
+  // ========== ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ ==========
+  const modeTabs = document.querySelectorAll('.mode-tab');
+  const modeContents = document.querySelectorAll('.mode-content');
+  
+  modeTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const mode = tab.dataset.mode;
+      
+      modeTabs.forEach(t => {
+        t.dataset.active = 'false';
+        t.classList.remove('tab-active');
+      });
+      tab.dataset.active = 'true';
+      tab.classList.add('tab-active');
+      
+      modeContents.forEach(content => {
+        content.classList.add('hidden');
+      });
+      document.getElementById('mode-' + mode).classList.remove('hidden');
+    });
+  });
+  
+  // ========== УТИЛИТЫ ==========
+  function showStatus(prefix, message, type) {
+    const status = document.getElementById(prefix + '-status');
+    const icon = document.getElementById(prefix + '-status-icon');
+    const text = document.getElementById(prefix + '-status-text');
+    
+    const icons = {
+      success: 'checkmark-circle',
+      error: 'alert-circle',
+      warning: 'warning',
+      info: 'information-circle'
+    };
+    const colors = {
+      success: 'text-success bg-success/10',
+      error: 'text-error bg-error/10',
+      warning: 'text-warning bg-warning/10',
+      info: 'text-info bg-info/10'
+    };
+    
+    status.className = `px-4 py-3 border-t border-base-200 dark:border-base-content/10 ${colors[type]}`;
+    icon.setAttribute('name', icons[type]);
+    text.textContent = message;
+    status.classList.remove('hidden');
+    
+    if (type === 'success' || type === 'info') {
+      setTimeout(() => status.classList.add('hidden'), 3000);
+    }
+  }
+  
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+  
+  function utf8ToBase64(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+  }
+  
+  function base64ToUtf8(str) {
+    return decodeURIComponent(escape(atob(str)));
+  }
+  
+  // ========== РЕЖИМ: ТЕКСТ ==========
+  const textInput = document.getElementById('text-input');
+  const textOutput = document.getElementById('text-output');
+  const textInputChars = document.getElementById('text-input-chars');
+  const textOutputChars = document.getElementById('text-output-chars');
+  const textStatOriginal = document.getElementById('text-stat-original');
+  const textStatEncoded = document.getElementById('text-stat-encoded');
+  const textStatRatio = document.getElementById('text-stat-ratio');
+  
+  function updateTextStats() {
+    textInputChars.textContent = textInput.value.length.toLocaleString();
+    textOutputChars.textContent = textOutput.value.length.toLocaleString();
+  }
+  
+  function textEncode() {
+    if (!textInput.value) {
+      showStatus('text', i18n.enterTextToEncode, 'warning');
+      return;
+    }
+    
+    try {
+      let result = utf8ToBase64(textInput.value);
+      
+      // URL-safe
+      if (document.getElementById('text-url-safe').checked) {
+        result = result.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+      }
+      
+      // Line breaks
+      if (document.getElementById('text-line-break').checked) {
+        result = result.match(/.{1,76}/g).join('\n');
+      }
+      
+      textOutput.value = result;
+      updateTextStats();
+      
+      // Stats
+      const originalSize = new Blob([textInput.value]).size;
+      const encodedSize = result.replace(/\n/g, '').length;
+      textStatOriginal.textContent = formatBytes(originalSize);
+      textStatEncoded.textContent = formatBytes(encodedSize);
+      textStatRatio.textContent = '+' + Math.round((encodedSize / originalSize - 1) * 100) + '%';
+      
+      showStatus('text', i18n.textEncoded, 'success');
+    } catch (e) {
+      showStatus('text', i18n.error + e.message, 'error');
+    }
+  }
+  
+  function textDecode() {
+    const input = textOutput.value.trim() || textInput.value.trim();
+    if (!input) {
+      showStatus('text', i18n.enterBase64ToDecode, 'warning');
+      return;
+    }
+    
+    try {
+      // Remove line breaks and URL-safe chars
+      let clean = input.replace(/\n/g, '').replace(/-/g, '+').replace(/_/g, '/');
+      
+      // Add padding if needed
+      while (clean.length % 4) {
+        clean += '=';
+      }
+      
+      const result = base64ToUtf8(clean);
+      textInput.value = result;
+      updateTextStats();
+      
+      showStatus('text', i18n.base64Decoded, 'success');
+    } catch (e) {
+      showStatus('text', i18n.invalidBase64 + e.message, 'error');
+    }
+  }
+  
+  document.getElementById('text-encode-btn').onclick = textEncode;
+  document.getElementById('text-decode-btn').onclick = textDecode;
+  
+  document.getElementById('text-swap-btn').onclick = () => {
+    [textInput.value, textOutput.value] = [textOutput.value, textInput.value];
+    updateTextStats();
+  };
+  
+  document.getElementById('text-clear-btn').onclick = () => {
+    textInput.value = '';
+    textOutput.value = '';
+    updateTextStats();
+    textStatOriginal.textContent = '—';
+    textStatEncoded.textContent = '—';
+    textStatRatio.textContent = '—';
+  };
+  
+  document.getElementById('text-sample-btn').onclick = () => {
+    textInput.value = i18n.sampleText;
+    updateTextStats();
+  };
+  
+  document.getElementById('text-paste-btn').onclick = async () => {
+    try {
+      textInput.value = await navigator.clipboard.readText();
+      updateTextStats();
+      showStatus('text', i18n.pasted, 'info');
+    } catch {
+      showStatus('text', i18n.noClipboardAccess, 'warning');
+    }
+  };
+  
+  document.getElementById('text-copy-btn').onclick = async () => {
+    if (textOutput.value) {
+      await navigator.clipboard.writeText(textOutput.value);
+      showStatus('text', i18n.copied, 'success');
+    }
+  };
+  
+  textInput.addEventListener('input', updateTextStats);
+  textOutput.addEventListener('input', updateTextStats);
+  
+  // ========== РЕЖИМ: ФАЙЛ ==========
+  const fileDropzone = document.getElementById('file-dropzone');
+  const fileInput = document.getElementById('file-input');
+  const fileInfo = document.getElementById('file-info');
+  const fileResult = document.getElementById('file-result');
+  const fileOutput = document.getElementById('file-output');
+  
+  function handleFile(file) {
+    if (file.size > 10 * 1024 * 1024) {
+      showStatus('file', i18n.fileTooLarge, 'error');
+      return;
+    }
+    
+    // Show file info
+    document.getElementById('file-name').textContent = file.name;
+    document.getElementById('file-size').textContent = formatBytes(file.size);
+    
+    // Set icon based on type
+    const iconMap = {
+      'application/pdf': 'document-outline',
+      'text/': 'document-text-outline',
+      'image/': 'image-outline',
+      'audio/': 'musical-notes-outline',
+      'video/': 'videocam-outline',
+      'application/zip': 'archive-outline',
+    };
+    let icon = 'document-outline';
+    for (const [type, iconName] of Object.entries(iconMap)) {
+      if (file.type.startsWith(type)) {
+        icon = iconName;
+        break;
+      }
+    }
+    document.getElementById('file-icon').setAttribute('name', icon);
+    
+    fileInfo.classList.remove('hidden');
+    
+    // Read and encode
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      let result = e.target.result;
+      
+      if (!document.getElementById('file-data-url').checked) {
+        // Remove data URL prefix
+        result = result.split(',')[1];
+      }
+      
+      fileOutput.value = result;
+      fileResult.classList.remove('hidden');
+      showStatus('file', i18n.fileEncoded, 'success');
+    };
+    reader.readAsDataURL(file);
+  }
+  
+  fileDropzone.onclick = () => fileInput.click();
+  fileInput.onchange = (e) => {
+    if (e.target.files[0]) handleFile(e.target.files[0]);
+  };
+  
+  fileDropzone.ondragover = (e) => {
+    e.preventDefault();
+    fileDropzone.classList.add('border-primary', 'bg-primary/5');
+  };
+  
+  fileDropzone.ondragleave = () => {
+    fileDropzone.classList.remove('border-primary', 'bg-primary/5');
+  };
+  
+  fileDropzone.ondrop = (e) => {
+    e.preventDefault();
+    fileDropzone.classList.remove('border-primary', 'bg-primary/5');
+    if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+  };
+  
+  document.getElementById('file-remove-btn').onclick = () => {
+    fileInfo.classList.add('hidden');
+    fileResult.classList.add('hidden');
+    fileOutput.value = '';
+    fileInput.value = '';
+  };
+  
+  document.getElementById('file-copy-btn').onclick = async () => {
+    if (fileOutput.value) {
+      await navigator.clipboard.writeText(fileOutput.value);
+      showStatus('file', i18n.copied, 'success');
+    }
+  };
+  
+  document.getElementById('file-download-btn').onclick = () => {
+    if (!fileOutput.value) return;
+    const blob = new Blob([fileOutput.value], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'base64.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+  
+  // ========== РЕЖИМ: ИЗОБРАЖЕНИЕ ==========
+  const imageDropzone = document.getElementById('image-dropzone');
+  const imageInput = document.getElementById('image-input');
+  const imagePreviewContainer = document.getElementById('image-preview-container');
+  const imagePreview = document.getElementById('image-preview');
+  const imageResult = document.getElementById('image-result');
+  const imageOutput = document.getElementById('image-output');
+  
+  function handleImage(file) {
+    if (!file.type.startsWith('image/')) {
+      showStatus('image', i18n.selectImage, 'error');
+      return;
+    }
+    
+    if (file.size > 5 * 1024 * 1024) {
+      showStatus('image', i18n.imageTooLarge, 'error');
+      return;
+    }
+    
+    document.getElementById('image-name').textContent = file.name;
+    document.getElementById('image-size').textContent = formatBytes(file.size);
+    document.getElementById('image-type').textContent = file.type;
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const dataUrl = e.target.result;
+      
+      // Show preview
+      imagePreview.src = dataUrl;
+      imagePreviewContainer.classList.remove('hidden');
+      
+      // Get dimensions
+      const img = new Image();
+      img.onload = () => {
+        document.getElementById('image-dimensions').textContent = img.width + ' × ' + img.height + ' px';
+      };
+      img.src = dataUrl;
+      
+      // Output
+      imageOutput.value = dataUrl;
+      imageResult.classList.remove('hidden');
+      
+      showStatus('image', i18n.imageEncoded, 'success');
+    };
+    reader.readAsDataURL(file);
+  }
+  
+  imageDropzone.onclick = () => imageInput.click();
+  imageInput.onchange = (e) => {
+    if (e.target.files[0]) handleImage(e.target.files[0]);
+  };
+  
+  imageDropzone.ondragover = (e) => {
+    e.preventDefault();
+    imageDropzone.classList.add('border-primary', 'bg-primary/5');
+  };
+  
+  imageDropzone.ondragleave = () => {
+    imageDropzone.classList.remove('border-primary', 'bg-primary/5');
+  };
+  
+  imageDropzone.ondrop = (e) => {
+    e.preventDefault();
+    imageDropzone.classList.remove('border-primary', 'bg-primary/5');
+    if (e.dataTransfer.files[0]) handleImage(e.dataTransfer.files[0]);
+  };
+  
+  document.getElementById('image-remove-btn').onclick = () => {
+    imagePreviewContainer.classList.add('hidden');
+    imageResult.classList.add('hidden');
+    imageOutput.value = '';
+    imageInput.value = '';
+  };
+  
+  document.getElementById('image-copy-btn').onclick = async () => {
+    if (imageOutput.value) {
+      await navigator.clipboard.writeText(imageOutput.value);
+      showStatus('image', i18n.dataUrlCopied, 'success');
+    }
+  };
+  
+  document.getElementById('image-copy-css-btn').onclick = async () => {
+    if (imageOutput.value) {
+      const css = `background-image: url('${imageOutput.value}');`;
+      await navigator.clipboard.writeText(css);
+      showStatus('image', i18n.cssCopied, 'success');
+    }
+  };
+  
+  document.getElementById('image-copy-html-btn').onclick = async () => {
+    if (imageOutput.value) {
+      const html = `<img src="${imageOutput.value}" alt="" />`;
+      await navigator.clipboard.writeText(html);
+      showStatus('image', i18n.htmlCopied, 'success');
+    }
+  };
+  
+  // ========== DECODE TO FILE ==========
+  const decodeInput = document.getElementById('decode-input');
+  const decodeFilename = document.getElementById('decode-filename');
+  const decodePreview = document.getElementById('decode-preview');
+  const decodePreviewImg = document.getElementById('decode-preview-img');
+  
+  decodeInput.addEventListener('input', () => {
+    const value = decodeInput.value.trim();
+    
+    // Check if it's an image
+    if (value.startsWith('data:image/')) {
+      decodePreviewImg.src = value;
+      decodePreview.classList.remove('hidden');
+    } else {
+      decodePreview.classList.add('hidden');
+    }
+  });
+  
+  document.getElementById('decode-btn').onclick = () => {
+    let value = decodeInput.value.trim();
+    if (!value) return;
+    
+    let mimeType = 'application/octet-stream';
+    let base64Data = value;
+    
+    // Parse data URL
+    if (value.startsWith('data:')) {
+      const match = value.match(/^data:([^;]+);base64,(.+)$/);
+      if (match) {
+        mimeType = match[1];
+        base64Data = match[2];
+      }
+    }
+    
+    try {
+      const binary = atob(base64Data);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+      }
+      
+      const blob = new Blob([bytes], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      
+      // Determine extension
+      const extMap = {
+        'image/png': '.png',
+        'image/jpeg': '.jpg',
+        'image/gif': '.gif',
+        'image/webp': '.webp',
+        'image/svg+xml': '.svg',
+        'application/pdf': '.pdf',
+        'text/plain': '.txt',
+        'application/json': '.json',
+      };
+      const ext = extMap[mimeType] || '';
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = decodeFilename.value + ext;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      alert(i18n.decodeError + e.message);
+    }
+  };
+  
+  // ========== ГОРЯЧИЕ КЛАВИШИ ==========
+  document.addEventListener('keydown', (e) => {
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    const modifier = isMac ? e.metaKey : e.ctrlKey;
+    
+    if (modifier && e.key === 'Enter') {
+      e.preventDefault();
+      if (e.shiftKey) {
+        textDecode();
+      } else {
+        textEncode();
+      }
+    }
+  });
+  
+})();
+</script>
+
+{{ end }}

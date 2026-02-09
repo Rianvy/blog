@@ -1,0 +1,1510 @@
+{{ define "title" }}
+{{ .Title }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">🏷️</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">{{ .Description }}</p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="eye-outline"></ion-icon>
+        {{ i18n "metaTag.livePreview" | default "Live Preview" }}
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="code-outline"></ion-icon>
+        {{ i18n "metaTag.fullCode" | default "Полный код" }}
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        {{ i18n "metaTag.noBackend" | default "100% клиент" }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto">
+    
+    <!-- Tabs -->
+    <div class="tabs tabs-boxed bg-base-200 p-1 rounded-2xl mb-6 overflow-x-auto flex-nowrap">
+      <button class="tab tab-active flex-1 sm:flex-none whitespace-nowrap" data-tab="seo">
+        <ion-icon name="search-outline" class="text-lg mr-1"></ion-icon>
+        {{ i18n "metaTag.seoTab" | default "SEO" }}
+      </button>
+      <button class="tab flex-1 sm:flex-none whitespace-nowrap" data-tab="opengraph">
+        <ion-icon name="share-social-outline" class="text-lg mr-1"></ion-icon>
+        {{ i18n "metaTag.openGraphTab" | default "Open Graph" }}
+      </button>
+      <button class="tab flex-1 sm:flex-none whitespace-nowrap" data-tab="twitter">
+        <ion-icon name="logo-twitter" class="text-lg mr-1"></ion-icon>
+        {{ i18n "metaTag.twitterTab" | default "Twitter" }}
+      </button>
+      <button class="tab flex-1 sm:flex-none whitespace-nowrap" data-tab="icons">
+        <ion-icon name="apps-outline" class="text-lg mr-1"></ion-icon>
+        {{ i18n "metaTag.icons" | default "Icons" }}
+      </button>
+      <button class="tab flex-1 sm:flex-none whitespace-nowrap" data-tab="manifest">
+        <ion-icon name="phone-portrait-outline" class="text-lg mr-1"></ion-icon>
+        {{ i18n "metaTag.manifestTab" | default "Manifest" }}
+      </button>
+      <button class="tab flex-1 sm:flex-none whitespace-nowrap" data-tab="preview">
+        <ion-icon name="eye-outline" class="text-lg mr-1"></ion-icon>
+        {{ i18n "metaTag.preview" | default "Preview" }}
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+      
+      <!-- Left Panel: Input Forms -->
+      <div class="lg:col-span-3 space-y-6">
+        
+        <!-- SEO Section -->
+        <div id="section-seo" class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="search-outline" class="text-primary"></ion-icon>
+              {{ i18n "metaTag.basicSeo" | default "Базовые SEO теги" }}
+            </h2>
+          </div>
+          
+          <div class="p-4 sm:p-6 space-y-4">
+            
+            <!-- Title -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "metaTag.pageTitle" | default "Title" }}</span>
+                <span class="label-text-alt" id="title-length">0/60</span>
+              </label>
+              <input type="text" id="input-title" class="input input-bordered" placeholder="{{ i18n "metaTag.titlePlaceholder" | default "Your Amazing Website" }}" maxlength="100" />
+              <label class="label">
+                <span class="label-text-alt text-base-content/60">{{ i18n "metaTag.titleHint" | default "Оптимально: 50-60 символов" }}</span>
+              </label>
+            </div>
+            
+            <!-- Description -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "metaTag.description" | default "Description" }}</span>
+                <span class="label-text-alt" id="description-length">0/160</span>
+              </label>
+              <textarea id="input-description" class="textarea textarea-bordered h-20" placeholder="{{ i18n "metaTag.descriptionPlaceholder" | default "A compelling description of your page..." }}" maxlength="300"></textarea>
+              <label class="label">
+                <span class="label-text-alt text-base-content/60">{{ i18n "metaTag.descriptionHint" | default "Оптимально: 150-160 символов" }}</span>
+              </label>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              
+              <!-- URL -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text font-medium">{{ i18n "metaTag.url" | default "URL" }}</span>
+                </label>
+                <input type="url" id="input-url" class="input input-bordered input-sm" placeholder="{{ i18n "metaTag.urlPlaceholder" | default "https://example.com" }}" />
+              </div>
+              
+              <!-- Canonical -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text font-medium">{{ i18n "metaTag.canonical" | default "Canonical URL" }}</span>
+                </label>
+                <input type="url" id="input-canonical" class="input input-bordered input-sm" placeholder="https://example.com/page" />
+              </div>
+              
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              
+              <!-- Author -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text font-medium">{{ i18n "metaTag.author" | default "Author" }}</span>
+                </label>
+                <input type="text" id="input-author" class="input input-bordered input-sm" placeholder="John Doe" />
+              </div>
+              
+              <!-- Language -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text font-medium">{{ i18n "metaTag.language" | default "Language" }}</span>
+                </label>
+                <select id="input-language" class="select select-bordered select-sm">
+                  <option value="en">{{ i18n "metaTag.langEnglish" | default "English" }}</option>
+                  <option value="ru">{{ i18n "metaTag.langRussian" | default "Русский" }}</option>
+                  <option value="es">{{ i18n "metaTag.langSpanish" | default "Español" }}</option>
+                  <option value="fr">{{ i18n "metaTag.langFrench" | default "Français" }}</option>
+                  <option value="de">{{ i18n "metaTag.langGerman" | default "Deutsch" }}</option>
+                  <option value="zh">{{ i18n "metaTag.langChinese" | default "中文" }}</option>
+                  <option value="ja">{{ i18n "metaTag.langJapanese" | default "日本語" }}</option>
+                </select>
+              </div>
+              
+              <!-- Robots -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text font-medium">{{ i18n "metaTag.robots" | default "Robots" }}</span>
+                </label>
+                <select id="input-robots" class="select select-bordered select-sm">
+                  <option value="index, follow">{{ i18n "metaTag.indexFollow" | default "index, follow" }}</option>
+                  <option value="noindex, follow">{{ i18n "metaTag.noindexFollow" | default "noindex, follow" }}</option>
+                  <option value="index, nofollow">{{ i18n "metaTag.indexNofollow" | default "index, nofollow" }}</option>
+                  <option value="noindex, nofollow">{{ i18n "metaTag.noindexNofollow" | default "noindex, nofollow" }}</option>
+                </select>
+              </div>
+              
+            </div>
+            
+            <!-- Keywords -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "metaTag.keywords" | default "Keywords" }} ({{ i18n "metaTag.optional" | default "optional" }})</span>
+              </label>
+              <input type="text" id="input-keywords" class="input input-bordered input-sm" placeholder="{{ i18n "metaTag.keywordsPlaceholder" | default "web, design, development" }}" />
+              <label class="label">
+                <span class="label-text-alt text-base-content/60">{{ i18n "metaTag.keywordsHint" | default "Разделяйте запятыми" }}</span>
+              </label>
+            </div>
+            
+          </div>
+        </div>
+
+        <!-- Open Graph Section -->
+        <div id="section-opengraph" class="hidden bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="share-social-outline" class="text-primary"></ion-icon>
+              {{ i18n "metaTag.openGraph" | default "Open Graph (Facebook, Discord, Telegram)" }}
+            </h2>
+          </div>
+          
+          <div class="p-4 sm:p-6 space-y-4">
+            
+            <div class="alert alert-info">
+              <ion-icon name="information-circle-outline" class="text-xl"></ion-icon>
+              <div class="text-sm">
+                {{ i18n "metaTag.ogHint" | default "Open Graph используется Facebook, Discord, Telegram, LinkedIn для превью ссылок" }}
+              </div>
+            </div>
+            
+            <!-- OG Title -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">og:title</span>
+                <label class="cursor-pointer flex items-center gap-2">
+                  <span class="label-text-alt">{{ i18n "metaTag.sameAsTitle" | default "Как в Title" }}</span>
+                  <input type="checkbox" id="og-title-same" class="checkbox checkbox-xs checkbox-primary" checked />
+                </label>
+              </label>
+              <input type="text" id="input-og-title" class="input input-bordered input-sm" placeholder="Automatically filled from title" disabled />
+            </div>
+            
+            <!-- OG Description -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">og:description</span>
+                <label class="cursor-pointer flex items-center gap-2">
+                  <span class="label-text-alt">{{ i18n "metaTag.sameAsDescription" | default "Как в Description" }}</span>
+                  <input type="checkbox" id="og-description-same" class="checkbox checkbox-xs checkbox-primary" checked />
+                </label>
+              </label>
+              <textarea id="input-og-description" class="textarea textarea-bordered textarea-sm h-16" placeholder="Automatically filled from description" disabled></textarea>
+            </div>
+            
+            <!-- OG Image -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">og:image</span>
+                <span class="label-text-alt">{{ i18n "metaTag.recommended" | default "Рекомендуется" }}: 1200×630</span>
+              </label>
+              <div class="flex gap-2">
+                <input type="url" id="input-og-image" class="input input-bordered input-sm flex-1" placeholder="https://example.com/image.jpg" />
+                <button id="og-image-upload" class="btn btn-ghost btn-sm gap-1">
+                  <ion-icon name="cloud-upload-outline"></ion-icon>
+                  {{ i18n "metaTag.upload" | default "Загрузить" }}
+                </button>
+              </div>
+              <input type="file" id="og-image-file" accept="image/*" class="hidden" />
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              
+              <!-- OG URL -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text font-medium">og:url</span>
+                  <label class="cursor-pointer flex items-center gap-2">
+                    <span class="label-text-alt">{{ i18n "metaTag.sameAsUrl" | default "Как в URL" }}</span>
+                    <input type="checkbox" id="og-url-same" class="checkbox checkbox-xs checkbox-primary" checked />
+                  </label>
+                </label>
+                <input type="url" id="input-og-url" class="input input-bordered input-sm" placeholder="Automatically filled" disabled />
+              </div>
+              
+              <!-- OG Type -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text font-medium">og:type</span>
+                </label>
+                <select id="input-og-type" class="select select-bordered select-sm">
+                  <option value="website">{{ i18n "metaTag.typeWebsite" | default "website" }}</option>
+                  <option value="article">{{ i18n "metaTag.typeArticle" | default "article" }}</option>
+                  <option value="blog">{{ i18n "metaTag.typeBlog" | default "blog" }}</option>
+                  <option value="product">{{ i18n "metaTag.typeProduct" | default "product" }}</option>
+                  <option value="profile">{{ i18n "metaTag.typeProfile" | default "profile" }}</option>
+                </select>
+              </div>
+              
+            </div>
+            
+            <!-- OG Site Name -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">og:site_name</span>
+              </label>
+              <input type="text" id="input-og-sitename" class="input input-bordered input-sm" placeholder="My Website" />
+            </div>
+            
+            <!-- OG Locale -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">og:locale</span>
+              </label>
+              <input type="text" id="input-og-locale" class="input input-bordered input-sm" placeholder="en_US" value="en_US" />
+            </div>
+            
+          </div>
+        </div>
+
+        <!-- Twitter Section -->
+        <div id="section-twitter" class="hidden bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="logo-twitter" class="text-primary"></ion-icon>
+              {{ i18n "metaTag.twitterCard" | default "Twitter Card" }}
+            </h2>
+          </div>
+          
+          <div class="p-4 sm:p-6 space-y-4">
+            
+            <!-- Twitter Card Type -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">twitter:card</span>
+              </label>
+              <select id="input-twitter-card" class="select select-bordered select-sm">
+                <option value="summary">{{ i18n "metaTag.cardSummary" | default "Summary" }}</option>
+                <option value="summary_large_image">{{ i18n "metaTag.cardSummaryLarge" | default "Summary Large Image" }}</option>
+                <option value="app">{{ i18n "metaTag.cardApp" | default "App" }}</option>
+                <option value="player">{{ i18n "metaTag.cardPlayer" | default "Player" }}</option>
+              </select>
+              <label class="label">
+                <span class="label-text-alt text-base-content/60">{{ i18n "metaTag.twitterCardHint" | default "summary_large_image рекомендуется для блогов" }}</span>
+              </label>
+            </div>
+            
+            <!-- Twitter Title -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">twitter:title</span>
+                <label class="cursor-pointer flex items-center gap-2">
+                  <span class="label-text-alt">{{ i18n "metaTag.sameAsTitle" | default "Как в Title" }}</span>
+                  <input type="checkbox" id="twitter-title-same" class="checkbox checkbox-xs checkbox-primary" checked />
+                </label>
+              </label>
+              <input type="text" id="input-twitter-title" class="input input-bordered input-sm" placeholder="Automatically filled" disabled />
+            </div>
+            
+            <!-- Twitter Description -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">twitter:description</span>
+                <label class="cursor-pointer flex items-center gap-2">
+                  <span class="label-text-alt">{{ i18n "metaTag.sameAsDescription" | default "Как в Description" }}</span>
+                  <input type="checkbox" id="twitter-description-same" class="checkbox checkbox-xs checkbox-primary" checked />
+                </label>
+              </label>
+              <textarea id="input-twitter-description" class="textarea textarea-bordered textarea-sm h-16" placeholder="Automatically filled" disabled></textarea>
+            </div>
+            
+            <!-- Twitter Image -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">twitter:image</span>
+                <label class="cursor-pointer flex items-center gap-2">
+                  <span class="label-text-alt">{{ i18n "metaTag.sameAsOgImage" | default "Как в OG Image" }}</span>
+                  <input type="checkbox" id="twitter-image-same" class="checkbox checkbox-xs checkbox-primary" checked />
+                </label>
+              </label>
+              <input type="url" id="input-twitter-image" class="input input-bordered input-sm" placeholder="Automatically filled" disabled />
+            </div>
+            
+            <!-- Twitter Site -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">twitter:site</span>
+              </label>
+              <input type="text" id="input-twitter-site" class="input input-bordered input-sm" placeholder="@username" />
+              <label class="label">
+                <span class="label-text-alt text-base-content/60">{{ i18n "metaTag.twitterSiteHint" | default "Ваш Twitter аккаунт" }}</span>
+              </label>
+            </div>
+            
+            <!-- Twitter Creator -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">twitter:creator</span>
+              </label>
+              <input type="text" id="input-twitter-creator" class="input input-bordered input-sm" placeholder="@author" />
+            </div>
+            
+          </div>
+        </div>
+
+        <!-- Icons Section -->
+        <div id="section-icons" class="hidden bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="apps-outline" class="text-primary"></ion-icon>
+              {{ i18n "metaTag.favicons" | default "Favicons & Icons" }}
+            </h2>
+          </div>
+          
+          <div class="p-4 sm:p-6 space-y-4">
+            
+            <!-- Favicon -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "metaTag.favicon" | default "Favicon" }} (.ico)</span>
+              </label>
+              <input type="url" id="input-favicon" class="input input-bordered input-sm" placeholder="/favicon.ico" value="/favicon.ico" />
+            </div>
+            
+            <!-- Icon 32x32 -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "metaTag.icon32" | default "Icon 32×32" }} (PNG)</span>
+              </label>
+              <input type="url" id="input-icon-32" class="input input-bordered input-sm" placeholder="/favicon-32x32.png" value="/favicon-32x32.png" />
+            </div>
+            
+            <!-- Icon 16x16 -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "metaTag.icon16" | default "Icon 16×16" }} (PNG)</span>
+              </label>
+              <input type="url" id="input-icon-16" class="input input-bordered input-sm" placeholder="/favicon-16x16.png" value="/favicon-16x16.png" />
+            </div>
+            
+            <!-- Apple Touch Icon -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "metaTag.appleTouchIcon" | default "Apple Touch Icon" }} (180×180)</span>
+              </label>
+              <input type="url" id="input-apple-icon" class="input input-bordered input-sm" placeholder="/apple-touch-icon.png" value="/apple-touch-icon.png" />
+            </div>
+            
+            <!-- Android Chrome Icon -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "metaTag.androidIcon" | default "Android Icon" }} (192×192)</span>
+              </label>
+              <input type="url" id="input-android-icon" class="input input-bordered input-sm" placeholder="/android-chrome-192x192.png" value="/android-chrome-192x192.png" />
+            </div>
+            
+            <!-- Theme Color -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "metaTag.themeColor" | default "Theme Color" }}</span>
+              </label>
+              <div class="flex gap-2">
+                <input type="color" id="input-theme-color" class="w-12 h-10 rounded-lg cursor-pointer" value="#3b82f6" />
+                <input type="text" id="input-theme-color-text" class="input input-bordered input-sm flex-1 font-mono" value="#3b82f6" />
+              </div>
+            </div>
+            
+            <!-- MS Tile Color -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "metaTag.msTileColor" | default "MS Tile Color" }}</span>
+              </label>
+              <div class="flex gap-2">
+                <input type="color" id="input-ms-tile-color" class="w-12 h-10 rounded-lg cursor-pointer" value="#3b82f6" />
+                <input type="text" id="input-ms-tile-color-text" class="input input-bordered input-sm flex-1 font-mono" value="#3b82f6" />
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <!-- Manifest Section -->
+        <div id="section-manifest" class="hidden bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="phone-portrait-outline" class="text-primary"></ion-icon>
+              {{ i18n "metaTag.webAppManifest" | default "Web App Manifest (PWA)" }}
+            </h2>
+          </div>
+          
+          <div class="p-4 sm:p-6 space-y-4">
+            
+            <div class="alert alert-info">
+              <ion-icon name="information-circle-outline" class="text-xl"></ion-icon>
+              <div class="text-sm">
+                {{ i18n "metaTag.manifestHint" | default "Manifest позволяет устанавливать веб-приложение на устройство" }}
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              
+              <!-- App Name -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text font-medium">{{ i18n "metaTag.appName" | default "App Name" }}</span>
+                </label>
+                <input type="text" id="input-manifest-name" class="input input-bordered input-sm" placeholder="My Awesome App" />
+              </div>
+              
+              <!-- Short Name -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text font-medium">{{ i18n "metaTag.shortName" | default "Short Name" }}</span>
+                </label>
+                <input type="text" id="input-manifest-short" class="input input-bordered input-sm" placeholder="App" maxlength="12" />
+              </div>
+              
+            </div>
+            
+            <!-- Description -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "metaTag.description" | default "Description" }}</span>
+              </label>
+              <textarea id="input-manifest-description" class="textarea textarea-bordered textarea-sm h-16" placeholder="App description"></textarea>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              
+              <!-- Background Color -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text font-medium">{{ i18n "metaTag.backgroundColor" | default "Background Color" }}</span>
+                </label>
+                <div class="flex gap-2">
+                  <input type="color" id="input-manifest-bg" class="w-10 h-9 rounded cursor-pointer" value="#ffffff" />
+                  <input type="text" id="input-manifest-bg-text" class="input input-bordered input-sm flex-1 font-mono" value="#ffffff" />
+                </div>
+              </div>
+              
+              <!-- Theme Color -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text font-medium">{{ i18n "metaTag.themeColor" | default "Theme Color" }}</span>
+                  <label class="cursor-pointer flex items-center gap-2">
+                    <span class="label-text-alt text-xs">{{ i18n "metaTag.sameAsAbove" | default "Как выше" }}</span>
+                    <input type="checkbox" id="manifest-theme-same" class="checkbox checkbox-xs checkbox-primary" checked />
+                  </label>
+                </label>
+                <div class="flex gap-2">
+                  <input type="color" id="input-manifest-theme" class="w-10 h-9 rounded cursor-pointer" value="#3b82f6" disabled />
+                  <input type="text" id="input-manifest-theme-text" class="input input-bordered input-sm flex-1 font-mono" value="#3b82f6" disabled />
+                </div>
+              </div>
+              
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              
+              <!-- Display -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text font-medium">{{ i18n "metaTag.display" | default "Display" }}</span>
+                </label>
+                <select id="input-manifest-display" class="select select-bordered select-sm">
+                  <option value="standalone">{{ i18n "metaTag.displayStandalone" | default "Standalone" }}</option>
+                  <option value="fullscreen">{{ i18n "metaTag.displayFullscreen" | default "Fullscreen" }}</option>
+                  <option value="minimal-ui">{{ i18n "metaTag.displayMinimalUi" | default "Minimal UI" }}</option>
+                  <option value="browser">{{ i18n "metaTag.displayBrowser" | default "Browser" }}</option>
+                </select>
+              </div>
+              
+              <!-- Start URL -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text font-medium">{{ i18n "metaTag.startUrl" | default "Start URL" }}</span>
+                </label>
+                <input type="text" id="input-manifest-start-url" class="input input-bordered input-sm" placeholder="/" value="/" />
+              </div>
+              
+            </div>
+            
+            <!-- Orientation -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "metaTag.orientation" | default "Orientation" }}</span>
+              </label>
+              <select id="input-manifest-orientation" class="select select-bordered select-sm">
+                <option value="any">{{ i18n "metaTag.orientationAny" | default "Any" }}</option>
+                <option value="portrait">{{ i18n "metaTag.orientationPortrait" | default "Portrait" }}</option>
+                <option value="landscape">{{ i18n "metaTag.orientationLandscape" | default "Landscape" }}</option>
+              </select>
+            </div>
+            
+          </div>
+        </div>
+
+        <!-- Preview Section -->
+        <div id="section-preview" class="hidden space-y-6">
+          
+          <!-- Google Preview -->
+          <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+            <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+              <h2 class="font-semibold flex items-center gap-2">
+                <ion-icon name="logo-google" class="text-primary"></ion-icon>
+                {{ i18n "metaTag.googlePreview" | default "Google Search Preview" }}
+              </h2>
+            </div>
+            <div class="p-6">
+              <div class="max-w-2xl">
+                <div class="text-xs text-base-content/60 mb-1" id="preview-google-url">https://example.com › page</div>
+                <div class="text-xl text-primary hover:underline cursor-pointer mb-1" id="preview-google-title">Your Amazing Website</div>
+                <div class="text-sm text-base-content/80" id="preview-google-description">A compelling description of your page that will appear in search results...</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Facebook Preview -->
+          <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+            <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+              <h2 class="font-semibold flex items-center gap-2">
+                <ion-icon name="logo-facebook" class="text-primary"></ion-icon>
+                {{ i18n "metaTag.facebookPreview" | default "Facebook / Discord Preview" }}
+              </h2>
+            </div>
+            <div class="p-6">
+              <div class="max-w-xl border border-base-300 rounded-lg overflow-hidden bg-base-200/30">
+                <div class="aspect-[1.91/1] bg-base-300 flex items-center justify-center relative overflow-hidden">
+                  <img id="preview-fb-image" src="" alt="" class="hidden w-full h-full object-cover" />
+                  <div id="preview-fb-placeholder" class="text-4xl text-base-content/20">
+                    <ion-icon name="image-outline"></ion-icon>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <div class="text-xs text-base-content/60 uppercase mb-1" id="preview-fb-url">EXAMPLE.COM</div>
+                  <div class="font-semibold text-sm mb-1" id="preview-fb-title">Your Amazing Website</div>
+                  <div class="text-xs text-base-content/70 line-clamp-2" id="preview-fb-description">A compelling description of your page...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Twitter Preview -->
+          <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+            <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+              <h2 class="font-semibold flex items-center gap-2">
+                <ion-icon name="logo-twitter" class="text-primary"></ion-icon>
+                {{ i18n "metaTag.twitterPreview" | default "Twitter Preview" }}
+              </h2>
+            </div>
+            <div class="p-6">
+              <div class="max-w-xl border border-base-300 rounded-2xl overflow-hidden bg-base-200/30">
+                <!-- Summary Large Image -->
+                <div id="preview-twitter-large" class="">
+                  <div class="aspect-[2/1] bg-base-300 flex items-center justify-center relative overflow-hidden">
+                    <img id="preview-twitter-image" src="" alt="" class="hidden w-full h-full object-cover" />
+                    <div id="preview-twitter-placeholder" class="text-4xl text-base-content/20">
+                      <ion-icon name="image-outline"></ion-icon>
+                    </div>
+                  </div>
+                  <div class="p-3">
+                    <div class="font-semibold text-sm mb-1" id="preview-twitter-title">Your Amazing Website</div>
+                    <div class="text-xs text-base-content/70 line-clamp-2 mb-1" id="preview-twitter-description">A compelling description...</div>
+                    <div class="text-xs text-base-content/50" id="preview-twitter-url">🔗 example.com</div>
+                  </div>
+                </div>
+                <!-- Summary Card -->
+                <div id="preview-twitter-summary" class="hidden flex gap-3 p-3">
+                  <div class="w-24 h-24 bg-base-300 flex items-center justify-center rounded overflow-hidden flex-shrink-0">
+                    <img id="preview-twitter-image-sm" src="" alt="" class="hidden w-full h-full object-cover" />
+                    <ion-icon name="image-outline" class="text-2xl text-base-content/20"></ion-icon>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="font-semibold text-sm mb-1 truncate" id="preview-twitter-title-sm">Your Amazing Website</div>
+                    <div class="text-xs text-base-content/70 line-clamp-2 mb-1" id="preview-twitter-description-sm">Description...</div>
+                    <div class="text-xs text-base-content/50 truncate" id="preview-twitter-url-sm">🔗 example.com</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+      </div>
+
+      <!-- Right Panel: Code Output -->
+      <div class="lg:col-span-2 space-y-4">
+        
+        <!-- Generated Code -->
+        <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden sticky top-4">
+          <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between flex-wrap gap-2">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="code-outline" class="text-success"></ion-icon>
+              {{ i18n "metaTag.generatedCode" | default "Сгенерированный код" }}
+            </h2>
+            <div class="flex items-center gap-2 flex-wrap">
+              <button id="copy-head" class="btn btn-primary btn-xs gap-1">
+                <ion-icon name="copy-outline"></ion-icon>
+                {{ i18n "metaTag.copyHead" | default "Copy <head>" }}
+              </button>
+              <button id="copy-meta" class="btn btn-ghost btn-xs gap-1">
+                <ion-icon name="copy-outline"></ion-icon>
+                {{ i18n "metaTag.copyMetaOnly" | default "Copy meta" }}
+              </button>
+              <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-xs gap-1">
+                  <ion-icon name="download-outline"></ion-icon>
+                  {{ i18n "metaTag.download" | default "Download" }}
+                </label>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow-lg bg-base-100 rounded-box w-44 border border-base-200">
+                  <li><a id="download-html"><ion-icon name="document-outline"></ion-icon> head.html</a></li>
+                  <li><a id="download-manifest"><ion-icon name="phone-portrait-outline"></ion-icon> manifest.json</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="p-4">
+            <pre id="code-output" class="text-xs font-mono bg-base-200 p-4 rounded-xl overflow-x-auto max-h-[600px] leading-relaxed"><code></code></pre>
+          </div>
+          
+          <!-- Stats -->
+          <div class="p-4 border-t border-base-200 dark:border-base-content/10 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+            <div>
+              <div class="text-lg font-bold text-primary" id="stat-meta-count">0</div>
+              <div class="text-xs text-base-content/60">{{ i18n "metaTag.metaTags" | default "meta тегов" }}</div>
+            </div>
+            <div>
+              <div class="text-lg font-bold text-secondary" id="stat-link-count">0</div>
+              <div class="text-xs text-base-content/60">{{ i18n "metaTag.linkTags" | default "link тегов" }}</div>
+            </div>
+            <div>
+              <div class="text-lg font-bold text-accent" id="stat-og-count">0</div>
+              <div class="text-xs text-base-content/60">{{ i18n "metaTag.ogTags" | default "OG тегов" }}</div>
+            </div>
+            <div>
+              <div class="text-lg font-bold text-success" id="stat-size">0 B</div>
+              <div class="text-xs text-base-content/60">{{ i18n "metaTag.size" | default "Размер" }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Warnings -->
+        <div id="warnings-panel" class="hidden space-y-2">
+          <!-- Warnings will be inserted here -->
+        </div>
+
+      </div>
+      
+    </div>
+
+    <!-- Info Cards -->
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+          <ion-icon name="search-outline" class="text-2xl text-primary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">{{ i18n "metaTag.seoOptimized" | default "SEO оптимизация" }}</h3>
+        <p class="text-sm text-base-content/60">{{ i18n "metaTag.seoDesc" | default "Базовые мета-теги для индексации в поисковых системах. Title, description, canonical, robots." }}</p>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-3">
+          <ion-icon name="share-social-outline" class="text-2xl text-secondary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">{{ i18n "metaTag.socialSharing" | default "Красивые превью" }}</h3>
+        <p class="text-sm text-base-content/60">{{ i18n "metaTag.socialDesc" | default "Open Graph и Twitter Card для красивого отображения в соцсетях и мессенджерах." }}</p>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-3">
+          <ion-icon name="phone-portrait-outline" class="text-2xl text-accent"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">{{ i18n "metaTag.pwaReady" | default "PWA Ready" }}</h3>
+        <p class="text-sm text-base-content/60">{{ i18n "metaTag.pwaDesc" | default "Web App Manifest для установки сайта как приложения на мобильных устройствах." }}</p>
+      </div>
+      
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast toast-top toast-center hidden">
+  <div class="alert alert-success">
+    <ion-icon name="checkmark-circle-outline" class="text-xl"></ion-icon>
+    <span id="toast-message">{{ i18n "metaTag.copied" | default "Скопировано!" }}</span>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  // ========== I18N ==========
+  const i18n = {
+    copied: {{ i18n "metaTag.copied" | default "Скопировано!" | jsonify }},
+    copiedHead: {{ i18n "metaTag.copiedHead" | default "Скопирован полный <head>" | jsonify }},
+    copiedMeta: {{ i18n "metaTag.copiedMeta" | default "Скопированы meta теги" | jsonify }},
+    downloadedHtml: {{ i18n "metaTag.downloadedHtml" | default "HTML файл скачан" | jsonify }},
+    downloadedManifest: {{ i18n "metaTag.downloadedManifest" | default "Manifest скачан" | jsonify }},
+    titleTooShort: {{ i18n "metaTag.titleTooShort" | default "Title слишком короткий (< 30 символов)" | jsonify }},
+    titleTooLong: {{ i18n "metaTag.titleTooLong" | default "Title слишком длинный (> 60 символов)" | jsonify }},
+    descriptionTooShort: {{ i18n "metaTag.descriptionTooShort" | default "Description слишком короткий (< 120 символов)" | jsonify }},
+    descriptionTooLong: {{ i18n "metaTag.descriptionTooLong" | default "Description слишком длинный (> 160 символов)" | jsonify }},
+    noOgImage: {{ i18n "metaTag.noOgImage" | default "Нет OG изображения для социальных сетей" | jsonify }},
+    noUrl: {{ i18n "metaTag.noUrl" | default "Не указан URL страницы" | jsonify }},
+  };
+  
+  // ========== STATE ==========
+  let state = {
+    title: '',
+    description: '',
+    url: '',
+    canonical: '',
+    author: '',
+    keywords: '',
+    robots: 'index, follow',
+    language: 'en',
+    
+    og: {
+      title: '',
+      description: '',
+      image: '',
+      url: '',
+      type: 'website',
+      siteName: '',
+      locale: 'en_US'
+    },
+    
+    twitter: {
+      card: 'summary',
+      title: '',
+      description: '',
+      image: '',
+      site: '',
+      creator: ''
+    },
+    
+    icons: {
+      favicon: '/favicon.ico',
+      icon32: '/favicon-32x32.png',
+      icon16: '/favicon-16x16.png',
+      appleTouchIcon: '/apple-touch-icon.png',
+      androidIcon: '/android-chrome-192x192.png',
+      themeColor: '#3b82f6',
+      msTileColor: '#3b82f6'
+    },
+    
+    manifest: {
+      name: '',
+      shortName: '',
+      description: '',
+      backgroundColor: '#ffffff',
+      themeColor: '#3b82f6',
+      display: 'standalone',
+      startUrl: '/',
+      orientation: 'any'
+    }
+  };
+  
+  let syncOptions = {
+    ogTitle: true,
+    ogDescription: true,
+    ogUrl: true,
+    twitterTitle: true,
+    twitterDescription: true,
+    twitterImage: true,
+    manifestTheme: true
+  };
+  
+  // ========== ELEMENTS ==========
+  const tabs = document.querySelectorAll('[data-tab]');
+  const sections = {
+    seo: document.getElementById('section-seo'),
+    opengraph: document.getElementById('section-opengraph'),
+    twitter: document.getElementById('section-twitter'),
+    icons: document.getElementById('section-icons'),
+    manifest: document.getElementById('section-manifest'),
+    preview: document.getElementById('section-preview')
+  };
+  
+  const codeOutput = document.getElementById('code-output').querySelector('code');
+  const toast = document.getElementById('toast');
+  const toastMessage = document.getElementById('toast-message');
+  
+  // ========== UTILITIES ==========
+  
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  function showToast(message) {
+    toastMessage.textContent = message;
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 2000);
+  }
+  
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 10) / 10 + ' ' + sizes[i];
+  }
+  
+  function getDomainFromUrl(url) {
+    try {
+      return new URL(url).hostname.toUpperCase();
+    } catch {
+      return 'EXAMPLE.COM';
+    }
+  }
+  
+  function getPathFromUrl(url) {
+    try {
+      const urlObj = new URL(url);
+      return urlObj.hostname + (urlObj.pathname !== '/' ? ' › ' + urlObj.pathname.replace(/^\//, '').replace(/\/$/, '') : '');
+    } catch {
+      return 'example.com › page';
+    }
+  }
+  
+  // ========== CODE GENERATION ==========
+  
+  function generateMetaTags() {
+    const tags = [];
+    
+    // Basic
+    tags.push(`<meta charset="UTF-8">`);
+    tags.push(`<meta name="viewport" content="width=device-width, initial-scale=1.0">`);
+    
+    if (state.title) {
+      tags.push(`<title>${escapeHtml(state.title)}</title>`);
+    }
+    
+    if (state.description) {
+      tags.push(`<meta name="description" content="${escapeHtml(state.description)}">`);
+    }
+    
+    if (state.keywords) {
+      tags.push(`<meta name="keywords" content="${escapeHtml(state.keywords)}">`);
+    }
+    
+    if (state.author) {
+      tags.push(`<meta name="author" content="${escapeHtml(state.author)}">`);
+    }
+    
+    tags.push(`<meta name="robots" content="${state.robots}">`);
+    
+    if (state.language) {
+      tags.push(`<meta http-equiv="content-language" content="${state.language}">`);
+    }
+    
+    if (state.canonical) {
+      tags.push(`<link rel="canonical" href="${escapeHtml(state.canonical)}">`);
+    }
+    
+    // Open Graph
+    if (state.og.title) {
+      tags.push(`<meta property="og:title" content="${escapeHtml(state.og.title)}">`);
+    }
+    
+    if (state.og.description) {
+      tags.push(`<meta property="og:description" content="${escapeHtml(state.og.description)}">`);
+    }
+    
+    if (state.og.image) {
+      tags.push(`<meta property="og:image" content="${escapeHtml(state.og.image)}">`);
+    }
+    
+    if (state.og.url) {
+      tags.push(`<meta property="og:url" content="${escapeHtml(state.og.url)}">`);
+    }
+    
+    tags.push(`<meta property="og:type" content="${state.og.type}">`);
+    
+    if (state.og.siteName) {
+      tags.push(`<meta property="og:site_name" content="${escapeHtml(state.og.siteName)}">`);
+    }
+    
+    tags.push(`<meta property="og:locale" content="${state.og.locale}">`);
+    
+    // Twitter
+    tags.push(`<meta name="twitter:card" content="${state.twitter.card}">`);
+    
+    if (state.twitter.title) {
+      tags.push(`<meta name="twitter:title" content="${escapeHtml(state.twitter.title)}">`);
+    }
+    
+    if (state.twitter.description) {
+      tags.push(`<meta name="twitter:description" content="${escapeHtml(state.twitter.description)}">`);
+    }
+    
+    if (state.twitter.image) {
+      tags.push(`<meta name="twitter:image" content="${escapeHtml(state.twitter.image)}">`);
+    }
+    
+    if (state.twitter.site) {
+      tags.push(`<meta name="twitter:site" content="${escapeHtml(state.twitter.site)}">`);
+    }
+    
+    if (state.twitter.creator) {
+      tags.push(`<meta name="twitter:creator" content="${escapeHtml(state.twitter.creator)}">`);
+    }
+    
+    // Icons
+    tags.push(`<link rel="icon" type="image/x-icon" href="${state.icons.favicon}">`);
+    tags.push(`<link rel="icon" type="image/png" sizes="32x32" href="${state.icons.icon32}">`);
+    tags.push(`<link rel="icon" type="image/png" sizes="16x16" href="${state.icons.icon16}">`);
+    tags.push(`<link rel="apple-touch-icon" sizes="180x180" href="${state.icons.appleTouchIcon}">`);
+    tags.push(`<meta name="theme-color" content="${state.icons.themeColor}">`);
+    tags.push(`<meta name="msapplication-TileColor" content="${state.icons.msTileColor}">`);
+    
+    // Manifest
+    tags.push(`<link rel="manifest" href="/manifest.webmanifest">`);
+    
+    return tags;
+  }
+  
+  function generateManifest() {
+    const manifest = {
+      name: state.manifest.name || state.title || 'My App',
+      short_name: state.manifest.shortName || state.manifest.name || 'App',
+      description: state.manifest.description || state.description || '',
+      start_url: state.manifest.startUrl,
+      display: state.manifest.display,
+      orientation: state.manifest.orientation,
+      background_color: state.manifest.backgroundColor,
+      theme_color: state.manifest.themeColor,
+      icons: [
+        {
+          src: state.icons.androidIcon,
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: state.icons.androidIcon.replace('192', '512'),
+          sizes: '512x512',
+          type: 'image/png'
+        }
+      ]
+    };
+    
+    return JSON.stringify(manifest, null, 2);
+  }
+  
+  // ========== UPDATE FUNCTIONS ==========
+  
+  function updateCode() {
+    const tags = generateMetaTags();
+    const html = tags.join('\n');
+    
+    codeOutput.textContent = html;
+    
+    // Stats
+    const metaCount = tags.filter(t => t.includes('<meta ')).length;
+    const linkCount = tags.filter(t => t.includes('<link ')).length;
+    const ogCount = tags.filter(t => t.includes('og:')).length;
+    const size = new Blob([html]).size;
+    
+    document.getElementById('stat-meta-count').textContent = metaCount;
+    document.getElementById('stat-link-count').textContent = linkCount;
+    document.getElementById('stat-og-count').textContent = ogCount;
+    document.getElementById('stat-size').textContent = formatBytes(size);
+    
+    updateWarnings();
+  }
+  
+  function updateWarnings() {
+    const warnings = [];
+    
+    if (state.title && state.title.length < 30) {
+      warnings.push({ type: 'warning', message: i18n.titleTooShort });
+    }
+    
+    if (state.title && state.title.length > 60) {
+      warnings.push({ type: 'warning', message: i18n.titleTooLong });
+    }
+    
+    if (state.description && state.description.length < 120) {
+      warnings.push({ type: 'warning', message: i18n.descriptionTooShort });
+    }
+    
+    if (state.description && state.description.length > 160) {
+      warnings.push({ type: 'warning', message: i18n.descriptionTooLong });
+    }
+    
+    if (!state.og.image) {
+      warnings.push({ type: 'info', message: i18n.noOgImage });
+    }
+    
+    if (!state.url) {
+      warnings.push({ type: 'info', message: i18n.noUrl });
+    }
+    
+    const panel = document.getElementById('warnings-panel');
+    
+    if (warnings.length === 0) {
+      panel.classList.add('hidden');
+      return;
+    }
+    
+    panel.classList.remove('hidden');
+    panel.innerHTML = warnings.map(w => `
+      <div class="alert alert-${w.type === 'warning' ? 'warning' : 'info'}">
+        <ion-icon name="${w.type === 'warning' ? 'warning' : 'information-circle'}-outline" class="text-lg"></ion-icon>
+        <span class="text-sm">${w.message}</span>
+      </div>
+    `).join('');
+  }
+  
+  function updatePreview() {
+    // Google
+    document.getElementById('preview-google-title').textContent = state.title || 'Your Amazing Website';
+    document.getElementById('preview-google-description').textContent = state.description || 'A compelling description of your page...';
+    document.getElementById('preview-google-url').textContent = state.url ? getPathFromUrl(state.url) : 'example.com › page';
+    
+    // Facebook
+    const fbImage = state.og.image;
+    const fbImageEl = document.getElementById('preview-fb-image');
+    const fbPlaceholder = document.getElementById('preview-fb-placeholder');
+    
+    if (fbImage) {
+      fbImageEl.src = fbImage;
+      fbImageEl.classList.remove('hidden');
+      fbPlaceholder.classList.add('hidden');
+    } else {
+      fbImageEl.classList.add('hidden');
+      fbPlaceholder.classList.remove('hidden');
+    }
+    
+    document.getElementById('preview-fb-title').textContent = state.og.title || state.title || 'Your Amazing Website';
+    document.getElementById('preview-fb-description').textContent = state.og.description || state.description || 'A compelling description...';
+    document.getElementById('preview-fb-url').textContent = state.og.url ? getDomainFromUrl(state.og.url) : 'EXAMPLE.COM';
+    
+    // Twitter
+    const twitterCard = state.twitter.card;
+    const twitterImage = state.twitter.image;
+    
+    document.getElementById('preview-twitter-large').classList.toggle('hidden', twitterCard === 'summary');
+    document.getElementById('preview-twitter-summary').classList.toggle('hidden', twitterCard !== 'summary');
+    
+    // Large
+    const twitterImageEl = document.getElementById('preview-twitter-image');
+    const twitterPlaceholder = document.getElementById('preview-twitter-placeholder');
+    
+    if (twitterImage && twitterCard !== 'summary') {
+      twitterImageEl.src = twitterImage;
+      twitterImageEl.classList.remove('hidden');
+      twitterPlaceholder.classList.add('hidden');
+    } else {
+      twitterImageEl.classList.add('hidden');
+      twitterPlaceholder.classList.remove('hidden');
+    }
+    
+    document.getElementById('preview-twitter-title').textContent = state.twitter.title || state.title || 'Your Amazing Website';
+    document.getElementById('preview-twitter-description').textContent = state.twitter.description || state.description || 'Description...';
+    document.getElementById('preview-twitter-url').textContent = state.url ? '🔗 ' + getDomainFromUrl(state.url).toLowerCase() : '🔗 example.com';
+    
+    // Summary
+    const twitterImageSm = document.getElementById('preview-twitter-image-sm');
+    if (twitterImage && twitterCard === 'summary') {
+      twitterImageSm.src = twitterImage;
+      twitterImageSm.classList.remove('hidden');
+      twitterImageSm.nextElementSibling.classList.add('hidden');
+    } else {
+      twitterImageSm.classList.add('hidden');
+      twitterImageSm.nextElementSibling.classList.remove('hidden');
+    }
+    
+    document.getElementById('preview-twitter-title-sm').textContent = state.twitter.title || state.title || 'Your Amazing Website';
+    document.getElementById('preview-twitter-description-sm').textContent = state.twitter.description || state.description || 'Description...';
+    document.getElementById('preview-twitter-url-sm').textContent = state.url ? '🔗 ' + getDomainFromUrl(state.url).toLowerCase() : '🔗 example.com';
+  }
+  
+  function updateAll() {
+    updateCode();
+    updatePreview();
+    saveToLocalStorage();
+  }
+  
+  // ========== EVENT HANDLERS ==========
+  
+  function bindInput(id, statePath) {
+    const input = document.getElementById(id);
+    if (!input) return;
+    
+    input.addEventListener('input', (e) => {
+      const keys = statePath.split('.');
+      let obj = state;
+      for (let i = 0; i < keys.length - 1; i++) {
+        obj = obj[keys[i]];
+      }
+      obj[keys[keys.length - 1]] = e.target.value;
+      updateAll();
+    });
+  }
+  
+  function syncField(sourceId, targetId, syncKey) {
+    const checkbox = document.getElementById(syncKey + '-same');
+    const targetInput = document.getElementById(targetId);
+    const sourceInput = document.getElementById(sourceId);
+    
+    if (!checkbox || !targetInput || !sourceInput) return;
+    
+    checkbox.addEventListener('change', (e) => {
+      syncOptions[syncKey] = e.target.checked;
+      targetInput.disabled = e.target.checked;
+      
+      if (e.target.checked) {
+        targetInput.value = sourceInput.value;
+        const event = new Event('input', { bubbles: true });
+        targetInput.dispatchEvent(event);
+      }
+      
+      saveToLocalStorage();
+    });
+    
+    sourceInput.addEventListener('input', () => {
+      if (syncOptions[syncKey]) {
+        targetInput.value = sourceInput.value;
+        const event = new Event('input', { bubbles: true });
+        targetInput.dispatchEvent(event);
+      }
+    });
+  }
+  
+  // ========== TABS ==========
+  
+  function switchTab(tabName) {
+    tabs.forEach(tab => {
+      tab.classList.toggle('tab-active', tab.dataset.tab === tabName);
+    });
+    
+    Object.keys(sections).forEach(key => {
+      sections[key].classList.toggle('hidden', key !== tabName);
+    });
+  }
+  
+  // ========== COPY & DOWNLOAD ==========
+  
+  async function copyToClipboard(text, message) {
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast(message || i18n.copied);
+    } catch (e) {
+      console.error('Failed to copy:', e);
+    }
+  }
+  
+  function downloadFile(content, filename, type) {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+  
+  // ========== LOCAL STORAGE ==========
+  
+  function saveToLocalStorage() {
+    localStorage.setItem('meta-tag-generator-state', JSON.stringify(state));
+    localStorage.setItem('meta-tag-generator-sync', JSON.stringify(syncOptions));
+  }
+  
+  function loadFromLocalStorage() {
+    const savedState = localStorage.getItem('meta-tag-generator-state');
+    const savedSync = localStorage.getItem('meta-tag-generator-sync');
+    
+    if (savedState) {
+      try {
+        state = { ...state, ...JSON.parse(savedState) };
+      } catch (e) {
+        console.error('Failed to load state:', e);
+      }
+    }
+    
+    if (savedSync) {
+      try {
+        syncOptions = { ...syncOptions, ...JSON.parse(savedSync) };
+      } catch (e) {
+        console.error('Failed to load sync options:', e);
+      }
+    }
+    
+    applyState();
+  }
+  
+  function applyState() {
+    // SEO
+    document.getElementById('input-title').value = state.title;
+    document.getElementById('input-description').value = state.description;
+    document.getElementById('input-url').value = state.url;
+    document.getElementById('input-canonical').value = state.canonical;
+    document.getElementById('input-author').value = state.author;
+    document.getElementById('input-keywords').value = state.keywords;
+    document.getElementById('input-robots').value = state.robots;
+    document.getElementById('input-language').value = state.language;
+    
+    // OG
+    document.getElementById('input-og-title').value = state.og.title;
+    document.getElementById('input-og-description').value = state.og.description;
+    document.getElementById('input-og-image').value = state.og.image;
+    document.getElementById('input-og-url').value = state.og.url;
+    document.getElementById('input-og-type').value = state.og.type;
+    document.getElementById('input-og-sitename').value = state.og.siteName;
+    document.getElementById('input-og-locale').value = state.og.locale;
+    
+    // Twitter
+    document.getElementById('input-twitter-card').value = state.twitter.card;
+    document.getElementById('input-twitter-title').value = state.twitter.title;
+    document.getElementById('input-twitter-description').value = state.twitter.description;
+    document.getElementById('input-twitter-image').value = state.twitter.image;
+    document.getElementById('input-twitter-site').value = state.twitter.site;
+    document.getElementById('input-twitter-creator').value = state.twitter.creator;
+    
+    // Icons
+    document.getElementById('input-favicon').value = state.icons.favicon;
+    document.getElementById('input-icon-32').value = state.icons.icon32;
+    document.getElementById('input-icon-16').value = state.icons.icon16;
+    document.getElementById('input-apple-icon').value = state.icons.appleTouchIcon;
+    document.getElementById('input-android-icon').value = state.icons.androidIcon;
+    document.getElementById('input-theme-color').value = state.icons.themeColor;
+    document.getElementById('input-theme-color-text').value = state.icons.themeColor;
+    document.getElementById('input-ms-tile-color').value = state.icons.msTileColor;
+    document.getElementById('input-ms-tile-color-text').value = state.icons.msTileColor;
+    
+    // Manifest
+    document.getElementById('input-manifest-name').value = state.manifest.name;
+    document.getElementById('input-manifest-short').value = state.manifest.shortName;
+    document.getElementById('input-manifest-description').value = state.manifest.description;
+    document.getElementById('input-manifest-bg').value = state.manifest.backgroundColor;
+    document.getElementById('input-manifest-bg-text').value = state.manifest.backgroundColor;
+    document.getElementById('input-manifest-theme').value = state.manifest.themeColor;
+    document.getElementById('input-manifest-theme-text').value = state.manifest.themeColor;
+    document.getElementById('input-manifest-display').value = state.manifest.display;
+    document.getElementById('input-manifest-start-url').value = state.manifest.startUrl;
+    document.getElementById('input-manifest-orientation').value = state.manifest.orientation;
+    
+    // Sync checkboxes
+    document.getElementById('og-title-same').checked = syncOptions.ogTitle;
+    document.getElementById('og-description-same').checked = syncOptions.ogDescription;
+    document.getElementById('og-url-same').checked = syncOptions.ogUrl;
+    document.getElementById('twitter-title-same').checked = syncOptions.twitterTitle;
+    document.getElementById('twitter-description-same').checked = syncOptions.twitterDescription;
+    document.getElementById('twitter-image-same').checked = syncOptions.twitterImage;
+    document.getElementById('manifest-theme-same').checked = syncOptions.manifestTheme;
+    
+    // Disabled states
+    document.getElementById('input-og-title').disabled = syncOptions.ogTitle;
+    document.getElementById('input-og-description').disabled = syncOptions.ogDescription;
+    document.getElementById('input-og-url').disabled = syncOptions.ogUrl;
+    document.getElementById('input-twitter-title').disabled = syncOptions.twitterTitle;
+    document.getElementById('input-twitter-description').disabled = syncOptions.twitterDescription;
+    document.getElementById('input-twitter-image').disabled = syncOptions.twitterImage;
+    document.getElementById('input-manifest-theme').disabled = syncOptions.manifestTheme;
+    document.getElementById('input-manifest-theme-text').disabled = syncOptions.manifestTheme;
+    
+    updateAll();
+  }
+  
+  // ========== INIT ==========
+  
+  // Tabs
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+  });
+  
+  // SEO inputs
+  bindInput('input-title', 'title');
+  bindInput('input-description', 'description');
+  bindInput('input-url', 'url');
+  bindInput('input-canonical', 'canonical');
+  bindInput('input-author', 'author');
+  bindInput('input-keywords', 'keywords');
+  bindInput('input-robots', 'robots');
+  bindInput('input-language', 'language');
+  
+  // Length counters
+  document.getElementById('input-title').addEventListener('input', (e) => {
+    const len = e.target.value.length;
+    const counter = document.getElementById('title-length');
+    counter.textContent = `${len}/60`;
+    counter.className = 'label-text-alt ' + (len > 60 ? 'text-error' : len < 30 ? 'text-warning' : 'text-success');
+  });
+  
+  document.getElementById('input-description').addEventListener('input', (e) => {
+    const len = e.target.value.length;
+    const counter = document.getElementById('description-length');
+    counter.textContent = `${len}/160`;
+    counter.className = 'label-text-alt ' + (len > 160 ? 'text-error' : len < 120 ? 'text-warning' : 'text-success');
+  });
+  
+  // OG inputs
+  bindInput('input-og-title', 'og.title');
+  bindInput('input-og-description', 'og.description');
+  bindInput('input-og-image', 'og.image');
+  bindInput('input-og-url', 'og.url');
+  bindInput('input-og-type', 'og.type');
+  bindInput('input-og-sitename', 'og.siteName');
+  bindInput('input-og-locale', 'og.locale');
+  
+  // OG Image upload
+  document.getElementById('og-image-upload').addEventListener('click', () => {
+    document.getElementById('og-image-file').click();
+  });
+  
+  document.getElementById('og-image-file').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        document.getElementById('input-og-image').value = event.target.result;
+        state.og.image = event.target.result;
+        updateAll();
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+  
+  // Sync fields
+  syncField('input-title', 'input-og-title', 'ogTitle');
+  syncField('input-description', 'input-og-description', 'ogDescription');
+  syncField('input-url', 'input-og-url', 'ogUrl');
+  syncField('input-title', 'input-twitter-title', 'twitterTitle');
+  syncField('input-description', 'input-twitter-description', 'twitterDescription');
+  syncField('input-og-image', 'input-twitter-image', 'twitterImage');
+  syncField('input-theme-color', 'input-manifest-theme', 'manifestTheme');
+  
+  // Twitter inputs
+  bindInput('input-twitter-card', 'twitter.card');
+  bindInput('input-twitter-title', 'twitter.title');
+  bindInput('input-twitter-description', 'twitter.description');
+  bindInput('input-twitter-image', 'twitter.image');
+  bindInput('input-twitter-site', 'twitter.site');
+  bindInput('input-twitter-creator', 'twitter.creator');
+  
+  // Icons inputs
+  bindInput('input-favicon', 'icons.favicon');
+  bindInput('input-icon-32', 'icons.icon32');
+  bindInput('input-icon-16', 'icons.icon16');
+  bindInput('input-apple-icon', 'icons.appleTouchIcon');
+  bindInput('input-android-icon', 'icons.androidIcon');
+  bindInput('input-theme-color', 'icons.themeColor');
+  bindInput('input-theme-color-text', 'icons.themeColor');
+  bindInput('input-ms-tile-color', 'icons.msTileColor');
+  bindInput('input-ms-tile-color-text', 'icons.msTileColor');
+  
+  // Color pickers sync
+  document.getElementById('input-theme-color').addEventListener('input', (e) => {
+    document.getElementById('input-theme-color-text').value = e.target.value;
+  });
+  
+  document.getElementById('input-theme-color-text').addEventListener('input', (e) => {
+    if (/^#[0-9A-Fa-f]{6}$/.test(e.target.value)) {
+      document.getElementById('input-theme-color').value = e.target.value;
+    }
+  });
+  
+  document.getElementById('input-ms-tile-color').addEventListener('input', (e) => {
+    document.getElementById('input-ms-tile-color-text').value = e.target.value;
+  });
+  
+  document.getElementById('input-ms-tile-color-text').addEventListener('input', (e) => {
+    if (/^#[0-9A-Fa-f]{6}$/.test(e.target.value)) {
+      document.getElementById('input-ms-tile-color').value = e.target.value;
+    }
+  });
+  
+  // Manifest inputs
+  bindInput('input-manifest-name', 'manifest.name');
+  bindInput('input-manifest-short', 'manifest.shortName');
+  bindInput('input-manifest-description', 'manifest.description');
+  bindInput('input-manifest-bg', 'manifest.backgroundColor');
+  bindInput('input-manifest-bg-text', 'manifest.backgroundColor');
+  bindInput('input-manifest-theme', 'manifest.themeColor');
+  bindInput('input-manifest-theme-text', 'manifest.themeColor');
+  bindInput('input-manifest-display', 'manifest.display');
+  bindInput('input-manifest-start-url', 'manifest.startUrl');
+  bindInput('input-manifest-orientation', 'manifest.orientation');
+  
+  // Manifest color pickers
+  document.getElementById('input-manifest-bg').addEventListener('input', (e) => {
+    document.getElementById('input-manifest-bg-text').value = e.target.value;
+  });
+  
+  document.getElementById('input-manifest-bg-text').addEventListener('input', (e) => {
+    if (/^#[0-9A-Fa-f]{6}$/.test(e.target.value)) {
+      document.getElementById('input-manifest-bg').value = e.target.value;
+    }
+  });
+  
+  document.getElementById('input-manifest-theme').addEventListener('input', (e) => {
+    document.getElementById('input-manifest-theme-text').value = e.target.value;
+  });
+  
+  document.getElementById('input-manifest-theme-text').addEventListener('input', (e) => {
+    if (/^#[0-9A-Fa-f]{6}$/.test(e.target.value)) {
+      document.getElementById('input-manifest-theme').value = e.target.value;
+    }
+  });
+  
+  // Copy buttons
+  document.getElementById('copy-head').addEventListener('click', () => {
+    const tags = generateMetaTags();
+    copyToClipboard(tags.join('\n'), i18n.copiedHead);
+  });
+  
+  document.getElementById('copy-meta').addEventListener('click', () => {
+    const tags = generateMetaTags().filter(t => t.includes('<meta '));
+    copyToClipboard(tags.join('\n'), i18n.copiedMeta);
+  });
+  
+  // Download buttons
+  document.getElementById('download-html').addEventListener('click', () => {
+    const tags = generateMetaTags();
+    downloadFile(tags.join('\n'), 'head.html', 'text/html');
+    showToast(i18n.downloadedHtml);
+  });
+  
+  document.getElementById('download-manifest').addEventListener('click', () => {
+    const manifest = generateManifest();
+    downloadFile(manifest, 'manifest.webmanifest', 'application/json');
+    showToast(i18n.downloadedManifest);
+  });
+  
+  // Load saved state
+  loadFromLocalStorage();
+  
+  console.log('Meta Tag Generator ready');
+  
+})();
+</script>
+
+{{ end }}

@@ -1,0 +1,774 @@
+{{ define "title" }}
+{{ i18n "colorConverter.title" | default "Color Converter" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">🎨</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto">{{ .Description }}</p>
+  </div>
+
+  <div class="max-w-4xl mx-auto">
+    
+    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      
+      <div class="p-4 sm:p-6">
+        
+        <!-- Выбор цвета -->
+        <div class="flex flex-col sm:flex-row gap-6 items-center mb-8">
+          
+          <!-- Color Picker -->
+          <div class="relative">
+            <div 
+              id="color-preview" 
+              class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl shadow-lg cursor-pointer transition-all hover:scale-105 border-4 border-base-200"
+              style="background-color: #6366f1;"
+            ></div>
+            <input 
+              type="color" 
+              id="color-picker" 
+              value="#6366f1" 
+              class="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+            />
+            <div class="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-base-100 shadow-lg flex items-center justify-center">
+              <ion-icon name="color-palette-outline" class="text-primary"></ion-icon>
+            </div>
+          </div>
+          
+          <!-- Ввод цвета -->
+          <div class="flex-1 w-full">
+            <div class="form-control mb-4">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "colorConverter.enterColor" | default "Введите цвет (HEX, RGB, HSL)" }}</span>
+              </label>
+              <div class="join w-full">
+                <input 
+                  type="text" 
+                  id="color-input" 
+                  class="input input-bordered join-item flex-1 font-mono"
+                  placeholder="{{ i18n "colorConverter.enterColorPlaceholder" | default "#6366f1 или rgb(99, 102, 241)" }}"
+                  value="#6366f1"
+                />
+                <button id="parse-color-btn" class="btn btn-primary join-item">
+                  <ion-icon name="arrow-forward-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Кнопки -->
+            <div class="flex flex-wrap gap-2">
+              <button id="random-color-btn" class="btn btn-ghost btn-sm gap-2">
+                <ion-icon name="dice-outline"></ion-icon>
+                {{ i18n "colorConverter.random" | default "Случайный" }}
+              </button>
+              <button id="eyedropper-btn" class="btn btn-ghost btn-sm gap-2">
+                <ion-icon name="eyedrop-outline"></ion-icon>
+                {{ i18n "colorConverter.eyedropper" | default "Пипетка" }}
+              </button>
+            </div>
+          </div>
+          
+        </div>
+
+        <!-- Результаты конвертации -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="color-results">
+          
+          <!-- HEX -->
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">HEX</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="hex">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-hex">#6366f1</div>
+          </div>
+          
+          <!-- RGB -->
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">RGB</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="rgb">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-rgb">rgb(99, 102, 241)</div>
+          </div>
+          
+          <!-- RGBA -->
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">RGBA</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="rgba">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-rgba">rgba(99, 102, 241, 1)</div>
+          </div>
+          
+          <!-- HSL -->
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">HSL</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="hsl">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-hsl">hsl(239, 84%, 67%)</div>
+          </div>
+          
+          <!-- HSLA -->
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">HSLA</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="hsla">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-hsla">hsla(239, 84%, 67%, 1)</div>
+          </div>
+          
+          <!-- HWB -->
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">HWB</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="hwb">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-hwb">hwb(239 39% 5%)</div>
+          </div>
+          
+          <!-- CMYK -->
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">CMYK</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="cmyk">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-cmyk">cmyk(59%, 58%, 0%, 5%)</div>
+          </div>
+          
+          <!-- CSS Variable -->
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">CSS Variable</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="css">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-css">--color: #6366f1;</div>
+          </div>
+          
+        </div>
+
+        <!-- Прозрачность -->
+        <div class="mt-6 p-4 rounded-xl bg-base-200/30">
+          <div class="flex items-center justify-between mb-2">
+            <label class="label-text font-medium">{{ i18n "colorConverter.transparency" | default "Прозрачность (Alpha)" }}</label>
+            <span class="font-mono text-sm" id="alpha-value">100%</span>
+          </div>
+          <input type="range" id="alpha-slider" min="0" max="100" value="100" class="range range-primary range-sm" />
+          <div class="flex justify-between text-xs text-base-content/40 mt-1">
+            <span>0%</span>
+            <span>50%</span>
+            <span>100%</span>
+          </div>
+        </div>
+
+        <!-- RGB Sliders -->
+        <div class="mt-6 p-4 rounded-xl bg-base-200/30">
+          <h4 class="font-medium mb-4">{{ i18n "colorConverter.rgbSettings" | default "Настройка RGB" }}</h4>
+          <div class="space-y-4">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm text-error font-medium">R</span>
+                <span class="font-mono text-sm" id="r-value">99</span>
+              </div>
+              <input type="range" id="r-slider" min="0" max="255" value="99" class="range range-error range-sm" />
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm text-success font-medium">G</span>
+                <span class="font-mono text-sm" id="g-value">102</span>
+              </div>
+              <input type="range" id="g-slider" min="0" max="255" value="102" class="range range-success range-sm" />
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm text-info font-medium">B</span>
+                <span class="font-mono text-sm" id="b-value">241</span>
+              </div>
+              <input type="range" id="b-slider" min="0" max="255" value="241" class="range range-info range-sm" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Палитра оттенков -->
+      <div class="p-4 sm:p-6 bg-base-200/30 border-t border-base-200 dark:border-base-content/10">
+        <h3 class="font-semibold mb-4">{{ i18n "colorConverter.shadesTitle" | default "Палитра оттенков" }}</h3>
+        <div class="grid grid-cols-5 sm:grid-cols-10 gap-2" id="color-shades">
+          <!-- Будет сгенерирована -->
+        </div>
+      </div>
+
+      <!-- Комплементарные цвета -->
+      <div class="p-4 sm:p-6 border-t border-base-200 dark:border-base-content/10">
+        <h3 class="font-semibold mb-4">{{ i18n "colorConverter.schemesTitle" | default "Цветовые схемы" }}</h3>
+        
+        <div class="space-y-4">
+          
+          <!-- Комплементарный -->
+          <div>
+            <div class="text-sm text-base-content/60 mb-2">{{ i18n "colorConverter.complementary" | default "Комплементарный" }}</div>
+            <div class="flex gap-2" id="complementary-colors"></div>
+          </div>
+          
+          <!-- Триадный -->
+          <div>
+            <div class="text-sm text-base-content/60 mb-2">{{ i18n "colorConverter.triadic" | default "Триадный" }}</div>
+            <div class="flex gap-2" id="triadic-colors"></div>
+          </div>
+          
+          <!-- Аналоговый -->
+          <div>
+            <div class="text-sm text-base-content/60 mb-2">{{ i18n "colorConverter.analogous" | default "Аналоговый" }}</div>
+            <div class="flex gap-2" id="analogous-colors"></div>
+          </div>
+          
+          <!-- Сплит-комплементарный -->
+          <div>
+            <div class="text-sm text-base-content/60 mb-2">{{ i18n "colorConverter.splitComplementary" | default "Сплит-комплементарный" }}</div>
+            <div class="flex gap-2" id="split-colors"></div>
+          </div>
+          
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Предустановленные цвета -->
+    <div class="mt-6 bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+      <details class="group" open>
+        <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+          <h3 class="font-semibold">{{ i18n "colorConverter.presetColors" | default "Популярные цвета (Tailwind CSS)" }}</h3>
+          <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+        </summary>
+        <div class="p-4 pt-0">
+          <div class="grid grid-cols-10 gap-1" id="preset-colors">
+            <!-- Будет сгенерировано -->
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Информация о контрасте -->
+    <div class="mt-6 bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 p-4 sm:p-6">
+      <h3 class="font-semibold mb-4">{{ i18n "colorConverter.contrastCheck" | default "Проверка контраста (WCAG)" }}</h3>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        
+        <!-- На белом фоне -->
+        <div class="p-4 rounded-xl bg-white text-center">
+          <div class="text-2xl font-bold mb-2" id="contrast-white-text" style="color: #6366f1;">Aa</div>
+          <div class="text-sm text-gray-600">{{ i18n "colorConverter.onWhite" | default "На белом фоне" }}</div>
+          <div class="mt-2">
+            <span class="badge" id="contrast-white-badge">—</span>
+            <span class="text-xs text-gray-500 ml-1" id="contrast-white-ratio">—</span>
+          </div>
+        </div>
+        
+        <!-- На чёрном фоне -->
+        <div class="p-4 rounded-xl bg-black text-center">
+          <div class="text-2xl font-bold mb-2" id="contrast-black-text" style="color: #6366f1;">Aa</div>
+          <div class="text-sm text-gray-400">{{ i18n "colorConverter.onBlack" | default "На чёрном фоне" }}</div>
+          <div class="mt-2">
+            <span class="badge" id="contrast-black-badge">—</span>
+            <span class="text-xs text-gray-400 ml-1" id="contrast-black-ratio">—</span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Локализация
+  const i18n = {
+    eyedropperNotSupported: {{ i18n "colorConverter.eyedropperNotSupported" | default "Ваш браузер не поддерживает EyeDropper API" | jsonify }}
+  };
+  
+  // ========== ЭЛЕМЕНТЫ ==========
+  const colorPicker = document.getElementById('color-picker');
+  const colorPreview = document.getElementById('color-preview');
+  const colorInput = document.getElementById('color-input');
+  const alphaSlider = document.getElementById('alpha-slider');
+  const alphaValue = document.getElementById('alpha-value');
+  
+  const rSlider = document.getElementById('r-slider');
+  const gSlider = document.getElementById('g-slider');
+  const bSlider = document.getElementById('b-slider');
+  const rValue = document.getElementById('r-value');
+  const gValue = document.getElementById('g-value');
+  const bValue = document.getElementById('b-value');
+  
+  let currentColor = { r: 99, g: 102, b: 241 };
+  let currentAlpha = 1;
+  
+  // ========== КОНВЕРТАЦИИ ==========
+  
+  // HEX -> RGB
+  function hexToRgb(hex) {
+    hex = hex.replace('#', '');
+    if (hex.length === 3) {
+      hex = hex.split('').map(c => c + c).join('');
+    }
+    const num = parseInt(hex, 16);
+    return {
+      r: (num >> 16) & 255,
+      g: (num >> 8) & 255,
+      b: num & 255
+    };
+  }
+  
+  // RGB -> HEX
+  function rgbToHex(r, g, b) {
+    return '#' + [r, g, b].map(x => {
+      const hex = Math.round(x).toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
+    }).join('');
+  }
+  
+  // RGB -> HSL
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+    
+    if (max === min) {
+      h = s = 0;
+    } else {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+        case g: h = ((b - r) / d + 2) / 6; break;
+        case b: h = ((r - g) / d + 4) / 6; break;
+      }
+    }
+    
+    return {
+      h: Math.round(h * 360),
+      s: Math.round(s * 100),
+      l: Math.round(l * 100)
+    };
+  }
+  
+  // HSL -> RGB
+  function hslToRgb(h, s, l) {
+    h /= 360; s /= 100; l /= 100;
+    let r, g, b;
+    
+    if (s === 0) {
+      r = g = b = l;
+    } else {
+      const hue2rgb = (p, q, t) => {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1/6) return p + (q - p) * 6 * t;
+        if (t < 1/2) return q;
+        if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+        return p;
+      };
+      
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      const p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1/3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1/3);
+    }
+    
+    return {
+      r: Math.round(r * 255),
+      g: Math.round(g * 255),
+      b: Math.round(b * 255)
+    };
+  }
+  
+  // RGB -> HWB
+  function rgbToHwb(r, g, b) {
+    const hsl = rgbToHsl(r, g, b);
+    const w = Math.min(r, g, b) / 255 * 100;
+    const bl = (1 - Math.max(r, g, b) / 255) * 100;
+    return { h: hsl.h, w: Math.round(w), b: Math.round(bl) };
+  }
+  
+  // RGB -> CMYK
+  function rgbToCmyk(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    const k = 1 - Math.max(r, g, b);
+    if (k === 1) return { c: 0, m: 0, y: 0, k: 100 };
+    return {
+      c: Math.round((1 - r - k) / (1 - k) * 100),
+      m: Math.round((1 - g - k) / (1 - k) * 100),
+      y: Math.round((1 - b - k) / (1 - k) * 100),
+      k: Math.round(k * 100)
+    };
+  }
+  
+  // Парсинг цвета из строки
+  function parseColor(input) {
+    input = input.trim().toLowerCase();
+    
+    // HEX
+    if (input.startsWith('#')) {
+      return hexToRgb(input);
+    }
+    
+    // RGB/RGBA
+    const rgbMatch = input.match(/rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+    if (rgbMatch) {
+      return {
+        r: parseInt(rgbMatch[1]),
+        g: parseInt(rgbMatch[2]),
+        b: parseInt(rgbMatch[3])
+      };
+    }
+    
+    // HSL/HSLA
+    const hslMatch = input.match(/hsla?\s*\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%/i);
+    if (hslMatch) {
+      return hslToRgb(
+        parseInt(hslMatch[1]),
+        parseInt(hslMatch[2]),
+        parseInt(hslMatch[3])
+      );
+    }
+    
+    return null;
+  }
+  
+  // ========== КОНТРАСТ (WCAG) ==========
+  
+  function getLuminance(r, g, b) {
+    const [rs, gs, bs] = [r, g, b].map(c => {
+      c /= 255;
+      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+  }
+  
+  function getContrastRatio(rgb1, rgb2) {
+    const l1 = getLuminance(rgb1.r, rgb1.g, rgb1.b);
+    const l2 = getLuminance(rgb2.r, rgb2.g, rgb2.b);
+    const lighter = Math.max(l1, l2);
+    const darker = Math.min(l1, l2);
+    return (lighter + 0.05) / (darker + 0.05);
+  }
+  
+  function getContrastLevel(ratio) {
+    if (ratio >= 7) return { level: 'AAA', class: 'badge-success' };
+    if (ratio >= 4.5) return { level: 'AA', class: 'badge-success' };
+    if (ratio >= 3) return { level: 'AA Large', class: 'badge-warning' };
+    return { level: 'Fail', class: 'badge-error' };
+  }
+  
+  // ========== ЦВЕТОВЫЕ СХЕМЫ ==========
+  
+  function getComplementary(h) {
+    return [(h + 180) % 360];
+  }
+  
+  function getTriadic(h) {
+    return [(h + 120) % 360, (h + 240) % 360];
+  }
+  
+  function getAnalogous(h) {
+    return [(h + 30) % 360, (h - 30 + 360) % 360];
+  }
+  
+  function getSplitComplementary(h) {
+    return [(h + 150) % 360, (h + 210) % 360];
+  }
+  
+  function renderColorScheme(container, hues, s, l) {
+    container.innerHTML = hues.map(hue => {
+      const rgb = hslToRgb(hue, s, l);
+      const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+      return `
+        <button 
+          class="w-12 h-12 rounded-lg shadow-md hover:scale-110 transition-transform color-swatch"
+          style="background-color: ${hex};"
+          data-color="${hex}"
+          title="${hex}"
+        ></button>
+      `;
+    }).join('');
+  }
+  
+  // ========== ОТТЕНКИ ==========
+  
+  function generateShades(h, s) {
+    const shades = [];
+    for (let l = 95; l >= 5; l -= 10) {
+      const rgb = hslToRgb(h, s, l);
+      shades.push(rgbToHex(rgb.r, rgb.g, rgb.b));
+    }
+    return shades;
+  }
+  
+  function renderShades(shades) {
+    const container = document.getElementById('color-shades');
+    container.innerHTML = shades.map((hex, i) => `
+      <button 
+        class="aspect-square rounded-lg shadow-sm hover:scale-110 transition-transform color-swatch"
+        style="background-color: ${hex};"
+        data-color="${hex}"
+        title="${hex}"
+      ></button>
+    `).join('');
+  }
+  
+  // ========== ОБНОВЛЕНИЕ UI ==========
+  
+  function updateUI() {
+    const { r, g, b } = currentColor;
+    const hex = rgbToHex(r, g, b);
+    const hsl = rgbToHsl(r, g, b);
+    const hwb = rgbToHwb(r, g, b);
+    const cmyk = rgbToCmyk(r, g, b);
+    const alpha = currentAlpha;
+    
+    // Превью
+    colorPreview.style.backgroundColor = alpha < 1 
+      ? `rgba(${r}, ${g}, ${b}, ${alpha})` 
+      : hex;
+    colorPicker.value = hex;
+    colorInput.value = hex;
+    
+    // RGB слайдеры
+    rSlider.value = r;
+    gSlider.value = g;
+    bSlider.value = b;
+    rValue.textContent = r;
+    gValue.textContent = g;
+    bValue.textContent = b;
+    
+    // Результаты
+    document.getElementById('result-hex').textContent = hex;
+    document.getElementById('result-rgb').textContent = `rgb(${r}, ${g}, ${b})`;
+    document.getElementById('result-rgba').textContent = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    document.getElementById('result-hsl').textContent = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+    document.getElementById('result-hsla').textContent = `hsla(${hsl.h}, ${hsl.s}%, ${hsl.l}%, ${alpha})`;
+    document.getElementById('result-hwb').textContent = `hwb(${hwb.h} ${hwb.w}% ${hwb.b}%)`;
+    document.getElementById('result-cmyk').textContent = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+    document.getElementById('result-css').textContent = `--color: ${hex};`;
+    
+    // Оттенки
+    const shades = generateShades(hsl.h, hsl.s);
+    renderShades(shades);
+    
+    // Цветовые схемы
+    renderColorScheme(
+      document.getElementById('complementary-colors'),
+      [hsl.h, ...getComplementary(hsl.h)],
+      hsl.s, hsl.l
+    );
+    renderColorScheme(
+      document.getElementById('triadic-colors'),
+      [hsl.h, ...getTriadic(hsl.h)],
+      hsl.s, hsl.l
+    );
+    renderColorScheme(
+      document.getElementById('analogous-colors'),
+      [(hsl.h - 30 + 360) % 360, hsl.h, (hsl.h + 30) % 360],
+      hsl.s, hsl.l
+    );
+    renderColorScheme(
+      document.getElementById('split-colors'),
+      [hsl.h, ...getSplitComplementary(hsl.h)],
+      hsl.s, hsl.l
+    );
+    
+    // Контраст
+    const whiteRatio = getContrastRatio(currentColor, { r: 255, g: 255, b: 255 });
+    const blackRatio = getContrastRatio(currentColor, { r: 0, g: 0, b: 0 });
+    
+    const whiteLevel = getContrastLevel(whiteRatio);
+    const blackLevel = getContrastLevel(blackRatio);
+    
+    document.getElementById('contrast-white-text').style.color = hex;
+    document.getElementById('contrast-black-text').style.color = hex;
+    
+    document.getElementById('contrast-white-badge').className = `badge ${whiteLevel.class}`;
+    document.getElementById('contrast-white-badge').textContent = whiteLevel.level;
+    document.getElementById('contrast-white-ratio').textContent = whiteRatio.toFixed(2) + ':1';
+    
+    document.getElementById('contrast-black-badge').className = `badge ${blackLevel.class}`;
+    document.getElementById('contrast-black-badge').textContent = blackLevel.level;
+    document.getElementById('contrast-black-ratio').textContent = blackRatio.toFixed(2) + ':1';
+    
+    // Биндинг swatch кликов
+    document.querySelectorAll('.color-swatch').forEach(swatch => {
+      swatch.addEventListener('click', () => {
+        const color = swatch.dataset.color;
+        currentColor = hexToRgb(color);
+        updateUI();
+      });
+    });
+  }
+  
+  // ========== СОБЫТИЯ ==========
+  
+  // Color picker
+  colorPicker.addEventListener('input', (e) => {
+    currentColor = hexToRgb(e.target.value);
+    updateUI();
+  });
+  
+  // Ввод цвета
+  document.getElementById('parse-color-btn').addEventListener('click', () => {
+    const parsed = parseColor(colorInput.value);
+    if (parsed) {
+      currentColor = parsed;
+      updateUI();
+    } else {
+      colorInput.classList.add('input-error');
+      setTimeout(() => colorInput.classList.remove('input-error'), 1000);
+    }
+  });
+  
+  colorInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      document.getElementById('parse-color-btn').click();
+    }
+  });
+  
+  // Alpha слайдер
+  alphaSlider.addEventListener('input', () => {
+    currentAlpha = alphaSlider.value / 100;
+    alphaValue.textContent = alphaSlider.value + '%';
+    updateUI();
+  });
+  
+  // RGB слайдеры
+  [rSlider, gSlider, bSlider].forEach((slider, i) => {
+    slider.addEventListener('input', () => {
+      currentColor = {
+        r: parseInt(rSlider.value),
+        g: parseInt(gSlider.value),
+        b: parseInt(bSlider.value)
+      };
+      updateUI();
+    });
+  });
+  
+  // Случайный цвет
+  document.getElementById('random-color-btn').addEventListener('click', () => {
+    currentColor = {
+      r: Math.floor(Math.random() * 256),
+      g: Math.floor(Math.random() * 256),
+      b: Math.floor(Math.random() * 256)
+    };
+    updateUI();
+  });
+  
+  // Пипетка (EyeDropper API)
+  document.getElementById('eyedropper-btn').addEventListener('click', async () => {
+    if (!('EyeDropper' in window)) {
+      alert(i18n.eyedropperNotSupported);
+      return;
+    }
+    
+    try {
+      const eyeDropper = new EyeDropper();
+      const result = await eyeDropper.open();
+      currentColor = hexToRgb(result.sRGBHex);
+      updateUI();
+    } catch (e) {
+      // User cancelled
+    }
+  });
+  
+  // Копирование
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const format = btn.dataset.format;
+      const resultEl = document.getElementById('result-' + format);
+      if (resultEl) {
+        await navigator.clipboard.writeText(resultEl.textContent);
+        
+        const originalIcon = btn.innerHTML;
+        btn.innerHTML = '<ion-icon name="checkmark-outline" class="text-success"></ion-icon>';
+        setTimeout(() => { btn.innerHTML = originalIcon; }, 1500);
+      }
+    });
+  });
+  
+  // ========== PRESET COLORS (Tailwind) ==========
+  
+  const tailwindColors = {
+    slate: ['#f8fafc','#f1f5f9','#e2e8f0','#cbd5e1','#94a3b8','#64748b','#475569','#334155','#1e293b','#0f172a'],
+    red: ['#fef2f2','#fee2e2','#fecaca','#fca5a5','#f87171','#ef4444','#dc2626','#b91c1c','#991b1b','#7f1d1d'],
+    orange: ['#fff7ed','#ffedd5','#fed7aa','#fdba74','#fb923c','#f97316','#ea580c','#c2410c','#9a3412','#7c2d12'],
+    amber: ['#fffbeb','#fef3c7','#fde68a','#fcd34d','#fbbf24','#f59e0b','#d97706','#b45309','#92400e','#78350f'],
+    yellow: ['#fefce8','#fef9c3','#fef08a','#fde047','#facc15','#eab308','#ca8a04','#a16207','#854d0e','#713f12'],
+    lime: ['#f7fee7','#ecfccb','#d9f99d','#bef264','#a3e635','#84cc16','#65a30d','#4d7c0f','#3f6212','#365314'],
+    green: ['#f0fdf4','#dcfce7','#bbf7d0','#86efac','#4ade80','#22c55e','#16a34a','#15803d','#166534','#14532d'],
+    emerald: ['#ecfdf5','#d1fae5','#a7f3d0','#6ee7b7','#34d399','#10b981','#059669','#047857','#065f46','#064e3b'],
+    teal: ['#f0fdfa','#ccfbf1','#99f6e4','#5eead4','#2dd4bf','#14b8a6','#0d9488','#0f766e','#115e59','#134e4a'],
+    cyan: ['#ecfeff','#cffafe','#a5f3fc','#67e8f9','#22d3ee','#06b6d4','#0891b2','#0e7490','#155e75','#164e63'],
+    sky: ['#f0f9ff','#e0f2fe','#bae6fd','#7dd3fc','#38bdf8','#0ea5e9','#0284c7','#0369a1','#075985','#0c4a6e'],
+    blue: ['#eff6ff','#dbeafe','#bfdbfe','#93c5fd','#60a5fa','#3b82f6','#2563eb','#1d4ed8','#1e40af','#1e3a8a'],
+    indigo: ['#eef2ff','#e0e7ff','#c7d2fe','#a5b4fc','#818cf8','#6366f1','#4f46e5','#4338ca','#3730a3','#312e81'],
+    violet: ['#f5f3ff','#ede9fe','#ddd6fe','#c4b5fd','#a78bfa','#8b5cf6','#7c3aed','#6d28d9','#5b21b6','#4c1d95'],
+    purple: ['#faf5ff','#f3e8ff','#e9d5ff','#d8b4fe','#c084fc','#a855f7','#9333ea','#7e22ce','#6b21a8','#581c87'],
+    fuchsia: ['#fdf4ff','#fae8ff','#f5d0fe','#f0abfc','#e879f9','#d946ef','#c026d3','#a21caf','#86198f','#701a75'],
+    pink: ['#fdf2f8','#fce7f3','#fbcfe8','#f9a8d4','#f472b6','#ec4899','#db2777','#be185d','#9d174d','#831843'],
+    rose: ['#fff1f2','#ffe4e6','#fecdd3','#fda4af','#fb7185','#f43f5e','#e11d48','#be123c','#9f1239','#881337'],
+  };
+  
+  function renderPresetColors() {
+    const container = document.getElementById('preset-colors');
+    let html = '';
+    
+    Object.entries(tailwindColors).forEach(([name, colors]) => {
+      colors.forEach((color, i) => {
+        html += `
+          <button 
+            class="aspect-square rounded hover:scale-125 transition-transform color-swatch"
+            style="background-color: ${color};"
+            data-color="${color}"
+            title="${name}-${(i + 1) * 100}"
+          ></button>
+        `;
+      });
+    });
+    
+    container.innerHTML = html;
+  }
+  
+  // ========== INIT ==========
+  renderPresetColors();
+  updateUI();
+  
+})();
+</script>
+
+{{ end }}

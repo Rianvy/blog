@@ -1,0 +1,291 @@
+{{ define "title" }}
+{{ default "Lorem Ipsum Generator" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">📄</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto">{{ .Description }}</p>
+  </div>
+
+  <div class="max-w-4xl mx-auto">
+    
+    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      
+      <!-- Настройки -->
+      <div class="p-4 sm:p-6 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <!-- Тип -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-medium">{{ T "loremIpsum.type" }}</span>
+            </label>
+            <select id="lorem-type" class="select select-bordered">
+              <option value="paragraphs">{{ T "loremIpsum.paragraphs" }}</option>
+              <option value="sentences">{{ T "loremIpsum.sentences" }}</option>
+              <option value="words">{{ T "loremIpsum.words" }}</option>
+            </select>
+          </div>
+          
+          <!-- Количество -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-medium">{{ T "loremIpsum.count" }}</span>
+            </label>
+            <input type="number" id="lorem-count" class="input input-bordered" value="3" min="1" max="100" />
+          </div>
+          
+          <!-- Язык -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-medium">{{ T "loremIpsum.language" }}</span>
+            </label>
+            <select id="lorem-lang" class="select select-bordered">
+              <option value="latin">{{ T "loremIpsum.latin" }}</option>
+              <option value="russian">{{ T "loremIpsum.russian" }}</option>
+              <option value="hipster">{{ T "loremIpsum.hipster" }}</option>
+            </select>
+          </div>
+          
+          <!-- Формат -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-medium">{{ T "loremIpsum.format" }}</span>
+            </label>
+            <select id="lorem-format" class="select select-bordered">
+              <option value="plain">{{ T "loremIpsum.plainText" }}</option>
+              <option value="html">{{ T "loremIpsum.htmlTags" }}</option>
+            </select>
+          </div>
+          
+        </div>
+        
+        <!-- Опции -->
+        <div class="flex flex-wrap gap-4 mt-4">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="lorem-start" class="checkbox checkbox-sm checkbox-primary" checked />
+            <span class="text-sm">{{ T "loremIpsum.startWithLorem" }}</span>
+          </label>
+        </div>
+        
+        <!-- Генерация -->
+        <div class="flex flex-wrap gap-2 mt-6">
+          <button id="generate-lorem" class="btn btn-primary gap-2">
+            <ion-icon name="sparkles-outline"></ion-icon>
+            {{ T "loremIpsum.generate" }}
+          </button>
+          <button id="copy-lorem" class="btn btn-ghost gap-2">
+            <ion-icon name="copy-outline"></ion-icon>
+            {{ T "loremIpsum.copy" }}
+          </button>
+        </div>
+        
+      </div>
+
+      <!-- Результат -->
+      <div class="p-4 sm:p-6">
+        <div id="lorem-output" class="prose max-w-none min-h-[200px]">
+          <p class="text-base-content/40 italic">{{ T "loremIpsum.placeholder" }}</p>
+        </div>
+        
+        <div class="flex items-center justify-between mt-4 pt-4 border-t border-base-200 text-sm text-base-content/60">
+          <span id="lorem-stats">0 {{ T "loremIpsum.characters" }} • 0 {{ T "loremIpsum.wordsCount" }}</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  // ========== I18N ==========
+  const i18n = {
+    characters: {{ T "loremIpsum.characters" | jsonify }},
+    wordsCount: {{ T "loremIpsum.wordsCount" | jsonify }},
+    copied: {{ T "loremIpsum.copied" | jsonify }},
+    copy: {{ T "loremIpsum.copy" | jsonify }}
+  };
+  
+  const loremWords = {
+    latin: [
+      'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit',
+      'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore',
+      'magna', 'aliqua', 'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud',
+      'exercitation', 'ullamco', 'laboris', 'nisi', 'aliquip', 'ex', 'ea', 'commodo',
+      'consequat', 'duis', 'aute', 'irure', 'in', 'reprehenderit', 'voluptate',
+      'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur', 'excepteur', 'sint',
+      'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui', 'officia',
+      'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum', 'mauris', 'vitae',
+      'ultricies', 'leo', 'integer', 'malesuada', 'nunc', 'vel', 'risus'
+    ],
+    russian: [
+      'далеко-далеко', 'за', 'словесными', 'горами', 'в', 'стране', 'гласных', 'и',
+      'согласных', 'живут', 'рыбные', 'тексты', 'вдали', 'от', 'всех', 'они',
+      'буквенных', 'домах', 'на', 'берегу', 'семантика', 'большого', 'языкового',
+      'океана', 'маленький', 'ручеёк', 'даль', 'журчит', 'по', 'всей', 'обеспечивает',
+      'её', 'необходимыми', 'правилами', 'эта', 'страна', 'которой', 'жаренные',
+      'предложения', 'залетают', 'прямо', 'рот', 'даже', 'всемогущая', 'пунктуация',
+      'не', 'имеет', 'власти', 'над', 'текстами', 'заголовок', 'продолжил', 'свой',
+      'путь', 'достигнув', 'первых', 'холмов', 'курсивных', 'гор', 'бросил',
+      'последний', 'взгляд', 'назад', 'силуэт', 'родного', 'города', 'букв', 'грамоты'
+    ],
+    hipster: [
+      'artisan', 'authentic', 'beard', 'brooklyn', 'craft', 'ethical', 'fixie',
+      'flannel', 'gastropub', 'gluten-free', 'helvetica', 'hoodie', 'irony',
+      'kickstarter', 'lomo', 'messenger', 'organic', 'pinterest', 'portland',
+      'quinoa', 'raw', 'selvage', 'skateboard', 'sustainable', 'tumblr', 'typewriter',
+      'umami', 'vegan', 'vinyl', 'wayfarers', 'williamsburg', 'wolf', 'yolo',
+      'aesthetic', 'banjo', 'bespoke', 'blog', 'butcher', 'cardigan', 'chambray',
+      'chia', 'cliche', 'cold-pressed', 'cornhole', 'crucifix', 'direct', 'trade',
+      'disrupt', 'dreamcatcher', 'echo', 'park', 'everyday', 'carry', 'farm-to-table'
+    ]
+  };
+  
+  const startPhrase = {
+    latin: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+    russian: 'Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. ',
+    hipster: 'Artisan authentic beard brooklyn craft beer ethical. '
+  };
+  
+  function getRandomWord(lang) {
+    const words = loremWords[lang];
+    return words[Math.floor(Math.random() * words.length)];
+  }
+  
+  function capitalizeFirst(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  
+  function generateSentence(lang, minWords = 8, maxWords = 16) {
+    const wordCount = Math.floor(Math.random() * (maxWords - minWords + 1)) + minWords;
+    const words = [];
+    
+    for (let i = 0; i < wordCount; i++) {
+      words.push(getRandomWord(lang));
+    }
+    
+    // Иногда добавляем запятую
+    if (wordCount > 6 && Math.random() > 0.5) {
+      const commaPos = Math.floor(wordCount / 2);
+      words[commaPos] += ',';
+    }
+    
+    return capitalizeFirst(words.join(' ')) + '.';
+  }
+  
+  function generateParagraph(lang, startWithLorem = false) {
+    const sentenceCount = Math.floor(Math.random() * 4) + 3; // 3-6 предложений
+    const sentences = [];
+    
+    if (startWithLorem) {
+      sentences.push(startPhrase[lang].trim());
+    }
+    
+    for (let i = startWithLorem ? 1 : 0; i < sentenceCount; i++) {
+      sentences.push(generateSentence(lang));
+    }
+    
+    return sentences.join(' ');
+  }
+  
+  function generateLorem(type, count, lang, format, startWithLorem) {
+    let result = [];
+    
+    if (type === 'words') {
+      const words = [];
+      if (startWithLorem) {
+        words.push(...startPhrase[lang].split(' ').slice(0, Math.min(count, 5)));
+      }
+      while (words.length < count) {
+        words.push(getRandomWord(lang));
+      }
+      result = [words.slice(0, count).join(' ')];
+    } else if (type === 'sentences') {
+      if (startWithLorem) {
+        result.push(startPhrase[lang].trim());
+        count--;
+      }
+      for (let i = 0; i < count; i++) {
+        result.push(generateSentence(lang));
+      }
+      result = [result.join(' ')];
+    } else { // paragraphs
+      for (let i = 0; i < count; i++) {
+        result.push(generateParagraph(lang, startWithLorem && i === 0));
+      }
+    }
+    
+    if (format === 'html') {
+      return result.map(p => `<p>${p}</p>`).join('\n');
+    }
+    
+    return result.join('\n\n');
+  }
+  
+  // Элементы
+  const loremType = document.getElementById('lorem-type');
+  const loremCount = document.getElementById('lorem-count');
+  const loremLang = document.getElementById('lorem-lang');
+  const loremFormat = document.getElementById('lorem-format');
+  const loremStart = document.getElementById('lorem-start');
+  const loremOutput = document.getElementById('lorem-output');
+  const loremStats = document.getElementById('lorem-stats');
+  
+  function generate() {
+    const text = generateLorem(
+      loremType.value,
+      parseInt(loremCount.value) || 3,
+      loremLang.value,
+      loremFormat.value,
+      loremStart.checked
+    );
+    
+    if (loremFormat.value === 'html') {
+      loremOutput.innerHTML = text;
+    } else {
+      loremOutput.innerHTML = text.split('\n\n').map(p => `<p>${p}</p>`).join('');
+    }
+    
+    // Статистика
+    const plainText = loremOutput.innerText;
+    const chars = plainText.length;
+    const words = plainText.split(/\s+/).filter(w => w).length;
+    loremStats.textContent = `${chars} ${i18n.characters} • ${words} ${i18n.wordsCount}`;
+  }
+  
+  document.getElementById('generate-lorem').addEventListener('click', generate);
+  
+  document.getElementById('copy-lorem').addEventListener('click', async () => {
+    const text = loremFormat.value === 'html' 
+      ? loremOutput.innerHTML 
+      : loremOutput.innerText;
+    await navigator.clipboard.writeText(text);
+    
+    const btn = document.getElementById('copy-lorem');
+    btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> ' + i18n.copied;
+    setTimeout(() => {
+      btn.innerHTML = '<ion-icon name="copy-outline"></ion-icon> ' + i18n.copy;
+    }, 2000);
+  });
+  
+  // Генерация при загрузке
+  generate();
+  
+})();
+</script>
+
+{{ end }}

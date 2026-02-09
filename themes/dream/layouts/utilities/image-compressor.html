@@ -1,0 +1,753 @@
+{{ define "title" }}
+{{ default "Image Compressor" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero секция -->
+  <div class="text-center mb-8 sm:mb-12">
+    
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}🖼️{{ end }}</span>
+    </div>
+    
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">
+      {{ .Description }}
+    </p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        {{ i18n "imageCompressor.inBrowser" | default "100% в браузере" }}
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="images-outline"></ion-icon>
+        {{ i18n "imageCompressor.formats" | default "PNG, JPG, WebP" }}
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="layers-outline"></ion-icon>
+        {{ i18n "imageCompressor.upToFiles" | default "До 20 файлов" }}
+      </span>
+    </div>
+    
+  </div>
+
+  <!-- Основной контент -->
+  <div class="max-w-5xl mx-auto">
+    
+    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      
+      <!-- Dropzone -->
+      <div 
+        id="dropzone"
+        class="p-8 sm:p-12 border-2 border-dashed border-base-300 rounded-xl m-4 
+               hover:border-primary hover:bg-primary/5 transition-all cursor-pointer
+               flex flex-col items-center justify-center text-center"
+      >
+        <div class="w-20 h-20 rounded-2xl bg-base-200 flex items-center justify-center mb-4">
+          <ion-icon name="cloud-upload-outline" class="text-4xl text-base-content/50"></ion-icon>
+        </div>
+        <h3 class="text-lg font-semibold mb-2">{{ i18n "imageCompressor.dropImages" | default "Перетащите изображения сюда" }}</h3>
+        <p class="text-sm text-base-content/60 mb-4">{{ i18n "imageCompressor.orClickToSelect" | default "или нажмите для выбора" }}</p>
+        <div class="flex flex-wrap justify-center gap-2 text-xs text-base-content/40">
+          <span class="px-2 py-1 bg-base-200 rounded">PNG</span>
+          <span class="px-2 py-1 bg-base-200 rounded">JPG/JPEG</span>
+          <span class="px-2 py-1 bg-base-200 rounded">WebP</span>
+          <span class="px-2 py-1 bg-base-200 rounded">{{ i18n "imageCompressor.upToMb" | default "до 10 MB" }}</span>
+        </div>
+        <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp" multiple class="hidden" />
+      </div>
+
+      <!-- Настройки сжатия -->
+      <div class="px-4 pb-4">
+        <details class="group bg-base-200/50 rounded-xl" open>
+          <summary class="flex items-center justify-between p-4 cursor-pointer select-none">
+            <div class="flex items-center gap-3">
+              <ion-icon name="settings-outline" class="text-xl"></ion-icon>
+              <span class="font-medium">{{ i18n "imageCompressor.compressionSettings" | default "Настройки сжатия" }}</span>
+            </div>
+            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          
+          <div class="px-4 pb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <!-- Качество -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "imageCompressor.quality" | default "Качество" }}</span>
+                <span class="label-text-alt" id="quality-value">85%</span>
+              </label>
+              <input type="range" id="quality" min="10" max="100" value="85" class="range range-primary range-sm" />
+              <div class="flex justify-between text-xs text-base-content/40 px-1 mt-1">
+                <span>{{ i18n "imageCompressor.minSize" | default "Мин. размер" }}</span>
+                <span>{{ i18n "imageCompressor.maxQuality" | default "Макс. качество" }}</span>
+              </div>
+            </div>
+            
+            <!-- Максимальный размер -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "imageCompressor.maxSizePx" | default "Макс. размер (px)" }}</span>
+                <span class="label-text-alt" id="max-size-value">{{ i18n "imageCompressor.noLimit" | default "Без ограничений" }}</span>
+              </label>
+              <input type="range" id="max-size" min="0" max="4000" value="0" step="100" class="range range-secondary range-sm" />
+              <div class="flex justify-between text-xs text-base-content/40 px-1 mt-1">
+                <span>{{ i18n "imageCompressor.original" | default "Оригинал" }}</span>
+                <span>4000px</span>
+              </div>
+            </div>
+            
+            <!-- Формат вывода -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">{{ i18n "imageCompressor.outputFormat" | default "Формат вывода" }}</span>
+              </label>
+              <select id="output-format" class="select select-bordered select-sm">
+                <option value="original">{{ i18n "imageCompressor.originalFormat" | default "Оригинальный формат" }}</option>
+                <option value="image/jpeg">JPEG</option>
+                <option value="image/png">PNG</option>
+                <option value="image/webp" selected>WebP ({{ i18n "imageCompressor.recommended" | default "рекомендуется" }})</option>
+              </select>
+            </div>
+            
+            <!-- Preserve EXIF -->
+            <div class="form-control">
+              <label class="label cursor-pointer justify-start gap-3">
+                <input type="checkbox" id="preserve-exif" class="checkbox checkbox-sm checkbox-primary" />
+                <div>
+                  <span class="label-text font-medium">{{ i18n "imageCompressor.preserveExif" | default "Сохранить EXIF" }}</span>
+                  <p class="text-xs text-base-content/60">{{ i18n "imageCompressor.exifDesc" | default "Метаданные камеры и GPS" }}</p>
+                </div>
+              </label>
+            </div>
+            
+          </div>
+        </details>
+      </div>
+
+      <!-- Список файлов -->
+      <div id="files-container" class="hidden">
+        
+        <!-- Заголовок списка -->
+        <div class="flex items-center justify-between px-4 py-3 bg-base-200/50 border-y border-base-200 dark:border-base-content/10">
+          <div class="flex items-center gap-2">
+            <ion-icon name="images-outline" class="text-lg"></ion-icon>
+            <span class="font-medium">{{ i18n "imageCompressor.images" | default "Изображения" }}</span>
+            <span class="badge badge-sm" id="files-count">0</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="compress-all-btn" class="btn btn-primary btn-sm gap-1.5">
+              <ion-icon name="flash-outline"></ion-icon>
+              {{ i18n "imageCompressor.compressAll" | default "Сжать все" }}
+            </button>
+            <button id="download-all-btn" class="btn btn-success btn-sm gap-1.5 hidden">
+              <ion-icon name="download-outline"></ion-icon>
+              {{ i18n "imageCompressor.downloadAll" | default "Скачать все" }}
+            </button>
+            <button id="clear-all-btn" class="btn btn-ghost btn-sm gap-1.5 text-error">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Список -->
+        <div id="files-list" class="divide-y divide-base-200 dark:divide-base-content/10 max-h-[500px] overflow-y-auto">
+          <!-- Файлы будут здесь -->
+        </div>
+        
+      </div>
+
+      <!-- Общая статистика -->
+      <div id="total-stats" class="hidden px-4 py-4 bg-gradient-to-r from-success/10 to-primary/10 border-t border-base-200 dark:border-base-content/10">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-6">
+            <div>
+              <div class="text-sm text-base-content/60">{{ i18n "imageCompressor.originalSize" | default "Исходный размер" }}</div>
+              <div class="text-xl font-bold" id="total-original">0 KB</div>
+            </div>
+            <div class="text-2xl text-base-content/30">→</div>
+            <div>
+              <div class="text-sm text-base-content/60">{{ i18n "imageCompressor.afterCompression" | default "После сжатия" }}</div>
+              <div class="text-xl font-bold text-success" id="total-compressed">0 KB</div>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm text-base-content/60">{{ i18n "imageCompressor.savings" | default "Экономия" }}</div>
+            <div class="text-2xl font-bold text-success" id="total-saved">0%</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Информация -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+        <div class="w-12 h-12 rounded-xl bg-success/10 flex items-center justify-center mx-auto mb-3">
+          <ion-icon name="shield-checkmark-outline" class="text-2xl text-success"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">{{ i18n "imageCompressor.privacy" | default "Приватность" }}</h3>
+        <p class="text-sm text-base-content/60">{{ i18n "imageCompressor.privacyDesc" | default "Все файлы обрабатываются локально в вашем браузере" }}</p>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3">
+          <ion-icon name="flash-outline" class="text-2xl text-primary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">{{ i18n "imageCompressor.fast" | default "Быстро" }}</h3>
+        <p class="text-sm text-base-content/60">{{ i18n "imageCompressor.fastDesc" | default "Мгновенное сжатие с использованием Canvas API" }}</p>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+        <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mx-auto mb-3">
+          <ion-icon name="sparkles-outline" class="text-2xl text-secondary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">{{ i18n "imageCompressor.qualityTitle" | default "Качество" }}</h3>
+        <p class="text-sm text-base-content/60">{{ i18n "imageCompressor.qualityDesc" | default "Умный алгоритм сохраняет детали изображения" }}</p>
+      </div>
+      
+    </div>
+
+    <!-- Сравнение форматов -->
+    <div class="mt-6 bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+      <details class="group">
+        <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-info/10 flex items-center justify-center">
+              <ion-icon name="information-circle-outline" class="text-xl text-info"></ion-icon>
+            </div>
+            <div>
+              <h3 class="font-semibold">{{ i18n "imageCompressor.whichFormat" | default "Какой формат выбрать?" }}</h3>
+              <p class="text-xs text-base-content/60">{{ i18n "imageCompressor.formatComparison" | default "Сравнение JPEG, PNG и WebP" }}</p>
+            </div>
+          </div>
+          <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+        </summary>
+        
+        <div class="px-4 pb-4">
+          <div class="overflow-x-auto">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>{{ i18n "imageCompressor.format" | default "Формат" }}</th>
+                  <th>{{ i18n "imageCompressor.bestFor" | default "Лучше для" }}</th>
+                  <th>{{ i18n "imageCompressor.transparency" | default "Прозрачность" }}</th>
+                  <th>{{ i18n "imageCompressor.size" | default "Размер" }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge badge-primary">JPEG</span></td>
+                  <td>{{ i18n "imageCompressor.photos" | default "Фотографии" }}</td>
+                  <td><ion-icon name="close-circle" class="text-error"></ion-icon></td>
+                  <td>{{ i18n "imageCompressor.small" | default "Маленький" }}</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-secondary">PNG</span></td>
+                  <td>{{ i18n "imageCompressor.graphics" | default "Графика, скриншоты" }}</td>
+                  <td><ion-icon name="checkmark-circle" class="text-success"></ion-icon></td>
+                  <td>{{ i18n "imageCompressor.large" | default "Большой" }}</td>
+                </tr>
+                <tr class="bg-success/5">
+                  <td><span class="badge badge-success">WebP</span></td>
+                  <td>{{ i18n "imageCompressor.universal" | default "Всё (универсальный)" }}</td>
+                  <td><ion-icon name="checkmark-circle" class="text-success"></ion-icon></td>
+                  <td>{{ i18n "imageCompressor.minimal" | default "Минимальный" }} ⭐</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-sm text-base-content/60 mt-3">
+            💡 <strong>{{ i18n "imageCompressor.recommendation" | default "Рекомендация" }}:</strong> {{ i18n "imageCompressor.recommendationText" | default "Используйте WebP для веб-сайтов — он на 25-35% меньше JPEG при том же качестве." }}
+          </p>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+  .file-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    transition: background-color 0.2s;
+  }
+  
+  .file-item:hover {
+    background-color: oklch(var(--b2) / 0.5);
+  }
+  
+  .file-preview {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    background-color: oklch(var(--b2));
+  }
+  
+  .file-progress {
+    height: 4px;
+    border-radius: 2px;
+    background-color: oklch(var(--b3));
+    overflow: hidden;
+  }
+  
+  .file-progress-bar {
+    height: 100%;
+    background-color: oklch(var(--p));
+    transition: width 0.3s;
+  }
+</style>
+
+<!-- JavaScript -->
+<script>
+(function() {
+  'use strict';
+  
+  // Локализация
+  const i18n = {
+    noLimit: {{ i18n "imageCompressor.noLimit" | default "Без ограничений" | jsonify }},
+    waiting: {{ i18n "imageCompressor.waiting" | default "Ожидание" | jsonify }},
+    compressing: {{ i18n "imageCompressor.compressing" | default "Сжатие..." | jsonify }},
+    error: {{ i18n "imageCompressor.error" | default "Ошибка" | jsonify }},
+    download: {{ i18n "imageCompressor.download" | default "Скачать" | jsonify }},
+    compare: {{ i18n "imageCompressor.compare" | default "Сравнить" | jsonify }},
+    compress: {{ i18n "imageCompressor.compress" | default "Сжать" | jsonify }},
+    remove: {{ i18n "imageCompressor.remove" | default "Удалить" | jsonify }},
+    comparison: {{ i18n "imageCompressor.comparison" | default "Сравнение" | jsonify }},
+    original: {{ i18n "imageCompressor.original" | default "Оригинал" | jsonify }},
+    compressed: {{ i18n "imageCompressor.compressed" | default "Сжатое" | jsonify }},
+    savings: {{ i18n "imageCompressor.savings" | default "Экономия" | jsonify }},
+    close: {{ i18n "imageCompressor.close" | default "Закрыть" | jsonify }},
+    fileNotSupported: {{ i18n "imageCompressor.fileNotSupported" | default "не поддерживается. Только PNG, JPG, WebP." | jsonify }},
+    fileTooLarge: {{ i18n "imageCompressor.fileTooLarge" | default "слишком большой (макс. 10 MB)" | jsonify }},
+    maxFiles: {{ i18n "imageCompressor.maxFiles" | default "Максимум 20 файлов за раз" | jsonify }}
+  };
+  
+  // ========== ЭЛЕМЕНТЫ ==========
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('file-input');
+  const filesContainer = document.getElementById('files-container');
+  const filesList = document.getElementById('files-list');
+  const filesCount = document.getElementById('files-count');
+  const totalStats = document.getElementById('total-stats');
+  
+  // Settings
+  const qualitySlider = document.getElementById('quality');
+  const qualityValue = document.getElementById('quality-value');
+  const maxSizeSlider = document.getElementById('max-size');
+  const maxSizeValue = document.getElementById('max-size-value');
+  const outputFormat = document.getElementById('output-format');
+  
+  // Buttons
+  const compressAllBtn = document.getElementById('compress-all-btn');
+  const downloadAllBtn = document.getElementById('download-all-btn');
+  const clearAllBtn = document.getElementById('clear-all-btn');
+  
+  // Stats
+  const totalOriginal = document.getElementById('total-original');
+  const totalCompressed = document.getElementById('total-compressed');
+  const totalSaved = document.getElementById('total-saved');
+  
+  // State
+  let files = [];
+  let fileIdCounter = 0;
+  
+  // ========== УТИЛИТЫ ==========
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const idx = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, idx)).toFixed(2)) + ' ' + sizes[idx];
+  }
+  
+  function getFileExtension(mimeType) {
+    const map = {
+      'image/jpeg': '.jpg',
+      'image/png': '.png',
+      'image/webp': '.webp'
+    };
+    return map[mimeType] || '.jpg';
+  }
+  
+  function getMimeType(format, originalType) {
+    if (format === 'original') return originalType;
+    return format;
+  }
+  
+  // ========== НАСТРОЙКИ ==========
+  qualitySlider.addEventListener('input', () => {
+    qualityValue.textContent = qualitySlider.value + '%';
+  });
+  
+  maxSizeSlider.addEventListener('input', () => {
+    const val = parseInt(maxSizeSlider.value);
+    maxSizeValue.textContent = val === 0 ? i18n.noLimit : val + 'px';
+  });
+  
+  // ========== DRAG & DROP ==========
+  dropzone.addEventListener('click', () => fileInput.click());
+  
+  dropzone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropzone.classList.add('border-primary', 'bg-primary/5');
+  });
+  
+  dropzone.addEventListener('dragleave', () => {
+    dropzone.classList.remove('border-primary', 'bg-primary/5');
+  });
+  
+  dropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('border-primary', 'bg-primary/5');
+    handleFiles(e.dataTransfer.files);
+  });
+  
+  fileInput.addEventListener('change', (e) => {
+    handleFiles(e.target.files);
+    fileInput.value = '';
+  });
+  
+  // ========== ОБРАБОТКА ФАЙЛОВ ==========
+  function handleFiles(fileList) {
+    const validFiles = Array.from(fileList).filter(file => {
+      if (!file.type.match(/^image\/(jpeg|png|webp)$/)) {
+        alert(`${file.name} ${i18n.fileNotSupported}`);
+        return false;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        alert(`${file.name} ${i18n.fileTooLarge}`);
+        return false;
+      }
+      return true;
+    });
+    
+    if (files.length + validFiles.length > 20) {
+      alert(i18n.maxFiles);
+      return;
+    }
+    
+    validFiles.forEach(file => addFile(file));
+    updateUI();
+  }
+  
+  function addFile(file) {
+    const id = ++fileIdCounter;
+    const fileObj = {
+      id,
+      file,
+      name: file.name,
+      originalSize: file.size,
+      compressedSize: null,
+      compressedBlob: null,
+      status: 'pending',
+      preview: null
+    };
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      fileObj.preview = e.target.result;
+      renderFile(fileObj);
+    };
+    reader.readAsDataURL(file);
+    
+    files.push(fileObj);
+  }
+  
+  function removeFile(id) {
+    files = files.filter(f => f.id !== id);
+    updateUI();
+  }
+  
+  // ========== РЕНДЕРИНГ ==========
+  function renderFile(fileObj) {
+    let el = document.getElementById(`file-${fileObj.id}`);
+    
+    if (!el) {
+      el = document.createElement('div');
+      el.id = `file-${fileObj.id}`;
+      el.className = 'file-item';
+      filesList.appendChild(el);
+    }
+    
+    const savings = fileObj.compressedSize 
+      ? Math.round((1 - fileObj.compressedSize / fileObj.originalSize) * 100) 
+      : 0;
+    
+    const statusBadge = {
+      pending: `<span class="badge badge-ghost badge-sm">${i18n.waiting}</span>`,
+      compressing: `<span class="badge badge-primary badge-sm"><span class="loading loading-spinner loading-xs mr-1"></span>${i18n.compressing}</span>`,
+      done: `<span class="badge badge-success badge-sm">-${savings}%</span>`,
+      error: `<span class="badge badge-error badge-sm">${i18n.error}</span>`
+    };
+    
+    el.innerHTML = `
+      <img src="${fileObj.preview || ''}" alt="" class="file-preview" />
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="font-medium text-sm truncate">${fileObj.name}</span>
+          ${statusBadge[fileObj.status]}
+        </div>
+        <div class="flex items-center gap-4 text-xs text-base-content/60">
+          <span>${formatBytes(fileObj.originalSize)}</span>
+          ${fileObj.compressedSize ? `
+            <span>→</span>
+            <span class="text-success font-medium">${formatBytes(fileObj.compressedSize)}</span>
+          ` : ''}
+        </div>
+        ${fileObj.status === 'compressing' ? `
+          <div class="file-progress mt-2">
+            <div class="file-progress-bar" style="width: 50%"></div>
+          </div>
+        ` : ''}
+      </div>
+      <div class="flex items-center gap-1">
+        ${fileObj.status === 'done' ? `
+          <button class="btn btn-ghost btn-sm btn-circle download-btn" data-id="${fileObj.id}" title="${i18n.download}">
+            <ion-icon name="download-outline" class="text-lg"></ion-icon>
+          </button>
+          <button class="btn btn-ghost btn-sm btn-circle compare-btn" data-id="${fileObj.id}" title="${i18n.compare}">
+            <ion-icon name="git-compare-outline" class="text-lg"></ion-icon>
+          </button>
+        ` : ''}
+        ${fileObj.status === 'pending' ? `
+          <button class="btn btn-ghost btn-sm btn-circle compress-btn" data-id="${fileObj.id}" title="${i18n.compress}">
+            <ion-icon name="flash-outline" class="text-lg"></ion-icon>
+          </button>
+        ` : ''}
+        <button class="btn btn-ghost btn-sm btn-circle text-error remove-btn" data-id="${fileObj.id}" title="${i18n.remove}">
+          <ion-icon name="close-outline" class="text-lg"></ion-icon>
+        </button>
+      </div>
+    `;
+    
+    el.querySelector('.remove-btn')?.addEventListener('click', () => {
+      el.remove();
+      removeFile(fileObj.id);
+    });
+    
+    el.querySelector('.compress-btn')?.addEventListener('click', () => {
+      compressFile(fileObj.id);
+    });
+    
+    el.querySelector('.download-btn')?.addEventListener('click', () => {
+      downloadFile(fileObj.id);
+    });
+    
+    el.querySelector('.compare-btn')?.addEventListener('click', () => {
+      showComparison(fileObj.id);
+    });
+  }
+  
+  function updateUI() {
+    filesCount.textContent = files.length;
+    
+    if (files.length === 0) {
+      filesContainer.classList.add('hidden');
+      totalStats.classList.add('hidden');
+      downloadAllBtn.classList.add('hidden');
+    } else {
+      filesContainer.classList.remove('hidden');
+    }
+    
+    const compressed = files.filter(f => f.status === 'done');
+    if (compressed.length > 0) {
+      const origTotal = compressed.reduce((sum, f) => sum + f.originalSize, 0);
+      const compTotal = compressed.reduce((sum, f) => sum + f.compressedSize, 0);
+      const savedPercent = Math.round((1 - compTotal / origTotal) * 100);
+      
+      totalOriginal.textContent = formatBytes(origTotal);
+      totalCompressed.textContent = formatBytes(compTotal);
+      totalSaved.textContent = savedPercent + '%';
+      totalStats.classList.remove('hidden');
+      downloadAllBtn.classList.remove('hidden');
+    }
+    
+    filesList.innerHTML = '';
+    files.forEach(f => renderFile(f));
+  }
+  
+  // ========== СЖАТИЕ ==========
+  async function compressFile(id) {
+    const fileObj = files.find(f => f.id === id);
+    if (!fileObj) return;
+    
+    fileObj.status = 'compressing';
+    renderFile(fileObj);
+    
+    try {
+      const quality = parseInt(qualitySlider.value) / 100;
+      const maxSize = parseInt(maxSizeSlider.value);
+      const format = getMimeType(outputFormat.value, fileObj.file.type);
+      
+      const compressedBlob = await compressImage(fileObj.file, {
+        quality,
+        maxSize,
+        format
+      });
+      
+      fileObj.compressedBlob = compressedBlob;
+      fileObj.compressedSize = compressedBlob.size;
+      fileObj.status = 'done';
+    } catch (e) {
+      console.error('Compression error:', e);
+      fileObj.status = 'error';
+    }
+    
+    renderFile(fileObj);
+    updateUI();
+  }
+  
+  function compressImage(file, options) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      img.onload = () => {
+        let { width, height } = img;
+        
+        if (options.maxSize > 0) {
+          const maxDim = Math.max(width, height);
+          if (maxDim > options.maxSize) {
+            const ratio = options.maxSize / maxDim;
+            width = Math.round(width * ratio);
+            height = Math.round(height * ratio);
+          }
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        
+        if (options.format === 'image/jpeg') {
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, width, height);
+        }
+        
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              resolve(blob);
+            } else {
+              reject(new Error('Failed to compress'));
+            }
+          },
+          options.format,
+          options.quality
+        );
+      };
+      
+      img.onerror = () => reject(new Error('Failed to load image'));
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  
+  compressAllBtn.addEventListener('click', async () => {
+    const pending = files.filter(f => f.status === 'pending');
+    for (const fileObj of pending) {
+      await compressFile(fileObj.id);
+    }
+  });
+  
+  // ========== DOWNLOAD ==========
+  function downloadFile(id) {
+    const fileObj = files.find(f => f.id === id);
+    if (!fileObj || !fileObj.compressedBlob) return;
+    
+    const format = getMimeType(outputFormat.value, fileObj.file.type);
+    const ext = getFileExtension(format);
+    const baseName = fileObj.name.replace(/\.[^/.]+$/, '');
+    
+    const url = URL.createObjectURL(fileObj.compressedBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${baseName}-compressed${ext}`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+  
+  downloadAllBtn.addEventListener('click', async () => {
+    const compressed = files.filter(f => f.status === 'done');
+    
+    if (compressed.length === 1) {
+      downloadFile(compressed[0].id);
+      return;
+    }
+    
+    for (const fileObj of compressed) {
+      downloadFile(fileObj.id);
+      await new Promise(r => setTimeout(r, 500));
+    }
+  });
+  
+  clearAllBtn.addEventListener('click', () => {
+    files = [];
+    filesList.innerHTML = '';
+    updateUI();
+  });
+  
+  // ========== COMPARISON MODAL ==========
+  function showComparison(id) {
+    const fileObj = files.find(f => f.id === id);
+    if (!fileObj || !fileObj.compressedBlob) return;
+    
+    const modal = document.createElement('dialog');
+    modal.className = 'modal';
+    modal.innerHTML = `
+      <div class="modal-box max-w-4xl">
+        <h3 class="font-bold text-lg mb-4">${i18n.comparison}: ${fileObj.name}</h3>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <div class="text-center">
+            <div class="text-sm text-base-content/60 mb-2">${i18n.original}</div>
+            <img src="${fileObj.preview}" alt="Original" class="rounded-lg max-h-[400px] mx-auto" />
+            <div class="mt-2 text-sm font-medium">${formatBytes(fileObj.originalSize)}</div>
+          </div>
+          <div class="text-center">
+            <div class="text-sm text-base-content/60 mb-2">${i18n.compressed}</div>
+            <img src="${URL.createObjectURL(fileObj.compressedBlob)}" alt="Compressed" class="rounded-lg max-h-[400px] mx-auto" />
+            <div class="mt-2 text-sm font-medium text-success">${formatBytes(fileObj.compressedSize)}</div>
+          </div>
+        </div>
+        
+        <div class="mt-4 text-center">
+          <span class="badge badge-success badge-lg">
+            ${i18n.savings}: ${Math.round((1 - fileObj.compressedSize / fileObj.originalSize) * 100)}%
+          </span>
+        </div>
+        
+        <div class="modal-action">
+          <form method="dialog">
+            <button class="btn">${i18n.close}</button>
+          </form>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
+    `;
+    
+    document.body.appendChild(modal);
+    modal.showModal();
+    
+    modal.addEventListener('close', () => {
+      modal.remove();
+    });
+  }
+  
+})();
+</script>
+
+{{ end }}

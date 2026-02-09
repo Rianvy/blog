@@ -1,0 +1,402 @@
+{{ define "title" }}
+{{ default "URL Encoder/Decoder" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-8 sm:mb-12">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">🔗</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto">{{ .Description }}</p>
+  </div>
+
+  <!-- Основной контент -->
+  <div class="max-w-4xl mx-auto">
+    
+    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      
+      <!-- Табы режимов -->
+      <div class="flex border-b border-base-200 dark:border-base-content/10">
+        <button class="flex-1 px-4 py-3 font-medium text-sm mode-tab border-b-2 border-primary text-primary" data-mode="encode">
+          <ion-icon name="lock-closed-outline" class="mr-1"></ion-icon>
+          {{ T "urlEncoder.encode" }}
+        </button>
+        <button class="flex-1 px-4 py-3 font-medium text-sm mode-tab border-b-2 border-transparent text-base-content/60 hover:text-base-content" data-mode="decode">
+          <ion-icon name="lock-open-outline" class="mr-1"></ion-icon>
+          {{ T "urlEncoder.decode" }}
+        </button>
+        <button class="flex-1 px-4 py-3 font-medium text-sm mode-tab border-b-2 border-transparent text-base-content/60 hover:text-base-content" data-mode="parse">
+          <ion-icon name="git-branch-outline" class="mr-1"></ion-icon>
+          {{ T "urlEncoder.parseUrl" }}
+        </button>
+      </div>
+
+      <!-- Encode/Decode панель -->
+      <div id="encode-decode-panel" class="p-4 sm:p-6">
+        
+        <!-- Ввод -->
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-medium" id="input-label">{{ T "urlEncoder.textToEncode" }}</span>
+            <button id="paste-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="clipboard-outline"></ion-icon>
+              {{ T "urlEncoder.paste" }}
+            </button>
+          </label>
+          <textarea 
+            id="url-input" 
+            class="textarea textarea-bordered h-32 font-mono text-sm"
+            placeholder="{{ T "urlEncoder.inputPlaceholder" }}"
+          ></textarea>
+        </div>
+
+        <!-- Опции -->
+        <div class="flex flex-wrap gap-4 mb-4">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="encode-type" value="component" class="radio radio-sm radio-primary" checked />
+            <span class="text-sm">encodeURIComponent</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="encode-type" value="uri" class="radio radio-sm radio-primary" />
+            <span class="text-sm">encodeURI</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="encode-spaces-plus" class="checkbox checkbox-sm checkbox-primary" />
+            <span class="text-sm">{{ T "urlEncoder.spacesAsPlus" }}</span>
+          </label>
+        </div>
+
+        <!-- Кнопка -->
+        <div class="flex justify-center mb-4">
+          <button id="convert-btn" class="btn btn-primary gap-2">
+            <ion-icon name="swap-vertical-outline" class="text-lg"></ion-icon>
+            <span id="convert-btn-text">{{ T "urlEncoder.encodeBtn" }}</span>
+          </button>
+        </div>
+
+        <!-- Результат -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-medium" id="output-label">{{ T "urlEncoder.result" }}</span>
+            <button id="copy-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="copy-outline"></ion-icon>
+              {{ T "urlEncoder.copy" }}
+            </button>
+          </label>
+          <textarea 
+            id="url-output" 
+            class="textarea textarea-bordered h-32 font-mono text-sm bg-base-200/50"
+            readonly
+          ></textarea>
+        </div>
+
+        <!-- Статус -->
+        <div id="status" class="hidden alert mt-4">
+          <ion-icon id="status-icon" name="information-circle" class="text-lg"></ion-icon>
+          <span id="status-text"></span>
+        </div>
+        
+      </div>
+
+      <!-- Parse URL панель -->
+      <div id="parse-panel" class="hidden p-4 sm:p-6">
+        
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-medium">{{ T "urlEncoder.urlToParse" }}</span>
+          </label>
+          <input 
+            type="text" 
+            id="parse-input" 
+            class="input input-bordered font-mono text-sm"
+            placeholder="https://example.com/path?param=value&foo=bar#hash"
+          />
+        </div>
+
+        <button id="parse-btn" class="btn btn-primary gap-2 mb-6">
+          <ion-icon name="git-branch-outline" class="text-lg"></ion-icon>
+          {{ T "urlEncoder.parseBtn" }}
+        </button>
+
+        <!-- Результаты парсинга -->
+        <div id="parse-result" class="hidden space-y-4">
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <div class="p-4 rounded-xl bg-base-200/50">
+              <div class="text-xs text-base-content/50 mb-1">Protocol</div>
+              <div class="font-mono text-sm break-all" id="parse-protocol">—</div>
+            </div>
+            
+            <div class="p-4 rounded-xl bg-base-200/50">
+              <div class="text-xs text-base-content/50 mb-1">Host</div>
+              <div class="font-mono text-sm break-all" id="parse-host">—</div>
+            </div>
+            
+            <div class="p-4 rounded-xl bg-base-200/50">
+              <div class="text-xs text-base-content/50 mb-1">Port</div>
+              <div class="font-mono text-sm break-all" id="parse-port">—</div>
+            </div>
+            
+            <div class="p-4 rounded-xl bg-base-200/50">
+              <div class="text-xs text-base-content/50 mb-1">Pathname</div>
+              <div class="font-mono text-sm break-all" id="parse-pathname">—</div>
+            </div>
+            
+            <div class="p-4 rounded-xl bg-base-200/50 md:col-span-2">
+              <div class="text-xs text-base-content/50 mb-1">Hash</div>
+              <div class="font-mono text-sm break-all" id="parse-hash">—</div>
+            </div>
+            
+          </div>
+
+          <!-- Query параметры -->
+          <div class="p-4 rounded-xl bg-base-200/50">
+            <div class="text-xs text-base-content/50 mb-3">{{ T "urlEncoder.queryParameters" }}</div>
+            <div id="parse-params" class="space-y-2">
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- Примеры -->
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <h3 class="font-semibold mb-3 flex items-center gap-2">
+          <ion-icon name="information-circle-outline" class="text-info"></ion-icon>
+          encodeURIComponent
+        </h3>
+        <p class="text-sm text-base-content/70 mb-2">{{ T "urlEncoder.componentDesc" }}</p>
+        <div class="text-xs font-mono bg-base-200 p-2 rounded">
+          hello world → hello%20world
+        </div>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <h3 class="font-semibold mb-3 flex items-center gap-2">
+          <ion-icon name="information-circle-outline" class="text-info"></ion-icon>
+          encodeURI
+        </h3>
+        <p class="text-sm text-base-content/70 mb-2">{{ T "urlEncoder.uriDesc" }}</p>
+        <div class="text-xs font-mono bg-base-200 p-2 rounded">
+          https://site.com/путь → https://site.com/%D0%BF%D1%83%D1%82%D1%8C
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // I18N
+  var i18n = {
+    textToEncode: '{{ T "urlEncoder.textToEncode" }}',
+    encodedUrl: '{{ T "urlEncoder.encodedUrl" }}',
+    encodedUrlInput: '{{ T "urlEncoder.encodedUrlInput" }}',
+    decodedText: '{{ T "urlEncoder.decodedText" }}',
+    encodeBtn: '{{ T "urlEncoder.encodeBtn" }}',
+    decodeBtn: '{{ T "urlEncoder.decodeBtn" }}',
+    enterText: '{{ T "urlEncoder.enterText" }}',
+    encoded: '{{ T "urlEncoder.encoded" }}',
+    decoded: '{{ T "urlEncoder.decoded" }}',
+    copied: '{{ T "urlEncoder.copied" }}',
+    error: '{{ T "urlEncoder.error" }}',
+    invalidUrl: '{{ T "urlEncoder.invalidUrl" }}',
+    noParams: '{{ T "urlEncoder.noParams" }}',
+    defaultPort: '{{ T "urlEncoder.defaultPort" }}'
+  };
+  
+  // Элементы
+  var urlInput = document.getElementById('url-input');
+  var urlOutput = document.getElementById('url-output');
+  var convertBtn = document.getElementById('convert-btn');
+  var convertBtnText = document.getElementById('convert-btn-text');
+  var inputLabel = document.getElementById('input-label');
+  var outputLabel = document.getElementById('output-label');
+  var status = document.getElementById('status');
+  var statusIcon = document.getElementById('status-icon');
+  var statusText = document.getElementById('status-text');
+  
+  var parseInput = document.getElementById('parse-input');
+  var parseResult = document.getElementById('parse-result');
+  
+  var currentMode = 'encode';
+  
+  // Показать статус
+  function showStatus(message, type) {
+    var colors = {
+      success: 'alert-success',
+      error: 'alert-error',
+      info: 'alert-info'
+    };
+    var icons = {
+      success: 'checkmark-circle',
+      error: 'alert-circle',
+      info: 'information-circle'
+    };
+    
+    status.className = 'alert ' + colors[type] + ' mt-4';
+    statusIcon.setAttribute('name', icons[type]);
+    statusText.textContent = message;
+    status.classList.remove('hidden');
+    
+    if (type === 'success') {
+      setTimeout(function() { status.classList.add('hidden'); }, 3000);
+    }
+  }
+  
+  // Переключение табов
+  document.querySelectorAll('.mode-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var mode = tab.dataset.mode;
+      currentMode = mode;
+      
+      document.querySelectorAll('.mode-tab').forEach(function(t) {
+        t.classList.remove('border-primary', 'text-primary');
+        t.classList.add('border-transparent', 'text-base-content/60');
+      });
+      tab.classList.add('border-primary', 'text-primary');
+      tab.classList.remove('border-transparent', 'text-base-content/60');
+      
+      if (mode === 'parse') {
+        document.getElementById('encode-decode-panel').classList.add('hidden');
+        document.getElementById('parse-panel').classList.remove('hidden');
+      } else {
+        document.getElementById('encode-decode-panel').classList.remove('hidden');
+        document.getElementById('parse-panel').classList.add('hidden');
+        
+        if (mode === 'encode') {
+          inputLabel.textContent = i18n.textToEncode;
+          outputLabel.textContent = i18n.encodedUrl;
+          convertBtnText.textContent = i18n.encodeBtn;
+        } else {
+          inputLabel.textContent = i18n.encodedUrlInput;
+          outputLabel.textContent = i18n.decodedText;
+          convertBtnText.textContent = i18n.decodeBtn;
+        }
+      }
+    });
+  });
+  
+  // Конвертация
+  convertBtn.addEventListener('click', function() {
+    var input = urlInput.value;
+    if (!input) {
+      showStatus(i18n.enterText, 'error');
+      return;
+    }
+    
+    var encodeType = document.querySelector('input[name="encode-type"]:checked').value;
+    var spacesAsPlus = document.getElementById('encode-spaces-plus').checked;
+    
+    try {
+      var result;
+      
+      if (currentMode === 'encode') {
+        if (encodeType === 'component') {
+          result = encodeURIComponent(input);
+        } else {
+          result = encodeURI(input);
+        }
+        
+        if (spacesAsPlus) {
+          result = result.replace(/%20/g, '+');
+        }
+        
+        showStatus(i18n.encoded, 'success');
+      } else {
+        var decoded = input;
+        if (spacesAsPlus) {
+          decoded = decoded.replace(/\+/g, '%20');
+        }
+        result = decodeURIComponent(decoded);
+        showStatus(i18n.decoded, 'success');
+      }
+      
+      urlOutput.value = result;
+    } catch (e) {
+      showStatus(i18n.error + ': ' + e.message, 'error');
+    }
+  });
+  
+  // Parse URL
+  document.getElementById('parse-btn').addEventListener('click', function() {
+    var input = parseInput.value.trim();
+    if (!input) return;
+    
+    try {
+      var url = new URL(input);
+      
+      document.getElementById('parse-protocol').textContent = url.protocol || '—';
+      document.getElementById('parse-host').textContent = url.hostname || '—';
+      document.getElementById('parse-port').textContent = url.port || i18n.defaultPort;
+      document.getElementById('parse-pathname').textContent = url.pathname || '/';
+      document.getElementById('parse-hash').textContent = url.hash || '—';
+      
+      var paramsContainer = document.getElementById('parse-params');
+      var params = new URLSearchParams(url.search);
+      var paramsArray = [];
+      params.forEach(function(value, key) {
+        paramsArray.push({ key: key, value: value });
+      });
+      
+      if (paramsArray.length === 0) {
+        paramsContainer.innerHTML = '<div class="text-base-content/50 text-sm">' + i18n.noParams + '</div>';
+      } else {
+        paramsContainer.innerHTML = paramsArray.map(function(p) {
+          return '<div class="flex items-center gap-2 p-2 bg-base-100 rounded-lg">' +
+            '<span class="font-mono text-sm text-primary font-medium">' + p.key + '</span>' +
+            '<span class="text-base-content/40">=</span>' +
+            '<span class="font-mono text-sm flex-1 break-all">' + p.value + '</span>' +
+            '<button class="btn btn-ghost btn-xs copy-param" data-value="' + encodeURIComponent(p.value) + '">' +
+            '<ion-icon name="copy-outline"></ion-icon>' +
+            '</button>' +
+            '</div>';
+        }).join('');
+        
+        paramsContainer.querySelectorAll('.copy-param').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            navigator.clipboard.writeText(decodeURIComponent(btn.dataset.value));
+          });
+        });
+      }
+      
+      parseResult.classList.remove('hidden');
+    } catch (e) {
+      showStatus(i18n.invalidUrl, 'error');
+    }
+  });
+  
+  // Вставить
+  document.getElementById('paste-btn').addEventListener('click', function() {
+    navigator.clipboard.readText().then(function(text) {
+      urlInput.value = text;
+    });
+  });
+  
+  // Копировать
+  document.getElementById('copy-btn').addEventListener('click', function() {
+    if (urlOutput.value) {
+      navigator.clipboard.writeText(urlOutput.value);
+      showStatus(i18n.copied, 'success');
+    }
+  });
+  
+});
+</script>
+
+{{ end }}

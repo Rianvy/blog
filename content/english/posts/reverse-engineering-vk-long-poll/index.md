@@ -721,8 +721,6 @@ And don't use it for:
 - [MDN: Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) — for understanding interception
 - [MDN: WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) — for WS work
 
----
-
 {{< donate_button     
     "https://pay.cloudtips.ru/p/b59e1765" 
     "https://t.me/tribute/app?startapp=dE4k"

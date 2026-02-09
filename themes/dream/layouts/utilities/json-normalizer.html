@@ -1,0 +1,639 @@
+{{ define "title" }}
+{{ default "JSON Normalizer" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero секция -->
+  <div class="text-center mb-8 sm:mb-12">
+    
+    <!-- Иконка -->
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}📋{{ end }}</span>
+    </div>
+    
+    <!-- Заголовок -->
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    
+    <!-- Описание -->
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">
+      {{ .Description | default (T "jsonFormatter.defaultDescription") }}
+    </p>
+    
+    <!-- Бейджи -->
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        {{ T "jsonFormatter.secure" }}
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="flash-outline"></ion-icon>
+        {{ T "jsonFormatter.instant" }}
+      </span>
+    </div>
+    
+  </div>
+
+  <!-- Основной контент -->
+  <div class="max-w-6xl mx-auto">
+    
+    <!-- Карточка инструмента -->
+    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      
+      <!-- Панель инструментов -->
+      <div class="flex flex-wrap items-center justify-between gap-3 p-4 bg-base-200/50 border-b border-base-200 dark:border-base-content/10">
+        
+        <!-- Левая часть: основные действия -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="format-btn" class="btn btn-primary btn-sm gap-1.5">
+            <ion-icon name="code-slash-outline"></ion-icon>
+            <span class="hidden sm:inline">{{ T "jsonFormatter.format" }}</span>
+            <span class="sm:hidden">{{ T "jsonFormatter.formatShort" }}</span>
+          </button>
+          <button id="minify-btn" class="btn btn-secondary btn-sm gap-1.5">
+            <ion-icon name="contract-outline"></ion-icon>
+            <span class="hidden sm:inline">{{ T "jsonFormatter.minify" }}</span>
+            <span class="sm:hidden">{{ T "jsonFormatter.minifyShort" }}</span>
+          </button>
+          <button id="validate-btn" class="btn btn-accent btn-sm gap-1.5">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            <span class="hidden sm:inline">{{ T "jsonFormatter.validate" }}</span>
+            <span class="sm:hidden">{{ T "jsonFormatter.validateShort" }}</span>
+          </button>
+        </div>
+        
+        <!-- Правая часть: доп. действия -->
+        <div class="flex items-center gap-2">
+          <button id="sample-btn" class="btn btn-ghost btn-sm gap-1.5" title="{{ T "jsonFormatter.loadSample" }}">
+            <ion-icon name="document-text-outline"></ion-icon>
+            <span class="hidden md:inline">{{ T "jsonFormatter.sample" }}</span>
+          </button>
+          <button id="clear-btn" class="btn btn-ghost btn-sm gap-1.5 text-error hover:bg-error/10" title="{{ T "jsonFormatter.clear" }}">
+            <ion-icon name="trash-outline"></ion-icon>
+            <span class="hidden md:inline">{{ T "jsonFormatter.clear" }}</span>
+          </button>
+        </div>
+        
+      </div>
+
+      <!-- Редакторы -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-base-200 dark:divide-base-content/10">
+        
+        <!-- Входной JSON -->
+        <div class="flex flex-col">
+          
+          <!-- Заголовок панели -->
+          <div class="flex items-center justify-between px-4 py-2.5 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <div class="flex items-center gap-2">
+              <ion-icon name="enter-outline" class="text-lg text-primary"></ion-icon>
+              <span class="font-medium text-sm">{{ T "jsonFormatter.input" }}</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <button id="paste-btn" class="btn btn-ghost btn-xs gap-1 hover:bg-primary/10 hover:text-primary">
+                <ion-icon name="clipboard-outline"></ion-icon>
+                {{ T "jsonFormatter.paste" }}
+              </button>
+              <button id="upload-btn" class="btn btn-ghost btn-xs gap-1 hover:bg-primary/10 hover:text-primary">
+                <ion-icon name="cloud-upload-outline"></ion-icon>
+                {{ T "jsonFormatter.file" }}
+              </button>
+              <input type="file" id="file-input" accept=".json,application/json" class="hidden" />
+            </div>
+          </div>
+          
+          <!-- Textarea -->
+          <div class="relative flex-1">
+            <textarea 
+              id="json-input" 
+              class="w-full h-80 lg:h-[500px] p-4 font-mono text-sm bg-transparent 
+                     border-0 focus:outline-none focus:ring-0 resize-none
+                     placeholder:text-base-content/30"
+              placeholder="{{ T "jsonFormatter.inputPlaceholder" }}"
+              spellcheck="false"
+            ></textarea>
+            
+            <!-- Счётчик символов -->
+            <div class="absolute bottom-2 right-2 text-xs text-base-content/40 bg-base-100/80 backdrop-blur px-2 py-1 rounded">
+              <span id="input-chars">0</span> {{ T "jsonFormatter.chars" }}
+            </div>
+          </div>
+          
+        </div>
+
+        <!-- Результат -->
+        <div class="flex flex-col">
+          
+          <!-- Заголовок панели -->
+          <div class="flex items-center justify-between px-4 py-2.5 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <div class="flex items-center gap-2">
+              <ion-icon name="exit-outline" class="text-lg text-success"></ion-icon>
+              <span class="font-medium text-sm">{{ T "jsonFormatter.output" }}</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <button id="copy-btn" class="btn btn-ghost btn-xs gap-1 hover:bg-success/10 hover:text-success">
+                <ion-icon name="copy-outline"></ion-icon>
+                {{ T "jsonFormatter.copy" }}
+              </button>
+              <button id="download-btn" class="btn btn-ghost btn-xs gap-1 hover:bg-success/10 hover:text-success">
+                <ion-icon name="download-outline"></ion-icon>
+                {{ T "jsonFormatter.download" }}
+              </button>
+            </div>
+          </div>
+          
+          <!-- Textarea -->
+          <div class="relative flex-1">
+            <textarea 
+              id="json-output" 
+              class="w-full h-80 lg:h-[500px] p-4 font-mono text-sm bg-base-200/20
+                     border-0 focus:outline-none focus:ring-0 resize-none"
+              readonly
+              placeholder="{{ T "jsonFormatter.outputPlaceholder" }}"
+            ></textarea>
+            
+            <!-- Счётчик символов -->
+            <div class="absolute bottom-2 right-2 text-xs text-base-content/40 bg-base-100/80 backdrop-blur px-2 py-1 rounded">
+              <span id="output-chars">0</span> {{ T "jsonFormatter.chars" }}
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+
+      <!-- Статус бар -->
+      <div id="status" class="hidden px-4 py-3 border-t border-base-200 dark:border-base-content/10">
+        <div class="flex items-center gap-2">
+          <ion-icon id="status-icon" name="information-circle" class="text-lg"></ion-icon>
+          <span id="status-text" class="text-sm"></span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Настройки и информация -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+      
+      <!-- Настройки -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-base-200">
+                <ion-icon name="settings-outline" class="text-xl"></ion-icon>
+              </div>
+              <div>
+                <h3 class="font-semibold">{{ T "jsonFormatter.settings" }}</h3>
+                <p class="text-xs text-base-content/60">{{ T "jsonFormatter.settingsDesc" }}</p>
+              </div>
+            </div>
+            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          
+          <div class="px-4 pb-4 space-y-4">
+            <div class="divider my-0"></div>
+            
+            <!-- Отступ -->
+            <div class="form-control">
+              <label class="label pb-1">
+                <span class="label-text font-medium">{{ T "jsonFormatter.indent" }}</span>
+              </label>
+              <div class="flex gap-2">
+                <label class="flex items-center gap-2 px-3 py-2 rounded-lg bg-base-200 cursor-pointer hover:bg-base-300 transition-colors has-[:checked]:bg-primary has-[:checked]:text-primary-content">
+                  <input type="radio" name="indent" value="2" class="radio radio-xs" checked />
+                  <span class="text-sm">{{ T "jsonFormatter.twoSpaces" }}</span>
+                </label>
+                <label class="flex items-center gap-2 px-3 py-2 rounded-lg bg-base-200 cursor-pointer hover:bg-base-300 transition-colors has-[:checked]:bg-primary has-[:checked]:text-primary-content">
+                  <input type="radio" name="indent" value="4" class="radio radio-xs" />
+                  <span class="text-sm">{{ T "jsonFormatter.fourSpaces" }}</span>
+                </label>
+                <label class="flex items-center gap-2 px-3 py-2 rounded-lg bg-base-200 cursor-pointer hover:bg-base-300 transition-colors has-[:checked]:bg-primary has-[:checked]:text-primary-content">
+                  <input type="radio" name="indent" value="tab" class="radio radio-xs" />
+                  <span class="text-sm">Tab</span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Доп. опции -->
+            <div class="space-y-2">
+              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+                <input type="checkbox" id="sort-keys" class="checkbox checkbox-sm checkbox-primary" />
+                <div>
+                  <span class="text-sm font-medium">{{ T "jsonFormatter.sortKeys" }}</span>
+                  <p class="text-xs text-base-content/60">{{ T "jsonFormatter.sortKeysDesc" }}</p>
+                </div>
+              </label>
+              
+              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+                <input type="checkbox" id="escape-unicode" class="checkbox checkbox-sm checkbox-primary" />
+                <div>
+                  <span class="text-sm font-medium">{{ T "jsonFormatter.escapeUnicode" }}</span>
+                  <p class="text-xs text-base-content/60">{{ T "jsonFormatter.escapeUnicodeDesc" }}</p>
+                </div>
+              </label>
+            </div>
+            
+          </div>
+        </details>
+      </div>
+      
+      <!-- Информация о JSON -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 p-4">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-info/10 text-info">
+            <ion-icon name="analytics-outline" class="text-xl"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold">{{ T "jsonFormatter.stats" }}</h3>
+            <p class="text-xs text-base-content/60">{{ T "jsonFormatter.statsDesc" }}</p>
+          </div>
+        </div>
+        
+        <div id="json-stats" class="grid grid-cols-2 gap-3">
+          <div class="p-3 rounded-xl bg-base-200/50">
+            <div class="text-2xl font-bold text-primary" id="stat-objects">—</div>
+            <div class="text-xs text-base-content/60">{{ T "jsonFormatter.objects" }}</div>
+          </div>
+          <div class="p-3 rounded-xl bg-base-200/50">
+            <div class="text-2xl font-bold text-secondary" id="stat-arrays">—</div>
+            <div class="text-xs text-base-content/60">{{ T "jsonFormatter.arrays" }}</div>
+          </div>
+          <div class="p-3 rounded-xl bg-base-200/50">
+            <div class="text-2xl font-bold text-accent" id="stat-keys">—</div>
+            <div class="text-xs text-base-content/60">{{ T "jsonFormatter.keys" }}</div>
+          </div>
+          <div class="p-3 rounded-xl bg-base-200/50">
+            <div class="text-2xl font-bold text-info" id="stat-depth">—</div>
+            <div class="text-xs text-base-content/60">{{ T "jsonFormatter.depth" }}</div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Горячие клавиши -->
+    <div class="mt-6 p-4 rounded-2xl bg-base-200/30 border border-base-200 dark:border-base-content/10">
+      <div class="flex items-center gap-2 mb-3">
+        <ion-icon name="keypad-outline" class="text-lg text-base-content/60"></ion-icon>
+        <span class="text-sm font-medium text-base-content/60">{{ T "jsonFormatter.hotkeys" }}</span>
+      </div>
+      <div class="flex flex-wrap gap-4 text-sm text-base-content/60">
+        <div class="flex items-center gap-2">
+          <kbd class="kbd kbd-sm">Ctrl</kbd>
+          <span>+</span>
+          <kbd class="kbd kbd-sm">Enter</kbd>
+          <span>→ {{ T "jsonFormatter.format" }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <kbd class="kbd kbd-sm">Ctrl</kbd>
+          <span>+</span>
+          <kbd class="kbd kbd-sm">Shift</kbd>
+          <span>+</span>
+          <kbd class="kbd kbd-sm">M</kbd>
+          <span>→ {{ T "jsonFormatter.minify" }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <kbd class="kbd kbd-sm">Ctrl</kbd>
+          <span>+</span>
+          <kbd class="kbd kbd-sm">Shift</kbd>
+          <span>+</span>
+          <kbd class="kbd kbd-sm">V</kbd>
+          <span>→ {{ T "jsonFormatter.pasteAndFormat" }}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- JavaScript -->
+<script>
+(function() {
+  'use strict';
+  
+  // ========== I18N ==========
+  const i18n = {
+    chars: {{ T "jsonFormatter.chars" | jsonify }},
+    enterJsonFormat: {{ T "jsonFormatter.enterJsonFormat" | jsonify }},
+    enterJsonMinify: {{ T "jsonFormatter.enterJsonMinify" | jsonify }},
+    enterJsonValidate: {{ T "jsonFormatter.enterJsonValidate" | jsonify }},
+    formatted: {{ T "jsonFormatter.formatted" | jsonify }},
+    minified: {{ T "jsonFormatter.minified" | jsonify }},
+    minifiedStats: {{ T "jsonFormatter.minifiedStats" | jsonify }},
+    valid: {{ T "jsonFormatter.valid" | jsonify }},
+    invalid: {{ T "jsonFormatter.invalid" | jsonify }},
+    error: {{ T "jsonFormatter.error" | jsonify }},
+    nothingToCopy: {{ T "jsonFormatter.nothingToCopy" | jsonify }},
+    copied: {{ T "jsonFormatter.copied" | jsonify }},
+    pasted: {{ T "jsonFormatter.pasted" | jsonify }},
+    noClipboard: {{ T "jsonFormatter.noClipboard" | jsonify }},
+    nothingToDownload: {{ T "jsonFormatter.nothingToDownload" | jsonify }},
+    downloaded: {{ T "jsonFormatter.downloaded" | jsonify }},
+    fileLoaded: {{ T "jsonFormatter.fileLoaded" | jsonify }},
+    sampleLoaded: {{ T "jsonFormatter.sampleLoaded" | jsonify }},
+    sampleData: {{ T "jsonFormatter.sampleData" | jsonify }}
+  };
+  
+  // Элементы
+  const input = document.getElementById('json-input');
+  const output = document.getElementById('json-output');
+  const status = document.getElementById('status');
+  const statusIcon = document.getElementById('status-icon');
+  const statusText = document.getElementById('status-text');
+  const inputChars = document.getElementById('input-chars');
+  const outputChars = document.getElementById('output-chars');
+  const fileInput = document.getElementById('file-input');
+  
+  // Статистика
+  const statObjects = document.getElementById('stat-objects');
+  const statArrays = document.getElementById('stat-arrays');
+  const statKeys = document.getElementById('stat-keys');
+  const statDepth = document.getElementById('stat-depth');
+  
+  // Получить отступ
+  function getIndent() {
+    const checked = document.querySelector('input[name="indent"]:checked');
+    const value = checked ? checked.value : '2';
+    return value === 'tab' ? '\t' : parseInt(value);
+  }
+  
+  // Сортировка ключей
+  function sortKeys(obj) {
+    if (Array.isArray(obj)) return obj.map(sortKeys);
+    if (obj && typeof obj === 'object') {
+      return Object.keys(obj).sort().reduce((a, k) => { 
+        a[k] = sortKeys(obj[k]); 
+        return a; 
+      }, {});
+    }
+    return obj;
+  }
+  
+  // Анализ JSON
+  function analyzeJSON(obj, depth = 0) {
+    let stats = { objects: 0, arrays: 0, keys: 0, maxDepth: depth };
+    
+    if (Array.isArray(obj)) {
+      stats.arrays++;
+      obj.forEach(item => {
+        const childStats = analyzeJSON(item, depth + 1);
+        stats.objects += childStats.objects;
+        stats.arrays += childStats.arrays;
+        stats.keys += childStats.keys;
+        stats.maxDepth = Math.max(stats.maxDepth, childStats.maxDepth);
+      });
+    } else if (obj && typeof obj === 'object') {
+      stats.objects++;
+      Object.keys(obj).forEach(key => {
+        stats.keys++;
+        const childStats = analyzeJSON(obj[key], depth + 1);
+        stats.objects += childStats.objects;
+        stats.arrays += childStats.arrays;
+        stats.keys += childStats.keys;
+        stats.maxDepth = Math.max(stats.maxDepth, childStats.maxDepth);
+      });
+    }
+    
+    return stats;
+  }
+  
+  // Обновить статистику
+  function updateStats(obj) {
+    const stats = analyzeJSON(obj);
+    statObjects.textContent = stats.objects;
+    statArrays.textContent = stats.arrays;
+    statKeys.textContent = stats.keys;
+    statDepth.textContent = stats.maxDepth;
+  }
+  
+  // Сбросить статистику
+  function resetStats() {
+    statObjects.textContent = '—';
+    statArrays.textContent = '—';
+    statKeys.textContent = '—';
+    statDepth.textContent = '—';
+  }
+  
+  // Показать статус
+  function showStatus(message, type = 'info') {
+    const icons = {
+      success: 'checkmark-circle',
+      error: 'alert-circle',
+      warning: 'warning',
+      info: 'information-circle'
+    };
+    const colors = {
+      success: 'text-success bg-success/10',
+      error: 'text-error bg-error/10',
+      warning: 'text-warning bg-warning/10',
+      info: 'text-info bg-info/10'
+    };
+    
+    status.className = `px-4 py-3 border-t border-base-200 dark:border-base-content/10 ${colors[type]}`;
+    statusIcon.setAttribute('name', icons[type]);
+    statusText.textContent = message;
+    status.classList.remove('hidden');
+    
+    if (type === 'success' || type === 'info') {
+      setTimeout(() => status.classList.add('hidden'), 3000);
+    }
+  }
+  
+  // Скрыть статус
+  function hideStatus() {
+    status.classList.add('hidden');
+  }
+  
+  // Обновить счётчики символов
+  function updateCharCounts() {
+    inputChars.textContent = input.value.length.toLocaleString();
+    outputChars.textContent = output.value.length.toLocaleString();
+  }
+  
+  // Форматировать
+  function formatJSON() {
+    if (!input.value.trim()) {
+      showStatus(i18n.enterJsonFormat, 'warning');
+      return;
+    }
+    
+    try {
+      let parsed = JSON.parse(input.value);
+      
+      if (document.getElementById('sort-keys').checked) {
+        parsed = sortKeys(parsed);
+      }
+      
+      output.value = JSON.stringify(parsed, null, getIndent());
+      updateCharCounts();
+      updateStats(parsed);
+      showStatus(i18n.formatted, 'success');
+    } catch (e) {
+      showStatus(i18n.error + ': ' + e.message, 'error');
+      resetStats();
+    }
+  }
+  
+  // Минифицировать
+  function minifyJSON() {
+    if (!input.value.trim()) {
+      showStatus(i18n.enterJsonMinify, 'warning');
+      return;
+    }
+    
+    try {
+      const parsed = JSON.parse(input.value);
+      output.value = JSON.stringify(parsed);
+      updateCharCounts();
+      updateStats(parsed);
+      
+      const saved = input.value.length - output.value.length;
+      const percent = ((saved / input.value.length) * 100).toFixed(1);
+      showStatus(i18n.minified + ' ' + i18n.minifiedStats.replace('{saved}', saved.toLocaleString()).replace('{percent}', percent), 'success');
+    } catch (e) {
+      showStatus(i18n.error + ': ' + e.message, 'error');
+    }
+  }
+  
+  // Валидировать
+  function validateJSON() {
+    if (!input.value.trim()) {
+      showStatus(i18n.enterJsonValidate, 'warning');
+      return;
+    }
+    
+    try {
+      const parsed = JSON.parse(input.value);
+      updateStats(parsed);
+      showStatus(i18n.valid, 'success');
+    } catch (e) {
+      resetStats();
+      showStatus(i18n.invalid + ': ' + e.message, 'error');
+    }
+  }
+  
+  // Очистить
+  function clearAll() {
+    input.value = '';
+    output.value = '';
+    updateCharCounts();
+    resetStats();
+    hideStatus();
+  }
+  
+  // Загрузить пример
+  function loadSample() {
+    const sampleData = JSON.parse(i18n.sampleData);
+    input.value = JSON.stringify(sampleData, null, 2);
+    updateCharCounts();
+    showStatus(i18n.sampleLoaded, 'info');
+  }
+  
+  // Копировать
+  async function copyOutput() {
+    if (!output.value) {
+      showStatus(i18n.nothingToCopy, 'warning');
+      return;
+    }
+    
+    try {
+      await navigator.clipboard.writeText(output.value);
+      showStatus(i18n.copied, 'success');
+    } catch {
+      showStatus(i18n.error, 'error');
+    }
+  }
+  
+  // Вставить
+  async function pasteInput() {
+    try {
+      const text = await navigator.clipboard.readText();
+      input.value = text;
+      updateCharCounts();
+      showStatus(i18n.pasted, 'info');
+      return true;
+    } catch {
+      showStatus(i18n.noClipboard, 'warning');
+      return false;
+    }
+  }
+  
+  // Скачать
+  function downloadOutput() {
+    if (!output.value) {
+      showStatus(i18n.nothingToDownload, 'warning');
+      return;
+    }
+    
+    const blob = new Blob([output.value], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'formatted.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    showStatus(i18n.downloaded, 'success');
+  }
+  
+  // Загрузить файл
+  function handleFileUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      input.value = event.target.result;
+      updateCharCounts();
+      showStatus(i18n.fileLoaded.replace('{filename}', file.name), 'info');
+    };
+    reader.readAsText(file);
+  }
+  
+  // Обработчики кнопок
+  document.getElementById('format-btn').onclick = formatJSON;
+  document.getElementById('minify-btn').onclick = minifyJSON;
+  document.getElementById('validate-btn').onclick = validateJSON;
+  document.getElementById('clear-btn').onclick = clearAll;
+  document.getElementById('sample-btn').onclick = loadSample;
+  document.getElementById('copy-btn').onclick = copyOutput;
+  document.getElementById('paste-btn').onclick = pasteInput;
+  document.getElementById('download-btn').onclick = downloadOutput;
+  document.getElementById('upload-btn').onclick = () => fileInput.click();
+  fileInput.onchange = handleFileUpload;
+  
+  // Обновлять счётчики при вводе
+  input.addEventListener('input', updateCharCounts);
+  
+  // Горячие клавиши
+  document.addEventListener('keydown', (e) => {
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    const modifier = isMac ? e.metaKey : e.ctrlKey;
+    
+    if (modifier) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        formatJSON();
+      }
+      else if (e.shiftKey && (e.key === 'm' || e.key === 'M' || e.key === 'ь' || e.key === 'Ь')) {
+        e.preventDefault();
+        minifyJSON();
+      }
+      else if (e.shiftKey && (e.key === 'v' || e.key === 'V' || e.key === 'м' || e.key === 'М')) {
+        e.preventDefault();
+        pasteInput().then(() => {
+          setTimeout(formatJSON, 100);
+        });
+      }
+    }
+  });
+  
+  // Инициализация
+  updateCharCounts();
+  
+})();
+</script>
+
+{{ end }}

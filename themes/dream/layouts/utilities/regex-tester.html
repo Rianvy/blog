@@ -1,0 +1,790 @@
+{{ define "title" }}
+{{ default "Regex Tester" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-8 sm:mb-12">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">🔍</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">{{ .Description }}</p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="flash-outline"></ion-icon>
+        {{ T "regexTester.realtime" }}
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="color-wand-outline"></ion-icon>
+        {{ T "regexTester.highlighting" }}
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="book-outline"></ion-icon>
+        {{ T "regexTester.explanation" }}
+      </span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- ========== ЛЕВАЯ ПАНЕЛЬ: REGEX + ТЕКСТ ========== -->
+    <div class="lg:col-span-2 space-y-4">
+
+      <!-- Regex Input -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between">
+          <h2 class="font-semibold flex items-center gap-2">
+            <ion-icon name="code-outline" class="text-primary"></ion-icon>
+            {{ T "regexTester.regularExpression" }}
+          </h2>
+          <div class="flex items-center gap-1">
+            <button id="clear-regex" class="btn btn-ghost btn-xs gap-1 text-error">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+        
+        <div class="p-4">
+          <!-- Regex с флагами -->
+          <div class="flex items-center gap-2">
+            <span class="text-2xl text-base-content/30 font-mono">/</span>
+            <input 
+              type="text" 
+              id="regex-input" 
+              class="input input-bordered flex-1 font-mono text-lg"
+              placeholder="{{ T "regexTester.regexPlaceholder" }}"
+              spellcheck="false"
+            />
+            <span class="text-2xl text-base-content/30 font-mono">/</span>
+            <input 
+              type="text" 
+              id="regex-flags" 
+              class="input input-bordered w-20 font-mono text-lg text-center"
+              placeholder="gim"
+              value="g"
+              spellcheck="false"
+            />
+          </div>
+          
+          <!-- Быстрые флаги -->
+          <div class="flex flex-wrap gap-2 mt-3">
+            <label class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="checkbox" class="checkbox checkbox-xs checkbox-primary flag-checkbox" data-flag="g" checked />
+              <span class="text-sm font-medium">g</span>
+              <span class="text-xs text-base-content/50">{{ T "regexTester.flagGlobal" }}</span>
+            </label>
+            <label class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="checkbox" class="checkbox checkbox-xs checkbox-primary flag-checkbox" data-flag="i" />
+              <span class="text-sm font-medium">i</span>
+              <span class="text-xs text-base-content/50">{{ T "regexTester.flagInsensitive" }}</span>
+            </label>
+            <label class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="checkbox" class="checkbox checkbox-xs checkbox-primary flag-checkbox" data-flag="m" />
+              <span class="text-sm font-medium">m</span>
+              <span class="text-xs text-base-content/50">{{ T "regexTester.flagMultiline" }}</span>
+            </label>
+            <label class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="checkbox" class="checkbox checkbox-xs checkbox-primary flag-checkbox" data-flag="s" />
+              <span class="text-sm font-medium">s</span>
+              <span class="text-xs text-base-content/50">{{ T "regexTester.flagDotall" }}</span>
+            </label>
+            <label class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="checkbox" class="checkbox checkbox-xs checkbox-primary flag-checkbox" data-flag="u" />
+              <span class="text-sm font-medium">u</span>
+              <span class="text-xs text-base-content/50">{{ T "regexTester.flagUnicode" }}</span>
+            </label>
+          </div>
+          
+          <!-- Ошибка regex -->
+          <div id="regex-error" class="hidden mt-3 p-3 rounded-lg bg-error/10 text-error text-sm">
+            <ion-icon name="alert-circle-outline" class="mr-1"></ion-icon>
+            <span id="regex-error-text"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Test Text -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between">
+          <h2 class="font-semibold flex items-center gap-2">
+            <ion-icon name="document-text-outline" class="text-primary"></ion-icon>
+            {{ T "regexTester.testText" }}
+          </h2>
+          <div class="flex items-center gap-1">
+            <button id="paste-text" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="clipboard-outline"></ion-icon>
+              {{ T "regexTester.paste" }}
+            </button>
+            <button id="sample-text" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="document-text-outline"></ion-icon>
+              {{ T "regexTester.sample" }}
+            </button>
+            <button id="clear-text" class="btn btn-ghost btn-xs gap-1 text-error">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+        
+        <div class="p-4">
+          <div class="relative">
+            <!-- Подсветка (под textarea) -->
+            <div 
+              id="highlight-layer" 
+              class="absolute inset-0 p-4 font-mono text-sm leading-relaxed whitespace-pre-wrap break-words pointer-events-none overflow-hidden"
+              aria-hidden="true"
+            ></div>
+            
+            <!-- Textarea -->
+            <textarea 
+              id="test-text" 
+              class="textarea textarea-bordered w-full h-64 font-mono text-sm leading-relaxed bg-transparent relative z-10"
+              placeholder="{{ T "regexTester.textPlaceholder" }}"
+              spellcheck="false"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Matches -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between">
+          <h2 class="font-semibold flex items-center gap-2">
+            <ion-icon name="checkmark-circle-outline" class="text-success"></ion-icon>
+            {{ T "regexTester.matches" }}
+            <span id="match-count" class="badge badge-primary badge-sm">0</span>
+          </h2>
+          <button id="copy-matches" class="btn btn-ghost btn-xs gap-1">
+            <ion-icon name="copy-outline"></ion-icon>
+            {{ T "regexTester.copyAll" }}
+          </button>
+        </div>
+        
+        <div class="p-4">
+          <div id="matches-list" class="space-y-2 max-h-64 overflow-y-auto">
+            <p class="text-base-content/40 text-sm italic">{{ T "regexTester.noMatches" }}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========== ПРАВАЯ ПАНЕЛЬ: ОБЪЯСНЕНИЕ + ШПАРГАЛКА ========== -->
+    <div class="space-y-4">
+
+      <!-- Explanation -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold flex items-center gap-2">
+            <ion-icon name="bulb-outline" class="text-warning"></ion-icon>
+            {{ T "regexTester.regexExplanation" }}
+          </h2>
+        </div>
+        
+        <div class="p-4">
+          <div id="explanation" class="space-y-2 text-sm">
+            <p class="text-base-content/40 italic">{{ T "regexTester.enterRegex" }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Reference -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="book-outline" class="text-info"></ion-icon>
+              {{ T "regexTester.cheatsheet" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          
+          <div class="p-4 pt-0 space-y-4 text-sm">
+            
+            <!-- Characters -->
+            <div>
+              <h4 class="font-medium text-base-content/70 mb-2">{{ T "regexTester.characters" }}</h4>
+              <div class="grid grid-cols-2 gap-1 font-mono text-xs">
+                <div class="p-1.5 bg-base-200/50 rounded"><code>.</code> {{ T "regexTester.anyChar" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>\d</code> {{ T "regexTester.digit" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>\w</code> {{ T "regexTester.word" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>\s</code> {{ T "regexTester.whitespace" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>\D</code> {{ T "regexTester.notDigit" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>\W</code> {{ T "regexTester.notWord" }}</div>
+              </div>
+            </div>
+            
+            <!-- Quantifiers -->
+            <div>
+              <h4 class="font-medium text-base-content/70 mb-2">{{ T "regexTester.quantifiers" }}</h4>
+              <div class="grid grid-cols-2 gap-1 font-mono text-xs">
+                <div class="p-1.5 bg-base-200/50 rounded"><code>*</code> 0+</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>+</code> 1+</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>?</code> 0-1</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>{'{'}n{'}'}</code> {{ T "regexTester.exactly" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>{'{'}n,{'}'}</code> n+</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>{'{'}n,m{'}'}</code> n-m</div>
+              </div>
+            </div>
+            
+            <!-- Anchors -->
+            <div>
+              <h4 class="font-medium text-base-content/70 mb-2">{{ T "regexTester.anchors" }}</h4>
+              <div class="grid grid-cols-2 gap-1 font-mono text-xs">
+                <div class="p-1.5 bg-base-200/50 rounded"><code>^</code> {{ T "regexTester.start" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>$</code> {{ T "regexTester.end" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>\b</code> {{ T "regexTester.boundary" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>\B</code> {{ T "regexTester.notBoundary" }}</div>
+              </div>
+            </div>
+            
+            <!-- Groups -->
+            <div>
+              <h4 class="font-medium text-base-content/70 mb-2">{{ T "regexTester.groups" }}</h4>
+              <div class="grid grid-cols-1 gap-1 font-mono text-xs">
+                <div class="p-1.5 bg-base-200/50 rounded"><code>(abc)</code> {{ T "regexTester.captureGroup" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>(?:abc)</code> {{ T "regexTester.nonCapture" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>(?=abc)</code> {{ T "regexTester.lookahead" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>(?!abc)</code> {{ T "regexTester.negLookahead" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>[abc]</code> {{ T "regexTester.charClass" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>[^abc]</code> {{ T "regexTester.negCharClass" }}</div>
+                <div class="p-1.5 bg-base-200/50 rounded"><code>a|b</code> {{ T "regexTester.alternation" }}</div>
+              </div>
+            </div>
+            
+          </div>
+        </details>
+      </div>
+
+      <!-- Common Patterns -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="layers-outline" class="text-secondary"></ion-icon>
+              {{ T "regexTester.commonPatterns" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          
+          <div class="p-4 pt-0 space-y-2">
+            <button class="btn btn-ghost btn-sm w-full justify-start font-mono text-xs pattern-btn" data-pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+              📧 Email
+            </button>
+            <button class="btn btn-ghost btn-sm w-full justify-start font-mono text-xs pattern-btn" data-pattern="https?://[^\s]+">
+              🔗 URL
+            </button>
+            <button class="btn btn-ghost btn-sm w-full justify-start font-mono text-xs pattern-btn" data-pattern="\+?[0-9]{1,4}?[-.\s]?\(?[0-9]{1,3}?\)?[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,9}">
+              📞 {{ T "regexTester.phone" }}
+            </button>
+            <button class="btn btn-ghost btn-sm w-full justify-start font-mono text-xs pattern-btn" data-pattern="\d{4}-\d{2}-\d{2}">
+              📅 {{ T "regexTester.date" }} (YYYY-MM-DD)
+            </button>
+            <button class="btn btn-ghost btn-sm w-full justify-start font-mono text-xs pattern-btn" data-pattern="#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})">
+              🎨 HEX {{ T "regexTester.color" }}
+            </button>
+            <button class="btn btn-ghost btn-sm w-full justify-start font-mono text-xs pattern-btn" data-pattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b">
+              🌐 IPv4
+            </button>
+            <button class="btn btn-ghost btn-sm w-full justify-start font-mono text-xs pattern-btn" data-pattern="^[a-zA-Z0-9_-]{3,16}$">
+              👤 {{ T "regexTester.username" }}
+            </button>
+            <button class="btn btn-ghost btn-sm w-full justify-start font-mono text-xs pattern-btn" data-pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}">
+              🔐 {{ T "regexTester.strongPassword" }}
+            </button>
+          </div>
+        </details>
+      </div>
+
+      <!-- Replace Mode -->
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="swap-horizontal-outline" class="text-accent"></ion-icon>
+              {{ T "regexTester.replaceMode" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          
+          <div class="p-4 pt-0 space-y-3">
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text text-sm">{{ T "regexTester.replaceWith" }}</span>
+              </label>
+              <input 
+                type="text" 
+                id="replace-input" 
+                class="input input-bordered input-sm font-mono"
+                placeholder="{{ T "regexTester.replacePlaceholder" }}"
+              />
+            </div>
+            <button id="replace-btn" class="btn btn-accent btn-sm w-full gap-2">
+              <ion-icon name="swap-horizontal-outline"></ion-icon>
+              {{ T "regexTester.replaceAll" }}
+            </button>
+            <div id="replace-result" class="hidden">
+              <div class="text-xs text-base-content/50 mb-1">{{ T "regexTester.result" }}:</div>
+              <div id="replace-output" class="p-2 bg-base-200/50 rounded-lg font-mono text-xs max-h-32 overflow-auto whitespace-pre-wrap"></div>
+              <button id="copy-replaced" class="btn btn-ghost btn-xs mt-2 gap-1">
+                <ion-icon name="copy-outline"></ion-icon>
+                {{ T "regexTester.copy" }}
+              </button>
+            </div>
+          </div>
+        </details>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Горячие клавиши -->
+  <div class="mt-6 p-4 rounded-2xl bg-base-200/30 border border-base-200 dark:border-base-content/10">
+    <div class="flex items-center gap-2 mb-3">
+      <ion-icon name="keypad-outline" class="text-lg text-base-content/60"></ion-icon>
+      <span class="text-sm font-medium text-base-content/60">{{ T "regexTester.hotkeys" }}</span>
+    </div>
+    <div class="flex flex-wrap gap-4 text-sm text-base-content/60">
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>+<kbd class="kbd kbd-sm">Enter</kbd>
+        <span class="ml-1">→ {{ T "regexTester.testRegex" }}</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Esc</kbd>
+        <span class="ml-1">→ {{ T "regexTester.clearAll" }}</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+/* Подсветка совпадений */
+#highlight-layer .match {
+  background-color: rgba(var(--p) / 0.3);
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(var(--p) / 0.5);
+}
+
+#highlight-layer .match-alt {
+  background-color: rgba(var(--s) / 0.3);
+  box-shadow: 0 0 0 1px rgba(var(--s) / 0.5);
+}
+
+/* Textarea прозрачный для подсветки */
+#test-text {
+  background: transparent !important;
+  color: inherit;
+  caret-color: currentColor;
+}
+
+/* Match item hover */
+.match-item:hover {
+  background-color: rgba(var(--p) / 0.1);
+}
+
+/* Explanation tokens */
+.regex-token {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+.regex-token-char { background: rgba(var(--in) / 0.2); }
+.regex-token-quantifier { background: rgba(var(--wa) / 0.2); }
+.regex-token-anchor { background: rgba(var(--su) / 0.2); }
+.regex-token-group { background: rgba(var(--ac) / 0.2); }
+.regex-token-special { background: rgba(var(--er) / 0.2); }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // I18N
+  var i18n = {
+    noMatches: '{{ T "regexTester.noMatches" }}',
+    matchesFound: '{{ T "regexTester.matchesFound" }}',
+    groupsFound: '{{ T "regexTester.groupsFound" }}',
+    enterRegex: '{{ T "regexTester.enterRegex" }}',
+    copied: '{{ T "regexTester.copied" }}',
+    invalidRegex: '{{ T "regexTester.invalidRegex" }}',
+    matchAt: '{{ T "regexTester.matchAt" }}',
+    group: '{{ T "regexTester.group" }}'
+  };
+  
+  // Элементы
+  var regexInput = document.getElementById('regex-input');
+  var regexFlags = document.getElementById('regex-flags');
+  var testText = document.getElementById('test-text');
+  var highlightLayer = document.getElementById('highlight-layer');
+  var matchesList = document.getElementById('matches-list');
+  var matchCount = document.getElementById('match-count');
+  var regexError = document.getElementById('regex-error');
+  var regexErrorText = document.getElementById('regex-error-text');
+  var explanation = document.getElementById('explanation');
+  var replaceInput = document.getElementById('replace-input');
+  var replaceResult = document.getElementById('replace-result');
+  var replaceOutput = document.getElementById('replace-output');
+  
+  // Debounce
+  function debounce(fn, delay) {
+    var timer;
+    return function() {
+      clearTimeout(timer);
+      timer = setTimeout(fn, delay);
+    };
+  }
+  
+  // Escapes for HTML
+  function escapeHtml(text) {
+    var div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  // Синхронизация флагов
+  function syncFlags() {
+    var flags = '';
+    document.querySelectorAll('.flag-checkbox').forEach(function(cb) {
+      if (cb.checked) flags += cb.dataset.flag;
+    });
+    regexFlags.value = flags;
+    runTest();
+  }
+  
+  document.querySelectorAll('.flag-checkbox').forEach(function(cb) {
+    cb.addEventListener('change', syncFlags);
+  });
+  
+  regexFlags.addEventListener('input', function() {
+    var flags = regexFlags.value;
+    document.querySelectorAll('.flag-checkbox').forEach(function(cb) {
+      cb.checked = flags.includes(cb.dataset.flag);
+    });
+    runTest();
+  });
+  
+  // Тестирование regex
+  function runTest() {
+    var pattern = regexInput.value;
+    var flags = regexFlags.value;
+    var text = testText.value;
+    
+    // Reset
+    regexError.classList.add('hidden');
+    highlightLayer.innerHTML = escapeHtml(text);
+    matchesList.innerHTML = '<p class="text-base-content/40 text-sm italic">' + i18n.noMatches + '</p>';
+    matchCount.textContent = '0';
+    
+    if (!pattern) {
+      explanation.innerHTML = '<p class="text-base-content/40 italic">' + i18n.enterRegex + '</p>';
+      return;
+    }
+    
+    // Создаём regex
+    var regex;
+    try {
+      regex = new RegExp(pattern, flags);
+    } catch (e) {
+      regexError.classList.remove('hidden');
+      regexErrorText.textContent = e.message;
+      explanation.innerHTML = '<p class="text-error">' + i18n.invalidRegex + '</p>';
+      return;
+    }
+    
+    // Объяснение regex
+    explainRegex(pattern);
+    
+    if (!text) return;
+    
+    // Поиск совпадений
+    var matches = [];
+    var match;
+    var lastIndex = 0;
+    var safetyCounter = 0;
+    var maxIterations = 10000;
+    
+    if (flags.includes('g')) {
+      while ((match = regex.exec(text)) !== null && safetyCounter < maxIterations) {
+        matches.push({
+          value: match[0],
+          index: match.index,
+          groups: match.slice(1)
+        });
+        if (match.index === regex.lastIndex) regex.lastIndex++;
+        safetyCounter++;
+      }
+    } else {
+      match = regex.exec(text);
+      if (match) {
+        matches.push({
+          value: match[0],
+          index: match.index,
+          groups: match.slice(1)
+        });
+      }
+    }
+    
+    matchCount.textContent = matches.length;
+    
+    if (matches.length === 0) {
+      return;
+    }
+    
+    // Подсветка
+    var highlighted = '';
+    var pos = 0;
+    var altColor = false;
+    
+    matches.forEach(function(m) {
+      highlighted += escapeHtml(text.substring(pos, m.index));
+      highlighted += '<span class="match' + (altColor ? ' match-alt' : '') + '">' + escapeHtml(m.value) + '</span>';
+      pos = m.index + m.value.length;
+      altColor = !altColor;
+    });
+    highlighted += escapeHtml(text.substring(pos));
+    highlightLayer.innerHTML = highlighted;
+    
+    // Список совпадений
+    matchesList.innerHTML = matches.map(function(m, idx) {
+      var groupsHtml = '';
+      if (m.groups.length > 0) {
+        groupsHtml = '<div class="mt-1 text-xs text-base-content/50">';
+        m.groups.forEach(function(g, gi) {
+          if (g !== undefined) {
+            groupsHtml += '<span class="mr-2">' + i18n.group + ' ' + (gi + 1) + ': <code class="bg-base-200 px-1 rounded">' + escapeHtml(g) + '</code></span>';
+          }
+        });
+        groupsHtml += '</div>';
+      }
+      
+      return '<div class="match-item p-2 rounded-lg border border-base-200 dark:border-base-content/10">' +
+        '<div class="flex items-center justify-between">' +
+        '<code class="font-mono text-sm break-all">' + escapeHtml(m.value) + '</code>' +
+        '<span class="text-xs text-base-content/40">' + i18n.matchAt + ' ' + m.index + '</span>' +
+        '</div>' +
+        groupsHtml +
+        '</div>';
+    }).join('');
+  }
+  
+  // Объяснение regex
+  function explainRegex(pattern) {
+    var tokens = [];
+    var i = 0;
+    
+    while (i < pattern.length) {
+      var char = pattern[i];
+      var token = { value: char, type: 'char', desc: '' };
+      
+      // Escaped characters
+      if (char === '\\' && i + 1 < pattern.length) {
+        var next = pattern[i + 1];
+        token.value = char + next;
+        i++;
+        
+        switch (next) {
+          case 'd': token.type = 'special'; token.desc = '{{ T "regexTester.descDigit" }}'; break;
+          case 'D': token.type = 'special'; token.desc = '{{ T "regexTester.descNotDigit" }}'; break;
+          case 'w': token.type = 'special'; token.desc = '{{ T "regexTester.descWord" }}'; break;
+          case 'W': token.type = 'special'; token.desc = '{{ T "regexTester.descNotWord" }}'; break;
+          case 's': token.type = 'special'; token.desc = '{{ T "regexTester.descWhitespace" }}'; break;
+          case 'S': token.type = 'special'; token.desc = '{{ T "regexTester.descNotWhitespace" }}'; break;
+          case 'b': token.type = 'anchor'; token.desc = '{{ T "regexTester.descBoundary" }}'; break;
+          case 'B': token.type = 'anchor'; token.desc = '{{ T "regexTester.descNotBoundary" }}'; break;
+          case 'n': token.type = 'special'; token.desc = '{{ T "regexTester.descNewline" }}'; break;
+          case 't': token.type = 'special'; token.desc = '{{ T "regexTester.descTab" }}'; break;
+          default: token.desc = '{{ T "regexTester.descEscaped" }} ' + next;
+        }
+      }
+      // Quantifiers
+      else if ('*+?'.includes(char)) {
+        token.type = 'quantifier';
+        switch (char) {
+          case '*': token.desc = '{{ T "regexTester.descZeroOrMore" }}'; break;
+          case '+': token.desc = '{{ T "regexTester.descOneOrMore" }}'; break;
+          case '?': token.desc = '{{ T "regexTester.descZeroOrOne" }}'; break;
+        }
+      }
+      // Braces quantifier
+      else if (char === '{') {
+        var end = pattern.indexOf('}', i);
+        if (end !== -1) {
+          token.value = pattern.substring(i, end + 1);
+          token.type = 'quantifier';
+          token.desc = '{{ T "regexTester.descRepeat" }} ' + pattern.substring(i + 1, end);
+          i = end;
+        }
+      }
+      // Anchors
+      else if (char === '^') {
+        token.type = 'anchor';
+        token.desc = '{{ T "regexTester.descStart" }}';
+      }
+      else if (char === '$') {
+        token.type = 'anchor';
+        token.desc = '{{ T "regexTester.descEnd" }}';
+      }
+      // Groups
+      else if (char === '(') {
+        var groupEnd = findClosingParen(pattern, i);
+        token.value = pattern.substring(i, groupEnd + 1);
+        token.type = 'group';
+        if (pattern.substring(i, i + 3) === '(?:') {
+          token.desc = '{{ T "regexTester.descNonCapture" }}';
+        } else if (pattern.substring(i, i + 3) === '(?=') {
+          token.desc = '{{ T "regexTester.descLookahead" }}';
+        } else if (pattern.substring(i, i + 3) === '(?!') {
+          token.desc = '{{ T "regexTester.descNegLookahead" }}';
+        } else {
+          token.desc = '{{ T "regexTester.descCaptureGroup" }}';
+        }
+        i = groupEnd;
+      }
+      // Character class
+      else if (char === '[') {
+        var classEnd = pattern.indexOf(']', i);
+        if (classEnd !== -1) {
+          token.value = pattern.substring(i, classEnd + 1);
+          token.type = 'group';
+          token.desc = pattern[i + 1] === '^' ? '{{ T "regexTester.descNegCharClass" }}' : '{{ T "regexTester.descCharClass" }}';
+          i = classEnd;
+        }
+      }
+      // Dot
+      else if (char === '.') {
+        token.type = 'special';
+        token.desc = '{{ T "regexTester.descAnyChar" }}';
+      }
+      // Alternation
+      else if (char === '|') {
+        token.type = 'special';
+        token.desc = '{{ T "regexTester.descAlternation" }}';
+      }
+      // Regular character
+      else {
+        token.desc = '{{ T "regexTester.descLiteral" }} "' + char + '"';
+      }
+      
+      tokens.push(token);
+      i++;
+    }
+    
+    // Render
+    var html = tokens.map(function(t) {
+      var typeClass = 'regex-token-' + (t.type === 'char' ? 'char' : t.type);
+      return '<div class="flex items-center gap-2 py-1">' +
+        '<span class="regex-token ' + typeClass + '">' + escapeHtml(t.value) + '</span>' +
+        '<span class="text-xs text-base-content/60">' + t.desc + '</span>' +
+        '</div>';
+    }).join('');
+    
+    explanation.innerHTML = html || '<p class="text-base-content/40 italic">' + i18n.enterRegex + '</p>';
+  }
+  
+  function findClosingParen(str, start) {
+    var depth = 1;
+    for (var i = start + 1; i < str.length; i++) {
+      if (str[i] === '(') depth++;
+      if (str[i] === ')') depth--;
+      if (depth === 0) return i;
+    }
+    return str.length - 1;
+  }
+  
+  // Event listeners
+  var debouncedTest = debounce(runTest, 150);
+  regexInput.addEventListener('input', debouncedTest);
+  testText.addEventListener('input', debouncedTest);
+  
+  // Paste
+  document.getElementById('paste-text').addEventListener('click', function() {
+    navigator.clipboard.readText().then(function(text) {
+      testText.value = text;
+      runTest();
+    });
+  });
+  
+  // Sample text
+  document.getElementById('sample-text').addEventListener('click', function() {
+    testText.value = 'Hello, my email is john.doe@example.com and my phone is +1-555-123-4567.\nVisit https://example.com for more info.\nAnother email: jane_smith@company.org\nDate: 2024-01-15\nIP: 192.168.1.1\nHex color: #FF5733';
+    runTest();
+  });
+  
+  // Clear buttons
+  document.getElementById('clear-regex').addEventListener('click', function() {
+    regexInput.value = '';
+    runTest();
+  });
+  
+  document.getElementById('clear-text').addEventListener('click', function() {
+    testText.value = '';
+    runTest();
+  });
+  
+  // Copy matches
+  document.getElementById('copy-matches').addEventListener('click', function() {
+    var matchItems = document.querySelectorAll('.match-item code');
+    var text = Array.from(matchItems).map(function(el) { return el.textContent; }).join('\n');
+    navigator.clipboard.writeText(text);
+  });
+  
+  // Pattern buttons
+  document.querySelectorAll('.pattern-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      regexInput.value = btn.dataset.pattern;
+      runTest();
+    });
+  });
+  
+  // Replace
+  document.getElementById('replace-btn').addEventListener('click', function() {
+    var pattern = regexInput.value;
+    var flags = regexFlags.value;
+    var text = testText.value;
+    var replacement = replaceInput.value;
+    
+    if (!pattern || !text) return;
+    
+    try {
+      var regex = new RegExp(pattern, flags);
+      var result = text.replace(regex, replacement);
+      replaceOutput.textContent = result;
+      replaceResult.classList.remove('hidden');
+    } catch (e) {
+      // Error already shown
+    }
+  });
+  
+  document.getElementById('copy-replaced').addEventListener('click', function() {
+    navigator.clipboard.writeText(replaceOutput.textContent);
+  });
+  
+  // Hotkeys
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      runTest();
+    }
+    if (e.key === 'Escape') {
+      regexInput.value = '';
+      testText.value = '';
+      runTest();
+    }
+  });
+  
+  // Init
+  runTest();
+  
+});
+</script>
+
+{{ end }}

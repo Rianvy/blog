@@ -45,7 +45,7 @@ module.exports = {
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
   darkMode: ['selector'],
   daisyui: {
-    themes: ['emerald', 'forest'],
-    darkTheme: 'forest',
+    themes: ['emerald', 'dim'],
+    darkTheme: 'dim',
   },
 }

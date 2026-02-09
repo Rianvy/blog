@@ -1,0 +1,937 @@
+{{ define "title" }}
+{{ default "Markdown Editor" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero секция -->
+  <div class="text-center mb-6 sm:mb-8">
+    
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}📝{{ end }}</span>
+    </div>
+    
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">
+      {{ .Description | default "Markdown редактор с предпросмотром и экспортом" }}
+    </p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="eye-outline"></ion-icon>
+        Live Preview
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="code-slash-outline"></ion-icon>
+        HTML Export
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="save-outline"></ion-icon>
+        Auto-save
+      </span>
+    </div>
+    
+  </div>
+
+  <!-- Редактор -->
+  <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+    
+    <!-- Панель инструментов -->
+    <div class="flex flex-wrap items-center gap-1 p-2 bg-base-200/50 border-b border-base-200 dark:border-base-content/10 overflow-x-auto">
+      
+      <!-- Форматирование текста -->
+      <div class="flex items-center gap-0.5 pr-2 border-r border-base-300">
+        <button class="btn btn-ghost btn-sm btn-square toolbar-btn" data-action="bold" title="Жирный (Ctrl+B)">
+          <ion-icon name="text" class="text-lg font-bold"></ion-icon>
+        </button>
+        <button class="btn btn-ghost btn-sm btn-square toolbar-btn" data-action="italic" title="Курсив (Ctrl+I)">
+          <ion-icon name="text" class="text-lg italic"></ion-icon>
+        </button>
+        <button class="btn btn-ghost btn-sm btn-square toolbar-btn" data-action="strikethrough" title="Зачёркнутый">
+          <ion-icon name="text" class="text-lg line-through"></ion-icon>
+        </button>
+        <button class="btn btn-ghost btn-sm btn-square toolbar-btn" data-action="code" title="Код (Ctrl+`)">
+          <ion-icon name="code-outline" class="text-lg"></ion-icon>
+        </button>
+      </div>
+      
+      <!-- Заголовки -->
+      <div class="flex items-center gap-0.5 px-2 border-r border-base-300">
+        <button class="btn btn-ghost btn-sm toolbar-btn" data-action="h1" title="Заголовок 1">H1</button>
+        <button class="btn btn-ghost btn-sm toolbar-btn" data-action="h2" title="Заголовок 2">H2</button>
+        <button class="btn btn-ghost btn-sm toolbar-btn" data-action="h3" title="Заголовок 3">H3</button>
+      </div>
+      
+      <!-- Списки -->
+      <div class="flex items-center gap-0.5 px-2 border-r border-base-300">
+        <button class="btn btn-ghost btn-sm btn-square toolbar-btn" data-action="ul" title="Маркированный список">
+          <ion-icon name="list-outline" class="text-lg"></ion-icon>
+        </button>
+        <button class="btn btn-ghost btn-sm btn-square toolbar-btn" data-action="ol" title="Нумерованный список">
+          <ion-icon name="list-outline" class="text-lg"></ion-icon>
+        </button>
+        <button class="btn btn-ghost btn-sm btn-square toolbar-btn" data-action="checklist" title="Чеклист">
+          <ion-icon name="checkbox-outline" class="text-lg"></ion-icon>
+        </button>
+      </div>
+      
+      <!-- Вставки -->
+      <div class="flex items-center gap-0.5 px-2 border-r border-base-300">
+        <button class="btn btn-ghost btn-sm btn-square toolbar-btn" data-action="link" title="Ссылка (Ctrl+K)">
+          <ion-icon name="link-outline" class="text-lg"></ion-icon>
+        </button>
+        <button class="btn btn-ghost btn-sm btn-square toolbar-btn" data-action="image" title="Изображение">
+          <ion-icon name="image-outline" class="text-lg"></ion-icon>
+        </button>
+        <button class="btn btn-ghost btn-sm btn-square toolbar-btn" data-action="table" title="Таблица">
+          <ion-icon name="grid-outline" class="text-lg"></ion-icon>
+        </button>
+        <button class="btn btn-ghost btn-sm btn-square toolbar-btn" data-action="codeblock" title="Блок кода">
+          <ion-icon name="terminal-outline" class="text-lg"></ion-icon>
+        </button>
+        <button class="btn btn-ghost btn-sm btn-square toolbar-btn" data-action="quote" title="Цитата">
+          <ion-icon name="chatbox-outline" class="text-lg"></ion-icon>
+        </button>
+        <button class="btn btn-ghost btn-sm btn-square toolbar-btn" data-action="hr" title="Разделитель">
+          <ion-icon name="remove-outline" class="text-lg"></ion-icon>
+        </button>
+      </div>
+      
+      <!-- Режим просмотра -->
+      <div class="flex items-center gap-0.5 px-2 border-r border-base-300">
+        <button class="btn btn-ghost btn-sm view-btn" data-view="split" title="Split View">
+          <ion-icon name="albums-outline" class="text-lg"></ion-icon>
+        </button>
+        <button class="btn btn-ghost btn-sm view-btn" data-view="editor" title="Только редактор">
+          <ion-icon name="create-outline" class="text-lg"></ion-icon>
+        </button>
+        <button class="btn btn-ghost btn-sm view-btn" data-view="preview" title="Только превью">
+          <ion-icon name="eye-outline" class="text-lg"></ion-icon>
+        </button>
+      </div>
+      
+      <!-- Действия -->
+      <div class="flex items-center gap-0.5 px-2 ml-auto">
+        <button class="btn btn-ghost btn-sm gap-1" id="template-btn" title="Шаблоны">
+          <ion-icon name="document-text-outline" class="text-lg"></ion-icon>
+          <span class="hidden sm:inline">Шаблоны</span>
+        </button>
+        <button class="btn btn-ghost btn-sm gap-1" id="clear-btn" title="Очистить">
+          <ion-icon name="trash-outline" class="text-lg"></ion-icon>
+        </button>
+        <div class="dropdown dropdown-end">
+          <label tabindex="0" class="btn btn-primary btn-sm gap-1">
+            <ion-icon name="download-outline" class="text-lg"></ion-icon>
+            <span class="hidden sm:inline">Экспорт</span>
+          </label>
+          <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow-lg bg-base-100 rounded-box w-52 mt-2">
+            <li><a id="export-md"><ion-icon name="document-outline" class="text-lg"></ion-icon> Markdown (.md)</a></li>
+            <li><a id="export-html"><ion-icon name="code-slash-outline" class="text-lg"></ion-icon> HTML (.html)</a></li>
+            <li><a id="export-html-styled"><ion-icon name="color-palette-outline" class="text-lg"></ion-icon> HTML + стили</a></li>
+            <li><a id="copy-html"><ion-icon name="copy-outline" class="text-lg"></ion-icon> Копировать HTML</a></li>
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Основной контент: редактор + превью -->
+    <div id="editor-container" class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-base-200 dark:divide-base-content/10" data-view="split">
+      
+      <!-- Редактор -->
+      <div id="editor-panel" class="flex flex-col">
+        <div class="flex items-center justify-between px-4 py-2 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <div class="flex items-center gap-2">
+            <ion-icon name="create-outline" class="text-lg text-primary"></ion-icon>
+            <span class="font-medium text-sm">Markdown</span>
+          </div>
+          <div class="flex items-center gap-2 text-xs text-base-content/50">
+            <span id="char-count">0 символов</span>
+            <span>•</span>
+            <span id="word-count">0 слов</span>
+            <span>•</span>
+            <span id="line-count">0 строк</span>
+          </div>
+        </div>
+        
+        <div class="relative flex-1">
+          <textarea 
+            id="markdown-input" 
+            class="w-full h-[500px] lg:h-[600px] p-4 font-mono text-sm bg-transparent border-0 focus:outline-none focus:ring-0 resize-none leading-relaxed"
+            placeholder="# Начните писать здесь...
+
+Используйте **жирный** и *курсив* для форматирования.
+
+- Маркированный список
+- Ещё один пункт
+
+1. Нумерованный список
+2. Второй пункт
+
+> Цитата выглядит так
+
+`inline code` и блоки кода:
+
+```javascript
+console.log('Hello, World!');
+```
+
+[Ссылка](https://example.com) и ![Изображение](url)"
+            spellcheck="false"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Превью -->
+      <div id="preview-panel" class="flex flex-col">
+        <div class="flex items-center justify-between px-4 py-2 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <div class="flex items-center gap-2">
+            <ion-icon name="eye-outline" class="text-lg text-success"></ion-icon>
+            <span class="font-medium text-sm">Предпросмотр</span>
+          </div>
+          <button id="fullscreen-preview" class="btn btn-ghost btn-xs gap-1">
+            <ion-icon name="expand-outline" class="text-sm"></ion-icon>
+            <span class="hidden sm:inline">Полный экран</span>
+          </button>
+        </div>
+        
+        <div id="preview-content" class="flex-1 h-[500px] lg:h-[600px] p-4 sm:p-6 overflow-y-auto prose prose-sm sm:prose max-w-none 
+                                          prose-headings:text-base-content prose-p:text-base-content/80
+                                          prose-a:text-primary prose-strong:text-base-content
+                                          prose-code:text-primary prose-code:bg-base-200 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+                                          prose-pre:bg-base-200 prose-pre:text-base-content
+                                          prose-blockquote:border-primary prose-blockquote:text-base-content/70
+                                          prose-li:text-base-content/80">
+          <p class="text-base-content/40 italic">Предпросмотр появится здесь...</p>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Статус бар -->
+    <div class="flex items-center justify-between px-4 py-2 bg-base-200/30 border-t border-base-200 dark:border-base-content/10 text-xs text-base-content/50">
+      <div class="flex items-center gap-4">
+        <span id="save-status" class="flex items-center gap-1">
+          <ion-icon name="checkmark-circle" class="text-success"></ion-icon>
+          Сохранено в браузере
+        </span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span>Markdown → HTML</span>
+        <kbd class="kbd kbd-xs">Ctrl+S</kbd> сохранить
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Шпаргалка по Markdown -->
+  <div class="mt-6 bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-info/10 flex items-center justify-center">
+            <ion-icon name="help-circle-outline" class="text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold">Шпаргалка по Markdown</h3>
+            <p class="text-xs text-base-content/60">Быстрый справочник по синтаксису</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+      </summary>
+      
+      <div class="px-4 pb-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          
+          <!-- Текст -->
+          <div class="p-4 rounded-xl bg-base-200/50">
+            <h4 class="font-semibold mb-3 flex items-center gap-2">
+              <ion-icon name="text-outline"></ion-icon> Текст
+            </h4>
+            <div class="space-y-2 text-sm font-mono">
+              <div><code>**жирный**</code> → <strong>жирный</strong></div>
+              <div><code>*курсив*</code> → <em>курсив</em></div>
+              <div><code>~~зачёркнутый~~</code> → <s>зачёркнутый</s></div>
+              <div><code>`код`</code> → <code class="bg-base-300 px-1 rounded">код</code></div>
+            </div>
+          </div>
+          
+          <!-- Заголовки -->
+          <div class="p-4 rounded-xl bg-base-200/50">
+            <h4 class="font-semibold mb-3 flex items-center gap-2">
+              <ion-icon name="text-outline"></ion-icon> Заголовки
+            </h4>
+            <div class="space-y-2 text-sm font-mono">
+              <div><code># Заголовок 1</code></div>
+              <div><code>## Заголовок 2</code></div>
+              <div><code>### Заголовок 3</code></div>
+              <div><code>#### Заголовок 4</code></div>
+            </div>
+          </div>
+          
+          <!-- Списки -->
+          <div class="p-4 rounded-xl bg-base-200/50">
+            <h4 class="font-semibold mb-3 flex items-center gap-2">
+              <ion-icon name="list-outline"></ion-icon> Списки
+            </h4>
+            <div class="space-y-2 text-sm font-mono">
+              <div><code>- пункт</code> (маркированный)</div>
+              <div><code>1. пункт</code> (нумерованный)</div>
+              <div><code>- [ ] задача</code> (чеклист)</div>
+              <div><code>- [x] выполнено</code></div>
+            </div>
+          </div>
+          
+          <!-- Ссылки и изображения -->
+          <div class="p-4 rounded-xl bg-base-200/50">
+            <h4 class="font-semibold mb-3 flex items-center gap-2">
+              <ion-icon name="link-outline"></ion-icon> Ссылки
+            </h4>
+            <div class="space-y-2 text-sm font-mono">
+              <div><code>[текст](url)</code></div>
+              <div><code>![alt](image.jpg)</code></div>
+              <div><code>[текст][ref]</code></div>
+              <div><code>[ref]: url</code></div>
+            </div>
+          </div>
+          
+          <!-- Код -->
+          <div class="p-4 rounded-xl bg-base-200/50">
+            <h4 class="font-semibold mb-3 flex items-center gap-2">
+              <ion-icon name="code-outline"></ion-icon> Код
+            </h4>
+            <div class="space-y-2 text-sm font-mono">
+              <div><code>`inline code`</code></div>
+              <div><code>```язык</code></div>
+              <div><code>блок кода</code></div>
+              <div><code>```</code></div>
+            </div>
+          </div>
+          
+          <!-- Прочее -->
+          <div class="p-4 rounded-xl bg-base-200/50">
+            <h4 class="font-semibold mb-3 flex items-center gap-2">
+              <ion-icon name="ellipsis-horizontal-outline"></ion-icon> Прочее
+            </h4>
+            <div class="space-y-2 text-sm font-mono">
+              <div><code>> цитата</code></div>
+              <div><code>---</code> (разделитель)</div>
+              <div><code>| A | B |</code> (таблица)</div>
+              <div><code>|-|-|</code></div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- Горячие клавиши -->
+  <div class="mt-4 p-4 rounded-2xl bg-base-200/30 border border-base-200 dark:border-base-content/10">
+    <div class="flex items-center gap-2 mb-3">
+      <ion-icon name="keypad-outline" class="text-lg text-base-content/60"></ion-icon>
+      <span class="text-sm font-medium text-base-content/60">Горячие клавиши</span>
+    </div>
+    <div class="flex flex-wrap gap-4 text-sm text-base-content/60">
+      <div class="flex items-center gap-2">
+        <kbd class="kbd kbd-sm">Ctrl</kbd><span>+</span><kbd class="kbd kbd-sm">B</kbd>
+        <span>Жирный</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <kbd class="kbd kbd-sm">Ctrl</kbd><span>+</span><kbd class="kbd kbd-sm">I</kbd>
+        <span>Курсив</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <kbd class="kbd kbd-sm">Ctrl</kbd><span>+</span><kbd class="kbd kbd-sm">K</kbd>
+        <span>Ссылка</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <kbd class="kbd kbd-sm">Ctrl</kbd><span>+</span><kbd class="kbd kbd-sm">`</kbd>
+        <span>Код</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <kbd class="kbd kbd-sm">Ctrl</kbd><span>+</span><kbd class="kbd kbd-sm">S</kbd>
+        <span>Сохранить</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Модалка шаблонов -->
+<dialog id="templates-modal" class="modal">
+  <div class="modal-box max-w-2xl">
+    <h3 class="font-bold text-lg mb-4">Выберите шаблон</h3>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="templates-list">
+      <!-- Templates will be inserted here -->
+    </div>
+    
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">Отмена</button>
+      </form>
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
+
+<!-- Модалка полноэкранного превью -->
+<dialog id="fullscreen-modal" class="modal">
+  <div class="modal-box max-w-4xl h-[90vh]">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-bold text-lg">Предпросмотр</h3>
+      <form method="dialog">
+        <button class="btn btn-ghost btn-sm btn-circle">
+          <ion-icon name="close-outline" class="text-xl"></ion-icon>
+        </button>
+      </form>
+    </div>
+    <div id="fullscreen-content" class="prose max-w-none overflow-y-auto h-[calc(100%-4rem)]">
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
+
+<!-- JavaScript -->
+<script>
+(function() {
+  'use strict';
+  
+  // ========== ЭЛЕМЕНТЫ ==========
+  const markdownInput = document.getElementById('markdown-input');
+  const previewContent = document.getElementById('preview-content');
+  const editorContainer = document.getElementById('editor-container');
+  const editorPanel = document.getElementById('editor-panel');
+  const previewPanel = document.getElementById('preview-panel');
+  
+  // Counters
+  const charCount = document.getElementById('char-count');
+  const wordCount = document.getElementById('word-count');
+  const lineCount = document.getElementById('line-count');
+  const saveStatus = document.getElementById('save-status');
+  
+  // Modals
+  const templatesModal = document.getElementById('templates-modal');
+  const templatesList = document.getElementById('templates-list');
+  const fullscreenModal = document.getElementById('fullscreen-modal');
+  const fullscreenContent = document.getElementById('fullscreen-content');
+  
+  // ========== MARKDOWN PARSER ==========
+  function parseMarkdown(md) {
+    let html = md;
+    
+    // Escape HTML
+    html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    
+    // Code blocks (before other parsing)
+    html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (match, lang, code) => {
+      return `<pre><code class="language-${lang}">${code.trim()}</code></pre>`;
+    });
+    
+    // Inline code
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+    
+    // Headers
+    html = html.replace(/^###### (.+)$/gm, '<h6>$1</h6>');
+    html = html.replace(/^##### (.+)$/gm, '<h5>$1</h5>');
+    html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+    html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+    html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+    html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+    
+    // Bold and Italic
+    html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+    html = html.replace(/___(.+?)___/g, '<strong><em>$1</em></strong>');
+    html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
+    html = html.replace(/_(.+?)_/g, '<em>$1</em>');
+    
+    // Strikethrough
+    html = html.replace(/~~(.+?)~~/g, '<del>$1</del>');
+    
+    // Links and Images
+    html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />');
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    
+    // Blockquotes
+    html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+    // Merge consecutive blockquotes
+    html = html.replace(/<\/blockquote>\n<blockquote>/g, '\n');
+    
+    // Horizontal rule
+    html = html.replace(/^(-{3,}|\*{3,}|_{3,})$/gm, '<hr />');
+    
+    // Checklists
+    html = html.replace(/^- \[x\] (.+)$/gm, '<li class="task-done"><input type="checkbox" checked disabled /> $1</li>');
+    html = html.replace(/^- \[ \] (.+)$/gm, '<li class="task"><input type="checkbox" disabled /> $1</li>');
+    
+    // Unordered lists
+    html = html.replace(/^[\-\*] (.+)$/gm, '<li>$1</li>');
+    html = html.replace(/(<li>.*<\/li>\n?)+/g, (match) => `<ul>${match}</ul>`);
+    
+    // Ordered lists
+    html = html.replace(/^\d+\. (.+)$/gm, '<oli>$1</oli>');
+    html = html.replace(/(<oli>.*<\/oli>\n?)+/g, (match) => {
+      return '<ol>' + match.replace(/<\/?oli>/g, (m) => m === '<oli>' ? '<li>' : '</li>') + '</ol>';
+    });
+    
+    // Tables
+    html = html.replace(/^\|(.+)\|$/gm, (match, content) => {
+      const cells = content.split('|').map(c => c.trim());
+      if (cells.every(c => /^[-:]+$/.test(c))) {
+        return '<!-- table separator -->';
+      }
+      const cellTag = 'td';
+      const cellsHtml = cells.map(c => `<${cellTag}>${c}</${cellTag}>`).join('');
+      return `<tr>${cellsHtml}</tr>`;
+    });
+    html = html.replace(/(<!-- table separator -->\n?)/g, '');
+    html = html.replace(/(<tr>.*<\/tr>\n?)+/g, (match) => `<table class="table table-zebra">${match}</table>`);
+    
+    // Paragraphs
+    html = html.split('\n\n').map(block => {
+      block = block.trim();
+      if (!block) return '';
+      if (block.startsWith('<')) return block;
+      return `<p>${block.replace(/\n/g, '<br />')}</p>`;
+    }).join('\n');
+    
+    return html;
+  }
+  
+  // ========== ОБНОВЛЕНИЕ ПРЕВЬЮ ==========
+  function updatePreview() {
+    const md = markdownInput.value;
+    const html = parseMarkdown(md);
+    previewContent.innerHTML = html || '<p class="text-base-content/40 italic">Предпросмотр появится здесь...</p>';
+    updateCounters();
+    saveToStorage();
+  }
+  
+  function updateCounters() {
+    const text = markdownInput.value;
+    charCount.textContent = text.length + ' символов';
+    wordCount.textContent = (text.match(/\S+/g) || []).length + ' слов';
+    lineCount.textContent = (text.split('\n').length) + ' строк';
+  }
+  
+  // ========== LOCALSTORAGE ==========
+  const STORAGE_KEY = 'markdown-editor-content';
+  
+  function saveToStorage() {
+    localStorage.setItem(STORAGE_KEY, markdownInput.value);
+    saveStatus.innerHTML = '<ion-icon name="checkmark-circle" class="text-success"></ion-icon> Сохранено';
+  }
+  
+  function loadFromStorage() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      markdownInput.value = saved;
+      updatePreview();
+    }
+  }
+  
+  // ========== TOOLBAR ACTIONS ==========
+  function insertText(before, after = '', placeholder = '') {
+    const start = markdownInput.selectionStart;
+    const end = markdownInput.selectionEnd;
+    const selected = markdownInput.value.substring(start, end) || placeholder;
+    const text = markdownInput.value;
+    
+    markdownInput.value = text.substring(0, start) + before + selected + after + text.substring(end);
+    markdownInput.focus();
+    markdownInput.setSelectionRange(start + before.length, start + before.length + selected.length);
+    updatePreview();
+  }
+  
+  function insertAtLineStart(prefix) {
+    const start = markdownInput.selectionStart;
+    const text = markdownInput.value;
+    const lineStart = text.lastIndexOf('\n', start - 1) + 1;
+    
+    markdownInput.value = text.substring(0, lineStart) + prefix + text.substring(lineStart);
+    markdownInput.focus();
+    markdownInput.setSelectionRange(start + prefix.length, start + prefix.length);
+    updatePreview();
+  }
+  
+  const toolbarActions = {
+    bold: () => insertText('**', '**', 'жирный текст'),
+    italic: () => insertText('*', '*', 'курсив'),
+    strikethrough: () => insertText('~~', '~~', 'зачёркнутый'),
+    code: () => insertText('`', '`', 'код'),
+    h1: () => insertAtLineStart('# '),
+    h2: () => insertAtLineStart('## '),
+    h3: () => insertAtLineStart('### '),
+    ul: () => insertAtLineStart('- '),
+    ol: () => insertAtLineStart('1. '),
+    checklist: () => insertAtLineStart('- [ ] '),
+    link: () => insertText('[', '](url)', 'текст ссылки'),
+    image: () => insertText('![', '](url)', 'alt текст'),
+    quote: () => insertAtLineStart('> '),
+    hr: () => insertText('\n---\n', '', ''),
+    codeblock: () => insertText('\n```javascript\n', '\n```\n', 'код'),
+    table: () => insertText('\n| Заголовок 1 | Заголовок 2 |\n|-------------|-------------|\n| Ячейка 1    | Ячейка 2    |\n', '', ''),
+  };
+  
+  document.querySelectorAll('.toolbar-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const action = btn.dataset.action;
+      if (toolbarActions[action]) {
+        toolbarActions[action]();
+      }
+    });
+  });
+  
+  // ========== VIEW MODES ==========
+  document.querySelectorAll('.view-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view;
+      
+      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('btn-active'));
+      btn.classList.add('btn-active');
+      
+      editorContainer.dataset.view = view;
+      
+      if (view === 'editor') {
+        editorPanel.classList.remove('hidden');
+        previewPanel.classList.add('hidden');
+        editorContainer.classList.remove('lg:grid-cols-2');
+      } else if (view === 'preview') {
+        editorPanel.classList.add('hidden');
+        previewPanel.classList.remove('hidden');
+        editorContainer.classList.remove('lg:grid-cols-2');
+      } else {
+        editorPanel.classList.remove('hidden');
+        previewPanel.classList.remove('hidden');
+        editorContainer.classList.add('lg:grid-cols-2');
+      }
+    });
+  });
+  
+  // ========== TEMPLATES ==========
+  const templates = {
+    'readme': {
+      name: 'README.md',
+      icon: 'document-text-outline',
+      content: `# Название проекта
+
+Краткое описание проекта.
+
+## Установка
+
+\`\`\`bash
+npm install my-project
+\`\`\`
+
+## Использование
+
+\`\`\`javascript
+import { myFunction } from 'my-project';
+
+myFunction();
+\`\`\`
+
+## API
+
+| Метод | Описание |
+|-------|----------|
+| \`init()\` | Инициализация |
+| \`run()\` | Запуск |
+
+## Лицензия
+
+MIT`
+    },
+    'article': {
+      name: 'Статья',
+      icon: 'newspaper-outline',
+      content: `# Заголовок статьи
+
+*Автор: Имя Фамилия | Дата: ${new Date().toLocaleDateString()}*
+
+## Введение
+
+Вводный абзац статьи...
+
+## Основная часть
+
+Основной контент статьи...
+
+### Подзаголовок 1
+
+Текст первого раздела...
+
+### Подзаголовок 2
+
+Текст второго раздела...
+
+## Заключение
+
+Выводы и итоги...
+
+---
+
+*Спасибо за прочтение!*`
+    },
+    'checklist': {
+      name: 'Чеклист',
+      icon: 'checkbox-outline',
+      content: `# Чеклист задач
+
+## Срочные
+- [ ] Задача 1
+- [ ] Задача 2
+- [ ] Задача 3
+
+## Важные
+- [ ] Задача 4
+- [ ] Задача 5
+
+## Выполненные
+- [x] Завершённая задача 1
+- [x] Завершённая задача 2`
+    },
+    'notes': {
+      name: 'Заметки',
+      icon: 'create-outline',
+      content: `# Заметки
+
+## ${new Date().toLocaleDateString()}
+
+### Идеи
+- Идея 1
+- Идея 2
+
+### Задачи на сегодня
+1. Первая задача
+2. Вторая задача
+3. Третья задача
+
+### Заметки
+> Важная цитата или мысль
+
+---
+
+*Записано в ${new Date().toLocaleTimeString()}*`
+    },
+    'documentation': {
+      name: 'Документация',
+      icon: 'book-outline',
+      content: `# Документация
+
+## Обзор
+
+Описание проекта или системы.
+
+## Быстрый старт
+
+### Требования
+
+- Node.js 18+
+- npm или yarn
+
+### Установка
+
+\`\`\`bash
+git clone https://github.com/user/repo.git
+cd repo
+npm install
+\`\`\`
+
+## Конфигурация
+
+| Параметр | Тип | По умолчанию | Описание |
+|----------|-----|--------------|----------|
+| \`port\` | number | 3000 | Порт сервера |
+| \`debug\` | boolean | false | Режим отладки |
+
+## API Reference
+
+### \`init(options)\`
+
+Инициализирует приложение.
+
+**Параметры:**
+- \`options\` (Object) - Объект настроек
+
+**Возвращает:** Promise<void>
+
+**Пример:**
+\`\`\`javascript
+await init({ port: 8080 });
+\`\`\`
+
+## FAQ
+
+**Q: Вопрос 1?**
+A: Ответ 1.
+
+**Q: Вопрос 2?**
+A: Ответ 2.`
+    }
+  };
+  
+  function renderTemplates() {
+    templatesList.innerHTML = Object.entries(templates).map(([key, tpl]) => `
+      <button class="btn btn-ghost justify-start gap-3 h-auto py-4 template-item" data-template="${key}">
+        <ion-icon name="${tpl.icon}" class="text-2xl text-primary"></ion-icon>
+        <span class="font-medium">${tpl.name}</span>
+      </button>
+    `).join('');
+    
+    document.querySelectorAll('.template-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.template;
+        markdownInput.value = templates[key].content;
+        updatePreview();
+        templatesModal.close();
+      });
+    });
+  }
+  
+  document.getElementById('template-btn').addEventListener('click', () => {
+    renderTemplates();
+    templatesModal.showModal();
+  });
+  
+  // ========== EXPORT ==========
+  document.getElementById('export-md').addEventListener('click', () => {
+    downloadFile(markdownInput.value, 'document.md', 'text/markdown');
+  });
+  
+  document.getElementById('export-html').addEventListener('click', () => {
+    const html = parseMarkdown(markdownInput.value);
+    downloadFile(html, 'document.html', 'text/html');
+  });
+  
+  document.getElementById('export-html-styled').addEventListener('click', () => {
+    const html = `<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      line-height: 1.6;
+      color: #333;
+    }
+    h1, h2, h3, h4, h5, h6 { margin-top: 1.5em; margin-bottom: 0.5em; }
+    h1 { font-size: 2em; border-bottom: 2px solid #eee; padding-bottom: 0.3em; }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #eee; padding-bottom: 0.3em; }
+    code { background: #f4f4f4; padding: 0.2em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    pre { background: #f4f4f4; padding: 1em; border-radius: 5px; overflow-x: auto; }
+    pre code { background: none; padding: 0; }
+    blockquote { border-left: 4px solid #ddd; margin: 1em 0; padding-left: 1em; color: #666; }
+    table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+    th, td { border: 1px solid #ddd; padding: 0.5em 1em; text-align: left; }
+    th { background: #f4f4f4; }
+    img { max-width: 100%; height: auto; }
+    a { color: #0066cc; }
+    hr { border: none; border-top: 1px solid #eee; margin: 2em 0; }
+  </style>
+</head>
+<body>
+${parseMarkdown(markdownInput.value)}
+</body>
+</html>`;
+    downloadFile(html, 'document.html', 'text/html');
+  });
+  
+  document.getElementById('copy-html').addEventListener('click', async () => {
+    const html = parseMarkdown(markdownInput.value);
+    await navigator.clipboard.writeText(html);
+    alert('HTML скопирован в буфер обмена!');
+  });
+  
+  function downloadFile(content, filename, type) {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+  
+  // ========== CLEAR ==========
+  document.getElementById('clear-btn').addEventListener('click', () => {
+    if (confirm('Очистить редактор?')) {
+      markdownInput.value = '';
+      updatePreview();
+    }
+  });
+  
+  // ========== FULLSCREEN PREVIEW ==========
+  document.getElementById('fullscreen-preview').addEventListener('click', () => {
+    fullscreenContent.innerHTML = previewContent.innerHTML;
+    fullscreenModal.showModal();
+  });
+  
+  // ========== HOTKEYS ==========
+  markdownInput.addEventListener('keydown', (e) => {
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    const modifier = isMac ? e.metaKey : e.ctrlKey;
+    
+    if (modifier) {
+      switch (e.key.toLowerCase()) {
+        case 'b':
+          e.preventDefault();
+          toolbarActions.bold();
+          break;
+        case 'i':
+          e.preventDefault();
+          toolbarActions.italic();
+          break;
+        case 'k':
+          e.preventDefault();
+          toolbarActions.link();
+          break;
+        case '`':
+          e.preventDefault();
+          toolbarActions.code();
+          break;
+        case 's':
+          e.preventDefault();
+          saveToStorage();
+          break;
+      }
+    }
+    
+    // Tab for indentation
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      insertText('  ', '', '');
+    }
+  });
+  
+  // ========== INIT ==========
+  markdownInput.addEventListener('input', updatePreview);
+  loadFromStorage();
+  updatePreview();
+  
+  // Debounced save
+  let saveTimeout;
+  markdownInput.addEventListener('input', () => {
+    saveStatus.innerHTML = '<ion-icon name="sync-outline" class="animate-spin"></ion-icon> Сохранение...';
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(saveToStorage, 1000);
+  });
+  
+})();
+</script>
+{{ end }}

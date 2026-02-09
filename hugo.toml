@@ -18,15 +18,12 @@ theme = "dream"
 
 [services]
   [services.googleAnalytics]
-    ID = ""
+    ID = "G-EGGNL85KC3"
 
 [params]
-yandexMetricaId = ""
-# zenMode = true
+yandexMetricaId = "99568144"
 lightTheme = "emerald"
-darkTheme = "forest"
-# backgroundImage = "me/background.jpg"
-# backgroundImageDark = ""
+darkTheme = "dim"
 author = "Rianvy"
 description = "В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет."
 avatar = "img/avatar.jpg"
@@ -34,7 +31,7 @@ motto = "Document today what you will forget tomorrow"
 headerTitle = "0x69.ru </>"
 footerBottomText = "Powered by ❤️"
 rss = true
-# utterancesRepo = ""
+utterancesRepo = "https://github.com/Rianvy/blog"
 # valine = true
 # LEANCLOUD_APP_ID = ""
 # LEANCLOUD_APP_KEY = ""
@@ -52,13 +49,14 @@ siteStartYear = 2025
 # Syntax highlighting
 #https://github.com/highlightjs/highlight.js/tree/main/src/languages
 SyntaxHighlighting = true
-SyntaxHighlightingThemeDark = "a11y-dark"
-SyntaxHighlightingThemeLight = "atom-one-dark"
-SyntaxHighlightingLanguages = ["apache", "json"]
+SyntaxHighlightingThemeLight = "atom-one-light"
+SyntaxHighlightingThemeDark = "github-dark-dimmed"
+SyntaxHighlightingLanguages = ["apache", "json", "javascript", "typescript", "bash", "shell", "sh", "zsh", "powershell", "ini", "nginx", "php"]
 # options
 stickyNav = true
 portfolio = true
-reorderNavItems = ["search", "categories", "portfolio", "posts", "tags", "github", "rss",]
+utilities = true
+reorderNavItems = ["search", "categories", "portfolio", "posts", "utilities", "tags", "github", "rss",]
 collapseNavItems = ["posts", "tags", "github", "rss"]
 # noDefaultSummaryCover = true
 showTableOfContents = true

@@ -1,0 +1,700 @@
+{{ define "title" }}
+{{ default "JavaScript Obfuscator" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-8 sm:mb-12">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">🛡️</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">{{ .Description }}</p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        {{ T "jsObfuscator.inBrowser" }}
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+        <ion-icon name="eye-off-outline"></ion-icon>
+        {{ T "jsObfuscator.codeProtection" }}
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="code-slash-outline"></ion-icon>
+        JavaScript
+      </span>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Left panel: Code -->
+      <div class="lg:col-span-2 space-y-4">
+        
+        <!-- Input code -->
+        <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="code-outline" class="text-primary"></ion-icon>
+              {{ T "jsObfuscator.sourceCode" }}
+            </h2>
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-base-content/50" id="input-stats">0 {{ T "jsObfuscator.characters" }}</span>
+              <button id="paste-btn" class="btn btn-ghost btn-xs gap-1">
+                <ion-icon name="clipboard-outline"></ion-icon>
+                {{ T "jsObfuscator.paste" }}
+              </button>
+              <button id="clear-btn" class="btn btn-ghost btn-xs gap-1 text-error">
+                <ion-icon name="trash-outline"></ion-icon>
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <textarea 
+              id="code-input" 
+              class="textarea textarea-bordered w-full h-64 font-mono text-sm leading-relaxed"
+              placeholder="{{ T "jsObfuscator.placeholder" }}"
+              spellcheck="false"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Obfuscate button -->
+        <div class="flex justify-center">
+          <button id="obfuscate-btn" class="btn btn-primary btn-lg gap-2 px-8">
+            <ion-icon name="shield-outline" class="text-xl"></ion-icon>
+            {{ T "jsObfuscator.obfuscateCode" }}
+          </button>
+        </div>
+
+        <!-- Result -->
+        <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="lock-closed-outline" class="text-success"></ion-icon>
+              {{ T "jsObfuscator.obfuscatedCode" }}
+            </h2>
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-base-content/50" id="output-stats">0 {{ T "jsObfuscator.characters" }}</span>
+              <button id="copy-btn" class="btn btn-ghost btn-xs gap-1">
+                <ion-icon name="copy-outline"></ion-icon>
+                {{ T "jsObfuscator.copy" }}
+              </button>
+              <button id="download-btn" class="btn btn-ghost btn-xs gap-1">
+                <ion-icon name="download-outline"></ion-icon>
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <textarea 
+              id="code-output" 
+              class="textarea textarea-bordered w-full h-64 font-mono text-xs leading-relaxed bg-base-200/30"
+              placeholder="{{ T "jsObfuscator.resultPlaceholder" }}"
+              readonly
+            ></textarea>
+          </div>
+          
+          <!-- Statistics -->
+          <div id="stats-panel" class="hidden p-4 border-t border-base-200 dark:border-base-content/10">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+              <div class="p-2 rounded-lg bg-base-200/50">
+                <div class="text-lg font-bold text-primary" id="stat-original">0</div>
+                <div class="text-xs text-base-content/60">{{ T "jsObfuscator.originalSize" }}</div>
+              </div>
+              <div class="p-2 rounded-lg bg-base-200/50">
+                <div class="text-lg font-bold text-secondary" id="stat-result">0</div>
+                <div class="text-xs text-base-content/60">{{ T "jsObfuscator.result" }}</div>
+              </div>
+              <div class="p-2 rounded-lg bg-base-200/50">
+                <div class="text-lg font-bold" id="stat-ratio">0%</div>
+                <div class="text-xs text-base-content/60">{{ T "jsObfuscator.sizeChange" }}</div>
+              </div>
+              <div class="p-2 rounded-lg bg-base-200/50">
+                <div class="text-lg font-bold text-accent" id="stat-vars">0</div>
+                <div class="text-xs text-base-content/60">{{ T "jsObfuscator.variables" }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- Right panel: Settings -->
+      <div class="space-y-4">
+        
+        <!-- Obfuscation settings -->
+        <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              {{ T "jsObfuscator.settings" }}
+            </h2>
+          </div>
+          
+          <div class="p-4 space-y-4">
+            
+            <!-- Protection level -->
+            <div>
+              <label class="label py-1">
+                <span class="label-text font-medium">{{ T "jsObfuscator.protectionLevel" }}</span>
+              </label>
+              <div class="space-y-2">
+                <label class="flex items-center gap-3 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+                  <input type="radio" name="level" value="low" class="radio radio-sm radio-primary" />
+                  <div class="flex-1">
+                    <div class="font-medium text-sm">{{ T "jsObfuscator.light" }}</div>
+                    <div class="text-xs text-base-content/60">{{ T "jsObfuscator.lightDesc" }}</div>
+                  </div>
+                  <span class="badge badge-success badge-sm">{{ T "jsObfuscator.fast" }}</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+                  <input type="radio" name="level" value="medium" class="radio radio-sm radio-primary" checked />
+                  <div class="flex-1">
+                    <div class="font-medium text-sm">{{ T "jsObfuscator.medium" }}</div>
+                    <div class="text-xs text-base-content/60">{{ T "jsObfuscator.mediumDesc" }}</div>
+                  </div>
+                  <span class="badge badge-warning badge-sm">{{ T "jsObfuscator.balanced" }}</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+                  <input type="radio" name="level" value="high" class="radio radio-sm radio-primary" />
+                  <div class="flex-1">
+                    <div class="font-medium text-sm">{{ T "jsObfuscator.high" }}</div>
+                    <div class="text-xs text-base-content/60">{{ T "jsObfuscator.highDesc" }}</div>
+                  </div>
+                  <span class="badge badge-error badge-sm">{{ T "jsObfuscator.slower" }}</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="divider my-2"></div>
+            
+            <!-- Options -->
+            <div class="space-y-3">
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="text-outline" class="text-lg text-base-content/70"></ion-icon>
+                  <span class="text-sm">{{ T "jsObfuscator.variableRenaming" }}</span>
+                </div>
+                <input type="checkbox" id="opt-rename" class="toggle toggle-sm toggle-primary" checked />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="lock-closed-outline" class="text-lg text-base-content/70"></ion-icon>
+                  <span class="text-sm">{{ T "jsObfuscator.stringEncryption" }}</span>
+                </div>
+                <input type="checkbox" id="opt-strings" class="toggle toggle-sm toggle-primary" checked />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="git-branch-outline" class="text-lg text-base-content/70"></ion-icon>
+                  <span class="text-sm">{{ T "jsObfuscator.controlFlowFlattening" }}</span>
+                </div>
+                <input type="checkbox" id="opt-controlflow" class="toggle toggle-sm toggle-primary" />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="skull-outline" class="text-lg text-base-content/70"></ion-icon>
+                  <span class="text-sm">{{ T "jsObfuscator.deadCodeInjection" }}</span>
+                </div>
+                <input type="checkbox" id="opt-deadcode" class="toggle toggle-sm toggle-primary" />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="bug-outline" class="text-lg text-base-content/70"></ion-icon>
+                  <span class="text-sm">{{ T "jsObfuscator.antiDebugProtection" }}</span>
+                </div>
+                <input type="checkbox" id="opt-antidebug" class="toggle toggle-sm toggle-primary" />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="contract-outline" class="text-lg text-base-content/70"></ion-icon>
+                  <span class="text-sm">{{ T "jsObfuscator.compactOutput" }}</span>
+                </div>
+                <input type="checkbox" id="opt-compact" class="toggle toggle-sm toggle-primary" checked />
+              </label>
+              
+            </div>
+
+            <div class="divider my-2"></div>
+
+            <!-- Name format -->
+            <div>
+              <label class="label py-1">
+                <span class="label-text font-medium text-sm">{{ T "jsObfuscator.variableNameFormat" }}</span>
+              </label>
+              <select id="name-format" class="select select-bordered select-sm w-full">
+                <option value="hexadecimal">{{ T "jsObfuscator.hexadecimal" }}</option>
+                <option value="short">{{ T "jsObfuscator.short" }}</option>
+                <option value="underscore">{{ T "jsObfuscator.underscore" }}</option>
+                <option value="mangled">{{ T "jsObfuscator.mangled" }}</option>
+              </select>
+            </div>
+            
+          </div>
+        </div>
+
+        <!-- Warning -->
+        <div class="alert alert-warning">
+          <ion-icon name="warning-outline" class="text-xl"></ion-icon>
+          <div class="text-sm">
+            <div class="font-semibold">{{ T "jsObfuscator.important" }}</div>
+            <p>{{ T "jsObfuscator.warningText" }}</p>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+
+    <!-- Examples and information -->
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+          <ion-icon name="text-outline" class="text-2xl text-primary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">{{ T "jsObfuscator.renaming" }}</h3>
+        <p class="text-sm text-base-content/60 mb-2">{{ T "jsObfuscator.renamingDesc" }}</p>
+        <div class="text-xs font-mono bg-base-200 p-2 rounded">
+          userName → _0x4f2a
+        </div>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-3">
+          <ion-icon name="lock-closed-outline" class="text-2xl text-secondary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">{{ T "jsObfuscator.stringEncryptionTitle" }}</h3>
+        <p class="text-sm text-base-content/60 mb-2">{{ T "jsObfuscator.stringEncryptionDesc" }}</p>
+        <div class="text-xs font-mono bg-base-200 p-2 rounded">
+          "Hello" → _0x3f['decode']()
+        </div>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-3">
+          <ion-icon name="git-branch-outline" class="text-2xl text-accent"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">{{ T "jsObfuscator.controlFlow" }}</h3>
+        <p class="text-sm text-base-content/60 mb-2">{{ T "jsObfuscator.controlFlowDesc" }}</p>
+        <div class="text-xs font-mono bg-base-200 p-2 rounded">
+          if/else → switch(_0x[...])
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  // ========== I18N ==========
+  const i18n = {
+    characters: {{ T "jsObfuscator.characters" | jsonify }},
+    copied: {{ T "jsObfuscator.copied" | jsonify }},
+    copy: {{ T "jsObfuscator.copy" | jsonify }},
+    enterCode: {{ T "jsObfuscator.enterCode" | jsonify }},
+    error: {{ T "jsObfuscator.error" | jsonify }}
+  };
+  
+  // ========== ELEMENTS ==========
+  const codeInput = document.getElementById('code-input');
+  const codeOutput = document.getElementById('code-output');
+  const obfuscateBtn = document.getElementById('obfuscate-btn');
+  const statsPanel = document.getElementById('stats-panel');
+  
+  let obfuscatedVarsCount = 0;
+  
+  // ========== UTILITIES ==========
+  
+  function generateHexName() {
+    return '_0x' + Math.random().toString(16).substr(2, 4);
+  }
+  
+  function generateShortName(index) {
+    const chars = 'abcdefghijklmnopqrstuvwxyz';
+    let name = '';
+    let i = index;
+    do {
+      name = chars[i % 26] + name;
+      i = Math.floor(i / 26) - 1;
+    } while (i >= 0);
+    return name;
+  }
+  
+  function generateUnderscoreName(index) {
+    return '__' + String.fromCharCode(97 + (index % 26)) + Math.floor(index / 26);
+  }
+  
+  function generateMangledName() {
+    const chars = '混淆変数関数';
+    return '_' + chars[Math.floor(Math.random() * chars.length)] + Math.random().toString(36).substr(2, 2);
+  }
+  
+  function base64Encode(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+  }
+  
+  // ========== OBFUSCATION FUNCTIONS ==========
+  
+  function findIdentifiers(code) {
+    const identifiers = new Set();
+    
+    const funcRegex = /function\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
+    let match;
+    while ((match = funcRegex.exec(code)) !== null) {
+      identifiers.add(match[1]);
+    }
+    
+    const varRegex = /(?:const|let|var)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
+    while ((match = varRegex.exec(code)) !== null) {
+      identifiers.add(match[1]);
+    }
+    
+    const paramRegex = /function\s*[a-zA-Z_$]*\s*\(([^)]*)\)/g;
+    while ((match = paramRegex.exec(code)) !== null) {
+      const params = match[1].split(',').map(p => p.trim()).filter(p => p);
+      params.forEach(p => {
+        const name = p.split('=')[0].trim();
+        if (/^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(name)) {
+          identifiers.add(name);
+        }
+      });
+    }
+    
+    const arrowRegex = /(?:const|let|var)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*=\s*(?:\([^)]*\)|[a-zA-Z_$][a-zA-Z0-9_$]*)\s*=>/g;
+    while ((match = arrowRegex.exec(code)) !== null) {
+      identifiers.add(match[1]);
+    }
+    
+    const reserved = ['if', 'else', 'for', 'while', 'do', 'switch', 'case', 'break', 'continue', 
+                      'return', 'function', 'const', 'let', 'var', 'class', 'new', 'this', 'true', 
+                      'false', 'null', 'undefined', 'typeof', 'instanceof', 'try', 'catch', 'finally',
+                      'throw', 'async', 'await', 'import', 'export', 'default', 'from', 'of', 'in',
+                      'console', 'window', 'document', 'Array', 'Object', 'String', 'Number', 
+                      'Boolean', 'Math', 'Date', 'JSON', 'Promise', 'Error', 'RegExp', 'Map', 'Set',
+                      'parseInt', 'parseFloat', 'isNaN', 'isFinite', 'eval', 'arguments'];
+    
+    reserved.forEach(r => identifiers.delete(r));
+    
+    return Array.from(identifiers);
+  }
+  
+  function renameIdentifiers(code, format) {
+    const identifiers = findIdentifiers(code);
+    const nameMap = {};
+    
+    identifiers.forEach((id, index) => {
+      let newName;
+      switch (format) {
+        case 'short':
+          newName = generateShortName(index);
+          break;
+        case 'underscore':
+          newName = generateUnderscoreName(index);
+          break;
+        case 'mangled':
+          newName = generateMangledName();
+          break;
+        default:
+          newName = generateHexName();
+      }
+      nameMap[id] = newName;
+    });
+    
+    obfuscatedVarsCount = identifiers.length;
+    
+    let result = code;
+    Object.entries(nameMap).forEach(([original, obfuscated]) => {
+      const regex = new RegExp('\\b' + original + '\\b', 'g');
+      result = result.replace(regex, obfuscated);
+    });
+    
+    return result;
+  }
+  
+  function obfuscateStrings(code) {
+    const stringArrayName = '_0x' + Math.random().toString(16).substr(2, 4);
+    const strings = [];
+    
+    let result = code.replace(/(["'`])(?:(?!\1)[^\\]|\\.)*\1/g, (match) => {
+      if (match.startsWith('`') && match.includes('${')) {
+        return match;
+      }
+      
+      const content = match.slice(1, -1);
+      const index = strings.length;
+      strings.push(base64Encode(content));
+      
+      return stringArrayName + '[' + index + ']';
+    });
+    
+    if (strings.length > 0) {
+      const decoder = `var ${stringArrayName}=(function(){var _arr=[${strings.map(s => '"' + s + '"').join(',')}];return _arr.map(function(s){return decodeURIComponent(escape(atob(s)));});})();`;
+      result = decoder + result;
+    }
+    
+    return result;
+  }
+  
+  function flattenControlFlow(code) {
+    const stateVar = '_0x' + Math.random().toString(16).substr(2, 4);
+    
+    const wrapped = `
+(function(){
+  var ${stateVar}=0x0;
+  while(true){
+    switch(${stateVar}){
+      case 0x0:
+        ${stateVar}=0x1;
+        break;
+      case 0x1:
+        ${code}
+        ${stateVar}=0x2;
+        break;
+      case 0x2:
+        return;
+    }
+  }
+})();`;
+    
+    return wrapped;
+  }
+  
+  function injectDeadCode(code) {
+    const deadSnippets = [
+      'if(false){console.log(Math.random());}',
+      'var _dead=function(){return null;};',
+      '(function(){if(typeof undefined!=="undefined")return;})();',
+      'void(0);',
+      'true&&false;',
+    ];
+    
+    const lines = code.split('\n');
+    const result = [];
+    
+    lines.forEach((line, i) => {
+      result.push(line);
+      if (Math.random() > 0.7 && line.trim()) {
+        result.push(deadSnippets[Math.floor(Math.random() * deadSnippets.length)]);
+      }
+    });
+    
+    return result.join('\n');
+  }
+  
+  function addAntiDebug(code) {
+    const antiDebug = `
+(function(){
+  var _0xcheck=function(){
+    var _start=new Date();
+    debugger;
+    var _end=new Date();
+    if(_end-_start>100){
+      while(true){}
+    }
+  };
+  setInterval(_0xcheck,1000);
+})();`;
+    
+    return antiDebug + code;
+  }
+  
+  function minify(code) {
+    return code
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/\/\/.*$/gm, '')
+      .replace(/\s+/g, ' ')
+      .replace(/\s*([{}\[\]();,:])\s*/g, '$1')
+      .replace(/\s*([=+\-*/<>!&|?])\s*/g, '$1')
+      .trim();
+  }
+  
+  // ========== MAIN OBFUSCATION ==========
+  
+  function obfuscate(code, options) {
+    let result = code;
+    obfuscatedVarsCount = 0;
+    
+    try {
+      if (options.rename) {
+        result = renameIdentifiers(result, options.nameFormat);
+      }
+      
+      if (options.strings) {
+        result = obfuscateStrings(result);
+      }
+      
+      if (options.deadCode) {
+        result = injectDeadCode(result);
+      }
+      
+      if (options.controlFlow) {
+        result = flattenControlFlow(result);
+      }
+      
+      if (options.antiDebug) {
+        result = addAntiDebug(result);
+      }
+      
+      if (options.compact) {
+        result = minify(result);
+      }
+      
+      return { success: true, code: result };
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  }
+  
+  // ========== UI FUNCTIONS ==========
+  
+  function updateInputStats() {
+    const len = codeInput.value.length;
+    document.getElementById('input-stats').textContent = len + ' ' + i18n.characters;
+  }
+  
+  function updateOutputStats() {
+    const len = codeOutput.value.length;
+    document.getElementById('output-stats').textContent = len + ' ' + i18n.characters;
+  }
+  
+  function showStats(originalLen, resultLen) {
+    document.getElementById('stat-original').textContent = formatBytes(originalLen);
+    document.getElementById('stat-result').textContent = formatBytes(resultLen);
+    
+    const ratio = ((resultLen - originalLen) / originalLen * 100).toFixed(1);
+    const ratioEl = document.getElementById('stat-ratio');
+    ratioEl.textContent = (ratio > 0 ? '+' : '') + ratio + '%';
+    ratioEl.className = 'text-lg font-bold ' + (ratio > 0 ? 'text-error' : 'text-success');
+    
+    document.getElementById('stat-vars').textContent = obfuscatedVarsCount;
+    
+    statsPanel.classList.remove('hidden');
+  }
+  
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    return (bytes / 1024).toFixed(1) + ' KB';
+  }
+  
+  function getOptions() {
+    const level = document.querySelector('input[name="level"]:checked').value;
+    
+    if (level === 'low') {
+      document.getElementById('opt-rename').checked = true;
+      document.getElementById('opt-strings').checked = false;
+      document.getElementById('opt-controlflow').checked = false;
+      document.getElementById('opt-deadcode').checked = false;
+    } else if (level === 'high') {
+      document.getElementById('opt-rename').checked = true;
+      document.getElementById('opt-strings').checked = true;
+      document.getElementById('opt-controlflow').checked = true;
+      document.getElementById('opt-deadcode').checked = true;
+    }
+    
+    return {
+      rename: document.getElementById('opt-rename').checked,
+      strings: document.getElementById('opt-strings').checked,
+      controlFlow: document.getElementById('opt-controlflow').checked,
+      deadCode: document.getElementById('opt-deadcode').checked,
+      antiDebug: document.getElementById('opt-antidebug').checked,
+      compact: document.getElementById('opt-compact').checked,
+      nameFormat: document.getElementById('name-format').value
+    };
+  }
+  
+  // ========== EVENT LISTENERS ==========
+  
+  codeInput.addEventListener('input', updateInputStats);
+  
+  obfuscateBtn.addEventListener('click', () => {
+    const code = codeInput.value.trim();
+    if (!code) {
+      alert(i18n.enterCode);
+      return;
+    }
+    
+    const options = getOptions();
+    const result = obfuscate(code, options);
+    
+    if (result.success) {
+      codeOutput.value = result.code;
+      updateOutputStats();
+      showStats(code.length, result.code.length);
+    } else {
+      codeOutput.value = '// ' + i18n.error + ': ' + result.error;
+      statsPanel.classList.add('hidden');
+    }
+  });
+  
+  document.getElementById('paste-btn').addEventListener('click', async () => {
+    try {
+      codeInput.value = await navigator.clipboard.readText();
+      updateInputStats();
+    } catch (e) {
+      console.error('Failed to paste:', e);
+    }
+  });
+  
+  document.getElementById('clear-btn').addEventListener('click', () => {
+    codeInput.value = '';
+    codeOutput.value = '';
+    statsPanel.classList.add('hidden');
+    updateInputStats();
+    updateOutputStats();
+  });
+  
+  document.getElementById('copy-btn').addEventListener('click', async () => {
+    if (codeOutput.value) {
+      await navigator.clipboard.writeText(codeOutput.value);
+      const btn = document.getElementById('copy-btn');
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> ' + i18n.copied;
+      setTimeout(() => { btn.innerHTML = '<ion-icon name="copy-outline"></ion-icon> ' + i18n.copy; }, 1500);
+    }
+  });
+  
+  document.getElementById('download-btn').addEventListener('click', () => {
+    if (codeOutput.value) {
+      const blob = new Blob([codeOutput.value], { type: 'application/javascript' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'obfuscated.js';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  });
+  
+  document.querySelectorAll('input[name="level"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      getOptions();
+    });
+  });
+  
+  // ========== INIT ==========
+  updateInputStats();
+  
+  console.log('JavaScript Obfuscator ready');
+  
+})();
+</script>
+
+{{ end }}

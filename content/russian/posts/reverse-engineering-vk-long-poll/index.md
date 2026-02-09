@@ -721,8 +721,6 @@ WebSocket — это другой протокол, и перехватыват�
 - [MDN: Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) — для понимания перехвата
 - [MDN: WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) — для работы с WS
 
----
-
 {{< donate_button     
     "https://pay.cloudtips.ru/p/b59e1765" 
     "https://t.me/tribute/app?startapp=dE4k"

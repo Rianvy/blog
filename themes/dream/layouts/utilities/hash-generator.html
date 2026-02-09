@@ -1,0 +1,499 @@
+{{ define "title" }}
+{{ default "Hash Generator" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-8 sm:mb-12">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">🔐</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto">{{ .Description }}</p>
+  </div>
+
+  <div class="max-w-4xl mx-auto">
+    
+    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      
+      <!-- Табы -->
+      <div class="tabs tabs-boxed m-4 bg-base-200">
+        <button class="tab tab-lg flex-1 gap-2 hash-tab tab-active" data-mode="text">
+          <ion-icon name="text-outline"></ion-icon>
+          {{ i18n "hashGenerator.text" | default "Текст" }}
+        </button>
+        <button class="tab tab-lg flex-1 gap-2 hash-tab" data-mode="file">
+          <ion-icon name="document-outline"></ion-icon>
+          {{ i18n "hashGenerator.file" | default "Файл" }}
+        </button>
+      </div>
+
+      <!-- Текстовый режим -->
+      <div id="text-mode" class="p-4 sm:p-6">
+        
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-medium">{{ i18n "hashGenerator.enterText" | default "Введите текст" }}</span>
+            <span class="label-text-alt" id="text-length">0 {{ i18n "hashGenerator.characters" | default "символов" }}</span>
+          </label>
+          <textarea 
+            id="hash-input" 
+            class="textarea textarea-bordered h-32 font-mono text-sm"
+            placeholder="{{ i18n "hashGenerator.textPlaceholder" | default "Введите текст для хеширования..." }}"
+          ></textarea>
+        </div>
+
+        <div class="flex flex-wrap gap-2 mb-6">
+          <button id="generate-btn" class="btn btn-primary gap-2">
+            <ion-icon name="key-outline"></ion-icon>
+            {{ i18n "hashGenerator.generateHashes" | default "Сгенерировать хеши" }}
+          </button>
+          <button id="clear-text-btn" class="btn btn-ghost gap-2">
+            <ion-icon name="trash-outline"></ion-icon>
+            {{ i18n "hashGenerator.clear" | default "Очистить" }}
+          </button>
+        </div>
+
+        <!-- Результаты -->
+        <div id="hash-results" class="space-y-3">
+          <!-- Будут сгенерированы -->
+        </div>
+        
+      </div>
+
+      <!-- Файловый режим -->
+      <div id="file-mode" class="hidden p-4 sm:p-6">
+        
+        <div 
+          id="file-dropzone"
+          class="p-8 border-2 border-dashed border-base-300 rounded-xl
+                 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer
+                 flex flex-col items-center justify-center text-center mb-6"
+        >
+          <ion-icon name="cloud-upload-outline" class="text-4xl text-base-content/50 mb-3"></ion-icon>
+          <p class="font-medium mb-1">{{ i18n "hashGenerator.dropFile" | default "Перетащите файл сюда" }}</p>
+          <p class="text-sm text-base-content/60">{{ i18n "hashGenerator.orClickToSelect" | default "или нажмите для выбора" }}</p>
+          <input type="file" id="file-input" class="hidden" />
+        </div>
+
+        <!-- Информация о файле -->
+        <div id="file-info" class="hidden p-4 bg-base-200/50 rounded-xl mb-6">
+          <div class="flex items-center gap-3">
+            <ion-icon name="document-outline" class="text-2xl text-primary"></ion-icon>
+            <div class="flex-1 min-w-0">
+              <div class="font-medium truncate" id="file-name">—</div>
+              <div class="text-sm text-base-content/60" id="file-size">—</div>
+            </div>
+            <button id="clear-file-btn" class="btn btn-ghost btn-sm btn-circle text-error">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Прогресс -->
+        <div id="hash-progress" class="hidden mb-6">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-sm font-medium">{{ i18n "hashGenerator.computingHashes" | default "Вычисление хешей..." }}</span>
+            <span class="text-sm" id="progress-percent">0%</span>
+          </div>
+          <progress id="progress-bar" class="progress progress-primary w-full" value="0" max="100"></progress>
+        </div>
+
+        <!-- Результаты файла -->
+        <div id="file-hash-results" class="space-y-3">
+          <!-- Будут сгенерированы -->
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- Информация об алгоритмах -->
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+        <div class="text-2xl mb-2">🔵</div>
+        <div class="font-semibold">MD5</div>
+        <div class="text-xs text-base-content/60">128 {{ i18n "hashGenerator.bits" | default "bit" }} / 32 {{ i18n "hashGenerator.chars" | default "символов" }}</div>
+        <div class="badge badge-warning badge-sm mt-2">{{ i18n "hashGenerator.deprecated" | default "Устаревший" }}</div>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+        <div class="text-2xl mb-2">🟡</div>
+        <div class="font-semibold">SHA-1</div>
+        <div class="text-xs text-base-content/60">160 {{ i18n "hashGenerator.bits" | default "bit" }} / 40 {{ i18n "hashGenerator.chars" | default "символов" }}</div>
+        <div class="badge badge-warning badge-sm mt-2">{{ i18n "hashGenerator.notRecommended" | default "Не рекомендуется" }}</div>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+        <div class="text-2xl mb-2">🟢</div>
+        <div class="font-semibold">SHA-256</div>
+        <div class="text-xs text-base-content/60">256 {{ i18n "hashGenerator.bits" | default "bit" }} / 64 {{ i18n "hashGenerator.chars" | default "символов" }}</div>
+        <div class="badge badge-success badge-sm mt-2">{{ i18n "hashGenerator.recommended" | default "Рекомендуется" }}</div>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+        <div class="text-2xl mb-2">🟣</div>
+        <div class="font-semibold">SHA-512</div>
+        <div class="text-xs text-base-content/60">512 {{ i18n "hashGenerator.bits" | default "bit" }} / 128 {{ i18n "hashGenerator.chars" | default "символов" }}</div>
+        <div class="badge badge-success badge-sm mt-2">{{ i18n "hashGenerator.maxProtection" | default "Максимальная защита" }}</div>
+      </div>
+      
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Локализация
+  const i18n = {
+    characters: {{ i18n "hashGenerator.characters" | default "символов" | jsonify }},
+    copy: {{ i18n "hashGenerator.copy" | default "Копировать" | jsonify }}
+  };
+  
+  // Элементы
+  const hashInput = document.getElementById('hash-input');
+  const hashResults = document.getElementById('hash-results');
+  const fileHashResults = document.getElementById('file-hash-results');
+  const fileDropzone = document.getElementById('file-dropzone');
+  const fileInput = document.getElementById('file-input');
+  const fileInfo = document.getElementById('file-info');
+  const hashProgress = document.getElementById('hash-progress');
+  const progressBar = document.getElementById('progress-bar');
+  const progressPercent = document.getElementById('progress-percent');
+  
+  let currentFile = null;
+  
+  // Переключение табов
+  document.querySelectorAll('.hash-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.hash-tab').forEach(t => t.classList.remove('tab-active'));
+      tab.classList.add('tab-active');
+      
+      const mode = tab.dataset.mode;
+      document.getElementById('text-mode').classList.toggle('hidden', mode !== 'text');
+      document.getElementById('file-mode').classList.toggle('hidden', mode !== 'file');
+    });
+  });
+  
+  // Обновление счётчика символов
+  hashInput.addEventListener('input', () => {
+    document.getElementById('text-length').textContent = hashInput.value.length + ' ' + i18n.characters;
+  });
+  
+  // SHA хеши через Web Crypto API
+  async function sha(algorithm, data) {
+    const encoder = new TextEncoder();
+    const dataBuffer = typeof data === 'string' ? encoder.encode(data) : data;
+    const hashBuffer = await crypto.subtle.digest(algorithm, dataBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+  
+  // MD5 (простая реализация)
+  function md5(string) {
+    function rotateLeft(value, shift) {
+      return (value << shift) | (value >>> (32 - shift));
+    }
+    
+    function addUnsigned(x, y) {
+      const x4 = x & 0x80000000;
+      const y4 = y & 0x80000000;
+      const x8 = x & 0x40000000;
+      const y8 = y & 0x40000000;
+      const result = (x & 0x3FFFFFFF) + (y & 0x3FFFFFFF);
+      
+      if (x8 & y8) return result ^ 0x80000000 ^ x4 ^ y4;
+      if (x8 | y8) {
+        if (result & 0x40000000) return result ^ 0xC0000000 ^ x4 ^ y4;
+        return result ^ 0x40000000 ^ x4 ^ y4;
+      }
+      return result ^ x4 ^ y4;
+    }
+    
+    function f(x, y, z) { return (x & y) | (~x & z); }
+    function g(x, y, z) { return (x & z) | (y & ~z); }
+    function h(x, y, z) { return x ^ y ^ z; }
+    function ii(x, y, z) { return y ^ (x | ~z); }
+    
+    function ff(a, b, c, d, x, s, ac) {
+      a = addUnsigned(a, addUnsigned(addUnsigned(f(b, c, d), x), ac));
+      return addUnsigned(rotateLeft(a, s), b);
+    }
+    
+    function gg(a, b, c, d, x, s, ac) {
+      a = addUnsigned(a, addUnsigned(addUnsigned(g(b, c, d), x), ac));
+      return addUnsigned(rotateLeft(a, s), b);
+    }
+    
+    function hh(a, b, c, d, x, s, ac) {
+      a = addUnsigned(a, addUnsigned(addUnsigned(h(b, c, d), x), ac));
+      return addUnsigned(rotateLeft(a, s), b);
+    }
+    
+    function iii(a, b, c, d, x, s, ac) {
+      a = addUnsigned(a, addUnsigned(addUnsigned(ii(b, c, d), x), ac));
+      return addUnsigned(rotateLeft(a, s), b);
+    }
+    
+    function convertToWordArray(str) {
+      let wordCount;
+      const messageLength = str.length;
+      const numberOfWords = (((messageLength + 8) - ((messageLength + 8) % 64)) / 64 + 1) * 16;
+      const wordArray = Array(numberOfWords - 1);
+      let bytePosition = 0;
+      let byteCount = 0;
+      
+      while (byteCount < messageLength) {
+        wordCount = (byteCount - (byteCount % 4)) / 4;
+        bytePosition = (byteCount % 4) * 8;
+        wordArray[wordCount] = (wordArray[wordCount] | (str.charCodeAt(byteCount) << bytePosition));
+        byteCount++;
+      }
+      
+      wordCount = (byteCount - (byteCount % 4)) / 4;
+      bytePosition = (byteCount % 4) * 8;
+      wordArray[wordCount] = wordArray[wordCount] | (0x80 << bytePosition);
+      wordArray[numberOfWords - 2] = messageLength << 3;
+      wordArray[numberOfWords - 1] = messageLength >>> 29;
+      return wordArray;
+    }
+    
+    function wordToHex(value) {
+      let hex = '', byte, temp;
+      for (let idx = 0; idx <= 3; idx++) {
+        byte = (value >>> (idx * 8)) & 255;
+        temp = '0' + byte.toString(16);
+        hex += temp.substr(temp.length - 2, 2);
+      }
+      return hex;
+    }
+    
+    const x = convertToWordArray(unescape(encodeURIComponent(string)));
+    let a = 0x67452301, b = 0xEFCDAB89, c = 0x98BADCFE, d = 0x10325476;
+    
+    const S = [7, 12, 17, 22, 5, 9, 14, 20, 4, 11, 16, 23, 6, 10, 15, 21];
+    
+    for (let k = 0; k < x.length; k += 16) {
+      const AA = a, BB = b, CC = c, DD = d;
+      
+      a = ff(a, b, c, d, x[k], S[0], 0xD76AA478);
+      d = ff(d, a, b, c, x[k + 1], S[1], 0xE8C7B756);
+      c = ff(c, d, a, b, x[k + 2], S[2], 0x242070DB);
+      b = ff(b, c, d, a, x[k + 3], S[3], 0xC1BDCEEE);
+      a = ff(a, b, c, d, x[k + 4], S[0], 0xF57C0FAF);
+      d = ff(d, a, b, c, x[k + 5], S[1], 0x4787C62A);
+      c = ff(c, d, a, b, x[k + 6], S[2], 0xA8304613);
+      b = ff(b, c, d, a, x[k + 7], S[3], 0xFD469501);
+      a = ff(a, b, c, d, x[k + 8], S[0], 0x698098D8);
+      d = ff(d, a, b, c, x[k + 9], S[1], 0x8B44F7AF);
+      c = ff(c, d, a, b, x[k + 10], S[2], 0xFFFF5BB1);
+      b = ff(b, c, d, a, x[k + 11], S[3], 0x895CD7BE);
+      a = ff(a, b, c, d, x[k + 12], S[0], 0x6B901122);
+      d = ff(d, a, b, c, x[k + 13], S[1], 0xFD987193);
+      c = ff(c, d, a, b, x[k + 14], S[2], 0xA679438E);
+      b = ff(b, c, d, a, x[k + 15], S[3], 0x49B40821);
+      
+      a = gg(a, b, c, d, x[k + 1], S[4], 0xF61E2562);
+      d = gg(d, a, b, c, x[k + 6], S[5], 0xC040B340);
+      c = gg(c, d, a, b, x[k + 11], S[6], 0x265E5A51);
+      b = gg(b, c, d, a, x[k], S[7], 0xE9B6C7AA);
+      a = gg(a, b, c, d, x[k + 5], S[4], 0xD62F105D);
+      d = gg(d, a, b, c, x[k + 10], S[5], 0x02441453);
+      c = gg(c, d, a, b, x[k + 15], S[6], 0xD8A1E681);
+      b = gg(b, c, d, a, x[k + 4], S[7], 0xE7D3FBC8);
+      a = gg(a, b, c, d, x[k + 9], S[4], 0x21E1CDE6);
+      d = gg(d, a, b, c, x[k + 14], S[5], 0xC33707D6);
+      c = gg(c, d, a, b, x[k + 3], S[6], 0xF4D50D87);
+      b = gg(b, c, d, a, x[k + 8], S[7], 0x455A14ED);
+      a = gg(a, b, c, d, x[k + 13], S[4], 0xA9E3E905);
+      d = gg(d, a, b, c, x[k + 2], S[5], 0xFCEFA3F8);
+      c = gg(c, d, a, b, x[k + 7], S[6], 0x676F02D9);
+      b = gg(b, c, d, a, x[k + 12], S[7], 0x8D2A4C8A);
+      
+      a = hh(a, b, c, d, x[k + 5], S[8], 0xFFFA3942);
+      d = hh(d, a, b, c, x[k + 8], S[9], 0x8771F681);
+      c = hh(c, d, a, b, x[k + 11], S[10], 0x6D9D6122);
+      b = hh(b, c, d, a, x[k + 14], S[11], 0xFDE5380C);
+      a = hh(a, b, c, d, x[k + 1], S[8], 0xA4BEEA44);
+      d = hh(d, a, b, c, x[k + 4], S[9], 0x4BDECFA9);
+      c = hh(c, d, a, b, x[k + 7], S[10], 0xF6BB4B60);
+      b = hh(b, c, d, a, x[k + 10], S[11], 0xBEBFBC70);
+      a = hh(a, b, c, d, x[k + 13], S[8], 0x289B7EC6);
+      d = hh(d, a, b, c, x[k], S[9], 0xEAA127FA);
+      c = hh(c, d, a, b, x[k + 3], S[10], 0xD4EF3085);
+      b = hh(b, c, d, a, x[k + 6], S[11], 0x04881D05);
+      a = hh(a, b, c, d, x[k + 9], S[8], 0xD9D4D039);
+      d = hh(d, a, b, c, x[k + 12], S[9], 0xE6DB99E5);
+      c = hh(c, d, a, b, x[k + 15], S[10], 0x1FA27CF8);
+      b = hh(b, c, d, a, x[k + 2], S[11], 0xC4AC5665);
+      
+      a = iii(a, b, c, d, x[k], S[12], 0xF4292244);
+      d = iii(d, a, b, c, x[k + 7], S[13], 0x432AFF97);
+      c = iii(c, d, a, b, x[k + 14], S[14], 0xAB9423A7);
+      b = iii(b, c, d, a, x[k + 5], S[15], 0xFC93A039);
+      a = iii(a, b, c, d, x[k + 12], S[12], 0x655B59C3);
+      d = iii(d, a, b, c, x[k + 3], S[13], 0x8F0CCC92);
+      c = iii(c, d, a, b, x[k + 10], S[14], 0xFFEFF47D);
+      b = iii(b, c, d, a, x[k + 1], S[15], 0x85845DD1);
+      a = iii(a, b, c, d, x[k + 8], S[12], 0x6FA87E4F);
+      d = iii(d, a, b, c, x[k + 15], S[13], 0xFE2CE6E0);
+      c = iii(c, d, a, b, x[k + 6], S[14], 0xA3014314);
+      b = iii(b, c, d, a, x[k + 13], S[15], 0x4E0811A1);
+      a = iii(a, b, c, d, x[k + 4], S[12], 0xF7537E82);
+      d = iii(d, a, b, c, x[k + 11], S[13], 0xBD3AF235);
+      c = iii(c, d, a, b, x[k + 2], S[14], 0x2AD7D2BB);
+      b = iii(b, c, d, a, x[k + 9], S[15], 0xEB86D391);
+      
+      a = addUnsigned(a, AA);
+      b = addUnsigned(b, BB);
+      c = addUnsigned(c, CC);
+      d = addUnsigned(d, DD);
+    }
+    
+    return (wordToHex(a) + wordToHex(b) + wordToHex(c) + wordToHex(d)).toLowerCase();
+  }
+  
+  // Рендеринг результатов
+  function renderResults(container, hashes) {
+    container.innerHTML = Object.entries(hashes).map(([name, hash]) => `
+      <div class="flex items-center gap-3 p-3 bg-base-200/50 rounded-xl">
+        <div class="badge badge-primary badge-lg font-mono">${name}</div>
+        <div class="flex-1 min-w-0">
+          <div class="font-mono text-xs sm:text-sm break-all select-all">${hash}</div>
+        </div>
+        <button class="btn btn-ghost btn-sm btn-square copy-hash" data-hash="${hash}" title="${i18n.copy}">
+          <ion-icon name="copy-outline"></ion-icon>
+        </button>
+      </div>
+    `).join('');
+    
+    container.querySelectorAll('.copy-hash').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(btn.dataset.hash);
+        btn.innerHTML = '<ion-icon name="checkmark-outline" class="text-success"></ion-icon>';
+        setTimeout(() => {
+          btn.innerHTML = '<ion-icon name="copy-outline"></ion-icon>';
+        }, 1500);
+      });
+    });
+  }
+  
+  // Генерация хешей для текста
+  document.getElementById('generate-btn').addEventListener('click', async () => {
+    const text = hashInput.value;
+    if (!text) return;
+    
+    const hashes = {
+      'MD5': md5(text),
+      'SHA-1': await sha('SHA-1', text),
+      'SHA-256': await sha('SHA-256', text),
+      'SHA-512': await sha('SHA-512', text)
+    };
+    
+    renderResults(hashResults, hashes);
+  });
+  
+  // Очистить текст
+  document.getElementById('clear-text-btn').addEventListener('click', () => {
+    hashInput.value = '';
+    hashResults.innerHTML = '';
+    document.getElementById('text-length').textContent = '0 ' + i18n.characters;
+  });
+  
+  // Drag & Drop файлов
+  fileDropzone.addEventListener('click', () => fileInput.click());
+  
+  fileDropzone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    fileDropzone.classList.add('border-primary', 'bg-primary/5');
+  });
+  
+  fileDropzone.addEventListener('dragleave', () => {
+    fileDropzone.classList.remove('border-primary', 'bg-primary/5');
+  });
+  
+  fileDropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    fileDropzone.classList.remove('border-primary', 'bg-primary/5');
+    if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+  });
+  
+  fileInput.addEventListener('change', (e) => {
+    if (e.target.files[0]) handleFile(e.target.files[0]);
+  });
+  
+  async function handleFile(file) {
+    currentFile = file;
+    
+    document.getElementById('file-name').textContent = file.name;
+    document.getElementById('file-size').textContent = formatBytes(file.size);
+    fileInfo.classList.remove('hidden');
+    fileDropzone.classList.add('hidden');
+    
+    // Вычисление хешей
+    hashProgress.classList.remove('hidden');
+    fileHashResults.innerHTML = '';
+    
+    const arrayBuffer = await file.arrayBuffer();
+    const uint8Array = new Uint8Array(arrayBuffer);
+    
+    // MD5 для файлов (упрощённая версия)
+    const textDecoder = new TextDecoder('iso-8859-1');
+    const binaryString = textDecoder.decode(uint8Array);
+    
+    progressBar.value = 25;
+    progressPercent.textContent = '25%';
+    
+    const hashes = {
+      'MD5': md5(binaryString),
+    };
+    
+    progressBar.value = 50;
+    progressPercent.textContent = '50%';
+    
+    hashes['SHA-1'] = await sha('SHA-1', uint8Array);
+    progressBar.value = 70;
+    progressPercent.textContent = '70%';
+    
+    hashes['SHA-256'] = await sha('SHA-256', uint8Array);
+    progressBar.value = 90;
+    progressPercent.textContent = '90%';
+    
+    hashes['SHA-512'] = await sha('SHA-512', uint8Array);
+    progressBar.value = 100;
+    progressPercent.textContent = '100%';
+    
+    setTimeout(() => {
+      hashProgress.classList.add('hidden');
+      renderResults(fileHashResults, hashes);
+    }, 300);
+  }
+  
+  document.getElementById('clear-file-btn').addEventListener('click', () => {
+    currentFile = null;
+    fileInfo.classList.add('hidden');
+    fileDropzone.classList.remove('hidden');
+    fileHashResults.innerHTML = '';
+    fileInput.value = '';
+  });
+  
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const idx = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, idx)).toFixed(2)) + ' ' + sizes[idx];
+  }
+  
+})();
+</script>
+
+{{ end }}

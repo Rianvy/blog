@@ -1,0 +1,2197 @@
+<!DOCTYPE html>
+<html lang="en"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+JSON to Types
+ | 0x69.ru</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Ox69" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="canonical" href="https://0x69.ru/en/utilities/json-to-types/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/en/utilities/json-to-types/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="JSON → TypeScript / Go / Zod">
+  <meta property="og:description" content="Generate TypeScript interfaces, Go structs, Zod schemas and JSON Schema from JSON data">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="utilities">
+    <meta property="article:published_time" content="2026-02-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-09T00:00:00+00:00">
+    <meta property="article:tag" content="Json">
+    <meta property="article:tag" content="Typescript">
+    <meta property="article:tag" content="Go">
+    <meta property="article:tag" content="Zod">
+    <meta property="article:tag" content="Schema">
+    <meta property="article:tag" content="Generator">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="JSON → TypeScript / Go / Zod">
+  <meta name="twitter:description" content="Generate TypeScript interfaces, Go structs, Zod schemas and JSON Schema from JSON data">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Flip it!"
+                aria-label="Flip it!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/en/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">To iterate is human, to recurse divine</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="About">About</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/en/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Search"
+   aria-label="Search">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="All Categories"
+   aria-label="All Categories">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Portfolio"
+   aria-label="Portfolio">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Utilities"
+   aria-label="Utilities">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/utilities/json-to-types/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/ru/utilities/json-to-types/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Menu</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="About"
+                aria-label="About">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">About</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Languages
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/utilities/json-to-types/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/utilities/json-to-types/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Menu
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Search">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Search</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Categories">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Categories</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Portfolio">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Portfolio</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Utilities">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Utilities</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">18</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">🔄</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">JSON → TypeScript / Go / Zod</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">Generate TypeScript interfaces, Go structs, Zod schemas and JSON Schema from JSON data</p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-blue-500/10 text-blue-500 border border-blue-500/20">
+        TypeScript
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">
+        Go
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-500 border border-purple-500/20">
+        Zod
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-orange-500/10 text-orange-500 border border-orange-500/20">
+        JSON Schema
+      </span>
+    </div>
+  </div>
+
+  
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    
+    <div class="space-y-4">
+
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        
+        
+        <div class="flex items-center justify-between p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold flex items-center gap-2">
+            <ion-icon name="code-slash-outline" class="text-primary"></ion-icon>
+            JSON Input
+          </h2>
+          <div class="flex items-center gap-1">
+            <button id="paste-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="clipboard-outline"></ion-icon>
+              Paste
+            </button>
+            <button id="sample-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="document-text-outline"></ion-icon>
+              Sample
+            </button>
+            <button id="clear-btn" class="btn btn-ghost btn-xs gap-1 text-error">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+        
+        
+        <div class="relative">
+          <textarea 
+            id="json-input" 
+            class="w-full h-[400px] lg:h-[500px] p-4 font-mono text-sm bg-transparent border-0 focus:outline-none focus:ring-0 resize-none"
+            placeholder="{
+  &#34;id&#34;: 1,
+  &#34;name&#34;: &#34;John Doe&#34;,
+  &#34;email&#34;: &#34;john@example.com&#34;,
+  &#34;isActive&#34;: true,
+  &#34;roles&#34;: [&#34;admin&#34;, &#34;user&#34;],
+  &#34;profile&#34;: {
+    &#34;age&#34;: 30,
+    &#34;city&#34;: &#34;New York&#34;
+  }
+}"
+            spellcheck="false"
+          ></textarea>
+          
+          <div class="absolute bottom-2 right-2 flex items-center gap-2 text-xs text-base-content/40">
+            <span id="json-status" class="hidden px-2 py-1 rounded bg-success/20 text-success">
+              ✓ Valid JSON
+            </span>
+            <span id="json-error" class="hidden px-2 py-1 rounded bg-error/20 text-error">
+              ✗ Invalid
+            </span>
+          </div>
+        </div>
+        
+      </div>
+
+      
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              Settings
+            </h2>
+            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          
+          <div class="p-4 pt-0 space-y-4">
+            
+            
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Root type name</span>
+              </label>
+              <input type="text" id="root-name" class="input input-bordered input-sm font-mono" value="Root" placeholder="Root" />
+            </div>
+            
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              
+              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+                <input type="checkbox" id="opt-optional" class="checkbox checkbox-sm checkbox-primary" />
+                <div>
+                  <span class="text-sm font-medium">Optional properties</span>
+                  <p class="text-xs text-base-content/60">Add ? to properties</p>
+                </div>
+              </label>
+              
+              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+                <input type="checkbox" id="opt-readonly" class="checkbox checkbox-sm checkbox-primary" />
+                <div>
+                  <span class="text-sm font-medium">Readonly</span>
+                  <p class="text-xs text-base-content/60">readonly modifier</p>
+                </div>
+              </label>
+              
+              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+                <input type="checkbox" id="opt-export" class="checkbox checkbox-sm checkbox-primary" checked />
+                <div>
+                  <span class="text-sm font-medium">Export</span>
+                  <p class="text-xs text-base-content/60">export keyword</p>
+                </div>
+              </label>
+              
+              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+                <input type="checkbox" id="opt-inline" class="checkbox checkbox-sm checkbox-primary" />
+                <div>
+                  <span class="text-sm font-medium">Inline types</span>
+                  <p class="text-xs text-base-content/60">Nested types inline</p>
+                </div>
+              </label>
+              
+            </div>
+            
+          </div>
+        </details>
+      </div>
+
+      
+      <button id="generate-btn" class="btn btn-primary btn-lg w-full gap-2">
+        <ion-icon name="flash-outline" class="text-xl"></ion-icon>
+        Generate
+      </button>
+
+    </div>
+
+    
+    <div class="space-y-4">
+
+      
+      <div class="tabs tabs-boxed bg-base-200 p-1 rounded-xl">
+        <button class="tab tab-lg flex-1 gap-2 format-tab tab-active" data-format="typescript">
+          <span class="text-blue-500 font-bold">TS</span>
+          TypeScript
+        </button>
+        <button class="tab tab-lg flex-1 gap-2 format-tab" data-format="go">
+          <span class="text-cyan-500 font-bold">Go</span>
+          Go
+        </button>
+        <button class="tab tab-lg flex-1 gap-2 format-tab" data-format="zod">
+          <span class="text-purple-500 font-bold">Z</span>
+          Zod
+        </button>
+        <button class="tab tab-lg flex-1 gap-2 format-tab" data-format="jsonschema">
+          <span class="text-orange-500 font-bold">{}</span>
+          Schema
+        </button>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        
+        <div class="flex items-center justify-between p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold flex items-center gap-2">
+            <ion-icon name="document-text-outline" class="text-success"></ion-icon>
+            <span id="output-title">TypeScript Interface</span>
+          </h2>
+          <div class="flex items-center gap-1">
+            <button id="copy-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="copy-outline"></ion-icon>
+              Copy
+            </button>
+            <button id="download-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="download-outline"></ion-icon>
+              Download
+            </button>
+          </div>
+        </div>
+        
+        <div class="relative">
+          <pre id="output" class="h-[400px] lg:h-[500px] p-4 font-mono text-sm overflow-auto"><code class="text-base-content/50">// Enter JSON and click &#34;Generate&#34;</code></pre>
+        </div>
+        
+      </div>
+
+      
+      <div id="stats" class="hidden grid grid-cols-4 gap-3">
+        <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-xl font-bold text-primary" id="stat-types">0</div>
+          <div class="text-xs text-base-content/60">Types</div>
+        </div>
+        <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-xl font-bold text-secondary" id="stat-props">0</div>
+          <div class="text-xs text-base-content/60">Properties</div>
+        </div>
+        <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-xl font-bold text-accent" id="stat-nested">0</div>
+          <div class="text-xs text-base-content/60">Nested</div>
+        </div>
+        <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-xl font-bold text-info" id="stat-lines">0</div>
+          <div class="text-xs text-base-content/60">Lines</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  
+  <div class="mt-8 bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <h3 class="font-semibold flex items-center gap-2">
+          <ion-icon name="book-outline" class="text-primary"></ion-icon>
+          Usage examples
+        </h3>
+        <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+      </summary>
+      
+      <div class="p-4 pt-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
+          <div class="font-semibold text-blue-500 mb-2">TypeScript</div>
+          <pre class="text-xs font-mono text-base-content/70">interface User {
+  id: number;
+  name: string;
+}</pre>
+        </div>
+        
+        <div class="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+          <div class="font-semibold text-cyan-500 mb-2">Go</div>
+          <pre class="text-xs font-mono text-base-content/70">type User struct {
+  ID   int    `json:"id"`
+  Name string `json:"name"`
+}</pre>
+        </div>
+        
+        <div class="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20">
+          <div class="font-semibold text-purple-500 mb-2">Zod</div>
+          <pre class="text-xs font-mono text-base-content/70">const UserSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+});</pre>
+        </div>
+        
+        <div class="p-4 rounded-xl bg-orange-500/10 border border-orange-500/20">
+          <div class="font-semibold text-orange-500 mb-2">JSON Schema</div>
+          <pre class="text-xs font-mono text-base-content/70">{
+  "type": "object",
+  "properties": { ... }
+}</pre>
+        </div>
+        
+      </div>
+    </details>
+  </div>
+
+  
+  <div class="mt-4 p-4 rounded-2xl bg-base-200/30 border border-base-200 dark:border-base-content/10">
+    <div class="flex items-center gap-2 mb-3">
+      <ion-icon name="keypad-outline" class="text-lg text-base-content/60"></ion-icon>
+      <span class="text-sm font-medium text-base-content/60">Hotkeys</span>
+    </div>
+    <div class="flex flex-wrap gap-4 text-sm text-base-content/60">
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>
+        <span>+</span>
+        <kbd class="kbd kbd-sm">Enter</kbd>
+        <span class="ml-1">→ Generate</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>
+        <span>+</span>
+        <kbd class="kbd kbd-sm">1</kbd>
+        <span class="ml-1">→ TypeScript</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>
+        <span>+</span>
+        <kbd class="kbd kbd-sm">2</kbd>
+        <span class="ml-1">→ Go</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>
+        <span>+</span>
+        <kbd class="kbd kbd-sm">3</kbd>
+        <span class="ml-1">→ Zod</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>
+        <span>+</span>
+        <kbd class="kbd kbd-sm">4</kbd>
+        <span class="ml-1">→ Schema</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>
+        <span>+</span>
+        <kbd class="kbd kbd-sm">S</kbd>
+        <span class="ml-1">→ Copy</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  
+  const i18n = {
+    enterJsonAndGenerate: "\"Enter JSON and click \\\"Generate\\\"\"",
+    parseError: "\"JSON parse error\"",
+    copied: "\"Copied!\"",
+    typescriptInterface: "\"TypeScript Interface\"",
+    goStruct: "\"Go Struct\"",
+    zodSchema: "\"Zod Schema\"",
+    jsonSchemaTitle: "\"JSON Schema\""
+  };
+  
+  
+  let currentFormat = 'typescript';
+  let parsedJson = null;
+  let generatedCode = {
+    typescript: '',
+    go: '',
+    zod: '',
+    jsonschema: ''
+  };
+  
+  
+  const jsonInput = document.getElementById('json-input');
+  const output = document.getElementById('output');
+  const outputTitle = document.getElementById('output-title');
+  const generateBtn = document.getElementById('generate-btn');
+  const jsonStatus = document.getElementById('json-status');
+  const jsonError = document.getElementById('json-error');
+  const stats = document.getElementById('stats');
+  
+  
+  
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  
+  function toPascalCase(str) {
+    return str
+      .replace(/[-_](.)/g, (_, c) => c.toUpperCase())
+      .replace(/^(.)/, (_, c) => c.toUpperCase());
+  }
+  
+  function toCamelCase(str) {
+    return str
+      .replace(/[-_](.)/g, (_, c) => c.toUpperCase())
+      .replace(/^(.)/, (_, c) => c.toLowerCase());
+  }
+  
+  function getType(value) {
+    if (value === null) return 'null';
+    if (Array.isArray(value)) return 'array';
+    return typeof value;
+  }
+  
+  function inferArrayType(arr) {
+    if (arr.length === 0) return { type: 'unknown', items: [] };
+    
+    const types = new Set();
+    const objectSamples = [];
+    
+    arr.forEach(item => {
+      const t = getType(item);
+      types.add(t);
+      if (t === 'object' && item !== null) {
+        objectSamples.push(item);
+      }
+    });
+    
+    if (types.size === 1) {
+      const t = [...types][0];
+      if (t === 'object' && objectSamples.length > 0) {
+        const merged = {};
+        objectSamples.forEach(obj => {
+          Object.keys(obj).forEach(key => {
+            if (!merged[key]) {
+              merged[key] = obj[key];
+            }
+          });
+        });
+        return { type: 'object', sample: merged };
+      }
+      return { type: t, items: arr };
+    }
+    
+    return { type: 'mixed', types: [...types] };
+  }
+  
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  
+  
+  function generateTypeScript(data, name, options = {}) {
+    const { optional = false, readonly = false, exportKw = true, inline = false } = options;
+    const type = getType(data);
+    const interfaces = [];
+    let mainInterface = '';
+    
+    if (type === 'object' && data !== null) {
+      const props = [];
+      
+      Object.entries(data).forEach(([key, value]) => {
+        const propType = getType(value);
+        const optMark = optional ? '?' : '';
+        const readonlyMark = readonly ? 'readonly ' : '';
+        
+        let tsType;
+        
+        if (propType === 'object' && value !== null) {
+          const nestedName = toPascalCase(key);
+          if (inline) {
+            const nestedProps = Object.entries(value).map(([k, v]) => {
+              return `${k}${optMark}: ${getSimpleTsType(v)}`;
+            }).join('; ');
+            tsType = `{ ${nestedProps} }`;
+          } else {
+            const nested = generateTypeScript(value, nestedName, options);
+            interfaces.push(...nested.interfaces, nested.main);
+            tsType = nestedName;
+          }
+        } else if (propType === 'array') {
+          const arrInfo = inferArrayType(value);
+          if (arrInfo.type === 'object' && arrInfo.sample) {
+            const nestedName = toPascalCase(key) + 'Item';
+            if (!inline) {
+              const nested = generateTypeScript(arrInfo.sample, nestedName, options);
+              interfaces.push(...nested.interfaces, nested.main);
+            }
+            tsType = inline ? 'object[]' : `${nestedName}[]`;
+          } else {
+            tsType = `${getTsArrayItemType(arrInfo)}[]`;
+          }
+        } else {
+          tsType = getSimpleTsType(value);
+        }
+        
+        props.push(`  ${readonlyMark}${key}${optMark}: ${tsType};`);
+      });
+      
+      const exportStr = exportKw ? 'export ' : '';
+      mainInterface = `${exportStr}interface ${name} {\n${props.join('\n')}\n}`;
+    } else if (type === 'array') {
+      const arrInfo = inferArrayType(data);
+      const exportStr = exportKw ? 'export ' : '';
+      mainInterface = `${exportStr}type ${name} = ${getTsArrayItemType(arrInfo)}[];`;
+    } else {
+      const exportStr = exportKw ? 'export ' : '';
+      mainInterface = `${exportStr}type ${name} = ${getSimpleTsType(data)};`;
+    }
+    
+    return { interfaces, main: mainInterface };
+  }
+  
+  function getSimpleTsType(value) {
+    const type = getType(value);
+    switch (type) {
+      case 'string': return 'string';
+      case 'number': return 'number';
+      case 'boolean': return 'boolean';
+      case 'null': return 'null';
+      case 'undefined': return 'undefined';
+      case 'object': return 'object';
+      case 'array': return 'unknown[]';
+      default: return 'unknown';
+    }
+  }
+  
+  function getTsArrayItemType(arrInfo) {
+    switch (arrInfo.type) {
+      case 'string': return 'string';
+      case 'number': return 'number';
+      case 'boolean': return 'boolean';
+      case 'null': return 'null';
+      case 'object': return 'object';
+      case 'mixed': return arrInfo.types.map(t => t === 'object' ? 'object' : t).join(' | ');
+      default: return 'unknown';
+    }
+  }
+  
+  
+  
+  function generateGo(data, name, options = {}) {
+    const type = getType(data);
+    const structs = [];
+    let mainStruct = '';
+    
+    if (type === 'object' && data !== null) {
+      const fields = [];
+      
+      Object.entries(data).forEach(([key, value]) => {
+        const fieldName = toPascalCase(key);
+        const propType = getType(value);
+        const jsonTag = '`json:"' + key + '"`';
+        
+        let goType;
+        
+        if (propType === 'object' && value !== null) {
+          const nestedName = toPascalCase(key);
+          const nested = generateGo(value, nestedName, options);
+          structs.push(...nested.structs, nested.main);
+          goType = nestedName;
+        } else if (propType === 'array') {
+          const arrInfo = inferArrayType(value);
+          if (arrInfo.type === 'object' && arrInfo.sample) {
+            const nestedName = toPascalCase(key) + 'Item';
+            const nested = generateGo(arrInfo.sample, nestedName, options);
+            structs.push(...nested.structs, nested.main);
+            goType = '[]' + nestedName;
+          } else {
+            goType = '[]' + getGoArrayItemType(arrInfo);
+          }
+        } else {
+          goType = getSimpleGoType(value);
+        }
+        
+        fields.push('\t' + fieldName + ' ' + goType + ' ' + jsonTag);
+      });
+      
+      mainStruct = 'type ' + name + ' struct {\n' + fields.join('\n') + '\n}';
+    } else if (type === 'array') {
+      const arrInfo = inferArrayType(data);
+      mainStruct = 'type ' + name + ' []' + getGoArrayItemType(arrInfo);
+    } else {
+      mainStruct = 'type ' + name + ' ' + getSimpleGoType(data);
+    }
+    
+    return { structs: structs, main: mainStruct };
+  }
+  
+  function getSimpleGoType(value) {
+    const type = getType(value);
+    switch (type) {
+      case 'string': return 'string';
+      case 'number': return Number.isInteger(value) ? 'int' : 'float64';
+      case 'boolean': return 'bool';
+      case 'null': return 'interface{}';
+      default: return 'interface{}';
+    }
+  }
+  
+  function getGoArrayItemType(arrInfo) {
+    switch (arrInfo.type) {
+      case 'string': return 'string';
+      case 'number': 
+        var allInts = arrInfo.items && arrInfo.items.every(function(n) { return Number.isInteger(n); });
+        return allInts ? 'int' : 'float64';
+      case 'boolean': return 'bool';
+      case 'object': return 'interface{}';
+      default: return 'interface{}';
+    }
+  }
+  
+  
+  
+  function generateZod(data, name, options = {}) {
+    const type = getType(data);
+    const schemas = [];
+    let mainSchema = '';
+    
+    if (type === 'object' && data !== null) {
+      const props = [];
+      
+      Object.entries(data).forEach(([key, value]) => {
+        const propType = getType(value);
+        let zodType;
+        
+        if (propType === 'object' && value !== null) {
+          const nestedName = toPascalCase(key) + 'Schema';
+          const nested = generateZod(value, nestedName, options);
+          schemas.push(...nested.schemas, nested.main);
+          zodType = nestedName;
+        } else if (propType === 'array') {
+          const arrInfo = inferArrayType(value);
+          if (arrInfo.type === 'object' && arrInfo.sample) {
+            const nestedName = toPascalCase(key) + 'ItemSchema';
+            const nested = generateZod(arrInfo.sample, nestedName, options);
+            schemas.push(...nested.schemas, nested.main);
+            zodType = 'z.array(' + nestedName + ')';
+          } else {
+            zodType = 'z.array(' + getZodArrayItemType(arrInfo) + ')';
+          }
+        } else {
+          zodType = getSimpleZodType(value);
+        }
+        
+        props.push('  ' + key + ': ' + zodType + ',');
+      });
+      
+      mainSchema = 'const ' + name + ' = z.object({\n' + props.join('\n') + '\n});';
+    } else if (type === 'array') {
+      const arrInfo = inferArrayType(data);
+      mainSchema = 'const ' + name + ' = z.array(' + getZodArrayItemType(arrInfo) + ');';
+    } else {
+      mainSchema = 'const ' + name + ' = ' + getSimpleZodType(data) + ';';
+    }
+    
+    return { schemas: schemas, main: mainSchema };
+  }
+  
+  function getSimpleZodType(value) {
+    const type = getType(value);
+    switch (type) {
+      case 'string': return 'z.string()';
+      case 'number': return Number.isInteger(value) ? 'z.number().int()' : 'z.number()';
+      case 'boolean': return 'z.boolean()';
+      case 'null': return 'z.null()';
+      default: return 'z.unknown()';
+    }
+  }
+  
+  function getZodArrayItemType(arrInfo) {
+    switch (arrInfo.type) {
+      case 'string': return 'z.string()';
+      case 'number': return 'z.number()';
+      case 'boolean': return 'z.boolean()';
+      case 'object': return 'z.object({})';
+      case 'mixed': return 'z.unknown()';
+      default: return 'z.unknown()';
+    }
+  }
+  
+  
+  
+  function generateJsonSchema(data, name) {
+    const type = getType(data);
+    
+    var schema = {
+      '$schema': 'http://json-schema.org/draft-07/schema#',
+      'title': name
+    };
+    
+    if (type === 'object' && data !== null) {
+      schema.type = 'object';
+      schema.properties = {};
+      schema.required = [];
+      
+      Object.entries(data).forEach(([key, value]) => {
+        schema.properties[key] = getJsonSchemaType(value, key);
+        schema.required.push(key);
+      });
+    } else if (type === 'array') {
+      schema.type = 'array';
+      const arrInfo = inferArrayType(data);
+      if (arrInfo.type === 'object' && arrInfo.sample) {
+        schema.items = getJsonSchemaType(arrInfo.sample, 'item');
+      } else {
+        schema.items = { type: arrInfo.type === 'mixed' ? 'string' : arrInfo.type };
+      }
+    } else {
+      Object.assign(schema, getJsonSchemaType(data, name));
+    }
+    
+    return JSON.stringify(schema, null, 2);
+  }
+  
+  function getJsonSchemaType(value, key) {
+    const type = getType(value);
+    
+    switch (type) {
+      case 'string':
+        return { type: 'string' };
+      case 'number':
+        return Number.isInteger(value) ? { type: 'integer' } : { type: 'number' };
+      case 'boolean':
+        return { type: 'boolean' };
+      case 'null':
+        return { type: 'null' };
+      case 'array':
+        var arrInfo = inferArrayType(value);
+        if (arrInfo.type === 'object' && arrInfo.sample) {
+          return {
+            type: 'array',
+            items: getJsonSchemaType(arrInfo.sample, key + 'Item')
+          };
+        }
+        return {
+          type: 'array',
+          items: { type: arrInfo.type }
+        };
+      case 'object':
+        if (value === null) return { type: 'null' };
+        var props = {};
+        var required = [];
+        Object.entries(value).forEach(([k, v]) => {
+          props[k] = getJsonSchemaType(v, k);
+          required.push(k);
+        });
+        return { type: 'object', properties: props, required: required };
+      default:
+        return {};
+    }
+  }
+  
+  
+  
+  function generate() {
+    var input = jsonInput.value.trim();
+    
+    if (!input) {
+      output.innerHTML = '<code class="text-base-content/50">// ' + i18n.enterJsonAndGenerate + '</code>';
+      return;
+    }
+    
+    try {
+      parsedJson = JSON.parse(input);
+      jsonStatus.classList.remove('hidden');
+      jsonError.classList.add('hidden');
+    } catch (e) {
+      jsonStatus.classList.add('hidden');
+      jsonError.classList.remove('hidden');
+      output.innerHTML = '<code class="text-error">// ' + i18n.parseError + ':\n// ' + e.message + '</code>';
+      return;
+    }
+    
+    var rootName = document.getElementById('root-name').value || 'Root';
+    var options = {
+      optional: document.getElementById('opt-optional').checked,
+      readonly: document.getElementById('opt-readonly').checked,
+      exportKw: document.getElementById('opt-export').checked,
+      inline: document.getElementById('opt-inline').checked
+    };
+    
+    
+    var tsResult = generateTypeScript(parsedJson, rootName, options);
+    generatedCode.typescript = tsResult.interfaces.concat([tsResult.main]).join('\n\n');
+    
+    
+    var goResult = generateGo(parsedJson, rootName, options);
+    generatedCode.go = goResult.structs.concat([goResult.main]).join('\n\n');
+    
+    
+    var zodResult = generateZod(parsedJson, rootName + 'Schema', options);
+    generatedCode.zod = "import { z } from 'zod';\n\n" + 
+      zodResult.schemas.concat([zodResult.main]).join('\n\n') + 
+      '\n\ntype ' + rootName + ' = z.infer<typeof ' + rootName + 'Schema>;';
+    
+    
+    generatedCode.jsonschema = generateJsonSchema(parsedJson, rootName);
+    
+    
+    showOutput();
+    
+    
+    updateStats();
+  }
+  
+  function showOutput() {
+    var code = generatedCode[currentFormat];
+    output.innerHTML = '<code>' + escapeHtml(code) + '</code>';
+    
+    var titles = {
+      typescript: i18n.typescriptInterface,
+      go: i18n.goStruct,
+      zod: i18n.zodSchema,
+      jsonschema: i18n.jsonSchemaTitle
+    };
+    outputTitle.textContent = titles[currentFormat];
+  }
+  
+  function updateStats() {
+    if (!generatedCode.typescript) return;
+    
+    stats.classList.remove('hidden');
+    
+    var code = generatedCode.typescript;
+    var interfaceMatches = code.match(/interface/g) || [];
+    var typeMatches = code.match(/type \w+ =/g) || [];
+    var interfaceCount = interfaceMatches.length + typeMatches.length;
+    var propMatches = code.match(/^\s+\w+[\?]?:/gm) || [];
+    var propCount = propMatches.length;
+    var nestedCount = Math.max(0, interfaceCount - 1);
+    var lineCount = code.split('\n').length;
+    
+    document.getElementById('stat-types').textContent = interfaceCount;
+    document.getElementById('stat-props').textContent = propCount;
+    document.getElementById('stat-nested').textContent = nestedCount;
+    document.getElementById('stat-lines').textContent = lineCount;
+  }
+  
+  function switchFormat(format) {
+    currentFormat = format;
+    
+    
+    document.querySelectorAll('.format-tab').forEach(function(t) {
+      t.classList.remove('tab-active');
+    });
+    var activeTab = document.querySelector('[data-format="' + format + '"]');
+    if (activeTab) {
+      activeTab.classList.add('tab-active');
+    }
+    
+    if (generatedCode[currentFormat]) {
+      showOutput();
+    }
+  }
+  
+  function copyResult() {
+    var code = generatedCode[currentFormat];
+    if (code) {
+      navigator.clipboard.writeText(code).then(function() {
+        var btn = document.getElementById('copy-btn');
+        var originalHtml = btn.innerHTML;
+        btn.innerHTML = '<ion-icon name="checkmark-outline" class="text-success"></ion-icon> ' + i18n.copied;
+        setTimeout(function() {
+          btn.innerHTML = originalHtml;
+        }, 2000);
+      });
+    }
+  }
+  
+  
+  
+  
+  document.querySelectorAll('.format-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      switchFormat(tab.dataset.format);
+    });
+  });
+  
+  
+  generateBtn.addEventListener('click', generate);
+  
+  
+  jsonInput.addEventListener('input', function() {
+    try {
+      JSON.parse(jsonInput.value);
+      jsonStatus.classList.remove('hidden');
+      jsonError.classList.add('hidden');
+    } catch (e) {
+      jsonStatus.classList.add('hidden');
+      if (jsonInput.value.trim()) {
+        jsonError.classList.remove('hidden');
+      } else {
+        jsonError.classList.add('hidden');
+      }
+    }
+  });
+  
+  
+  document.getElementById('paste-btn').addEventListener('click', function() {
+    navigator.clipboard.readText().then(function(text) {
+      jsonInput.value = text;
+      jsonInput.dispatchEvent(new Event('input'));
+    }).catch(function() {});
+  });
+  
+  
+  document.getElementById('sample-btn').addEventListener('click', function() {
+    var sample = {
+      id: 1,
+      name: "John Doe",
+      email: "john@example.com",
+      isActive: true,
+      roles: ["admin", "user"],
+      profile: {
+        age: 30,
+        city: "Moscow",
+        interests: ["coding", "music"]
+      },
+      createdAt: "2024-01-15T10:30:00Z"
+    };
+    jsonInput.value = JSON.stringify(sample, null, 2);
+    jsonInput.dispatchEvent(new Event('input'));
+  });
+  
+  
+  document.getElementById('clear-btn').addEventListener('click', function() {
+    jsonInput.value = '';
+    output.innerHTML = '<code class="text-base-content/50">// ' + i18n.enterJsonAndGenerate + '</code>';
+    jsonStatus.classList.add('hidden');
+    jsonError.classList.add('hidden');
+    stats.classList.add('hidden');
+    generatedCode = { typescript: '', go: '', zod: '', jsonschema: '' };
+  });
+  
+  
+  document.getElementById('copy-btn').addEventListener('click', copyResult);
+  
+  
+  document.getElementById('download-btn').addEventListener('click', function() {
+    var code = generatedCode[currentFormat];
+    if (!code) return;
+    
+    var extensions = {
+      typescript: 'ts',
+      go: 'go',
+      zod: 'ts',
+      jsonschema: 'json'
+    };
+    
+    var blob = new Blob([code], { type: 'text/plain' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'types.' + extensions[currentFormat];
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+  
+  
+  
+  window.addEventListener('keydown', function(e) {
+    var isCtrl = e.ctrlKey || e.metaKey;
+    
+    if (!isCtrl) return;
+    
+    var key = e.key;
+    var code = e.code;
+    
+    if (key === 'Enter') {
+      e.preventDefault();
+      generate();
+      return;
+    }
+    
+    if (key === 's' || key === 'S' || code === 'KeyS') {
+      e.preventDefault();
+      copyResult();
+      return;
+    }
+    
+    if (key === '1' || code === 'Digit1' || code === 'Numpad1') {
+      e.preventDefault();
+      switchFormat('typescript');
+      return;
+    }
+    
+    if (key === '2' || code === 'Digit2' || code === 'Numpad2') {
+      e.preventDefault();
+      switchFormat('go');
+      return;
+    }
+    
+    if (key === '3' || code === 'Digit3' || code === 'Numpad3') {
+      e.preventDefault();
+      switchFormat('zod');
+      return;
+    }
+    
+    if (key === '4' || code === 'Digit4' || code === 'Numpad4') {
+      e.preventDefault();
+      switchFormat('jsonschema');
+      return;
+    }
+  }, true);
+  
+  console.log('JSON to Types: Keyboard shortcuts initialized');
+  
+})();
+</script>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Maksim Alexandrov<br>
+<strong>Age:</strong> 28<br>
+<strong>Location:</strong> Tula, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>This blog is my personal knowledge base, where I push notes about my tech stack, life experience, and everything that triggers my interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — ready to merge ideas and work on joint projects.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-programming-languages">💻 Programming Languages</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Responsive layout (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST APIs</strong></li>
+</ul>
+<h2 id="-databases">🗄️ Databases</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-design--graphics">🎨 Design &amp; Graphics</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX design and prototyping</li>
+<li><strong>Photoshop</strong> — graphics and image editing</li>
+<li><strong>After Effects</strong> — motion design and animation 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Open Source Projects 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Projects 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN service in Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN service in Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Social Links</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+     
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

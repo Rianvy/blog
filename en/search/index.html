@@ -8,8 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search | 0x69.ru</title>
 
-    
-<meta name="google-site-verification" content="SX8wwAcRfmBYPxrIA69UFfuq8DDa2GxWVBzVj9tucMA" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Ox69" />
+<link rel="manifest" href="/site.webmanifest" />
+
 <link rel="canonical" href="https://0x69.ru/en/search/" />
 
 
@@ -43,9 +48,6 @@
 
 <link rel="stylesheet" href="/css/output.min.css" />
 
-
-
-
      
 
     
@@ -62,119 +64,412 @@
     <div id="dream-global-bg"></div>
 
     
-<nav x-data="{ isSticky: false, mobileMenuOpen: false }"
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
      x-init="
+       
        window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
        $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
-     "
-     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
-     :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
-
+     ">
 
   
-  <div class="container flex items-center justify-between px-4">
   
   
-    
-    
-    
-    <section class="flex items-center gap-3">
-      <button class="avatar cursor-pointer transition-all duration-200 group" 
-              @click="flip = !flip" 
-              title="Flip it!"
-              aria-label="Flip it!">
-        <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
-          <img src="/img/avatar.jpg" 
-               alt="0x69.ru &lt;/&gt;" 
-               class="rounded-full" 
-               loading="eager" />
-        </div>
-      </button>
-
-      
-      <div class="flex flex-col">
-        
-        <a href="/en/" 
-           class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
-          0x69.ru &lt;/&gt;
-        </a>
-        
-        
-        <span class="text-sm text-base-content/60 hidden sm:block">To iterate is human, to recurse divine</span>
-        
-      </div>
-      
-    </section>
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
 
     
+    <div class="container flex items-center justify-between px-4">
     
     
-    <div class="sm:hidden">
       
-      <button @click="mobileMenuOpen = !mobileMenuOpen" 
-              class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
-              :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
-              aria-label="Открыть меню"
-              :aria-expanded="mobileMenuOpen">
-        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
-      </button>
-      
-      
-      <div x-show="mobileMenuOpen"
-           x-transition:enter="transition ease-out duration-300"
-           x-transition:enter-start="opacity-0"
-           x-transition:enter-end="opacity-100"
-           x-transition:leave="transition ease-in duration-200"
-           x-transition:leave-start="opacity-100"
-           x-transition:leave-end="opacity-0"
-           @click="mobileMenuOpen = false"
-           class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm"
-           aria-hidden="true">
-      </div>
-      
-      
-      <div x-show="mobileMenuOpen"
-           x-transition:enter="transition ease-out duration-300"
-           x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
-           x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-           x-transition:leave="transition ease-in duration-200"
-           x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-           x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
-           @click.outside="mobileMenuOpen = false"
-           @keydown.escape.window="mobileMenuOpen = false"
-           class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden">
-        
-        
-        <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
-          <span class="font-semibold text-base-content">Menu</span>
-          <button @click="mobileMenuOpen = false" 
-                  class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
-                  aria-label="Закрыть">
-            <ion-icon name="close" class="text-lg"></ion-icon>
-          </button>
-        </div>
-        
-        
-        
-          
-          
-          <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
-            <button type="button"
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-                    @click="flip = !flip; mobileMenuOpen = false"
-                    title="About"
-                    aria-label="About">
-              <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
-              <span class="flex-1 text-left">About</span>
-              <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
-            </button>
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Flip it!"
+                aria-label="Flip it!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
           </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/en/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">To iterate is human, to recurse divine</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="About">About</button>
           
         
+
         
         
-        <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
           
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/en/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Search"
+   aria-label="Search">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="All Categories"
+   aria-label="All Categories">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Portfolio"
+   aria-label="Portfolio">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Utilities"
+   aria-label="Utilities">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/search/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/ru/search/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Menu</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="About"
+                aria-label="About">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">About</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
 
 
   
@@ -356,6 +651,29 @@
 
 
 <li role="none">
+  <a href="/en/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Utilities">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Utilities</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">18</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
   <a href="/en/tags" 
      role="menuitem"
      class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
@@ -363,7 +681,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">All Tags</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">65</span>
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
     
   </a>
 </li>
@@ -439,289 +757,10 @@
   </div>
 
 </nav>
-        </div>
-      </div>
     </div>
-
-    
-    
-    
-    <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
-      
-      
-      
-        
-        
-        <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
-                @click="flip = !flip"
-                title="About">About</button>
-        
-      
-
-      
-      
-        
-      
-
-      
-        
-        
-        
-        
-        
-          
-
-
-
-
-
-
-
-<a href="/en/search" 
-   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
-   title="Search"
-   aria-label="Search">
-  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
-</a>
-
-
-
-
-
-        
-          
-
-
-
-
-
-
-
-<a href="/en/categories" 
-   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
-   title="All Categories"
-   aria-label="All Categories">
-  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
-</a>
-
-
-
-
-
-        
-          
-
-
-
-
-
-
-
-<a href="/en/portfolio" 
-   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
-   title="Portfolio"
-   aria-label="Portfolio">
-  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
-</a>
-
-
-
-
-
-        
-      
-        
-        
-        
-        <div class="dropdown dropdown-end dropdown-hover">
-          <button tabindex="0" 
-                  class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
-                  aria-label="Выбрать язык"
-                  aria-haspopup="true">
-            <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
-          </button>
-          <ul tabindex="0" 
-              class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
-              role="menu">
-            
-              
-              
-              
-              
-
-              
-              
-                
-                
-              
-
-              <li role="none">
-                <a href="https://0x69.ru/en/search/" 
-                   hreflang="en"
-                   role="menuitem"
-                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
-                   aria-current="true">
-                  <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
-                  <span class="flex-1">English</span>
-                  
-                  <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
-                  
-                </a>
-              </li>
-            
-              
-              
-              
-              
-
-              
-              
-                
-              
-
-              <li role="none">
-                <a href="https://0x69.ru/ru/search/" 
-                   hreflang="ru"
-                   role="menuitem"
-                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
-                   >
-                  <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
-                  <span class="flex-1">Русский</span>
-                  
-                </a>
-              </li>
-            
-          </ul>
-        </div>
-          
-        
-        
-        
-        <div class="dropdown dropdown-end dropdown-hover">
-          <button tabindex="0" 
-                  class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
-                  aria-label="Ещё"
-                  aria-haspopup="true">
-            <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
-          </button>
-          <ul tabindex="0" 
-              class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
-              role="menu">
-            
-              
-
-
-
-
-<li role="none">
-  <a href="/en/posts" 
-     role="menuitem"
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-     title="Archives">
-    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
-    <span class="flex-1">Archives</span>
-    
-    <span class="badge badge-sm badge-ghost font-normal">9</span>
-    
-  </a>
-</li>
-
-
-
-
-
-            
-              
-
-
-
-
-<li role="none">
-  <a href="/en/tags" 
-     role="menuitem"
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-     title="All Tags">
-    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
-    <span class="flex-1">All Tags</span>
-    
-    <span class="badge badge-sm badge-ghost font-normal">65</span>
-    
-  </a>
-</li>
-
-
-
-
-
-            
-              
-
-
-
-
-<li role="none">
-    <a href="https://github.com/rianvy" 
-       role="menuitem"
-       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-       target="_blank"
-       rel="noopener noreferrer"
-       title="GitHub">
-      
-      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
-      
-      <span class="flex-1">GitHub</span>
-      
-      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
-      
-    </a>
-  </li>
-  
-
-            
-              
-
-
-
-
-
-<li role="none">
-  <a href="/en/index.xml" 
-     role="menuitem"
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-     title="RSS"
-     target="_blank"
-     rel="noopener noreferrer">
-    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
-    <span class="flex-1">RSS</span>
-    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
-  </a>
-</li>
-
-
-
-
-
-            
-
-            
-              
-
-
-
-
-
-
-
-
-
-
-            
-          </ul>
-        </div>
-      
-    </section>
   </div>
-</nav>
+
+</div>
 	
 	<style>
 	.flip-container .back {
@@ -745,9 +784,14 @@
 <div class="mt-8 lg:mt-12 px-4 sm:px-6"
 x-data="{
   search: '',
+  activeFilter: 'all',
   isLoading: false,
-  get results() {
+  get allResults() {
     return this.search.trim() !== '' ? window.fuse.search(this.search) : [];
+  },
+  get results() {
+    if (this.activeFilter === 'all') return this.allResults;
+    return this.allResults.filter(r => r.item.type === this.activeFilter);
   },
   get hasResults() {
     return this.results.length > 0;
@@ -755,35 +799,84 @@ x-data="{
   get showEmpty() {
     return this.search.trim() !== '' && !this.hasResults;
   },
+  get counts() {
+    const all = this.allResults;
+    return {
+      all: all.length,
+      posts: all.filter(r => r.item.type === 'posts').length,
+      portfolio: all.filter(r => r.item.type === 'portfolio').length,
+      utilities: all.filter(r => r.item.type === 'utilities').length
+    };
+  },
   clearSearch() {
     this.search = '';
+    this.activeFilter = 'all';
     this.$refs.searchInput.focus();
+  },
+  setFilter(f) {
+    this.activeFilter = f;
+  },
+  typeIcon(type) {
+    const icons = {
+      posts: 'newspaper-outline',
+      portfolio: 'briefcase-outline',
+      utilities: 'build-outline'
+    };
+    return icons[type] || 'document-outline';
+  },
+  typeLabel(type) {
+    const labels = {
+      posts: 'Post',
+      portfolio: 'Project',
+      utilities: 'Utility'
+    };
+    return labels[type] || type;
+  },
+  typeColor(type) {
+    const colors = {
+      posts: 'badge-primary',
+      portfolio: 'badge-accent',
+      utilities: 'badge-secondary'
+    };
+    return colors[type] || 'badge-ghost';
   }
 }"
-x-init="$refs.searchInput.focus()">
+x-init="$refs.searchInput.focus()"
+@keydown.escape.window="clearSearch()">
 
   <div class="max-w-2xl mx-auto">
     
     
     <div class="text-center mb-6 sm:mb-8">
       <h1 class="text-2xl sm:text-3xl font-bold mb-2">Search</h1>
-      <p class="text-sm text-base-content/60">Search by titles, descriptions and tags</p>
+      <p class="text-sm text-base-content/60">Search across articles, projects, utilities and tags</p>
     </div>
 
     
     <div class="relative">
       <label for="search" class="input input-bordered input-lg flex items-center gap-2 
-                                  focus-within:input-primary transition-colors duration-200">
-        <ion-icon name="search" class="text-base-content/50 text-lg"></ion-icon>
+                                  focus-within:input-primary transition-colors duration-200
+                                  shadow-sm focus-within:shadow-md">
+        
+        <div class="w-5 h-5 flex items-center justify-center">
+          <ion-icon x-show="!isLoading" name="search" class="text-base-content/50 text-lg"></ion-icon>
+          <span x-show="isLoading" class="loading loading-spinner loading-xs text-primary"></span>
+        </div>
+        
         <input id="search" 
                name="search" 
                type="text" 
                class="grow bg-transparent" 
-               placeholder="Enter your query..." 
-               x-model.debounce.300ms="search"
+               placeholder="Articles, projects, utilities..." 
+               x-model.debounce.200ms="search"
                x-ref="searchInput"
-               autocomplete="off" />
+               autocomplete="off"
+               spellcheck="false" />
         
+        <kbd x-show="search.length === 0" 
+             class="hidden sm:inline-flex kbd kbd-sm text-base-content/30">
+          Esc
+        </kbd>
         
         <button x-show="search.length > 0" 
                 x-transition:enter="transition ease-out duration-200"
@@ -796,107 +889,312 @@ x-init="$refs.searchInput.focus()">
         </button>
       </label>
       
-      
-      <div class="absolute -bottom-6 left-0 text-xs text-base-content/50"
+      <div class="absolute -bottom-6 left-0 right-0 flex items-center justify-between text-xs text-base-content/50"
            x-show="search.trim() !== ''"
            x-transition>
-        <span x-text="results.length"></span> found
+        <span>
+          <span x-text="results.length" class="font-medium"></span> found
+        </span>
+        <span x-show="activeFilter !== 'all'" 
+              @click="activeFilter = 'all'" 
+              class="cursor-pointer hover:text-primary transition-colors">
+          Show all →
+        </span>
       </div>
     </div>
 
     
-    <div class="mt-10 sm:mt-12 space-y-3 sm:space-y-4">
+    <div class="mt-10 sm:mt-12"
+         x-show="search.trim() !== '' && allResults.length > 0"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 -translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0">
+      
+      <div class="flex flex-wrap items-center gap-2 mb-6">
+        
+        <span class="text-xs text-base-content/40 mr-1 hidden sm:inline">
+          <ion-icon name="filter-outline" class="align-middle"></ion-icon>
+        </span>
+        
+        <button @click="setFilter('all')"
+                class="btn btn-xs gap-1.5 transition-all"
+                :class="activeFilter === 'all' ? 'btn-primary' : 'btn-ghost bg-base-200/50'">
+          <ion-icon name="apps-outline"></ion-icon>
+          All
+          <span class="opacity-70" x-text="counts.all"></span>
+        </button>
+        
+        <button @click="setFilter('posts')"
+                x-show="counts.posts > 0"
+                class="btn btn-xs gap-1.5 transition-all"
+                :class="activeFilter === 'posts' ? 'btn-primary' : 'btn-ghost bg-base-200/50'">
+          <ion-icon name="newspaper-outline"></ion-icon>
+          Posts
+          <span class="opacity-70" x-text="counts.posts"></span>
+        </button>
+        
+        <button @click="setFilter('portfolio')"
+                x-show="counts.portfolio > 0"
+                class="btn btn-xs gap-1.5 transition-all"
+                :class="activeFilter === 'portfolio' ? 'btn-accent' : 'btn-ghost bg-base-200/50'">
+          <ion-icon name="briefcase-outline"></ion-icon>
+          Projects
+          <span class="opacity-70" x-text="counts.portfolio"></span>
+        </button>
+        
+        <button @click="setFilter('utilities')"
+                x-show="counts.utilities > 0"
+                class="btn btn-xs gap-1.5 transition-all"
+                :class="activeFilter === 'utilities' ? 'btn-secondary' : 'btn-ghost bg-base-200/50'">
+          <ion-icon name="build-outline"></ion-icon>
+          Utilities
+          <span class="opacity-70" x-text="counts.utilities"></span>
+        </button>
+        
+      </div>
+    </div>
+
+    
+    <div class="space-y-3 sm:space-y-4"
+         :class="{ 'mt-10 sm:mt-12': search.trim() === '' || allResults.length === 0 }">
       
       
       <div x-show="search.trim() === ''" 
            x-transition
            class="text-center py-12 sm:py-16">
-        <ion-icon name="search-outline" class="text-6xl sm:text-7xl text-base-content/20 mb-4"></ion-icon>
-        <p class="text-base-content/50">Start typing to search</p>
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-base-200/50 mb-4">
+          <ion-icon name="search-outline" class="text-4xl text-base-content/20"></ion-icon>
+        </div>
+        <p class="text-base-content/50 mb-1">Start typing to search</p>
+        <p class="text-xs text-base-content/30">Searching across articles, projects and utilities</p>
       </div>
       
       
       <div x-show="showEmpty" 
            x-transition
            class="text-center py-12 sm:py-16">
-        <ion-icon name="sad-outline" class="text-6xl sm:text-7xl text-base-content/20 mb-4"></ion-icon>
-        <p class="text-base-content/60 mb-2">Nothing found</p>
-        <p class="text-sm text-base-content/40">Try a different query</p>
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-base-200/50 mb-4">
+          <ion-icon name="sad-outline" class="text-4xl text-base-content/20"></ion-icon>
+        </div>
+        <p class="text-base-content/60 mb-1">Nothing found</p>
+        <p class="text-sm text-base-content/40 mb-4">Try a different query</p>
+        
+        <button x-show="activeFilter !== 'all' && allResults.length > 0"
+                @click="activeFilter = 'all'"
+                class="btn btn-sm btn-outline btn-primary gap-1">
+          <ion-icon name="apps-outline"></ion-icon>
+          Search all sections
+          <span class="opacity-70" x-text="'(' + allResults.length + ')'"></span>
+        </button>
       </div>
 
       
-      <template x-for="(result, index) in results" :key="result.item.url">
-        <a class="block group" :href="result.item.url"
+      <template x-for="(result, index) in results" :key="result.item.url + activeFilter">
+        <a class="block group no-underline" :href="result.item.url"
            x-transition:enter="transition ease-out duration-300"
            x-transition:enter-start="opacity-0 translate-y-4"
            x-transition:enter-end="opacity-100 translate-y-0"
-           :style="{ transitionDelay: `${index * 50}ms` }">
-          <article class="card card-compact 
-                          bg-base-200/50 dark:bg-base-200/10
-                          hover:bg-base-200 dark:hover:bg-base-200/20
-                          border border-transparent hover:border-primary/30
-                          hover:shadow-md
-                          transition-all duration-200">
-            <div class="card-body p-4 sm:p-5">
+           :style="{ transitionDelay: `${Math.min(index * 40, 300)}ms` }">
+          
+          
+          <template x-if="result.item.type === 'utilities'">
+            <article class="flex items-start gap-4 p-4 sm:p-5 rounded-2xl
+                            bg-base-200/50 dark:bg-base-200/10
+                            hover:bg-base-200 dark:hover:bg-base-200/20
+                            border border-transparent hover:border-secondary/30
+                            hover:shadow-md transition-all duration-200">
               
+              <div class="flex-shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-xl 
+                          bg-gradient-to-br from-secondary/15 to-secondary/5
+                          flex items-center justify-center text-xl sm:text-2xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                <span x-text="result.item.icon || '🔧'"></span>
+              </div>
               
-              <h2 class="card-title text-base sm:text-lg group-hover:text-primary transition-colors duration-200">
-                <span x-text="result.item.title"></span>
-                <ion-icon name="arrow-forward" 
-                          class="text-base-content/30 group-hover:text-primary 
-                                 group-hover:translate-x-1 transition-all duration-200 ml-auto shrink-0"></ion-icon>
-              </h2>
-              
-              
-              <div class="text-sm text-base-content/70 line-clamp-2 sm:line-clamp-3" 
-                   x-html="result.item.description"></div>
-              
-              
-              <template x-if="result.item.tags && result.item.tags.length > 0">
-                <div class="flex flex-wrap gap-1.5 mt-2">
-                  <template x-for="tag in result.item.tags.slice(0, 3)" :key="tag">
-                    <span class="badge badge-sm badge-outline opacity-60" x-text="tag"></span>
-                  </template>
-                  <template x-if="result.item.tags.length > 3">
-                    <span class="badge badge-sm badge-ghost" x-text="'+' + (result.item.tags.length - 3)"></span>
-                  </template>
-                </div>
-              </template>
-              
-              
-              <div class="card-actions justify-between items-center mt-3 pt-3 
-                          border-t border-base-content/10">
+              <div class="flex-1 min-w-0">
                 
-                
-                <div class="flex items-center gap-2 text-sm text-base-content/60">
-                  <template x-if="result.item.avatar">
-                    <div class="avatar">
-                      <div class="w-6 h-6 rounded-full ring-1 ring-base-content/10">
-                        <img class="my-0" :src="result.item.avatar" :alt="result.item.author" />
-                      </div>
-                    </div>
-                  </template>
-                  <template x-if="!result.item.avatar">
-                    <div class="avatar placeholder">
-                      <div class="w-6 h-6 rounded-full bg-base-300">
-                        <ion-icon name="person" class="text-xs"></ion-icon>
-                      </div>
-                    </div>
-                  </template>
-                  
-                  <span x-text="result.item.author || 'Rianvy'"></span>
-                </div>
-                
-                
-                <div class="flex items-center gap-1 text-xs text-base-content/50">
-                  <ion-icon name="time-outline"></ion-icon>
-                  <span>
-                    <span x-text="result.item.readingTime"></span> min
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="badge badge-secondary badge-xs gap-1">
+                    <ion-icon name="build-outline" class="text-[10px]"></ion-icon>
+                    Utility
                   </span>
+                  
+                  <template x-if="result.item.utilityCategory">
+                    <span class="text-[11px] text-base-content/40" 
+                          x-text="result.item.utilityCategory"></span>
+                  </template>
+                </div>
+                
+                <h2 class="font-bold text-base leading-tight mb-1 
+                           group-hover:text-secondary transition-colors line-clamp-1"
+                    x-text="result.item.title"></h2>
+                
+                <p class="text-sm text-base-content/60 line-clamp-2 leading-relaxed"
+                   x-text="result.item.description"></p>
+                
+                <template x-if="result.item.tags && result.item.tags.length > 0">
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    <template x-for="tag in result.item.tags.slice(0, 3)" :key="tag">
+                      <span class="inline-block px-1.5 py-0.5 text-[11px] rounded 
+                                  bg-base-300/50 text-base-content/50" x-text="tag"></span>
+                    </template>
+                  </div>
+                </template>
+              </div>
+              
+              <div class="flex-shrink-0 self-center opacity-0 -translate-x-2
+                          group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <ion-icon name="arrow-forward" class="text-secondary text-lg"></ion-icon>
+              </div>
+            </article>
+          </template>
+          
+          
+          <template x-if="result.item.type === 'portfolio'">
+            <article class="flex items-start gap-4 p-4 sm:p-5 rounded-2xl
+                            bg-base-200/50 dark:bg-base-200/10
+                            hover:bg-base-200 dark:hover:bg-base-200/20
+                            border border-transparent hover:border-accent/30
+                            hover:shadow-md transition-all duration-200">
+              
+              <div class="flex-shrink-0 w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden bg-base-300">
+                <template x-if="result.item.cover">
+                  <img :src="result.item.cover" :alt="result.item.title" 
+                       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </template>
+                <template x-if="!result.item.cover">
+                  <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-base-200 to-base-300">
+                    <ion-icon name="briefcase-outline" class="text-xl text-base-content/20"></ion-icon>
+                  </div>
+                </template>
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="badge badge-accent badge-xs gap-1">
+                    <ion-icon name="briefcase-outline" class="text-[10px]"></ion-icon>
+                    Project
+                  </span>
+                  
+                  <template x-if="result.item.status">
+                    <span class="text-[11px] text-base-content/40" x-text="result.item.status"></span>
+                  </template>
+                </div>
+                
+                <h2 class="font-bold text-base leading-tight mb-1 
+                           group-hover:text-accent transition-colors line-clamp-1"
+                    x-text="result.item.title"></h2>
+                
+                <p class="text-sm text-base-content/60 line-clamp-2"
+                   x-text="result.item.description"></p>
+                
+                <template x-if="result.item.tools && result.item.tools.length > 0">
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    <template x-for="tool in result.item.tools.slice(0, 3)" :key="tool">
+                      <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[11px] 
+                                  bg-base-300/50 rounded text-base-content/50">
+                        <ion-icon name="code-slash-outline" class="text-[9px]"></ion-icon>
+                        <span x-text="tool"></span>
+                      </span>
+                    </template>
+                    <template x-if="result.item.tools.length > 3">
+                      <span class="text-[11px] text-base-content/40" 
+                            x-text="'+' + (result.item.tools.length - 3)"></span>
+                    </template>
+                  </div>
+                </template>
+              </div>
+              
+              <div class="flex-shrink-0 self-center opacity-0 -translate-x-2
+                          group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <ion-icon name="arrow-forward" class="text-accent text-lg"></ion-icon>
+              </div>
+            </article>
+          </template>
+          
+          
+          <template x-if="result.item.type !== 'utilities' && result.item.type !== 'portfolio'">
+            <article class="flex items-start gap-4 p-4 sm:p-5 rounded-2xl
+                            bg-base-200/50 dark:bg-base-200/10
+                            hover:bg-base-200 dark:hover:bg-base-200/20
+                            border border-transparent hover:border-primary/30
+                            hover:shadow-md transition-all duration-200">
+              
+              
+              <div class="flex-shrink-0 w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden bg-base-300">
+                <template x-if="result.item.cover">
+                  <img :src="result.item.cover" :alt="result.item.title" 
+                       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </template>
+                <template x-if="!result.item.cover">
+                  <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-base-200 to-base-300">
+                    <ion-icon name="newspaper-outline" class="text-xl text-base-content/20"></ion-icon>
+                  </div>
+                </template>
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="badge badge-primary badge-xs gap-1">
+                    <ion-icon name="newspaper-outline" class="text-[10px]"></ion-icon>
+                    Post
+                  </span>
+                  
+                  <template x-if="result.item.date">
+                    <span class="text-[11px] text-base-content/40" x-text="result.item.date"></span>
+                  </template>
+                </div>
+                
+                <h2 class="font-bold text-base leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1"
+                    x-text="result.item.title"></h2>
+                
+                <p class="text-sm text-base-content/60 line-clamp-2"
+                   x-text="result.item.description"></p>
+                
+                
+                <template x-if="result.item.tags && result.item.tags.length > 0">
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    <template x-for="tag in result.item.tags.slice(0, 3)" :key="tag">
+                      <span class="badge badge-sm badge-outline opacity-60" x-text="tag"></span>
+                    </template>
+                    <template x-if="result.item.tags.length > 3">
+                      <span class="badge badge-sm badge-ghost" x-text="'+' + (result.item.tags.length - 3)"></span>
+                    </template>
+                  </div>
+                </template>
+                
+                
+                <div class="flex items-center gap-3 mt-2 text-xs text-base-content/50">
+                  <div class="flex items-center gap-1.5">
+                    <template x-if="result.item.avatar">
+                      <div class="avatar">
+                        <div class="w-5 h-5 rounded-full ring-1 ring-base-content/10">
+                          <img class="my-0" :src="result.item.avatar" :alt="result.item.author" />
+                        </div>
+                      </div>
+                    </template>
+                    <span x-text="result.item.author || 'Rianvy'"></span>
+                  </div>
+                  
+                  <div class="flex items-center gap-1">
+                    <ion-icon name="time-outline"></ion-icon>
+                    <span>
+                      <span x-text="result.item.readingTime"></span> min
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
+              
+              <div class="flex-shrink-0 self-center opacity-0 -translate-x-2
+                          group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <ion-icon name="arrow-forward" class="text-primary text-lg"></ion-icon>
+              </div>
+            </article>
+          </template>
+          
         </a>
       </template>
     </div>
@@ -905,35 +1203,71 @@ x-init="$refs.searchInput.focus()">
     <div x-show="search.trim() === ''" 
          x-transition
          class="mt-8 sm:mt-12">
+      
       <p class="text-xs text-base-content/40 text-center mb-3">Popular searches</p>
       <div class="flex flex-wrap justify-center gap-2">
         
-        <button @click="search = 'Web Development'" 
-                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
-          Web Development
+        <button @click="search = 'Generator'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200 cursor-pointer">
+          Generator
+        </button>
+        
+        <button @click="search = 'Web-Development'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200 cursor-pointer">
+          Web-Development
         </button>
         
         <button @click="search = 'Javascript'" 
-                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200 cursor-pointer">
           Javascript
         </button>
         
-        <button @click="search = 'UI/UX'" 
-                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
-          UI/UX
+        <button @click="search = 'Text'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200 cursor-pointer">
+          Text
         </button>
         
-        <button @click="search = 'Browser-Extension'" 
-                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
-          Browser-Extension
-        </button>
-        
-        <button @click="search = 'Design'" 
-                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200">
-          Design
+        <button @click="search = 'Images'" 
+                class="badge badge-sm no-underline hover:badge-primary transition-colors duration-200 cursor-pointer">
+          Images
         </button>
         
       </div>
+      
+      
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        
+        
+        <a href="/en/posts/" 
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
+                  bg-primary/10 text-primary hover:bg-primary/20 transition-colors no-underline">
+          <ion-icon name="newspaper-outline"></ion-icon>
+          All posts
+        </a>
+        
+        
+        
+        
+        <a href="/en/portfolio/" 
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
+                  bg-accent/10 text-accent hover:bg-accent/20 transition-colors no-underline">
+          <ion-icon name="briefcase-outline"></ion-icon>
+          Portfolio
+        </a>
+        
+        
+        
+        
+        <a href="/en/utilities/" 
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
+                  bg-secondary/10 text-secondary hover:bg-secondary/20 transition-colors no-underline">
+          <ion-icon name="build-outline"></ion-icon>
+          Utilities
+        </a>
+        
+        
+      </div>
+      
     </div>
 
   </div>
@@ -1285,7 +1619,7 @@ x-init="$refs.searchInput.focus()">
 
     <script>
   window.lightTheme = "emerald"
-  window.darkTheme = "forest"
+  window.darkTheme = "dim"
 </script>
 
 
@@ -1316,6 +1650,144 @@ x-init="$refs.searchInput.focus()">
 
 
 
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1336,13 +1808,16 @@ x-init="$refs.searchInput.focus()">
 
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js" integrity="sha256-42IbU8t3tOwwbexB7ZVRHm3YDRf65aBPPjRtIUufj5I=" crossorigin="anonymous"></script>
 <script>
-  var fuseData = [{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Development","Reverse Engineering"],"date":"2026-02-04","description":"A deep dive into how VK\u0026rsquo;s Long Poll works, building a sniffer to intercept events, and discovering undocumented event codes.\n","readingTime":13,"tags":["Javascript","VK-api","Long-poll","Websocket","Reverse-engineering","Browser-extension","Sniffer","Traffic-interception"],"title":"Reverse Engineering VK Long Poll: Building a Sniffer, Discovering Hidden Events, and WebSocket Mysteries","url":"/en/posts/reverse-engineering-vk-long-poll/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Guides"],"date":"2026-01-25","description":"A complete guide to torrent streaming for those who value quality and their time\n","readingTime":17,"tags":["Lampa","TorrServer","Android TV","Apple TV","Smart TV","Xbox","streaming","torrents","4K","HDR","media center","home theater","IPTV"],"title":"How to Watch Movies and TV Shows in 4K via Lampa and TorrServer","url":"/en/posts/kak-smotret-filmy-4k-lampa-torrserver/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Guides","Neural Networks"],"date":"2026-01-17","description":"Proper DNS configuration for stable access to AI services – via DNS, hosts file, or AdGuard.\n","readingTime":19,"tags":["DNS","Neural Networks","ChatGPT","Gemini","Claude","AdGuard","Comss.one DNS","Guide","AI","OpenAI","Anthropic","Google AI","Microsoft Copilot","GitHub Copilot","DNS Filtering"],"title":"ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services","url":"/en/posts/chatgpt-claude-gemini-dns-dostup/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Administration"],"date":"2025-01-12","description":".htaccess allows you to create your own Apache server management configuration in directories or hosting settings.\n","readingTime":5,"tags":["Servers","Apache",".htaccess","Web Security","Performance"],"title":"Role of the .htaccess file in Apache server configuration","url":"/en/posts/role-htaccess/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-28","description":"Development of a modern landing page for the VKify browser extension — from a creative homepage to onboarding and changelog service pages.\n","readingTime":5,"tags":["Web Development","React","Landing Page","UI/UX","Tailwind CSS","Framer Motion","SEO"],"title":"VKify Website — Landing Page for Browser Extension","url":"/en/portfolio/vkify-website-extension-landing/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-27","description":"VKify is a browser extension that makes VKontakte more convenient: ad blocking, interface customization, privacy mode, and much more.\n","readingTime":7,"tags":["Web Development","Browser Extension","React","JavaScript","UI/UX","VKontakte","Customization"],"title":"VKify — Extension for VKontakte","url":"/en/portfolio/vkify-vkontakte-extension/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2026-01-19","description":"CodeSqueeze is a modern web tool for minifying HTML, CSS, and JavaScript, focused on speed, privacy, and a comfortable in-browser workflow.\n","readingTime":2,"tags":["Web Development","UI/UX","Frontend","JavaScript","Optimization","Web Tools","Figma"],"title":"CodeSqueeze — Online Code Minifier","url":"/en/portfolio/codesqueeze/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2025-01-27","description":"Landing Page development for a sports analytics project, including Google Sheets integration and unique visual style.\n","readingTime":2,"tags":["Design","Adaptive Landing","Landing development","Web Development","Landing design","Interactive Landing","Adaptation for mobile devices","Figma"],"title":"Landing Page ProStavki","url":"/en/portfolio/prostavki/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"date":"2025-01-19","description":"Developed visual identity for PBPack\u0026rsquo;s social media brand, including YouTube and Telegram.\n","readingTime":1,"tags":["Design","Branding","Identity","Telegram","Animated Logo","Visual Style"],"title":"Social media design PBPack","url":"/en/portfolio/pbpack/"}];
+  var fuseData = [{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Development","Reverse Engineering"],"cover":"https://0x69.ru/en/posts/reverse-engineering-vk-long-poll/Cover.png","date":"2026-02-04","description":"A deep dive into how VK\u0026rsquo;s Long Poll works, building a sniffer to intercept events, and discovering undocumented event codes.\n","readingTime":13,"tags":["Javascript","VK-api","Long-poll","Websocket","Reverse-engineering","Browser-extension","Sniffer","Traffic-interception"],"title":"Reverse Engineering VK Long Poll: Building a Sniffer, Discovering Hidden Events, and WebSocket Mysteries","type":"posts","url":"/en/posts/reverse-engineering-vk-long-poll/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Guides"],"cover":"https://0x69.ru/en/posts/kak-smotret-filmy-4k-lampa-torrserver/Cover.png","date":"2026-01-25","description":"A complete guide to torrent streaming for those who value quality and their time\n","readingTime":17,"tags":["Lampa","TorrServer","Android TV","Apple TV","Smart TV","Xbox","streaming","torrents","4K","HDR","media center","home theater","IPTV"],"title":"How to Watch Movies and TV Shows in 4K via Lampa and TorrServer","type":"posts","url":"/en/posts/kak-smotret-filmy-4k-lampa-torrserver/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Guides","Neural Networks"],"cover":"https://0x69.ru/en/posts/chatgpt-claude-gemini-dns-dostup/Cover.png","date":"2026-01-17","description":"Proper DNS configuration for stable access to AI services – via DNS, hosts file, or AdGuard.\n","readingTime":19,"tags":["DNS","Neural Networks","ChatGPT","Gemini","Claude","AdGuard","Comss.one DNS","Guide","AI","OpenAI","Anthropic","Google AI","Microsoft Copilot","GitHub Copilot","DNS Filtering"],"title":"ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services","type":"posts","url":"/en/posts/chatgpt-claude-gemini-dns-dostup/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":["Administration"],"cover":"https://0x69.ru/en/posts/role-htaccess/Cover.png","date":"2025-01-12","description":".htaccess allows you to create your own Apache server management configuration in directories or hosting settings.\n","readingTime":5,"tags":["Servers","Apache",".htaccess","Web Security","Performance"],"title":"Role of the .htaccess file in Apache server configuration","type":"posts","url":"/en/posts/role-htaccess/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"cover":"https://0x69.ru/en/portfolio/vkify-website-extension-landing/Cover.png","date":"2026-01-28","description":"Development of a modern landing page for the VKify browser extension — from a creative homepage to onboarding and changelog service pages.\n","filters":["Web-Development"],"readingTime":5,"status":"completed","tags":["Web Development","React","Landing Page","UI/UX","Tailwind CSS","Framer Motion","SEO"],"title":"VKify Website — Landing Page for Browser Extension","tools":["React","Tailwind CSS","Framer Motion","Vite","Figma"],"type":"portfolio","url":"/en/portfolio/vkify-website-extension-landing/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"cover":"https://0x69.ru/en/portfolio/vkify-vkontakte-extension/Cover.png","date":"2026-01-27","description":"VKify is a browser extension that makes VKontakte more convenient: ad blocking, interface customization, privacy mode, and much more.\n","filters":["Web-Development"],"readingTime":7,"status":"in-progress","tags":["Web Development","Browser Extension","React","JavaScript","UI/UX","VKontakte","Customization"],"title":"VKify — Extension for VKontakte","tools":["React","Tailwind CSS","Chrome Extension API","Figma","JavaScript"],"type":"portfolio","url":"/en/portfolio/vkify-vkontakte-extension/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"cover":"https://0x69.ru/en/portfolio/codesqueeze/Cover.png","date":"2026-01-19","description":"CodeSqueeze is a modern web tool for minifying HTML, CSS, and JavaScript, focused on speed, privacy, and a comfortable in-browser workflow.\n","filters":["Web-Development"],"readingTime":2,"status":"in-progress","tags":["Web Development","UI/UX","Frontend","JavaScript","Optimization","Web Tools","Figma"],"title":"CodeSqueeze — Online Code Minifier","tools":["Figma","HTML","CSS","Tailwind CSS","JavaScript"],"type":"portfolio","url":"/en/portfolio/codesqueeze/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"cover":"https://0x69.ru/en/portfolio/prostavki/Cover.png","date":"2025-01-27","description":"Landing Page development for a sports analytics project, including Google Sheets integration and unique visual style.\n","filters":["Web-Development"],"readingTime":2,"status":"completed","tags":["Design","Adaptive Landing","Landing development","Web Development","Landing design","Interactive Landing","Adaptation for mobile devices","Figma"],"title":"Landing Page ProStavki","tools":["Figma","HTML","CSS","JavaScript","Google Sheets API"],"type":"portfolio","url":"/en/portfolio/prostavki/"},{"author":"Rianvy","avatar":"/img/avatar.jpg","categories":null,"cover":"https://0x69.ru/en/portfolio/pbpack/Cover.png","date":"2025-01-19","description":"Developed visual identity for PBPack\u0026rsquo;s social media brand, including YouTube and Telegram.\n","filters":["Social-Media"],"readingTime":1,"status":"completed","tags":["Design","Branding","Identity","Telegram","Animated Logo","Visual Style"],"title":"Social media design PBPack","tools":["Photoshop","After Effects"],"type":"portfolio","url":"/en/portfolio/pbpack/"},{"date":"2026-02-09","description":"Generate favicons, PWA icons and Web App Manifest. Works entirely in browser.","icon":"⭐","tags":["favicon","pwa","manifest","icons","generator"],"title":"Favicon Generator","type":"utilities","url":"/en/utilities/favicon-generator/","utilityCategory":"Generators"},{"date":"2026-02-09","description":"Upscale images with high quality. 2x-4x upscaling with Lanczos algorithm for art, photos and more.","icon":"🔍","tags":["upscale","images","enlarge","lanczos","resize"],"title":"Image Upscaler","type":"utilities","url":"/en/utilities/image-upscaler/","utilityCategory":"Images"},{"date":"2026-02-09","description":"Obfuscate JavaScript code to protect from copying and analysis","icon":"🛡️","tags":["javascript","obfuscator","protection","code","minification"],"title":"JavaScript Obfuscator","type":"utilities","url":"/en/utilities/javascript-obfuscator/","utilityCategory":"Encoding"},{"date":"2026-02-09","description":"Generate TypeScript interfaces, Go structs, Zod schemas and JSON Schema from JSON data","icon":"🔄","tags":["json","typescript","go","zod","schema","generator"],"title":"JSON → TypeScript / Go / Zod","type":"utilities","url":"/en/utilities/json-to-types/","utilityCategory":"Generators"},{"date":"2026-02-09","description":"SEO, Open Graph, Twitter, and favicon meta tag generator with live preview. Free online tool.","icon":"🏷️","tags":["meta","seo","open-graph","twitter","og","favicon","manifest"],"title":"Meta Tag Generator","type":"utilities","url":"/en/utilities/meta-tag-generator/","utilityCategory":"Generators"},{"date":"2026-02-09","description":"Generate QR codes with customizable color, size, logo and export to PNG/SVG","icon":"📱","tags":["qr","qr-code","generator","links"],"title":"QR Code Generator","type":"utilities","url":"/en/utilities/qr-generator/","utilityCategory":"Generators"},{"date":"2026-02-09","description":"Regular expression testing with match highlighting and syntax explanation","icon":"🔍","tags":["regex","regexp","regular-expressions","pattern","match","test","developer","validation"],"title":"Regex Tester","type":"utilities","url":"/en/utilities/regex-tester/","utilityCategory":"Development"},{"date":"2026-02-09","description":"Unix timestamp to date converter, timezones, duration calculator","icon":"⏰","tags":["timestamp","unix","date","time","converter","timezone","epoch"],"title":"Timestamp Converter","type":"utilities","url":"/en/utilities/timestamp-converter/","utilityCategory":"Converters"},{"date":"2026-02-09","description":"Online UUID v4, nanoid, random string, and secure password generator. Bulk generation of up to 10,000 values.","icon":"🎲","tags":["uuid","nanoid","random","password","generator","bulk"],"title":"UUID \u0026 Random Generator","type":"utilities","url":"/en/utilities/uuid-generator/","utilityCategory":"Generators"},{"date":"2026-02-08","description":"Encode and decode text, files, and images to Base64 online","icon":"🔐","tags":["base64","encode","decode","text","files","images"],"title":"Base64 Encoder/Decoder","type":"utilities","url":"/en/utilities/base64-encoder/","utilityCategory":"Encoding"},{"date":"2026-02-08","description":"Convert colors between HEX, RGB, HSL and other formats","icon":"🎨","tags":["color","hex","rgb","hsl","converter"],"title":"Color Converter","type":"utilities","url":"/en/utilities/color-converter/","utilityCategory":"Design"},{"date":"2026-02-08","description":"Compare text, JSON, code with change highlighting","icon":"📊","tags":["diff","comparison","text","json","code"],"title":"Diff Tool","type":"utilities","url":"/en/utilities/diff-tool/","utilityCategory":"Comparison"},{"date":"2026-02-08","description":"Generate MD5, SHA-1, SHA-256, SHA-512 hashes for text and files","icon":"🔐","tags":["hash","md5","sha256","sha512","cryptography"],"title":"Hash Generator","type":"utilities","url":"/en/utilities/hash-generator/","utilityCategory":"Security"},{"date":"2026-02-08","description":"Compress PNG, JPG, WebP images without quality loss","icon":"🖼️","tags":["images","compression","optimization","png","jpg","webp"],"title":"Image Compressor","type":"utilities","url":"/en/utilities/image-compressor/","utilityCategory":"Images"},{"date":"2026-02-08","description":"Format, minify and validate JSON online","icon":"📋","tags":["json","formatting","validation","minification"],"title":"JSON Normalizer","type":"utilities","url":"/en/utilities/json-normalizer/","utilityCategory":"Formatting"},{"date":"2026-02-08","description":"Generate placeholder text for design and layout","icon":"📄","tags":["lorem ipsum","placeholder","text","generator"],"title":"Lorem Ipsum Generator","type":"utilities","url":"/en/utilities/lorem-ipsum/","utilityCategory":"Text"},{"date":"2026-02-08","description":"Online Markdown editor with real-time preview and HTML export","icon":"📝","tags":["markdown","editor","html","documentation","text"],"title":"Markdown Editor","type":"utilities","url":"/en/utilities/markdown-editor/","utilityCategory":"Editors"},{"date":"2026-02-08","description":"Free online tool for safe URL encoding and decoding. Convert special characters to URL format and back for correct parameter passing and URI component handling. Supports UTF-8, query parameters and full links.","icon":"🔗","tags":["url","encode","decode","uri","parameters","web-development","encoding","percent-encoding"],"title":"URL Encoder/Decoder","type":"utilities","url":"/en/utilities/url-encoder/","utilityCategory":"Encoding"}];
   var fuseOptions = {
     keys: [
-      { name: "title", weight: 2 },
+      { name: "title", weight: 2.5 },
       { name: "description", weight: 1 },
       { name: "categories", weight: 1.5 },
-      { name: "tags", weight: 1.5 }
+      { name: "tags", weight: 1.5 },
+      { name: "tools", weight: 1.2 },
+      { name: "filters", weight: 1.2 },
+      { name: "utilityCategory", weight: 1.3 }
     ],
     includeMatches: true,
     threshold: 0.3,
@@ -1350,7 +1825,7 @@ x-init="$refs.searchInput.focus()">
     minMatchCharLength: 2
   };
 
-  var fuse = new Fuse(fuseData, fuseOptions);
+  window.fuse = new Fuse(fuseData, fuseOptions);
 </script>
 
 
@@ -1364,6 +1839,40 @@ x-init="$refs.searchInput.focus()">
     
 
     
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 	
     
 

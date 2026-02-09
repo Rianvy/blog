@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="en"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+UUID &amp; Random Generator
+ | 0x69.ru</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Ox69" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="canonical" href="https://0x69.ru/en/utilities/uuid-generator/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/en/utilities/uuid-generator/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="UUID & Random Generator">
+  <meta property="og:description" content="Online UUID v4, nanoid, random string, and secure password generator. Bulk generation of up to 10,000 values.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="utilities">
+    <meta property="article:published_time" content="2026-02-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-09T00:00:00+00:00">
+    <meta property="article:tag" content="Uuid">
+    <meta property="article:tag" content="Nanoid">
+    <meta property="article:tag" content="Random">
+    <meta property="article:tag" content="Password">
+    <meta property="article:tag" content="Generator">
+    <meta property="article:tag" content="Bulk">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="UUID & Random Generator">
+  <meta name="twitter:description" content="Online UUID v4, nanoid, random string, and secure password generator. Bulk generation of up to 10,000 values.">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Flip it!"
+                aria-label="Flip it!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/en/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">To iterate is human, to recurse divine</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="About">About</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/en/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Search"
+   aria-label="Search">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="All Categories"
+   aria-label="All Categories">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Portfolio"
+   aria-label="Portfolio">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Utilities"
+   aria-label="Utilities">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/utilities/uuid-generator/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/ru/utilities/uuid-generator/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Menu</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="About"
+                aria-label="About">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">About</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Languages
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/utilities/uuid-generator/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/utilities/uuid-generator/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Menu
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Search">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Search</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Categories">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Categories</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Portfolio">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Portfolio</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Utilities">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Utilities</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">18</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">🎲</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">UUID &amp; Random Generator</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">Online UUID v4, nanoid, random string, and secure password generator. Bulk generation of up to 10,000 values.</p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        100% в браузере
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="flash-outline"></ion-icon>
+        Мгновенная генерация
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="layers-outline"></ion-icon>
+        Bulk до 10 000
+      </span>
+    </div>
+  </div>
+
+  
+  <div class="max-w-6xl mx-auto">
+    
+    
+    <div class="tabs tabs-boxed bg-base-200 p-1 rounded-2xl mb-6 overflow-x-auto flex-nowrap">
+      <button class="tab tab-active flex-1 sm:flex-none whitespace-nowrap" data-tab="uuid">
+        <ion-icon name="finger-print-outline" class="text-lg mr-1"></ion-icon>
+        UUID v4
+      </button>
+      <button class="tab flex-1 sm:flex-none whitespace-nowrap" data-tab="nanoid">
+        <ion-icon name="barcode-outline" class="text-lg mr-1"></ion-icon>
+        nanoid
+      </button>
+      <button class="tab flex-1 sm:flex-none whitespace-nowrap" data-tab="random">
+        <ion-icon name="text-outline" class="text-lg mr-1"></ion-icon>
+        Random String
+      </button>
+      <button class="tab flex-1 sm:flex-none whitespace-nowrap" data-tab="password">
+        <ion-icon name="key-outline" class="text-lg mr-1"></ion-icon>
+        Password
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      
+      <div class="lg:col-span-1">
+        
+        
+        <div id="settings-uuid" class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              Настройки
+            </h2>
+          </div>
+          
+          <div class="p-4 space-y-4">
+            
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">Формат</span>
+              </label>
+              <select id="uuid-format" class="select select-bordered select-sm">
+                <option value="default">xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx</option>
+                <option value="uppercase">XXXXXXXX-XXXX-4XXX-YXXX-XXXXXXXXXXXX</option>
+                <option value="no-dash">xxxxxxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx</option>
+                <option value="braces">{xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx}</option>
+              </select>
+            </div>
+            
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">Количество</span>
+              </label>
+              <input type="number" id="uuid-count" class="input input-bordered input-sm" value="1" min="1" max="10000" />
+            </div>
+            
+            <button id="uuid-generate" class="btn btn-primary btn-sm w-full gap-2">
+              <ion-icon name="flash-outline"></ion-icon>
+              Сгенерировать
+            </button>
+            
+          </div>
+        </div>
+
+        
+        <div id="settings-nanoid" class="hidden bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              Настройки
+            </h2>
+          </div>
+          
+          <div class="p-4 space-y-4">
+            
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">Длина</span>
+              </label>
+              <input type="number" id="nanoid-length" class="input input-bordered input-sm" value="21" min="1" max="128" />
+              <label class="label">
+                <span class="label-text-alt text-base-content/60">По умолчанию: 21</span>
+              </label>
+            </div>
+            
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">Алфавит</span>
+              </label>
+              <select id="nanoid-preset" class="select select-bordered select-sm mb-2">
+                <option value="default">По умолчанию (A-Za-z0-9_-)</option>
+                <option value="numbers">Только цифры (0-9)</option>
+                <option value="lowercase">Lowercase (a-z0-9)</option>
+                <option value="uppercase">Uppercase (A-Z0-9)</option>
+                <option value="hex">Hex (0-9a-f)</option>
+                <option value="custom">Кастомный</option>
+              </select>
+              <input type="text" id="nanoid-alphabet" class="input input-bordered input-sm font-mono hidden" placeholder="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-" />
+            </div>
+            
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">Количество</span>
+              </label>
+              <input type="number" id="nanoid-count" class="input input-bordered input-sm" value="1" min="1" max="10000" />
+            </div>
+            
+            <button id="nanoid-generate" class="btn btn-primary btn-sm w-full gap-2">
+              <ion-icon name="flash-outline"></ion-icon>
+              Сгенерировать
+            </button>
+            
+          </div>
+        </div>
+
+        
+        <div id="settings-random" class="hidden bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              Настройки
+            </h2>
+          </div>
+          
+          <div class="p-4 space-y-4">
+            
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">Длина</span>
+              </label>
+              <input type="number" id="random-length" class="input input-bordered input-sm" value="16" min="1" max="256" />
+            </div>
+            
+            <div class="space-y-2">
+              <label class="label py-1">
+                <span class="label-text font-medium">Символы</span>
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm">Lowercase (a-z)</span>
+                <input type="checkbox" id="random-lowercase" class="toggle toggle-sm toggle-primary" checked />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm">Uppercase (A-Z)</span>
+                <input type="checkbox" id="random-uppercase" class="toggle toggle-sm toggle-primary" checked />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm">Цифры (0-9)</span>
+                <input type="checkbox" id="random-numbers" class="toggle toggle-sm toggle-primary" checked />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm">Символы (!@#$%)</span>
+                <input type="checkbox" id="random-symbols" class="toggle toggle-sm toggle-primary" />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm">Исключить похожие (0Ol1)</span>
+                <input type="checkbox" id="random-exclude-similar" class="toggle toggle-sm toggle-primary" />
+              </label>
+            </div>
+            
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">Количество</span>
+              </label>
+              <input type="number" id="random-count" class="input input-bordered input-sm" value="1" min="1" max="10000" />
+            </div>
+            
+            <button id="random-generate" class="btn btn-primary btn-sm w-full gap-2">
+              <ion-icon name="flash-outline"></ion-icon>
+              Сгенерировать
+            </button>
+            
+          </div>
+        </div>
+
+        
+        <div id="settings-password" class="hidden bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              Настройки
+            </h2>
+          </div>
+          
+          <div class="p-4 space-y-4">
+            
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">Длина</span>
+              </label>
+              <input type="range" id="password-length" class="range range-primary range-sm" min="6" max="128" value="16" />
+              <div class="flex justify-between text-xs text-base-content/40 mt-1">
+                <span>6</span>
+                <span id="password-length-value" class="text-base-content font-medium">16</span>
+                <span>128</span>
+              </div>
+            </div>
+            
+            <div>
+              <label class="label py-1">
+                <span class="label-text font-medium">Уровень сложности</span>
+              </label>
+              <div class="space-y-2">
+                <label class="flex items-center gap-3 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
+                  <input type="radio" name="password-level" value="simple" class="radio radio-sm radio-primary" />
+                  <div class="flex-1">
+                    <span class="text-sm font-medium">Simple</span>
+                  </div>
+                  <span class="badge badge-success badge-sm">a-z, A-Z, 0-9</span>
+                </label>
+                <label class="flex items-center gap-3 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
+                  <input type="radio" name="password-level" value="strong" class="radio radio-sm radio-primary" checked />
+                  <div class="flex-1">
+                    <span class="text-sm font-medium">Strong</span>
+                  </div>
+                  <span class="badge badge-warning badge-sm">+ !@#$%</span>
+                </label>
+                <label class="flex items-center gap-3 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
+                  <input type="radio" name="password-level" value="ultra" class="radio radio-sm radio-primary" />
+                  <div class="flex-1">
+                    <span class="text-sm font-medium">Ultra</span>
+                  </div>
+                  <span class="badge badge-error badge-sm">+ ^&*()_+=</span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm">Исключить похожие</span>
+                <input type="checkbox" id="password-exclude-similar" class="toggle toggle-sm toggle-primary" />
+              </label>
+            </div>
+            
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-medium">Количество</span>
+              </label>
+              <input type="number" id="password-count" class="input input-bordered input-sm" value="1" min="1" max="10000" />
+            </div>
+            
+            <button id="password-generate" class="btn btn-primary btn-sm w-full gap-2">
+              <ion-icon name="flash-outline"></ion-icon>
+              Сгенерировать
+            </button>
+            
+          </div>
+        </div>
+
+      </div>
+
+      
+      <div class="lg:col-span-2">
+        
+        <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          
+          
+          <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="list-outline" class="text-success"></ion-icon>
+              Результаты
+              <span class="badge badge-sm" id="results-count">0</span>
+            </h2>
+            <div class="flex items-center gap-2">
+              <button id="copy-all" class="btn btn-ghost btn-xs gap-1" disabled>
+                <ion-icon name="copy-outline"></ion-icon>
+                Копировать всё
+              </button>
+              <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-xs gap-1">
+                  <ion-icon name="download-outline"></ion-icon>
+                  Скачать
+                </label>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow-lg bg-base-100 rounded-box w-40 border border-base-200">
+                  <li><a id="download-txt"><ion-icon name="document-text-outline"></ion-icon> .txt</a></li>
+                  <li><a id="download-json"><ion-icon name="code-outline"></ion-icon> .json</a></li>
+                  <li><a id="download-csv"><ion-icon name="grid-outline"></ion-icon> .csv</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div id="single-result" class="p-6">
+            <div class="flex items-center gap-4">
+              <div class="flex-1">
+                <div class="font-mono text-lg sm:text-xl break-all select-all p-4 bg-base-200/50 rounded-xl" id="single-value">—</div>
+              </div>
+              <button id="copy-single" class="btn btn-primary btn-lg gap-2">
+                <ion-icon name="copy-outline" class="text-xl"></ion-icon>
+                Копировать
+              </button>
+            </div>
+            
+            
+            <div id="password-strength" class="hidden mt-6">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-medium">Надёжность пароля</span>
+                <span class="text-sm font-semibold" id="strength-label">—</span>
+              </div>
+              <div class="w-full bg-base-200 rounded-full h-2">
+                <div id="strength-bar" class="h-2 rounded-full transition-all" style="width: 0%"></div>
+              </div>
+              <div class="mt-3 grid grid-cols-2 gap-2 text-xs text-base-content/60">
+                <div>Энтропия <span id="entropy-value" class="font-mono">—</span> бит</div>
+                <div>Комбинаций <span id="combinations-value" class="font-mono">—</span></div>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div id="bulk-results" class="hidden p-4">
+            <textarea 
+              id="bulk-output" 
+              class="textarea textarea-bordered w-full h-96 font-mono text-sm leading-relaxed bg-base-200/30"
+              readonly
+              placeholder="Сгенерированные значения появятся здесь..."
+            ></textarea>
+          </div>
+          
+        </div>
+
+        
+        <div id="stats-panel" class="hidden mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+            <div class="text-xl font-bold text-primary" id="stat-total">0</div>
+            <div class="text-xs text-base-content/60">Сгенерировано</div>
+          </div>
+          <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+            <div class="text-xl font-bold text-secondary" id="stat-length">0</div>
+            <div class="text-xs text-base-content/60">Средняя длина</div>
+          </div>
+          <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+            <div class="text-xl font-bold text-accent" id="stat-unique">0</div>
+            <div class="text-xs text-base-content/60">Уникальных</div>
+          </div>
+          <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+            <div class="text-xl font-bold text-success" id="stat-time">0ms</div>
+            <div class="text-xs text-base-content/60">Время</div>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+
+    
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+          <ion-icon name="finger-print-outline" class="text-2xl text-primary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">UUID v4</h3>
+        <p class="text-sm text-base-content/60">Универсальный уникальный идентификатор. RFC 4122 стандарт.</p>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-3">
+          <ion-icon name="barcode-outline" class="text-2xl text-secondary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">nanoid</h3>
+        <p class="text-sm text-base-content/60">Компактный URL-friendly идентификатор. Короче UUID на 40%.</p>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-3">
+          <ion-icon name="text-outline" class="text-2xl text-accent"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">Random String</h3>
+        <p class="text-sm text-base-content/60">Случайная строка с настраиваемым набором символов.</p>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-success/10 flex items-center justify-center mb-3">
+          <ion-icon name="key-outline" class="text-2xl text-success"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">Password</h3>
+        <p class="text-sm text-base-content/60">Криптографически стойкий пароль с индикатором надёжности.</p>
+      </div>
+      
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="toast" class="toast toast-top toast-center hidden">
+  <div class="alert alert-success">
+    <ion-icon name="checkmark-circle-outline" class="text-xl"></ion-icon>
+    <span id="toast-message">✅ Скопировано!</span>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  
+  const i18n = {
+    copied: "\"✅ Скопировано!\"",
+    copiedCount: "\"✅ Скопировано {count} значений\"",
+    weak: "\"Слабый\"",
+    medium: "\"Средний\"",
+    strong: "\"Strong\"",
+    veryStrong: "\"Очень сильный\"",
+    generated: "\"Сгенерировано\"",
+  };
+  
+  
+  let currentTab = 'uuid';
+  let currentResults = [];
+  let settings = {
+    uuid: { format: 'default', count: 1 },
+    nanoid: { length: 21, alphabet: 'default', count: 1 },
+    random: { length: 16, lowercase: true, uppercase: true, numbers: true, symbols: false, excludeSimilar: false, count: 1 },
+    password: { length: 16, level: 'strong', excludeSimilar: false, count: 1 }
+  };
+  
+  
+  const tabs = document.querySelectorAll('[data-tab]');
+  const singleResult = document.getElementById('single-result');
+  const bulkResults = document.getElementById('bulk-results');
+  const singleValue = document.getElementById('single-value');
+  const bulkOutput = document.getElementById('bulk-output');
+  const resultsCount = document.getElementById('results-count');
+  const statsPanel = document.getElementById('stats-panel');
+  const passwordStrength = document.getElementById('password-strength');
+  const toast = document.getElementById('toast');
+  const toastMessage = document.getElementById('toast-message');
+  
+  
+  
+  function getRandomValues(length) {
+    const array = new Uint8Array(length);
+    crypto.getRandomValues(array);
+    return array;
+  }
+  
+  function randomInt(max) {
+    const array = getRandomValues(4);
+    const num = (array[0] << 24) | (array[1] << 16) | (array[2] << 8) | array[3];
+    return Math.abs(num) % max;
+  }
+  
+  
+  
+  function generateUUID() {
+    const bytes = getRandomValues(16);
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    
+    const hex = Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
+    return `${hex.substr(0,8)}-${hex.substr(8,4)}-${hex.substr(12,4)}-${hex.substr(16,4)}-${hex.substr(20,12)}`;
+  }
+  
+  function formatUUID(uuid, format) {
+    switch (format) {
+      case 'uppercase':
+        return uuid.toUpperCase();
+      case 'no-dash':
+        return uuid.replace(/-/g, '');
+      case 'braces':
+        return '{' + uuid + '}';
+      default:
+        return uuid;
+    }
+  }
+  
+  
+  
+  const NANOID_ALPHABETS = {
+    default: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-',
+    numbers: '0123456789',
+    lowercase: 'abcdefghijklmnopqrstuvwxyz0123456789',
+    uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+    hex: '0123456789abcdef',
+  };
+  
+  function generateNanoid(length, alphabet) {
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += alphabet[randomInt(alphabet.length)];
+    }
+    return result;
+  }
+  
+  
+  
+  const CHAR_SETS = {
+    lowercase: 'abcdefghijklmnopqrstuvwxyz',
+    uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    numbers: '0123456789',
+    symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?',
+  };
+  
+  const SIMILAR_CHARS = '0Oo1lI';
+  
+  function generateRandomString(length, options) {
+    let charset = '';
+    if (options.lowercase) charset += CHAR_SETS.lowercase;
+    if (options.uppercase) charset += CHAR_SETS.uppercase;
+    if (options.numbers) charset += CHAR_SETS.numbers;
+    if (options.symbols) charset += CHAR_SETS.symbols;
+    
+    if (options.excludeSimilar) {
+      charset = charset.split('').filter(c => !SIMILAR_CHARS.includes(c)).join('');
+    }
+    
+    if (!charset) return '';
+    
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += charset[randomInt(charset.length)];
+    }
+    return result;
+  }
+  
+  
+  
+  const PASSWORD_SETS = {
+    simple: CHAR_SETS.lowercase + CHAR_SETS.uppercase + CHAR_SETS.numbers,
+    strong: CHAR_SETS.lowercase + CHAR_SETS.uppercase + CHAR_SETS.numbers + '!@#$%^&*',
+    ultra: CHAR_SETS.lowercase + CHAR_SETS.uppercase + CHAR_SETS.numbers + CHAR_SETS.symbols,
+  };
+  
+  function generatePassword(length, level, excludeSimilar) {
+    let charset = PASSWORD_SETS[level];
+    
+    if (excludeSimilar) {
+      charset = charset.split('').filter(c => !SIMILAR_CHARS.includes(c)).join('');
+    }
+    
+    
+    let password = '';
+    
+    if (level === 'simple' || level === 'strong' || level === 'ultra') {
+      password += CHAR_SETS.lowercase[randomInt(CHAR_SETS.lowercase.length)];
+      password += CHAR_SETS.uppercase[randomInt(CHAR_SETS.uppercase.length)];
+      password += CHAR_SETS.numbers[randomInt(CHAR_SETS.numbers.length)];
+    }
+    
+    if (level === 'strong' || level === 'ultra') {
+      password += '!@#$%^&*'[randomInt(8)];
+    }
+    
+    
+    for (let i = password.length; i < length; i++) {
+      password += charset[randomInt(charset.length)];
+    }
+    
+    
+    const arr = password.split('');
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = randomInt(i + 1);
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    
+    return arr.join('');
+  }
+  
+  function calculatePasswordStrength(password) {
+    const length = password.length;
+    let charsetSize = 0;
+    
+    if (/[a-z]/.test(password)) charsetSize += 26;
+    if (/[A-Z]/.test(password)) charsetSize += 26;
+    if (/[0-9]/.test(password)) charsetSize += 10;
+    if (/[^a-zA-Z0-9]/.test(password)) charsetSize += 32;
+    
+    const entropy = length * Math.log2(charsetSize);
+    const combinations = Math.pow(charsetSize, length);
+    
+    let strength = 'weak';
+    let strengthClass = 'bg-error';
+    let strengthWidth = 25;
+    
+    if (entropy > 100) {
+      strength = 'veryStrong';
+      strengthClass = 'bg-success';
+      strengthWidth = 100;
+    } else if (entropy > 60) {
+      strength = 'strong';
+      strengthClass = 'bg-success';
+      strengthWidth = 75;
+    } else if (entropy > 30) {
+      strength = 'medium';
+      strengthClass = 'bg-warning';
+      strengthWidth = 50;
+    }
+    
+    return {
+      entropy: entropy.toFixed(1),
+      combinations: combinations.toExponential(2),
+      strength: i18n[strength],
+      strengthClass,
+      strengthWidth
+    };
+  }
+  
+  
+  
+  function generate(type, count) {
+    const startTime = performance.now();
+    const results = [];
+    
+    for (let i = 0; i < count; i++) {
+      let value;
+      
+      switch (type) {
+        case 'uuid':
+          value = formatUUID(generateUUID(), settings.uuid.format);
+          break;
+        case 'nanoid':
+          const alphabet = settings.nanoid.alphabet === 'custom' 
+            ? document.getElementById('nanoid-alphabet').value || NANOID_ALPHABETS.default
+            : NANOID_ALPHABETS[settings.nanoid.alphabet];
+          value = generateNanoid(settings.nanoid.length, alphabet);
+          break;
+        case 'random':
+          value = generateRandomString(settings.random.length, settings.random);
+          break;
+        case 'password':
+          value = generatePassword(settings.password.length, settings.password.level, settings.password.excludeSimilar);
+          break;
+      }
+      
+      results.push(value);
+    }
+    
+    const endTime = performance.now();
+    const time = (endTime - startTime).toFixed(2);
+    
+    currentResults = results;
+    displayResults(results, time);
+  }
+  
+  
+  
+  function displayResults(results, time) {
+    const count = results.length;
+    resultsCount.textContent = count;
+    
+    if (count === 1) {
+      singleResult.classList.remove('hidden');
+      bulkResults.classList.add('hidden');
+      singleValue.textContent = results[0];
+      
+      
+      if (currentTab === 'password') {
+        const strength = calculatePasswordStrength(results[0]);
+        passwordStrength.classList.remove('hidden');
+        document.getElementById('strength-label').textContent = strength.strength;
+        document.getElementById('strength-bar').className = `h-2 rounded-full transition-all ${strength.strengthClass}`;
+        document.getElementById('strength-bar').style.width = strength.strengthWidth + '%';
+        document.getElementById('entropy-value').textContent = strength.entropy;
+        document.getElementById('combinations-value').textContent = strength.combinations;
+      } else {
+        passwordStrength.classList.add('hidden');
+      }
+    } else {
+      singleResult.classList.add('hidden');
+      bulkResults.classList.remove('hidden');
+      bulkOutput.value = results.join('\n');
+    }
+    
+    
+    const avgLength = results.reduce((sum, r) => sum + r.length, 0) / count;
+    const unique = new Set(results).size;
+    
+    document.getElementById('stat-total').textContent = count;
+    document.getElementById('stat-length').textContent = avgLength.toFixed(1);
+    document.getElementById('stat-unique').textContent = unique;
+    document.getElementById('stat-time').textContent = time + 'ms';
+    
+    statsPanel.classList.remove('hidden');
+    
+    
+    document.getElementById('copy-all').disabled = false;
+  }
+  
+  
+  
+  function switchTab(tab) {
+    currentTab = tab;
+    
+    tabs.forEach(t => {
+      t.classList.toggle('tab-active', t.dataset.tab === tab);
+    });
+    
+    ['uuid', 'nanoid', 'random', 'password'].forEach(type => {
+      document.getElementById('settings-' + type).classList.toggle('hidden', type !== tab);
+    });
+    
+    
+    currentResults = [];
+    singleResult.classList.remove('hidden');
+    bulkResults.classList.add('hidden');
+    singleValue.textContent = '—';
+    resultsCount.textContent = '0';
+    statsPanel.classList.add('hidden');
+    passwordStrength.classList.add('hidden');
+    document.getElementById('copy-all').disabled = true;
+  }
+  
+  
+  
+  async function copyToClipboard(text, message) {
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast(message || i18n.copied);
+    } catch (e) {
+      console.error('Failed to copy:', e);
+    }
+  }
+  
+  function showToast(message) {
+    toastMessage.textContent = message;
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 2000);
+  }
+  
+  
+  
+  function downloadFile(content, filename, type) {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+  
+  function downloadTxt() {
+    if (!currentResults.length) return;
+    downloadFile(currentResults.join('\n'), `${currentTab}-${Date.now()}.txt`, 'text/plain');
+  }
+  
+  function downloadJson() {
+    if (!currentResults.length) return;
+    const json = JSON.stringify(currentResults, null, 2);
+    downloadFile(json, `${currentTab}-${Date.now()}.json`, 'application/json');
+  }
+  
+  function downloadCsv() {
+    if (!currentResults.length) return;
+    const csv = 'value\n' + currentResults.join('\n');
+    downloadFile(csv, `${currentTab}-${Date.now()}.csv`, 'text/csv');
+  }
+  
+  
+  
+  function saveSettings() {
+    localStorage.setItem('uuid-generator-settings', JSON.stringify(settings));
+  }
+  
+  function loadSettings() {
+    const saved = localStorage.getItem('uuid-generator-settings');
+    if (saved) {
+      try {
+        settings = { ...settings, ...JSON.parse(saved) };
+        applySettings();
+      } catch (e) {
+        console.error('Failed to load settings:', e);
+      }
+    }
+  }
+  
+  function applySettings() {
+    
+    document.getElementById('uuid-format').value = settings.uuid.format;
+    document.getElementById('uuid-count').value = settings.uuid.count;
+    
+    
+    document.getElementById('nanoid-length').value = settings.nanoid.length;
+    document.getElementById('nanoid-preset').value = settings.nanoid.alphabet;
+    document.getElementById('nanoid-count').value = settings.nanoid.count;
+    
+    
+    document.getElementById('random-length').value = settings.random.length;
+    document.getElementById('random-lowercase').checked = settings.random.lowercase;
+    document.getElementById('random-uppercase').checked = settings.random.uppercase;
+    document.getElementById('random-numbers').checked = settings.random.numbers;
+    document.getElementById('random-symbols').checked = settings.random.symbols;
+    document.getElementById('random-exclude-similar').checked = settings.random.excludeSimilar;
+    document.getElementById('random-count').value = settings.random.count;
+    
+    
+    document.getElementById('password-length').value = settings.password.length;
+    document.getElementById('password-length-value').textContent = settings.password.length;
+    document.querySelector(`input[name="password-level"][value="${settings.password.level}"]`).checked = true;
+    document.getElementById('password-exclude-similar').checked = settings.password.excludeSimilar;
+    document.getElementById('password-count').value = settings.password.count;
+  }
+  
+  
+  
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+  });
+  
+  
+  document.getElementById('uuid-format').addEventListener('change', (e) => {
+    settings.uuid.format = e.target.value;
+    saveSettings();
+  });
+  
+  document.getElementById('uuid-count').addEventListener('change', (e) => {
+    settings.uuid.count = parseInt(e.target.value);
+    saveSettings();
+  });
+  
+  document.getElementById('uuid-generate').addEventListener('click', () => {
+    generate('uuid', settings.uuid.count);
+  });
+  
+  
+  document.getElementById('nanoid-length').addEventListener('change', (e) => {
+    settings.nanoid.length = parseInt(e.target.value);
+    saveSettings();
+  });
+  
+  document.getElementById('nanoid-preset').addEventListener('change', (e) => {
+    settings.nanoid.alphabet = e.target.value;
+    document.getElementById('nanoid-alphabet').classList.toggle('hidden', e.target.value !== 'custom');
+    saveSettings();
+  });
+  
+  document.getElementById('nanoid-count').addEventListener('change', (e) => {
+    settings.nanoid.count = parseInt(e.target.value);
+    saveSettings();
+  });
+  
+  document.getElementById('nanoid-generate').addEventListener('click', () => {
+    generate('nanoid', settings.nanoid.count);
+  });
+  
+  
+  document.getElementById('random-length').addEventListener('change', (e) => {
+    settings.random.length = parseInt(e.target.value);
+    saveSettings();
+  });
+  
+  ['lowercase', 'uppercase', 'numbers', 'symbols', 'exclude-similar'].forEach(opt => {
+    const key = opt.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+    document.getElementById('random-' + opt).addEventListener('change', (e) => {
+      settings.random[key] = e.target.checked;
+      saveSettings();
+    });
+  });
+  
+  document.getElementById('random-count').addEventListener('change', (e) => {
+    settings.random.count = parseInt(e.target.value);
+    saveSettings();
+  });
+  
+  document.getElementById('random-generate').addEventListener('click', () => {
+    generate('random', settings.random.count);
+  });
+  
+  
+  document.getElementById('password-length').addEventListener('input', (e) => {
+    settings.password.length = parseInt(e.target.value);
+    document.getElementById('password-length-value').textContent = e.target.value;
+    saveSettings();
+  });
+  
+  document.querySelectorAll('input[name="password-level"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      settings.password.level = e.target.value;
+      saveSettings();
+    });
+  });
+  
+  document.getElementById('password-exclude-similar').addEventListener('change', (e) => {
+    settings.password.excludeSimilar = e.target.checked;
+    saveSettings();
+  });
+  
+  document.getElementById('password-count').addEventListener('change', (e) => {
+    settings.password.count = parseInt(e.target.value);
+    saveSettings();
+  });
+  
+  document.getElementById('password-generate').addEventListener('click', () => {
+    generate('password', settings.password.count);
+  });
+  
+  
+  document.getElementById('copy-single').addEventListener('click', () => {
+    if (currentResults.length === 1) {
+      copyToClipboard(currentResults[0]);
+    }
+  });
+  
+  document.getElementById('copy-all').addEventListener('click', () => {
+    if (currentResults.length > 0) {
+      const text = currentResults.join('\n');
+      const message = i18n.copiedCount.replace('{count}', currentResults.length);
+      copyToClipboard(text, message);
+    }
+  });
+  
+  
+  document.getElementById('download-txt').addEventListener('click', downloadTxt);
+  document.getElementById('download-json').addEventListener('click', downloadJson);
+  document.getElementById('download-csv').addEventListener('click', downloadCsv);
+  
+  
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      const btn = document.getElementById(`${currentTab}-generate`);
+      if (btn) btn.click();
+    }
+  });
+  
+  
+  loadSettings();
+  
+  
+  generate('uuid', 1);
+  
+  console.log('UUID Generator ready');
+  
+})();
+</script>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Maksim Alexandrov<br>
+<strong>Age:</strong> 28<br>
+<strong>Location:</strong> Tula, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>This blog is my personal knowledge base, where I push notes about my tech stack, life experience, and everything that triggers my interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — ready to merge ideas and work on joint projects.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-programming-languages">💻 Programming Languages</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Responsive layout (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST APIs</strong></li>
+</ul>
+<h2 id="-databases">🗄️ Databases</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-design--graphics">🎨 Design &amp; Graphics</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX design and prototyping</li>
+<li><strong>Photoshop</strong> — graphics and image editing</li>
+<li><strong>After Effects</strong> — motion design and animation 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Open Source Projects 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Projects 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN service in Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN service in Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Social Links</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+     
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Web Development on 0x69.ru</title>
+    <title>Web-Development on 0x69.ru</title>
     <link>https://0x69.ru/en/tags/web-development/</link>
-    <description>Recent content in Web Development on 0x69.ru</description>
+    <description>Recent content in Web-Development on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 28 Jan 2026 00:35:23 +0300</lastBuildDate>
+    <lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://0x69.ru/en/tags/web-development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>URL Encoder/Decoder</title>
+      <link>https://0x69.ru/en/utilities/url-encoder/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/url-encoder/</guid>
+      <description>&lt;p&gt;Free online tool for safe URL encoding and decoding. Convert special characters to URL format and back for correct parameter passing and URI component handling. Supports UTF-8, query parameters and full links.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>VKify Website — Landing Page for Browser Extension</title>
       <link>https://0x69.ru/en/portfolio/vkify-website-extension-landing/</link>

@@ -6,8 +6,134 @@
     <description>Recent content on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 04 Feb 2026 13:52:09 +0300</lastBuildDate>
+    <lastBuildDate>Mon, 09 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://0x69.ru/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Favicon Generator</title>
+      <link>https://0x69.ru/en/utilities/favicon-generator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/favicon-generator/</guid>
+      <description>&lt;p&gt;Generate favicons, PWA icons and Web App Manifest. Works entirely in browser.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Image Upscaler</title>
+      <link>https://0x69.ru/en/utilities/image-upscaler/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/image-upscaler/</guid>
+      <description>&lt;p&gt;Upscale images with high quality. 2x-4x upscaling with Lanczos algorithm for art, photos and more.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>JavaScript Obfuscator</title>
+      <link>https://0x69.ru/en/utilities/javascript-obfuscator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/javascript-obfuscator/</guid>
+      <description>&lt;p&gt;Obfuscate JavaScript code to protect from copying and analysis&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>JSON → TypeScript / Go / Zod</title>
+      <link>https://0x69.ru/en/utilities/json-to-types/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/json-to-types/</guid>
+      <description>&lt;p&gt;Generate TypeScript interfaces, Go structs, Zod schemas and JSON Schema from JSON data&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Meta Tag Generator</title>
+      <link>https://0x69.ru/en/utilities/meta-tag-generator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/meta-tag-generator/</guid>
+      <description>&lt;p&gt;SEO, Open Graph, Twitter, and favicon meta tag generator with live preview. Free online tool.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>QR Code Generator</title>
+      <link>https://0x69.ru/en/utilities/qr-generator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/qr-generator/</guid>
+      <description>&lt;p&gt;Generate QR codes with customizable color, size, logo and export to PNG/SVG&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Regex Tester</title>
+      <link>https://0x69.ru/en/utilities/regex-tester/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/regex-tester/</guid>
+      <description>&lt;p&gt;Regular expression testing with match highlighting and syntax explanation&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Timestamp Converter</title>
+      <link>https://0x69.ru/en/utilities/timestamp-converter/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/timestamp-converter/</guid>
+      <description>&lt;p&gt;Unix timestamp to date converter, timezones, duration calculator&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>UUID &amp; Random Generator</title>
+      <link>https://0x69.ru/en/utilities/uuid-generator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/uuid-generator/</guid>
+      <description>&lt;p&gt;Online UUID v4, nanoid, random string, and secure password generator. Bulk generation of up to 10,000 values.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Base64 Encoder/Decoder</title>
+      <link>https://0x69.ru/en/utilities/base64-encoder/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/base64-encoder/</guid>
+      <description>&lt;p&gt;Encode and decode text, files, and images to Base64 online&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Color Converter</title>
+      <link>https://0x69.ru/en/utilities/color-converter/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/color-converter/</guid>
+      <description>&lt;p&gt;Convert colors between HEX, RGB, HSL and other formats&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Diff Tool</title>
+      <link>https://0x69.ru/en/utilities/diff-tool/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/diff-tool/</guid>
+      <description>&lt;p&gt;Compare text, JSON, code with change highlighting&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hash Generator</title>
+      <link>https://0x69.ru/en/utilities/hash-generator/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/hash-generator/</guid>
+      <description>&lt;p&gt;Generate MD5, SHA-1, SHA-256, SHA-512 hashes for text and files&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Image Compressor</title>
+      <link>https://0x69.ru/en/utilities/image-compressor/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/image-compressor/</guid>
+      <description>&lt;p&gt;Compress PNG, JPG, WebP images without quality loss&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>JSON Normalizer</title>
+      <link>https://0x69.ru/en/utilities/json-normalizer/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/json-normalizer/</guid>
+      <description>&lt;p&gt;Format, minify and validate JSON online&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Lorem Ipsum Generator</title>
+      <link>https://0x69.ru/en/utilities/lorem-ipsum/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/lorem-ipsum/</guid>
+      <description>&lt;p&gt;Generate placeholder text for design and layout&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Markdown Editor</title>
+      <link>https://0x69.ru/en/utilities/markdown-editor/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/markdown-editor/</guid>
+      <description>&lt;p&gt;Online Markdown editor with real-time preview and HTML export&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>URL Encoder/Decoder</title>
+      <link>https://0x69.ru/en/utilities/url-encoder/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/url-encoder/</guid>
+      <description>&lt;p&gt;Free online tool for safe URL encoding and decoding. Convert special characters to URL format and back for correct parameter passing and URI component handling. Supports UTF-8, query parameters and full links.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Reverse Engineering VK Long Poll: Building a Sniffer, Discovering Hidden Events, and WebSocket Mysteries</title>
       <link>https://0x69.ru/en/posts/reverse-engineering-vk-long-poll/</link>

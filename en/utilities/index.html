@@ -1,0 +1,4912 @@
+<!DOCTYPE html>
+<html lang="en"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+Utilities
+ | 0x69.ru</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Ox69" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="canonical" href="https://0x69.ru/en/utilities/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/en/utilities/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="Utilities">
+  <meta property="og:description" content="Useful online tools for developers">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="website">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Utilities">
+  <meta name="twitter:description" content="Useful online tools for developers">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Flip it!"
+                aria-label="Flip it!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/en/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">To iterate is human, to recurse divine</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="About">About</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/en/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Search"
+   aria-label="Search">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="All Categories"
+   aria-label="All Categories">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Portfolio"
+   aria-label="Portfolio">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Utilities"
+   aria-label="Utilities">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/utilities/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/ru/utilities/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Menu</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="About"
+                aria-label="About">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">About</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Languages
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/utilities/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/utilities/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Menu
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Search">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Search</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Categories">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Categories</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Portfolio">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Portfolio</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Utilities">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Utilities</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">18</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+
+
+
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+
+
+<section class="relative overflow-hidden">
+  
+  
+  <div class="absolute inset-0 -z-10 overflow-hidden">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/8 rounded-full blur-3xl animate-pulse" 
+         style="animation-duration: 4s;"></div>
+    <div class="absolute top-40 right-20 w-96 h-96 bg-secondary/6 rounded-full blur-3xl animate-pulse" 
+         style="animation-duration: 6s; animation-delay: 1s;"></div>
+    <div class="absolute -bottom-20 left-1/3 w-80 h-80 bg-accent/5 rounded-full blur-3xl animate-pulse" 
+         style="animation-duration: 5s; animation-delay: 2s;"></div>
+    
+    
+    <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/20 rounded-full animate-bounce" 
+         style="animation-duration: 3s;"></div>
+    <div class="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-secondary/25 rounded-full animate-bounce" 
+         style="animation-duration: 4s; animation-delay: 0.5s;"></div>
+    <div class="absolute bottom-1/3 left-1/2 w-1 h-1 bg-accent/30 rounded-full animate-bounce" 
+         style="animation-duration: 3.5s; animation-delay: 1s;"></div>
+    
+    
+    <div class="absolute inset-0 opacity-[0.02] dark:opacity-[0.04]" 
+         style="background-image: 
+           radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); 
+           background-size: 40px 40px;">
+    </div>
+  </div>
+  
+  
+  <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
+              bg-gradient-to-r from-base-100 via-base-100/80 to-transparent 
+              z-0 pointer-events-none"></div>
+  <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
+              bg-gradient-to-l from-base-100 via-base-100/80 to-transparent 
+              z-0 pointer-events-none"></div>
+  
+  
+  <div class="absolute left-0 right-0 top-0 h-20 sm:h-32 
+              bg-gradient-to-b from-base-100 to-transparent 
+              z-0 pointer-events-none"></div>
+  <div class="absolute left-0 right-0 bottom-0 h-20 sm:h-32 
+              bg-gradient-to-t from-base-100 to-transparent 
+              z-0 pointer-events-none"></div>
+  
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-10 sm:pt-20 pb-14 sm:pb-24">
+    
+    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+      
+      
+      <div class="flex-1 text-center lg:text-left">
+        
+        
+        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full 
+                    bg-base-100/80 backdrop-blur-sm shadow-lg shadow-base-content/5 
+                    border border-base-200 dark:border-base-content/10 mb-8
+                    hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-success"></span>
+          </span>
+          <span class="text-sm font-semibold text-base-content/70">
+            18 tools available
+          </span>
+          <ion-icon name="arrow-forward" class="text-xs text-base-content/40"></ion-icon>
+        </div>
+        
+        
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 leading-[1.05] tracking-tight">
+          <span class="block">
+            Tools
+          </span>
+          <span class="relative inline-block mt-1">
+            <span class="relative z-10 bg-gradient-to-r from-primary via-secondary to-accent 
+                         bg-clip-text text-transparent
+                         bg-[length:200%_auto] animate-[gradient-shift_3s_ease-in-out_infinite]">
+              for developers
+            </span>
+            
+            <svg class="absolute -bottom-2 left-0 w-full h-4 text-primary/30" 
+                 viewBox="0 0 300 16" preserveAspectRatio="none">
+              <path d="M0,12 C50,4 100,16 150,8 C200,0 250,14 300,8" 
+                    fill="none" stroke="currentColor" stroke-width="3" 
+                    stroke-linecap="round" stroke-dasharray="300"
+                    stroke-dashoffset="300"
+                    style="animation: draw-line 1.5s ease-out 0.5s forwards;">
+              </path>
+            </svg>
+          </span>
+        </h1>
+        
+        
+        <p class="text-lg sm:text-xl text-base-content/55 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+          Useful online tools for developers
+        </p>
+        
+        
+        <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+          <div class="group flex items-center gap-2 px-5 py-2.5 rounded-full 
+                      bg-success/10 text-success text-sm font-semibold
+                      border border-success/10
+                      hover:bg-success/15 hover:border-success/20 hover:shadow-lg hover:shadow-success/10
+                      hover:scale-105 transition-all duration-300 cursor-default">
+            <ion-icon name="shield-checkmark" class="text-base group-hover:scale-110 transition-transform"></ion-icon>
+            Data stays local
+          </div>
+          <div class="group flex items-center gap-2 px-5 py-2.5 rounded-full 
+                      bg-primary/10 text-primary text-sm font-semibold
+                      border border-primary/10
+                      hover:bg-primary/15 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/10
+                      hover:scale-105 transition-all duration-300 cursor-default">
+            <ion-icon name="flash" class="text-base group-hover:scale-110 transition-transform"></ion-icon>
+            Instant
+          </div>
+          <div class="group flex items-center gap-2 px-5 py-2.5 rounded-full 
+                      bg-secondary/10 text-secondary text-sm font-semibold
+                      border border-secondary/10
+                      hover:bg-secondary/15 hover:border-secondary/20 hover:shadow-lg hover:shadow-secondary/10
+                      hover:scale-105 transition-all duration-300 cursor-default">
+            <ion-icon name="cloud-offline" class="text-base group-hover:scale-110 transition-transform"></ion-icon>
+            Works offline
+          </div>
+        </div>
+        
+      </div>
+      
+      
+      <div class="flex-shrink-0 w-full max-w-sm lg:max-w-md xl:max-w-lg">
+        <div class="relative group">
+          
+          
+          <div class="absolute -top-4 -left-4 w-full h-full rounded-3xl 
+                      bg-gradient-to-br from-primary/8 to-secondary/5 
+                      rotate-3 group-hover:rotate-4 transition-transform duration-500"></div>
+          <div class="absolute -top-2 -left-2 w-full h-full rounded-3xl 
+                      bg-gradient-to-br from-secondary/6 to-accent/4 
+                      rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+          
+          
+          <div class="absolute -inset-4 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 
+                      rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+          
+          
+          <div class="relative bg-base-100/90 backdrop-blur-sm rounded-3xl p-6 sm:p-8 
+                      shadow-2xl shadow-base-content/5 
+                      border border-base-200 dark:border-base-content/10
+                      group-hover:shadow-3xl group-hover:shadow-base-content/10 
+                      transition-all duration-500">
+            
+            
+            <div class="flex items-center gap-2 mb-5">
+              <div class="flex gap-1.5">
+                <div class="w-3 h-3 rounded-full bg-error/60"></div>
+                <div class="w-3 h-3 rounded-full bg-warning/60"></div>
+                <div class="w-3 h-3 rounded-full bg-success/60"></div>
+              </div>
+              <div class="flex-1 h-6 rounded-lg bg-base-200/60 dark:bg-base-content/5 mx-2 
+                          flex items-center justify-center">
+                <span class="text-[10px] text-base-content/30 font-mono tracking-wider">
+                  toolbox
+                </span>
+              </div>
+            </div>
+            
+            
+            <div class="grid grid-cols-3 gap-3 mb-6">
+              
+              <div class="group/card aspect-square rounded-2xl 
+                          bg-gradient-to-br from-base-200/80 to-base-300/60 
+                          dark:from-base-content/5 dark:to-base-content/10
+                          flex flex-col items-center justify-center gap-1
+                          hover:scale-110 hover:-translate-y-1 
+                          hover:shadow-lg hover:shadow-primary/10
+                          transition-all duration-300 cursor-pointer
+                          border border-transparent hover:border-primary/20"
+                   style="animation-delay: 0ms;"
+                   title="Favicon Generator">
+                <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
+                  ⭐
+                </span>
+                <span class="text-[9px] text-base-content/40 font-medium truncate w-full text-center px-1 
+                             group-hover/card:text-base-content/70 transition-colors">
+                  Favicon …
+                </span>
+              </div>
+              
+              <div class="group/card aspect-square rounded-2xl 
+                          bg-gradient-to-br from-base-200/80 to-base-300/60 
+                          dark:from-base-content/5 dark:to-base-content/10
+                          flex flex-col items-center justify-center gap-1
+                          hover:scale-110 hover:-translate-y-1 
+                          hover:shadow-lg hover:shadow-primary/10
+                          transition-all duration-300 cursor-pointer
+                          border border-transparent hover:border-primary/20"
+                   style="animation-delay: 100ms;"
+                   title="Image Upscaler">
+                <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
+                  🔍
+                </span>
+                <span class="text-[9px] text-base-content/40 font-medium truncate w-full text-center px-1 
+                             group-hover/card:text-base-content/70 transition-colors">
+                  Image …
+                </span>
+              </div>
+              
+              <div class="group/card aspect-square rounded-2xl 
+                          bg-gradient-to-br from-base-200/80 to-base-300/60 
+                          dark:from-base-content/5 dark:to-base-content/10
+                          flex flex-col items-center justify-center gap-1
+                          hover:scale-110 hover:-translate-y-1 
+                          hover:shadow-lg hover:shadow-primary/10
+                          transition-all duration-300 cursor-pointer
+                          border border-transparent hover:border-primary/20"
+                   style="animation-delay: 200ms;"
+                   title="JavaScript Obfuscator">
+                <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
+                  🛡️
+                </span>
+                <span class="text-[9px] text-base-content/40 font-medium truncate w-full text-center px-1 
+                             group-hover/card:text-base-content/70 transition-colors">
+                  JavaScript …
+                </span>
+              </div>
+              
+              <div class="group/card aspect-square rounded-2xl 
+                          bg-gradient-to-br from-base-200/80 to-base-300/60 
+                          dark:from-base-content/5 dark:to-base-content/10
+                          flex flex-col items-center justify-center gap-1
+                          hover:scale-110 hover:-translate-y-1 
+                          hover:shadow-lg hover:shadow-primary/10
+                          transition-all duration-300 cursor-pointer
+                          border border-transparent hover:border-primary/20"
+                   style="animation-delay: 300ms;"
+                   title="JSON → TypeScript / Go / Zod">
+                <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
+                  🔄
+                </span>
+                <span class="text-[9px] text-base-content/40 font-medium truncate w-full text-center px-1 
+                             group-hover/card:text-base-content/70 transition-colors">
+                  JSON → …
+                </span>
+              </div>
+              
+              <div class="group/card aspect-square rounded-2xl 
+                          bg-gradient-to-br from-base-200/80 to-base-300/60 
+                          dark:from-base-content/5 dark:to-base-content/10
+                          flex flex-col items-center justify-center gap-1
+                          hover:scale-110 hover:-translate-y-1 
+                          hover:shadow-lg hover:shadow-primary/10
+                          transition-all duration-300 cursor-pointer
+                          border border-transparent hover:border-primary/20"
+                   style="animation-delay: 400ms;"
+                   title="Meta Tag Generator">
+                <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
+                  🏷️
+                </span>
+                <span class="text-[9px] text-base-content/40 font-medium truncate w-full text-center px-1 
+                             group-hover/card:text-base-content/70 transition-colors">
+                  Meta Tag …
+                </span>
+              </div>
+              
+              <div class="group/card aspect-square rounded-2xl 
+                          bg-gradient-to-br from-base-200/80 to-base-300/60 
+                          dark:from-base-content/5 dark:to-base-content/10
+                          flex flex-col items-center justify-center gap-1
+                          hover:scale-110 hover:-translate-y-1 
+                          hover:shadow-lg hover:shadow-primary/10
+                          transition-all duration-300 cursor-pointer
+                          border border-transparent hover:border-primary/20"
+                   style="animation-delay: 500ms;"
+                   title="QR Code Generator">
+                <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
+                  📱
+                </span>
+                <span class="text-[9px] text-base-content/40 font-medium truncate w-full text-center px-1 
+                             group-hover/card:text-base-content/70 transition-colors">
+                  QR Code …
+                </span>
+              </div>
+              
+            </div>
+            
+            
+            <div class="h-px bg-gradient-to-r from-transparent via-base-content/10 to-transparent mb-5"></div>
+            
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="text-center p-4 rounded-2xl 
+                          bg-gradient-to-br from-primary/5 to-primary/10 
+                          border border-primary/10
+                          hover:border-primary/20 transition-colors duration-300">
+                <div class="text-3xl sm:text-4xl font-black bg-gradient-to-br from-primary to-primary/70 
+                            bg-clip-text text-transparent mb-1">
+                  18
+                </div>
+                <div class="text-[11px] text-base-content/50 uppercase tracking-widest font-semibold">
+                  Tools
+                </div>
+              </div>
+              <div class="text-center p-4 rounded-2xl 
+                          bg-gradient-to-br from-secondary/5 to-secondary/10 
+                          border border-secondary/10
+                          hover:border-secondary/20 transition-colors duration-300">
+                <div class="text-3xl sm:text-4xl font-black bg-gradient-to-br from-secondary to-secondary/70 
+                            bg-clip-text text-transparent mb-1">
+                  11
+                </div>
+                <div class="text-[11px] text-base-content/50 uppercase tracking-widest font-semibold">
+                  Categories
+                </div>
+              </div>
+            </div>
+          
+            
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+
+
+<section class="relative bg-base-100/50 backdrop-blur-sm overflow-hidden">
+  
+  
+  <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
+              bg-gradient-to-r from-base-100 via-base-100/80 to-transparent 
+              z-20 pointer-events-none"></div>
+  <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
+              bg-gradient-to-l from-base-100 via-base-100/80 to-transparent 
+              z-20 pointer-events-none"></div>
+  
+  
+  <div class="absolute left-0 right-0 top-0 h-px">
+    <div class="absolute inset-0 bg-base-300 dark:bg-base-content/10"></div>
+    <div class="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 xl:w-64 bg-gradient-to-r from-base-100 to-transparent"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 xl:w-64 bg-gradient-to-l from-base-100 to-transparent"></div>
+  </div>
+  <div class="absolute left-0 right-0 bottom-0 h-px">
+    <div class="absolute inset-0 bg-base-300 dark:bg-base-content/10"></div>
+    <div class="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 xl:w-64 bg-gradient-to-r from-base-100 to-transparent"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 xl:w-64 bg-gradient-to-l from-base-100 to-transparent"></div>
+  </div>
+  
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+    
+    <div class="py-5">
+      
+      <div class="flex items-center gap-4">
+        
+        
+        <div class="hidden sm:flex items-center gap-2 text-sm text-base-content/50 font-medium shrink-0">
+          <ion-icon name="filter-outline"></ion-icon>
+          Filter:
+        </div>
+        
+        
+        <button id="scroll-left" class="hidden sm:flex shrink-0 w-8 h-8 items-center justify-center rounded-lg
+                                        bg-base-200 hover:bg-base-300 text-base-content/60 transition-all
+                                        disabled:opacity-30 disabled:cursor-not-allowed" disabled>
+          <ion-icon name="chevron-back"></ion-icon>
+        </button>
+        
+        
+        <div id="filters-container" class="flex-1 overflow-hidden relative">
+          
+          
+          <div id="fade-left" class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-base-100 to-transparent z-10 pointer-events-none opacity-0 transition-opacity"></div>
+          <div id="fade-right" class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-base-100 to-transparent z-10 pointer-events-none opacity-0 transition-opacity"></div>
+          
+          
+          <div id="filters-scroll" class="flex items-center gap-2 overflow-x-auto scrollbar-hide scroll-smooth py-1">
+            
+            
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter="*"
+              data-state="checked">
+              <ion-icon name="apps-outline"></ion-icon>
+              <span>All</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                18
+              </span>
+            </button>
+            
+            
+            
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+            
+            
+            
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".cat-0"
+              data-state="unchecked">
+              <ion-icon name="folder-outline"></ion-icon>
+              <span>Generators</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                5
+              </span>
+            </button>
+            
+            
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+            
+            
+            
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".cat-1"
+              data-state="unchecked">
+              <ion-icon name="folder-outline"></ion-icon>
+              <span>Images</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                2
+              </span>
+            </button>
+            
+            
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+            
+            
+            
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".cat-2"
+              data-state="unchecked">
+              <ion-icon name="folder-outline"></ion-icon>
+              <span>Encoding</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                3
+              </span>
+            </button>
+            
+            
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+            
+            
+            
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".cat-3"
+              data-state="unchecked">
+              <ion-icon name="folder-outline"></ion-icon>
+              <span>Development</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                1
+              </span>
+            </button>
+            
+            
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+            
+            
+            
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".cat-4"
+              data-state="unchecked">
+              <ion-icon name="folder-outline"></ion-icon>
+              <span>Converters</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                1
+              </span>
+            </button>
+            
+            
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+            
+            
+            
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".cat-5"
+              data-state="unchecked">
+              <ion-icon name="folder-outline"></ion-icon>
+              <span>Design</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                1
+              </span>
+            </button>
+            
+            
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+            
+            
+            
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".cat-6"
+              data-state="unchecked">
+              <ion-icon name="folder-outline"></ion-icon>
+              <span>Comparison</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                1
+              </span>
+            </button>
+            
+            
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+            
+            
+            
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".cat-7"
+              data-state="unchecked">
+              <ion-icon name="folder-outline"></ion-icon>
+              <span>Security</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                1
+              </span>
+            </button>
+            
+            
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+            
+            
+            
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".cat-8"
+              data-state="unchecked">
+              <ion-icon name="folder-outline"></ion-icon>
+              <span>Formatting</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                1
+              </span>
+            </button>
+            
+            
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+            
+            
+            
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".cat-9"
+              data-state="unchecked">
+              <ion-icon name="folder-outline"></ion-icon>
+              <span>Text</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                1
+              </span>
+            </button>
+            
+            
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+            
+            
+            
+            <button 
+              class="utility-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".cat-10"
+              data-state="unchecked">
+              <ion-icon name="folder-outline"></ion-icon>
+              <span>Editors</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                1
+              </span>
+            </button>
+            
+            
+          </div>
+        </div>
+        
+        
+        <button id="scroll-right" class="hidden sm:flex shrink-0 w-8 h-8 items-center justify-center rounded-lg
+                                         bg-base-200 hover:bg-base-300 text-base-content/60 transition-all
+                                         disabled:opacity-30 disabled:cursor-not-allowed">
+          <ion-icon name="chevron-forward"></ion-icon>
+        </button>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+
+<section class="py-10 sm:py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    
+    
+    
+    
+    <div id="utilities-grid" class="utilities-grid">
+      
+      
+      
+      
+      
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-0">
+        
+        <a href="/en/utilities/favicon-generator/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                ⭐
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  Favicon Generator
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Generators
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Generate favicons, PWA icons and Web App Manifest. Works entirely in browser.
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  favicon
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  pwa
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+3</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-1">
+        
+        <a href="/en/utilities/image-upscaler/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                🔍
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  Image Upscaler
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Images
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Upscale images with high quality. 2x-4x upscaling with Lanczos algorithm for art, photos and more.
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  upscale
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  images
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+3</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-2">
+        
+        <a href="/en/utilities/javascript-obfuscator/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                🛡️
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  JavaScript Obfuscator
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Encoding
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Obfuscate JavaScript code to protect from copying and analysis
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  javascript
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  obfuscator
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+3</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-0">
+        
+        <a href="/en/utilities/json-to-types/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                🔄
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  JSON → TypeScript / Go / Zod
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Generators
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Generate TypeScript interfaces, Go structs, Zod schemas and JSON Schema from JSON data
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  json
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  typescript
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+4</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-0">
+        
+        <a href="/en/utilities/meta-tag-generator/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                🏷️
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  Meta Tag Generator
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Generators
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              SEO, Open Graph, Twitter, and favicon meta tag generator with live preview. Free online tool.
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  meta
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  seo
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+5</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-0">
+        
+        <a href="/en/utilities/qr-generator/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                📱
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  QR Code Generator
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Generators
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Generate QR codes with customizable color, size, logo and export to PNG/SVG
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  qr
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  qr-code
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+2</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-3">
+        
+        <a href="/en/utilities/regex-tester/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                🔍
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  Regex Tester
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Development
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Regular expression testing with match highlighting and syntax explanation
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  regex
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  regexp
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+6</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-4">
+        
+        <a href="/en/utilities/timestamp-converter/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                ⏰
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  Timestamp Converter
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Converters
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Unix timestamp to date converter, timezones, duration calculator
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  timestamp
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  unix
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+5</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-0">
+        
+        <a href="/en/utilities/uuid-generator/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                🎲
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  UUID &amp; Random Generator
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Generators
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Online UUID v4, nanoid, random string, and secure password generator. Bulk generation of up to 10,000 values.
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  uuid
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  nanoid
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+4</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-2">
+        
+        <a href="/en/utilities/base64-encoder/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                🔐
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  Base64 Encoder/Decoder
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Encoding
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Encode and decode text, files, and images to Base64 online
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  base64
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  encode
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+4</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-5">
+        
+        <a href="/en/utilities/color-converter/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                🎨
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  Color Converter
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Design
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Convert colors between HEX, RGB, HSL and other formats
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  color
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  hex
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+3</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-6">
+        
+        <a href="/en/utilities/diff-tool/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                📊
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  Diff Tool
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Comparison
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Compare text, JSON, code with change highlighting
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  diff
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  comparison
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+3</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-7">
+        
+        <a href="/en/utilities/hash-generator/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                🔐
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  Hash Generator
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Security
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Generate MD5, SHA-1, SHA-256, SHA-512 hashes for text and files
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  hash
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  md5
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+3</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-1">
+        
+        <a href="/en/utilities/image-compressor/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                🖼️
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  Image Compressor
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Images
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Compress PNG, JPG, WebP images without quality loss
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  images
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  compression
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+4</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-8">
+        
+        <a href="/en/utilities/json-normalizer/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                📋
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  JSON Normalizer
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Formatting
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Format, minify and validate JSON online
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  json
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  formatting
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+2</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-9">
+        
+        <a href="/en/utilities/lorem-ipsum/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                📄
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  Lorem Ipsum Generator
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Text
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Generate placeholder text for design and layout
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  lorem ipsum
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  placeholder
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+2</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-10">
+        
+        <a href="/en/utilities/markdown-editor/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                📝
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  Markdown Editor
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Editors
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Online Markdown editor with real-time preview and HTML export
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  markdown
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  editor
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+3</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-2">
+        
+        <a href="/en/utilities/url-encoder/" 
+           class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
+                  border border-base-200 dark:border-base-content/10
+                  shadow-lg hover:shadow-2xl
+                  transition-all duration-300 hover:-translate-y-2">
+          
+          
+          <div class="p-5 sm:p-6">
+            
+            <div class="flex items-start gap-4">
+              
+              
+              
+              
+                
+              
+              
+              <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 
+                          flex items-center justify-center text-2xl sm:text-3xl
+                          group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                🔗
+              </div>
+              
+              <div class="flex-1 min-w-0">
+                
+                
+                <h2 class="text-base sm:text-lg font-bold leading-tight mb-1 
+                           group-hover:text-primary transition-colors line-clamp-1">
+                  URL Encoder/Decoder
+                </h2>
+                
+                
+                <div class="flex items-center gap-2">
+                  
+                  <span class="text-xs text-base-content/50">
+                    Encoding
+                  </span>
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold 
+                              uppercase tracking-wide bg-success/15 text-success">
+                    new
+                  </span>
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            
+            <p class="mt-4 text-sm text-base-content/60 line-clamp-2 leading-relaxed">
+              Free online tool for safe URL encoding and decoding. Convert special characters to URL format and back for correct parameter passing and URI component handling. Supports UTF-8, query parameters and full links.
+            </p>
+            
+          </div>
+          
+          
+          <div class="px-5 sm:px-6 py-4 border-t border-base-200 dark:border-base-content/5 
+                      bg-base-200/30 flex items-center justify-between">
+            
+            
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  url
+                </span>
+                
+                <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
+                  encode
+                </span>
+                
+                
+                <span class="text-xs text-base-content/40">+6</span>
+                
+              
+            </div>
+            
+            
+            <div class="flex items-center gap-1 text-sm font-semibold text-primary opacity-0 -translate-x-2
+                        group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span class="hidden sm:inline">Open</span>
+              <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+            </div>
+            
+          </div>
+          
+        </a>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    <div id="utilities-no-results" class="hidden py-20 text-center">
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-base-200 mb-6">
+        <ion-icon name="search-outline" class="text-4xl text-base-content/30"></ion-icon>
+      </div>
+      <h3 class="text-xl font-bold mb-2">Nothing found</h3>
+      <p class="text-base-content/60 mb-6">No utilities in this category yet</p>
+      <button id="show-all-btn" class="btn btn-primary btn-sm gap-2">
+        <ion-icon name="apps-outline"></ion-icon>
+        Show all
+      </button>
+    </div>
+    
+    
+    
+  </div>
+</section>
+
+
+<section class="py-16 sm:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    
+    
+    <div class="text-center mb-12 sm:mb-16">
+      <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+        Benefits
+      </span>
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+        Why our utilities?
+      </h2>
+      <p class="text-base-content/60 max-w-2xl mx-auto text-lg">
+        Tools that respect your privacy and save time
+      </p>
+    </div>
+    
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+      
+      
+      <div class="group relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative p-6 sm:p-8 rounded-2xl border border-base-200 dark:border-base-content/10 
+                    bg-base-100 hover:border-blue-500/30 transition-colors h-full">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 
+                      flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <ion-icon name="flash" class="text-2xl text-blue-500"></ion-icon>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Lightning fast</h3>
+          <p class="text-sm text-base-content/60 leading-relaxed">
+            Everything works locally. No delays sending data to servers
+          </p>
+        </div>
+      </div>
+      
+      
+      <div class="group relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative p-6 sm:p-8 rounded-2xl border border-base-200 dark:border-base-content/10 
+                    bg-base-100 hover:border-green-500/30 transition-colors h-full">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 
+                      flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <ion-icon name="shield-checkmark" class="text-2xl text-green-500"></ion-icon>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Private</h3>
+          <p class="text-sm text-base-content/60 leading-relaxed">
+            Data is processed only in your browser. We don&#39;t store anything
+          </p>
+        </div>
+      </div>
+      
+      
+      <div class="group relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative p-6 sm:p-8 rounded-2xl border border-base-200 dark:border-base-content/10 
+                    bg-base-100 hover:border-purple-500/30 transition-colors h-full">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 
+                      flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <ion-icon name="cloud-offline" class="text-2xl text-purple-500"></ion-icon>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Works offline</h3>
+          <p class="text-sm text-base-content/60 leading-relaxed">
+            After loading the page, no internet is required
+          </p>
+        </div>
+      </div>
+      
+      
+      <div class="group relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative p-6 sm:p-8 rounded-2xl border border-base-200 dark:border-base-content/10 
+                    bg-base-100 hover:border-amber-500/30 transition-colors h-full">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 
+                      flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <ion-icon name="heart" class="text-2xl text-amber-500"></ion-icon>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Free</h3>
+          <p class="text-sm text-base-content/60 leading-relaxed">
+            No subscriptions, registrations or ads. Forever
+          </p>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+<script>
+(function() {
+  'use strict';
+  
+  var grid = document.getElementById('utilities-grid');
+  if (!grid) return;
+  
+  var noResults = document.getElementById('utilities-no-results');
+  var showAllBtn = document.getElementById('show-all-btn');
+  var iso = null;
+  
+  
+  var filtersScroll = document.getElementById('filters-scroll');
+  var scrollLeftBtn = document.getElementById('scroll-left');
+  var scrollRightBtn = document.getElementById('scroll-right');
+  var fadeLeft = document.getElementById('fade-left');
+  var fadeRight = document.getElementById('fade-right');
+  
+  function updateScrollButtons() {
+    if (!filtersScroll || !scrollLeftBtn || !scrollRightBtn) return;
+    
+    var scrollLeft = filtersScroll.scrollLeft;
+    var maxScroll = filtersScroll.scrollWidth - filtersScroll.clientWidth;
+    
+    scrollLeftBtn.disabled = scrollLeft <= 0;
+    scrollRightBtn.disabled = scrollLeft >= maxScroll - 1;
+    
+    if (fadeLeft) fadeLeft.style.opacity = scrollLeft > 0 ? '1' : '0';
+    if (fadeRight) fadeRight.style.opacity = scrollLeft < maxScroll - 1 ? '1' : '0';
+  }
+  
+  if (scrollLeftBtn && filtersScroll) {
+    scrollLeftBtn.addEventListener('click', function() {
+      filtersScroll.scrollBy({ left: -200, behavior: 'smooth' });
+    });
+  }
+  
+  if (scrollRightBtn && filtersScroll) {
+    scrollRightBtn.addEventListener('click', function() {
+      filtersScroll.scrollBy({ left: 200, behavior: 'smooth' });
+    });
+  }
+  
+  if (filtersScroll) {
+    filtersScroll.addEventListener('scroll', updateScrollButtons);
+    window.addEventListener('resize', updateScrollButtons);
+    setTimeout(updateScrollButtons, 100);
+  }
+  
+  function initIsotope() {
+    if (iso) return;
+    
+    try {
+      iso = new Isotope(grid, {
+        itemSelector: '.utility-item',
+        layoutMode: 'fitRows',
+        transitionDuration: '0.4s',
+        stagger: 30,
+        percentPosition: true,
+        fitRows: {
+          gutter: 0
+        }
+      });
+      
+      grid.classList.add('is-loaded');
+      
+      var filterButtons = document.querySelectorAll('.utility-filter-btn');
+      
+      filterButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          var filterValue = this.getAttribute('data-filter');
+          
+          if (iso) {
+            iso.arrange({ filter: filterValue });
+          }
+
+          filterButtons.forEach(function(btn) {
+            btn.setAttribute('data-state', 'unchecked');
+          });
+          this.setAttribute('data-state', 'checked');
+          
+          if (filtersScroll) {
+            var btnRect = this.getBoundingClientRect();
+            var containerRect = filtersScroll.getBoundingClientRect();
+            
+            if (btnRect.left < containerRect.left || btnRect.right > containerRect.right) {
+              this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+          }
+        });
+      });
+      
+      iso.on('arrangeComplete', function(filteredItems) {
+        if (noResults) {
+          if (filteredItems.length === 0) {
+            noResults.classList.remove('hidden');
+            grid.style.display = 'none';
+          } else {
+            noResults.classList.add('hidden');
+            grid.style.display = '';
+          }
+        }
+      });
+      
+      if (showAllBtn) {
+        showAllBtn.addEventListener('click', function() {
+          var allBtn = document.querySelector('.utility-filter-btn[data-filter="*"]');
+          if (allBtn) {
+            allBtn.click();
+          }
+        });
+      }
+      
+    } catch (e) {
+      console.error('Utilities Isotope init error:', e);
+    }
+  }
+  
+  function relayout() {
+    if (iso) {
+      try {
+        iso.layout();
+      } catch (e) {}
+    }
+  }
+  
+  function startInit() {
+    setTimeout(function() {
+      initIsotope();
+      setTimeout(relayout, 100);
+      setTimeout(relayout, 300);
+    }, 50);
+  }
+  
+  if (document.readyState === 'complete') {
+    startInit();
+  } else {
+    window.addEventListener('load', startInit);
+  }
+  
+  if ('fonts' in document) {
+    document.fonts.ready.then(function() {
+      setTimeout(relayout, 50);
+    });
+  }
+  
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(relayout, 250);
+  });
+  
+})();
+</script>
+
+<style>
+.utilities-grid {
+  display: flex;
+  flex-wrap: wrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.utilities-grid.is-loaded {
+  opacity: 1;
+}
+
+.utility-item {
+  box-sizing: border-box;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+</style>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Maksim Alexandrov<br>
+<strong>Age:</strong> 28<br>
+<strong>Location:</strong> Tula, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>This blog is my personal knowledge base, where I push notes about my tech stack, life experience, and everything that triggers my interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — ready to merge ideas and work on joint projects.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-programming-languages">💻 Programming Languages</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Responsive layout (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST APIs</strong></li>
+</ul>
+<h2 id="-databases">🗄️ Databases</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-design--graphics">🎨 Design &amp; Graphics</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX design and prototyping</li>
+<li><strong>Photoshop</strong> — graphics and image editing</li>
+<li><strong>After Effects</strong> — motion design and animation 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Open Source Projects 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Projects 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN service in Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN service in Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Social Links</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+     
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

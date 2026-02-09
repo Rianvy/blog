@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="ru"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+Image Upscaler
+ | 0x69.ru</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Ox69" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="canonical" href="https://0x69.ru/ru/utilities/image-upscaler/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/ru/utilities/image-upscaler/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="Image Upscaler">
+  <meta property="og:description" content="Увеличение изображений с высоким качеством. Апскейл в 2x-4x с алгоритмом Lanczos для арта, фото и тд.">
+  <meta property="og:locale" content="ru">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="utilities">
+    <meta property="article:published_time" content="2026-02-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-09T00:00:00+00:00">
+    <meta property="article:tag" content="Upscale">
+    <meta property="article:tag" content="Изображения">
+    <meta property="article:tag" content="Увеличение">
+    <meta property="article:tag" content="Lanczos">
+    <meta property="article:tag" content="Ресайз">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Image Upscaler">
+  <meta name="twitter:description" content="Увеличение изображений с высоким качеством. Апскейл в 2x-4x с алгоритмом Lanczos для арта, фото и тд.">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Повернуть!"
+                aria-label="Повернуть!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/ru/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">Документируй сегодня то, что забудешь завтра</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="Обо мне">Обо мне</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/ru/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Поиск"
+   aria-label="Поиск">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/ru/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Категории"
+   aria-label="Категории">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/ru/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Портфолио"
+   aria-label="Портфолио">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/ru/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Утилиты"
+   aria-label="Утилиты">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/utilities/image-upscaler/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/ru/utilities/image-upscaler/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/ru/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/ru/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">146</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/ru/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Меню</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="Обо мне"
+                aria-label="Обо мне">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">Обо мне</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/utilities/image-upscaler/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/utilities/image-upscaler/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/ru/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Поиск</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Категории</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Портфолио</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Утилиты">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Утилиты</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">18</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">146</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/ru/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">🔍</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">Image Upscaler</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">Увеличение изображений с высоким качеством. Апскейл в 2x-4x с алгоритмом Lanczos для арта, фото и тд.</p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        100% в браузере
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="resize-outline"></ion-icon>
+        Lanczos Resampling
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="expand-outline"></ion-icon>
+        До 4x
+      </span>
+    </div>
+  </div>
+
+  
+  <div class="max-w-5xl mx-auto">
+
+    
+    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden mb-6">
+      <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+        <h2 class="font-semibold flex items-center gap-2">
+          <ion-icon name="cloud-upload-outline" class="text-primary"></ion-icon>
+          Загрузка изображения
+        </h2>
+      </div>
+      
+      <div class="p-4">
+        
+        
+        <div 
+          id="dropzone"
+          class="relative p-8 sm:p-12 border-2 border-dashed border-base-300 rounded-xl
+                 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer
+                 flex flex-col items-center justify-center text-center min-h-[200px]"
+        >
+          <div id="dropzone-empty">
+            <div class="w-20 h-20 rounded-2xl bg-base-200 flex items-center justify-center mb-4 mx-auto">
+              <ion-icon name="image-outline" class="text-4xl text-base-content/50"></ion-icon>
+            </div>
+            <p class="font-medium mb-1">Перетащите изображение сюда</p>
+            <p class="text-sm text-base-content/60 mb-3">или нажмите для выбора</p>
+            <div class="flex justify-center gap-2 text-xs text-base-content/40">
+              <span class="px-2 py-1 bg-base-200 rounded">PNG</span>
+              <span class="px-2 py-1 bg-base-200 rounded">JPG</span>
+              <span class="px-2 py-1 bg-base-200 rounded">WebP</span>
+              <span class="px-2 py-1 bg-base-200 rounded">до 5 MB</span>
+            </div>
+          </div>
+          
+          
+          <div id="dropzone-preview" class="hidden w-full">
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+              <div class="relative">
+                <img id="source-preview" src="" alt="Source" class="max-w-[200px] max-h-[200px] rounded-xl shadow-lg" />
+                <button id="remove-image" class="absolute -top-2 -right-2 btn btn-circle btn-error btn-sm">
+                  <ion-icon name="close-outline"></ion-icon>
+                </button>
+              </div>
+              <div class="text-left">
+                <div class="font-medium" id="source-name">image.png</div>
+                <div class="text-sm text-base-content/60" id="source-info">1920 × 1080 • 2.4 MB</div>
+                <div class="text-sm text-base-content/60" id="source-dimensions"></div>
+              </div>
+            </div>
+          </div>
+          
+          <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp" class="hidden" />
+        </div>
+        
+      </div>
+    </div>
+
+    
+    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden mb-6">
+      <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+        <h2 class="font-semibold flex items-center gap-2">
+          <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+          Настройки
+        </h2>
+      </div>
+      
+      <div class="p-4 space-y-6">
+        
+        
+        <div>
+          <label class="label py-1">
+            <span class="label-text font-medium">Масштаб увеличения</span>
+          </label>
+          <div class="grid grid-cols-3 gap-3">
+            <label class="flex flex-col items-center gap-2 p-4 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="scale" value="2" class="hidden" checked />
+              <span class="text-2xl font-bold">2x</span>
+              <span class="text-xs text-base-content/60">Быстро</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-4 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="scale" value="3" class="hidden" />
+              <span class="text-2xl font-bold">3x</span>
+              <span class="text-xs text-base-content/60">Средне</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-4 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="scale" value="4" class="hidden" />
+              <span class="text-2xl font-bold">4x</span>
+              <span class="text-xs text-base-content/60">Долго</span>
+            </label>
+          </div>
+        </div>
+        
+        
+        <div>
+          <label class="label py-1">
+            <span class="label-text font-medium">Тип изображения</span>
+            <span class="label-text-alt text-base-content/50">влияет на резкость</span>
+          </label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="type" value="auto" class="hidden" checked />
+              <ion-icon name="options-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">Авто</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="type" value="anime" class="hidden" />
+              <ion-icon name="happy-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">Аниме/Арт</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="type" value="photo" class="hidden" />
+              <ion-icon name="camera-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">Фото</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="type" value="cg" class="hidden" />
+              <ion-icon name="cube-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">CG/3D</span>
+            </label>
+          </div>
+        </div>
+        
+        
+        <div>
+          <label class="label py-1">
+            <span class="label-text font-medium">Сглаживание</span>
+            <span class="label-text-alt text-base-content/50">уменьшает шум и артефакты</span>
+          </label>
+          <div class="grid grid-cols-4 gap-3">
+            <label class="flex flex-col items-center gap-1 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="denoise" value="0" class="hidden" checked />
+              <span class="text-sm font-bold">Нет</span>
+            </label>
+            <label class="flex flex-col items-center gap-1 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="denoise" value="1" class="hidden" />
+              <span class="text-sm font-bold">Лёгкое</span>
+            </label>
+            <label class="flex flex-col items-center gap-1 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="denoise" value="2" class="hidden" />
+              <span class="text-sm font-bold">Среднее</span>
+            </label>
+            <label class="flex flex-col items-center gap-1 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="denoise" value="3" class="hidden" />
+              <span class="text-sm font-bold">Сильное</span>
+            </label>
+          </div>
+        </div>
+        
+        
+        <div id="result-preview-info" class="p-4 bg-base-200/50 rounded-xl">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-sm text-base-content/60">Исходный размер:</span>
+              <span class="font-mono font-medium ml-2" id="original-size">— × —</span>
+            </div>
+            <ion-icon name="arrow-forward-outline" class="text-xl text-base-content/40"></ion-icon>
+            <div>
+              <span class="text-sm text-base-content/60">Результат:</span>
+              <span class="font-mono font-medium ml-2 text-primary" id="result-size">— × —</span>
+            </div>
+          </div>
+        </div>
+        
+        
+        <button id="process-btn" class="btn btn-primary btn-lg w-full gap-2" disabled>
+          <ion-icon name="resize-outline" class="text-xl"></ion-icon>
+          Увеличить изображение
+        </button>
+        
+      </div>
+    </div>
+
+    
+    <div id="progress-section" class="hidden bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden mb-6">
+      <div class="p-6">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="loading loading-spinner loading-lg text-primary"></div>
+          <div>
+            <h3 class="font-semibold" id="progress-title">Обработка...</h3>
+            <p class="text-sm text-base-content/60" id="progress-status">Подготовка изображения</p>
+          </div>
+        </div>
+        
+        <progress id="progress-bar" class="progress progress-primary w-full" value="0" max="100"></progress>
+        <div class="flex justify-between text-xs text-base-content/50 mt-2">
+          <span id="progress-percent">0%</span>
+          <span id="progress-time">Осталось: ~</span>
+        </div>
+      </div>
+    </div>
+
+    
+    <div id="result-section" class="hidden bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden mb-6">
+      <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between">
+        <h2 class="font-semibold flex items-center gap-2">
+          <ion-icon name="checkmark-circle-outline" class="text-success"></ion-icon>
+          Результат
+        </h2>
+        <div class="flex gap-2">
+          <button id="download-result" class="btn btn-primary btn-sm gap-1">
+            <ion-icon name="download-outline"></ion-icon>
+            Скачать
+          </button>
+        </div>
+      </div>
+      
+      <div class="p-4">
+        
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          
+          
+          <div class="text-center">
+            <div class="text-sm text-base-content/60 mb-2">До</div>
+            <div class="bg-[repeating-conic-gradient(#80808015_0%_25%,transparent_0%_50%)] bg-[length:16px_16px] rounded-xl p-4 flex items-center justify-center min-h-[200px]">
+              <img id="compare-before" src="" alt="Before" class="max-w-full max-h-[300px] rounded-lg shadow-lg" />
+            </div>
+            <div class="text-xs text-base-content/50 mt-2" id="before-dimensions">— × —</div>
+          </div>
+          
+          
+          <div class="text-center">
+            <div class="text-sm text-base-content/60 mb-2">После</div>
+            <div class="bg-[repeating-conic-gradient(#80808015_0%_25%,transparent_0%_50%)] bg-[length:16px_16px] rounded-xl p-4 flex items-center justify-center min-h-[200px]">
+              <img id="compare-after" src="" alt="After" class="max-w-full max-h-[300px] rounded-lg shadow-lg" />
+            </div>
+            <div class="text-xs text-base-content/50 mt-2" id="after-dimensions">— × —</div>
+          </div>
+          
+        </div>
+        
+        
+        <div class="grid grid-cols-3 gap-3">
+          <div class="p-3 rounded-xl bg-base-200/50 text-center">
+            <div class="text-xl font-bold text-primary" id="stat-scale">2x</div>
+            <div class="text-xs text-base-content/60">Масштаб</div>
+          </div>
+          <div class="p-3 rounded-xl bg-base-200/50 text-center">
+            <div class="text-xl font-bold text-secondary" id="stat-time">0.0s</div>
+            <div class="text-xs text-base-content/60">Время</div>
+          </div>
+          <div class="p-3 rounded-xl bg-base-200/50 text-center">
+            <div class="text-xl font-bold text-accent" id="stat-size">0 KB</div>
+            <div class="text-xs text-base-content/60">Размер файла</div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-success/10 flex items-center justify-center mb-3">
+          <ion-icon name="shield-checkmark-outline" class="text-2xl text-success"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">Приватность</h3>
+        <p class="text-sm text-base-content/60">Изображения обрабатываются локально в вашем браузере и никуда не отправляются.</p>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+          <ion-icon name="analytics-outline" class="text-2xl text-primary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">Алгоритм Lanczos</h3>
+        <p class="text-sm text-base-content/60">Высококачественный алгоритм интерполяции для увеличения без сильной пикселизации.</p>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-3">
+          <ion-icon name="color-wand-outline" class="text-2xl text-secondary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">Пост-обработка</h3>
+        <p class="text-sm text-base-content/60">Автоматическое повышение резкости и сглаживание для лучшего результата.</p>
+      </div>
+      
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  
+  var i18n = {
+    fileTooLarge: "\"Файл слишком большой. Максимум 5 MB.\"",
+    failedToLoad: "\"Не удалось загрузить изображение\"",
+    fileReadError: "\"Ошибка чтения файла\"",
+    selectImage: "\"Выберите изображение (PNG, JPG, WebP)\"",
+    processingImage: "\"Обработка изображения...\"",
+    initialization: "\"Инициализация\"",
+    smoothingProcess: "\"Сглаживание...\"",
+    upscalingLanczos: "\"Увеличение (Lanczos)...\"",
+    sharpening: "\"Повышение резкости...\"",
+    done: "\"Готово!\"",
+    remaining: "\"Осталось:\"",
+    processingError: "\"Ошибка обработки:\""
+  };
+  
+  
+  var sourceImage = null;
+  var sourceWidth = 0;
+  var sourceHeight = 0;
+  var resultDataUrl = null;
+  var processing = false;
+  
+  
+  var dropzone = document.getElementById('dropzone');
+  var fileInput = document.getElementById('file-input');
+  var dropzoneEmpty = document.getElementById('dropzone-empty');
+  var dropzonePreview = document.getElementById('dropzone-preview');
+  var sourcePreview = document.getElementById('source-preview');
+  var processBtn = document.getElementById('process-btn');
+  var progressSection = document.getElementById('progress-section');
+  var resultSection = document.getElementById('result-section');
+  
+  
+  
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    var k = 1024;
+    var sizes = ['B', 'KB', 'MB'];
+    var idx = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, idx)).toFixed(1)) + ' ' + sizes[idx];
+  }
+  
+  
+  
+  function loadImage(file) {
+    return new Promise(function(resolve, reject) {
+      if (file.size > 5 * 1024 * 1024) {
+        reject(new Error(i18n.fileTooLarge));
+        return;
+      }
+      
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var img = new Image();
+        img.onload = function() {
+          resolve({ image: img, dataUrl: e.target.result, file: file });
+        };
+        img.onerror = function() {
+          reject(new Error(i18n.failedToLoad));
+        };
+        img.src = e.target.result;
+      };
+      reader.onerror = function() {
+        reject(new Error(i18n.fileReadError));
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  
+  function handleFile(file) {
+    if (!file || !file.type.startsWith('image/')) {
+      alert(i18n.selectImage);
+      return;
+    }
+    
+    loadImage(file).then(function(result) {
+      sourceImage = result.image;
+      sourceWidth = result.image.width;
+      sourceHeight = result.image.height;
+      
+      dropzoneEmpty.classList.add('hidden');
+      dropzonePreview.classList.remove('hidden');
+      sourcePreview.src = result.dataUrl;
+      document.getElementById('source-name').textContent = file.name;
+      document.getElementById('source-info').textContent = 
+        sourceWidth + ' × ' + sourceHeight + ' • ' + formatBytes(file.size);
+      
+      updateResultPreview();
+      processBtn.disabled = false;
+      resultSection.classList.add('hidden');
+      
+    }).catch(function(err) {
+      alert(err.message);
+    });
+  }
+  
+  function removeImage() {
+    sourceImage = null;
+    sourceWidth = 0;
+    sourceHeight = 0;
+    resultDataUrl = null;
+    
+    dropzoneEmpty.classList.remove('hidden');
+    dropzonePreview.classList.add('hidden');
+    processBtn.disabled = true;
+    resultSection.classList.add('hidden');
+    fileInput.value = '';
+    
+    updateResultPreview();
+  }
+  
+  function updateResultPreview() {
+    var scale = parseInt(document.querySelector('input[name="scale"]:checked').value);
+    
+    if (sourceWidth && sourceHeight) {
+      document.getElementById('original-size').textContent = sourceWidth + ' × ' + sourceHeight;
+      document.getElementById('result-size').textContent = (sourceWidth * scale) + ' × ' + (sourceHeight * scale);
+    } else {
+      document.getElementById('original-size').textContent = '— × —';
+      document.getElementById('result-size').textContent = '— × —';
+    }
+  }
+  
+  
+  
+  function lanczosKernel(x, a) {
+    if (x === 0) return 1;
+    if (Math.abs(x) >= a) return 0;
+    var pix = Math.PI * x;
+    return (a * Math.sin(pix) * Math.sin(pix / a)) / (pix * pix);
+  }
+  
+  function upscaleLanczos(sourceCanvas, scale, onProgress) {
+    return new Promise(function(resolve) {
+      var sw = sourceCanvas.width;
+      var sh = sourceCanvas.height;
+      var dw = Math.floor(sw * scale);
+      var dh = Math.floor(sh * scale);
+      
+      var destCanvas = document.createElement('canvas');
+      destCanvas.width = dw;
+      destCanvas.height = dh;
+      var destCtx = destCanvas.getContext('2d');
+      
+      var srcCtx = sourceCanvas.getContext('2d');
+      var srcData = srcCtx.getImageData(0, 0, sw, sh);
+      var destData = destCtx.createImageData(dw, dh);
+      
+      var a = 3;
+      var totalPixels = dw * dh;
+      var lastProgress = 0;
+      
+      var chunkSize = 1000;
+      var currentPixel = 0;
+      
+      function processChunk() {
+        var endPixel = Math.min(currentPixel + chunkSize, totalPixels);
+        
+        for (var idx = currentPixel; idx < endPixel; idx++) {
+          var dx = idx % dw;
+          var dy = Math.floor(idx / dw);
+          
+          var sx = dx / scale;
+          var sy = dy / scale;
+          
+          var r = 0, g = 0, b = 0, alpha = 0, totalWeight = 0;
+          
+          var x0 = Math.floor(sx) - a + 1;
+          var x1 = Math.floor(sx) + a;
+          var y0 = Math.floor(sy) - a + 1;
+          var y1 = Math.floor(sy) + a;
+          
+          for (var y = y0; y <= y1; y++) {
+            for (var x = x0; x <= x1; x++) {
+              var px = Math.max(0, Math.min(sw - 1, x));
+              var py = Math.max(0, Math.min(sh - 1, y));
+              
+              var weight = lanczosKernel(sx - x, a) * lanczosKernel(sy - y, a);
+              
+              var srcIdx = (py * sw + px) * 4;
+              r += srcData.data[srcIdx] * weight;
+              g += srcData.data[srcIdx + 1] * weight;
+              b += srcData.data[srcIdx + 2] * weight;
+              alpha += srcData.data[srcIdx + 3] * weight;
+              totalWeight += weight;
+            }
+          }
+          
+          var destIdx = idx * 4;
+          if (totalWeight > 0) {
+            destData.data[destIdx] = Math.max(0, Math.min(255, Math.round(r / totalWeight)));
+            destData.data[destIdx + 1] = Math.max(0, Math.min(255, Math.round(g / totalWeight)));
+            destData.data[destIdx + 2] = Math.max(0, Math.min(255, Math.round(b / totalWeight)));
+            destData.data[destIdx + 3] = Math.max(0, Math.min(255, Math.round(alpha / totalWeight)));
+          }
+        }
+        
+        currentPixel = endPixel;
+        
+        var progress = Math.round((currentPixel / totalPixels) * 100);
+        if (progress !== lastProgress) {
+          onProgress(progress);
+          lastProgress = progress;
+        }
+        
+        if (currentPixel < totalPixels) {
+          setTimeout(processChunk, 0);
+        } else {
+          destCtx.putImageData(destData, 0, 0);
+          resolve(destCanvas);
+        }
+      }
+      
+      processChunk();
+    });
+  }
+  
+  function applySharpen(canvas, amount) {
+    if (amount <= 0) return canvas;
+    
+    var ctx = canvas.getContext('2d');
+    var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var data = imageData.data;
+    var w = canvas.width;
+    var h = canvas.height;
+    
+    var factor = amount * 0.3;
+    var copy = new Uint8ClampedArray(data);
+    
+    for (var y = 1; y < h - 1; y++) {
+      for (var x = 1; x < w - 1; x++) {
+        var idx = (y * w + x) * 4;
+        
+        for (var c = 0; c < 3; c++) {
+          var center = copy[idx + c] * (1 + 4 * factor);
+          var neighbors = (
+            copy[((y - 1) * w + x) * 4 + c] +
+            copy[((y + 1) * w + x) * 4 + c] +
+            copy[(y * w + x - 1) * 4 + c] +
+            copy[(y * w + x + 1) * 4 + c]
+          ) * factor;
+          
+          data[idx + c] = Math.max(0, Math.min(255, Math.round(center - neighbors)));
+        }
+      }
+    }
+    
+    ctx.putImageData(imageData, 0, 0);
+    return canvas;
+  }
+  
+  function applySmoothing(canvas, level) {
+    if (level <= 0) return canvas;
+    
+    var ctx = canvas.getContext('2d');
+    var w = canvas.width;
+    var h = canvas.height;
+    
+    var radius = level;
+    var imageData = ctx.getImageData(0, 0, w, h);
+    var data = imageData.data;
+    var copy = new Uint8ClampedArray(data);
+    
+    for (var y = radius; y < h - radius; y++) {
+      for (var x = radius; x < w - radius; x++) {
+        var idx = (y * w + x) * 4;
+        
+        for (var c = 0; c < 3; c++) {
+          var sum = 0;
+          var count = 0;
+          
+          for (var dy = -radius; dy <= radius; dy++) {
+            for (var dx = -radius; dx <= radius; dx++) {
+              var nidx = ((y + dy) * w + (x + dx)) * 4 + c;
+              sum += copy[nidx];
+              count++;
+            }
+          }
+          
+          var blurred = sum / count;
+          var blend = level * 0.2;
+          data[idx + c] = Math.round(copy[idx + c] * (1 - blend) + blurred * blend);
+        }
+      }
+    }
+    
+    ctx.putImageData(imageData, 0, 0);
+    return canvas;
+  }
+  
+  
+  
+  function processImage() {
+    if (!sourceImage || processing) return;
+    
+    processing = true;
+    var startTime = Date.now();
+    
+    var scale = parseInt(document.querySelector('input[name="scale"]:checked').value);
+    var smoothing = parseInt(document.querySelector('input[name="denoise"]:checked').value);
+    var imageType = document.querySelector('input[name="type"]:checked').value;
+    
+    progressSection.classList.remove('hidden');
+    resultSection.classList.add('hidden');
+    processBtn.disabled = true;
+    
+    document.getElementById('progress-title').textContent = i18n.processingImage;
+    document.getElementById('progress-status').textContent = i18n.initialization;
+    document.getElementById('progress-bar').value = 0;
+    document.getElementById('progress-percent').textContent = '0%';
+    
+    var sourceCanvas = document.createElement('canvas');
+    sourceCanvas.width = sourceWidth;
+    sourceCanvas.height = sourceHeight;
+    var sourceCtx = sourceCanvas.getContext('2d');
+    sourceCtx.drawImage(sourceImage, 0, 0);
+    
+    if (smoothing > 0) {
+      document.getElementById('progress-status').textContent = i18n.smoothingProcess;
+      sourceCanvas = applySmoothing(sourceCanvas, smoothing);
+    }
+    
+    document.getElementById('progress-status').textContent = i18n.upscalingLanczos;
+    
+    upscaleLanczos(sourceCanvas, scale, function(progress) {
+      document.getElementById('progress-bar').value = progress * 0.9;
+      document.getElementById('progress-percent').textContent = Math.round(progress * 0.9) + '%';
+      
+      var elapsed = (Date.now() - startTime) / 1000;
+      var estimated = (elapsed / progress) * (100 - progress);
+      document.getElementById('progress-time').textContent = i18n.remaining + ' ~' + Math.round(estimated) + 's';
+    }).then(function(resultCanvas) {
+      
+      document.getElementById('progress-status').textContent = i18n.sharpening;
+      document.getElementById('progress-bar').value = 95;
+      
+      var sharpenAmount = 0;
+      if (imageType === 'anime' || imageType === 'cg') {
+        sharpenAmount = 1.5;
+      } else if (imageType === 'photo') {
+        sharpenAmount = 0.8;
+      } else {
+        sharpenAmount = 1.0;
+      }
+      
+      resultCanvas = applySharpen(resultCanvas, sharpenAmount);
+      
+      document.getElementById('progress-bar').value = 100;
+      document.getElementById('progress-percent').textContent = '100%';
+      document.getElementById('progress-status').textContent = i18n.done;
+      
+      resultDataUrl = resultCanvas.toDataURL('image/png');
+      var endTime = Date.now();
+      var duration = ((endTime - startTime) / 1000).toFixed(1);
+      
+      document.getElementById('compare-before').src = sourceCanvas.toDataURL('image/png');
+      document.getElementById('compare-after').src = resultDataUrl;
+      document.getElementById('before-dimensions').textContent = sourceWidth + ' × ' + sourceHeight;
+      document.getElementById('after-dimensions').textContent = resultCanvas.width + ' × ' + resultCanvas.height;
+      
+      document.getElementById('stat-scale').textContent = scale + 'x';
+      document.getElementById('stat-time').textContent = duration + 's';
+      
+      var base64Length = resultDataUrl.length - 'data:image/png;base64,'.length;
+      var fileSize = Math.round(base64Length * 0.75);
+      document.getElementById('stat-size').textContent = formatBytes(fileSize);
+      
+      setTimeout(function() {
+        progressSection.classList.add('hidden');
+        resultSection.classList.remove('hidden');
+        processBtn.disabled = false;
+        processing = false;
+      }, 500);
+      
+    }).catch(function(err) {
+      console.error('Processing error:', err);
+      alert(i18n.processingError + ' ' + err.message);
+      progressSection.classList.add('hidden');
+      processBtn.disabled = false;
+      processing = false;
+    });
+  }
+  
+  function downloadResult() {
+    if (!resultDataUrl) return;
+    
+    var link = document.createElement('a');
+    link.download = 'upscaled-image.png';
+    link.href = resultDataUrl;
+    link.click();
+  }
+  
+  
+  
+  dropzone.addEventListener('click', function(e) {
+    if (!e.target.closest('#remove-image')) {
+      fileInput.click();
+    }
+  });
+  
+  dropzone.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    this.classList.add('border-primary', 'bg-primary/5');
+  });
+  
+  dropzone.addEventListener('dragleave', function() {
+    this.classList.remove('border-primary', 'bg-primary/5');
+  });
+  
+  dropzone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    this.classList.remove('border-primary', 'bg-primary/5');
+    if (e.dataTransfer.files[0]) {
+      handleFile(e.dataTransfer.files[0]);
+    }
+  });
+  
+  fileInput.addEventListener('change', function(e) {
+    if (e.target.files[0]) {
+      handleFile(e.target.files[0]);
+    }
+  });
+  
+  document.getElementById('remove-image').addEventListener('click', function(e) {
+    e.stopPropagation();
+    removeImage();
+  });
+  
+  document.querySelectorAll('input[name="scale"]').forEach(function(radio) {
+    radio.addEventListener('change', updateResultPreview);
+  });
+  
+  processBtn.addEventListener('click', processImage);
+  
+  document.getElementById('download-result').addEventListener('click', downloadResult);
+  
+})();
+</script>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Максим Александров<br>
+<strong>Age:</strong> 28
+<strong>Location:</strong> Тула, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>Этот блог — мой personal knowledge base, где я пушу заметки про tech stack, life experience и всё, что триггерит мой interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — готов к мёрджу идей и совместным проектам.</p>
+<p><img src="/img/meme.webp" alt="meme"></p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-яп">💻 ЯП</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Адаптивная вёрстка (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST API</strong></li>
+</ul>
+<h2 id="-базы-данных">🗄️ Базы данных</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-дизайн-и-графика">🎨 Дизайн и графика</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX дизайн и прототипирование</li>
+<li><strong>Photoshop</strong> — графика и обработка изображений</li>
+<li><strong>After Effects</strong> — моушн-дизайн и анимация 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои Open Source проекты 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои проекты 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN-сервис в Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN-сервис в Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Социальные сети</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+     
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

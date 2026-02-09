@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+JavaScript Obfuscator
+ | 0x69.ru</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Ox69" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="canonical" href="https://0x69.ru/en/utilities/javascript-obfuscator/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/en/utilities/javascript-obfuscator/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="JavaScript Obfuscator">
+  <meta property="og:description" content="Obfuscate JavaScript code to protect from copying and analysis">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="utilities">
+    <meta property="article:published_time" content="2026-02-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-09T00:00:00+00:00">
+    <meta property="article:tag" content="Javascript">
+    <meta property="article:tag" content="Obfuscator">
+    <meta property="article:tag" content="Protection">
+    <meta property="article:tag" content="Code">
+    <meta property="article:tag" content="Minification">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="JavaScript Obfuscator">
+  <meta name="twitter:description" content="Obfuscate JavaScript code to protect from copying and analysis">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Flip it!"
+                aria-label="Flip it!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/en/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">To iterate is human, to recurse divine</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="About">About</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/en/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Search"
+   aria-label="Search">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="All Categories"
+   aria-label="All Categories">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Portfolio"
+   aria-label="Portfolio">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Utilities"
+   aria-label="Utilities">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/utilities/javascript-obfuscator/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/ru/utilities/javascript-obfuscator/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Menu</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="About"
+                aria-label="About">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">About</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Languages
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/utilities/javascript-obfuscator/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/utilities/javascript-obfuscator/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Menu
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Search">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Search</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Categories">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Categories</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Portfolio">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Portfolio</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Utilities">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Utilities</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">18</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  
+  <div class="text-center mb-8 sm:mb-12">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">🛡️</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">JavaScript Obfuscator</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">Obfuscate JavaScript code to protect from copying and analysis</p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        100% in browser
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+        <ion-icon name="eye-off-outline"></ion-icon>
+        Code protection
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="code-slash-outline"></ion-icon>
+        JavaScript
+      </span>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      
+      <div class="lg:col-span-2 space-y-4">
+        
+        
+        <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="code-outline" class="text-primary"></ion-icon>
+              Source code
+            </h2>
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-base-content/50" id="input-stats">0 characters</span>
+              <button id="paste-btn" class="btn btn-ghost btn-xs gap-1">
+                <ion-icon name="clipboard-outline"></ion-icon>
+                Paste
+              </button>
+              <button id="clear-btn" class="btn btn-ghost btn-xs gap-1 text-error">
+                <ion-icon name="trash-outline"></ion-icon>
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <textarea 
+              id="code-input" 
+              class="textarea textarea-bordered w-full h-64 font-mono text-sm leading-relaxed"
+              placeholder="// Paste your JavaScript code here...
+
+function hello(name) {
+    const message = &#39;Hello, &#39; &#43; name &#43; &#39;!&#39;;
+    console.log(message);
+    return message;
+}
+
+hello(&#39;World&#39;);"
+              spellcheck="false"
+            ></textarea>
+          </div>
+        </div>
+
+        
+        <div class="flex justify-center">
+          <button id="obfuscate-btn" class="btn btn-primary btn-lg gap-2 px-8">
+            <ion-icon name="shield-outline" class="text-xl"></ion-icon>
+            Obfuscate code
+          </button>
+        </div>
+
+        
+        <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="lock-closed-outline" class="text-success"></ion-icon>
+              Obfuscated code
+            </h2>
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-base-content/50" id="output-stats">0 characters</span>
+              <button id="copy-btn" class="btn btn-ghost btn-xs gap-1">
+                <ion-icon name="copy-outline"></ion-icon>
+                Copy
+              </button>
+              <button id="download-btn" class="btn btn-ghost btn-xs gap-1">
+                <ion-icon name="download-outline"></ion-icon>
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <textarea 
+              id="code-output" 
+              class="textarea textarea-bordered w-full h-64 font-mono text-xs leading-relaxed bg-base-200/30"
+              placeholder="Obfuscated code will appear here..."
+              readonly
+            ></textarea>
+          </div>
+          
+          
+          <div id="stats-panel" class="hidden p-4 border-t border-base-200 dark:border-base-content/10">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+              <div class="p-2 rounded-lg bg-base-200/50">
+                <div class="text-lg font-bold text-primary" id="stat-original">0</div>
+                <div class="text-xs text-base-content/60">Original size</div>
+              </div>
+              <div class="p-2 rounded-lg bg-base-200/50">
+                <div class="text-lg font-bold text-secondary" id="stat-result">0</div>
+                <div class="text-xs text-base-content/60">Result</div>
+              </div>
+              <div class="p-2 rounded-lg bg-base-200/50">
+                <div class="text-lg font-bold" id="stat-ratio">0%</div>
+                <div class="text-xs text-base-content/60">Size change</div>
+              </div>
+              <div class="p-2 rounded-lg bg-base-200/50">
+                <div class="text-lg font-bold text-accent" id="stat-vars">0</div>
+                <div class="text-xs text-base-content/60">Variables</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      
+      <div class="space-y-4">
+        
+        
+        <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              Settings
+            </h2>
+          </div>
+          
+          <div class="p-4 space-y-4">
+            
+            
+            <div>
+              <label class="label py-1">
+                <span class="label-text font-medium">Protection level</span>
+              </label>
+              <div class="space-y-2">
+                <label class="flex items-center gap-3 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+                  <input type="radio" name="level" value="low" class="radio radio-sm radio-primary" />
+                  <div class="flex-1">
+                    <div class="font-medium text-sm">Light</div>
+                    <div class="text-xs text-base-content/60">Minification &#43; basic renaming</div>
+                  </div>
+                  <span class="badge badge-success badge-sm">Fast</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+                  <input type="radio" name="level" value="medium" class="radio radio-sm radio-primary" checked />
+                  <div class="flex-1">
+                    <div class="font-medium text-sm">Medium</div>
+                    <div class="text-xs text-base-content/60">&#43; string encryption</div>
+                  </div>
+                  <span class="badge badge-warning badge-sm">Balanced</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+                  <input type="radio" name="level" value="high" class="radio radio-sm radio-primary" />
+                  <div class="flex-1">
+                    <div class="font-medium text-sm">High</div>
+                    <div class="text-xs text-base-content/60">&#43; control flow &#43; dead code</div>
+                  </div>
+                  <span class="badge badge-error badge-sm">Slower</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="divider my-2"></div>
+            
+            
+            <div class="space-y-3">
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="text-outline" class="text-lg text-base-content/70"></ion-icon>
+                  <span class="text-sm">Variable renaming</span>
+                </div>
+                <input type="checkbox" id="opt-rename" class="toggle toggle-sm toggle-primary" checked />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="lock-closed-outline" class="text-lg text-base-content/70"></ion-icon>
+                  <span class="text-sm">String encryption</span>
+                </div>
+                <input type="checkbox" id="opt-strings" class="toggle toggle-sm toggle-primary" checked />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="git-branch-outline" class="text-lg text-base-content/70"></ion-icon>
+                  <span class="text-sm">Control Flow Flattening</span>
+                </div>
+                <input type="checkbox" id="opt-controlflow" class="toggle toggle-sm toggle-primary" />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="skull-outline" class="text-lg text-base-content/70"></ion-icon>
+                  <span class="text-sm">Dead Code Injection</span>
+                </div>
+                <input type="checkbox" id="opt-deadcode" class="toggle toggle-sm toggle-primary" />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="bug-outline" class="text-lg text-base-content/70"></ion-icon>
+                  <span class="text-sm">Anti-Debug Protection</span>
+                </div>
+                <input type="checkbox" id="opt-antidebug" class="toggle toggle-sm toggle-primary" />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="contract-outline" class="text-lg text-base-content/70"></ion-icon>
+                  <span class="text-sm">Compact Output</span>
+                </div>
+                <input type="checkbox" id="opt-compact" class="toggle toggle-sm toggle-primary" checked />
+              </label>
+              
+            </div>
+
+            <div class="divider my-2"></div>
+
+            
+            <div>
+              <label class="label py-1">
+                <span class="label-text font-medium text-sm">Variable name format</span>
+              </label>
+              <select id="name-format" class="select select-bordered select-sm w-full">
+                <option value="hexadecimal">Hexadecimal (_0x1a2b)</option>
+                <option value="short">Short (a, b, c)</option>
+                <option value="underscore">Underscore (__x, __y)</option>
+                <option value="mangled">Mangled (混淆)</option>
+              </select>
+            </div>
+            
+          </div>
+        </div>
+
+        
+        <div class="alert alert-warning">
+          <ion-icon name="warning-outline" class="text-xl"></ion-icon>
+          <div class="text-sm">
+            <div class="font-semibold">Important</div>
+            <p>Obfuscation makes analysis harder but doesn&#39;t make code fully secure. Always test the result!</p>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+
+    
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+          <ion-icon name="text-outline" class="text-2xl text-primary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">Renaming</h3>
+        <p class="text-sm text-base-content/60 mb-2">Variables and functions get unreadable names</p>
+        <div class="text-xs font-mono bg-base-200 p-2 rounded">
+          userName → _0x4f2a
+        </div>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-3">
+          <ion-icon name="lock-closed-outline" class="text-2xl text-secondary"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">String encryption</h3>
+        <p class="text-sm text-base-content/60 mb-2">Strings are encoded and decrypted at runtime</p>
+        <div class="text-xs font-mono bg-base-200 p-2 rounded">
+          "Hello" → _0x3f['decode']()
+        </div>
+      </div>
+      
+      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-3">
+          <ion-icon name="git-branch-outline" class="text-2xl text-accent"></ion-icon>
+        </div>
+        <h3 class="font-semibold mb-1">Control Flow</h3>
+        <p class="text-sm text-base-content/60 mb-2">Code logic is obfuscated through switch/case</p>
+        <div class="text-xs font-mono bg-base-200 p-2 rounded">
+          if/else → switch(_0x[...])
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  
+  const i18n = {
+    characters: "\"characters\"",
+    copied: "\"Copied\"",
+    copy: "\"Copy\"",
+    enterCode: "\"Enter JavaScript code\"",
+    error: "\"Error\""
+  };
+  
+  
+  const codeInput = document.getElementById('code-input');
+  const codeOutput = document.getElementById('code-output');
+  const obfuscateBtn = document.getElementById('obfuscate-btn');
+  const statsPanel = document.getElementById('stats-panel');
+  
+  let obfuscatedVarsCount = 0;
+  
+  
+  
+  function generateHexName() {
+    return '_0x' + Math.random().toString(16).substr(2, 4);
+  }
+  
+  function generateShortName(index) {
+    const chars = 'abcdefghijklmnopqrstuvwxyz';
+    let name = '';
+    let i = index;
+    do {
+      name = chars[i % 26] + name;
+      i = Math.floor(i / 26) - 1;
+    } while (i >= 0);
+    return name;
+  }
+  
+  function generateUnderscoreName(index) {
+    return '__' + String.fromCharCode(97 + (index % 26)) + Math.floor(index / 26);
+  }
+  
+  function generateMangledName() {
+    const chars = '混淆変数関数';
+    return '_' + chars[Math.floor(Math.random() * chars.length)] + Math.random().toString(36).substr(2, 2);
+  }
+  
+  function base64Encode(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+  }
+  
+  
+  
+  function findIdentifiers(code) {
+    const identifiers = new Set();
+    
+    const funcRegex = /function\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
+    let match;
+    while ((match = funcRegex.exec(code)) !== null) {
+      identifiers.add(match[1]);
+    }
+    
+    const varRegex = /(?:const|let|var)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
+    while ((match = varRegex.exec(code)) !== null) {
+      identifiers.add(match[1]);
+    }
+    
+    const paramRegex = /function\s*[a-zA-Z_$]*\s*\(([^)]*)\)/g;
+    while ((match = paramRegex.exec(code)) !== null) {
+      const params = match[1].split(',').map(p => p.trim()).filter(p => p);
+      params.forEach(p => {
+        const name = p.split('=')[0].trim();
+        if (/^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(name)) {
+          identifiers.add(name);
+        }
+      });
+    }
+    
+    const arrowRegex = /(?:const|let|var)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*=\s*(?:\([^)]*\)|[a-zA-Z_$][a-zA-Z0-9_$]*)\s*=>/g;
+    while ((match = arrowRegex.exec(code)) !== null) {
+      identifiers.add(match[1]);
+    }
+    
+    const reserved = ['if', 'else', 'for', 'while', 'do', 'switch', 'case', 'break', 'continue', 
+                      'return', 'function', 'const', 'let', 'var', 'class', 'new', 'this', 'true', 
+                      'false', 'null', 'undefined', 'typeof', 'instanceof', 'try', 'catch', 'finally',
+                      'throw', 'async', 'await', 'import', 'export', 'default', 'from', 'of', 'in',
+                      'console', 'window', 'document', 'Array', 'Object', 'String', 'Number', 
+                      'Boolean', 'Math', 'Date', 'JSON', 'Promise', 'Error', 'RegExp', 'Map', 'Set',
+                      'parseInt', 'parseFloat', 'isNaN', 'isFinite', 'eval', 'arguments'];
+    
+    reserved.forEach(r => identifiers.delete(r));
+    
+    return Array.from(identifiers);
+  }
+  
+  function renameIdentifiers(code, format) {
+    const identifiers = findIdentifiers(code);
+    const nameMap = {};
+    
+    identifiers.forEach((id, index) => {
+      let newName;
+      switch (format) {
+        case 'short':
+          newName = generateShortName(index);
+          break;
+        case 'underscore':
+          newName = generateUnderscoreName(index);
+          break;
+        case 'mangled':
+          newName = generateMangledName();
+          break;
+        default:
+          newName = generateHexName();
+      }
+      nameMap[id] = newName;
+    });
+    
+    obfuscatedVarsCount = identifiers.length;
+    
+    let result = code;
+    Object.entries(nameMap).forEach(([original, obfuscated]) => {
+      const regex = new RegExp('\\b' + original + '\\b', 'g');
+      result = result.replace(regex, obfuscated);
+    });
+    
+    return result;
+  }
+  
+  function obfuscateStrings(code) {
+    const stringArrayName = '_0x' + Math.random().toString(16).substr(2, 4);
+    const strings = [];
+    
+    let result = code.replace(/(["'`])(?:(?!\1)[^\\]|\\.)*\1/g, (match) => {
+      if (match.startsWith('`') && match.includes('${')) {
+        return match;
+      }
+      
+      const content = match.slice(1, -1);
+      const index = strings.length;
+      strings.push(base64Encode(content));
+      
+      return stringArrayName + '[' + index + ']';
+    });
+    
+    if (strings.length > 0) {
+      const decoder = `var ${stringArrayName}=(function(){var _arr=[${strings.map(s => '"' + s + '"').join(',')}];return _arr.map(function(s){return decodeURIComponent(escape(atob(s)));});})();`;
+      result = decoder + result;
+    }
+    
+    return result;
+  }
+  
+  function flattenControlFlow(code) {
+    const stateVar = '_0x' + Math.random().toString(16).substr(2, 4);
+    
+    const wrapped = `
+(function(){
+  var ${stateVar}=0x0;
+  while(true){
+    switch(${stateVar}){
+      case 0x0:
+        ${stateVar}=0x1;
+        break;
+      case 0x1:
+        ${code}
+        ${stateVar}=0x2;
+        break;
+      case 0x2:
+        return;
+    }
+  }
+})();`;
+    
+    return wrapped;
+  }
+  
+  function injectDeadCode(code) {
+    const deadSnippets = [
+      'if(false){console.log(Math.random());}',
+      'var _dead=function(){return null;};',
+      '(function(){if(typeof undefined!=="undefined")return;})();',
+      'void(0);',
+      'true&&false;',
+    ];
+    
+    const lines = code.split('\n');
+    const result = [];
+    
+    lines.forEach((line, i) => {
+      result.push(line);
+      if (Math.random() > 0.7 && line.trim()) {
+        result.push(deadSnippets[Math.floor(Math.random() * deadSnippets.length)]);
+      }
+    });
+    
+    return result.join('\n');
+  }
+  
+  function addAntiDebug(code) {
+    const antiDebug = `
+(function(){
+  var _0xcheck=function(){
+    var _start=new Date();
+    debugger;
+    var _end=new Date();
+    if(_end-_start>100){
+      while(true){}
+    }
+  };
+  setInterval(_0xcheck,1000);
+})();`;
+    
+    return antiDebug + code;
+  }
+  
+  function minify(code) {
+    return code
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/\/\/.*$/gm, '')
+      .replace(/\s+/g, ' ')
+      .replace(/\s*([{}\[\]();,:])\s*/g, '$1')
+      .replace(/\s*([=+\-*/<>!&|?])\s*/g, '$1')
+      .trim();
+  }
+  
+  
+  
+  function obfuscate(code, options) {
+    let result = code;
+    obfuscatedVarsCount = 0;
+    
+    try {
+      if (options.rename) {
+        result = renameIdentifiers(result, options.nameFormat);
+      }
+      
+      if (options.strings) {
+        result = obfuscateStrings(result);
+      }
+      
+      if (options.deadCode) {
+        result = injectDeadCode(result);
+      }
+      
+      if (options.controlFlow) {
+        result = flattenControlFlow(result);
+      }
+      
+      if (options.antiDebug) {
+        result = addAntiDebug(result);
+      }
+      
+      if (options.compact) {
+        result = minify(result);
+      }
+      
+      return { success: true, code: result };
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  }
+  
+  
+  
+  function updateInputStats() {
+    const len = codeInput.value.length;
+    document.getElementById('input-stats').textContent = len + ' ' + i18n.characters;
+  }
+  
+  function updateOutputStats() {
+    const len = codeOutput.value.length;
+    document.getElementById('output-stats').textContent = len + ' ' + i18n.characters;
+  }
+  
+  function showStats(originalLen, resultLen) {
+    document.getElementById('stat-original').textContent = formatBytes(originalLen);
+    document.getElementById('stat-result').textContent = formatBytes(resultLen);
+    
+    const ratio = ((resultLen - originalLen) / originalLen * 100).toFixed(1);
+    const ratioEl = document.getElementById('stat-ratio');
+    ratioEl.textContent = (ratio > 0 ? '+' : '') + ratio + '%';
+    ratioEl.className = 'text-lg font-bold ' + (ratio > 0 ? 'text-error' : 'text-success');
+    
+    document.getElementById('stat-vars').textContent = obfuscatedVarsCount;
+    
+    statsPanel.classList.remove('hidden');
+  }
+  
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    return (bytes / 1024).toFixed(1) + ' KB';
+  }
+  
+  function getOptions() {
+    const level = document.querySelector('input[name="level"]:checked').value;
+    
+    if (level === 'low') {
+      document.getElementById('opt-rename').checked = true;
+      document.getElementById('opt-strings').checked = false;
+      document.getElementById('opt-controlflow').checked = false;
+      document.getElementById('opt-deadcode').checked = false;
+    } else if (level === 'high') {
+      document.getElementById('opt-rename').checked = true;
+      document.getElementById('opt-strings').checked = true;
+      document.getElementById('opt-controlflow').checked = true;
+      document.getElementById('opt-deadcode').checked = true;
+    }
+    
+    return {
+      rename: document.getElementById('opt-rename').checked,
+      strings: document.getElementById('opt-strings').checked,
+      controlFlow: document.getElementById('opt-controlflow').checked,
+      deadCode: document.getElementById('opt-deadcode').checked,
+      antiDebug: document.getElementById('opt-antidebug').checked,
+      compact: document.getElementById('opt-compact').checked,
+      nameFormat: document.getElementById('name-format').value
+    };
+  }
+  
+  
+  
+  codeInput.addEventListener('input', updateInputStats);
+  
+  obfuscateBtn.addEventListener('click', () => {
+    const code = codeInput.value.trim();
+    if (!code) {
+      alert(i18n.enterCode);
+      return;
+    }
+    
+    const options = getOptions();
+    const result = obfuscate(code, options);
+    
+    if (result.success) {
+      codeOutput.value = result.code;
+      updateOutputStats();
+      showStats(code.length, result.code.length);
+    } else {
+      codeOutput.value = '// ' + i18n.error + ': ' + result.error;
+      statsPanel.classList.add('hidden');
+    }
+  });
+  
+  document.getElementById('paste-btn').addEventListener('click', async () => {
+    try {
+      codeInput.value = await navigator.clipboard.readText();
+      updateInputStats();
+    } catch (e) {
+      console.error('Failed to paste:', e);
+    }
+  });
+  
+  document.getElementById('clear-btn').addEventListener('click', () => {
+    codeInput.value = '';
+    codeOutput.value = '';
+    statsPanel.classList.add('hidden');
+    updateInputStats();
+    updateOutputStats();
+  });
+  
+  document.getElementById('copy-btn').addEventListener('click', async () => {
+    if (codeOutput.value) {
+      await navigator.clipboard.writeText(codeOutput.value);
+      const btn = document.getElementById('copy-btn');
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> ' + i18n.copied;
+      setTimeout(() => { btn.innerHTML = '<ion-icon name="copy-outline"></ion-icon> ' + i18n.copy; }, 1500);
+    }
+  });
+  
+  document.getElementById('download-btn').addEventListener('click', () => {
+    if (codeOutput.value) {
+      const blob = new Blob([codeOutput.value], { type: 'application/javascript' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'obfuscated.js';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  });
+  
+  document.querySelectorAll('input[name="level"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      getOptions();
+    });
+  });
+  
+  
+  updateInputStats();
+  
+  console.log('JavaScript Obfuscator ready');
+  
+})();
+</script>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Maksim Alexandrov<br>
+<strong>Age:</strong> 28<br>
+<strong>Location:</strong> Tula, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>This blog is my personal knowledge base, where I push notes about my tech stack, life experience, and everything that triggers my interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — ready to merge ideas and work on joint projects.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-programming-languages">💻 Programming Languages</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Responsive layout (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST APIs</strong></li>
+</ul>
+<h2 id="-databases">🗄️ Databases</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-design--graphics">🎨 Design &amp; Graphics</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX design and prototyping</li>
+<li><strong>Photoshop</strong> — graphics and image editing</li>
+<li><strong>After Effects</strong> — motion design and animation 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Open Source Projects 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Projects 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN service in Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN service in Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Social Links</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+     
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

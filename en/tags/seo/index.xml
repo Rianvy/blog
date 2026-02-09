@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>SEO on 0x69.ru</title>
+    <title>Seo on 0x69.ru</title>
     <link>https://0x69.ru/en/tags/seo/</link>
-    <description>Recent content in SEO on 0x69.ru</description>
+    <description>Recent content in Seo on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 28 Jan 2026 00:35:23 +0300</lastBuildDate>
+    <lastBuildDate>Mon, 09 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://0x69.ru/en/tags/seo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Meta Tag Generator</title>
+      <link>https://0x69.ru/en/utilities/meta-tag-generator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/meta-tag-generator/</guid>
+      <description>&lt;p&gt;SEO, Open Graph, Twitter, and favicon meta tag generator with live preview. Free online tool.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>VKify Website — Landing Page for Browser Extension</title>
       <link>https://0x69.ru/en/portfolio/vkify-website-extension-landing/</link>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Text on 0x69.ru</title>
+    <link>https://0x69.ru/en/tags/text/</link>
+    <description>Recent content in Text on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://0x69.ru/en/tags/text/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Base64 Encoder/Decoder</title>
+      <link>https://0x69.ru/en/utilities/base64-encoder/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/base64-encoder/</guid>
+      <description>&lt;p&gt;Encode and decode text, files, and images to Base64 online&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Diff Tool</title>
+      <link>https://0x69.ru/en/utilities/diff-tool/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/diff-tool/</guid>
+      <description>&lt;p&gt;Compare text, JSON, code with change highlighting&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Lorem Ipsum Generator</title>
+      <link>https://0x69.ru/en/utilities/lorem-ipsum/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/lorem-ipsum/</guid>
+      <description>&lt;p&gt;Generate placeholder text for design and layout&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Markdown Editor</title>
+      <link>https://0x69.ru/en/utilities/markdown-editor/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/markdown-editor/</guid>
+      <description>&lt;p&gt;Online Markdown editor with real-time preview and HTML export&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

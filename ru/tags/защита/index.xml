@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Защита on 0x69.ru</title>
+    <link>https://0x69.ru/ru/tags/%D0%B7%D0%B0%D1%89%D0%B8%D1%82%D0%B0/</link>
+    <description>Recent content in Защита on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>ru</language>
+    <lastBuildDate>Mon, 09 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://0x69.ru/ru/tags/%D0%B7%D0%B0%D1%89%D0%B8%D1%82%D0%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaScript Obfuscator</title>
+      <link>https://0x69.ru/ru/utilities/javascript-obfuscator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/ru/utilities/javascript-obfuscator/</guid>
+      <description>&lt;p&gt;Обфускация JavaScript кода для защиты от копирования и анализа&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

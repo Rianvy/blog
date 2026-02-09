@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Генератор on 0x69.ru</title>
+    <link>https://0x69.ru/ru/tags/%D0%B3%D0%B5%D0%BD%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80/</link>
+    <description>Recent content in Генератор on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>ru</language>
+    <lastBuildDate>Mon, 09 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://0x69.ru/ru/tags/%D0%B3%D0%B5%D0%BD%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Favicon Generator</title>
+      <link>https://0x69.ru/ru/utilities/favicon-generator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/ru/utilities/favicon-generator/</guid>
+      <description>&lt;p&gt;Генератор favicon, иконок для PWA и Web App Manifest. Работает полностью в браузере.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>JSON → TypeScript / Go / Zod</title>
+      <link>https://0x69.ru/ru/utilities/json-to-types/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/ru/utilities/json-to-types/</guid>
+      <description>&lt;p&gt;Генерация TypeScript интерфейсов, Go структур, Zod схем и JSON Schema из JSON данных&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>QR Code Generator</title>
+      <link>https://0x69.ru/ru/utilities/qr-generator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/ru/utilities/qr-generator/</guid>
+      <description>&lt;p&gt;Генератор QR-кодов с настройкой цвета, размера, логотипа и экспортом в PNG/SVG&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Lorem Ipsum Generator</title>
+      <link>https://0x69.ru/ru/utilities/lorem-ipsum/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/ru/utilities/lorem-ipsum/</guid>
+      <description>&lt;p&gt;Генератор текста-заполнителя для дизайна и вёрстки&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

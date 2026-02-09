@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="en"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+Color Converter
+ | 0x69.ru</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Ox69" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="canonical" href="https://0x69.ru/en/utilities/color-converter/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/en/utilities/color-converter/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="Color Converter">
+  <meta property="og:description" content="Convert colors between HEX, RGB, HSL and other formats">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="utilities">
+    <meta property="article:published_time" content="2026-02-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-08T00:00:00+00:00">
+    <meta property="article:tag" content="Color">
+    <meta property="article:tag" content="Hex">
+    <meta property="article:tag" content="Rgb">
+    <meta property="article:tag" content="Hsl">
+    <meta property="article:tag" content="Converter">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Color Converter">
+  <meta name="twitter:description" content="Convert colors between HEX, RGB, HSL and other formats">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Flip it!"
+                aria-label="Flip it!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/en/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">To iterate is human, to recurse divine</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="About">About</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/en/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Search"
+   aria-label="Search">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="All Categories"
+   aria-label="All Categories">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Portfolio"
+   aria-label="Portfolio">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Utilities"
+   aria-label="Utilities">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/utilities/color-converter/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/ru/utilities/color-converter/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Menu</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="About"
+                aria-label="About">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">About</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Languages
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/utilities/color-converter/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/utilities/color-converter/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Menu
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Search">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Search</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Categories">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Categories</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Portfolio">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Portfolio</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Utilities">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Utilities</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">18</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">🎨</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">Color Converter</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto">Convert colors between HEX, RGB, HSL and other formats</p>
+  </div>
+
+  <div class="max-w-4xl mx-auto">
+    
+    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      
+      <div class="p-4 sm:p-6">
+        
+        
+        <div class="flex flex-col sm:flex-row gap-6 items-center mb-8">
+          
+          
+          <div class="relative">
+            <div 
+              id="color-preview" 
+              class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl shadow-lg cursor-pointer transition-all hover:scale-105 border-4 border-base-200"
+              style="background-color: #6366f1;"
+            ></div>
+            <input 
+              type="color" 
+              id="color-picker" 
+              value="#6366f1" 
+              class="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+            />
+            <div class="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-base-100 shadow-lg flex items-center justify-center">
+              <ion-icon name="color-palette-outline" class="text-primary"></ion-icon>
+            </div>
+          </div>
+          
+          
+          <div class="flex-1 w-full">
+            <div class="form-control mb-4">
+              <label class="label">
+                <span class="label-text font-medium">Enter color (HEX, RGB, HSL)</span>
+              </label>
+              <div class="join w-full">
+                <input 
+                  type="text" 
+                  id="color-input" 
+                  class="input input-bordered join-item flex-1 font-mono"
+                  placeholder="#6366f1 or rgb(99, 102, 241)"
+                  value="#6366f1"
+                />
+                <button id="parse-color-btn" class="btn btn-primary join-item">
+                  <ion-icon name="arrow-forward-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+            
+            
+            <div class="flex flex-wrap gap-2">
+              <button id="random-color-btn" class="btn btn-ghost btn-sm gap-2">
+                <ion-icon name="dice-outline"></ion-icon>
+                Random
+              </button>
+              <button id="eyedropper-btn" class="btn btn-ghost btn-sm gap-2">
+                <ion-icon name="eyedrop-outline"></ion-icon>
+                Eyedropper
+              </button>
+            </div>
+          </div>
+          
+        </div>
+
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="color-results">
+          
+          
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">HEX</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="hex">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-hex">#6366f1</div>
+          </div>
+          
+          
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">RGB</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="rgb">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-rgb">rgb(99, 102, 241)</div>
+          </div>
+          
+          
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">RGBA</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="rgba">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-rgba">rgba(99, 102, 241, 1)</div>
+          </div>
+          
+          
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">HSL</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="hsl">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-hsl">hsl(239, 84%, 67%)</div>
+          </div>
+          
+          
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">HSLA</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="hsla">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-hsla">hsla(239, 84%, 67%, 1)</div>
+          </div>
+          
+          
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">HWB</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="hwb">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-hwb">hwb(239 39% 5%)</div>
+          </div>
+          
+          
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">CMYK</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="cmyk">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-cmyk">cmyk(59%, 58%, 0%, 5%)</div>
+          </div>
+          
+          
+          <div class="p-4 rounded-xl bg-base-200/50 group hover:bg-base-200 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-base-content/60">CSS Variable</span>
+              <button class="btn btn-ghost btn-xs copy-btn opacity-0 group-hover:opacity-100 transition-opacity" data-format="css">
+                <ion-icon name="copy-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="font-mono text-lg select-all" id="result-css">--color: #6366f1;</div>
+          </div>
+          
+        </div>
+
+        
+        <div class="mt-6 p-4 rounded-xl bg-base-200/30">
+          <div class="flex items-center justify-between mb-2">
+            <label class="label-text font-medium">Transparency (Alpha)</label>
+            <span class="font-mono text-sm" id="alpha-value">100%</span>
+          </div>
+          <input type="range" id="alpha-slider" min="0" max="100" value="100" class="range range-primary range-sm" />
+          <div class="flex justify-between text-xs text-base-content/40 mt-1">
+            <span>0%</span>
+            <span>50%</span>
+            <span>100%</span>
+          </div>
+        </div>
+
+        
+        <div class="mt-6 p-4 rounded-xl bg-base-200/30">
+          <h4 class="font-medium mb-4">RGB Settings</h4>
+          <div class="space-y-4">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm text-error font-medium">R</span>
+                <span class="font-mono text-sm" id="r-value">99</span>
+              </div>
+              <input type="range" id="r-slider" min="0" max="255" value="99" class="range range-error range-sm" />
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm text-success font-medium">G</span>
+                <span class="font-mono text-sm" id="g-value">102</span>
+              </div>
+              <input type="range" id="g-slider" min="0" max="255" value="102" class="range range-success range-sm" />
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm text-info font-medium">B</span>
+                <span class="font-mono text-sm" id="b-value">241</span>
+              </div>
+              <input type="range" id="b-slider" min="0" max="255" value="241" class="range range-info range-sm" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      
+      <div class="p-4 sm:p-6 bg-base-200/30 border-t border-base-200 dark:border-base-content/10">
+        <h3 class="font-semibold mb-4">Color Shades</h3>
+        <div class="grid grid-cols-5 sm:grid-cols-10 gap-2" id="color-shades">
+          
+        </div>
+      </div>
+
+      
+      <div class="p-4 sm:p-6 border-t border-base-200 dark:border-base-content/10">
+        <h3 class="font-semibold mb-4">Color Schemes</h3>
+        
+        <div class="space-y-4">
+          
+          
+          <div>
+            <div class="text-sm text-base-content/60 mb-2">Complementary</div>
+            <div class="flex gap-2" id="complementary-colors"></div>
+          </div>
+          
+          
+          <div>
+            <div class="text-sm text-base-content/60 mb-2">Triadic</div>
+            <div class="flex gap-2" id="triadic-colors"></div>
+          </div>
+          
+          
+          <div>
+            <div class="text-sm text-base-content/60 mb-2">Analogous</div>
+            <div class="flex gap-2" id="analogous-colors"></div>
+          </div>
+          
+          
+          <div>
+            <div class="text-sm text-base-content/60 mb-2">Split-complementary</div>
+            <div class="flex gap-2" id="split-colors"></div>
+          </div>
+          
+        </div>
+      </div>
+
+    </div>
+
+    
+    <div class="mt-6 bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+      <details class="group" open>
+        <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+          <h3 class="font-semibold">Popular Colors (Tailwind CSS)</h3>
+          <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+        </summary>
+        <div class="p-4 pt-0">
+          <div class="grid grid-cols-10 gap-1" id="preset-colors">
+            
+          </div>
+        </div>
+      </details>
+    </div>
+
+    
+    <div class="mt-6 bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 p-4 sm:p-6">
+      <h3 class="font-semibold mb-4">Contrast Check (WCAG)</h3>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        
+        
+        <div class="p-4 rounded-xl bg-white text-center">
+          <div class="text-2xl font-bold mb-2" id="contrast-white-text" style="color: #6366f1;">Aa</div>
+          <div class="text-sm text-gray-600">On white background</div>
+          <div class="mt-2">
+            <span class="badge" id="contrast-white-badge">—</span>
+            <span class="text-xs text-gray-500 ml-1" id="contrast-white-ratio">—</span>
+          </div>
+        </div>
+        
+        
+        <div class="p-4 rounded-xl bg-black text-center">
+          <div class="text-2xl font-bold mb-2" id="contrast-black-text" style="color: #6366f1;">Aa</div>
+          <div class="text-sm text-gray-400">On black background</div>
+          <div class="mt-2">
+            <span class="badge" id="contrast-black-badge">—</span>
+            <span class="text-xs text-gray-400 ml-1" id="contrast-black-ratio">—</span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  
+  const i18n = {
+    eyedropperNotSupported: "\"Your browser does not support EyeDropper API\""
+  };
+  
+  
+  const colorPicker = document.getElementById('color-picker');
+  const colorPreview = document.getElementById('color-preview');
+  const colorInput = document.getElementById('color-input');
+  const alphaSlider = document.getElementById('alpha-slider');
+  const alphaValue = document.getElementById('alpha-value');
+  
+  const rSlider = document.getElementById('r-slider');
+  const gSlider = document.getElementById('g-slider');
+  const bSlider = document.getElementById('b-slider');
+  const rValue = document.getElementById('r-value');
+  const gValue = document.getElementById('g-value');
+  const bValue = document.getElementById('b-value');
+  
+  let currentColor = { r: 99, g: 102, b: 241 };
+  let currentAlpha = 1;
+  
+  
+  
+  
+  function hexToRgb(hex) {
+    hex = hex.replace('#', '');
+    if (hex.length === 3) {
+      hex = hex.split('').map(c => c + c).join('');
+    }
+    const num = parseInt(hex, 16);
+    return {
+      r: (num >> 16) & 255,
+      g: (num >> 8) & 255,
+      b: num & 255
+    };
+  }
+  
+  
+  function rgbToHex(r, g, b) {
+    return '#' + [r, g, b].map(x => {
+      const hex = Math.round(x).toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
+    }).join('');
+  }
+  
+  
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+    
+    if (max === min) {
+      h = s = 0;
+    } else {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+        case g: h = ((b - r) / d + 2) / 6; break;
+        case b: h = ((r - g) / d + 4) / 6; break;
+      }
+    }
+    
+    return {
+      h: Math.round(h * 360),
+      s: Math.round(s * 100),
+      l: Math.round(l * 100)
+    };
+  }
+  
+  
+  function hslToRgb(h, s, l) {
+    h /= 360; s /= 100; l /= 100;
+    let r, g, b;
+    
+    if (s === 0) {
+      r = g = b = l;
+    } else {
+      const hue2rgb = (p, q, t) => {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1/6) return p + (q - p) * 6 * t;
+        if (t < 1/2) return q;
+        if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+        return p;
+      };
+      
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      const p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1/3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1/3);
+    }
+    
+    return {
+      r: Math.round(r * 255),
+      g: Math.round(g * 255),
+      b: Math.round(b * 255)
+    };
+  }
+  
+  
+  function rgbToHwb(r, g, b) {
+    const hsl = rgbToHsl(r, g, b);
+    const w = Math.min(r, g, b) / 255 * 100;
+    const bl = (1 - Math.max(r, g, b) / 255) * 100;
+    return { h: hsl.h, w: Math.round(w), b: Math.round(bl) };
+  }
+  
+  
+  function rgbToCmyk(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    const k = 1 - Math.max(r, g, b);
+    if (k === 1) return { c: 0, m: 0, y: 0, k: 100 };
+    return {
+      c: Math.round((1 - r - k) / (1 - k) * 100),
+      m: Math.round((1 - g - k) / (1 - k) * 100),
+      y: Math.round((1 - b - k) / (1 - k) * 100),
+      k: Math.round(k * 100)
+    };
+  }
+  
+  
+  function parseColor(input) {
+    input = input.trim().toLowerCase();
+    
+    
+    if (input.startsWith('#')) {
+      return hexToRgb(input);
+    }
+    
+    
+    const rgbMatch = input.match(/rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+    if (rgbMatch) {
+      return {
+        r: parseInt(rgbMatch[1]),
+        g: parseInt(rgbMatch[2]),
+        b: parseInt(rgbMatch[3])
+      };
+    }
+    
+    
+    const hslMatch = input.match(/hsla?\s*\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%/i);
+    if (hslMatch) {
+      return hslToRgb(
+        parseInt(hslMatch[1]),
+        parseInt(hslMatch[2]),
+        parseInt(hslMatch[3])
+      );
+    }
+    
+    return null;
+  }
+  
+  
+  
+  function getLuminance(r, g, b) {
+    const [rs, gs, bs] = [r, g, b].map(c => {
+      c /= 255;
+      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+  }
+  
+  function getContrastRatio(rgb1, rgb2) {
+    const l1 = getLuminance(rgb1.r, rgb1.g, rgb1.b);
+    const l2 = getLuminance(rgb2.r, rgb2.g, rgb2.b);
+    const lighter = Math.max(l1, l2);
+    const darker = Math.min(l1, l2);
+    return (lighter + 0.05) / (darker + 0.05);
+  }
+  
+  function getContrastLevel(ratio) {
+    if (ratio >= 7) return { level: 'AAA', class: 'badge-success' };
+    if (ratio >= 4.5) return { level: 'AA', class: 'badge-success' };
+    if (ratio >= 3) return { level: 'AA Large', class: 'badge-warning' };
+    return { level: 'Fail', class: 'badge-error' };
+  }
+  
+  
+  
+  function getComplementary(h) {
+    return [(h + 180) % 360];
+  }
+  
+  function getTriadic(h) {
+    return [(h + 120) % 360, (h + 240) % 360];
+  }
+  
+  function getAnalogous(h) {
+    return [(h + 30) % 360, (h - 30 + 360) % 360];
+  }
+  
+  function getSplitComplementary(h) {
+    return [(h + 150) % 360, (h + 210) % 360];
+  }
+  
+  function renderColorScheme(container, hues, s, l) {
+    container.innerHTML = hues.map(hue => {
+      const rgb = hslToRgb(hue, s, l);
+      const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+      return `
+        <button 
+          class="w-12 h-12 rounded-lg shadow-md hover:scale-110 transition-transform color-swatch"
+          style="background-color: ${hex};"
+          data-color="${hex}"
+          title="${hex}"
+        ></button>
+      `;
+    }).join('');
+  }
+  
+  
+  
+  function generateShades(h, s) {
+    const shades = [];
+    for (let l = 95; l >= 5; l -= 10) {
+      const rgb = hslToRgb(h, s, l);
+      shades.push(rgbToHex(rgb.r, rgb.g, rgb.b));
+    }
+    return shades;
+  }
+  
+  function renderShades(shades) {
+    const container = document.getElementById('color-shades');
+    container.innerHTML = shades.map((hex, i) => `
+      <button 
+        class="aspect-square rounded-lg shadow-sm hover:scale-110 transition-transform color-swatch"
+        style="background-color: ${hex};"
+        data-color="${hex}"
+        title="${hex}"
+      ></button>
+    `).join('');
+  }
+  
+  
+  
+  function updateUI() {
+    const { r, g, b } = currentColor;
+    const hex = rgbToHex(r, g, b);
+    const hsl = rgbToHsl(r, g, b);
+    const hwb = rgbToHwb(r, g, b);
+    const cmyk = rgbToCmyk(r, g, b);
+    const alpha = currentAlpha;
+    
+    
+    colorPreview.style.backgroundColor = alpha < 1 
+      ? `rgba(${r}, ${g}, ${b}, ${alpha})` 
+      : hex;
+    colorPicker.value = hex;
+    colorInput.value = hex;
+    
+    
+    rSlider.value = r;
+    gSlider.value = g;
+    bSlider.value = b;
+    rValue.textContent = r;
+    gValue.textContent = g;
+    bValue.textContent = b;
+    
+    
+    document.getElementById('result-hex').textContent = hex;
+    document.getElementById('result-rgb').textContent = `rgb(${r}, ${g}, ${b})`;
+    document.getElementById('result-rgba').textContent = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    document.getElementById('result-hsl').textContent = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+    document.getElementById('result-hsla').textContent = `hsla(${hsl.h}, ${hsl.s}%, ${hsl.l}%, ${alpha})`;
+    document.getElementById('result-hwb').textContent = `hwb(${hwb.h} ${hwb.w}% ${hwb.b}%)`;
+    document.getElementById('result-cmyk').textContent = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+    document.getElementById('result-css').textContent = `--color: ${hex};`;
+    
+    
+    const shades = generateShades(hsl.h, hsl.s);
+    renderShades(shades);
+    
+    
+    renderColorScheme(
+      document.getElementById('complementary-colors'),
+      [hsl.h, ...getComplementary(hsl.h)],
+      hsl.s, hsl.l
+    );
+    renderColorScheme(
+      document.getElementById('triadic-colors'),
+      [hsl.h, ...getTriadic(hsl.h)],
+      hsl.s, hsl.l
+    );
+    renderColorScheme(
+      document.getElementById('analogous-colors'),
+      [(hsl.h - 30 + 360) % 360, hsl.h, (hsl.h + 30) % 360],
+      hsl.s, hsl.l
+    );
+    renderColorScheme(
+      document.getElementById('split-colors'),
+      [hsl.h, ...getSplitComplementary(hsl.h)],
+      hsl.s, hsl.l
+    );
+    
+    
+    const whiteRatio = getContrastRatio(currentColor, { r: 255, g: 255, b: 255 });
+    const blackRatio = getContrastRatio(currentColor, { r: 0, g: 0, b: 0 });
+    
+    const whiteLevel = getContrastLevel(whiteRatio);
+    const blackLevel = getContrastLevel(blackRatio);
+    
+    document.getElementById('contrast-white-text').style.color = hex;
+    document.getElementById('contrast-black-text').style.color = hex;
+    
+    document.getElementById('contrast-white-badge').className = `badge ${whiteLevel.class}`;
+    document.getElementById('contrast-white-badge').textContent = whiteLevel.level;
+    document.getElementById('contrast-white-ratio').textContent = whiteRatio.toFixed(2) + ':1';
+    
+    document.getElementById('contrast-black-badge').className = `badge ${blackLevel.class}`;
+    document.getElementById('contrast-black-badge').textContent = blackLevel.level;
+    document.getElementById('contrast-black-ratio').textContent = blackRatio.toFixed(2) + ':1';
+    
+    
+    document.querySelectorAll('.color-swatch').forEach(swatch => {
+      swatch.addEventListener('click', () => {
+        const color = swatch.dataset.color;
+        currentColor = hexToRgb(color);
+        updateUI();
+      });
+    });
+  }
+  
+  
+  
+  
+  colorPicker.addEventListener('input', (e) => {
+    currentColor = hexToRgb(e.target.value);
+    updateUI();
+  });
+  
+  
+  document.getElementById('parse-color-btn').addEventListener('click', () => {
+    const parsed = parseColor(colorInput.value);
+    if (parsed) {
+      currentColor = parsed;
+      updateUI();
+    } else {
+      colorInput.classList.add('input-error');
+      setTimeout(() => colorInput.classList.remove('input-error'), 1000);
+    }
+  });
+  
+  colorInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      document.getElementById('parse-color-btn').click();
+    }
+  });
+  
+  
+  alphaSlider.addEventListener('input', () => {
+    currentAlpha = alphaSlider.value / 100;
+    alphaValue.textContent = alphaSlider.value + '%';
+    updateUI();
+  });
+  
+  
+  [rSlider, gSlider, bSlider].forEach((slider, i) => {
+    slider.addEventListener('input', () => {
+      currentColor = {
+        r: parseInt(rSlider.value),
+        g: parseInt(gSlider.value),
+        b: parseInt(bSlider.value)
+      };
+      updateUI();
+    });
+  });
+  
+  
+  document.getElementById('random-color-btn').addEventListener('click', () => {
+    currentColor = {
+      r: Math.floor(Math.random() * 256),
+      g: Math.floor(Math.random() * 256),
+      b: Math.floor(Math.random() * 256)
+    };
+    updateUI();
+  });
+  
+  
+  document.getElementById('eyedropper-btn').addEventListener('click', async () => {
+    if (!('EyeDropper' in window)) {
+      alert(i18n.eyedropperNotSupported);
+      return;
+    }
+    
+    try {
+      const eyeDropper = new EyeDropper();
+      const result = await eyeDropper.open();
+      currentColor = hexToRgb(result.sRGBHex);
+      updateUI();
+    } catch (e) {
+      
+    }
+  });
+  
+  
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const format = btn.dataset.format;
+      const resultEl = document.getElementById('result-' + format);
+      if (resultEl) {
+        await navigator.clipboard.writeText(resultEl.textContent);
+        
+        const originalIcon = btn.innerHTML;
+        btn.innerHTML = '<ion-icon name="checkmark-outline" class="text-success"></ion-icon>';
+        setTimeout(() => { btn.innerHTML = originalIcon; }, 1500);
+      }
+    });
+  });
+  
+  
+  
+  const tailwindColors = {
+    slate: ['#f8fafc','#f1f5f9','#e2e8f0','#cbd5e1','#94a3b8','#64748b','#475569','#334155','#1e293b','#0f172a'],
+    red: ['#fef2f2','#fee2e2','#fecaca','#fca5a5','#f87171','#ef4444','#dc2626','#b91c1c','#991b1b','#7f1d1d'],
+    orange: ['#fff7ed','#ffedd5','#fed7aa','#fdba74','#fb923c','#f97316','#ea580c','#c2410c','#9a3412','#7c2d12'],
+    amber: ['#fffbeb','#fef3c7','#fde68a','#fcd34d','#fbbf24','#f59e0b','#d97706','#b45309','#92400e','#78350f'],
+    yellow: ['#fefce8','#fef9c3','#fef08a','#fde047','#facc15','#eab308','#ca8a04','#a16207','#854d0e','#713f12'],
+    lime: ['#f7fee7','#ecfccb','#d9f99d','#bef264','#a3e635','#84cc16','#65a30d','#4d7c0f','#3f6212','#365314'],
+    green: ['#f0fdf4','#dcfce7','#bbf7d0','#86efac','#4ade80','#22c55e','#16a34a','#15803d','#166534','#14532d'],
+    emerald: ['#ecfdf5','#d1fae5','#a7f3d0','#6ee7b7','#34d399','#10b981','#059669','#047857','#065f46','#064e3b'],
+    teal: ['#f0fdfa','#ccfbf1','#99f6e4','#5eead4','#2dd4bf','#14b8a6','#0d9488','#0f766e','#115e59','#134e4a'],
+    cyan: ['#ecfeff','#cffafe','#a5f3fc','#67e8f9','#22d3ee','#06b6d4','#0891b2','#0e7490','#155e75','#164e63'],
+    sky: ['#f0f9ff','#e0f2fe','#bae6fd','#7dd3fc','#38bdf8','#0ea5e9','#0284c7','#0369a1','#075985','#0c4a6e'],
+    blue: ['#eff6ff','#dbeafe','#bfdbfe','#93c5fd','#60a5fa','#3b82f6','#2563eb','#1d4ed8','#1e40af','#1e3a8a'],
+    indigo: ['#eef2ff','#e0e7ff','#c7d2fe','#a5b4fc','#818cf8','#6366f1','#4f46e5','#4338ca','#3730a3','#312e81'],
+    violet: ['#f5f3ff','#ede9fe','#ddd6fe','#c4b5fd','#a78bfa','#8b5cf6','#7c3aed','#6d28d9','#5b21b6','#4c1d95'],
+    purple: ['#faf5ff','#f3e8ff','#e9d5ff','#d8b4fe','#c084fc','#a855f7','#9333ea','#7e22ce','#6b21a8','#581c87'],
+    fuchsia: ['#fdf4ff','#fae8ff','#f5d0fe','#f0abfc','#e879f9','#d946ef','#c026d3','#a21caf','#86198f','#701a75'],
+    pink: ['#fdf2f8','#fce7f3','#fbcfe8','#f9a8d4','#f472b6','#ec4899','#db2777','#be185d','#9d174d','#831843'],
+    rose: ['#fff1f2','#ffe4e6','#fecdd3','#fda4af','#fb7185','#f43f5e','#e11d48','#be123c','#9f1239','#881337'],
+  };
+  
+  function renderPresetColors() {
+    const container = document.getElementById('preset-colors');
+    let html = '';
+    
+    Object.entries(tailwindColors).forEach(([name, colors]) => {
+      colors.forEach((color, i) => {
+        html += `
+          <button 
+            class="aspect-square rounded hover:scale-125 transition-transform color-swatch"
+            style="background-color: ${color};"
+            data-color="${color}"
+            title="${name}-${(i + 1) * 100}"
+          ></button>
+        `;
+      });
+    });
+    
+    container.innerHTML = html;
+  }
+  
+  
+  renderPresetColors();
+  updateUI();
+  
+})();
+</script>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Maksim Alexandrov<br>
+<strong>Age:</strong> 28<br>
+<strong>Location:</strong> Tula, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>This blog is my personal knowledge base, where I push notes about my tech stack, life experience, and everything that triggers my interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — ready to merge ideas and work on joint projects.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-programming-languages">💻 Programming Languages</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Responsive layout (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST APIs</strong></li>
+</ul>
+<h2 id="-databases">🗄️ Databases</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-design--graphics">🎨 Design &amp; Graphics</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX design and prototyping</li>
+<li><strong>Photoshop</strong> — graphics and image editing</li>
+<li><strong>After Effects</strong> — motion design and animation 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Open Source Projects 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Projects 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN service in Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN service in Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Social Links</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+     
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

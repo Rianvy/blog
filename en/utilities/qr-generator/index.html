@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+<html lang="en"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+QR Generator
+ | 0x69.ru</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Ox69" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="canonical" href="https://0x69.ru/en/utilities/qr-generator/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/en/utilities/qr-generator/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="QR Code Generator">
+  <meta property="og:description" content="Generate QR codes with customizable color, size, logo and export to PNG/SVG">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="utilities">
+    <meta property="article:published_time" content="2026-02-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-09T00:00:00+00:00">
+    <meta property="article:tag" content="Qr">
+    <meta property="article:tag" content="Qr-Code">
+    <meta property="article:tag" content="Generator">
+    <meta property="article:tag" content="Links">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="QR Code Generator">
+  <meta name="twitter:description" content="Generate QR codes with customizable color, size, logo and export to PNG/SVG">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Flip it!"
+                aria-label="Flip it!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/en/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">To iterate is human, to recurse divine</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="About">About</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/en/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Search"
+   aria-label="Search">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="All Categories"
+   aria-label="All Categories">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Portfolio"
+   aria-label="Portfolio">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Utilities"
+   aria-label="Utilities">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/utilities/qr-generator/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/ru/utilities/qr-generator/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Menu</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="About"
+                aria-label="About">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">About</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Languages
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/utilities/qr-generator/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/utilities/qr-generator/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Menu
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Search">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Search</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Categories">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Categories</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Portfolio">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Portfolio</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Utilities">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Utilities</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">18</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+  
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
+      <span class="text-4xl sm:text-5xl">📱</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">QR Code Generator</h1>
+    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">Generate QR codes with customizable color, size, logo and export to PNG/SVG</p>
+    
+    <div class="flex flex-wrap justify-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        100% local
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="color-palette-outline"></ion-icon>
+        Customization
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="image-outline"></ion-icon>
+        PNG & SVG
+      </span>
+    </div>
+  </div>
+
+  
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    
+    <div class="space-y-4">
+
+      
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold flex items-center gap-2">
+            <ion-icon name="apps-outline" class="text-primary"></ion-icon>
+            Content type
+          </h2>
+        </div>
+        
+        <div class="p-4">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="qr-type" value="url" class="hidden" checked />
+              <ion-icon name="link-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">URL</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="qr-type" value="text" class="hidden" />
+              <ion-icon name="text-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">Text</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="qr-type" value="email" class="hidden" />
+              <ion-icon name="mail-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">Email</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="qr-type" value="phone" class="hidden" />
+              <ion-icon name="call-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">Phone</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="qr-type" value="sms" class="hidden" />
+              <ion-icon name="chatbubble-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">SMS</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="qr-type" value="wifi" class="hidden" />
+              <ion-icon name="wifi-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">WiFi</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="qr-type" value="vcard" class="hidden" />
+              <ion-icon name="person-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">vCard</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+              <input type="radio" name="qr-type" value="geo" class="hidden" />
+              <ion-icon name="location-outline" class="text-2xl"></ion-icon>
+              <span class="text-xs font-medium">Geolocation</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold flex items-center gap-2">
+            <ion-icon name="create-outline" class="text-primary"></ion-icon>
+            Data
+          </h2>
+        </div>
+        
+        <div class="p-4">
+          
+          
+          <div id="input-url" class="input-section">
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">URL address</span>
+              </label>
+              <input type="url" id="data-url" class="input input-bordered" placeholder="https://example.com" value="https://example.com" />
+            </div>
+          </div>
+          
+          
+          <div id="input-text" class="input-section hidden">
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Text</span>
+                <span class="label-text-alt" id="text-count">0/500</span>
+              </label>
+              <textarea id="data-text" class="textarea textarea-bordered h-24" placeholder="Enter text..." maxlength="500"></textarea>
+            </div>
+          </div>
+          
+          
+          <div id="input-email" class="input-section hidden space-y-3">
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Email</span>
+              </label>
+              <input type="email" id="data-email" class="input input-bordered" placeholder="email@example.com" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Subject (optional)</span>
+              </label>
+              <input type="text" id="data-email-subject" class="input input-bordered input-sm" placeholder="Email subject" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Message (optional)</span>
+              </label>
+              <textarea id="data-email-body" class="textarea textarea-bordered textarea-sm h-16" placeholder="Message text"></textarea>
+            </div>
+          </div>
+          
+          
+          <div id="input-phone" class="input-section hidden">
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Phone number</span>
+              </label>
+              <input type="tel" id="data-phone" class="input input-bordered" placeholder="+7 999 123-45-67" />
+            </div>
+          </div>
+          
+          
+          <div id="input-sms" class="input-section hidden space-y-3">
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Phone number</span>
+              </label>
+              <input type="tel" id="data-sms-phone" class="input input-bordered" placeholder="+7 999 123-45-67" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Message (optional)</span>
+              </label>
+              <textarea id="data-sms-message" class="textarea textarea-bordered h-16" placeholder="SMS text"></textarea>
+            </div>
+          </div>
+          
+          
+          <div id="input-wifi" class="input-section hidden space-y-3">
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Network name (SSID)</span>
+              </label>
+              <input type="text" id="data-wifi-ssid" class="input input-bordered" placeholder="MyWiFi" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Password</span>
+              </label>
+              <div class="join w-full">
+                <input type="password" id="data-wifi-password" class="input input-bordered join-item flex-1" placeholder="••••••••" />
+                <button type="button" id="toggle-wifi-password" class="btn btn-ghost join-item">
+                  <ion-icon name="eye-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Encryption</span>
+              </label>
+              <select id="data-wifi-encryption" class="select select-bordered">
+                <option value="WPA">WPA/WPA2</option>
+                <option value="WEP">WEP</option>
+                <option value="nopass">No password</option>
+              </select>
+            </div>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" id="data-wifi-hidden" class="checkbox checkbox-sm" />
+              <span class="text-sm">Hidden network</span>
+            </label>
+          </div>
+          
+          
+          <div id="input-vcard" class="input-section hidden space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+              <div class="form-control">
+                <label class="label py-1">
+                  <span class="label-text font-medium">First name</span>
+                </label>
+                <input type="text" id="data-vcard-firstname" class="input input-bordered input-sm" placeholder="John" />
+              </div>
+              <div class="form-control">
+                <label class="label py-1">
+                  <span class="label-text font-medium">Last name</span>
+                </label>
+                <input type="text" id="data-vcard-lastname" class="input input-bordered input-sm" placeholder="Doe" />
+              </div>
+            </div>
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Phone</span>
+              </label>
+              <input type="tel" id="data-vcard-phone" class="input input-bordered input-sm" placeholder="+7 999 123-45-67" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Email</span>
+              </label>
+              <input type="email" id="data-vcard-email" class="input input-bordered input-sm" placeholder="email@example.com" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Company</span>
+              </label>
+              <input type="text" id="data-vcard-org" class="input input-bordered input-sm" placeholder="Company" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Position</span>
+              </label>
+              <input type="text" id="data-vcard-title" class="input input-bordered input-sm" placeholder="Position" />
+            </div>
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Website</span>
+              </label>
+              <input type="url" id="data-vcard-url" class="input input-bordered input-sm" placeholder="https://example.com" />
+            </div>
+          </div>
+          
+          
+          <div id="input-geo" class="input-section hidden space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+              <div class="form-control">
+                <label class="label py-1">
+                  <span class="label-text font-medium">Latitude</span>
+                </label>
+                <input type="number" step="any" id="data-geo-lat" class="input input-bordered" placeholder="55.7558" />
+              </div>
+              <div class="form-control">
+                <label class="label py-1">
+                  <span class="label-text font-medium">Longitude</span>
+                </label>
+                <input type="number" step="any" id="data-geo-lon" class="input input-bordered" placeholder="37.6173" />
+              </div>
+            </div>
+            <button type="button" id="get-location" class="btn btn-ghost btn-sm gap-2">
+              <ion-icon name="navigate-outline"></ion-icon>
+              My location
+            </button>
+          </div>
+          
+        </div>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="color-palette-outline" class="text-primary"></ion-icon>
+              Appearance
+            </h2>
+            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          
+          <div class="p-4 pt-0 space-y-4">
+            
+            
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Size</span>
+                <span class="label-text-alt font-mono" id="size-value">256px</span>
+              </label>
+              <input type="range" id="qr-size" min="128" max="512" value="256" step="32" class="range range-primary range-sm" />
+            </div>
+            
+            
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium">Error correction</span>
+              </label>
+              <div class="grid grid-cols-4 gap-2">
+                <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
+                  <input type="radio" name="error-level" value="L" class="hidden" />
+                  <span class="text-sm font-bold">L</span>
+                  <span class="text-xs text-base-content/60">7%</span>
+                </label>
+                <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
+                  <input type="radio" name="error-level" value="M" class="hidden" checked />
+                  <span class="text-sm font-bold">M</span>
+                  <span class="text-xs text-base-content/60">15%</span>
+                </label>
+                <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
+                  <input type="radio" name="error-level" value="Q" class="hidden" />
+                  <span class="text-sm font-bold">Q</span>
+                  <span class="text-xs text-base-content/60">25%</span>
+                </label>
+                <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
+                  <input type="radio" name="error-level" value="H" class="hidden" />
+                  <span class="text-sm font-bold">H</span>
+                  <span class="text-xs text-base-content/60">30%</span>
+                </label>
+              </div>
+              <p class="text-xs text-base-content/50 mt-1">Q or H recommended for logo</p>
+            </div>
+            
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control">
+                <label class="label py-1">
+                  <span class="label-text font-medium">QR color</span>
+                </label>
+                <div class="flex gap-2">
+                  <input type="color" id="qr-color" value="#000000" class="w-10 h-10 rounded-lg cursor-pointer border-0" />
+                  <input type="text" id="qr-color-text" value="#000000" class="input input-bordered input-sm flex-1 font-mono" />
+                </div>
+              </div>
+              <div class="form-control">
+                <label class="label py-1">
+                  <span class="label-text font-medium">Background color</span>
+                </label>
+                <div class="flex gap-2">
+                  <input type="color" id="bg-color" value="#ffffff" class="w-10 h-10 rounded-lg cursor-pointer border-0" />
+                  <input type="text" id="bg-color-text" value="#ffffff" class="input input-bordered input-sm flex-1 font-mono" />
+                </div>
+              </div>
+            </div>
+            
+            
+            <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
+              <input type="checkbox" id="transparent-bg" class="checkbox checkbox-sm checkbox-primary" />
+              <div>
+                <span class="font-medium">Transparent background</span>
+                <p class="text-xs text-base-content/60">For PNG with alpha channel</p>
+              </div>
+            </label>
+            
+          </div>
+        </details>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <h2 class="font-semibold flex items-center gap-2">
+              <ion-icon name="image-outline" class="text-primary"></ion-icon>
+              Logo
+              <span id="logo-badge" class="hidden badge badge-success badge-sm">Added</span>
+            </h2>
+            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          
+          <div class="p-4 pt-0 space-y-4">
+            
+            <div id="logo-dropzone" class="p-4 border-2 border-dashed border-base-300 rounded-xl cursor-pointer hover:border-primary hover:bg-primary/5 transition-all text-center">
+              <div id="logo-empty">
+                <ion-icon name="add-circle-outline" class="text-3xl text-base-content/40 mb-2"></ion-icon>
+                <p class="text-sm text-base-content/60">Click or drag</p>
+                <p class="text-xs text-base-content/40">PNG, JPG, SVG • max 2 MB</p>
+              </div>
+              <div id="logo-preview" class="hidden">
+                <img id="logo-image" src="" alt="Logo" class="w-20 h-20 object-contain mx-auto rounded-lg bg-base-200 p-2" />
+                <p class="text-xs text-base-content/60 mt-2" id="logo-name">logo.png</p>
+              </div>
+              <input type="file" id="logo-input" accept="image/png,image/jpeg,image/svg+xml,image/webp" class="hidden" />
+            </div>
+            
+            <div id="logo-controls" class="hidden space-y-3">
+              <div class="form-control">
+                <label class="label py-1">
+                  <span class="label-text font-medium">Logo size</span>
+                  <span class="label-text-alt font-mono" id="logo-size-value">20%</span>
+                </label>
+                <input type="range" id="logo-size" min="10" max="35" value="20" class="range range-sm" />
+              </div>
+              
+              <button type="button" id="remove-logo" class="btn btn-ghost btn-sm text-error w-full gap-2">
+                <ion-icon name="trash-outline"></ion-icon>
+                Remove logo
+              </button>
+            </div>
+            
+            <div class="alert alert-warning text-xs">
+              <ion-icon name="information-circle-outline"></ion-icon>
+              <span>When adding logo use error correction level Q or H</span>
+            </div>
+            
+          </div>
+        </details>
+      </div>
+
+    </div>
+
+    
+    <div class="space-y-4">
+
+      
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between">
+          <h2 class="font-semibold flex items-center gap-2">
+            <ion-icon name="qr-code-outline" class="text-primary"></ion-icon>
+            Preview
+          </h2>
+          <button id="regenerate-btn" class="btn btn-ghost btn-sm gap-1">
+            <ion-icon name="refresh-outline"></ion-icon>
+            Refresh
+          </button>
+        </div>
+        
+        <div class="p-8 flex items-center justify-center min-h-[350px] bg-[repeating-conic-gradient(#80808020_0%_25%,transparent_0%_50%)] bg-[length:20px_20px]" id="qr-container">
+          <canvas id="qr-canvas" class="rounded-lg shadow-lg"></canvas>
+        </div>
+        
+        <div id="qr-data-preview" class="hidden px-4 pb-4">
+          <div class="p-3 bg-base-200/50 rounded-lg">
+            <div class="text-xs text-base-content/50 mb-1">Encoded data:</div>
+            <div class="font-mono text-sm break-all max-h-20 overflow-auto" id="encoded-data"></div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold flex items-center gap-2">
+            <ion-icon name="download-outline" class="text-primary"></ion-icon>
+            Download
+          </h2>
+        </div>
+        
+        <div class="p-4 space-y-4">
+          
+          <div class="form-control">
+            <label class="label py-1">
+              <span class="label-text font-medium">Export size</span>
+              <span class="label-text-alt font-mono" id="export-size-value">512px</span>
+            </label>
+            <input type="range" id="export-size" min="256" max="2048" value="512" step="128" class="range range-sm" />
+          </div>
+          
+          <div class="grid grid-cols-2 gap-3">
+            <button id="download-png" class="btn btn-primary gap-2" disabled>
+              <ion-icon name="image-outline" class="text-lg"></ion-icon>
+              PNG
+            </button>
+            <button id="download-svg" class="btn btn-secondary gap-2" disabled>
+              <ion-icon name="code-slash-outline" class="text-lg"></ion-icon>
+              SVG
+            </button>
+          </div>
+          
+        </div>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 p-4">
+        <h3 class="font-semibold mb-3">Quick actions</h3>
+        <div class="flex flex-wrap gap-2">
+          <button id="copy-qr" class="btn btn-ghost btn-sm gap-1" disabled>
+            <ion-icon name="copy-outline"></ion-icon>
+            Copy
+          </button>
+          <button id="share-qr" class="btn btn-ghost btn-sm gap-1" disabled>
+            <ion-icon name="share-outline"></ion-icon>
+            Share
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  
+  <div class="mt-6 p-4 rounded-2xl bg-base-200/30 border border-base-200 dark:border-base-content/10">
+    <div class="flex items-center gap-2 mb-3">
+      <ion-icon name="keypad-outline" class="text-lg text-base-content/60"></ion-icon>
+      <span class="text-sm font-medium text-base-content/60">Hotkeys</span>
+    </div>
+    <div class="flex flex-wrap gap-4 text-sm text-base-content/60">
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>+<kbd class="kbd kbd-sm">Enter</kbd>
+        <span class="ml-1">→ Refresh</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <kbd class="kbd kbd-sm">Ctrl</kbd>+<kbd class="kbd kbd-sm">S</kbd>
+        <span class="ml-1">→ Download PNG</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  
+  var i18n = {
+    enterData: 'Enter data',
+    generationError: 'Generation error',
+    copied: 'Copied!',
+    determining: 'Determining...',
+    locationError: 'Could not determine location',
+    fileTooLarge: 'File too large. Maximum 2 MB.',
+    imageLoadError: 'Image load error',
+    myLocation: 'My location'
+  };
+  
+  
+  var logoImg = null;
+  var logoDataUrl = null;
+  var currentType = 'url';
+  var qrGenerated = false;
+  
+  
+  var qrCanvas = document.getElementById('qr-canvas');
+  var ctx = qrCanvas.getContext('2d');
+  
+  
+  var QRCode = (function() {
+    
+    function generate(text, ecl) {
+      ecl = ecl || 'M';
+      var version = getVersion(text, ecl);
+      var size = version * 4 + 17;
+      
+      var matrix = [];
+      for (var i = 0; i < size; i++) {
+        matrix[i] = [];
+        for (var j = 0; j < size; j++) {
+          matrix[i][j] = null;
+        }
+      }
+      
+      function addFinderPattern(row, col) {
+        for (var r = -1; r <= 7; r++) {
+          for (var c = -1; c <= 7; c++) {
+            var rr = row + r, cc = col + c;
+            if (rr < 0 || rr >= size || cc < 0 || cc >= size) continue;
+            
+            if (r === -1 || r === 7 || c === -1 || c === 7) {
+              matrix[rr][cc] = 0;
+            } else if (r === 0 || r === 6 || c === 0 || c === 6) {
+              matrix[rr][cc] = 1;
+            } else if (r >= 2 && r <= 4 && c >= 2 && c <= 4) {
+              matrix[rr][cc] = 1;
+            } else {
+              matrix[rr][cc] = 0;
+            }
+          }
+        }
+      }
+      
+      addFinderPattern(0, 0);
+      addFinderPattern(0, size - 7);
+      addFinderPattern(size - 7, 0);
+      
+      for (var i = 8; i < size - 8; i++) {
+        matrix[6][i] = matrix[i][6] = i % 2 === 0 ? 1 : 0;
+      }
+      
+      matrix[size - 8][8] = 1;
+      
+      var data = encodeData(text, version, ecl);
+      var dataIndex = 0;
+      var upward = true;
+      
+      for (var col = size - 1; col >= 1; col -= 2) {
+        if (col === 6) col = 5;
+        
+        for (var row = upward ? size - 1 : 0; upward ? row >= 0 : row < size; row += upward ? -1 : 1) {
+          for (var c = 0; c < 2; c++) {
+            var cc = col - c;
+            if (matrix[row][cc] === null) {
+              var bit = dataIndex < data.length ? data[dataIndex] : 0;
+              var masked = ((row + cc) % 2 === 0) ? (bit ^ 1) : bit;
+              matrix[row][cc] = masked;
+              dataIndex++;
+            }
+          }
+        }
+        upward = !upward;
+      }
+      
+      return { matrix: matrix, size: size, version: version };
+    }
+    
+    function getVersion(text, ecl) {
+      var len = new TextEncoder().encode(text).length;
+      var capacities = [17,32,53,78,106,134,154,192,230,271,321,367,425,458,520,586,644,718,792,858];
+      for (var v = 0; v < capacities.length; v++) {
+        if (len <= capacities[v]) return v + 1;
+      }
+      return 20;
+    }
+    
+    function encodeData(text, version, ecl) {
+      var bytes = new TextEncoder().encode(text);
+      var bits = [];
+      
+      bits.push(0, 1, 0, 0);
+      
+      var countBits = version < 10 ? 8 : 16;
+      for (var i = countBits - 1; i >= 0; i--) {
+        bits.push((bytes.length >> i) & 1);
+      }
+      
+      for (var i = 0; i < bytes.length; i++) {
+        for (var j = 7; j >= 0; j--) {
+          bits.push((bytes[i] >> j) & 1);
+        }
+      }
+      
+      return bits;
+    }
+    
+    return { generate: generate };
+  })();
+  
+  
+  function buildQRData() {
+    var data = '';
+    
+    switch (currentType) {
+      case 'url':
+        data = document.getElementById('data-url').value.trim();
+        break;
+      case 'text':
+        data = document.getElementById('data-text').value.trim();
+        break;
+      case 'email':
+        var email = document.getElementById('data-email').value.trim();
+        var subject = document.getElementById('data-email-subject').value.trim();
+        var body = document.getElementById('data-email-body').value.trim();
+        if (email) {
+          data = 'mailto:' + email;
+          var params = [];
+          if (subject) params.push('subject=' + encodeURIComponent(subject));
+          if (body) params.push('body=' + encodeURIComponent(body));
+          if (params.length) data += '?' + params.join('&');
+        }
+        break;
+      case 'phone':
+        var phone = document.getElementById('data-phone').value.trim();
+        if (phone) data = 'tel:' + phone.replace(/\s/g, '');
+        break;
+      case 'sms':
+        var smsPhone = document.getElementById('data-sms-phone').value.trim();
+        var smsMsg = document.getElementById('data-sms-message').value.trim();
+        if (smsPhone) {
+          data = 'sms:' + smsPhone.replace(/\s/g, '');
+          if (smsMsg) data += '?body=' + encodeURIComponent(smsMsg);
+        }
+        break;
+      case 'wifi':
+        var ssid = document.getElementById('data-wifi-ssid').value.trim();
+        var pass = document.getElementById('data-wifi-password').value;
+        var enc = document.getElementById('data-wifi-encryption').value;
+        var hidden = document.getElementById('data-wifi-hidden').checked;
+        if (ssid) {
+          data = 'WIFI:T:' + enc + ';S:' + ssid + ';P:' + pass + ';H:' + (hidden ? 'true' : '') + ';;';
+        }
+        break;
+      case 'vcard':
+        var fn = document.getElementById('data-vcard-firstname').value.trim();
+        var ln = document.getElementById('data-vcard-lastname').value.trim();
+        var vphone = document.getElementById('data-vcard-phone').value.trim();
+        var vemail = document.getElementById('data-vcard-email').value.trim();
+        var org = document.getElementById('data-vcard-org').value.trim();
+        var title = document.getElementById('data-vcard-title').value.trim();
+        var vurl = document.getElementById('data-vcard-url').value.trim();
+        if (fn || ln || vphone || vemail) {
+          data = 'BEGIN:VCARD\nVERSION:3.0\n';
+          if (fn || ln) data += 'N:' + ln + ';' + fn + ';;;\nFN:' + (fn + ' ' + ln).trim() + '\n';
+          if (vphone) data += 'TEL:' + vphone + '\n';
+          if (vemail) data += 'EMAIL:' + vemail + '\n';
+          if (org) data += 'ORG:' + org + '\n';
+          if (title) data += 'TITLE:' + title + '\n';
+          if (vurl) data += 'URL:' + vurl + '\n';
+          data += 'END:VCARD';
+        }
+        break;
+      case 'geo':
+        var lat = document.getElementById('data-geo-lat').value.trim();
+        var lon = document.getElementById('data-geo-lon').value.trim();
+        if (lat && lon) data = 'geo:' + lat + ',' + lon;
+        break;
+    }
+    
+    return data;
+  }
+  
+  
+  function renderQR() {
+    var data = buildQRData();
+    var size = parseInt(document.getElementById('qr-size').value);
+    
+    if (!data) {
+      qrCanvas.width = size;
+      qrCanvas.height = size;
+      ctx.fillStyle = '#f0f0f0';
+      ctx.fillRect(0, 0, size, size);
+      ctx.fillStyle = '#999';
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(i18n.enterData, size / 2, size / 2);
+      qrGenerated = false;
+      updateButtons();
+      document.getElementById('qr-data-preview').classList.add('hidden');
+      return;
+    }
+    
+    var qrColor = document.getElementById('qr-color').value;
+    var bgColor = document.getElementById('bg-color').value;
+    var transparentBg = document.getElementById('transparent-bg').checked;
+    var errorLevel = document.querySelector('input[name="error-level"]:checked').value;
+    
+    try {
+      var qr = QRCode.generate(data, errorLevel);
+      var cellSize = Math.floor(size / qr.size);
+      var actualSize = cellSize * qr.size;
+      var offset = Math.floor((size - actualSize) / 2);
+      
+      qrCanvas.width = size;
+      qrCanvas.height = size;
+      
+      if (transparentBg) {
+        ctx.clearRect(0, 0, size, size);
+      } else {
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, size, size);
+      }
+      
+      ctx.fillStyle = qrColor;
+      for (var row = 0; row < qr.size; row++) {
+        for (var col = 0; col < qr.size; col++) {
+          if (qr.matrix[row][col] === 1) {
+            ctx.fillRect(offset + col * cellSize, offset + row * cellSize, cellSize, cellSize);
+          }
+        }
+      }
+      
+      if (logoImg) {
+        var logoSizePercent = parseInt(document.getElementById('logo-size').value) / 100;
+        var logoSize = Math.floor(size * logoSizePercent);
+        var logoX = Math.floor((size - logoSize) / 2);
+        var logoY = Math.floor((size - logoSize) / 2);
+        
+        var padding = Math.floor(logoSize * 0.15);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(logoX - padding, logoY - padding, logoSize + padding * 2, logoSize + padding * 2);
+        ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+      }
+      
+      qrGenerated = true;
+      updateButtons();
+      
+      document.getElementById('qr-data-preview').classList.remove('hidden');
+      document.getElementById('encoded-data').textContent = data;
+      
+    } catch (e) {
+      console.error('QR error:', e);
+      qrCanvas.width = size;
+      qrCanvas.height = size;
+      ctx.fillStyle = '#fee';
+      ctx.fillRect(0, 0, size, size);
+      ctx.fillStyle = '#c00';
+      ctx.font = '12px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(i18n.generationError, size / 2, size / 2);
+      qrGenerated = false;
+      updateButtons();
+    }
+  }
+  
+  function updateButtons() {
+    document.getElementById('download-png').disabled = !qrGenerated;
+    document.getElementById('download-svg').disabled = !qrGenerated;
+    document.getElementById('copy-qr').disabled = !qrGenerated;
+    document.getElementById('share-qr').disabled = !qrGenerated || !navigator.share;
+  }
+  
+  
+  function downloadPNG() {
+    if (!qrGenerated) return;
+    
+    var exportSize = parseInt(document.getElementById('export-size').value);
+    var data = buildQRData();
+    var qrColor = document.getElementById('qr-color').value;
+    var bgColor = document.getElementById('bg-color').value;
+    var transparentBg = document.getElementById('transparent-bg').checked;
+    var errorLevel = document.querySelector('input[name="error-level"]:checked').value;
+    
+    var tempCanvas = document.createElement('canvas');
+    var tempCtx = tempCanvas.getContext('2d');
+    tempCanvas.width = exportSize;
+    tempCanvas.height = exportSize;
+    
+    var qr = QRCode.generate(data, errorLevel);
+    var cellSize = Math.floor(exportSize / qr.size);
+    var offset = Math.floor((exportSize - cellSize * qr.size) / 2);
+    
+    if (transparentBg) {
+      tempCtx.clearRect(0, 0, exportSize, exportSize);
+    } else {
+      tempCtx.fillStyle = bgColor;
+      tempCtx.fillRect(0, 0, exportSize, exportSize);
+    }
+    
+    tempCtx.fillStyle = qrColor;
+    for (var row = 0; row < qr.size; row++) {
+      for (var col = 0; col < qr.size; col++) {
+        if (qr.matrix[row][col] === 1) {
+          tempCtx.fillRect(offset + col * cellSize, offset + row * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+    
+    if (logoImg) {
+      var logoSizePercent = parseInt(document.getElementById('logo-size').value) / 100;
+      var logoSize = Math.floor(exportSize * logoSizePercent);
+      var logoX = Math.floor((exportSize - logoSize) / 2);
+      var logoY = Math.floor((exportSize - logoSize) / 2);
+      var padding = Math.floor(logoSize * 0.15);
+      tempCtx.fillStyle = '#ffffff';
+      tempCtx.fillRect(logoX - padding, logoY - padding, logoSize + padding * 2, logoSize + padding * 2);
+      tempCtx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+    }
+    
+    var link = document.createElement('a');
+    link.download = 'qrcode.png';
+    link.href = tempCanvas.toDataURL('image/png');
+    link.click();
+  }
+  
+  function downloadSVG() {
+    if (!qrGenerated) return;
+    
+    var data = buildQRData();
+    var size = 256;
+    var qrColor = document.getElementById('qr-color').value;
+    var bgColor = document.getElementById('bg-color').value;
+    var transparentBg = document.getElementById('transparent-bg').checked;
+    var errorLevel = document.querySelector('input[name="error-level"]:checked').value;
+    
+    var qr = QRCode.generate(data, errorLevel);
+    var cellSize = size / qr.size;
+    
+    var svg = '<?xml version="1.0"?>\n<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '">\n';
+    if (!transparentBg) svg += '<rect width="100%" height="100%" fill="' + bgColor + '"/>\n';
+    
+    for (var row = 0; row < qr.size; row++) {
+      for (var col = 0; col < qr.size; col++) {
+        if (qr.matrix[row][col] === 1) {
+          svg += '<rect x="' + (col * cellSize) + '" y="' + (row * cellSize) + '" width="' + cellSize + '" height="' + cellSize + '" fill="' + qrColor + '"/>\n';
+        }
+      }
+    }
+    svg += '</svg>';
+    
+    var blob = new Blob([svg], { type: 'image/svg+xml' });
+    var link = document.createElement('a');
+    link.download = 'qrcode.svg';
+    link.href = URL.createObjectURL(blob);
+    link.click();
+  }
+  
+  function copyQR() {
+    if (!qrGenerated) return;
+    qrCanvas.toBlob(function(blob) {
+      var item = new ClipboardItem({ 'image/png': blob });
+      navigator.clipboard.write([item]).then(function() {
+        var btn = document.getElementById('copy-qr');
+        var orig = btn.innerHTML;
+        btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> ' + i18n.copied;
+        setTimeout(function() { btn.innerHTML = orig; }, 2000);
+      });
+    });
+  }
+  
+  function shareQR() {
+    if (!qrGenerated || !navigator.share) return;
+    qrCanvas.toBlob(function(blob) {
+      var file = new File([blob], 'qrcode.png', { type: 'image/png' });
+      navigator.share({ files: [file], title: 'QR Code' });
+    });
+  }
+  
+  
+  function switchType(type) {
+    currentType = type;
+    document.querySelectorAll('.input-section').forEach(function(el) {
+      el.classList.add('hidden');
+    });
+    document.getElementById('input-' + type).classList.remove('hidden');
+    renderQR();
+  }
+  
+  
+  function handleLogoFile(file) {
+    if (!file || !file.type.startsWith('image/')) return;
+    if (file.size > 2 * 1024 * 1024) {
+      alert(i18n.fileTooLarge);
+      return;
+    }
+    
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      logoDataUrl = e.target.result;
+      var img = new Image();
+      img.onload = function() {
+        logoImg = img;
+        document.getElementById('logo-empty').classList.add('hidden');
+        document.getElementById('logo-preview').classList.remove('hidden');
+        document.getElementById('logo-image').src = logoDataUrl;
+        document.getElementById('logo-name').textContent = file.name;
+        document.getElementById('logo-controls').classList.remove('hidden');
+        document.getElementById('logo-badge').classList.remove('hidden');
+        
+        var qLevel = document.querySelector('input[name="error-level"][value="Q"]');
+        if (qLevel) qLevel.checked = true;
+        
+        renderQR();
+      };
+      img.onerror = function() { alert(i18n.imageLoadError); };
+      img.src = logoDataUrl;
+    };
+    reader.readAsDataURL(file);
+  }
+  
+  function removeLogo() {
+    logoImg = null;
+    logoDataUrl = null;
+    document.getElementById('logo-empty').classList.remove('hidden');
+    document.getElementById('logo-preview').classList.add('hidden');
+    document.getElementById('logo-controls').classList.add('hidden');
+    document.getElementById('logo-badge').classList.add('hidden');
+    document.getElementById('logo-input').value = '';
+    renderQR();
+  }
+  
+  
+  document.querySelectorAll('input[name="qr-type"]').forEach(function(radio) {
+    radio.addEventListener('change', function() { switchType(this.value); });
+  });
+  
+  document.querySelectorAll('input[type="text"], input[type="url"], input[type="email"], input[type="tel"], input[type="number"], textarea, select').forEach(function(el) {
+    el.addEventListener('input', function() {
+      clearTimeout(window.qrTimeout);
+      window.qrTimeout = setTimeout(renderQR, 300);
+    });
+  });
+  
+  document.querySelectorAll('input[type="checkbox"]').forEach(function(el) {
+    el.addEventListener('change', renderQR);
+  });
+  
+  document.getElementById('qr-size').addEventListener('input', function() {
+    document.getElementById('size-value').textContent = this.value + 'px';
+    renderQR();
+  });
+  
+  document.getElementById('export-size').addEventListener('input', function() {
+    document.getElementById('export-size-value').textContent = this.value + 'px';
+  });
+  
+  document.querySelectorAll('input[name="error-level"]').forEach(function(radio) {
+    radio.addEventListener('change', renderQR);
+  });
+  
+  document.getElementById('qr-color').addEventListener('input', function() {
+    document.getElementById('qr-color-text').value = this.value;
+    renderQR();
+  });
+  document.getElementById('qr-color-text').addEventListener('input', function() {
+    if (/^#[0-9A-Fa-f]{6}$/.test(this.value)) {
+      document.getElementById('qr-color').value = this.value;
+      renderQR();
+    }
+  });
+  
+  document.getElementById('bg-color').addEventListener('input', function() {
+    document.getElementById('bg-color-text').value = this.value;
+    renderQR();
+  });
+  document.getElementById('bg-color-text').addEventListener('input', function() {
+    if (/^#[0-9A-Fa-f]{6}$/.test(this.value)) {
+      document.getElementById('bg-color').value = this.value;
+      renderQR();
+    }
+  });
+  
+  document.getElementById('transparent-bg').addEventListener('change', renderQR);
+  
+  var logoDropzone = document.getElementById('logo-dropzone');
+  var logoInput = document.getElementById('logo-input');
+  
+  logoDropzone.addEventListener('click', function(e) {
+    if (!e.target.closest('#remove-logo')) logoInput.click();
+  });
+  
+  logoDropzone.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    this.classList.add('border-primary');
+  });
+  
+  logoDropzone.addEventListener('dragleave', function() {
+    this.classList.remove('border-primary');
+  });
+  
+  logoDropzone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    this.classList.remove('border-primary');
+    if (e.dataTransfer.files[0]) handleLogoFile(e.dataTransfer.files[0]);
+  });
+  
+  logoInput.addEventListener('change', function(e) {
+    if (e.target.files[0]) handleLogoFile(e.target.files[0]);
+  });
+  
+  document.getElementById('remove-logo').addEventListener('click', function(e) {
+    e.stopPropagation();
+    removeLogo();
+  });
+  
+  document.getElementById('logo-size').addEventListener('input', function() {
+    document.getElementById('logo-size-value').textContent = this.value + '%';
+    renderQR();
+  });
+  
+  document.getElementById('data-text').addEventListener('input', function() {
+    document.getElementById('text-count').textContent = this.value.length + '/500';
+  });
+  
+  document.getElementById('toggle-wifi-password').addEventListener('click', function() {
+    var input = document.getElementById('data-wifi-password');
+    var icon = this.querySelector('ion-icon');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.setAttribute('name', 'eye-off-outline');
+    } else {
+      input.type = 'password';
+      icon.setAttribute('name', 'eye-outline');
+    }
+  });
+  
+  document.getElementById('get-location').addEventListener('click', function() {
+    if (!navigator.geolocation) return;
+    var btn = this;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading loading-spinner loading-xs"></span> ' + i18n.determining;
+    
+    navigator.geolocation.getCurrentPosition(
+      function(pos) {
+        document.getElementById('data-geo-lat').value = pos.coords.latitude.toFixed(6);
+        document.getElementById('data-geo-lon').value = pos.coords.longitude.toFixed(6);
+        btn.disabled = false;
+        btn.innerHTML = '<ion-icon name="navigate-outline"></ion-icon> ' + i18n.myLocation;
+        renderQR();
+      },
+      function(err) {
+        alert(i18n.locationError + ': ' + err.message);
+        btn.disabled = false;
+        btn.innerHTML = '<ion-icon name="navigate-outline"></ion-icon> ' + i18n.myLocation;
+      }
+    );
+  });
+  
+  document.getElementById('regenerate-btn').addEventListener('click', renderQR);
+  document.getElementById('download-png').addEventListener('click', downloadPNG);
+  document.getElementById('download-svg').addEventListener('click', downloadSVG);
+  document.getElementById('copy-qr').addEventListener('click', copyQR);
+  document.getElementById('share-qr').addEventListener('click', shareQR);
+  
+  
+  window.addEventListener('keydown', function(e) {
+    if (!(e.ctrlKey || e.metaKey)) return;
+    if (e.key === 'Enter') { e.preventDefault(); renderQR(); }
+    if (e.key === 's' || e.key === 'S') { e.preventDefault(); downloadPNG(); }
+  }, true);
+  
+  
+  renderQR();
+  
+});
+</script>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Maksim Alexandrov<br>
+<strong>Age:</strong> 28<br>
+<strong>Location:</strong> Tula, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>This blog is my personal knowledge base, where I push notes about my tech stack, life experience, and everything that triggers my interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — ready to merge ideas and work on joint projects.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-programming-languages">💻 Programming Languages</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Responsive layout (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST APIs</strong></li>
+</ul>
+<h2 id="-databases">🗄️ Databases</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-design--graphics">🎨 Design &amp; Graphics</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX design and prototyping</li>
+<li><strong>Photoshop</strong> — graphics and image editing</li>
+<li><strong>After Effects</strong> — motion design and animation 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Open Source Projects 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">My Projects 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Name
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Description
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN service in Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Name
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Description
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN service in Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Social Links</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+     
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

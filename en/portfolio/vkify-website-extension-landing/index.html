@@ -8,8 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VKify Website — Landing Page for Browser Extension | 0x69.ru</title>
 
-    
-<meta name="google-site-verification" content="SX8wwAcRfmBYPxrIA69UFfuq8DDa2GxWVBzVj9tucMA" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Ox69" />
+<link rel="manifest" href="/site.webmanifest" />
+
 <link rel="canonical" href="https://0x69.ru/en/portfolio/vkify-website-extension-landing/" />
 
 
@@ -19,7 +24,7 @@
 " />
 
 
-<meta name="keywords" content="Web Development,React,Landing Page,UI/UX,Tailwind CSS,Framer Motion,SEO">
+<meta name="keywords" content="Web-Development,React,Landing Page,UI/UX,Tailwind CSS,Framer Motion,Seo">
 
 
 
@@ -35,7 +40,7 @@
     <meta property="article:section" content="portfolio">
     <meta property="article:published_time" content="2026-01-28T00:35:23+03:00">
     <meta property="article:modified_time" content="2026-01-28T00:35:23+03:00">
-    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Web-Development">
     <meta property="article:tag" content="React">
     <meta property="article:tag" content="Landing Page">
     <meta property="article:tag" content="UI/UX">
@@ -58,14 +63,11 @@
 
 <link rel="stylesheet" href="/css/output.min.css" />
 
-
-
-
     
 
 
 <link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css" data-syntax-highlight="true" id="syntax-theme">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css" data-syntax-highlight="true" id="syntax-theme">
 
 
 
@@ -170,119 +172,412 @@
     <div id="dream-global-bg"></div>
 
     
-<nav x-data="{ isSticky: false, mobileMenuOpen: false }"
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
      x-init="
+       
        window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
        $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
-     "
-     class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
-     :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
-
+     ">
 
   
-  <div class="container flex items-center justify-between px-4">
   
   
-    
-    
-    
-    <section class="flex items-center gap-3">
-      <button class="avatar cursor-pointer transition-all duration-200 group" 
-              @click="flip = !flip" 
-              title="Flip it!"
-              aria-label="Flip it!">
-        <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
-          <img src="/img/avatar.jpg" 
-               alt="0x69.ru &lt;/&gt;" 
-               class="rounded-full" 
-               loading="eager" />
-        </div>
-      </button>
-
-      
-      <div class="flex flex-col">
-        
-        <a href="/en/" 
-           class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
-          0x69.ru &lt;/&gt;
-        </a>
-        
-        
-        <span class="text-sm text-base-content/60 hidden sm:block">To iterate is human, to recurse divine</span>
-        
-      </div>
-      
-    </section>
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
 
     
+    <div class="container flex items-center justify-between px-4">
     
     
-    <div class="sm:hidden">
       
-      <button @click="mobileMenuOpen = !mobileMenuOpen" 
-              class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
-              :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
-              aria-label="Открыть меню"
-              :aria-expanded="mobileMenuOpen">
-        <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
-      </button>
-      
-      
-      <div x-show="mobileMenuOpen"
-           x-transition:enter="transition ease-out duration-300"
-           x-transition:enter-start="opacity-0"
-           x-transition:enter-end="opacity-100"
-           x-transition:leave="transition ease-in duration-200"
-           x-transition:leave-start="opacity-100"
-           x-transition:leave-end="opacity-0"
-           @click="mobileMenuOpen = false"
-           class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm"
-           aria-hidden="true">
-      </div>
-      
-      
-      <div x-show="mobileMenuOpen"
-           x-transition:enter="transition ease-out duration-300"
-           x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
-           x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-           x-transition:leave="transition ease-in duration-200"
-           x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-           x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
-           @click.outside="mobileMenuOpen = false"
-           @keydown.escape.window="mobileMenuOpen = false"
-           class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden">
-        
-        
-        <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
-          <span class="font-semibold text-base-content">Menu</span>
-          <button @click="mobileMenuOpen = false" 
-                  class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
-                  aria-label="Закрыть">
-            <ion-icon name="close" class="text-lg"></ion-icon>
-          </button>
-        </div>
-        
-        
-        
-          
-          
-          <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
-            <button type="button"
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-                    @click="flip = !flip; mobileMenuOpen = false"
-                    title="About"
-                    aria-label="About">
-              <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
-              <span class="flex-1 text-left">About</span>
-              <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
-            </button>
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Flip it!"
+                aria-label="Flip it!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
           </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/en/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">To iterate is human, to recurse divine</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="About">About</button>
           
         
+
         
         
-        <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
           
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/en/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Search"
+   aria-label="Search">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="All Categories"
+   aria-label="All Categories">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Portfolio"
+   aria-label="Portfolio">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/en/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Utilities"
+   aria-label="Utilities">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/portfolio/vkify-website-extension-landing/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/ru/portfolio/vkify-website-extension-landing/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Archives">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Archives</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/en/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="All Tags">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">All Tags</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/en/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Menu</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="About"
+                aria-label="About">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">About</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
 
 
   
@@ -464,6 +759,29 @@
 
 
 <li role="none">
+  <a href="/en/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Utilities">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Utilities</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">18</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
   <a href="/en/tags" 
      role="menuitem"
      class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
@@ -471,7 +789,7 @@
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">All Tags</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">65</span>
+    <span class="badge badge-sm badge-ghost font-normal">143</span>
     
   </a>
 </li>
@@ -547,289 +865,10 @@
   </div>
 
 </nav>
-        </div>
-      </div>
     </div>
-
-    
-    
-    
-    <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
-      
-      
-      
-        
-        
-        <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
-                @click="flip = !flip"
-                title="About">About</button>
-        
-      
-
-      
-      
-        
-      
-
-      
-        
-        
-        
-        
-        
-          
-
-
-
-
-
-
-
-<a href="/en/search" 
-   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
-   title="Search"
-   aria-label="Search">
-  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
-</a>
-
-
-
-
-
-        
-          
-
-
-
-
-
-
-
-<a href="/en/categories" 
-   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
-   title="All Categories"
-   aria-label="All Categories">
-  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
-</a>
-
-
-
-
-
-        
-          
-
-
-
-
-
-
-
-<a href="/en/portfolio" 
-   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
-   title="Portfolio"
-   aria-label="Portfolio">
-  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
-</a>
-
-
-
-
-
-        
-      
-        
-        
-        
-        <div class="dropdown dropdown-end dropdown-hover">
-          <button tabindex="0" 
-                  class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
-                  aria-label="Выбрать язык"
-                  aria-haspopup="true">
-            <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
-          </button>
-          <ul tabindex="0" 
-              class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
-              role="menu">
-            
-              
-              
-              
-              
-
-              
-              
-                
-                
-              
-
-              <li role="none">
-                <a href="https://0x69.ru/en/portfolio/vkify-website-extension-landing/" 
-                   hreflang="en"
-                   role="menuitem"
-                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
-                   aria-current="true">
-                  <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
-                  <span class="flex-1">English</span>
-                  
-                  <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
-                  
-                </a>
-              </li>
-            
-              
-              
-              
-              
-
-              
-              
-                
-              
-
-              <li role="none">
-                <a href="https://0x69.ru/ru/portfolio/vkify-website-extension-landing/" 
-                   hreflang="ru"
-                   role="menuitem"
-                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
-                   >
-                  <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
-                  <span class="flex-1">Русский</span>
-                  
-                </a>
-              </li>
-            
-          </ul>
-        </div>
-          
-        
-        
-        
-        <div class="dropdown dropdown-end dropdown-hover">
-          <button tabindex="0" 
-                  class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
-                  aria-label="Ещё"
-                  aria-haspopup="true">
-            <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
-          </button>
-          <ul tabindex="0" 
-              class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
-              role="menu">
-            
-              
-
-
-
-
-<li role="none">
-  <a href="/en/posts" 
-     role="menuitem"
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-     title="Archives">
-    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
-    <span class="flex-1">Archives</span>
-    
-    <span class="badge badge-sm badge-ghost font-normal">9</span>
-    
-  </a>
-</li>
-
-
-
-
-
-            
-              
-
-
-
-
-<li role="none">
-  <a href="/en/tags" 
-     role="menuitem"
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-     title="All Tags">
-    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
-    <span class="flex-1">All Tags</span>
-    
-    <span class="badge badge-sm badge-ghost font-normal">65</span>
-    
-  </a>
-</li>
-
-
-
-
-
-            
-              
-
-
-
-
-<li role="none">
-    <a href="https://github.com/rianvy" 
-       role="menuitem"
-       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-       target="_blank"
-       rel="noopener noreferrer"
-       title="GitHub">
-      
-      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
-      
-      <span class="flex-1">GitHub</span>
-      
-      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
-      
-    </a>
-  </li>
-  
-
-            
-              
-
-
-
-
-
-<li role="none">
-  <a href="/en/index.xml" 
-     role="menuitem"
-     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-     title="RSS"
-     target="_blank"
-     rel="noopener noreferrer">
-    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
-    <span class="flex-1">RSS</span>
-    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
-  </a>
-</li>
-
-
-
-
-
-            
-
-            
-              
-
-
-
-
-
-
-
-
-
-
-            
-          </ul>
-        </div>
-      
-    </section>
   </div>
-</nav>
+
+</div>
 	
 	<style>
 	.flip-container .back {
@@ -880,7 +919,7 @@
   <meta itemprop="dateModified" content="2026-01-28T00:35:23+03:00">
   <meta itemprop="wordCount" content="974">
   <meta itemprop="image" content="https://0x69.ru/en/portfolio/vkify-website-extension-landing/Cover.png">
-  <meta itemprop="keywords" content="Web Development,React,Landing Page,UI/UX,Tailwind CSS,Framer Motion,SEO">
+  <meta itemprop="keywords" content="Web-Development,React,Landing Page,UI/UX,Tailwind CSS,Framer Motion,Seo">
 
     <header class="not-prose mb-6 sm:mb-8">
       
@@ -1074,7 +1113,7 @@
               <span class="text-xs text-base-content/50">• January 2026</span>
               
             </div>
-            <p class="text-sm text-base-content/60">Project successfully completed and operational</p>
+            <p class="text-sm text-base-content/60">Project successfully completed and running</p>
           </div>
         </div>
       </div>
@@ -1090,7 +1129,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       </div>
-      <h3 class="text-2xl md:text-3xl font-bold text-base-content">Tools used</h3>
+      <h3 class="text-2xl md:text-3xl font-bold text-base-content">Tools Used</h3>
     </div>
   </div>
   
@@ -1283,7 +1322,7 @@
             <ion-icon name="rocket-outline" class="text-xl text-primary"></ion-icon>
           </div>
           <div class="flex-1 min-w-0">
-            <div class="font-medium text-primary">View Live Demo</div>
+            <div class="font-medium text-primary">Live Demo</div>
             <div class="text-xs text-base-content/50 truncate">https://vkify.ru</div>
           </div>
           <ion-icon name="open-outline" class="text-primary group-hover:translate-x-1 transition-all"></ion-icon>
@@ -1352,14 +1391,14 @@
 <h2 id="-website-interface">🖼️ Website Interface</h2>
 <p>The site fully supports light and dark themes. Use the toggles to compare:</p>
 <h3 id="homepage">Homepage</h3>
-<div class="theme-compare-137658942 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-438762951 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">VKify Landing</h4>
   
-  <div class="tc-toggle-137658942">
+  <div class="tc-toggle-438762951">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-137658942 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-438762951 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -1369,7 +1408,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-137658942 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-438762951 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -1383,7 +1422,7 @@
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
       
-      <div class="tc-light-wrap-137658942 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-438762951 relative leading-[0] transition-opacity duration-500">
         <img 
           src="work/home-light.png" 
           alt="VKify Landing - Light"
@@ -1393,7 +1432,7 @@
         />
       </div>
       
-      <div class="tc-dark-wrap-137658942 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-438762951 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="work/home-dark.png" 
           alt="VKify Landing - Dark"
@@ -1409,42 +1448,42 @@
 
 <style>
    
-  .tc-btn-137658942 {
+  .tc-btn-438762951 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-137658942.active {
+  .tc-btn-438762951.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-137658942:hover:not(.active) {
+  .tc-btn-438762951:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
    
-  .tc-slider-container-137658942 {
+  .tc-slider-container-438762951 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-137658942 img {
+  .tc-slider-container-438762951 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-137658942:hover > div:last-child,
-  .tc-handle-137658942:active > div:last-child {
+  .tc-handle-438762951:hover > div:last-child,
+  .tc-handle-438762951:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-137658942 > div:last-child {
+  .tc-handle-438762951 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-137658942 {
+  .tc-overlay-438762951 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -1452,7 +1491,7 @@
 
 <script>
 (function() {
-  const id = '137658942';
+  const id = '438762951';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -1479,11 +1518,11 @@
 })();
 </script>
 <h3 id="changelog">Changelog</h3>
-<div class="theme-compare-831275964 my-8 not-prose" data-mode="slider" data-tc-exclude>
+<div class="theme-compare-162849375 my-8 not-prose" data-mode="slider" data-tc-exclude>
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Changelog</h4>
   
-  <div class="tc-slider-831275964 relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-    <div class="tc-slider-container-831275964 relative select-none" style="--pos: 50%;">
+  <div class="tc-slider-162849375 relative overflow-hidden rounded-xl shadow-lg border border-base-300">
+    <div class="tc-slider-container-162849375 relative select-none" style="--pos: 50%;">
       
       <img 
         src="work/changelog-dark.png" 
@@ -1494,7 +1533,7 @@
       />
       
       
-      <div class="tc-overlay-831275964 absolute inset-0 overflow-hidden" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0);">
+      <div class="tc-overlay-162849375 absolute inset-0 overflow-hidden" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0);">
         <img 
           src="work/changelog-light.png" 
           alt="Changelog - Light"
@@ -1505,7 +1544,7 @@
       </div>
       
       
-      <div class="tc-handle-831275964 absolute top-0 bottom-0 cursor-ew-resize z-10 flex items-center justify-center" style="left: var(--pos); transform: translateX(-50%); width: 44px;">
+      <div class="tc-handle-162849375 absolute top-0 bottom-0 cursor-ew-resize z-10 flex items-center justify-center" style="left: var(--pos); transform: translateX(-50%); width: 44px;">
         <div class="absolute top-0 bottom-0 w-0.5 bg-white" style="box-shadow: 0 0 10px rgba(0,0,0,0.5);"></div>
         <div class="relative w-11 h-11 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-white/50" style="box-shadow: 0 2px 20px rgba(0,0,0,0.3);">
           <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
@@ -1531,42 +1570,42 @@
 
 <style>
    
-  .tc-btn-831275964 {
+  .tc-btn-162849375 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-831275964.active {
+  .tc-btn-162849375.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-831275964:hover:not(.active) {
+  .tc-btn-162849375:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
    
-  .tc-slider-container-831275964 {
+  .tc-slider-container-162849375 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-831275964 img {
+  .tc-slider-container-162849375 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-831275964:hover > div:last-child,
-  .tc-handle-831275964:active > div:last-child {
+  .tc-handle-162849375:hover > div:last-child,
+  .tc-handle-162849375:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-831275964 > div:last-child {
+  .tc-handle-162849375 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-831275964 {
+  .tc-overlay-162849375 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -1574,7 +1613,7 @@
 
 <script>
 (function() {
-  const id = '831275964';
+  const id = '162849375';
   const mode = 'slider';
   const sliderContainer = document.querySelector('.tc-slider-container-' + id);
   const handle = document.querySelector('.tc-handle-' + id);
@@ -1625,11 +1664,11 @@
 })();
 </script>
 <h3 id="update-details">Update Details</h3>
-<div class="theme-compare-569823714 my-8 not-prose" data-mode="side-by-side" >
+<div class="theme-compare-846925173 my-8 not-prose" data-mode="side-by-side" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Release Details</h4>
   
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div class="tc-card-569823714 rounded-xl overflow-hidden shadow-lg border border-base-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <div class="tc-card-846925173 rounded-xl overflow-hidden shadow-lg border border-base-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 px-4 py-2 flex items-center gap-2 border-b border-base-300">
         <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
@@ -1645,7 +1684,7 @@
       />
     </div>
     
-    <div class="tc-card-569823714 rounded-xl overflow-hidden shadow-lg border border-base-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <div class="tc-card-846925173 rounded-xl overflow-hidden shadow-lg border border-base-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       <div class="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 px-4 py-2 flex items-center gap-2 border-b border-base-300">
         <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
@@ -1666,42 +1705,42 @@
 
 <style>
    
-  .tc-btn-569823714 {
+  .tc-btn-846925173 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-569823714.active {
+  .tc-btn-846925173.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-569823714:hover:not(.active) {
+  .tc-btn-846925173:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
    
-  .tc-slider-container-569823714 {
+  .tc-slider-container-846925173 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-569823714 img {
+  .tc-slider-container-846925173 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-569823714:hover > div:last-child,
-  .tc-handle-569823714:active > div:last-child {
+  .tc-handle-846925173:hover > div:last-child,
+  .tc-handle-846925173:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-569823714 > div:last-child {
+  .tc-handle-846925173 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-569823714 {
+  .tc-overlay-846925173 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -1709,19 +1748,19 @@
 
 <script>
 (function() {
-  const id = '569823714';
+  const id = '846925173';
   const mode = 'side-by-side';
 })();
 </script>
 <h3 id="privacy-policy">Privacy Policy</h3>
-<div class="theme-compare-852719634 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-537861249 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Privacy Policy</h4>
   
-  <div class="tc-toggle-852719634">
+  <div class="tc-toggle-537861249">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-852719634 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-537861249 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -1731,7 +1770,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-852719634 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-537861249 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -1745,7 +1784,7 @@
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
       
-      <div class="tc-light-wrap-852719634 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-537861249 relative leading-[0] transition-opacity duration-500">
         <img 
           src="work/privacy-light.png" 
           alt="Privacy Policy - Light"
@@ -1755,7 +1794,7 @@
         />
       </div>
       
-      <div class="tc-dark-wrap-852719634 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-537861249 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="work/privacy-dark.png" 
           alt="Privacy Policy - Dark"
@@ -1771,42 +1810,42 @@
 
 <style>
    
-  .tc-btn-852719634 {
+  .tc-btn-537861249 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-852719634.active {
+  .tc-btn-537861249.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-852719634:hover:not(.active) {
+  .tc-btn-537861249:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
    
-  .tc-slider-container-852719634 {
+  .tc-slider-container-537861249 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-852719634 img {
+  .tc-slider-container-537861249 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-852719634:hover > div:last-child,
-  .tc-handle-852719634:active > div:last-child {
+  .tc-handle-537861249:hover > div:last-child,
+  .tc-handle-537861249:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-852719634 > div:last-child {
+  .tc-handle-537861249 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-852719634 {
+  .tc-overlay-537861249 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -1814,7 +1853,7 @@
 
 <script>
 (function() {
-  const id = '852719634';
+  const id = '537861249';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -1841,14 +1880,14 @@
 })();
 </script>
 <h3 id="terms-of-service">Terms of Service</h3>
-<div class="theme-compare-136278954 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-345716289 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Terms of Service</h4>
   
-  <div class="tc-toggle-136278954">
+  <div class="tc-toggle-345716289">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-136278954 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-345716289 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -1858,7 +1897,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-136278954 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-345716289 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -1872,7 +1911,7 @@
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
       
-      <div class="tc-light-wrap-136278954 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-345716289 relative leading-[0] transition-opacity duration-500">
         <img 
           src="work/terms-light.png" 
           alt="Terms of Service - Light"
@@ -1882,7 +1921,7 @@
         />
       </div>
       
-      <div class="tc-dark-wrap-136278954 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-345716289 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="work/terms-dark.png" 
           alt="Terms of Service - Dark"
@@ -1898,42 +1937,42 @@
 
 <style>
    
-  .tc-btn-136278954 {
+  .tc-btn-345716289 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-136278954.active {
+  .tc-btn-345716289.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-136278954:hover:not(.active) {
+  .tc-btn-345716289:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
    
-  .tc-slider-container-136278954 {
+  .tc-slider-container-345716289 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-136278954 img {
+  .tc-slider-container-345716289 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-136278954:hover > div:last-child,
-  .tc-handle-136278954:active > div:last-child {
+  .tc-handle-345716289:hover > div:last-child,
+  .tc-handle-345716289:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-136278954 > div:last-child {
+  .tc-handle-345716289 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-136278954 {
+  .tc-overlay-345716289 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -1941,7 +1980,7 @@
 
 <script>
 (function() {
-  const id = '136278954';
+  const id = '345716289';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -1968,14 +2007,14 @@
 })();
 </script>
 <h3 id="post-installation-page">Post-Installation Page</h3>
-<div class="theme-compare-347528169 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-185349726 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Welcome / Onboarding</h4>
   
-  <div class="tc-toggle-347528169">
+  <div class="tc-toggle-185349726">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-347528169 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-185349726 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -1985,7 +2024,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-347528169 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-185349726 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -1999,7 +2038,7 @@
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
       
-      <div class="tc-light-wrap-347528169 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-185349726 relative leading-[0] transition-opacity duration-500">
         <img 
           src="work/welcome-light.png" 
           alt="Welcome / Onboarding - Light"
@@ -2009,7 +2048,7 @@
         />
       </div>
       
-      <div class="tc-dark-wrap-347528169 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-185349726 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="work/welcome-dark.png" 
           alt="Welcome / Onboarding - Dark"
@@ -2025,42 +2064,42 @@
 
 <style>
    
-  .tc-btn-347528169 {
+  .tc-btn-185349726 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-347528169.active {
+  .tc-btn-185349726.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-347528169:hover:not(.active) {
+  .tc-btn-185349726:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
    
-  .tc-slider-container-347528169 {
+  .tc-slider-container-185349726 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-347528169 img {
+  .tc-slider-container-185349726 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-347528169:hover > div:last-child,
-  .tc-handle-347528169:active > div:last-child {
+  .tc-handle-185349726:hover > div:last-child,
+  .tc-handle-185349726:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-347528169 > div:last-child {
+  .tc-handle-185349726 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-347528169 {
+  .tc-overlay-185349726 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2068,7 +2107,7 @@
 
 <script>
 (function() {
-  const id = '347528169';
+  const id = '185349726';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -2095,14 +2134,14 @@
 })();
 </script>
 <h3 id="post-uninstall-page">Post-Uninstall Page</h3>
-<div class="theme-compare-714928365 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-127843956 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Uninstall Feedback</h4>
   
-  <div class="tc-toggle-714928365">
+  <div class="tc-toggle-127843956">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-714928365 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-127843956 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -2112,7 +2151,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-714928365 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-127843956 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -2126,7 +2165,7 @@
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
       
-      <div class="tc-light-wrap-714928365 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-127843956 relative leading-[0] transition-opacity duration-500">
         <img 
           src="work/uninstall-light.png" 
           alt="Uninstall Feedback - Light"
@@ -2136,7 +2175,7 @@
         />
       </div>
       
-      <div class="tc-dark-wrap-714928365 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-127843956 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="work/uninstall-dark.png" 
           alt="Uninstall Feedback - Dark"
@@ -2152,42 +2191,42 @@
 
 <style>
    
-  .tc-btn-714928365 {
+  .tc-btn-127843956 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-714928365.active {
+  .tc-btn-127843956.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-714928365:hover:not(.active) {
+  .tc-btn-127843956:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
    
-  .tc-slider-container-714928365 {
+  .tc-slider-container-127843956 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-714928365 img {
+  .tc-slider-container-127843956 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-714928365:hover > div:last-child,
-  .tc-handle-714928365:active > div:last-child {
+  .tc-handle-127843956:hover > div:last-child,
+  .tc-handle-127843956:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-714928365 > div:last-child {
+  .tc-handle-127843956 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-714928365 {
+  .tc-overlay-127843956 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2195,7 +2234,7 @@
 
 <script>
 (function() {
-  const id = '714928365';
+  const id = '127843956';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -2222,14 +2261,14 @@
 })();
 </script>
 <h3 id="404-page">404 Page</h3>
-<div class="theme-compare-615249387 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-328619754 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Error Page</h4>
   
-  <div class="tc-toggle-615249387">
+  <div class="tc-toggle-328619754">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-615249387 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-328619754 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -2239,7 +2278,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-615249387 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-328619754 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -2253,7 +2292,7 @@
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
       
-      <div class="tc-light-wrap-615249387 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-328619754 relative leading-[0] transition-opacity duration-500">
         <img 
           src="work/404-light.png" 
           alt="Error Page - Light"
@@ -2263,7 +2302,7 @@
         />
       </div>
       
-      <div class="tc-dark-wrap-615249387 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-328619754 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="work/404-dark.png" 
           alt="Error Page - Dark"
@@ -2279,42 +2318,42 @@
 
 <style>
    
-  .tc-btn-615249387 {
+  .tc-btn-328619754 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-615249387.active {
+  .tc-btn-328619754.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-615249387:hover:not(.active) {
+  .tc-btn-328619754:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
    
-  .tc-slider-container-615249387 {
+  .tc-slider-container-328619754 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-615249387 img {
+  .tc-slider-container-328619754 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-615249387:hover > div:last-child,
-  .tc-handle-615249387:active > div:last-child {
+  .tc-handle-328619754:hover > div:last-child,
+  .tc-handle-328619754:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-615249387 > div:last-child {
+  .tc-handle-328619754 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-615249387 {
+  .tc-overlay-328619754 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2322,7 +2361,7 @@
 
 <script>
 (function() {
-  const id = '615249387';
+  const id = '328619754';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -3881,6 +3920,33 @@
 
     
     
+    <section class="mt-12">
+      
+
+
+<template x-if="['localhost', '127.0.0.1'].indexOf(window.location.hostname) == -1">
+  <article>
+    <script
+      src="https://utteranc.es/client.js"
+      repo="https://github.com/Rianvy/blog"
+      issue-term="og:title"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </article>
+</template>
+
+
+
+
+
+
+
+
+
+    </section>
+    
   </article>
 
   
@@ -4459,7 +4525,7 @@
 
     <script>
   window.lightTheme = "emerald"
-  window.darkTheme = "forest"
+  window.darkTheme = "dim"
 </script>
 
 
@@ -4601,14 +4667,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/apache.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script><script>
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/apache.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/shell.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sh.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/zsh.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/powershell.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/ini.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/nginx.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script><script>
   hljs.highlightAll();
   hljs.addPlugin(new CopyButtonPlugin());
 
   document.addEventListener('alpine:initialized', () => {
     window.customSyntaxHighlighting = {
-      dark: 'a11y-dark',
-      light: 'atom-one-dark'
+      dark: 'github-dark-dimmed',
+      light: 'atom-one-light'
     };
 
     const updateSyntaxTheme = () => {
@@ -4911,6 +4977,40 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 	
     
 

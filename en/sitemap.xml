@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://0x69.ru/en/</loc>
-    <lastmod>2026-02-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ru"
@@ -13,6 +13,110 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://0x69.ru/en/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/accounts/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/accounts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/accounts/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/logout/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/logout/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/logout/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/privacy/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/privacy/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/privacy/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/security/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/security/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/security/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/session/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/session/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/session/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/sign-out/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/sign-out/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/sign-out/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/utilities/super-logout/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/utilities/super-logout/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/utilities/super-logout/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/"
                 />
   </url><url>
     <loc>https://0x69.ru/en/tags/bulk/</loc>
@@ -495,19 +599,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://0x69.ru/en/tags/seo/"
-                />
-  </url><url>
-    <loc>https://0x69.ru/en/tags/</loc>
-    <lastmod>2026-02-09T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.ru/ru/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.ru/en/tags/"
                 />
   </url><url>
     <loc>https://0x69.ru/en/tags/test/</loc>

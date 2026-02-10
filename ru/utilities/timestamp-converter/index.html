@@ -340,7 +340,7 @@ Timestamp Converter
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Все теги</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">146</span>
+    <span class="badge badge-sm badge-ghost font-normal">152</span>
     
   </a>
 </li>
@@ -669,7 +669,7 @@ Timestamp Converter
     <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Утилиты</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">18</span>
+    <span class="badge badge-sm badge-ghost font-normal">19</span>
     
   </a>
 </li>
@@ -692,7 +692,7 @@ Timestamp Converter
     <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
     <span class="flex-1">Все теги</span>
     
-    <span class="badge badge-sm badge-ghost font-normal">146</span>
+    <span class="badge badge-sm badge-ghost font-normal">152</span>
     
   </a>
 </li>
@@ -792,26 +792,26 @@ Timestamp Converter
           <div class="container">
             
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
 
   
-  <div class="text-center mb-8 sm:mb-12">
-    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
-      <span class="text-4xl sm:text-5xl">⏰</span>
+  <div class="text-center mb-6 sm:mb-12">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">⏰</span>
     </div>
-    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">Timestamp Converter</h1>
-    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">Конвертер Unix timestamp в дату и обратно, таймзоны, калькулятор длительности</p>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">Timestamp Converter</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">Конвертер Unix timestamp в дату и обратно, таймзоны, калькулятор длительности</p>
     
-    <div class="flex flex-wrap justify-center gap-2">
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
         <ion-icon name="swap-horizontal-outline"></ion-icon>
         Unix ↔ Date
       </span>
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
         <ion-icon name="globe-outline"></ion-icon>
         Таймзоны
       </span>
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
         <ion-icon name="time-outline"></ion-icon>
         Live время
       </span>
@@ -819,22 +819,24 @@ Timestamp Converter
   </div>
 
   
-  <div class="max-w-4xl mx-auto mb-6">
-    <div class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl border border-primary/20 p-4 sm:p-6">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div class="text-center sm:text-left">
-          <div class="text-xs text-base-content/50 mb-1">Текущее время</div>
-          <div class="font-mono text-2xl sm:text-3xl font-bold" id="live-timestamp">—</div>
-          <div class="text-sm text-base-content/60 mt-1" id="live-date">—</div>
+  <div class="max-w-4xl mx-auto mb-5 sm:mb-6">
+    <div class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl sm:rounded-2xl border border-primary/20 p-3 sm:p-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+        <div class="text-center sm:text-left w-full sm:w-auto">
+          <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Текущее время</div>
+          <div class="font-mono text-xl sm:text-3xl font-bold break-all" id="live-timestamp">—</div>
+          <div class="text-xs sm:text-sm text-base-content/60 mt-0.5 sm:mt-1" id="live-date">—</div>
         </div>
-        <div class="flex gap-2">
-          <button id="copy-now-ts" class="btn btn-primary btn-sm gap-1">
+        <div class="flex gap-2 w-full sm:w-auto">
+          <button id="copy-now-ts" class="btn btn-primary btn-sm flex-1 sm:flex-none gap-1 text-xs sm:text-sm">
             <ion-icon name="copy-outline"></ion-icon>
-            Копировать
+            <span class="hidden xs:inline">Копировать</span>
+            <span class="xs:hidden">Copy</span>
           </button>
-          <button id="use-now" class="btn btn-ghost btn-sm gap-1">
+          <button id="use-now" class="btn btn-ghost btn-sm flex-1 sm:flex-none gap-1 text-xs sm:text-sm">
             <ion-icon name="arrow-down-outline"></ion-icon>
-            Использовать
+            <span class="hidden xs:inline">Использовать</span>
+            <span class="xs:hidden">Use</span>
           </button>
         </div>
       </div>
@@ -842,73 +844,74 @@ Timestamp Converter
   </div>
 
   <div class="max-w-4xl mx-auto">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
 
       
-      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
-          <h2 class="font-semibold flex items-center gap-2">
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
             <ion-icon name="arrow-forward-outline" class="text-primary"></ion-icon>
             Timestamp → Дата
           </h2>
         </div>
         
-        <div class="p-4 space-y-4">
+        <div class="p-3 sm:p-4 space-y-3 sm:space-y-4">
           
           
           <div class="form-control">
             <label class="label py-1">
-              <span class="label-text font-medium">Unix Timestamp</span>
-              <div class="flex gap-1">
-                <button class="btn btn-ghost btn-xs unit-btn" data-unit="s" data-active="true">Секунды</button>
-                <button class="btn btn-ghost btn-xs unit-btn" data-unit="ms">Миллисекунды</button>
+              <span class="label-text font-medium text-xs sm:text-sm">Unix Timestamp</span>
+              <div class="flex gap-0.5 sm:gap-1">
+                <button class="btn btn-ghost btn-xs unit-btn text-[10px] sm:text-xs px-1.5 sm:px-2" data-unit="s" data-active="true">Секунды</button>
+                <button class="btn btn-ghost btn-xs unit-btn text-[10px] sm:text-xs px-1.5 sm:px-2" data-unit="ms">Миллисекунды</button>
               </div>
             </label>
             <input 
               type="text" 
+              inputmode="numeric"
               id="ts-input" 
-              class="input input-bordered font-mono text-lg"
+              class="input input-bordered font-mono text-base sm:text-lg w-full"
               placeholder="1704067200"
             />
           </div>
           
           
-          <div class="flex flex-wrap gap-2">
-            <button class="btn btn-ghost btn-xs quick-ts" data-offset="-86400">-1d</button>
-            <button class="btn btn-ghost btn-xs quick-ts" data-offset="-3600">-1h</button>
-            <button class="btn btn-ghost btn-xs quick-ts" data-offset="-60">-1m</button>
-            <button class="btn btn-ghost btn-xs quick-ts" data-offset="60">+1m</button>
-            <button class="btn btn-ghost btn-xs quick-ts" data-offset="3600">+1h</button>
-            <button class="btn btn-ghost btn-xs quick-ts" data-offset="86400">+1d</button>
-            <button class="btn btn-ghost btn-xs quick-ts" data-offset="604800">+1w</button>
+          <div class="flex flex-wrap gap-1.5 sm:gap-2">
+            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="-86400">-1d</button>
+            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="-3600">-1h</button>
+            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="-60">-1m</button>
+            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="60">+1m</button>
+            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="3600">+1h</button>
+            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="86400">+1d</button>
+            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="604800">+1w</button>
           </div>
           
           
-          <button id="ts-to-date-btn" class="btn btn-primary w-full gap-2">
+          <button id="ts-to-date-btn" class="btn btn-primary w-full gap-2 text-sm sm:text-base">
             <ion-icon name="calendar-outline"></ion-icon>
             Конвертировать в дату
           </button>
           
           
-          <div id="ts-result" class="hidden space-y-3">
-            <div class="divider text-xs text-base-content/50">Результат</div>
+          <div id="ts-result" class="hidden space-y-2 sm:space-y-3">
+            <div class="divider text-[10px] sm:text-xs text-base-content/50 my-1 sm:my-2">Результат</div>
             
             <div class="grid gap-2">
-              <div class="flex items-center justify-between p-3 bg-base-200/50 rounded-lg">
-                <span class="text-sm text-base-content/60">Локальное</span>
-                <code class="font-mono text-sm" id="result-local">—</code>
+              <div class="flex flex-col xs:flex-row xs:items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg gap-1">
+                <span class="text-xs sm:text-sm text-base-content/60">Локальное</span>
+                <code class="font-mono text-xs sm:text-sm break-all" id="result-local">—</code>
               </div>
-              <div class="flex items-center justify-between p-3 bg-base-200/50 rounded-lg">
-                <span class="text-sm text-base-content/60">UTC</span>
-                <code class="font-mono text-sm" id="result-utc">—</code>
+              <div class="flex flex-col xs:flex-row xs:items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg gap-1">
+                <span class="text-xs sm:text-sm text-base-content/60">UTC</span>
+                <code class="font-mono text-xs sm:text-sm break-all" id="result-utc">—</code>
               </div>
-              <div class="flex items-center justify-between p-3 bg-base-200/50 rounded-lg">
-                <span class="text-sm text-base-content/60">ISO 8601</span>
-                <code class="font-mono text-sm" id="result-iso">—</code>
+              <div class="flex flex-col xs:flex-row xs:items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg gap-1">
+                <span class="text-xs sm:text-sm text-base-content/60">ISO 8601</span>
+                <code class="font-mono text-xs sm:text-sm break-all" id="result-iso">—</code>
               </div>
-              <div class="flex items-center justify-between p-3 bg-base-200/50 rounded-lg">
-                <span class="text-sm text-base-content/60">Относительное</span>
-                <code class="font-mono text-sm" id="result-relative">—</code>
+              <div class="flex flex-col xs:flex-row xs:items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg gap-1">
+                <span class="text-xs sm:text-sm text-base-content/60">Относительное</span>
+                <code class="font-mono text-xs sm:text-sm" id="result-relative">—</code>
               </div>
             </div>
           </div>
@@ -917,38 +920,38 @@ Timestamp Converter
       </div>
 
       
-      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
-          <h2 class="font-semibold flex items-center gap-2">
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
             <ion-icon name="arrow-back-outline" class="text-secondary"></ion-icon>
             Дата → Timestamp
           </h2>
         </div>
         
-        <div class="p-4 space-y-4">
+        <div class="p-3 sm:p-4 space-y-3 sm:space-y-4">
           
           
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-2 gap-2 sm:gap-3">
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">Дата</span>
+                <span class="label-text font-medium text-xs sm:text-sm">Дата</span>
               </label>
-              <input type="date" id="date-input" class="input input-bordered" />
+              <input type="date" id="date-input" class="input input-bordered input-sm sm:input-md w-full text-sm" />
             </div>
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">Время</span>
+                <span class="label-text font-medium text-xs sm:text-sm">Время</span>
               </label>
-              <input type="time" id="time-input" class="input input-bordered" value="00:00" step="1" />
+              <input type="time" id="time-input" class="input input-bordered input-sm sm:input-md w-full text-sm" value="00:00" step="1" />
             </div>
           </div>
           
           
           <div class="form-control">
             <label class="label py-1">
-              <span class="label-text font-medium">Часовой пояс</span>
+              <span class="label-text font-medium text-xs sm:text-sm">Часовой пояс</span>
             </label>
-            <select id="tz-select" class="select select-bordered">
+            <select id="tz-select" class="select select-bordered select-sm sm:select-md w-full text-sm">
               <option value="local">Локальный</option>
               <option value="UTC">UTC</option>
               <option value="America/New_York">New York (EST/EDT)</option>
@@ -964,29 +967,29 @@ Timestamp Converter
           </div>
           
           
-          <button id="date-to-ts-btn" class="btn btn-secondary w-full gap-2">
+          <button id="date-to-ts-btn" class="btn btn-secondary w-full gap-2 text-sm sm:text-base">
             <ion-icon name="time-outline"></ion-icon>
             Конвертировать в timestamp
           </button>
           
           
-          <div id="date-result" class="hidden space-y-3">
-            <div class="divider text-xs text-base-content/50">Результат</div>
+          <div id="date-result" class="hidden space-y-2 sm:space-y-3">
+            <div class="divider text-[10px] sm:text-xs text-base-content/50 my-1 sm:my-2">Результат</div>
             
             <div class="grid gap-2">
-              <div class="flex items-center justify-between p-3 bg-base-200/50 rounded-lg">
-                <span class="text-sm text-base-content/60">Секунды</span>
-                <div class="flex items-center gap-2">
-                  <code class="font-mono text-lg font-bold" id="result-ts-sec">—</code>
+              <div class="flex items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg">
+                <span class="text-xs sm:text-sm text-base-content/60">Секунды</span>
+                <div class="flex items-center gap-1.5 sm:gap-2">
+                  <code class="font-mono text-sm sm:text-lg font-bold" id="result-ts-sec">—</code>
                   <button class="btn btn-ghost btn-xs copy-result" data-target="result-ts-sec">
                     <ion-icon name="copy-outline"></ion-icon>
                   </button>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-3 bg-base-200/50 rounded-lg">
-                <span class="text-sm text-base-content/60">Миллисекунды</span>
-                <div class="flex items-center gap-2">
-                  <code class="font-mono text-sm" id="result-ts-ms">—</code>
+              <div class="flex items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg">
+                <span class="text-xs sm:text-sm text-base-content/60">Миллисекунды</span>
+                <div class="flex items-center gap-1.5 sm:gap-2">
+                  <code class="font-mono text-xs sm:text-sm break-all" id="result-ts-ms">—</code>
                   <button class="btn btn-ghost btn-xs copy-result" data-target="result-ts-ms">
                     <ion-icon name="copy-outline"></ion-icon>
                   </button>
@@ -1001,31 +1004,31 @@ Timestamp Converter
     </div>
 
     
-    <div class="mt-6 bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-      <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
-        <h2 class="font-semibold flex items-center gap-2">
+    <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+        <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
           <ion-icon name="globe-outline" class="text-accent"></ion-icon>
           Конвертер таймзон
         </h2>
       </div>
       
-      <div class="p-4">
+      <div class="p-3 sm:p-4">
         
         
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3" id="world-clocks">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3" id="world-clocks">
           
         </div>
         
         
-        <div class="mt-6 pt-6 border-t border-base-200 dark:border-base-content/10">
-          <h3 class="text-sm font-medium mb-3">Сравнить часовые пояса</h3>
+        <div class="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-base-200 dark:border-base-content/10">
+          <h3 class="text-xs sm:text-sm font-medium mb-2 sm:mb-3">Сравнить часовые пояса</h3>
           
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 items-end">
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text text-sm">Из</span>
+                <span class="label-text text-xs sm:text-sm">Из</span>
               </label>
-              <select id="tz-from" class="select select-bordered select-sm">
+              <select id="tz-from" class="select select-bordered select-sm w-full text-sm">
                 <option value="local">Локальный</option>
                 <option value="UTC">UTC</option>
                 <option value="America/New_York">New York</option>
@@ -1037,16 +1040,16 @@ Timestamp Converter
             
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text text-sm">Время</span>
+                <span class="label-text text-xs sm:text-sm">Время</span>
               </label>
-              <input type="time" id="tz-time" class="input input-bordered input-sm" value="12:00" />
+              <input type="time" id="tz-time" class="input input-bordered input-sm w-full text-sm" value="12:00" />
             </div>
             
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text text-sm">В</span>
+                <span class="label-text text-xs sm:text-sm">В</span>
               </label>
-              <select id="tz-to" class="select select-bordered select-sm">
+              <select id="tz-to" class="select select-bordered select-sm w-full text-sm">
                 <option value="UTC">UTC</option>
                 <option value="America/New_York">New York</option>
                 <option value="Europe/London">London</option>
@@ -1057,9 +1060,9 @@ Timestamp Converter
             </div>
           </div>
           
-          <div id="tz-compare-result" class="mt-4 p-4 bg-base-200/50 rounded-xl text-center">
-            <div class="text-sm text-base-content/60 mb-1" id="tz-compare-from">—</div>
-            <div class="text-2xl font-bold font-mono" id="tz-compare-to">—</div>
+          <div id="tz-compare-result" class="mt-3 sm:mt-4 p-3 sm:p-4 bg-base-200/50 rounded-xl text-center">
+            <div class="text-xs sm:text-sm text-base-content/60 mb-1" id="tz-compare-from">—</div>
+            <div class="text-xl sm:text-2xl font-bold font-mono" id="tz-compare-to">—</div>
           </div>
         </div>
         
@@ -1067,58 +1070,58 @@ Timestamp Converter
     </div>
 
     
-    <div class="mt-6 bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+    <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
       <details class="group">
-        <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
-          <h2 class="font-semibold flex items-center gap-2">
+        <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors active:bg-base-200/70">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
             <ion-icon name="hourglass-outline" class="text-warning"></ion-icon>
             Калькулятор длительности
           </h2>
-          <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          <ion-icon name="chevron-down" class="text-lg sm:text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
         </summary>
         
-        <div class="p-4 pt-0 space-y-4">
+        <div class="p-3 sm:p-4 pt-0 space-y-3 sm:space-y-4">
           
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">Начало</span>
+                <span class="label-text font-medium text-xs sm:text-sm">Начало</span>
               </label>
-              <input type="datetime-local" id="duration-start" class="input input-bordered" />
+              <input type="datetime-local" id="duration-start" class="input input-bordered input-sm sm:input-md w-full text-sm" />
             </div>
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">Конец</span>
+                <span class="label-text font-medium text-xs sm:text-sm">Конец</span>
               </label>
-              <input type="datetime-local" id="duration-end" class="input input-bordered" />
+              <input type="datetime-local" id="duration-end" class="input input-bordered input-sm sm:input-md w-full text-sm" />
             </div>
           </div>
           
-          <button id="calc-duration-btn" class="btn btn-warning w-full gap-2">
+          <button id="calc-duration-btn" class="btn btn-warning w-full gap-2 text-sm sm:text-base">
             <ion-icon name="calculator-outline"></ion-icon>
             Рассчитать
           </button>
           
           <div id="duration-result" class="hidden">
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-              <div class="p-3 bg-base-200/50 rounded-xl">
-                <div class="text-2xl font-bold" id="dur-days">0</div>
-                <div class="text-xs text-base-content/60">Дней</div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 text-center">
+              <div class="p-2.5 sm:p-3 bg-base-200/50 rounded-xl">
+                <div class="text-xl sm:text-2xl font-bold" id="dur-days">0</div>
+                <div class="text-[10px] sm:text-xs text-base-content/60">Дней</div>
               </div>
-              <div class="p-3 bg-base-200/50 rounded-xl">
-                <div class="text-2xl font-bold" id="dur-hours">0</div>
-                <div class="text-xs text-base-content/60">Часов</div>
+              <div class="p-2.5 sm:p-3 bg-base-200/50 rounded-xl">
+                <div class="text-xl sm:text-2xl font-bold" id="dur-hours">0</div>
+                <div class="text-[10px] sm:text-xs text-base-content/60">Часов</div>
               </div>
-              <div class="p-3 bg-base-200/50 rounded-xl">
-                <div class="text-2xl font-bold" id="dur-minutes">0</div>
-                <div class="text-xs text-base-content/60">Минут</div>
+              <div class="p-2.5 sm:p-3 bg-base-200/50 rounded-xl">
+                <div class="text-xl sm:text-2xl font-bold" id="dur-minutes">0</div>
+                <div class="text-[10px] sm:text-xs text-base-content/60">Минут</div>
               </div>
-              <div class="p-3 bg-base-200/50 rounded-xl">
-                <div class="text-2xl font-bold" id="dur-seconds">0</div>
-                <div class="text-xs text-base-content/60">сек</div>
+              <div class="p-2.5 sm:p-3 bg-base-200/50 rounded-xl">
+                <div class="text-xl sm:text-2xl font-bold" id="dur-seconds">0</div>
+                <div class="text-[10px] sm:text-xs text-base-content/60">сек</div>
               </div>
             </div>
-            <div class="mt-3 text-center text-sm text-base-content/60">
+            <div class="mt-2 sm:mt-3 text-center text-xs sm:text-sm text-base-content/60">
               Всего: <span class="font-mono" id="dur-total">0</span> сек
             </div>
           </div>
@@ -1128,18 +1131,18 @@ Timestamp Converter
     </div>
 
     
-    <div class="mt-6 bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+    <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
       <details class="group">
-        <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
-          <h2 class="font-semibold flex items-center gap-2">
+        <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors active:bg-base-200/70">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
             <ion-icon name="bookmark-outline" class="text-info"></ion-icon>
             Популярные даты
           </h2>
-          <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          <ion-icon name="chevron-down" class="text-lg sm:text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
         </summary>
         
-        <div class="p-4 pt-0">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="common-timestamps">
+        <div class="p-3 sm:p-4 pt-0">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3" id="common-timestamps">
             
           </div>
         </div>
@@ -1182,20 +1185,69 @@ document.addEventListener('DOMContentLoaded', function() {
   var unitMs = false;
   
   
-  function updateLiveClock() {
-    var now = Math.floor(Date.now() / 1000);
-    liveTimestamp.textContent = now;
-    liveDate.textContent = new Date().toLocaleString();
+  function copyToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        showToast(i18n.copied);
+      }).catch(function() {
+        fallbackCopy(text);
+      });
+    } else {
+      fallbackCopy(text);
+    }
   }
   
-  setInterval(updateLiveClock, 1000);
-  updateLiveClock();
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    ta.style.top = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try {
+      document.execCommand('copy');
+      showToast(i18n.copied);
+    } catch (e) {
+      
+    }
+    document.body.removeChild(ta);
+  }
+  
+  
+  var liveClockInterval = null;
+  
+  function updateLiveClock() {
+    var now = Math.floor(Date.now() / 1000);
+    if (liveTimestamp) liveTimestamp.textContent = now;
+    if (liveDate) liveDate.textContent = new Date().toLocaleString();
+  }
+  
+  function startLiveClock() {
+    updateLiveClock();
+    if (liveClockInterval) clearInterval(liveClockInterval);
+    liveClockInterval = setInterval(updateLiveClock, 1000);
+  }
+  
+  startLiveClock();
+  
+  
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      if (liveClockInterval) clearInterval(liveClockInterval);
+      if (worldClockInterval) clearInterval(worldClockInterval);
+    } else {
+      startLiveClock();
+      updateWorldClocks();
+      startWorldClockInterval();
+    }
+  });
   
   
   document.getElementById('copy-now-ts').addEventListener('click', function() {
     var now = Math.floor(Date.now() / 1000);
-    navigator.clipboard.writeText(now.toString());
-    showToast(i18n.copied);
+    copyToClipboard(now.toString());
   });
   
   
@@ -1206,23 +1258,47 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   
-  document.querySelectorAll('.unit-btn').forEach(function(btn) {
+  var unitBtns = document.querySelectorAll('.unit-btn');
+  unitBtns.forEach(function(btn) {
     btn.addEventListener('click', function() {
-      document.querySelectorAll('.unit-btn').forEach(function(b) {
-        b.classList.remove('btn-primary');
+      unitBtns.forEach(function(b) {
+        b.classList.remove('btn-primary', 'btn-active');
         b.dataset.active = 'false';
       });
-      btn.classList.add('btn-primary');
+      btn.classList.add('btn-primary', 'btn-active');
       btn.dataset.active = 'true';
       unitMs = btn.dataset.unit === 'ms';
+      
+      
+      var val = tsInput.value.trim();
+      if (val) {
+        var num = parseInt(val, 10);
+        if (!isNaN(num)) {
+          if (unitMs && val.length <= 10) {
+            tsInput.value = num * 1000;
+          } else if (!unitMs && val.length > 10) {
+            tsInput.value = Math.floor(num / 1000);
+          }
+        }
+      }
     });
+  });
+  
+  
+  unitBtns.forEach(function(btn) {
+    if (btn.dataset.active === 'true') {
+      btn.classList.add('btn-primary', 'btn-active');
+    }
   });
   
   
   document.querySelectorAll('.quick-ts').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      var offset = parseInt(btn.dataset.offset);
-      var current = parseInt(tsInput.value) || Math.floor(Date.now() / 1000);
+      var offset = parseInt(btn.dataset.offset, 10);
+      var current = parseInt(tsInput.value, 10);
+      if (isNaN(current)) {
+        current = unitMs ? Date.now() : Math.floor(Date.now() / 1000);
+      }
       if (unitMs) {
         tsInput.value = current + (offset * 1000);
       } else {
@@ -1234,13 +1310,29 @@ document.addEventListener('DOMContentLoaded', function() {
   
   
   function convertTsToDate() {
-    var ts = parseInt(tsInput.value);
+    var val = tsInput.value.trim();
+    if (!val) return;
+    
+    var ts = parseInt(val, 10);
     if (isNaN(ts)) return;
     
     
-    if (!unitMs) ts = ts * 1000;
+    var msValue;
+    if (unitMs) {
+      msValue = ts;
+    } else {
+      
+      if (ts > 1e12) {
+        msValue = ts;
+      } else {
+        msValue = ts * 1000;
+      }
+    }
     
-    var date = new Date(ts);
+    var date = new Date(msValue);
+    
+    
+    if (isNaN(date.getTime())) return;
     
     document.getElementById('result-local').textContent = date.toLocaleString();
     document.getElementById('result-utc').textContent = date.toUTCString();
@@ -1256,12 +1348,28 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   
+  var tsInputTimer = null;
+  tsInput.addEventListener('input', function() {
+    if (tsInputTimer) clearTimeout(tsInputTimer);
+    tsInputTimer = setTimeout(function() {
+      if (tsInput.value.trim().length >= 8) {
+        convertTsToDate();
+      }
+    }, 500);
+  });
+  
+  
   function convertDateToTs() {
     var dateVal = dateInput.value;
     var timeVal = timeInput.value || '00:00:00';
     var tz = document.getElementById('tz-select').value;
     
     if (!dateVal) return;
+    
+    
+    if (timeVal.split(':').length === 2) {
+      timeVal += ':00';
+    }
     
     var dateStr = dateVal + 'T' + timeVal;
     var date;
@@ -1272,11 +1380,43 @@ document.addEventListener('DOMContentLoaded', function() {
       date = new Date(dateStr + 'Z');
     } else {
       
-      var localDate = new Date(dateStr);
-      var tzDate = new Date(localDate.toLocaleString('en-US', { timeZone: tz }));
-      var offset = localDate - tzDate;
-      date = new Date(localDate.getTime() + offset);
+      try {
+        
+        var localDate = new Date(dateStr);
+        
+        
+        var formatter = new Intl.DateTimeFormat('en-US', {
+          timeZone: tz,
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit', second: '2-digit',
+          hour12: false
+        });
+        
+        
+        
+        var targetStr = dateStr.replace('T', ' ');
+        var guess = localDate.getTime();
+        
+        for (var i = 0; i < 4; i++) {
+          var parts = formatter.formatToParts(new Date(guess));
+          var obj = {};
+          parts.forEach(function(p) { obj[p.type] = p.value; });
+          var guessLocal = obj.year + '-' + obj.month + '-' + obj.day + ' ' + 
+                          (obj.hour === '24' ? '00' : obj.hour) + ':' + obj.minute + ':' + obj.second;
+          
+          var targetDate = new Date(dateStr);
+          var guessDate = new Date(guessLocal.replace(' ', 'T'));
+          var diff = targetDate - guessDate;
+          guess += diff;
+        }
+        
+        date = new Date(guess);
+      } catch (e) {
+        date = new Date(dateStr);
+      }
     }
+    
+    if (isNaN(date.getTime())) return;
     
     var ts = Math.floor(date.getTime() / 1000);
     var tsMs = date.getTime();
@@ -1290,15 +1430,30 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('date-to-ts-btn').addEventListener('click', convertDateToTs);
   
   
+  dateInput.addEventListener('change', function() {
+    if (dateInput.value) convertDateToTs();
+  });
+  timeInput.addEventListener('change', function() {
+    if (dateInput.value) convertDateToTs();
+  });
+  document.getElementById('tz-select').addEventListener('change', function() {
+    if (dateInput.value) convertDateToTs();
+  });
+  
+  
   var today = new Date();
-  dateInput.value = today.toISOString().split('T')[0];
+  var todayStr = today.getFullYear() + '-' + 
+                 String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+                 String(today.getDate()).padStart(2, '0');
+  dateInput.value = todayStr;
   
   
   document.querySelectorAll('.copy-result').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var target = document.getElementById(btn.dataset.target);
-      navigator.clipboard.writeText(target.textContent);
-      showToast(i18n.copied);
+      if (target) {
+        copyToClipboard(target.textContent);
+      }
     });
   });
   
@@ -1309,6 +1464,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var abs = Math.abs(diff);
     var future = diff < 0;
     
+    if (abs < 5) return i18n.justNow;
     if (abs < 60) return future ? i18n.inSeconds.replace('{n}', Math.floor(abs)) : i18n.secondsAgo.replace('{n}', Math.floor(abs));
     if (abs < 3600) return future ? i18n.inMinutes.replace('{n}', Math.floor(abs / 60)) : i18n.minutesAgo.replace('{n}', Math.floor(abs / 60));
     if (abs < 86400) return future ? i18n.inHours.replace('{n}', Math.floor(abs / 3600)) : i18n.hoursAgo.replace('{n}', Math.floor(abs / 3600));
@@ -1316,39 +1472,58 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   
+  var worldClockInterval = null;
+  
   function updateWorldClocks() {
     var zones = [
-      { name: 'UTC', tz: 'UTC' },
-      { name: 'New York', tz: 'America/New_York' },
-      { name: 'London', tz: 'Europe/London' },
-      { name: 'Moscow', tz: 'Europe/Moscow' },
-      { name: 'Tokyo', tz: 'Asia/Tokyo' },
-      { name: 'Sydney', tz: 'Australia/Sydney' }
+      { name: 'UTC', tz: 'UTC', emoji: '🌍' },
+      { name: 'New York', tz: 'America/New_York', emoji: '🗽' },
+      { name: 'London', tz: 'Europe/London', emoji: '🇬🇧' },
+      { name: 'Moscow', tz: 'Europe/Moscow', emoji: '🇷🇺' },
+      { name: 'Tokyo', tz: 'Asia/Tokyo', emoji: '🇯🇵' },
+      { name: 'Sydney', tz: 'Australia/Sydney', emoji: '🇦🇺' }
     ];
     
     var container = document.getElementById('world-clocks');
-    container.innerHTML = zones.map(function(z) {
-      var time = new Date().toLocaleTimeString('en-US', { 
-        timeZone: z.tz, 
-        hour: '2-digit', 
-        minute: '2-digit',
-        hour12: false 
-      });
-      var date = new Date().toLocaleDateString('en-US', { 
-        timeZone: z.tz, 
-        weekday: 'short',
-        day: 'numeric'
-      });
-      return '<div class="p-3 bg-base-200/50 rounded-xl text-center">' +
-        '<div class="text-xs text-base-content/50">' + z.name + '</div>' +
-        '<div class="font-mono text-lg font-bold">' + time + '</div>' +
-        '<div class="text-xs text-base-content/60">' + date + '</div>' +
-        '</div>';
-    }).join('');
+    if (!container) return;
+    
+    var html = '';
+    for (var i = 0; i < zones.length; i++) {
+      var z = zones[i];
+      try {
+        var time = new Date().toLocaleTimeString('en-US', { 
+          timeZone: z.tz, 
+          hour: '2-digit', 
+          minute: '2-digit',
+          hour12: false 
+        });
+        var date = new Date().toLocaleDateString('en-US', { 
+          timeZone: z.tz, 
+          weekday: 'short',
+          day: 'numeric'
+        });
+        html += '<div class="p-2.5 sm:p-3 bg-base-200/50 rounded-xl text-center">' +
+          '<div class="text-[10px] sm:text-xs text-base-content/50">' + z.emoji + ' ' + z.name + '</div>' +
+          '<div class="font-mono text-base sm:text-lg font-bold">' + time + '</div>' +
+          '<div class="text-[10px] sm:text-xs text-base-content/60">' + date + '</div>' +
+          '</div>';
+      } catch (e) {
+        html += '<div class="p-2.5 sm:p-3 bg-base-200/50 rounded-xl text-center">' +
+          '<div class="text-[10px] sm:text-xs text-base-content/50">' + z.name + '</div>' +
+          '<div class="font-mono text-base sm:text-lg font-bold">—</div>' +
+          '</div>';
+      }
+    }
+    container.innerHTML = html;
+  }
+  
+  function startWorldClockInterval() {
+    if (worldClockInterval) clearInterval(worldClockInterval);
+    worldClockInterval = setInterval(updateWorldClocks, 60000);
   }
   
   updateWorldClocks();
-  setInterval(updateWorldClocks, 60000);
+  startWorldClockInterval();
   
   
   function compareTimezones() {
@@ -1356,39 +1531,86 @@ document.addEventListener('DOMContentLoaded', function() {
     var toTz = document.getElementById('tz-to').value;
     var timeVal = document.getElementById('tz-time').value;
     
-    var today = new Date().toISOString().split('T')[0];
-    var dateStr = today + 'T' + timeVal + ':00';
+    if (!timeVal) return;
     
-    var fromTime, toTime;
-    
-    if (fromTz === 'local') {
-      fromTime = new Date(dateStr);
-    } else {
-      fromTime = new Date(new Date(dateStr).toLocaleString('en-US', { timeZone: fromTz }));
+    try {
+      var now = new Date();
+      var todayDate = now.getFullYear() + '-' + 
+                      String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+                      String(now.getDate()).padStart(2, '0');
+      var dateStr = todayDate + 'T' + timeVal + ':00';
+      
+      var sourceDate;
+      
+      if (fromTz === 'local') {
+        sourceDate = new Date(dateStr);
+      } else {
+        
+        var guess = new Date(dateStr).getTime();
+        var formatter = new Intl.DateTimeFormat('en-US', {
+          timeZone: fromTz,
+          hour: '2-digit', minute: '2-digit',
+          hour12: false
+        });
+        
+        for (var i = 0; i < 4; i++) {
+          var parts = formatter.formatToParts(new Date(guess));
+          var obj = {};
+          parts.forEach(function(p) { obj[p.type] = p.value; });
+          var guessTime = (obj.hour === '24' ? '00' : obj.hour) + ':' + obj.minute;
+          
+          var targetParts = timeVal.split(':');
+          var guessParts = guessTime.split(':');
+          var diffMin = (parseInt(targetParts[0], 10) * 60 + parseInt(targetParts[1], 10)) - 
+                        (parseInt(guessParts[0], 10) * 60 + parseInt(guessParts[1], 10));
+          guess += diffMin * 60000;
+        }
+        
+        sourceDate = new Date(guess);
+      }
+      
+      var targetTimeStr;
+      if (toTz === 'local') {
+        targetTimeStr = sourceDate.toLocaleTimeString('en-US', {
+          hour: '2-digit', minute: '2-digit', hour12: false
+        });
+      } else {
+        targetTimeStr = sourceDate.toLocaleTimeString('en-US', { 
+          timeZone: toTz,
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        });
+      }
+      
+      var fromLabel = fromTz === 'local' ? 'Local' : fromTz.split('/').pop().replace(/_/g, ' ');
+      var toLabel = toTz === 'local' ? 'Local' : toTz.split('/').pop().replace(/_/g, ' ');
+      
+      document.getElementById('tz-compare-from').textContent = timeVal + ' ' + fromLabel;
+      document.getElementById('tz-compare-to').textContent = targetTimeStr + ' ' + toLabel;
+    } catch (e) {
+      document.getElementById('tz-compare-from').textContent = '—';
+      document.getElementById('tz-compare-to').textContent = '—';
     }
-    
-    toTime = fromTime.toLocaleTimeString('en-US', { 
-      timeZone: toTz === 'local' ? undefined : toTz,
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    });
-    
-    document.getElementById('tz-compare-from').textContent = timeVal + ' ' + (fromTz === 'local' ? 'Local' : fromTz.split('/')[1]);
-    document.getElementById('tz-compare-to').textContent = toTime + ' ' + (toTz === 'local' ? 'Local' : toTz.split('/')[1]);
   }
   
   document.getElementById('tz-from').addEventListener('change', compareTimezones);
   document.getElementById('tz-to').addEventListener('change', compareTimezones);
   document.getElementById('tz-time').addEventListener('input', compareTimezones);
+  document.getElementById('tz-time').addEventListener('change', compareTimezones);
   compareTimezones();
   
   
   document.getElementById('calc-duration-btn').addEventListener('click', function() {
-    var start = new Date(document.getElementById('duration-start').value);
-    var end = new Date(document.getElementById('duration-end').value);
+    var startVal = document.getElementById('duration-start').value;
+    var endVal = document.getElementById('duration-end').value;
     
-    if (isNaN(start) || isNaN(end)) return;
+    if (!startVal || !endVal) return;
+    
+    var start = new Date(startVal);
+    var end = new Date(endVal);
+    
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) return;
     
     var diff = Math.abs(end - start) / 1000;
     
@@ -1407,39 +1629,63 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   
+  var nowLocal = new Date();
+  var nowStr = nowLocal.getFullYear() + '-' + 
+               String(nowLocal.getMonth() + 1).padStart(2, '0') + '-' + 
+               String(nowLocal.getDate()).padStart(2, '0') + 'T' +
+               String(nowLocal.getHours()).padStart(2, '0') + ':' +
+               String(nowLocal.getMinutes()).padStart(2, '0');
+  
+  var tomorrowLocal = new Date(nowLocal.getTime() + 86400000);
+  var tomorrowStr = tomorrowLocal.getFullYear() + '-' + 
+                    String(tomorrowLocal.getMonth() + 1).padStart(2, '0') + '-' + 
+                    String(tomorrowLocal.getDate()).padStart(2, '0') + 'T' +
+                    String(tomorrowLocal.getHours()).padStart(2, '0') + ':' +
+                    String(tomorrowLocal.getMinutes()).padStart(2, '0');
+  
+  var durationStart = document.getElementById('duration-start');
+  var durationEnd = document.getElementById('duration-end');
+  if (durationStart && !durationStart.value) durationStart.value = nowStr;
+  if (durationEnd && !durationEnd.value) durationEnd.value = tomorrowStr;
+  
+  
   function generateCommonTimestamps() {
     var now = new Date();
     var year = now.getFullYear();
     
     var stamps = [
-      { name: i18n.today + ' 00:00', ts: new Date(year, now.getMonth(), now.getDate()).getTime() / 1000 },
-      { name: i18n.yesterday, ts: new Date(year, now.getMonth(), now.getDate() - 1).getTime() / 1000 },
-      { name: i18n.tomorrow, ts: new Date(year, now.getMonth(), now.getDate() + 1).getTime() / 1000 },
-      { name: i18n.startOfMonth, ts: new Date(year, now.getMonth(), 1).getTime() / 1000 },
-      { name: i18n.startOfYear + ' ' + year, ts: new Date(year, 0, 1).getTime() / 1000 },
-      { name: i18n.endOfYear + ' ' + year, ts: new Date(year, 11, 31, 23, 59, 59).getTime() / 1000 },
+      { name: i18n.today + ' 00:00', ts: Math.floor(new Date(year, now.getMonth(), now.getDate()).getTime() / 1000) },
+      { name: i18n.yesterday, ts: Math.floor(new Date(year, now.getMonth(), now.getDate() - 1).getTime() / 1000) },
+      { name: i18n.tomorrow, ts: Math.floor(new Date(year, now.getMonth(), now.getDate() + 1).getTime() / 1000) },
+      { name: i18n.startOfMonth, ts: Math.floor(new Date(year, now.getMonth(), 1).getTime() / 1000) },
+      { name: i18n.startOfYear + ' ' + year, ts: Math.floor(new Date(year, 0, 1).getTime() / 1000) },
+      { name: i18n.endOfYear + ' ' + year, ts: Math.floor(new Date(year, 11, 31, 23, 59, 59).getTime() / 1000) },
       { name: 'Unix Epoch', ts: 0 },
       { name: 'Y2K', ts: 946684800 },
       { name: '2038 Problem', ts: 2147483647 }
     ];
     
     var container = document.getElementById('common-timestamps');
-    container.innerHTML = stamps.map(function(s) {
-      return '<div class="flex items-center justify-between p-3 bg-base-200/50 rounded-lg">' +
-        '<span class="text-sm">' + s.name + '</span>' +
-        '<div class="flex items-center gap-2">' +
-        '<code class="font-mono text-xs">' + Math.floor(s.ts) + '</code>' +
-        '<button class="btn btn-ghost btn-xs copy-common" data-ts="' + Math.floor(s.ts) + '">' +
+    if (!container) return;
+    
+    var html = '';
+    for (var i = 0; i < stamps.length; i++) {
+      var s = stamps[i];
+      html += '<div class="flex items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg gap-2">' +
+        '<span class="text-xs sm:text-sm truncate">' + s.name + '</span>' +
+        '<div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">' +
+        '<code class="font-mono text-[10px] sm:text-xs">' + s.ts + '</code>' +
+        '<button class="btn btn-ghost btn-xs copy-common" data-ts="' + s.ts + '">' +
         '<ion-icon name="copy-outline"></ion-icon>' +
         '</button>' +
         '</div>' +
         '</div>';
-    }).join('');
+    }
+    container.innerHTML = html;
     
     container.querySelectorAll('.copy-common').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        navigator.clipboard.writeText(btn.dataset.ts);
-        showToast(i18n.copied);
+        copyToClipboard(btn.dataset.ts);
       });
     });
   }
@@ -1448,11 +1694,33 @@ document.addEventListener('DOMContentLoaded', function() {
   
   
   function showToast(message) {
+    
+    var existing = document.querySelectorAll('.ts-toast');
+    existing.forEach(function(el) { el.remove(); });
+    
     var toast = document.createElement('div');
-    toast.className = 'toast toast-top toast-end';
-    toast.innerHTML = '<div class="alert alert-success"><span>' + message + '</span></div>';
+    toast.className = 'ts-toast';
+    toast.style.cssText = 'position:fixed;top:16px;right:16px;z-index:9999;padding:10px 20px;' +
+      'background:hsl(var(--su, 158 64% 52%));color:hsl(var(--suc, 0 0% 100%));' +
+      'border-radius:8px;font-size:14px;font-weight:500;' +
+      'box-shadow:0 4px 12px rgba(0,0,0,0.15);' +
+      'animation:tsToastIn 0.3s ease;max-width:calc(100vw - 32px);';
+    toast.textContent = message;
     document.body.appendChild(toast);
-    setTimeout(function() { toast.remove(); }, 2000);
+    
+    setTimeout(function() { 
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity 0.3s ease';
+      setTimeout(function() { toast.remove(); }, 300);
+    }, 2000);
+  }
+  
+  
+  if (!document.getElementById('ts-toast-style')) {
+    var style = document.createElement('style');
+    style.id = 'ts-toast-style';
+    style.textContent = '@keyframes tsToastIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}';
+    document.head.appendChild(style);
   }
   
 });

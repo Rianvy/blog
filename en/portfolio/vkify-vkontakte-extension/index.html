@@ -2670,9 +2670,8 @@
     <div class="giscus" id="giscus-container"></div>
     <script>
       (function() {
-        
-        window.giscusLightTheme = 'https:\/\/0x69.ru\/css\/giscus-emerald.css';
-        window.giscusDarkTheme = 'https:\/\/0x69.ru\/css\/giscus-dim.css';
+        var LIGHT = 'light';
+        var DARK = 'https:\/\/0x69.ru\/css\/giscus-dim.css';
 
         function isDark() {
           var stored = window.localStorage.getItem('hugo-theme-dream-is-dark');
@@ -2681,6 +2680,21 @@
           return window.matchMedia('(prefers-color-scheme: dark)').matches;
         }
 
+        function currentTheme() {
+          return isDark() ? DARK : LIGHT;
+        }
+
+        
+        function sendTheme() {
+          var frame = document.querySelector('iframe.gsc-frame');
+          if (!frame) return;
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: currentTheme() } } },
+            'https://giscus.app'
+          );
+        }
+
+        
         var script = document.createElement('script');
         script.src = 'https://giscus.app/client.js';
         script.setAttribute('data-repo', 'Rianvy\/blog');
@@ -2692,13 +2706,49 @@
         script.setAttribute('data-reactions-enabled', '1');
         script.setAttribute('data-emit-metadata', '0');
         script.setAttribute('data-input-position', 'top');
-        script.setAttribute('data-theme', isDark() ? window.giscusDarkTheme : window.giscusLightTheme);
+        script.setAttribute('data-theme', currentTheme());
         script.setAttribute('data-lang', 'ru');
         script.setAttribute('data-loading', 'lazy');
         script.crossOrigin = 'anonymous';
         script.async = true;
-
         document.getElementById('giscus-container').appendChild(script);
+
+        
+        window.addEventListener('message', function(event) {
+          if (event.origin === 'https://giscus.app') {
+            sendTheme();
+          }
+        });
+
+        
+        
+        var observer = new MutationObserver(function() {
+          sendTheme();
+        });
+        observer.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['data-theme', 'class']
+        });
+
+        
+        
+        window.addEventListener('storage', function(event) {
+          if (event.key === 'hugo-theme-dream-is-dark') {
+            sendTheme();
+          }
+        });
+
+        
+        
+        var lastTheme = currentTheme();
+        setInterval(function() {
+          var now = currentTheme();
+          if (now !== lastTheme) {
+            lastTheme = now;
+            sendTheme();
+          }
+        }, 500);
+
       })();
     </script>
   </article>

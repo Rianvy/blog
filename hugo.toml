@@ -31,7 +31,7 @@ motto = "Document today what you will forget tomorrow"
 headerTitle = "0x69.ru </>"
 footerBottomText = "Powered by ❤️"
 rss = true
-utterancesRepo = "Rianvy/blog"
+# utterancesRepo = ""
 # valine = true
 # LEANCLOUD_APP_ID = ""
 # LEANCLOUD_APP_KEY = ""
@@ -85,3 +85,18 @@ en = { href = "/en/", icon = "language", title = "English" }
 [params.experimental]
 jsDate = true
 jsDateFormat = "dd.MM.yyyy, HH:mm"
+
+[params.giscus]
+enable = true
+repo = "Rianvy/blog"
+repoId = "ВR_kgDONpZnjw"
+category = "Comments"
+categoryId = "DIC_kwDONpZnj84C2KjB"
+mapping = "pathname"
+strict = true
+reactionsEnabled = true
+inputPosition = "top"
+lang = "ru"
+loading = "lazy"
+lightTheme = "noborder_light"
+darkTheme = "noborder_dark"

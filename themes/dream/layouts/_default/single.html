@@ -463,7 +463,7 @@
     {{ end }}
 
     {{/* Comments */}}
-    {{ if or site.Config.Services.Disqus.Shortname site.Params.utterancesRepo site.Params.valine site.Params.waline site.Params.commentsApp site.Params.telegramComments }}
+    {{ if or site.Config.Services.Disqus.Shortname site.Params.giscus.enable site.Params.valine site.Params.waline site.Params.commentsApp site.Params.telegramComments }}
     <section class="mt-12">
       {{ partialCached "comments/commentSystems.html" . .RelPermalink }}
     </section>

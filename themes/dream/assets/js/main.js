@@ -14,8 +14,8 @@ document.addEventListener('alpine:init', function () {
         this.on = 'auto';
       }
       setTimeout(function () {
-        _this.setThemeForUtterances();
-      }, 6000);
+        _this.setThemeForComments();
+      }, 3000);
     },
     mql: window.matchMedia('(prefers-color-scheme: dark)'),
     on: 'n',
@@ -51,15 +51,18 @@ document.addEventListener('alpine:init', function () {
       } else {
         window.localStorage.setItem('hugo-theme-dream-is-dark', status);
       }
-      this.setThemeForUtterances();
+      this.setThemeForComments();
     },
-    setThemeForUtterances: function setThemeForUtterances() {
-      var utterances = document.querySelector('iframe.utterances-frame');
-      if (utterances) {
-        utterances.contentWindow.postMessage({
-          type: 'set-theme',
-          theme: this.isDark() ? 'github-dark' : 'github-light'
-        }, 'https://utteranc.es');
+    setThemeForComments: function setThemeForComments() {
+      var giscus = document.querySelector('iframe.gsc-frame');
+      if (giscus) {
+        giscus.contentWindow.postMessage({
+          giscus: {
+            setConfig: {
+              theme: this.isDark() ? 'noborder_dark' : 'noborder_light'
+            }
+          }
+        }, 'https://giscus.app');
       }
     }
   });

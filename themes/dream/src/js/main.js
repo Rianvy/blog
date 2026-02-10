@@ -9,13 +9,12 @@ document.addEventListener('alpine:init', () => {
         this.mql.addEventListener('change', (event) => {
           this.on = event.matches ? 'y' : 'n'
         })
-
         this.on = 'auto'
       }
 
       setTimeout(() => {
-        this.setThemeForUtterances()
-      }, 6000) // Set a bigger timeout to make sure the utterances iframe is loaded.
+        this.setThemeForComments()
+      }, 3000)
     },
 
     mql: window.matchMedia('(prefers-color-scheme: dark)'),
@@ -57,19 +56,21 @@ document.addEventListener('alpine:init', () => {
         window.localStorage.setItem('hugo-theme-dream-is-dark', status)
       }
 
-      this.setThemeForUtterances()
+      this.setThemeForComments()
     },
 
-    setThemeForUtterances() {
-      const utterances = document.querySelector('iframe.utterances-frame')
-
-      if (utterances) {
-        utterances.contentWindow.postMessage(
+    setThemeForComments() {
+      const giscus = document.querySelector('iframe.gsc-frame')
+      if (giscus) {
+        giscus.contentWindow.postMessage(
           {
-            type: 'set-theme',
-            theme: this.isDark() ? 'github-dark' : 'github-light',
+            giscus: {
+              setConfig: {
+                theme: this.isDark() ? 'noborder_dark' : 'noborder_light',
+              },
+            },
           },
-          'https://utteranc.es'
+          'https://giscus.app'
         )
       }
     },

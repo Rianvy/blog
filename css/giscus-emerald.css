@@ -1,0 +1,58 @@
+/*! Giscus — Emerald (DaisyUI) */
+main {
+  --color-canvas-default: #ffffff;
+  --color-canvas-subtle: #f6faf7;
+  --color-canvas-inset: #f0f5f1;
+  --color-border-default: #d1ddd4;
+  --color-border-muted: #e2ebe4;
+  --color-fg-default: #1a2e22;
+  --color-fg-muted: #4a6b54;
+  --color-fg-subtle: #6b8f77;
+  --color-accent-fg: #66cc8a;
+  --color-accent-emphasis: #66cc8a;
+  --color-accent-subtle: #e8f7ed;
+  --color-accent-muted: #b3e6c8;
+  --color-neutral-muted: #e2ebe4;
+  --color-neutral-subtle: #f0f5f1;
+  --color-btn-bg: #f6faf7;
+  --color-btn-border: #d1ddd4;
+  --color-btn-hover-bg: #e8f0ea;
+  --color-btn-hover-border: #b8ccbe;
+  --color-btn-active-bg: #d5e5da;
+  --color-btn-primary-bg: #66cc8a;
+  --color-btn-primary-border: #5ab87d;
+  --color-btn-primary-hover-bg: #52b376;
+  --color-btn-primary-hover-border: #48a069;
+  --color-btn-primary-text: #fff;
+  --color-btn-primary-disabled-bg: #b3e6c8;
+  --color-primer-shadow-inset: inset 0 1px 0 rgba(26,46,34,0.04);
+  --color-scale-gray-1: #e2ebe4;
+  --color-scale-gray-2: #d1ddd4;
+  --color-scale-gray-3: #b8ccbe;
+  --color-scale-gray-5: #6b8f77;
+  --color-scale-blue-1: #e8f7ed;
+}
+
+main .gsc-comment-box {
+  border-color: var(--color-border-muted);
+}
+
+main .gsc-header .gsc-left-header {
+  color: var(--color-fg-muted);
+}
+
+main .gsc-comment .gsc-comment-content {
+  color: var(--color-fg-default);
+}
+
+main .gsc-reactions-button {
+  border-color: var(--color-border-default);
+}
+
+main .gsc-reactions-button:hover {
+  background-color: var(--color-accent-subtle);
+}
+
+main .gsc-reply .gsc-reply-author-avatar {
+  border-color: var(--color-border-muted);
+}

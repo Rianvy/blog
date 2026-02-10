@@ -2595,15 +2595,15 @@ ${eventCodes.size &gt; 0 ? `Коды: ${[...eventCodes.keys()].join(', ')}` : ''
     <div class="giscus" id="giscus-container"></div>
     <script>
       (function() {
-        var lightTheme = 'noborder_light';
-        var darkTheme = 'noborder_dark';
+        
+        window.giscusLightTheme = 'https:\/\/0x69.ru\/css\/giscus-emerald.css';
+        window.giscusDarkTheme = 'https:\/\/0x69.ru\/css\/giscus-dim.css';
 
-        function getTheme() {
+        function isDark() {
           var stored = window.localStorage.getItem('hugo-theme-dream-is-dark');
-          if (stored === 'y') return darkTheme;
-          if (stored === 'n') return lightTheme;
-          
-          return window.matchMedia('(prefers-color-scheme: dark)').matches ? darkTheme : lightTheme;
+          if (stored === 'y') return true;
+          if (stored === 'n') return false;
+          return window.matchMedia('(prefers-color-scheme: dark)').matches;
         }
 
         var script = document.createElement('script');
@@ -2617,7 +2617,7 @@ ${eventCodes.size &gt; 0 ? `Коды: ${[...eventCodes.keys()].join(', ')}` : ''
         script.setAttribute('data-reactions-enabled', '1');
         script.setAttribute('data-emit-metadata', '0');
         script.setAttribute('data-input-position', 'top');
-        script.setAttribute('data-theme', getTheme());
+        script.setAttribute('data-theme', isDark() ? window.giscusDarkTheme : window.giscusLightTheme);
         script.setAttribute('data-lang', 'ru');
         script.setAttribute('data-loading', 'lazy');
         script.crossOrigin = 'anonymous';

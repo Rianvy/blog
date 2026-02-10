@@ -1,0 +1,58 @@
+/*! Giscus — Dim (DaisyUI) */
+main {
+  --color-canvas-default: #2a303c;
+  --color-canvas-subtle: #313742;
+  --color-canvas-inset: #242933;
+  --color-border-default: #444b58;
+  --color-border-muted: #3b424e;
+  --color-fg-default: #d6dade;
+  --color-fg-muted: #a0a6b2;
+  --color-fg-subtle: #7c8494;
+  --color-accent-fg: #66cc8a;
+  --color-accent-emphasis: #66cc8a;
+  --color-accent-subtle: #2d3f33;
+  --color-accent-muted: #3d5c47;
+  --color-neutral-muted: #3b424e;
+  --color-neutral-subtle: #313742;
+  --color-btn-bg: #353c48;
+  --color-btn-border: #4a5261;
+  --color-btn-hover-bg: #3e4654;
+  --color-btn-hover-border: #555e6f;
+  --color-btn-active-bg: #464f5e;
+  --color-btn-primary-bg: #66cc8a;
+  --color-btn-primary-border: #5ab87d;
+  --color-btn-primary-hover-bg: #52b376;
+  --color-btn-primary-hover-border: #48a069;
+  --color-btn-primary-text: #1a2e22;
+  --color-btn-primary-disabled-bg: #3d5c47;
+  --color-primer-shadow-inset: inset 0 1px 0 rgba(0,0,0,0.15);
+  --color-scale-gray-1: #3b424e;
+  --color-scale-gray-2: #444b58;
+  --color-scale-gray-3: #555e6f;
+  --color-scale-gray-5: #7c8494;
+  --color-scale-blue-1: #2d3f33;
+}
+
+main .gsc-comment-box {
+  border-color: var(--color-border-muted);
+}
+
+main .gsc-header .gsc-left-header {
+  color: var(--color-fg-muted);
+}
+
+main .gsc-comment .gsc-comment-content {
+  color: var(--color-fg-default);
+}
+
+main .gsc-reactions-button {
+  border-color: var(--color-border-default);
+}
+
+main .gsc-reactions-button:hover {
+  background-color: var(--color-accent-subtle);
+}
+
+main .gsc-reply .gsc-reply-author-avatar {
+  border-color: var(--color-border-muted);
+}

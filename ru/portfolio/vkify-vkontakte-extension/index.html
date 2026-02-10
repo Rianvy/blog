@@ -2678,6 +2678,12 @@
           return isDark() ? 'https://0x69.ru/css/giscus-dim.css' : 'light';
         }
 
+        function getLang() {
+          var path = window.location.pathname;
+          if (path.startsWith('/en/')) return 'en';
+          return 'ru';
+        }
+
         function sendTheme() {
           var frame = document.querySelector('iframe.giscus-frame');
           if (!frame) return;
@@ -2699,7 +2705,7 @@
         script.setAttribute('data-emit-metadata', '0');
         script.setAttribute('data-input-position', 'top');
         script.setAttribute('data-theme', getTheme());
-        script.setAttribute('data-lang', 'ru');
+        script.setAttribute('data-lang', getLang());
         script.setAttribute('data-loading', 'lazy');
         script.crossOrigin = 'anonymous';
         script.async = true;

@@ -922,9 +922,12 @@ Portfolio
   
   
   <div class="absolute inset-0 -z-10 overflow-hidden">
-    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/8 rounded-full blur-3xl"></div>
-    <div class="absolute top-40 right-20 w-96 h-96 bg-secondary/6 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-20 left-1/3 w-80 h-80 bg-accent/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/8 rounded-full blur-3xl will-change-[opacity] animate-pulse" 
+         style="animation-duration: 4s;"></div>
+    <div class="absolute top-40 right-20 w-96 h-96 bg-secondary/6 rounded-full blur-3xl will-change-[opacity] animate-pulse" 
+         style="animation-duration: 6s; animation-delay: 1s;"></div>
+    <div class="absolute -bottom-20 left-1/3 w-80 h-80 bg-accent/5 rounded-full blur-3xl will-change-[opacity] animate-pulse" 
+         style="animation-duration: 5s; animation-delay: 2s;"></div>
     
     
     <div class="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]" 
@@ -965,9 +968,6 @@ Portfolio
             <span class="relative z-10 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
               I&#39;m proud of
             </span>
-            <svg class="absolute -bottom-2 left-0 w-full h-3 text-primary/20" viewBox="0 0 200 12" preserveAspectRatio="none">
-              <path d="M0,10 Q50,0 100,10 T200,10" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-            </svg>
           </span>
         </h1>
         
@@ -1017,7 +1017,8 @@ Portfolio
                 
                   
                     <img src="/en/portfolio/vkify-website-extension-landing/Cover.png" alt="Portfolios" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                         loading="lazy" />
                   
                 
                 <div class="absolute inset-0 bg-gradient-to-t from-base-100/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -1028,7 +1029,8 @@ Portfolio
                 
                   
                     <img src="/en/portfolio/vkify-vkontakte-extension/Cover.png" alt="Portfolios" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                         loading="lazy" />
                   
                 
                 <div class="absolute inset-0 bg-gradient-to-t from-base-100/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -1039,7 +1041,8 @@ Portfolio
                 
                   
                     <img src="/en/portfolio/codesqueeze/Cover.png" alt="Portfolios" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                         loading="lazy" />
                   
                 
                 <div class="absolute inset-0 bg-gradient-to-t from-base-100/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -1050,7 +1053,8 @@ Portfolio
                 
                   
                     <img src="/en/portfolio/prostavki/Cover.png" alt="Portfolios" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                         loading="lazy" />
                   
                 
                 <div class="absolute inset-0 bg-gradient-to-t from-base-100/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -1085,7 +1089,7 @@ Portfolio
 
 
 
-<section class="relative bg-base-100/50 backdrop-blur-sm overflow-hidden">
+<section class="relative bg-base-100/50 overflow-hidden">
   
   
   <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
@@ -1280,6 +1284,7 @@ Portfolio
     
     
     
+    
     <div class="portfolio-grid" id="portfolio-grid">
       
       
@@ -1298,7 +1303,7 @@ Portfolio
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 portfolio-item  filter-0">
+      <div class="portfolio-item  filter-0">
         
         
         <a class="group block h-full bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
@@ -1314,7 +1319,9 @@ Portfolio
                   
                   <picture>
                     <source srcset="/en/portfolio/vkify-website-extension-landing/Cover_hu_7fe98d5ccbfed8a9.webp" type="image/webp" />
-                    <img src="/en/portfolio/vkify-website-extension-landing/Cover.png" alt="Portfolios" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                    <img src="/en/portfolio/vkify-website-extension-landing/Cover.png" alt="Portfolios" 
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                         loading="lazy" />
                   </picture>
                 
               
@@ -1341,7 +1348,7 @@ Portfolio
             
             
             <div class="absolute top-3 right-3">
-              <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-base-100/90 text-base-content shadow-lg backdrop-blur-sm" title="Related Projects: 1">
+              <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-base-100/90 text-base-content shadow-lg" title="Related Projects: 1">
                 <ion-icon name="git-branch-outline" class="text-sm"></ion-icon>
                 1
               </span>
@@ -1453,7 +1460,7 @@ Portfolio
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 portfolio-item  filter-0">
+      <div class="portfolio-item  filter-0">
         
         
         <a class="group block h-full bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
@@ -1469,7 +1476,9 @@ Portfolio
                   
                   <picture>
                     <source srcset="/en/portfolio/vkify-vkontakte-extension/Cover_hu_2cf413fff24db313.webp" type="image/webp" />
-                    <img src="/en/portfolio/vkify-vkontakte-extension/Cover.png" alt="Portfolios" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                    <img src="/en/portfolio/vkify-vkontakte-extension/Cover.png" alt="Portfolios" 
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                         loading="lazy" />
                   </picture>
                 
               
@@ -1496,7 +1505,7 @@ Portfolio
             
             
             <div class="absolute top-3 right-3">
-              <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-base-100/90 text-base-content shadow-lg backdrop-blur-sm" title="Related Projects: 1">
+              <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-base-100/90 text-base-content shadow-lg" title="Related Projects: 1">
                 <ion-icon name="git-branch-outline" class="text-sm"></ion-icon>
                 1
               </span>
@@ -1608,7 +1617,7 @@ Portfolio
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 portfolio-item  filter-0">
+      <div class="portfolio-item  filter-0">
         
         
         <a class="group block h-full bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
@@ -1624,7 +1633,9 @@ Portfolio
                   
                   <picture>
                     <source srcset="/en/portfolio/codesqueeze/Cover_hu_254f86675be688b6.webp" type="image/webp" />
-                    <img src="/en/portfolio/codesqueeze/Cover.png" alt="Portfolios" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                    <img src="/en/portfolio/codesqueeze/Cover.png" alt="Portfolios" 
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                         loading="lazy" />
                   </picture>
                 
               
@@ -1753,7 +1764,7 @@ Portfolio
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 portfolio-item  filter-0">
+      <div class="portfolio-item  filter-0">
         
         
         <a class="group block h-full bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
@@ -1769,7 +1780,9 @@ Portfolio
                   
                   <picture>
                     <source srcset="/en/portfolio/prostavki/Cover_hu_d3baa322557c7656.webp" type="image/webp" />
-                    <img src="/en/portfolio/prostavki/Cover.png" alt="Portfolios" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                    <img src="/en/portfolio/prostavki/Cover.png" alt="Portfolios" 
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                         loading="lazy" />
                   </picture>
                 
               
@@ -1898,7 +1911,7 @@ Portfolio
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 portfolio-item  filter-1">
+      <div class="portfolio-item  filter-1">
         
         
         <a class="group block h-full bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
@@ -1914,7 +1927,9 @@ Portfolio
                   
                   <picture>
                     <source srcset="/en/portfolio/pbpack/Cover_hu_8ca39c7c3022a721.webp" type="image/webp" />
-                    <img src="/en/portfolio/pbpack/Cover.png" alt="Portfolios" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                    <img src="/en/portfolio/pbpack/Cover.png" alt="Portfolios" 
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                         loading="lazy" />
                   </picture>
                 
               
@@ -2422,8 +2437,6 @@ Portfolio
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
-<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 <script>
 (function() {
   'use strict';
@@ -2433,7 +2446,7 @@ Portfolio
   
   var noResults = document.getElementById('portfolio-no-results');
   var showAllBtn = document.getElementById('show-all-btn');
-  var iso = null;
+  var items = grid.querySelectorAll('.portfolio-item');
   
   
   var filtersScroll = document.getElementById('filters-scroll');
@@ -2445,14 +2458,14 @@ Portfolio
   function updateScrollButtons() {
     if (!filtersScroll || !scrollLeftBtn || !scrollRightBtn) return;
     
-    var scrollLeft = filtersScroll.scrollLeft;
+    var scrollL = filtersScroll.scrollLeft;
     var maxScroll = filtersScroll.scrollWidth - filtersScroll.clientWidth;
     
-    scrollLeftBtn.disabled = scrollLeft <= 0;
-    scrollRightBtn.disabled = scrollLeft >= maxScroll - 1;
+    scrollLeftBtn.disabled = scrollL <= 0;
+    scrollRightBtn.disabled = scrollL >= maxScroll - 1;
     
-    if (fadeLeft) fadeLeft.style.opacity = scrollLeft > 0 ? '1' : '0';
-    if (fadeRight) fadeRight.style.opacity = scrollLeft < maxScroll - 1 ? '1' : '0';
+    if (fadeLeft) fadeLeft.style.opacity = scrollL > 0 ? '1' : '0';
+    if (fadeRight) fadeRight.style.opacity = scrollL < maxScroll - 1 ? '1' : '0';
   }
   
   if (scrollLeftBtn && filtersScroll) {
@@ -2473,132 +2486,110 @@ Portfolio
     setTimeout(updateScrollButtons, 100);
   }
   
-  function initIsotope() {
-    if (iso) return;
+  
+  function filterItems(filterValue) {
+    var visibleCount = 0;
     
-    try {
-      iso = new Isotope(grid, {
-        itemSelector: '.portfolio-item',
-        layoutMode: 'fitRows',
-        transitionDuration: '0.4s',
-        stagger: 30,
-        percentPosition: true,
-        fitRows: {
-          gutter: 0
-        }
-      });
-      
-      grid.classList.add('is-loaded');
-      
-      var filterButtons = document.querySelectorAll('.portfolio-filter-btn');
-      
-      filterButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-          var filterValue = this.getAttribute('data-filter');
-          
-          if (iso) {
-            iso.arrange({ filter: filterValue });
-          }
-
-          filterButtons.forEach(function(btn) {
-            btn.setAttribute('data-state', 'unchecked');
-          });
-          this.setAttribute('data-state', 'checked');
-          
-          
-          if (filtersScroll) {
-            var btnRect = this.getBoundingClientRect();
-            var containerRect = filtersScroll.getBoundingClientRect();
-            if (btnRect.left < containerRect.left || btnRect.right > containerRect.right) {
-              this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            }
-          }
-        });
-      });
-      
-      iso.on('arrangeComplete', function(filteredItems) {
-        if (noResults) {
-          if (filteredItems.length === 0) {
-            noResults.classList.remove('hidden');
-            grid.style.display = 'none';
-          } else {
-            noResults.classList.add('hidden');
-            grid.style.display = '';
-          }
-        }
-      });
-      
-      if (showAllBtn) {
-        showAllBtn.addEventListener('click', function() {
-          var allBtn = document.querySelector('.portfolio-filter-btn[data-filter="*"]');
-          if (allBtn) allBtn.click();
-        });
+    items.forEach(function(item) {
+      if (filterValue === '*' || item.classList.contains(filterValue.replace('.', ''))) {
+        item.style.display = '';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
       }
-      
-    } catch (e) {
-      console.error('Portfolio Isotope init error:', e);
-    }
-  }
-  
-  function relayout() {
-    if (iso) {
-      try { iso.layout(); } catch (e) {}
-    }
-  }
-  
-  function startInit() {
-    if (typeof imagesLoaded === 'undefined') {
-      setTimeout(startInit, 100);
-      return;
-    }
+    });
     
-    imagesLoaded(grid, function() {
-      setTimeout(function() {
-        initIsotope();
-        setTimeout(relayout, 100);
-        setTimeout(relayout, 300);
-      }, 50);
+    if (noResults) {
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+        grid.style.display = 'none';
+      } else {
+        noResults.classList.add('hidden');
+        grid.style.display = '';
+      }
+    }
+  }
+  
+  
+  var filterButtons = document.querySelectorAll('.portfolio-filter-btn');
+  
+  filterButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      var filterValue = this.getAttribute('data-filter');
+      
+      filterItems(filterValue);
+      
+      filterButtons.forEach(function(btn) {
+        btn.setAttribute('data-state', 'unchecked');
+      });
+      this.setAttribute('data-state', 'checked');
+      
+      if (filtersScroll) {
+        var btnRect = this.getBoundingClientRect();
+        var containerRect = filtersScroll.getBoundingClientRect();
+        if (btnRect.left < containerRect.left || btnRect.right > containerRect.right) {
+          this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      }
     });
-  }
-  
-  if (document.readyState === 'complete') {
-    startInit();
-  } else {
-    window.addEventListener('load', startInit);
-  }
-  
-  if ('fonts' in document) {
-    document.fonts.ready.then(function() {
-      setTimeout(relayout, 50);
-    });
-  }
-  
-  var resizeTimer;
-  window.addEventListener('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(relayout, 250);
   });
+  
+  
+  if (showAllBtn) {
+    showAllBtn.addEventListener('click', function() {
+      var allBtn = document.querySelector('.portfolio-filter-btn[data-filter="*"]');
+      if (allBtn) allBtn.click();
+    });
+  }
+  
+  
+  grid.classList.add('is-loaded');
   
 })();
 </script>
 
 <style>
+ 
 .portfolio-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
+
+@media (min-width: 640px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .portfolio-grid.is-loaded {
   opacity: 1;
 }
+
 .portfolio-item {
+  padding: 0.5rem;
   box-sizing: border-box;
 }
+
+@media (min-width: 640px) {
+  .portfolio-item {
+    padding: 0.75rem;
+  }
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }

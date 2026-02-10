@@ -871,20 +871,12 @@
   
   
   <div class="absolute inset-0 -z-10 overflow-hidden">
-    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/8 rounded-full blur-3xl animate-pulse" 
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/8 rounded-full blur-3xl will-change-[opacity] animate-pulse" 
          style="animation-duration: 4s;"></div>
-    <div class="absolute top-40 right-20 w-96 h-96 bg-secondary/6 rounded-full blur-3xl animate-pulse" 
+    <div class="absolute top-40 right-20 w-96 h-96 bg-secondary/6 rounded-full blur-3xl will-change-[opacity] animate-pulse" 
          style="animation-duration: 6s; animation-delay: 1s;"></div>
-    <div class="absolute -bottom-20 left-1/3 w-80 h-80 bg-accent/5 rounded-full blur-3xl animate-pulse" 
+    <div class="absolute -bottom-20 left-1/3 w-80 h-80 bg-accent/5 rounded-full blur-3xl will-change-[opacity] animate-pulse" 
          style="animation-duration: 5s; animation-delay: 2s;"></div>
-    
-    
-    <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/20 rounded-full animate-bounce" 
-         style="animation-duration: 3s;"></div>
-    <div class="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-secondary/25 rounded-full animate-bounce" 
-         style="animation-duration: 4s; animation-delay: 0.5s;"></div>
-    <div class="absolute bottom-1/3 left-1/2 w-1 h-1 bg-accent/30 rounded-full animate-bounce" 
-         style="animation-duration: 3.5s; animation-delay: 1s;"></div>
     
     
     <div class="absolute inset-0 opacity-[0.02] dark:opacity-[0.04]" 
@@ -919,7 +911,7 @@
         
         
         <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full 
-                    bg-base-100/80 backdrop-blur-sm shadow-lg shadow-base-content/5 
+                    bg-base-100/80 shadow-lg shadow-base-content/5 
                     border border-base-200 dark:border-base-content/10 mb-8
                     hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
           <span class="relative flex h-2.5 w-2.5">
@@ -943,16 +935,6 @@
                          bg-[length:200%_auto] animate-[gradient-shift_3s_ease-in-out_infinite]">
               для разработчиков
             </span>
-            
-            <svg class="absolute -bottom-2 left-0 w-full h-4 text-primary/30" 
-                 viewBox="0 0 300 16" preserveAspectRatio="none">
-              <path d="M0,12 C50,4 100,16 150,8 C200,0 250,14 300,8" 
-                    fill="none" stroke="currentColor" stroke-width="3" 
-                    stroke-linecap="round" stroke-dasharray="300"
-                    stroke-dashoffset="300"
-                    style="animation: draw-line 1.5s ease-out 0.5s forwards;">
-              </path>
-            </svg>
           </span>
         </h1>
         
@@ -1004,15 +986,11 @@
                       rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
           
           
-          <div class="absolute -inset-4 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 
-                      rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-          
-          
-          <div class="relative bg-base-100/90 backdrop-blur-sm rounded-3xl p-6 sm:p-8 
+          <div class="relative bg-base-100/90 rounded-3xl p-6 sm:p-8 
                       shadow-2xl shadow-base-content/5 
                       border border-base-200 dark:border-base-content/10
-                      group-hover:shadow-3xl group-hover:shadow-base-content/10 
-                      transition-all duration-500">
+                      transition-shadow duration-500
+                      group-hover:shadow-[0_25px_60px_-12px_rgba(0,0,0,0.15)]">
             
             
             <div class="flex items-center gap-2 mb-5">
@@ -1040,7 +1018,6 @@
                           hover:shadow-lg hover:shadow-primary/10
                           transition-all duration-300 cursor-pointer
                           border border-transparent hover:border-primary/20"
-                   style="animation-delay: 0ms;"
                    title="Super Logout">
                 <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
                   🚪
@@ -1059,7 +1036,6 @@
                           hover:shadow-lg hover:shadow-primary/10
                           transition-all duration-300 cursor-pointer
                           border border-transparent hover:border-primary/20"
-                   style="animation-delay: 100ms;"
                    title="Favicon Generator">
                 <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
                   ⭐
@@ -1078,7 +1054,6 @@
                           hover:shadow-lg hover:shadow-primary/10
                           transition-all duration-300 cursor-pointer
                           border border-transparent hover:border-primary/20"
-                   style="animation-delay: 200ms;"
                    title="Image Upscaler">
                 <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
                   🔍
@@ -1097,7 +1072,6 @@
                           hover:shadow-lg hover:shadow-primary/10
                           transition-all duration-300 cursor-pointer
                           border border-transparent hover:border-primary/20"
-                   style="animation-delay: 300ms;"
                    title="JavaScript Obfuscator">
                 <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
                   🛡️
@@ -1116,7 +1090,6 @@
                           hover:shadow-lg hover:shadow-primary/10
                           transition-all duration-300 cursor-pointer
                           border border-transparent hover:border-primary/20"
-                   style="animation-delay: 400ms;"
                    title="JSON → TypeScript / Go / Zod">
                 <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
                   🔄
@@ -1135,7 +1108,6 @@
                           hover:shadow-lg hover:shadow-primary/10
                           transition-all duration-300 cursor-pointer
                           border border-transparent hover:border-primary/20"
-                   style="animation-delay: 500ms;"
                    title="Meta Tag Generator">
                 <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
                   🏷️
@@ -1192,7 +1164,7 @@
 
 
 
-<section class="relative bg-base-100/50 backdrop-blur-sm overflow-hidden">
+<section class="relative bg-base-100/50 overflow-hidden">
   
   
   <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
@@ -1942,7 +1914,6 @@
       
       
       
-      
         
           
         
@@ -1968,7 +1939,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-0">
+      <div class="utility-item cat-0">
         
         <a href="/ru/utilities/super-logout/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -2069,7 +2040,6 @@
       
       
       
-      
         
       
         
@@ -2095,7 +2065,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-1">
+      <div class="utility-item cat-1">
         
         <a href="/ru/utilities/favicon-generator/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -2196,7 +2166,6 @@
       
       
       
-      
         
       
         
@@ -2222,7 +2191,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-2">
+      <div class="utility-item cat-2">
         
         <a href="/ru/utilities/image-upscaler/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -2323,7 +2292,6 @@
       
       
       
-      
         
       
         
@@ -2349,7 +2317,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-3">
+      <div class="utility-item cat-3">
         
         <a href="/ru/utilities/javascript-obfuscator/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -2450,7 +2418,6 @@
       
       
       
-      
         
       
         
@@ -2476,7 +2443,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-1">
+      <div class="utility-item cat-1">
         
         <a href="/ru/utilities/json-to-types/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -2577,7 +2544,6 @@
       
       
       
-      
         
       
         
@@ -2603,7 +2569,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-1">
+      <div class="utility-item cat-1">
         
         <a href="/ru/utilities/meta-tag-generator/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -2704,7 +2670,6 @@
       
       
       
-      
         
       
         
@@ -2730,7 +2695,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-1">
+      <div class="utility-item cat-1">
         
         <a href="/ru/utilities/qr-generator/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -2831,7 +2796,6 @@
       
       
       
-      
         
       
         
@@ -2857,7 +2821,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-4">
+      <div class="utility-item cat-4">
         
         <a href="/ru/utilities/regex-tester/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -2958,7 +2922,6 @@
       
       
       
-      
         
       
         
@@ -2984,7 +2947,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-5">
+      <div class="utility-item cat-5">
         
         <a href="/ru/utilities/timestamp-converter/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -3085,7 +3048,6 @@
       
       
       
-      
         
       
         
@@ -3111,7 +3073,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-1">
+      <div class="utility-item cat-1">
         
         <a href="/ru/utilities/uuid-generator/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -3212,7 +3174,6 @@
       
       
       
-      
         
       
         
@@ -3238,7 +3199,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-3">
+      <div class="utility-item cat-3">
         
         <a href="/ru/utilities/base64-encoder/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -3339,7 +3300,6 @@
       
       
       
-      
         
       
         
@@ -3365,7 +3325,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-6">
+      <div class="utility-item cat-6">
         
         <a href="/ru/utilities/color-converter/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -3466,7 +3426,6 @@
       
       
       
-      
         
       
         
@@ -3492,7 +3451,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-7">
+      <div class="utility-item cat-7">
         
         <a href="/ru/utilities/diff-tool/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -3593,7 +3552,6 @@
       
       
       
-      
         
           
         
@@ -3619,7 +3577,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-0">
+      <div class="utility-item cat-0">
         
         <a href="/ru/utilities/hash-generator/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -3720,7 +3678,6 @@
       
       
       
-      
         
       
         
@@ -3746,7 +3703,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-2">
+      <div class="utility-item cat-2">
         
         <a href="/ru/utilities/image-compressor/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -3847,7 +3804,6 @@
       
       
       
-      
         
       
         
@@ -3873,7 +3829,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-8">
+      <div class="utility-item cat-8">
         
         <a href="/ru/utilities/json-normalizer/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -3974,7 +3930,6 @@
       
       
       
-      
         
       
         
@@ -4000,7 +3955,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-9">
+      <div class="utility-item cat-9">
         
         <a href="/ru/utilities/lorem-ipsum/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -4101,7 +4056,6 @@
       
       
       
-      
         
       
         
@@ -4127,7 +4081,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-10">
+      <div class="utility-item cat-10">
         
         <a href="/ru/utilities/markdown-editor/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -4228,7 +4182,6 @@
       
       
       
-      
         
       
         
@@ -4254,7 +4207,7 @@
         
       
       
-      <div class="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-3 utility-item cat-3">
+      <div class="utility-item cat-3">
         
         <a href="/ru/utilities/url-encoder/" 
            class="utility-card group block h-full bg-base-100 rounded-2xl overflow-hidden
@@ -4392,7 +4345,6 @@
     
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
       
-      
       <div class="group relative">
         <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         <div class="relative p-6 sm:p-8 rounded-2xl border border-base-200 dark:border-base-content/10 
@@ -4407,7 +4359,6 @@
           </p>
         </div>
       </div>
-      
       
       <div class="group relative">
         <div class="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -4424,7 +4375,6 @@
         </div>
       </div>
       
-      
       <div class="group relative">
         <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         <div class="relative p-6 sm:p-8 rounded-2xl border border-base-200 dark:border-base-content/10 
@@ -4439,7 +4389,6 @@
           </p>
         </div>
       </div>
-      
       
       <div class="group relative">
         <div class="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -4462,7 +4411,6 @@
 </section>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
 <script>
 (function() {
   'use strict';
@@ -4472,7 +4420,7 @@
   
   var noResults = document.getElementById('utilities-no-results');
   var showAllBtn = document.getElementById('show-all-btn');
-  var iso = null;
+  var items = grid.querySelectorAll('.utility-item');
   
   
   var filtersScroll = document.getElementById('filters-scroll');
@@ -4484,14 +4432,14 @@
   function updateScrollButtons() {
     if (!filtersScroll || !scrollLeftBtn || !scrollRightBtn) return;
     
-    var scrollLeft = filtersScroll.scrollLeft;
+    var scrollL = filtersScroll.scrollLeft;
     var maxScroll = filtersScroll.scrollWidth - filtersScroll.clientWidth;
     
-    scrollLeftBtn.disabled = scrollLeft <= 0;
-    scrollRightBtn.disabled = scrollLeft >= maxScroll - 1;
+    scrollLeftBtn.disabled = scrollL <= 0;
+    scrollRightBtn.disabled = scrollL >= maxScroll - 1;
     
-    if (fadeLeft) fadeLeft.style.opacity = scrollLeft > 0 ? '1' : '0';
-    if (fadeRight) fadeRight.style.opacity = scrollLeft < maxScroll - 1 ? '1' : '0';
+    if (fadeLeft) fadeLeft.style.opacity = scrollL > 0 ? '1' : '0';
+    if (fadeRight) fadeRight.style.opacity = scrollL < maxScroll - 1 ? '1' : '0';
   }
   
   if (scrollLeftBtn && filtersScroll) {
@@ -4512,118 +4460,90 @@
     setTimeout(updateScrollButtons, 100);
   }
   
-  function initIsotope() {
-    if (iso) return;
+  
+  function filterItems(filterValue) {
+    var visibleCount = 0;
     
-    try {
-      iso = new Isotope(grid, {
-        itemSelector: '.utility-item',
-        layoutMode: 'fitRows',
-        transitionDuration: '0.4s',
-        stagger: 30,
-        percentPosition: true,
-        fitRows: {
-          gutter: 0
-        }
-      });
-      
-      grid.classList.add('is-loaded');
-      
-      var filterButtons = document.querySelectorAll('.utility-filter-btn');
-      
-      filterButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-          var filterValue = this.getAttribute('data-filter');
-          
-          if (iso) {
-            iso.arrange({ filter: filterValue });
-          }
-
-          filterButtons.forEach(function(btn) {
-            btn.setAttribute('data-state', 'unchecked');
-          });
-          this.setAttribute('data-state', 'checked');
-          
-          if (filtersScroll) {
-            var btnRect = this.getBoundingClientRect();
-            var containerRect = filtersScroll.getBoundingClientRect();
-            
-            if (btnRect.left < containerRect.left || btnRect.right > containerRect.right) {
-              this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            }
-          }
-        });
-      });
-      
-      iso.on('arrangeComplete', function(filteredItems) {
-        if (noResults) {
-          if (filteredItems.length === 0) {
-            noResults.classList.remove('hidden');
-            grid.style.display = 'none';
-          } else {
-            noResults.classList.add('hidden');
-            grid.style.display = '';
-          }
-        }
-      });
-      
-      if (showAllBtn) {
-        showAllBtn.addEventListener('click', function() {
-          var allBtn = document.querySelector('.utility-filter-btn[data-filter="*"]');
-          if (allBtn) {
-            allBtn.click();
-          }
-        });
+    items.forEach(function(item) {
+      if (filterValue === '*' || item.classList.contains(filterValue.replace('.', ''))) {
+        item.style.display = '';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
       }
+    });
+    
+    
+    if (noResults) {
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+        grid.style.display = 'none';
+      } else {
+        noResults.classList.add('hidden');
+        grid.style.display = '';
+      }
+    }
+  }
+  
+  
+  var filterButtons = document.querySelectorAll('.utility-filter-btn');
+  
+  filterButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      var filterValue = this.getAttribute('data-filter');
       
-    } catch (e) {
-      console.error('Utilities Isotope init error:', e);
-    }
-  }
+      filterItems(filterValue);
+      
+      filterButtons.forEach(function(btn) {
+        btn.setAttribute('data-state', 'unchecked');
+      });
+      this.setAttribute('data-state', 'checked');
+      
+      if (filtersScroll) {
+        var btnRect = this.getBoundingClientRect();
+        var containerRect = filtersScroll.getBoundingClientRect();
+        
+        if (btnRect.left < containerRect.left || btnRect.right > containerRect.right) {
+          this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      }
+    });
+  });
   
-  function relayout() {
-    if (iso) {
-      try {
-        iso.layout();
-      } catch (e) {}
-    }
-  }
   
-  function startInit() {
-    setTimeout(function() {
-      initIsotope();
-      setTimeout(relayout, 100);
-      setTimeout(relayout, 300);
-    }, 50);
-  }
-  
-  if (document.readyState === 'complete') {
-    startInit();
-  } else {
-    window.addEventListener('load', startInit);
-  }
-  
-  if ('fonts' in document) {
-    document.fonts.ready.then(function() {
-      setTimeout(relayout, 50);
+  if (showAllBtn) {
+    showAllBtn.addEventListener('click', function() {
+      var allBtn = document.querySelector('.utility-filter-btn[data-filter="*"]');
+      if (allBtn) allBtn.click();
     });
   }
   
-  var resizeTimer;
-  window.addEventListener('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(relayout, 250);
-  });
+  
+  grid.classList.add('is-loaded');
   
 })();
 </script>
 
 <style>
+ 
 .utilities-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .utilities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .utilities-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .utilities-grid.is-loaded {
@@ -4631,7 +4551,14 @@
 }
 
 .utility-item {
+  padding: 0.5rem;
   box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .utility-item {
+    padding: 0.75rem;
+  }
 }
 
 .scrollbar-hide {
@@ -4641,6 +4568,15 @@
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+@keyframes draw-line {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 </style>
 

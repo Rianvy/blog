@@ -4,26 +4,26 @@
 
 {{ define "main" }}
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
 
   <!-- Hero -->
-  <div class="text-center mb-8">
-    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
-      <span class="text-4xl sm:text-5xl">📱</span>
+  <div class="text-center mb-6 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">📱</span>
     </div>
-    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
-    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">{{ .Description }}</p>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">{{ .Title }}</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">{{ .Description }}</p>
     
-    <div class="flex flex-wrap justify-center gap-2">
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
         <ion-icon name="shield-checkmark-outline"></ion-icon>
         {{ T "qrGenerator.local" }}
       </span>
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
         <ion-icon name="color-palette-outline"></ion-icon>
         {{ T "qrGenerator.customization" }}
       </span>
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
         <ion-icon name="image-outline"></ion-icon>
         PNG & SVG
       </span>
@@ -31,84 +31,84 @@
   </div>
 
   <!-- Основной контент -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
 
     <!-- ЛЕВАЯ ПАНЕЛЬ: НАСТРОЙКИ -->
-    <div class="space-y-4">
+    <div class="space-y-3 sm:space-y-4">
 
       <!-- Тип контента -->
-      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
-          <h2 class="font-semibold flex items-center gap-2">
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
             <ion-icon name="apps-outline" class="text-primary"></ion-icon>
             {{ T "qrGenerator.contentType" }}
           </h2>
         </div>
         
-        <div class="p-4">
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+        <div class="p-3 sm:p-4">
+          <div class="grid grid-cols-4 sm:grid-cols-4 gap-1.5 sm:gap-2">
+            <label class="flex flex-col items-center gap-1 sm:gap-2 p-2 sm:p-3 rounded-lg sm:rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors active:bg-base-200 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
               <input type="radio" name="qr-type" value="url" class="hidden" checked />
-              <ion-icon name="link-outline" class="text-2xl"></ion-icon>
-              <span class="text-xs font-medium">URL</span>
+              <ion-icon name="link-outline" class="text-xl sm:text-2xl"></ion-icon>
+              <span class="text-[10px] sm:text-xs font-medium">URL</span>
             </label>
-            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+            <label class="flex flex-col items-center gap-1 sm:gap-2 p-2 sm:p-3 rounded-lg sm:rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors active:bg-base-200 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
               <input type="radio" name="qr-type" value="text" class="hidden" />
-              <ion-icon name="text-outline" class="text-2xl"></ion-icon>
-              <span class="text-xs font-medium">{{ T "qrGenerator.text" }}</span>
+              <ion-icon name="text-outline" class="text-xl sm:text-2xl"></ion-icon>
+              <span class="text-[10px] sm:text-xs font-medium">{{ T "qrGenerator.text" }}</span>
             </label>
-            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+            <label class="flex flex-col items-center gap-1 sm:gap-2 p-2 sm:p-3 rounded-lg sm:rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors active:bg-base-200 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
               <input type="radio" name="qr-type" value="email" class="hidden" />
-              <ion-icon name="mail-outline" class="text-2xl"></ion-icon>
-              <span class="text-xs font-medium">Email</span>
+              <ion-icon name="mail-outline" class="text-xl sm:text-2xl"></ion-icon>
+              <span class="text-[10px] sm:text-xs font-medium">Email</span>
             </label>
-            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+            <label class="flex flex-col items-center gap-1 sm:gap-2 p-2 sm:p-3 rounded-lg sm:rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors active:bg-base-200 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
               <input type="radio" name="qr-type" value="phone" class="hidden" />
-              <ion-icon name="call-outline" class="text-2xl"></ion-icon>
-              <span class="text-xs font-medium">{{ T "qrGenerator.phone" }}</span>
+              <ion-icon name="call-outline" class="text-xl sm:text-2xl"></ion-icon>
+              <span class="text-[10px] sm:text-xs font-medium">{{ T "qrGenerator.phone" }}</span>
             </label>
-            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+            <label class="flex flex-col items-center gap-1 sm:gap-2 p-2 sm:p-3 rounded-lg sm:rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors active:bg-base-200 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
               <input type="radio" name="qr-type" value="sms" class="hidden" />
-              <ion-icon name="chatbubble-outline" class="text-2xl"></ion-icon>
-              <span class="text-xs font-medium">SMS</span>
+              <ion-icon name="chatbubble-outline" class="text-xl sm:text-2xl"></ion-icon>
+              <span class="text-[10px] sm:text-xs font-medium">SMS</span>
             </label>
-            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+            <label class="flex flex-col items-center gap-1 sm:gap-2 p-2 sm:p-3 rounded-lg sm:rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors active:bg-base-200 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
               <input type="radio" name="qr-type" value="wifi" class="hidden" />
-              <ion-icon name="wifi-outline" class="text-2xl"></ion-icon>
-              <span class="text-xs font-medium">WiFi</span>
+              <ion-icon name="wifi-outline" class="text-xl sm:text-2xl"></ion-icon>
+              <span class="text-[10px] sm:text-xs font-medium">WiFi</span>
             </label>
-            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+            <label class="flex flex-col items-center gap-1 sm:gap-2 p-2 sm:p-3 rounded-lg sm:rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors active:bg-base-200 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
               <input type="radio" name="qr-type" value="vcard" class="hidden" />
-              <ion-icon name="person-outline" class="text-2xl"></ion-icon>
-              <span class="text-xs font-medium">vCard</span>
+              <ion-icon name="person-outline" class="text-xl sm:text-2xl"></ion-icon>
+              <span class="text-[10px] sm:text-xs font-medium">vCard</span>
             </label>
-            <label class="flex flex-col items-center gap-2 p-3 rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
+            <label class="flex flex-col items-center gap-1 sm:gap-2 p-2 sm:p-3 rounded-lg sm:rounded-xl bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors active:bg-base-200 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/10">
               <input type="radio" name="qr-type" value="geo" class="hidden" />
-              <ion-icon name="location-outline" class="text-2xl"></ion-icon>
-              <span class="text-xs font-medium">{{ T "qrGenerator.geo" }}</span>
+              <ion-icon name="location-outline" class="text-xl sm:text-2xl"></ion-icon>
+              <span class="text-[10px] sm:text-xs font-medium">{{ T "qrGenerator.geo" }}</span>
             </label>
           </div>
         </div>
       </div>
 
       <!-- Ввод данных -->
-      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
-          <h2 class="font-semibold flex items-center gap-2">
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
             <ion-icon name="create-outline" class="text-primary"></ion-icon>
             {{ T "qrGenerator.data" }}
           </h2>
         </div>
         
-        <div class="p-4">
+        <div class="p-3 sm:p-4">
           
           <!-- URL -->
           <div id="input-url" class="input-section">
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.urlAddress" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.urlAddress" }}</span>
               </label>
-              <input type="url" id="data-url" class="input input-bordered" placeholder="https://example.com" value="https://example.com" />
+              <input type="url" id="data-url" class="input input-bordered input-sm sm:input-md" placeholder="https://example.com" value="https://example.com" />
             </div>
           </div>
           
@@ -116,32 +116,32 @@
           <div id="input-text" class="input-section hidden">
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.text" }}</span>
-                <span class="label-text-alt" id="text-count">0/500</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.text" }}</span>
+                <span class="label-text-alt text-xs" id="text-count">0/500</span>
               </label>
-              <textarea id="data-text" class="textarea textarea-bordered h-24" placeholder="{{ T "qrGenerator.enterText" }}" maxlength="500"></textarea>
+              <textarea id="data-text" class="textarea textarea-bordered text-sm h-20 sm:h-24" placeholder="{{ T "qrGenerator.enterText" }}" maxlength="500"></textarea>
             </div>
           </div>
           
           <!-- Email -->
-          <div id="input-email" class="input-section hidden space-y-3">
+          <div id="input-email" class="input-section hidden space-y-2 sm:space-y-3">
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">Email</span>
+                <span class="label-text text-sm font-medium">Email</span>
               </label>
-              <input type="email" id="data-email" class="input input-bordered" placeholder="email@example.com" />
+              <input type="email" id="data-email" class="input input-bordered input-sm" placeholder="email@example.com" />
             </div>
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.subject" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.subject" }}</span>
               </label>
               <input type="text" id="data-email-subject" class="input input-bordered input-sm" placeholder="{{ T "qrGenerator.emailSubject" }}" />
             </div>
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.message" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.message" }}</span>
               </label>
-              <textarea id="data-email-body" class="textarea textarea-bordered textarea-sm h-16" placeholder="{{ T "qrGenerator.messageText" }}"></textarea>
+              <textarea id="data-email-body" class="textarea textarea-bordered textarea-sm text-sm h-14 sm:h-16" placeholder="{{ T "qrGenerator.messageText" }}"></textarea>
             </div>
           </div>
           
@@ -149,125 +149,125 @@
           <div id="input-phone" class="input-section hidden">
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.phoneNumber" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.phoneNumber" }}</span>
               </label>
-              <input type="tel" id="data-phone" class="input input-bordered" placeholder="+7 999 123-45-67" />
+              <input type="tel" id="data-phone" class="input input-bordered input-sm sm:input-md" placeholder="+7 999 123-45-67" />
             </div>
           </div>
           
           <!-- SMS -->
-          <div id="input-sms" class="input-section hidden space-y-3">
+          <div id="input-sms" class="input-section hidden space-y-2 sm:space-y-3">
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.phoneNumber" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.phoneNumber" }}</span>
               </label>
-              <input type="tel" id="data-sms-phone" class="input input-bordered" placeholder="+7 999 123-45-67" />
+              <input type="tel" id="data-sms-phone" class="input input-bordered input-sm" placeholder="+7 999 123-45-67" />
             </div>
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.message" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.message" }}</span>
               </label>
-              <textarea id="data-sms-message" class="textarea textarea-bordered h-16" placeholder="{{ T "qrGenerator.smsText" }}"></textarea>
+              <textarea id="data-sms-message" class="textarea textarea-bordered text-sm h-14 sm:h-16" placeholder="{{ T "qrGenerator.smsText" }}"></textarea>
             </div>
           </div>
           
           <!-- WiFi -->
-          <div id="input-wifi" class="input-section hidden space-y-3">
+          <div id="input-wifi" class="input-section hidden space-y-2 sm:space-y-3">
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.networkName" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.networkName" }}</span>
               </label>
-              <input type="text" id="data-wifi-ssid" class="input input-bordered" placeholder="MyWiFi" />
+              <input type="text" id="data-wifi-ssid" class="input input-bordered input-sm" placeholder="MyWiFi" />
             </div>
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.password" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.password" }}</span>
               </label>
               <div class="join w-full">
-                <input type="password" id="data-wifi-password" class="input input-bordered join-item flex-1" placeholder="••••••••" />
-                <button type="button" id="toggle-wifi-password" class="btn btn-ghost join-item">
+                <input type="password" id="data-wifi-password" class="input input-bordered input-sm join-item flex-1 min-w-0" placeholder="••••••••" />
+                <button type="button" id="toggle-wifi-password" class="btn btn-ghost btn-sm join-item">
                   <ion-icon name="eye-outline"></ion-icon>
                 </button>
               </div>
             </div>
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.encryption" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.encryption" }}</span>
               </label>
-              <select id="data-wifi-encryption" class="select select-bordered">
+              <select id="data-wifi-encryption" class="select select-bordered select-sm text-sm">
                 <option value="WPA">WPA/WPA2</option>
                 <option value="WEP">WEP</option>
                 <option value="nopass">{{ T "qrGenerator.noPassword" }}</option>
               </select>
             </div>
-            <label class="flex items-center gap-2 cursor-pointer">
+            <label class="flex items-center gap-2 cursor-pointer p-1">
               <input type="checkbox" id="data-wifi-hidden" class="checkbox checkbox-sm" />
               <span class="text-sm">{{ T "qrGenerator.hiddenNetwork" }}</span>
             </label>
           </div>
           
           <!-- vCard -->
-          <div id="input-vcard" class="input-section hidden space-y-3">
-            <div class="grid grid-cols-2 gap-3">
+          <div id="input-vcard" class="input-section hidden space-y-2 sm:space-y-3">
+            <div class="grid grid-cols-2 gap-2 sm:gap-3">
               <div class="form-control">
                 <label class="label py-1">
-                  <span class="label-text font-medium">{{ T "qrGenerator.firstName" }}</span>
+                  <span class="label-text text-sm font-medium">{{ T "qrGenerator.firstName" }}</span>
                 </label>
                 <input type="text" id="data-vcard-firstname" class="input input-bordered input-sm" placeholder="{{ T "qrGenerator.firstNamePlaceholder" }}" />
               </div>
               <div class="form-control">
                 <label class="label py-1">
-                  <span class="label-text font-medium">{{ T "qrGenerator.lastName" }}</span>
+                  <span class="label-text text-sm font-medium">{{ T "qrGenerator.lastName" }}</span>
                 </label>
                 <input type="text" id="data-vcard-lastname" class="input input-bordered input-sm" placeholder="{{ T "qrGenerator.lastNamePlaceholder" }}" />
               </div>
             </div>
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.phone" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.phone" }}</span>
               </label>
               <input type="tel" id="data-vcard-phone" class="input input-bordered input-sm" placeholder="+7 999 123-45-67" />
             </div>
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">Email</span>
+                <span class="label-text text-sm font-medium">Email</span>
               </label>
               <input type="email" id="data-vcard-email" class="input input-bordered input-sm" placeholder="email@example.com" />
             </div>
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.company" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.company" }}</span>
               </label>
               <input type="text" id="data-vcard-org" class="input input-bordered input-sm" placeholder="{{ T "qrGenerator.companyPlaceholder" }}" />
             </div>
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.position" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.position" }}</span>
               </label>
               <input type="text" id="data-vcard-title" class="input input-bordered input-sm" placeholder="{{ T "qrGenerator.positionPlaceholder" }}" />
             </div>
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.website" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.website" }}</span>
               </label>
               <input type="url" id="data-vcard-url" class="input input-bordered input-sm" placeholder="https://example.com" />
             </div>
           </div>
           
           <!-- Geo -->
-          <div id="input-geo" class="input-section hidden space-y-3">
-            <div class="grid grid-cols-2 gap-3">
+          <div id="input-geo" class="input-section hidden space-y-2 sm:space-y-3">
+            <div class="grid grid-cols-2 gap-2 sm:gap-3">
               <div class="form-control">
                 <label class="label py-1">
-                  <span class="label-text font-medium">{{ T "qrGenerator.latitude" }}</span>
+                  <span class="label-text text-sm font-medium">{{ T "qrGenerator.latitude" }}</span>
                 </label>
-                <input type="number" step="any" id="data-geo-lat" class="input input-bordered" placeholder="55.7558" />
+                <input type="number" step="any" id="data-geo-lat" class="input input-bordered input-sm" placeholder="55.7558" />
               </div>
               <div class="form-control">
                 <label class="label py-1">
-                  <span class="label-text font-medium">{{ T "qrGenerator.longitude" }}</span>
+                  <span class="label-text text-sm font-medium">{{ T "qrGenerator.longitude" }}</span>
                 </label>
-                <input type="number" step="any" id="data-geo-lon" class="input input-bordered" placeholder="37.6173" />
+                <input type="number" step="any" id="data-geo-lon" class="input input-bordered input-sm" placeholder="37.6173" />
               </div>
             </div>
             <button type="button" id="get-location" class="btn btn-ghost btn-sm gap-2">
@@ -280,23 +280,23 @@
       </div>
 
       <!-- Настройки внешнего вида -->
-      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
         <details class="group" open>
-          <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
-            <h2 class="font-semibold flex items-center gap-2">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
               <ion-icon name="color-palette-outline" class="text-primary"></ion-icon>
               {{ T "qrGenerator.appearance" }}
             </h2>
-            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+            <ion-icon name="chevron-down" class="text-lg sm:text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
           </summary>
           
-          <div class="p-4 pt-0 space-y-4">
+          <div class="p-3 sm:p-4 pt-0 space-y-3 sm:space-y-4">
             
             <!-- Размер -->
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.size" }}</span>
-                <span class="label-text-alt font-mono" id="size-value">256px</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.size" }}</span>
+                <span class="label-text-alt text-xs font-mono" id="size-value">256px</span>
               </label>
               <input type="range" id="qr-size" min="128" max="512" value="256" step="32" class="range range-primary range-sm" />
             </div>
@@ -304,61 +304,61 @@
             <!-- Уровень коррекции -->
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "qrGenerator.errorCorrection" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "qrGenerator.errorCorrection" }}</span>
               </label>
-              <div class="grid grid-cols-4 gap-2">
-                <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
+              <div class="grid grid-cols-4 gap-1.5 sm:gap-2">
+                <label class="flex flex-col items-center gap-0.5 sm:gap-1 p-1.5 sm:p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
                   <input type="radio" name="error-level" value="L" class="hidden" />
-                  <span class="text-sm font-bold">L</span>
-                  <span class="text-xs text-base-content/60">7%</span>
+                  <span class="text-xs sm:text-sm font-bold">L</span>
+                  <span class="text-[10px] sm:text-xs text-base-content/60">7%</span>
                 </label>
-                <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
+                <label class="flex flex-col items-center gap-0.5 sm:gap-1 p-1.5 sm:p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
                   <input type="radio" name="error-level" value="M" class="hidden" checked />
-                  <span class="text-sm font-bold">M</span>
-                  <span class="text-xs text-base-content/60">15%</span>
+                  <span class="text-xs sm:text-sm font-bold">M</span>
+                  <span class="text-[10px] sm:text-xs text-base-content/60">15%</span>
                 </label>
-                <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
+                <label class="flex flex-col items-center gap-0.5 sm:gap-1 p-1.5 sm:p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
                   <input type="radio" name="error-level" value="Q" class="hidden" />
-                  <span class="text-sm font-bold">Q</span>
-                  <span class="text-xs text-base-content/60">25%</span>
+                  <span class="text-xs sm:text-sm font-bold">Q</span>
+                  <span class="text-[10px] sm:text-xs text-base-content/60">25%</span>
                 </label>
-                <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
+                <label class="flex flex-col items-center gap-0.5 sm:gap-1 p-1.5 sm:p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary">
                   <input type="radio" name="error-level" value="H" class="hidden" />
-                  <span class="text-sm font-bold">H</span>
-                  <span class="text-xs text-base-content/60">30%</span>
+                  <span class="text-xs sm:text-sm font-bold">H</span>
+                  <span class="text-[10px] sm:text-xs text-base-content/60">30%</span>
                 </label>
               </div>
-              <p class="text-xs text-base-content/50 mt-1">{{ T "qrGenerator.errorCorrectionHint" }}</p>
+              <p class="text-[10px] sm:text-xs text-base-content/50 mt-1">{{ T "qrGenerator.errorCorrectionHint" }}</p>
             </div>
             
             <!-- Цвета -->
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-3 sm:gap-4">
               <div class="form-control">
                 <label class="label py-1">
-                  <span class="label-text font-medium">{{ T "qrGenerator.qrColor" }}</span>
+                  <span class="label-text text-sm font-medium">{{ T "qrGenerator.qrColor" }}</span>
                 </label>
-                <div class="flex gap-2">
-                  <input type="color" id="qr-color" value="#000000" class="w-10 h-10 rounded-lg cursor-pointer border-0" />
-                  <input type="text" id="qr-color-text" value="#000000" class="input input-bordered input-sm flex-1 font-mono" />
+                <div class="flex gap-1.5 sm:gap-2">
+                  <input type="color" id="qr-color" value="#000000" class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg cursor-pointer border-0" />
+                  <input type="text" id="qr-color-text" value="#000000" class="input input-bordered input-sm flex-1 font-mono min-w-0 text-xs sm:text-sm" />
                 </div>
               </div>
               <div class="form-control">
                 <label class="label py-1">
-                  <span class="label-text font-medium">{{ T "qrGenerator.bgColor" }}</span>
+                  <span class="label-text text-sm font-medium">{{ T "qrGenerator.bgColor" }}</span>
                 </label>
-                <div class="flex gap-2">
-                  <input type="color" id="bg-color" value="#ffffff" class="w-10 h-10 rounded-lg cursor-pointer border-0" />
-                  <input type="text" id="bg-color-text" value="#ffffff" class="input input-bordered input-sm flex-1 font-mono" />
+                <div class="flex gap-1.5 sm:gap-2">
+                  <input type="color" id="bg-color" value="#ffffff" class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg cursor-pointer border-0" />
+                  <input type="text" id="bg-color-text" value="#ffffff" class="input input-bordered input-sm flex-1 font-mono min-w-0 text-xs sm:text-sm" />
                 </div>
               </div>
             </div>
             
             <!-- Прозрачный фон -->
-            <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
-              <input type="checkbox" id="transparent-bg" class="checkbox checkbox-sm checkbox-primary" />
-              <div>
-                <span class="font-medium">{{ T "qrGenerator.transparentBg" }}</span>
-                <p class="text-xs text-base-content/60">{{ T "qrGenerator.transparentBgHint" }}</p>
+            <label class="flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors active:bg-base-200">
+              <input type="checkbox" id="transparent-bg" class="checkbox checkbox-sm checkbox-primary mt-0.5" />
+              <div class="min-w-0">
+                <span class="text-xs sm:text-sm font-medium">{{ T "qrGenerator.transparentBg" }}</span>
+                <p class="text-[10px] sm:text-xs text-base-content/60 leading-tight mt-0.5">{{ T "qrGenerator.transparentBgHint" }}</p>
               </div>
             </label>
             
@@ -367,37 +367,37 @@
       </div>
 
       <!-- Логотип -->
-      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
         <details class="group">
-          <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
-            <h2 class="font-semibold flex items-center gap-2">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
               <ion-icon name="image-outline" class="text-primary"></ion-icon>
               {{ T "qrGenerator.logo" }}
-              <span id="logo-badge" class="hidden badge badge-success badge-sm">{{ T "qrGenerator.added" }}</span>
+              <span id="logo-badge" class="hidden badge badge-success badge-xs sm:badge-sm">{{ T "qrGenerator.added" }}</span>
             </h2>
-            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+            <ion-icon name="chevron-down" class="text-lg sm:text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
           </summary>
           
-          <div class="p-4 pt-0 space-y-4">
+          <div class="p-3 sm:p-4 pt-0 space-y-3 sm:space-y-4">
             
-            <div id="logo-dropzone" class="p-4 border-2 border-dashed border-base-300 rounded-xl cursor-pointer hover:border-primary hover:bg-primary/5 transition-all text-center">
+            <div id="logo-dropzone" class="p-3 sm:p-4 border-2 border-dashed border-base-300 rounded-lg sm:rounded-xl cursor-pointer hover:border-primary hover:bg-primary/5 transition-all text-center active:bg-primary/10">
               <div id="logo-empty">
-                <ion-icon name="add-circle-outline" class="text-3xl text-base-content/40 mb-2"></ion-icon>
-                <p class="text-sm text-base-content/60">{{ T "qrGenerator.clickOrDrag" }}</p>
-                <p class="text-xs text-base-content/40">{{ T "qrGenerator.logoFormats" }}</p>
+                <ion-icon name="add-circle-outline" class="text-2xl sm:text-3xl text-base-content/40 mb-1 sm:mb-2"></ion-icon>
+                <p class="text-xs sm:text-sm text-base-content/60">{{ T "qrGenerator.clickOrDrag" }}</p>
+                <p class="text-[10px] sm:text-xs text-base-content/40">{{ T "qrGenerator.logoFormats" }}</p>
               </div>
               <div id="logo-preview" class="hidden">
-                <img id="logo-image" src="" alt="Logo" class="w-20 h-20 object-contain mx-auto rounded-lg bg-base-200 p-2" />
-                <p class="text-xs text-base-content/60 mt-2" id="logo-name">logo.png</p>
+                <img id="logo-image" src="" alt="Logo" class="w-16 h-16 sm:w-20 sm:h-20 object-contain mx-auto rounded-lg bg-base-200 p-2" />
+                <p class="text-[10px] sm:text-xs text-base-content/60 mt-1 sm:mt-2 truncate" id="logo-name">logo.png</p>
               </div>
               <input type="file" id="logo-input" accept="image/png,image/jpeg,image/svg+xml,image/webp" class="hidden" />
             </div>
             
-            <div id="logo-controls" class="hidden space-y-3">
+            <div id="logo-controls" class="hidden space-y-2 sm:space-y-3">
               <div class="form-control">
                 <label class="label py-1">
-                  <span class="label-text font-medium">{{ T "qrGenerator.logoSize" }}</span>
-                  <span class="label-text-alt font-mono" id="logo-size-value">20%</span>
+                  <span class="label-text text-sm font-medium">{{ T "qrGenerator.logoSize" }}</span>
+                  <span class="label-text-alt text-xs font-mono" id="logo-size-value">20%</span>
                 </label>
                 <input type="range" id="logo-size" min="10" max="35" value="20" class="range range-sm" />
               </div>
@@ -408,8 +408,8 @@
               </button>
             </div>
             
-            <div class="alert alert-warning text-xs">
-              <ion-icon name="information-circle-outline"></ion-icon>
+            <div class="alert alert-warning text-[10px] sm:text-xs py-2 sm:py-3">
+              <ion-icon name="information-circle-outline" class="shrink-0"></ion-icon>
               <span>{{ T "qrGenerator.logoWarning" }}</span>
             </div>
             
@@ -420,59 +420,59 @@
     </div>
 
     <!-- ПРАВАЯ ПАНЕЛЬ: ПРЕВЬЮ -->
-    <div class="space-y-4">
+    <div class="space-y-3 sm:space-y-4">
 
       <!-- QR Preview -->
-      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between">
-          <h2 class="font-semibold flex items-center gap-2">
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
             <ion-icon name="qr-code-outline" class="text-primary"></ion-icon>
             {{ T "qrGenerator.preview" }}
           </h2>
-          <button id="regenerate-btn" class="btn btn-ghost btn-sm gap-1">
+          <button id="regenerate-btn" class="btn btn-ghost btn-xs sm:btn-sm gap-1">
             <ion-icon name="refresh-outline"></ion-icon>
-            {{ T "qrGenerator.refresh" }}
+            <span class="hidden min-[360px]:inline">{{ T "qrGenerator.refresh" }}</span>
           </button>
         </div>
         
-        <div class="p-8 flex items-center justify-center min-h-[350px] bg-[repeating-conic-gradient(#80808020_0%_25%,transparent_0%_50%)] bg-[length:20px_20px]" id="qr-container">
-          <canvas id="qr-canvas" class="rounded-lg shadow-lg"></canvas>
+        <div class="p-4 sm:p-8 flex items-center justify-center min-h-[250px] sm:min-h-[350px] bg-[repeating-conic-gradient(#80808020_0%_25%,transparent_0%_50%)] bg-[length:20px_20px]" id="qr-container">
+          <canvas id="qr-canvas" class="rounded-lg shadow-lg max-w-full"></canvas>
         </div>
         
-        <div id="qr-data-preview" class="hidden px-4 pb-4">
-          <div class="p-3 bg-base-200/50 rounded-lg">
-            <div class="text-xs text-base-content/50 mb-1">{{ T "qrGenerator.encodedData" }}:</div>
-            <div class="font-mono text-sm break-all max-h-20 overflow-auto" id="encoded-data"></div>
+        <div id="qr-data-preview" class="hidden px-3 sm:px-4 pb-3 sm:pb-4">
+          <div class="p-2.5 sm:p-3 bg-base-200/50 rounded-lg">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "qrGenerator.encodedData" }}:</div>
+            <div class="font-mono text-xs sm:text-sm break-all max-h-16 sm:max-h-20 overflow-auto" id="encoded-data"></div>
           </div>
         </div>
       </div>
 
       <!-- Скачивание -->
-      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-        <div class="p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
-          <h2 class="font-semibold flex items-center gap-2">
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
             <ion-icon name="download-outline" class="text-primary"></ion-icon>
             {{ T "qrGenerator.download" }}
           </h2>
         </div>
         
-        <div class="p-4 space-y-4">
+        <div class="p-3 sm:p-4 space-y-3 sm:space-y-4">
           
           <div class="form-control">
             <label class="label py-1">
-              <span class="label-text font-medium">{{ T "qrGenerator.exportSize" }}</span>
-              <span class="label-text-alt font-mono" id="export-size-value">512px</span>
+              <span class="label-text text-sm font-medium">{{ T "qrGenerator.exportSize" }}</span>
+              <span class="label-text-alt text-xs font-mono" id="export-size-value">512px</span>
             </label>
             <input type="range" id="export-size" min="256" max="2048" value="512" step="128" class="range range-sm" />
           </div>
           
-          <div class="grid grid-cols-2 gap-3">
-            <button id="download-png" class="btn btn-primary gap-2" disabled>
-              <ion-icon name="image-outline" class="text-lg"></ion-icon>
+          <div class="grid grid-cols-2 gap-2 sm:gap-3">
+            <button id="download-png" class="btn btn-primary btn-sm sm:btn-md gap-1 sm:gap-2" disabled>
+              <ion-icon name="image-outline" class="text-base sm:text-lg"></ion-icon>
               PNG
             </button>
-            <button id="download-svg" class="btn btn-secondary gap-2" disabled>
-              <ion-icon name="code-slash-outline" class="text-lg"></ion-icon>
+            <button id="download-svg" class="btn btn-secondary btn-sm sm:btn-md gap-1 sm:gap-2" disabled>
+              <ion-icon name="code-slash-outline" class="text-base sm:text-lg"></ion-icon>
               SVG
             </button>
           </div>
@@ -481,14 +481,14 @@
       </div>
 
       <!-- Быстрые действия -->
-      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 p-4">
-        <h3 class="font-semibold mb-3">{{ T "qrGenerator.quickActions" }}</h3>
-        <div class="flex flex-wrap gap-2">
-          <button id="copy-qr" class="btn btn-ghost btn-sm gap-1" disabled>
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 p-3 sm:p-4">
+        <h3 class="font-semibold text-sm sm:text-base mb-2 sm:mb-3">{{ T "qrGenerator.quickActions" }}</h3>
+        <div class="flex flex-wrap gap-1.5 sm:gap-2">
+          <button id="copy-qr" class="btn btn-ghost btn-xs sm:btn-sm gap-1" disabled>
             <ion-icon name="copy-outline"></ion-icon>
             {{ T "qrGenerator.copy" }}
           </button>
-          <button id="share-qr" class="btn btn-ghost btn-sm gap-1" disabled>
+          <button id="share-qr" class="btn btn-ghost btn-xs sm:btn-sm gap-1" disabled>
             <ion-icon name="share-outline"></ion-icon>
             {{ T "qrGenerator.share" }}
           </button>
@@ -499,13 +499,13 @@
 
   </div>
 
-  <!-- Горячие клавиши -->
-  <div class="mt-6 p-4 rounded-2xl bg-base-200/30 border border-base-200 dark:border-base-content/10">
+  <!-- Горячие клавиши — скрыты на мобильных -->
+  <div class="hidden sm:block mt-4 sm:mt-6 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-200/30 border border-base-200 dark:border-base-content/10">
     <div class="flex items-center gap-2 mb-3">
       <ion-icon name="keypad-outline" class="text-lg text-base-content/60"></ion-icon>
       <span class="text-sm font-medium text-base-content/60">{{ T "qrGenerator.hotkeys" }}</span>
     </div>
-    <div class="flex flex-wrap gap-4 text-sm text-base-content/60">
+    <div class="flex flex-wrap gap-3 sm:gap-4 text-sm text-base-content/60">
       <div class="flex items-center gap-1">
         <kbd class="kbd kbd-sm">Ctrl</kbd>+<kbd class="kbd kbd-sm">Enter</kbd>
         <span class="ml-1">→ {{ T "qrGenerator.refresh" }}</span>

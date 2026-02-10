@@ -4,54 +4,55 @@
 
 {{ define "main" }}
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
 
   <!-- Hero -->
-  <div class="text-center mb-8">
-    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
-      <span class="text-4xl sm:text-5xl">🔄</span>
+  <div class="text-center mb-6 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">🔄</span>
     </div>
-    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
-    <p class="text-base-content/60 max-w-2xl mx-auto mb-4">{{ .Description }}</p>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">{{ .Title }}</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">{{ .Description }}</p>
     
-    <div class="flex flex-wrap justify-center gap-2">
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-blue-500/10 text-blue-500 border border-blue-500/20">
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-blue-500/10 text-blue-500 border border-blue-500/20">
         TypeScript
       </span>
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">
         Go
       </span>
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-500 border border-purple-500/20">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-purple-500/10 text-purple-500 border border-purple-500/20">
         Zod
       </span>
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-orange-500/10 text-orange-500 border border-orange-500/20">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-orange-500/10 text-orange-500 border border-orange-500/20">
         JSON Schema
       </span>
     </div>
   </div>
 
   <!-- Основной контент -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
 
     <!-- ========== ЛЕВАЯ ПАНЕЛЬ: ВВОД ========== -->
-    <div class="space-y-4">
+    <div class="space-y-3 sm:space-y-4">
 
-      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
         
         <!-- Header -->
-        <div class="flex items-center justify-between p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
-          <h2 class="font-semibold flex items-center gap-2">
+        <div class="flex items-center justify-between p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-1.5 sm:gap-2">
             <ion-icon name="code-slash-outline" class="text-primary"></ion-icon>
-            {{ T "jsonToTypes.jsonInput" }}
+            <span class="hidden xs:inline">{{ T "jsonToTypes.jsonInput" }}</span>
+            <span class="xs:hidden">JSON</span>
           </h2>
-          <div class="flex items-center gap-1">
+          <div class="flex items-center gap-0.5 sm:gap-1">
             <button id="paste-btn" class="btn btn-ghost btn-xs gap-1">
               <ion-icon name="clipboard-outline"></ion-icon>
-              {{ T "jsonToTypes.paste" }}
+              <span class="hidden sm:inline">{{ T "jsonToTypes.paste" }}</span>
             </button>
             <button id="sample-btn" class="btn btn-ghost btn-xs gap-1">
               <ion-icon name="document-text-outline"></ion-icon>
-              {{ T "jsonToTypes.sample" }}
+              <span class="hidden sm:inline">{{ T "jsonToTypes.sample" }}</span>
             </button>
             <button id="clear-btn" class="btn btn-ghost btn-xs gap-1 text-error">
               <ion-icon name="trash-outline"></ion-icon>
@@ -63,16 +64,16 @@
         <div class="relative">
           <textarea 
             id="json-input" 
-            class="w-full h-[400px] lg:h-[500px] p-4 font-mono text-sm bg-transparent border-0 focus:outline-none focus:ring-0 resize-none"
+            class="w-full h-[250px] sm:h-[350px] lg:h-[500px] p-3 sm:p-4 font-mono text-xs sm:text-sm bg-transparent border-0 focus:outline-none focus:ring-0 resize-none"
             placeholder="{{ T "jsonToTypes.inputPlaceholder" }}"
             spellcheck="false"
           ></textarea>
           
-          <div class="absolute bottom-2 right-2 flex items-center gap-2 text-xs text-base-content/40">
-            <span id="json-status" class="hidden px-2 py-1 rounded bg-success/20 text-success">
+          <div class="absolute bottom-2 right-2 flex items-center gap-2 text-[10px] sm:text-xs text-base-content/40">
+            <span id="json-status" class="hidden px-1.5 sm:px-2 py-0.5 sm:py-1 rounded bg-success/20 text-success">
               ✓ {{ T "jsonToTypes.validJson" }}
             </span>
-            <span id="json-error" class="hidden px-2 py-1 rounded bg-error/20 text-error">
+            <span id="json-error" class="hidden px-1.5 sm:px-2 py-0.5 sm:py-1 rounded bg-error/20 text-error">
               ✗ {{ T "jsonToTypes.invalidJson" }}
             </span>
           </div>
@@ -81,58 +82,58 @@
       </div>
 
       <!-- Настройки -->
-      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
         <details class="group" open>
-          <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
-            <h2 class="font-semibold flex items-center gap-2">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-1.5 sm:gap-2">
               <ion-icon name="settings-outline" class="text-primary"></ion-icon>
               {{ T "jsonToTypes.settings" }}
             </h2>
-            <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+            <ion-icon name="chevron-down" class="text-lg sm:text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
           </summary>
           
-          <div class="p-4 pt-0 space-y-4">
+          <div class="p-3 sm:p-4 pt-0 space-y-3 sm:space-y-4">
             
             <!-- Root Name -->
             <div class="form-control">
               <label class="label py-1">
-                <span class="label-text font-medium">{{ T "jsonToTypes.rootTypeName" }}</span>
+                <span class="label-text text-sm font-medium">{{ T "jsonToTypes.rootTypeName" }}</span>
               </label>
               <input type="text" id="root-name" class="input input-bordered input-sm font-mono" value="Root" placeholder="Root" />
             </div>
             
             <!-- Options Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
               
-              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
-                <input type="checkbox" id="opt-optional" class="checkbox checkbox-sm checkbox-primary" />
-                <div>
-                  <span class="text-sm font-medium">{{ T "jsonToTypes.optionalProperties" }}</span>
-                  <p class="text-xs text-base-content/60">{{ T "jsonToTypes.optionalPropertiesDesc" }}</p>
+              <label class="flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors active:bg-base-200">
+                <input type="checkbox" id="opt-optional" class="checkbox checkbox-sm checkbox-primary mt-0.5" />
+                <div class="min-w-0">
+                  <span class="text-xs sm:text-sm font-medium">{{ T "jsonToTypes.optionalProperties" }}</span>
+                  <p class="text-[10px] sm:text-xs text-base-content/60 leading-tight mt-0.5">{{ T "jsonToTypes.optionalPropertiesDesc" }}</p>
                 </div>
               </label>
               
-              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
-                <input type="checkbox" id="opt-readonly" class="checkbox checkbox-sm checkbox-primary" />
-                <div>
-                  <span class="text-sm font-medium">{{ T "jsonToTypes.readonly" }}</span>
-                  <p class="text-xs text-base-content/60">{{ T "jsonToTypes.readonlyDesc" }}</p>
+              <label class="flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors active:bg-base-200">
+                <input type="checkbox" id="opt-readonly" class="checkbox checkbox-sm checkbox-primary mt-0.5" />
+                <div class="min-w-0">
+                  <span class="text-xs sm:text-sm font-medium">{{ T "jsonToTypes.readonly" }}</span>
+                  <p class="text-[10px] sm:text-xs text-base-content/60 leading-tight mt-0.5">{{ T "jsonToTypes.readonlyDesc" }}</p>
                 </div>
               </label>
               
-              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
-                <input type="checkbox" id="opt-export" class="checkbox checkbox-sm checkbox-primary" checked />
-                <div>
-                  <span class="text-sm font-medium">{{ T "jsonToTypes.export" }}</span>
-                  <p class="text-xs text-base-content/60">{{ T "jsonToTypes.exportDesc" }}</p>
+              <label class="flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors active:bg-base-200">
+                <input type="checkbox" id="opt-export" class="checkbox checkbox-sm checkbox-primary mt-0.5" checked />
+                <div class="min-w-0">
+                  <span class="text-xs sm:text-sm font-medium">{{ T "jsonToTypes.export" }}</span>
+                  <p class="text-[10px] sm:text-xs text-base-content/60 leading-tight mt-0.5">{{ T "jsonToTypes.exportDesc" }}</p>
                 </div>
               </label>
               
-              <label class="flex items-center gap-3 p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors">
-                <input type="checkbox" id="opt-inline" class="checkbox checkbox-sm checkbox-primary" />
-                <div>
-                  <span class="text-sm font-medium">{{ T "jsonToTypes.inlineTypes" }}</span>
-                  <p class="text-xs text-base-content/60">{{ T "jsonToTypes.inlineTypesDesc" }}</p>
+              <label class="flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors active:bg-base-200">
+                <input type="checkbox" id="opt-inline" class="checkbox checkbox-sm checkbox-primary mt-0.5" />
+                <div class="min-w-0">
+                  <span class="text-xs sm:text-sm font-medium">{{ T "jsonToTypes.inlineTypes" }}</span>
+                  <p class="text-[10px] sm:text-xs text-base-content/60 leading-tight mt-0.5">{{ T "jsonToTypes.inlineTypesDesc" }}</p>
                 </div>
               </label>
               
@@ -143,79 +144,79 @@
       </div>
 
       <!-- Кнопка генерации -->
-      <button id="generate-btn" class="btn btn-primary btn-lg w-full gap-2">
-        <ion-icon name="flash-outline" class="text-xl"></ion-icon>
+      <button id="generate-btn" class="btn btn-primary btn-md sm:btn-lg w-full gap-2">
+        <ion-icon name="flash-outline" class="text-lg sm:text-xl"></ion-icon>
         {{ T "jsonToTypes.generate" }}
       </button>
 
     </div>
 
     <!-- ========== ПРАВАЯ ПАНЕЛЬ: РЕЗУЛЬТАТ ========== -->
-    <div class="space-y-4">
+    <div class="space-y-3 sm:space-y-4">
 
       <!-- Табы выбора формата -->
-      <div class="tabs tabs-boxed bg-base-200 p-1 rounded-xl">
-        <button class="tab tab-lg flex-1 gap-2 format-tab tab-active" data-format="typescript">
-          <span class="text-blue-500 font-bold">TS</span>
-          TypeScript
+      <div class="tabs tabs-boxed bg-base-200 p-1 rounded-lg sm:rounded-xl">
+        <button class="tab tab-sm sm:tab-lg flex-1 gap-1 sm:gap-2 format-tab tab-active text-xs sm:text-sm" data-format="typescript">
+          <span class="text-blue-500 font-bold text-[10px] sm:text-base">TS</span>
+          <span class="hidden min-[400px]:inline">TypeScript</span>
         </button>
-        <button class="tab tab-lg flex-1 gap-2 format-tab" data-format="go">
-          <span class="text-cyan-500 font-bold">Go</span>
-          Go
+        <button class="tab tab-sm sm:tab-lg flex-1 gap-1 sm:gap-2 format-tab text-xs sm:text-sm" data-format="go">
+          <span class="text-cyan-500 font-bold text-[10px] sm:text-base">Go</span>
+          <span class="hidden min-[400px]:inline">Go</span>
         </button>
-        <button class="tab tab-lg flex-1 gap-2 format-tab" data-format="zod">
-          <span class="text-purple-500 font-bold">Z</span>
-          Zod
+        <button class="tab tab-sm sm:tab-lg flex-1 gap-1 sm:gap-2 format-tab text-xs sm:text-sm" data-format="zod">
+          <span class="text-purple-500 font-bold text-[10px] sm:text-base">Z</span>
+          <span class="hidden min-[400px]:inline">Zod</span>
         </button>
-        <button class="tab tab-lg flex-1 gap-2 format-tab" data-format="jsonschema">
-          <span class="text-orange-500 font-bold">{}</span>
-          Schema
+        <button class="tab tab-sm sm:tab-lg flex-1 gap-1 sm:gap-2 format-tab text-xs sm:text-sm" data-format="jsonschema">
+          <span class="text-orange-500 font-bold text-[10px] sm:text-base">{}</span>
+          <span class="hidden min-[400px]:inline">Schema</span>
         </button>
       </div>
 
       <!-- Результат -->
-      <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
         
-        <div class="flex items-center justify-between p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
-          <h2 class="font-semibold flex items-center gap-2">
-            <ion-icon name="document-text-outline" class="text-success"></ion-icon>
-            <span id="output-title">{{ T "jsonToTypes.typescriptInterface" }}</span>
+        <div class="flex items-center justify-between p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-1.5 sm:gap-2 min-w-0 truncate">
+            <ion-icon name="document-text-outline" class="text-success shrink-0"></ion-icon>
+            <span id="output-title" class="truncate">{{ T "jsonToTypes.typescriptInterface" }}</span>
           </h2>
-          <div class="flex items-center gap-1">
+          <div class="flex items-center gap-0.5 sm:gap-1 shrink-0 ml-2">
             <button id="copy-btn" class="btn btn-ghost btn-xs gap-1">
               <ion-icon name="copy-outline"></ion-icon>
-              {{ T "jsonToTypes.copy" }}
+              <span class="hidden sm:inline">{{ T "jsonToTypes.copy" }}</span>
             </button>
             <button id="download-btn" class="btn btn-ghost btn-xs gap-1">
               <ion-icon name="download-outline"></ion-icon>
-              {{ T "jsonToTypes.download" }}
+              <span class="hidden sm:inline">{{ T "jsonToTypes.download" }}</span>
             </button>
           </div>
         </div>
         
         <div class="relative">
-          <pre id="output" class="h-[400px] lg:h-[500px] p-4 font-mono text-sm overflow-auto"><code class="text-base-content/50">// {{ T "jsonToTypes.enterJsonAndGenerate" }}</code></pre>
+          <pre id="output" class="h-[250px] sm:h-[350px] lg:h-[500px] p-3 sm:p-4 font-mono text-xs sm:text-sm overflow-auto"><code class="text-base-content/50">// {{ T "jsonToTypes.enterJsonAndGenerate" }}</code></pre>
         </div>
         
       </div>
 
       <!-- Статистика -->
-      <div id="stats" class="hidden grid grid-cols-4 gap-3">
-        <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
-          <div class="text-xl font-bold text-primary" id="stat-types">0</div>
-          <div class="text-xs text-base-content/60">{{ T "jsonToTypes.types" }}</div>
+      <div id="stats" class="hidden grid grid-cols-4 gap-2 sm:gap-3">
+        <div class="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-base sm:text-xl font-bold text-primary" id="stat-types">0</div>
+          <div class="text-[10px] sm:text-xs text-base-content/60">{{ T "jsonToTypes.types" }}</div>
         </div>
-        <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
-          <div class="text-xl font-bold text-secondary" id="stat-props">0</div>
-          <div class="text-xs text-base-content/60">{{ T "jsonToTypes.properties" }}</div>
+        <div class="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-base sm:text-xl font-bold text-secondary" id="stat-props">0</div>
+          <div class="text-[10px] sm:text-xs text-base-content/60">{{ T "jsonToTypes.properties" }}</div>
         </div>
-        <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
-          <div class="text-xl font-bold text-accent" id="stat-nested">0</div>
-          <div class="text-xs text-base-content/60">{{ T "jsonToTypes.nested" }}</div>
+        <div class="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-base sm:text-xl font-bold text-accent" id="stat-nested">0</div>
+          <div class="text-[10px] sm:text-xs text-base-content/60">{{ T "jsonToTypes.nested" }}</div>
         </div>
-        <div class="p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
-          <div class="text-xl font-bold text-info" id="stat-lines">0</div>
-          <div class="text-xs text-base-content/60">{{ T "jsonToTypes.lines" }}</div>
+        <div class="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+          <div class="text-base sm:text-xl font-bold text-info" id="stat-lines">0</div>
+          <div class="text-[10px] sm:text-xs text-base-content/60">{{ T "jsonToTypes.lines" }}</div>
         </div>
       </div>
 
@@ -224,45 +225,45 @@
   </div>
 
   <!-- Примеры использования -->
-  <div class="mt-8 bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+  <div class="mt-6 sm:mt-8 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
     <details class="group">
-      <summary class="flex items-center justify-between p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
-        <h3 class="font-semibold flex items-center gap-2">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <h3 class="font-semibold text-sm sm:text-base flex items-center gap-1.5 sm:gap-2">
           <ion-icon name="book-outline" class="text-primary"></ion-icon>
           {{ T "jsonToTypes.usageExamples" }}
         </h3>
-        <ion-icon name="chevron-down" class="text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+        <ion-icon name="chevron-down" class="text-lg sm:text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
       </summary>
       
-      <div class="p-4 pt-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="p-3 sm:p-4 pt-0 grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         
-        <div class="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
-          <div class="font-semibold text-blue-500 mb-2">TypeScript</div>
-          <pre class="text-xs font-mono text-base-content/70">interface User {
+        <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-blue-500/10 border border-blue-500/20">
+          <div class="font-semibold text-blue-500 text-sm mb-2">TypeScript</div>
+          <pre class="text-[10px] sm:text-xs font-mono text-base-content/70 overflow-x-auto">interface User {
   id: number;
   name: string;
 }</pre>
         </div>
         
-        <div class="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
-          <div class="font-semibold text-cyan-500 mb-2">Go</div>
-          <pre class="text-xs font-mono text-base-content/70">type User struct {
+        <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+          <div class="font-semibold text-cyan-500 text-sm mb-2">Go</div>
+          <pre class="text-[10px] sm:text-xs font-mono text-base-content/70 overflow-x-auto">type User struct {
   ID   int    `json:"id"`
   Name string `json:"name"`
 }</pre>
         </div>
         
-        <div class="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20">
-          <div class="font-semibold text-purple-500 mb-2">Zod</div>
-          <pre class="text-xs font-mono text-base-content/70">const UserSchema = z.object({
+        <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-purple-500/10 border border-purple-500/20">
+          <div class="font-semibold text-purple-500 text-sm mb-2">Zod</div>
+          <pre class="text-[10px] sm:text-xs font-mono text-base-content/70 overflow-x-auto">const UserSchema = z.object({
   id: z.number(),
   name: z.string(),
 });</pre>
         </div>
         
-        <div class="p-4 rounded-xl bg-orange-500/10 border border-orange-500/20">
-          <div class="font-semibold text-orange-500 mb-2">JSON Schema</div>
-          <pre class="text-xs font-mono text-base-content/70">{
+        <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-orange-500/10 border border-orange-500/20">
+          <div class="font-semibold text-orange-500 text-sm mb-2">JSON Schema</div>
+          <pre class="text-[10px] sm:text-xs font-mono text-base-content/70 overflow-x-auto">{
   "type": "object",
   "properties": { ... }
 }</pre>
@@ -272,13 +273,13 @@
     </details>
   </div>
 
-  <!-- Горячие клавиши -->
-  <div class="mt-4 p-4 rounded-2xl bg-base-200/30 border border-base-200 dark:border-base-content/10">
+  <!-- Горячие клавиши — скрыты на мобильных -->
+  <div class="hidden sm:block mt-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-200/30 border border-base-200 dark:border-base-content/10">
     <div class="flex items-center gap-2 mb-3">
       <ion-icon name="keypad-outline" class="text-lg text-base-content/60"></ion-icon>
       <span class="text-sm font-medium text-base-content/60">{{ T "jsonToTypes.hotkeys" }}</span>
     </div>
-    <div class="flex flex-wrap gap-4 text-sm text-base-content/60">
+    <div class="flex flex-wrap gap-3 sm:gap-4 text-sm text-base-content/60">
       <div class="flex items-center gap-1">
         <kbd class="kbd kbd-sm">Ctrl</kbd>
         <span>+</span>

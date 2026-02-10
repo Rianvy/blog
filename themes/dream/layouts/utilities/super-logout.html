@@ -1,0 +1,692 @@
+{{ define "title" }}
+{{ default "Super Logout" }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-4xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-5 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-error/10 text-error mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}🚪{{ end }}</span>
+    </div>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">{{ .Title }}</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">{{ .Description }}</p>
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-error/10 text-error border border-error/20">
+        <ion-icon name="log-out-outline"></ion-icon>
+        {{ T "superLogout.badges_services" }}
+      </span>
+      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        {{ T "superLogout.badges_privacy" }}
+      </span>
+      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="flash-outline"></ion-icon>
+        {{ T "superLogout.badges_instant" }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Предупреждение -->
+  <div class="alert alert-warning mb-4 sm:mb-6 shadow-md">
+    <ion-icon name="warning-outline" class="text-xl sm:text-2xl shrink-0"></ion-icon>
+    <div>
+      <h3 class="font-bold text-sm sm:text-base">{{ T "superLogout.warningTitle" }}</h3>
+      <p class="text-xs sm:text-sm">{{ T "superLogout.warningText" }}</p>
+    </div>
+  </div>
+
+  <!-- ===== БЛОК ОЧИСТКИ БРАУЗЕРА ===== -->
+  <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-lg sm:shadow-xl overflow-hidden mb-4 sm:mb-6">
+    
+    <!-- Заголовок -->
+    <div class="flex flex-wrap items-center gap-2 p-3 sm:p-4 bg-base-200/50 border-b border-base-200 dark:border-base-content/10">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-warning/10 flex items-center justify-center shrink-0">
+          <ion-icon name="trash-outline" class="text-lg sm:text-xl text-warning"></ion-icon>
+        </div>
+        <div>
+          <h2 class="font-semibold text-sm sm:text-base">{{ T "superLogout.cleanupSection" }}</h2>
+          <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "superLogout.cleanupSectionDesc" }}</p>
+        </div>
+      </div>
+      <div class="flex-1"></div>
+      <button type="button" id="clean-all-btn" class="btn btn-warning btn-sm sm:btn-md gap-2">
+        <ion-icon name="nuclear-outline" class="text-lg sm:text-xl"></ion-icon>
+        <span class="text-xs sm:text-sm">{{ T "superLogout.cleanAll" }}</span>
+      </button>
+    </div>
+
+    <!-- Кнопки очистки -->
+    <div class="p-3 sm:p-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+        
+        <!-- localStorage -->
+        <div class="clean-card flex items-center gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl border border-base-200 dark:border-base-content/10 hover:bg-base-200/30 transition-all">
+          <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center shrink-0">
+            <ion-icon name="server-outline" class="text-xl text-orange-500"></ion-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-medium text-xs sm:text-sm">{{ T "superLogout.cleanLocalStorage" }}</div>
+            <div class="text-[10px] sm:text-xs text-base-content/50">{{ T "superLogout.cleanLocalStorageDesc" }}</div>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="clean-result text-[10px] sm:text-xs text-base-content/40" id="ls-result"></span>
+            <button type="button" class="btn btn-ghost btn-xs sm:btn-sm btn-square" id="clean-ls-btn" title="{{ T "superLogout.cleanLocalStorage" }}">
+              <ion-icon name="trash-outline" class="text-base sm:text-lg"></ion-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- sessionStorage -->
+        <div class="clean-card flex items-center gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl border border-base-200 dark:border-base-content/10 hover:bg-base-200/30 transition-all">
+          <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0">
+            <ion-icon name="time-outline" class="text-xl text-blue-500"></ion-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-medium text-xs sm:text-sm">{{ T "superLogout.cleanSessionStorage" }}</div>
+            <div class="text-[10px] sm:text-xs text-base-content/50">{{ T "superLogout.cleanSessionStorageDesc" }}</div>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="clean-result text-[10px] sm:text-xs text-base-content/40" id="ss-result"></span>
+            <button type="button" class="btn btn-ghost btn-xs sm:btn-sm btn-square" id="clean-ss-btn" title="{{ T "superLogout.cleanSessionStorage" }}">
+              <ion-icon name="trash-outline" class="text-base sm:text-lg"></ion-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cookies -->
+        <div class="clean-card flex items-center gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl border border-base-200 dark:border-base-content/10 hover:bg-base-200/30 transition-all">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center shrink-0">
+            <ion-icon name="finger-print-outline" class="text-xl text-purple-500"></ion-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-medium text-xs sm:text-sm">{{ T "superLogout.cleanCookiesNote" }}</div>
+            <div class="text-[10px] sm:text-xs text-base-content/50">{{ T "superLogout.cleanCookiesNoteDesc" }}</div>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="clean-result text-[10px] sm:text-xs text-base-content/40" id="ck-result"></span>
+            <button type="button" class="btn btn-ghost btn-xs sm:btn-sm btn-square" id="clean-ck-btn" title="{{ T "superLogout.cleanCookiesNote" }}">
+              <ion-icon name="trash-outline" class="text-base sm:text-lg"></ion-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cache Storage -->
+        <div class="clean-card flex items-center gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl border border-base-200 dark:border-base-content/10 hover:bg-base-200/30 transition-all">
+          <div class="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center shrink-0">
+            <ion-icon name="cloud-offline-outline" class="text-xl text-green-500"></ion-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-medium text-xs sm:text-sm">{{ T "superLogout.cleanCache" }}</div>
+            <div class="text-[10px] sm:text-xs text-base-content/50">{{ T "superLogout.cleanCacheDesc" }}</div>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="clean-result text-[10px] sm:text-xs text-base-content/40" id="ca-result"></span>
+            <button type="button" class="btn btn-ghost btn-xs sm:btn-sm btn-square" id="clean-ca-btn" title="{{ T "superLogout.cleanCache" }}">
+              <ion-icon name="trash-outline" class="text-base sm:text-lg"></ion-icon>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Инструкция полной очистки -->
+    <div class="px-3 sm:px-4 pb-3 sm:pb-4">
+      <div class="p-3 sm:p-4 rounded-lg bg-base-200/50 border border-base-200 dark:border-base-content/10">
+        <div class="flex items-start gap-2 mb-2">
+          <ion-icon name="information-circle-outline" class="text-info text-lg mt-0.5 shrink-0"></ion-icon>
+          <div>
+            <h4 class="font-semibold text-xs sm:text-sm">{{ T "superLogout.manualCleanupTitle" }}</h4>
+            <p class="text-[10px] sm:text-xs text-base-content/60 mb-2">{{ T "superLogout.manualCleanupDesc" }}</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 text-[10px] sm:text-xs">
+          <div class="flex items-center gap-1.5 p-1.5 sm:p-2 rounded bg-base-100">
+            <span class="text-base">🌐</span>
+            <span class="text-base-content/70">{{ T "superLogout.manualChrome" }}</span>
+          </div>
+          <div class="flex items-center gap-1.5 p-1.5 sm:p-2 rounded bg-base-100">
+            <span class="text-base">🦊</span>
+            <span class="text-base-content/70">{{ T "superLogout.manualFirefox" }}</span>
+          </div>
+          <div class="flex items-center gap-1.5 p-1.5 sm:p-2 rounded bg-base-100">
+            <span class="text-base">🧭</span>
+            <span class="text-base-content/70">{{ T "superLogout.manualSafari" }}</span>
+          </div>
+          <div class="flex items-center gap-1.5 p-1.5 sm:p-2 rounded bg-base-100">
+            <span class="text-base">🔷</span>
+            <span class="text-base-content/70">{{ T "superLogout.manualEdge" }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== БЛОК LOGOUT СЕРВИСОВ ===== -->
+  <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-lg sm:shadow-xl overflow-hidden">
+
+    <!-- Панель управления -->
+    <div class="flex flex-wrap items-center gap-2 p-3 sm:p-4 bg-base-200/50 border-b border-base-200 dark:border-base-content/10">
+      <button type="button" id="logout-all-btn" class="btn btn-error btn-sm sm:btn-md gap-2">
+        <ion-icon name="log-out-outline" class="text-lg sm:text-xl"></ion-icon>
+        <span class="text-xs sm:text-sm">{{ T "superLogout.logoutAll" }}</span>
+      </button>
+      <button type="button" id="select-all-btn" class="btn btn-ghost btn-xs sm:btn-sm gap-1">
+        <ion-icon name="checkmark-done-outline" class="text-base"></ion-icon>
+        <span class="text-xs">{{ T "superLogout.selectAll" }}</span>
+      </button>
+      <button type="button" id="deselect-all-btn" class="btn btn-ghost btn-xs sm:btn-sm gap-1">
+        <ion-icon name="close-outline" class="text-base"></ion-icon>
+        <span class="text-xs">{{ T "superLogout.deselectAll" }}</span>
+      </button>
+      <div class="flex-1"></div>
+      <div class="flex items-center gap-2 sm:gap-3 text-[10px] sm:text-xs text-base-content/60">
+        <span class="flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-base-300"></span>
+          {{ T "superLogout.statusPending" }}: <strong id="count-pending">0</strong>
+        </span>
+        <span class="flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-warning animate-pulse"></span>
+          {{ T "superLogout.statusRunning" }}: <strong id="count-running">0</strong>
+        </span>
+        <span class="flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-success"></span>
+          {{ T "superLogout.statusDone" }}: <strong id="count-done">0</strong>
+        </span>
+        <span class="flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-error"></span>
+          {{ T "superLogout.statusError" }}: <strong id="count-error">0</strong>
+        </span>
+      </div>
+    </div>
+
+    <!-- Прогресс -->
+    <div class="px-3 sm:px-4 py-2 bg-base-200/30 border-b border-base-200 dark:border-base-content/10" id="progress-wrap" style="display:none;">
+      <div class="flex items-center justify-between mb-1">
+        <span class="text-xs text-base-content/60" id="progress-label">{{ T "superLogout.progressLabel" }}</span>
+        <span class="text-xs font-mono text-base-content/60" id="progress-percent">0%</span>
+      </div>
+      <progress id="progress-bar" class="progress progress-error w-full" value="0" max="100"></progress>
+    </div>
+
+    <!-- Фильтры -->
+    <div class="flex flex-wrap items-center gap-1.5 px-3 sm:px-4 py-2 bg-base-200/20 border-b border-base-200 dark:border-base-content/10">
+      <button type="button" class="filter-btn btn btn-xs rounded-full btn-active" data-filter="all">{{ T "superLogout.filterAll" }}</button>
+      <button type="button" class="filter-btn btn btn-xs btn-ghost rounded-full" data-filter="social">{{ T "superLogout.filterSocial" }}</button>
+      <button type="button" class="filter-btn btn btn-xs btn-ghost rounded-full" data-filter="google">{{ T "superLogout.filterGoogle" }}</button>
+      <button type="button" class="filter-btn btn btn-xs btn-ghost rounded-full" data-filter="shopping">{{ T "superLogout.filterShopping" }}</button>
+      <button type="button" class="filter-btn btn btn-xs btn-ghost rounded-full" data-filter="dev">{{ T "superLogout.filterDev" }}</button>
+      <button type="button" class="filter-btn btn btn-xs btn-ghost rounded-full" data-filter="media">{{ T "superLogout.filterMedia" }}</button>
+      <button type="button" class="filter-btn btn btn-xs btn-ghost rounded-full" data-filter="other">{{ T "superLogout.filterOther" }}</button>
+    </div>
+
+    <!-- Сервисы -->
+    <div class="p-3 sm:p-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3" id="services-grid"></div>
+    </div>
+
+    <!-- Статус -->
+    <div class="flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 bg-base-200/30 border-t border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+      <span id="status-text">{{ T "superLogout.statusReady" }}</span>
+      <span>{{ T "superLogout.statusBrowser" }}</span>
+    </div>
+  </div>
+
+  <!-- Как это работает -->
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-info/10 flex items-center justify-center shrink-0">
+            <ion-icon name="help-circle-outline" class="text-lg sm:text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">{{ T "superLogout.howItWorksTitle" }}</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "superLogout.howItWorksSubtitle" }}</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg sm:text-xl text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <ion-icon name="globe-outline" class="text-primary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "superLogout.howRequests" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "superLogout.howRequestsText" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-warning/10 flex items-center justify-center">
+                <ion-icon name="trash-bin-outline" class="text-warning"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "superLogout.howCleanup" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "superLogout.howCleanupText" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-error/10 flex items-center justify-center">
+                <ion-icon name="shield-outline" class="text-error"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "superLogout.howLimitations" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "superLogout.howLimitationsText" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center">
+                <ion-icon name="lock-closed-outline" class="text-success"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "superLogout.howPrivacy" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "superLogout.howPrivacyText" }}</p>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- Скрытый контейнер -->
+<div id="logout-sandbox" style="display:none; width:0; height:0; overflow:hidden; position:absolute; left:-9999px;"></div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ===== ПЕРЕВОДЫ =====
+  var i18n = {
+    logoutAll: "{{ T "superLogout.logoutAll" }}",
+    logoutRunning: "{{ T "superLogout.logoutRunning" }}",
+    confirmText: "{{ T "superLogout.confirmText" }}",
+    emptySelection: "{{ T "superLogout.emptySelection" }}",
+    statusReady: "{{ T "superLogout.statusReady" }}",
+    statusProcessing: "{{ T "superLogout.statusProcessing" }}",
+    statusFinished: "{{ T "superLogout.statusFinished" }}",
+    progressLabel: "{{ T "superLogout.progressLabel" }}",
+    progressDone: "{{ T "superLogout.progressDone" }}",
+    progressProcessed: "{{ T "superLogout.progressProcessed" }}",
+    progressOf: "{{ T "superLogout.progressOf" }}",
+    itemsCleared: "{{ T "superLogout.itemsCleared" }}",
+    cachesCleared: "{{ T "superLogout.cachesCleared" }}",
+    cookiesCleared: "{{ T "superLogout.cookiesCleared" }}",
+    cleanupDone: "{{ T "superLogout.cleanupDone" }}"
+  };
+
+  // ===== СЕРВИСЫ =====
+  var services = [
+    { id: 'google',       name: 'Google',           icon: '🔍', cat: 'google',   method: 'get', url: 'https://accounts.google.com/Logout' },
+    { id: 'gmail',        name: 'Gmail',            icon: '📧', cat: 'google',   method: 'get', url: 'https://mail.google.com/mail/?logout' },
+    { id: 'youtube',      name: 'YouTube',          icon: '▶️', cat: 'google',   method: 'get', url: 'https://www.youtube.com/logout' },
+    { id: 'github',       name: 'GitHub',           icon: '🐙', cat: 'dev',      method: 'get', url: 'https://github.com/logout' },
+    { id: 'amazon',       name: 'Amazon',           icon: '📦', cat: 'shopping', method: 'get', url: 'https://www.amazon.com/gp/flex/sign-out.html?action=sign-out' },
+    { id: 'facebook',     name: 'Facebook',         icon: '👤', cat: 'social',   method: 'get', url: 'https://www.facebook.com/logout.php' },
+    { id: 'twitter',      name: 'X (Twitter)',      icon: '🐦', cat: 'social',   method: 'get', url: 'https://twitter.com/logout' },
+    { id: 'reddit',       name: 'Reddit',           icon: '🤖', cat: 'social',   method: 'get', url: 'https://www.reddit.com/logout' },
+    { id: 'tumblr',       name: 'Tumblr',           icon: '📝', cat: 'social',   method: 'get', url: 'https://www.tumblr.com/logout' },
+    { id: 'linkedin',     name: 'LinkedIn',         icon: '💼', cat: 'social',   method: 'get', url: 'https://www.linkedin.com/m/logout' },
+    { id: 'instagram',    name: 'Instagram',        icon: '📸', cat: 'social',   method: 'get', url: 'https://www.instagram.com/accounts/logout/' },
+    { id: 'dropbox',      name: 'Dropbox',          icon: '📁', cat: 'other',    method: 'get', url: 'https://www.dropbox.com/logout' },
+    { id: 'wordpress',    name: 'WordPress',        icon: '📰', cat: 'dev',      method: 'get', url: 'https://wordpress.com/wp-login.php?action=logout' },
+    { id: 'blogger',      name: 'Blogger',          icon: '✍️', cat: 'social',   method: 'get', url: 'https://www.blogger.com/logout.g' },
+    { id: 'ebay',         name: 'eBay',             icon: '🛒', cat: 'shopping', method: 'get', url: 'https://signin.ebay.com/ws/eBayISAPI.dll?SignIn' },
+    { id: 'netflix',      name: 'Netflix',          icon: '🎬', cat: 'media',    method: 'get', url: 'https://www.netflix.com/Logout' },
+    { id: 'hulu',         name: 'Hulu',             icon: '📺', cat: 'media',    method: 'get', url: 'https://secure.hulu.com/logout' },
+    { id: 'soundcloud',   name: 'SoundCloud',       icon: '🎵', cat: 'media',    method: 'get', url: 'https://soundcloud.com/logout' },
+    { id: 'vimeo',        name: 'Vimeo',            icon: '🎥', cat: 'media',    method: 'get', url: 'https://vimeo.com/log_out' },
+    { id: 'deviantart',   name: 'DeviantArt',       icon: '🎨', cat: 'social',   method: 'get', url: 'https://www.deviantart.com/users/logout' },
+    { id: 'steam_com',    name: 'Steam Community',  icon: '🎮', cat: 'media',    method: 'get', url: 'https://steamcommunity.com/?action=doLogout' },
+    { id: 'steam_store',  name: 'Steam Store',      icon: '🕹️', cat: 'shopping', method: 'get', url: 'https://store.steampowered.com/logout/' },
+    { id: 'wikipedia',    name: 'Wikipedia',        icon: '📚', cat: 'other',    method: 'get', url: 'https://en.wikipedia.org/w/index.php?title=Special:UserLogout' },
+    { id: 'yahoo',        name: 'Yahoo!',           icon: '🟣', cat: 'other',    method: 'get', url: 'https://login.yahoo.com/config/login?.src=fpctx&logout=1&.direct=1&.done=https://www.yahoo.com/' },
+    { id: 'aol',          name: 'AOL',              icon: '🔷', cat: 'other',    method: 'get', url: 'https://my.screenname.aol.com/_cqr/logout/mcLogout.psp?sitedomain=startpage.aol.com&authLev=0&lang=en&locale=us' },
+    { id: 'live',         name: 'Microsoft Live',   icon: '🪟', cat: 'other',    method: 'get', url: 'https://login.live.com/logout.srf' },
+    { id: 'slashdot',     name: 'Slashdot',         icon: '📰', cat: 'dev',      method: 'get', url: 'https://slashdot.org/my/logout' },
+    { id: 'instapaper',   name: 'Instapaper',       icon: '📄', cat: 'other',    method: 'get', url: 'https://www.instapaper.com/user/logout' },
+    { id: 'nytimes',      name: 'NY Times',         icon: '🗞️', cat: 'media',    method: 'get', url: 'https://www.nytimes.com/logout' },
+    { id: 'photobucket',  name: 'Photobucket',      icon: '🖼️', cat: 'media',    method: 'get', url: 'https://photobucket.com/logout' },
+    { id: 'skype',        name: 'Skype',            icon: '💬', cat: 'social',   method: 'get', url: 'https://secure.skype.com/account/logout' },
+    { id: 'newegg',       name: 'Newegg',           icon: '🖥️', cat: 'shopping', method: 'get', url: 'https://secure.newegg.com/NewMyAccount/AccountLogout.aspx' },
+    { id: 'delicious',    name: 'Delicious',        icon: '🔖', cat: 'other',    method: 'get', url: 'https://www.delicious.com/logout' },
+    { id: 'twitch',       name: 'Twitch',           icon: '🟪', cat: 'media',    method: 'get', url: 'https://www.twitch.tv/logout' },
+    { id: 'pinterest',    name: 'Pinterest',        icon: '📌', cat: 'social',   method: 'get', url: 'https://www.pinterest.com/logout/' },
+    { id: 'stackoverflow',name: 'Stack Overflow',   icon: '📋', cat: 'dev',      method: 'get', url: 'https://stackoverflow.com/users/logout' },
+    { id: 'gitlab',       name: 'GitLab',           icon: '🦊', cat: 'dev',      method: 'get', url: 'https://gitlab.com/users/sign_out' },
+    { id: 'discord',      name: 'Discord',          icon: '💜', cat: 'social',   method: 'get', url: 'https://discord.com/logout' },
+    { id: 'spotify',      name: 'Spotify',          icon: '🎧', cat: 'media',    method: 'get', url: 'https://accounts.spotify.com/logout' }
+  ];
+
+  // ===== ЭЛЕМЕНТЫ =====
+  var grid = document.getElementById('services-grid');
+  var sandbox = document.getElementById('logout-sandbox');
+  var progressWrap = document.getElementById('progress-wrap');
+  var progressBar = document.getElementById('progress-bar');
+  var progressLabelEl = document.getElementById('progress-label');
+  var progressPercent = document.getElementById('progress-percent');
+  var countPending = document.getElementById('count-pending');
+  var countRunning = document.getElementById('count-running');
+  var countDone = document.getElementById('count-done');
+  var countError = document.getElementById('count-error');
+  var statusText = document.getElementById('status-text');
+
+  var serviceStates = {};
+  var isRunning = false;
+
+  // ===== ОЧИСТКА БРАУЗЕРНЫХ ДАННЫХ =====
+
+  function clearLocalStorage() {
+    var count = 0;
+    try { count = localStorage.length; localStorage.clear(); } catch(e) {}
+    var el = document.getElementById('ls-result');
+    el.innerHTML = '<span class="text-success font-medium">' + count + ' ' + i18n.itemsCleared + '</span>';
+    flashCard(el);
+  }
+
+  function clearSessionStorage() {
+    var count = 0;
+    try { count = sessionStorage.length; sessionStorage.clear(); } catch(e) {}
+    var el = document.getElementById('ss-result');
+    el.innerHTML = '<span class="text-success font-medium">' + count + ' ' + i18n.itemsCleared + '</span>';
+    flashCard(el);
+  }
+
+  function clearCookies() {
+    var count = 0;
+    try {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var name = cookies[i].split('=')[0].trim();
+        if (!name) continue;
+        // Удаляем для всех возможных path
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=' + location.hostname;
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=.' + location.hostname;
+        // Для поддоменов
+        var parts = location.hostname.split('.');
+        while (parts.length > 1) {
+          document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=.' + parts.join('.');
+          parts.shift();
+        }
+        count++;
+      }
+    } catch(e) {}
+    var el = document.getElementById('ck-result');
+    el.innerHTML = '<span class="text-success font-medium">' + count + ' ' + i18n.cookiesCleared + '</span>';
+    flashCard(el);
+  }
+
+  function clearCacheStorage() {
+    var el = document.getElementById('ca-result');
+    if (!('caches' in window)) {
+      el.innerHTML = '<span class="text-warning font-medium">N/A</span>';
+      return;
+    }
+    caches.keys().then(function(names) {
+      var count = names.length;
+      var promises = names.map(function(name) { return caches.delete(name); });
+      return Promise.all(promises).then(function() {
+        el.innerHTML = '<span class="text-success font-medium">' + count + ' ' + i18n.cachesCleared + '</span>';
+        flashCard(el);
+      });
+    }).catch(function() {
+      el.innerHTML = '<span class="text-error font-medium">Error</span>';
+    });
+
+    // Также отключаем Service Workers
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(regs) {
+        regs.forEach(function(reg) { reg.unregister(); });
+      });
+    }
+  }
+
+  function clearAll() {
+    clearLocalStorage();
+    clearSessionStorage();
+    clearCookies();
+    clearCacheStorage();
+  }
+
+  function flashCard(el) {
+    var card = el.closest('.clean-card');
+    if (card) {
+      card.classList.add('border-success/50', 'bg-success/5');
+      setTimeout(function() {
+        card.classList.remove('border-success/50', 'bg-success/5');
+      }, 2000);
+    }
+  }
+
+  // Обработчики очистки
+  document.getElementById('clean-ls-btn').addEventListener('click', clearLocalStorage);
+  document.getElementById('clean-ss-btn').addEventListener('click', clearSessionStorage);
+  document.getElementById('clean-ck-btn').addEventListener('click', clearCookies);
+  document.getElementById('clean-ca-btn').addEventListener('click', clearCacheStorage);
+  document.getElementById('clean-all-btn').addEventListener('click', clearAll);
+
+  // ===== РЕНДЕР СЕРВИСОВ =====
+  function renderServices() {
+    var html = '';
+    for (var i = 0; i < services.length; i++) {
+      var s = services[i];
+      html += '<label class="service-card flex items-center gap-2.5 p-2.5 sm:p-3 rounded-lg sm:rounded-xl border border-base-200 dark:border-base-content/10 hover:bg-base-200/50 transition-all cursor-pointer select-none" data-id="' + s.id + '" data-cat="' + s.cat + '">';
+      html += '<input type="checkbox" class="checkbox checkbox-sm checkbox-error service-check" data-id="' + s.id + '" checked />';
+      html += '<span class="text-lg sm:text-xl shrink-0">' + s.icon + '</span>';
+      html += '<div class="flex-1 min-w-0">';
+      html += '<div class="font-medium text-xs sm:text-sm truncate">' + s.name + '</div>';
+      html += '<div class="text-[10px] sm:text-xs text-base-content/40 truncate">' + s.url.replace(/https?:\/\//, '').split('/')[0] + '</div>';
+      html += '</div>';
+      html += '<span class="service-status shrink-0" data-id="' + s.id + '"></span>';
+      html += '</label>';
+    }
+    grid.innerHTML = html;
+    updateCounts();
+  }
+
+  // ===== СЧЁТЧИКИ =====
+  function updateCounts() {
+    var pending = 0, running = 0, done = 0, error = 0;
+    for (var key in serviceStates) {
+      if (serviceStates[key] === 'running') running++;
+      else if (serviceStates[key] === 'done') done++;
+      else if (serviceStates[key] === 'error') error++;
+    }
+    if (isRunning) {
+      var checks = document.querySelectorAll('.service-check:checked');
+      pending = checks.length - (running + done + error);
+      if (pending < 0) pending = 0;
+    }
+    countPending.textContent = pending;
+    countRunning.textContent = running;
+    countDone.textContent = done;
+    countError.textContent = error;
+
+    var total = done + error + running + pending;
+    var finished = done + error;
+    if (total > 0 && isRunning) {
+      var pct = Math.round((finished / total) * 100);
+      progressBar.value = pct;
+      progressPercent.textContent = pct + '%';
+      progressLabelEl.textContent = i18n.progressProcessed + ' ' + finished + ' ' + i18n.progressOf + ' ' + total;
+    }
+  }
+
+  // ===== СТАТУС =====
+  function setStatus(id, status) {
+    serviceStates[id] = status;
+    var el = document.querySelector('.service-status[data-id="' + id + '"]');
+    var card = document.querySelector('.service-card[data-id="' + id + '"]');
+    if (!el || !card) return;
+    card.classList.remove('border-warning/30', 'bg-warning/5', 'border-success/30', 'bg-success/5', 'border-error/30', 'bg-error/5');
+    if (status === 'running') {
+      el.innerHTML = '<span class="loading loading-spinner loading-xs text-warning"></span>';
+      card.classList.add('border-warning/30', 'bg-warning/5');
+    } else if (status === 'done') {
+      el.innerHTML = '<ion-icon name="checkmark-circle" class="text-success text-lg"></ion-icon>';
+      card.classList.add('border-success/30', 'bg-success/5');
+    } else if (status === 'error') {
+      el.innerHTML = '<ion-icon name="alert-circle" class="text-error text-lg"></ion-icon>';
+      card.classList.add('border-error/30', 'bg-error/5');
+    } else {
+      el.innerHTML = '';
+    }
+    updateCounts();
+  }
+
+  // ===== LOGOUT GET =====
+  function logoutGet(service, callback) {
+    var img = document.createElement('img');
+    img.style.display = 'none';
+    var finished = false;
+    var timer = setTimeout(function() {
+      if (!finished) { finished = true; cleanup(); callback('done'); }
+    }, 8000);
+    function cleanup() {
+      clearTimeout(timer);
+      if (img.parentNode) img.parentNode.removeChild(img);
+    }
+    img.onload = function() { if (finished) return; finished = true; cleanup(); callback('done'); };
+    img.onerror = function() { if (finished) return; finished = true; cleanup(); callback('done'); };
+    sandbox.appendChild(img);
+    img.src = service.url + (service.url.indexOf('?') > -1 ? '&' : '?') + '_t=' + Date.now();
+  }
+
+  // ===== LOGOUT POST =====
+  function logoutPost(service, callback) {
+    var iframe = document.createElement('iframe');
+    var form = document.createElement('form');
+    iframe.style.display = 'none';
+    iframe.name = 'logout_' + service.id + '_' + Date.now();
+    var finished = false;
+    var timer = setTimeout(function() {
+      if (!finished) { finished = true; cleanup(); callback('done'); }
+    }, 8000);
+    function cleanup() {
+      clearTimeout(timer);
+      if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+      if (form.parentNode) form.parentNode.removeChild(form);
+    }
+    iframe.onload = function() {
+      iframe.onload = function() { if (finished) return; finished = true; cleanup(); callback('done'); };
+    };
+    iframe.onerror = function() { if (finished) return; finished = true; cleanup(); callback('done'); };
+    sandbox.appendChild(iframe);
+    form.action = service.url;
+    form.method = 'POST';
+    form.target = iframe.name;
+    if (service.params) {
+      var keys = Object.keys(service.params);
+      for (var j = 0; j < keys.length; j++) {
+        var inp = document.createElement('input');
+        inp.type = 'hidden'; inp.name = keys[j]; inp.value = service.params[keys[j]];
+        form.appendChild(inp);
+      }
+    }
+    sandbox.appendChild(form);
+    form.submit();
+  }
+
+  // ===== ОБРАБОТКА =====
+  function processService(service, callback) {
+    setStatus(service.id, 'running');
+    var handler = function(result) { setStatus(service.id, result); callback(); };
+    if (service.method === 'post') logoutPost(service, handler);
+    else logoutGet(service, handler);
+  }
+
+  // ===== ЗАПУСК =====
+  function startLogout() {
+    if (isRunning) return;
+    var selected = [];
+    var checks = document.querySelectorAll('.service-check:checked');
+    for (var i = 0; i < checks.length; i++) {
+      var id = checks[i].getAttribute('data-id');
+      for (var j = 0; j < services.length; j++) {
+        if (services[j].id === id) { selected.push(services[j]); break; }
+      }
+    }
+    if (selected.length === 0) { alert(i18n.emptySelection); return; }
+    if (!confirm(i18n.confirmText.replace('%d', selected.length))) return;
+
+    isRunning = true;
+    serviceStates = {};
+    progressWrap.style.display = 'block';
+    progressBar.value = 0;
+    progressPercent.textContent = '0%';
+
+    document.querySelectorAll('.service-status').forEach(function(el) { el.innerHTML = ''; });
+    document.querySelectorAll('.service-card').forEach(function(el) {
+      el.classList.remove('border-warning/30', 'bg-warning/5', 'border-success/30', 'bg-success/5', 'border-error/30', 'bg-error/5');
+    });
+
+    var btn = document.getElementById('logout-all-btn');
+    btn.classList.add('btn-disabled');
+    btn.innerHTML = '<span class="loading loading-spinner loading-sm"></span> ' + i18n.logoutRunning;
+    statusText.textContent = i18n.statusProcessing;
+    updateCounts();
+
+    var queue = selected.slice();
+    var concurrent = 3;
+    var active = 0;
+    var completedCount = 0;
+    var total = queue.length;
+
+    function next() {
+      while (active < concurrent && queue.length > 0) {
+        var svc = queue.shift();
+        active++;
+        processService(svc, function() {
+          active--;
+          completedCount++;
+          updateCounts();
+          if (completedCount >= total) {
+            isRunning = false;
+            btn.classList.remove('btn-disabled');
+            btn.innerHTML = '<ion-icon name="log-out-outline" class="text-lg sm:text-xl"></ion-icon><span class="text-xs sm:text-sm">' + i18n.logoutAll + '</span>';
+            statusText.textContent = i18n.statusFinished.replace('%d', total);
+            progressBar.value = 100;
+            progressPercent.textContent = '100%';
+            progressLabelEl.textContent = i18n.progressDone;
+          } else { next(); }
+        });
+      }
+    }
+    next();
+  }
+
+  // ===== ОБРАБОТЧИКИ =====
+  document.getElementById('logout-all-btn').addEventListener('click', startLogout);
+  document.getElementById('select-all-btn').addEventListener('click', function() {
+    document.querySelectorAll('.service-check').forEach(function(cb) { cb.checked = true; });
+  });
+  document.getElementById('deselect-all-btn').addEventListener('click', function() {
+    document.querySelectorAll('.service-check').forEach(function(cb) { cb.checked = false; });
+  });
+
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var filter = btn.getAttribute('data-filter');
+      document.querySelectorAll('.filter-btn').forEach(function(b) {
+        b.classList.remove('btn-active'); b.classList.add('btn-ghost');
+      });
+      btn.classList.add('btn-active'); btn.classList.remove('btn-ghost');
+      document.querySelectorAll('.service-card').forEach(function(card) {
+        card.style.display = (filter === 'all' || card.getAttribute('data-cat') === filter) ? '' : 'none';
+      });
+    });
+  });
+
+  // ===== INIT =====
+  renderServices();
+
+})();
+</script>
+{{ end }}

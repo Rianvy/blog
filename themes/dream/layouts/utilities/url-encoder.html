@@ -4,161 +4,170 @@
 
 {{ define "main" }}
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
 
   <!-- Hero -->
-  <div class="text-center mb-8 sm:mb-12">
-    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
-      <span class="text-4xl sm:text-5xl">🔗</span>
+  <div class="text-center mb-6 sm:mb-12">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">🔗</span>
     </div>
-    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
-    <p class="text-base-content/60 max-w-2xl mx-auto">{{ .Description }}</p>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">{{ .Title }}</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto px-2">{{ .Description }}</p>
   </div>
 
   <!-- Основной контент -->
   <div class="max-w-4xl mx-auto">
     
-    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+    <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-lg sm:shadow-xl overflow-hidden">
       
       <!-- Табы режимов -->
       <div class="flex border-b border-base-200 dark:border-base-content/10">
-        <button class="flex-1 px-4 py-3 font-medium text-sm mode-tab border-b-2 border-primary text-primary" data-mode="encode">
-          <ion-icon name="lock-closed-outline" class="mr-1"></ion-icon>
-          {{ T "urlEncoder.encode" }}
+        <button class="flex-1 px-2 sm:px-4 py-2.5 sm:py-3 font-medium text-xs sm:text-sm mode-tab border-b-2 border-primary text-primary flex items-center justify-center gap-1 sm:gap-1.5" data-mode="encode">
+          <ion-icon name="lock-closed-outline" class="text-sm sm:text-base"></ion-icon>
+          <span>{{ T "urlEncoder.encode" }}</span>
         </button>
-        <button class="flex-1 px-4 py-3 font-medium text-sm mode-tab border-b-2 border-transparent text-base-content/60 hover:text-base-content" data-mode="decode">
-          <ion-icon name="lock-open-outline" class="mr-1"></ion-icon>
-          {{ T "urlEncoder.decode" }}
+        <button class="flex-1 px-2 sm:px-4 py-2.5 sm:py-3 font-medium text-xs sm:text-sm mode-tab border-b-2 border-transparent text-base-content/60 hover:text-base-content active:text-base-content flex items-center justify-center gap-1 sm:gap-1.5" data-mode="decode">
+          <ion-icon name="lock-open-outline" class="text-sm sm:text-base"></ion-icon>
+          <span>{{ T "urlEncoder.decode" }}</span>
         </button>
-        <button class="flex-1 px-4 py-3 font-medium text-sm mode-tab border-b-2 border-transparent text-base-content/60 hover:text-base-content" data-mode="parse">
-          <ion-icon name="git-branch-outline" class="mr-1"></ion-icon>
-          {{ T "urlEncoder.parseUrl" }}
+        <button class="flex-1 px-2 sm:px-4 py-2.5 sm:py-3 font-medium text-xs sm:text-sm mode-tab border-b-2 border-transparent text-base-content/60 hover:text-base-content active:text-base-content flex items-center justify-center gap-1 sm:gap-1.5" data-mode="parse">
+          <ion-icon name="git-branch-outline" class="text-sm sm:text-base"></ion-icon>
+          <span class="hidden xs:inline">{{ T "urlEncoder.parseUrl" }}</span>
+          <span class="xs:hidden">Parse</span>
         </button>
       </div>
 
       <!-- Encode/Decode панель -->
-      <div id="encode-decode-panel" class="p-4 sm:p-6">
+      <div id="encode-decode-panel" class="p-3 sm:p-6">
         
         <!-- Ввод -->
-        <div class="form-control mb-4">
-          <label class="label">
-            <span class="label-text font-medium" id="input-label">{{ T "urlEncoder.textToEncode" }}</span>
+        <div class="form-control mb-3 sm:mb-4">
+          <label class="label py-1 sm:py-2">
+            <span class="label-text font-medium text-sm" id="input-label">{{ T "urlEncoder.textToEncode" }}</span>
             <button id="paste-btn" class="btn btn-ghost btn-xs gap-1">
               <ion-icon name="clipboard-outline"></ion-icon>
-              {{ T "urlEncoder.paste" }}
+              <span class="hidden sm:inline">{{ T "urlEncoder.paste" }}</span>
             </button>
           </label>
           <textarea 
             id="url-input" 
-            class="textarea textarea-bordered h-32 font-mono text-sm"
+            class="textarea textarea-bordered h-24 sm:h-32 font-mono text-xs sm:text-sm resize-y"
             placeholder="{{ T "urlEncoder.inputPlaceholder" }}"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
           ></textarea>
         </div>
 
         <!-- Опции -->
-        <div class="flex flex-wrap gap-4 mb-4">
+        <div class="flex flex-col xs:flex-row flex-wrap gap-2 xs:gap-3 sm:gap-4 mb-3 sm:mb-4">
           <label class="flex items-center gap-2 cursor-pointer">
             <input type="radio" name="encode-type" value="component" class="radio radio-sm radio-primary" checked />
-            <span class="text-sm">encodeURIComponent</span>
+            <span class="text-xs sm:text-sm">encodeURIComponent</span>
           </label>
           <label class="flex items-center gap-2 cursor-pointer">
             <input type="radio" name="encode-type" value="uri" class="radio radio-sm radio-primary" />
-            <span class="text-sm">encodeURI</span>
+            <span class="text-xs sm:text-sm">encodeURI</span>
           </label>
           <label class="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" id="encode-spaces-plus" class="checkbox checkbox-sm checkbox-primary" />
-            <span class="text-sm">{{ T "urlEncoder.spacesAsPlus" }}</span>
+            <span class="text-xs sm:text-sm">{{ T "urlEncoder.spacesAsPlus" }}</span>
           </label>
         </div>
 
         <!-- Кнопка -->
-        <div class="flex justify-center mb-4">
-          <button id="convert-btn" class="btn btn-primary gap-2">
-            <ion-icon name="swap-vertical-outline" class="text-lg"></ion-icon>
+        <div class="flex justify-center mb-3 sm:mb-4">
+          <button id="convert-btn" class="btn btn-primary btn-sm sm:btn-md gap-2 w-full sm:w-auto">
+            <ion-icon name="swap-vertical-outline" class="text-base sm:text-lg"></ion-icon>
             <span id="convert-btn-text">{{ T "urlEncoder.encodeBtn" }}</span>
           </button>
         </div>
 
         <!-- Результат -->
         <div class="form-control">
-          <label class="label">
-            <span class="label-text font-medium" id="output-label">{{ T "urlEncoder.result" }}</span>
+          <label class="label py-1 sm:py-2">
+            <span class="label-text font-medium text-sm" id="output-label">{{ T "urlEncoder.result" }}</span>
             <button id="copy-btn" class="btn btn-ghost btn-xs gap-1">
               <ion-icon name="copy-outline"></ion-icon>
-              {{ T "urlEncoder.copy" }}
+              <span class="hidden sm:inline">{{ T "urlEncoder.copy" }}</span>
             </button>
           </label>
           <textarea 
             id="url-output" 
-            class="textarea textarea-bordered h-32 font-mono text-sm bg-base-200/50"
+            class="textarea textarea-bordered h-24 sm:h-32 font-mono text-xs sm:text-sm bg-base-200/50 resize-y"
             readonly
           ></textarea>
         </div>
 
         <!-- Статус -->
-        <div id="status" class="hidden alert mt-4">
-          <ion-icon id="status-icon" name="information-circle" class="text-lg"></ion-icon>
+        <div id="status" class="hidden alert mt-3 sm:mt-4 text-xs sm:text-sm py-2 sm:py-3">
+          <ion-icon id="status-icon" name="information-circle" class="text-base sm:text-lg"></ion-icon>
           <span id="status-text"></span>
         </div>
         
       </div>
 
       <!-- Parse URL панель -->
-      <div id="parse-panel" class="hidden p-4 sm:p-6">
+      <div id="parse-panel" class="hidden p-3 sm:p-6">
         
-        <div class="form-control mb-4">
-          <label class="label">
-            <span class="label-text font-medium">{{ T "urlEncoder.urlToParse" }}</span>
+        <div class="form-control mb-3 sm:mb-4">
+          <label class="label py-1 sm:py-2">
+            <span class="label-text font-medium text-sm">{{ T "urlEncoder.urlToParse" }}</span>
           </label>
           <input 
             type="text" 
             id="parse-input" 
-            class="input input-bordered font-mono text-sm"
+            class="input input-bordered input-sm sm:input-md font-mono text-xs sm:text-sm"
             placeholder="https://example.com/path?param=value&foo=bar#hash"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
           />
         </div>
 
-        <button id="parse-btn" class="btn btn-primary gap-2 mb-6">
-          <ion-icon name="git-branch-outline" class="text-lg"></ion-icon>
+        <button id="parse-btn" class="btn btn-primary btn-sm sm:btn-md gap-2 mb-4 sm:mb-6 w-full sm:w-auto">
+          <ion-icon name="git-branch-outline" class="text-base sm:text-lg"></ion-icon>
           {{ T "urlEncoder.parseBtn" }}
         </button>
 
         <!-- Результаты парсинга -->
-        <div id="parse-result" class="hidden space-y-4">
+        <div id="parse-result" class="hidden space-y-3 sm:space-y-4">
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
             
-            <div class="p-4 rounded-xl bg-base-200/50">
-              <div class="text-xs text-base-content/50 mb-1">Protocol</div>
-              <div class="font-mono text-sm break-all" id="parse-protocol">—</div>
+            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Protocol</div>
+              <div class="font-mono text-xs sm:text-sm break-all" id="parse-protocol">—</div>
             </div>
             
-            <div class="p-4 rounded-xl bg-base-200/50">
-              <div class="text-xs text-base-content/50 mb-1">Host</div>
-              <div class="font-mono text-sm break-all" id="parse-host">—</div>
+            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Host</div>
+              <div class="font-mono text-xs sm:text-sm break-all" id="parse-host">—</div>
             </div>
             
-            <div class="p-4 rounded-xl bg-base-200/50">
-              <div class="text-xs text-base-content/50 mb-1">Port</div>
-              <div class="font-mono text-sm break-all" id="parse-port">—</div>
+            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Port</div>
+              <div class="font-mono text-xs sm:text-sm break-all" id="parse-port">—</div>
             </div>
             
-            <div class="p-4 rounded-xl bg-base-200/50">
-              <div class="text-xs text-base-content/50 mb-1">Pathname</div>
-              <div class="font-mono text-sm break-all" id="parse-pathname">—</div>
+            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Pathname</div>
+              <div class="font-mono text-xs sm:text-sm break-all" id="parse-pathname">—</div>
             </div>
             
-            <div class="p-4 rounded-xl bg-base-200/50 md:col-span-2">
-              <div class="text-xs text-base-content/50 mb-1">Hash</div>
-              <div class="font-mono text-sm break-all" id="parse-hash">—</div>
+            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50 sm:col-span-2">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Hash</div>
+              <div class="font-mono text-xs sm:text-sm break-all" id="parse-hash">—</div>
             </div>
             
           </div>
 
           <!-- Query параметры -->
-          <div class="p-4 rounded-xl bg-base-200/50">
-            <div class="text-xs text-base-content/50 mb-3">{{ T "urlEncoder.queryParameters" }}</div>
-            <div id="parse-params" class="space-y-2">
+          <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-2 sm:mb-3">{{ T "urlEncoder.queryParameters" }}</div>
+            <div id="parse-params" class="space-y-1.5 sm:space-y-2">
             </div>
           </div>
           
@@ -169,27 +178,37 @@
     </div>
 
     <!-- Примеры -->
-    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
       
-      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
-        <h3 class="font-semibold mb-3 flex items-center gap-2">
-          <ion-icon name="information-circle-outline" class="text-info"></ion-icon>
-          encodeURIComponent
-        </h3>
-        <p class="text-sm text-base-content/70 mb-2">{{ T "urlEncoder.componentDesc" }}</p>
-        <div class="text-xs font-mono bg-base-200 p-2 rounded">
-          hello world → hello%20world
+      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="flex sm:block items-start gap-3">
+          <ion-icon name="information-circle-outline" class="text-info text-xl sm:text-base shrink-0 mt-0.5 sm:mt-0 sm:hidden"></ion-icon>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base mb-1.5 sm:mb-3 flex items-center gap-2">
+              <ion-icon name="information-circle-outline" class="text-info hidden sm:inline-block"></ion-icon>
+              encodeURIComponent
+            </h3>
+            <p class="text-xs sm:text-sm text-base-content/70 mb-1.5 sm:mb-2">{{ T "urlEncoder.componentDesc" }}</p>
+            <div class="text-[10px] sm:text-xs font-mono bg-base-200 p-1.5 sm:p-2 rounded overflow-x-auto">
+              hello world → hello%20world
+            </div>
+          </div>
         </div>
       </div>
       
-      <div class="p-4 rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
-        <h3 class="font-semibold mb-3 flex items-center gap-2">
-          <ion-icon name="information-circle-outline" class="text-info"></ion-icon>
-          encodeURI
-        </h3>
-        <p class="text-sm text-base-content/70 mb-2">{{ T "urlEncoder.uriDesc" }}</p>
-        <div class="text-xs font-mono bg-base-200 p-2 rounded">
-          https://site.com/путь → https://site.com/%D0%BF%D1%83%D1%82%D1%8C
+      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="flex sm:block items-start gap-3">
+          <ion-icon name="information-circle-outline" class="text-info text-xl sm:text-base shrink-0 mt-0.5 sm:mt-0 sm:hidden"></ion-icon>
+          <div class="min-w-0 flex-1">
+            <h3 class="font-semibold text-sm sm:text-base mb-1.5 sm:mb-3 flex items-center gap-2">
+              <ion-icon name="information-circle-outline" class="text-info hidden sm:inline-block"></ion-icon>
+              encodeURI
+            </h3>
+            <p class="text-xs sm:text-sm text-base-content/70 mb-1.5 sm:mb-2">{{ T "urlEncoder.uriDesc" }}</p>
+            <div class="text-[10px] sm:text-xs font-mono bg-base-200 p-1.5 sm:p-2 rounded overflow-x-auto">
+              <span class="whitespace-nowrap">https://site.com/путь → https://site.com/%D0%BF%D1%83%D1%82%D1%8C</span>
+            </div>
+          </div>
         </div>
       </div>
       

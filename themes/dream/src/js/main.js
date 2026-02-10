@@ -12,9 +12,11 @@ document.addEventListener('alpine:init', () => {
         this.on = 'auto'
       }
 
-      setTimeout(() => {
+      // Слушаем загрузку iframe Giscus
+      window.addEventListener('message', (event) => {
+        if (event.origin !== 'https://giscus.app') return
         this.setThemeForComments()
-      }, 3000)
+      })
     },
 
     mql: window.matchMedia('(prefers-color-scheme: dark)'),
@@ -60,9 +62,9 @@ document.addEventListener('alpine:init', () => {
     },
 
     setThemeForComments() {
-      const giscus = document.querySelector('iframe.gsc-frame')
-      if (giscus) {
-        giscus.contentWindow.postMessage(
+      const giscusFrame = document.querySelector('iframe.gsc-frame')
+      if (giscusFrame) {
+        giscusFrame.contentWindow.postMessage(
           {
             giscus: {
               setConfig: {

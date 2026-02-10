@@ -7,25 +7,40 @@
 {{ if site.Params.giscus.enable }}
 <template x-if="['localhost', '127.0.0.1'].indexOf(window.location.hostname) == -1">
   <article>
-    <div class="giscus">
-      <script
-        src="https://giscus.app/client.js"
-        data-repo="{{ site.Params.giscus.repo }}"
-        data-repo-id="{{ site.Params.giscus.repoId }}"
-        data-category="{{ site.Params.giscus.category }}"
-        data-category-id="{{ site.Params.giscus.categoryId }}"
-        data-mapping="{{ site.Params.giscus.mapping | default "pathname" }}"
-        data-strict="{{ if site.Params.giscus.strict }}1{{ else }}0{{ end }}"
-        data-reactions-enabled="{{ if site.Params.giscus.reactionsEnabled }}1{{ else }}0{{ end }}"
-        data-emit-metadata="0"
-        data-input-position="{{ site.Params.giscus.inputPosition | default "top" }}"
-        data-theme="{{ site.Params.giscus.lightTheme | default "light" }}"
-        data-lang="{{ site.Params.giscus.lang | default "ru" }}"
-        data-loading="{{ site.Params.giscus.loading | default "lazy" }}"
-        crossorigin="anonymous"
-        async>
-      </script>
-    </div>
+    <div class="giscus" id="giscus-container"></div>
+    <script>
+      (function() {
+        var lightTheme = '{{ site.Params.giscus.lightTheme | default "noborder_light" }}';
+        var darkTheme = '{{ site.Params.giscus.darkTheme | default "noborder_dark" }}';
+
+        function getTheme() {
+          var stored = window.localStorage.getItem('hugo-theme-dream-is-dark');
+          if (stored === 'y') return darkTheme;
+          if (stored === 'n') return lightTheme;
+          // auto — по системной теме
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? darkTheme : lightTheme;
+        }
+
+        var script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.setAttribute('data-repo', '{{ site.Params.giscus.repo }}');
+        script.setAttribute('data-repo-id', '{{ site.Params.giscus.repoId }}');
+        script.setAttribute('data-category', '{{ site.Params.giscus.category }}');
+        script.setAttribute('data-category-id', '{{ site.Params.giscus.categoryId }}');
+        script.setAttribute('data-mapping', '{{ site.Params.giscus.mapping | default "pathname" }}');
+        script.setAttribute('data-strict', '{{ if site.Params.giscus.strict }}1{{ else }}0{{ end }}');
+        script.setAttribute('data-reactions-enabled', '{{ if site.Params.giscus.reactionsEnabled }}1{{ else }}0{{ end }}');
+        script.setAttribute('data-emit-metadata', '0');
+        script.setAttribute('data-input-position', '{{ site.Params.giscus.inputPosition | default "top" }}');
+        script.setAttribute('data-theme', getTheme());
+        script.setAttribute('data-lang', '{{ site.Params.giscus.lang | default "ru" }}');
+        script.setAttribute('data-loading', '{{ site.Params.giscus.loading | default "lazy" }}');
+        script.crossOrigin = 'anonymous';
+        script.async = true;
+
+        document.getElementById('giscus-container').appendChild(script);
+      })();
+    </script>
   </article>
 </template>
 {{ end }}

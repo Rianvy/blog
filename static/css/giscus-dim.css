@@ -56,3 +56,7 @@ main .gsc-reactions-button:hover {
 main .gsc-reply .gsc-reply-author-avatar {
   border-color: var(--color-border-muted);
 }
+
+.color-border-primary.color-text-secondary.color-bg-overlay.gsc-reactions-popover.bottom.open.left {
+    background-color: var(--color-canvas-default);
+}

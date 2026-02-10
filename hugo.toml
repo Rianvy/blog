@@ -89,7 +89,7 @@ jsDateFormat = "dd.MM.yyyy, HH:mm"
 [params.giscus]
 enable = true
 repo = "Rianvy/blog"
-repoId = "ВR_kgDONpZnjw"
+repoId = "R_kgDONpZnjw"
 category = "Comments"
 categoryId = "DIC_kwDONpZnj84C2KjB"
 mapping = "pathname"
@@ -98,4 +98,3 @@ reactionsEnabled = true
 inputPosition = "top"
 lang = "ru"
 loading = "lazy"
-darkTheme = "https://0x69.ru/css/giscus-dim.css"

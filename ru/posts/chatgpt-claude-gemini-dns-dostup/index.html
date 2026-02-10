@@ -3413,25 +3413,40 @@
 
 <template x-if="['localhost', '127.0.0.1'].indexOf(window.location.hostname) == -1">
   <article>
-    <div class="giscus">
-      <script
-        src="https://giscus.app/client.js"
-        data-repo="Rianvy/blog"
-        data-repo-id="ВR_kgDONpZnjw"
-        data-category="Comments"
-        data-category-id="DIC_kwDONpZnj84C2KjB"
-        data-mapping="pathname"
-        data-strict="1"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="noborder_light"
-        data-lang="ru"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-      </script>
-    </div>
+    <div class="giscus" id="giscus-container"></div>
+    <script>
+      (function() {
+        var lightTheme = 'noborder_light';
+        var darkTheme = 'noborder_dark';
+
+        function getTheme() {
+          var stored = window.localStorage.getItem('hugo-theme-dream-is-dark');
+          if (stored === 'y') return darkTheme;
+          if (stored === 'n') return lightTheme;
+          
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? darkTheme : lightTheme;
+        }
+
+        var script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.setAttribute('data-repo', 'Rianvy\/blog');
+        script.setAttribute('data-repo-id', 'ВR_kgDONpZnjw');
+        script.setAttribute('data-category', 'Comments');
+        script.setAttribute('data-category-id', 'DIC_kwDONpZnj84C2KjB');
+        script.setAttribute('data-mapping', 'pathname');
+        script.setAttribute('data-strict', '1');
+        script.setAttribute('data-reactions-enabled', '1');
+        script.setAttribute('data-emit-metadata', '0');
+        script.setAttribute('data-input-position', 'top');
+        script.setAttribute('data-theme', getTheme());
+        script.setAttribute('data-lang', 'ru');
+        script.setAttribute('data-loading', 'lazy');
+        script.crossOrigin = 'anonymous';
+        script.async = true;
+
+        document.getElementById('giscus-container').appendChild(script);
+      })();
+    </script>
   </article>
 </template>
 

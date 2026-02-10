@@ -98,5 +98,4 @@ reactionsEnabled = true
 inputPosition = "top"
 lang = "ru"
 loading = "lazy"
-lightTheme = "https://0x69.ru/css/giscus-emerald.css"
 darkTheme = "https://0x69.ru/css/giscus-dim.css"

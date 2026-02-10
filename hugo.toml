@@ -98,5 +98,5 @@ reactionsEnabled = true
 inputPosition = "top"
 lang = "ru"
 loading = "lazy"
-lightTheme = "noborder_light"
-darkTheme = "noborder_dark"
+lightTheme = "https://0x69.ru/css/giscus-emerald.css"
+darkTheme = "https://0x69.ru/css/giscus-dim.css"

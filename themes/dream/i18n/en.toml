@@ -1422,3 +1422,244 @@ tplChecklistName = "Checklist"
 tplChecklistContent = "# Tasks\n\n- [ ] Task 1\n- [ ] Task 2\n- [ ] Task 3\n- [x] Done"
 tplNotesName = "Notes"
 tplNotesContent = "# Notes\n\n## Ideas\n\n- Idea 1\n- Idea 2\n\n## Tasks\n\n1. First\n2. Second\n\n> Important thought"
+
+# ==========================================
+# TreeSnap
+# ==========================================
+[treesnap]
+# Badges
+badgeGenerator = "Tree generator"
+badgeGitignore = ".gitignore"
+badgeExport = "Export"
+badgeSearch = "Search & Filter"
+
+# Main
+dropzoneTitle = "Drop a folder here"
+dropzoneSubtitle = "or click to select"
+dropzoneHint = "Supports folders with any structure"
+selectFolder = "Select folder"
+processing = "Processing..."
+
+# Toolbar
+copyTree = "Copy"
+downloadTxt = "Download .txt"
+downloadMd = "Download .md"
+clearAll = "Clear"
+collapseAll = "Collapse all"
+expandAll = "Expand all"
+
+# Search
+searchPlaceholder = "Search files and folders..."
+
+# Presets
+presetsTitle = "Quick Presets"
+
+# Settings
+settings = "Settings"
+gitignoreSupport = "Use .gitignore"
+gitignoreDesc = "Automatically exclude files from .gitignore"
+showTags = "Show tags"
+showTagsDesc = "Add [JS], [CSS] etc. before files"
+showHidden = "Show hidden"
+showHiddenDesc = "Files and folders starting with a dot"
+interactiveMode = "Interactive tree"
+interactiveModeDesc = "Click folders to expand/collapse"
+maxDepth = "Max depth"
+maxDepthUnlimited = "Unlimited"
+excludePatterns = "Additional exclusions"
+excludePatternsPlaceholder = "node_modules, dist, .cache"
+excludePatternsHint = "Comma-separated, in addition to .gitignore"
+
+# Suggestions
+suggestionsTitle = "Suggestions"
+
+# Results
+resultTitle = "Project Structure"
+files = "files"
+folders = "folders"
+totalSize = "Size"
+depth = "Depth"
+
+# AI Summary
+aiSummaryTitle = "Project Summary"
+aiSummarize = "Analyze"
+aiSummaryEmpty = "Scan a folder first, then click Analyze to get a project summary."
+
+# Status
+statusReady = "Ready"
+statusProcessing = "Scanning files..."
+statusDone = "Done!"
+statusBrowser = "All files are processed locally in your browser"
+copied = "Copied!"
+downloaded = "File downloaded!"
+cleared = "Cleared"
+emptyResult = "No files to display"
+noFolder = "No folder selected"
+folderNotSupported = "Your browser doesn't support folder selection. Try Chrome or Edge."
+
+# Tags section
+tagsTitle = "Supported tags"
+tagsSubtitle = "Automatic labeling by file extension"
+tagLabel = "Tag"
+tagExtensions = "Extensions"
+
+# How it works
+howTitle = "How does it work?"
+howSubtitle = "Features and how it works"
+howScan = "Scanning"
+howScanDesc = "Recursively traverses all files and folders of the selected directory via File System Access API."
+howFilter = "Filtering"
+howFilterDesc = "Reads .gitignore and excludes matching files. The .git folder is always excluded."
+howFormat = "Formatting"
+howFormatDesc = "Builds an ASCII tree with indentation, extension tags and beautiful formatting."
+howExport = "Export"
+howExportDesc = "Copy to clipboard or download as .txt/.md for README and documentation."
+
+# Gitignore info
+gitignoreTitle = ".gitignore Support"
+gitignoreSubtitle = "Automatic file exclusion"
+gitignorePattern = "Pattern"
+gitignoreExcludes = "What's excluded"
+gitignoreAlways = "The .git folder is always excluded, even without .gitignore"
+patternNodeModules = "Entire folder"
+patternDist = "Entire folder"
+patternLog = "All .log files"
+patternEnv = "Specific file"
+patternIde = "IDE folder"
+
+# Styles
+styleLabel = "Tree style"
+styleClassic = "Classic"
+styleClassicDesc = "├── └── — standard Unicode"
+styleAscii = "ASCII"
+styleAsciiDesc = "+-- \\-- — compatible everywhere"
+styleMinimal = "Minimal"
+styleMinimalDesc = "Indentation only, no lines"
+styleDots = "Dotted"
+styleDotsDesc = "... dotted lines"
+styleArrow = "Arrows"
+styleArrowDesc = "→ pointers to elements"
+styleMarkdown = "Markdown"
+styleMarkdownDesc = "Nested lists for README"
+styleIndented = "Indented"
+styleIndentedDesc = "Tabs, IDE-like"
+styleFancy = "Fancy"
+styleFancyDesc = "╠══ ╚══ — double lines"
+
+# ==========================================
+# Email Alias Tester
+# ==========================================
+[emailalias]
+# Badges
+badgeGenerator = "Alias generator"
+badgeNormalization = "Normalization"
+badgeExport = "Export"
+badgeProviders = "Providers"
+
+# Main
+inputTitle = "Enter email"
+inputPlaceholder = "john.doe@gmail.com"
+inputHint = "Provider is detected automatically from domain"
+providerLabel = "Provider"
+providerAuto = "Auto-detect"
+generateBtn = "Generate variations"
+generateBtnProcessing = "Generating..."
+
+# Providers
+providerGmail = "Gmail / Google Workspace"
+providerOutlook = "Outlook / Hotmail"
+providerYahoo = "Yahoo"
+providerYandex = "Yandex"
+providerProton = "ProtonMail"
+providerCustom = "Custom domain"
+
+# Results
+resultsTitle = "Generated Aliases"
+resultsEmpty = "Enter an email and click Generate"
+methodDots = "Dot variations"
+methodDotsDesc = "Gmail ignores dots in the local part"
+methodPlus = "Plus addressing"
+methodPlusDesc = "Adding +tag before @"
+methodCombined = "Combined"
+methodCombinedDesc = "Dots + plus tag"
+methodCase = "Case variations"
+methodCaseDesc = "RFC allows different casing, but most providers ignore it"
+methodDash = "Dash aliases"
+methodDashDesc = "Yahoo supports base names with dashes"
+methodSubaddress = "Sub-addresses"
+methodSubaddressDesc = "Sub-addressing variations for this provider"
+variationsCount = "variations"
+deliveryConfirmed = "Delivery confirmed"
+deliveryLikely = "Likely delivers"
+deliveryUncertain = "Behavior unknown"
+copyAlias = "Copy"
+copiedAlias = "Copied!"
+
+# Normalization
+normTitle = "Email Normalization"
+normSubtitle = "How backends and providers may interpret this address"
+normInput = "Original"
+normResult = "Normalized"
+normRules = "Applied rules"
+normRuleDots = "Dots removed from local part"
+normRulePlus = "Plus suffix removed"
+normRuleCase = "Lowercased"
+normRuleDomain = "Domain normalized"
+normRuleGoogleapps = "googlemail.com → gmail.com"
+normRuleYandex = "ya.ru → yandex.ru"
+normWarning = "Normalization depends on the specific service. These rules describe typical behavior."
+
+# Provider rules
+rulesTitle = "Provider Rules"
+rulesSubtitle = "How different services handle email addresses"
+ruleFeature = "Feature"
+ruleSupported = "Support"
+ruleDotIgnore = "Dots ignored"
+rulePlusAddress = "Plus addressing"
+ruleCaseInsensitive = "Case insensitive"
+ruleYes = "Yes"
+ruleNo = "No"
+ruleLimited = "Limited"
+ruleUnknown = "Unknown"
+
+# Export
+exportTitle = "Export"
+copyAll = "Copy all"
+exportTxt = "Download .txt"
+exportJson = "Download .json"
+exportCsv = "Download .csv"
+
+# Safety
+safetyNote = "This tool is intended for developers and QA testing email handling and normalization. Do not use it to bypass service restrictions."
+
+# Status
+statusReady = "Ready"
+statusGenerated = "Generated"
+statusBrowser = "All data is processed locally in your browser"
+statusAliases = "aliases"
+
+# How it works
+howTitle = "How does it work?"
+howSubtitle = "How the alias generator works"
+howDetect = "Detection"
+howDetectDesc = "Automatically detects the provider from the email domain and applies the corresponding rules."
+howGenerate = "Generation"
+howGenerateDesc = "Creates valid address variations: dots, plus tags, casing, and their combinations."
+howNormalize = "Normalization"
+howNormalizeDesc = "Shows how a backend or provider might normalize the address to canonical form."
+howExport = "Export"
+howExportDesc = "Copy individual aliases or export all as TXT, JSON, or CSV format."
+
+methodDomain = "Domain aliases"
+methodDomainDesc = "Alternative domains for this provider (delivery not guaranteed)"
+
+# Generation count
+countLabel = "Variation count"
+countDots = "Dot variations"
+countPlus = "Plus tags"
+countCombined = "Combined"
+countCase = "Case"
+countDomain = "Domains"
+countDash = "Dash aliases"
+countMin = "min"
+countMax = "max"

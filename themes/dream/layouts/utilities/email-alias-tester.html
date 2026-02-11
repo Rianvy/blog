@@ -1,0 +1,1271 @@
+{{ define "title" }}
+{{ .Title }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-5xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-5 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}📧{{ end }}</span>
+    </div>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">{{ .Title }}</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">{{ .Description }}</p>
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="mail-outline"></ion-icon>
+        {{ T "emailalias.badgeGenerator" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+        <ion-icon name="git-compare-outline"></ion-icon>
+        {{ T "emailalias.badgeNormalization" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="download-outline"></ion-icon>
+        {{ T "emailalias.badgeExport" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="globe-outline"></ion-icon>
+        {{ T "emailalias.badgeProviders" }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Safety notice -->
+  <div class="alert alert-warning shadow-lg mb-4 sm:mb-6 text-xs sm:text-sm">
+    <ion-icon name="shield-checkmark-outline" class="text-lg shrink-0"></ion-icon>
+    <span>{{ T "emailalias.safetyNote" }}</span>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+
+    <!-- Left panel -->
+    <div class="lg:col-span-1 space-y-3 sm:space-y-4">
+
+      <!-- Input card -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="mail-outline" class="text-primary"></ion-icon>
+            {{ T "emailalias.inputTitle" }}
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-3">
+          <div class="form-control">
+            <input type="email" id="email-input" class="input input-bordered input-sm sm:input-md w-full font-mono text-xs sm:text-sm" placeholder="{{ T "emailalias.inputPlaceholder" }}" autocomplete="off" spellcheck="false" />
+            <label class="label py-0.5">
+              <span class="label-text-alt text-[10px] sm:text-xs text-base-content/50">{{ T "emailalias.inputHint" }}</span>
+            </label>
+          </div>
+
+          <div class="form-control">
+            <label class="label py-1">
+              <span class="label-text text-xs sm:text-sm font-medium">{{ T "emailalias.providerLabel" }}</span>
+            </label>
+            <select id="provider-select" class="select select-bordered select-sm text-xs sm:text-sm">
+              <option value="auto">{{ T "emailalias.providerAuto" }}</option>
+              <option value="gmail">{{ T "emailalias.providerGmail" }}</option>
+              <option value="outlook">{{ T "emailalias.providerOutlook" }}</option>
+              <option value="yahoo">{{ T "emailalias.providerYahoo" }}</option>
+              <option value="yandex">{{ T "emailalias.providerYandex" }}</option>
+              <option value="proton">{{ T "emailalias.providerProton" }}</option>
+              <option value="custom">{{ T "emailalias.providerCustom" }}</option>
+            </select>
+          </div>
+
+          <div id="detected-provider" class="hidden">
+            <div class="flex items-center gap-2 p-2 rounded-lg bg-info/5 border border-info/20">
+              <ion-icon name="information-circle-outline" class="text-info shrink-0"></ion-icon>
+              <span class="text-xs" id="detected-provider-text"></span>
+            </div>
+          </div>
+
+          <button type="button" id="btn-generate" class="btn btn-primary btn-sm sm:btn-md w-full gap-2">
+            <ion-icon name="flash-outline"></ion-icon>
+            {{ T "emailalias.generateBtn" }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Generation count settings -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="options-outline" class="text-secondary"></ion-icon>
+            {{ T "emailalias.countLabel" }}
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-3" id="count-settings">
+
+          <!-- Dot variations count -->
+          <div class="form-control" id="count-dots-group">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium flex items-center gap-1.5">
+                <ion-icon name="ellipsis-horizontal-outline" class="text-primary text-sm"></ion-icon>
+                {{ T "emailalias.countDots" }}
+              </span>
+              <span class="label-text-alt text-[10px] text-base-content/40" id="count-dots-range"></span>
+            </label>
+            <div class="flex items-center gap-2">
+              <input type="range" id="count-dots" min="2" max="30" value="15" class="range range-xs range-primary flex-1" />
+              <span class="text-xs font-mono font-bold w-6 text-center" id="count-dots-val">15</span>
+            </div>
+          </div>
+
+          <!-- Plus tags count -->
+          <div class="form-control">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium flex items-center gap-1.5">
+                <ion-icon name="add-circle-outline" class="text-success text-sm"></ion-icon>
+                {{ T "emailalias.countPlus" }}
+              </span>
+              <span class="label-text-alt text-[10px] text-base-content/40" id="count-plus-range"></span>
+            </label>
+            <div class="flex items-center gap-2">
+              <input type="range" id="count-plus" min="2" max="18" value="12" class="range range-xs range-success flex-1" />
+              <span class="text-xs font-mono font-bold w-6 text-center" id="count-plus-val">12</span>
+            </div>
+          </div>
+
+          <!-- Combined count -->
+          <div class="form-control" id="count-combined-group">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium flex items-center gap-1.5">
+                <ion-icon name="git-merge-outline" class="text-accent text-sm"></ion-icon>
+                {{ T "emailalias.countCombined" }}
+              </span>
+              <span class="label-text-alt text-[10px] text-base-content/40" id="count-combined-range"></span>
+            </label>
+            <div class="flex items-center gap-2">
+              <input type="range" id="count-combined" min="2" max="20" value="10" class="range range-xs range-accent flex-1" />
+              <span class="text-xs font-mono font-bold w-6 text-center" id="count-combined-val">10</span>
+            </div>
+          </div>
+
+          <!-- Case count -->
+          <div class="form-control">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium flex items-center gap-1.5">
+                <ion-icon name="text-outline" class="text-warning text-sm"></ion-icon>
+                {{ T "emailalias.countCase" }}
+              </span>
+              <span class="label-text-alt text-[10px] text-base-content/40" id="count-case-range"></span>
+            </label>
+            <div class="flex items-center gap-2">
+              <input type="range" id="count-case" min="2" max="10" value="6" class="range range-xs range-warning flex-1" />
+              <span class="text-xs font-mono font-bold w-6 text-center" id="count-case-val">6</span>
+            </div>
+          </div>
+
+          <!-- Dash count (Yahoo) -->
+          <div class="form-control" id="count-dash-group">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium flex items-center gap-1.5">
+                <ion-icon name="remove-outline" class="text-error text-sm"></ion-icon>
+                {{ T "emailalias.countDash" }}
+              </span>
+              <span class="label-text-alt text-[10px] text-base-content/40" id="count-dash-range"></span>
+            </label>
+            <div class="flex items-center gap-2">
+              <input type="range" id="count-dash" min="1" max="10" value="5" class="range range-xs range-error flex-1" />
+              <span class="text-xs font-mono font-bold w-6 text-center" id="count-dash-val">5</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Normalization panel -->
+      <div id="norm-panel" class="hidden bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="git-compare-outline" class="text-warning"></ion-icon>
+            {{ T "emailalias.normTitle" }}
+          </h2>
+          <p class="text-[10px] sm:text-xs text-base-content/50 mt-0.5">{{ T "emailalias.normSubtitle" }}</p>
+        </div>
+        <div class="p-3 sm:p-4 space-y-3">
+          <div class="space-y-2">
+            <div class="p-2 rounded-lg bg-base-200/50">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5">{{ T "emailalias.normInput" }}</div>
+              <div class="font-mono text-xs sm:text-sm font-medium break-all" id="norm-input"></div>
+            </div>
+            <div class="flex justify-center">
+              <ion-icon name="arrow-down-outline" class="text-base-content/30"></ion-icon>
+            </div>
+            <div class="p-2 rounded-lg bg-success/5 border border-success/20">
+              <div class="text-[10px] sm:text-xs text-success/70 mb-0.5">{{ T "emailalias.normResult" }}</div>
+              <div class="font-mono text-xs sm:text-sm font-bold text-success break-all" id="norm-result"></div>
+            </div>
+          </div>
+          <div>
+            <div class="text-[10px] sm:text-xs font-medium text-base-content/70 mb-1">{{ T "emailalias.normRules" }}</div>
+            <div id="norm-rules" class="space-y-1"></div>
+          </div>
+          <div class="text-[9px] sm:text-[10px] text-base-content/40 italic">{{ T "emailalias.normWarning" }}</div>
+        </div>
+      </div>
+
+      <!-- Provider rules -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <div class="flex items-center gap-2.5 sm:gap-3">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-secondary/10 flex items-center justify-center shrink-0">
+                <ion-icon name="globe-outline" class="text-lg sm:text-xl text-secondary"></ion-icon>
+              </div>
+              <div>
+                <h3 class="font-semibold text-sm sm:text-base">{{ T "emailalias.rulesTitle" }}</h3>
+                <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "emailalias.rulesSubtitle" }}</p>
+              </div>
+            </div>
+            <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+          </summary>
+          <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+            <div class="overflow-x-auto">
+              <table class="table table-xs sm:table-sm">
+                <thead>
+                  <tr>
+                    <th class="text-xs">{{ T "emailalias.providerLabel" }}</th>
+                    <th class="text-xs">{{ T "emailalias.ruleDotIgnore" }}</th>
+                    <th class="text-xs">{{ T "emailalias.rulePlusAddress" }}</th>
+                    <th class="text-xs">{{ T "emailalias.ruleCaseInsensitive" }}</th>
+                  </tr>
+                </thead>
+                <tbody class="text-[10px] sm:text-xs">
+                  <tr>
+                    <td class="font-medium">Gmail</td>
+                    <td><span class="badge badge-xs badge-success">{{ T "emailalias.ruleYes" }}</span></td>
+                    <td><span class="badge badge-xs badge-success">{{ T "emailalias.ruleYes" }}</span></td>
+                    <td><span class="badge badge-xs badge-success">{{ T "emailalias.ruleYes" }}</span></td>
+                  </tr>
+                  <tr>
+                    <td class="font-medium">Outlook</td>
+                    <td><span class="badge badge-xs badge-error">{{ T "emailalias.ruleNo" }}</span></td>
+                    <td><span class="badge badge-xs badge-warning">{{ T "emailalias.ruleLimited" }}</span></td>
+                    <td><span class="badge badge-xs badge-success">{{ T "emailalias.ruleYes" }}</span></td>
+                  </tr>
+                  <tr>
+                    <td class="font-medium">Yahoo</td>
+                    <td><span class="badge badge-xs badge-error">{{ T "emailalias.ruleNo" }}</span></td>
+                    <td><span class="badge badge-xs badge-warning">{{ T "emailalias.ruleLimited" }}</span></td>
+                    <td><span class="badge badge-xs badge-success">{{ T "emailalias.ruleYes" }}</span></td>
+                  </tr>
+                  <tr>
+                    <td class="font-medium">Yandex</td>
+                    <td><span class="badge badge-xs badge-error">{{ T "emailalias.ruleNo" }}</span></td>
+                    <td><span class="badge badge-xs badge-warning">{{ T "emailalias.ruleLimited" }}</span></td>
+                    <td><span class="badge badge-xs badge-success">{{ T "emailalias.ruleYes" }}</span></td>
+                  </tr>
+                  <tr>
+                    <td class="font-medium">ProtonMail</td>
+                    <td><span class="badge badge-xs badge-error">{{ T "emailalias.ruleNo" }}</span></td>
+                    <td><span class="badge badge-xs badge-success">{{ T "emailalias.ruleYes" }}</span></td>
+                    <td><span class="badge badge-xs badge-success">{{ T "emailalias.ruleYes" }}</span></td>
+                  </tr>
+                  <tr>
+                    <td class="font-medium">Custom</td>
+                    <td><span class="badge badge-xs badge-ghost">{{ T "emailalias.ruleUnknown" }}</span></td>
+                    <td><span class="badge badge-xs badge-ghost">{{ T "emailalias.ruleUnknown" }}</span></td>
+                    <td><span class="badge badge-xs badge-ghost">{{ T "emailalias.ruleUnknown" }}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Right panel: Results -->
+    <div class="lg:col-span-2 space-y-3 sm:space-y-4">
+
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="list-outline" class="text-success"></ion-icon>
+            {{ T "emailalias.resultsTitle" }}
+          </h2>
+          <span id="results-count" class="badge badge-sm badge-primary hidden">0</span>
+          <div class="flex-1"></div>
+          <button type="button" id="btn-copy-all" class="btn btn-primary btn-xs sm:btn-sm gap-1" disabled>
+            <ion-icon name="copy-outline"></ion-icon>
+            <span class="hidden sm:inline text-xs">{{ T "emailalias.copyAll" }}</span>
+          </button>
+          <button type="button" id="btn-export-txt" class="btn btn-ghost btn-xs sm:btn-sm gap-1" disabled>
+            <ion-icon name="document-text-outline"></ion-icon>
+            <span class="hidden sm:inline text-xs">.txt</span>
+          </button>
+          <button type="button" id="btn-export-json" class="btn btn-ghost btn-xs sm:btn-sm gap-1" disabled>
+            <ion-icon name="code-slash-outline"></ion-icon>
+            <span class="hidden sm:inline text-xs">.json</span>
+          </button>
+          <button type="button" id="btn-export-csv" class="btn btn-ghost btn-xs sm:btn-sm gap-1" disabled>
+            <ion-icon name="grid-outline"></ion-icon>
+            <span class="hidden sm:inline text-xs">.csv</span>
+          </button>
+        </div>
+
+        <div class="p-3 sm:p-4">
+          <div id="results-empty" class="py-12 sm:py-16 text-center">
+            <ion-icon name="mail-unread-outline" class="text-4xl sm:text-5xl text-base-content/20 mb-3"></ion-icon>
+            <p class="text-sm text-base-content/40">{{ T "emailalias.resultsEmpty" }}</p>
+          </div>
+          <div id="results-container" class="hidden space-y-4"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-info/10 flex items-center justify-center shrink-0">
+            <ion-icon name="help-circle-outline" class="text-lg sm:text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">{{ T "emailalias.howTitle" }}</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "emailalias.howSubtitle" }}</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <ion-icon name="scan-outline" class="text-primary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "emailalias.howDetect" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "emailalias.howDetectDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center">
+                <ion-icon name="flash-outline" class="text-success"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "emailalias.howGenerate" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "emailalias.howGenerateDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-warning/10 flex items-center justify-center">
+                <ion-icon name="git-compare-outline" class="text-warning"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "emailalias.howNormalize" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "emailalias.howNormalizeDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center">
+                <ion-icon name="download-outline" class="text-secondary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "emailalias.howExport" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "emailalias.howExportDesc" }}</p>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- Status bar -->
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span id="status-text">{{ T "emailalias.statusReady" }}</span>
+    <span>{{ T "emailalias.statusBrowser" }}</span>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast toast-top toast-center hidden z-50">
+  <div class="alert alert-success py-2 px-4">
+    <ion-icon name="checkmark-circle-outline" class="text-lg"></ion-icon>
+    <span id="toast-message" class="text-sm"></span>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ===== I18N =====
+  var i18n = {
+    copied: "{{ T "emailalias.copiedAlias" }}",
+    copyAll: "{{ T "emailalias.copyAll" }}",
+    statusReady: "{{ T "emailalias.statusReady" }}",
+    statusGenerated: "{{ T "emailalias.statusGenerated" }}",
+    statusAliases: "{{ T "emailalias.statusAliases" }}",
+    deliveryConfirmed: "{{ T "emailalias.deliveryConfirmed" }}",
+    deliveryLikely: "{{ T "emailalias.deliveryLikely" }}",
+    deliveryUncertain: "{{ T "emailalias.deliveryUncertain" }}",
+    copyAlias: "{{ T "emailalias.copyAlias" }}",
+    variationsCount: "{{ T "emailalias.variationsCount" }}",
+    methodDots: "{{ T "emailalias.methodDots" }}",
+    methodDotsDesc: "{{ T "emailalias.methodDotsDesc" }}",
+    methodPlus: "{{ T "emailalias.methodPlus" }}",
+    methodPlusDesc: "{{ T "emailalias.methodPlusDesc" }}",
+    methodCombined: "{{ T "emailalias.methodCombined" }}",
+    methodCombinedDesc: "{{ T "emailalias.methodCombinedDesc" }}",
+    methodCase: "{{ T "emailalias.methodCase" }}",
+    methodCaseDesc: "{{ T "emailalias.methodCaseDesc" }}",
+    methodDash: "{{ T "emailalias.methodDash" }}",
+    methodDashDesc: "{{ T "emailalias.methodDashDesc" }}",
+    methodSubaddress: "{{ T "emailalias.methodSubaddress" }}",
+    methodSubaddressDesc: "{{ T "emailalias.methodSubaddressDesc" }}",
+    methodDomain: "{{ T "emailalias.methodDomain" | default "Domain aliases" }}",
+    methodDomainDesc: "{{ T "emailalias.methodDomainDesc" | default "Alternative domains for this provider (delivery not guaranteed)" }}",
+    normRuleDots: "{{ T "emailalias.normRuleDots" }}",
+    normRulePlus: "{{ T "emailalias.normRulePlus" }}",
+    normRuleCase: "{{ T "emailalias.normRuleCase" }}",
+    normRuleDomain: "{{ T "emailalias.normRuleDomain" }}",
+    normRuleGoogleapps: "{{ T "emailalias.normRuleGoogleapps" }}",
+    normRuleYandex: "{{ T "emailalias.normRuleYandex" }}",
+    providerGmail: "{{ T "emailalias.providerGmail" }}",
+    providerOutlook: "{{ T "emailalias.providerOutlook" }}",
+    providerYahoo: "{{ T "emailalias.providerYahoo" }}",
+    providerYandex: "{{ T "emailalias.providerYandex" }}",
+    providerProton: "{{ T "emailalias.providerProton" }}",
+    providerCustom: "{{ T "emailalias.providerCustom" }}",
+    countMin: "{{ T "emailalias.countMin" | default "min" }}",
+    countMax: "{{ T "emailalias.countMax" | default "max" }}"
+  };
+
+  // ===== STORAGE =====
+  var STORAGE_KEY = 'emailalias-settings';
+
+  function saveSettings() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        countDots: getCount('dots'),
+        countPlus: getCount('plus'),
+        countCombined: getCount('combined'),
+        countCase: getCount('case'),
+        countDash: getCount('dash')
+      }));
+    } catch(e) {}
+  }
+
+  function loadSettings() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s.countDots) document.getElementById('count-dots').value = s.countDots;
+      if (s.countPlus) document.getElementById('count-plus').value = s.countPlus;
+      if (s.countCombined) document.getElementById('count-combined').value = s.countCombined;
+      if (s.countCase) document.getElementById('count-case').value = s.countCase;
+      if (s.countDash) document.getElementById('count-dash').value = s.countDash;
+    } catch(e) {}
+  }
+
+  // ===== COUNT CONTROLS =====
+  //
+  // Max limits per method (based on what's realistically possible):
+  //
+  // dots:     depends on username length → 2^(len-1) combinations
+  //           For "johndoe" (7 chars) → 64 possible. Cap at 30.
+  //           For "ab" (2 chars) → only 2 possible.
+  //
+  // plus:     limited by PLUS_TAGS array (18 tags). Max = 18.
+  //
+  // combined: dots × plus. For 5 dots × 4 tags = 20 max.
+  //
+  // case:     2^len combinations but diminishing returns. Max 10.
+  //
+  // dash:     limited by DASH_TAGS array (10 tags). Max = 10.
+  //
+  var COUNT_LIMITS = {
+    dots:     { min: 2, max: 30, default: 15 },
+    plus:     { min: 2, max: 18, default: 12 },
+    combined: { min: 2, max: 20, default: 10 },
+    case:     { min: 2, max: 10, default: 6  },
+    dash:     { min: 1, max: 10, default: 5  }
+  };
+
+  function getCount(type) {
+    var el = document.getElementById('count-' + type);
+    return el ? parseInt(el.value) || COUNT_LIMITS[type].default : COUNT_LIMITS[type].default;
+  }
+
+  // Calculate actual max for dots based on username length
+  function getDotsMax(usernameLength) {
+    if (usernameLength <= 1) return 1;
+    var clean = usernameLength; // after removing existing dots
+    var theoretical = Math.pow(2, clean - 1);
+    return Math.min(theoretical, COUNT_LIMITS.dots.max);
+  }
+
+  // Calculate actual max for combined based on dots and plus counts
+  function getCombinedMax() {
+    var dotsCount = Math.min(getCount('dots'), 5);
+    var plusTags = 4; // we use first 4 tags for combined
+    return Math.min(dotsCount * plusTags, COUNT_LIMITS.combined.max);
+  }
+
+  // Calculate actual max for case based on username length
+  function getCaseMax(usernameLength) {
+    if (usernameLength <= 1) return 1;
+    // Realistically, more than 10 case variations adds no value
+    return Math.min(Math.pow(2, usernameLength) - 1, COUNT_LIMITS.case.max);
+  }
+
+  // Update range slider displays and enforce limits
+  function updateCountDisplays(usernameLength) {
+    var types = ['dots', 'plus', 'combined', 'case', 'dash'];
+
+    types.forEach(function(type) {
+      var slider = document.getElementById('count-' + type);
+      var valEl = document.getElementById('count-' + type + '-val');
+      var rangeEl = document.getElementById('count-' + type + '-range');
+      if (!slider || !valEl) return;
+
+      var limits = COUNT_LIMITS[type];
+      var actualMax = limits.max;
+
+      // Compute dynamic max based on username length
+      if (type === 'dots' && usernameLength) {
+        actualMax = getDotsMax(usernameLength);
+      } else if (type === 'combined') {
+        actualMax = getCombinedMax();
+      } else if (type === 'case' && usernameLength) {
+        actualMax = getCaseMax(usernameLength);
+      }
+
+      // Enforce max
+      slider.max = actualMax;
+      if (parseInt(slider.value) > actualMax) {
+        slider.value = actualMax;
+      }
+
+      valEl.textContent = slider.value;
+
+      if (rangeEl) {
+        rangeEl.textContent = i18n.countMin + ' ' + limits.min + ' · ' + i18n.countMax + ' ' + actualMax;
+      }
+    });
+  }
+
+  // Show/hide count groups based on selected provider
+  function updateCountVisibility(provider) {
+    var dotsGroup = document.getElementById('count-dots-group');
+    var combinedGroup = document.getElementById('count-combined-group');
+    var dashGroup = document.getElementById('count-dash-group');
+
+    // Dots + combined: only for Gmail (only provider where dots are ignored)
+    if (provider === 'gmail') {
+      dotsGroup.classList.remove('hidden');
+      combinedGroup.classList.remove('hidden');
+    } else {
+      dotsGroup.classList.add('hidden');
+      combinedGroup.classList.add('hidden');
+    }
+
+    // Dash: only for Yahoo
+    if (provider === 'yahoo') {
+      dashGroup.classList.remove('hidden');
+    } else {
+      dashGroup.classList.add('hidden');
+    }
+  }
+
+  // Bind range sliders to update value display + save
+  ['dots', 'plus', 'combined', 'case', 'dash'].forEach(function(type) {
+    var slider = document.getElementById('count-' + type);
+    if (!slider) return;
+    slider.addEventListener('input', function() {
+      document.getElementById('count-' + type + '-val').textContent = slider.value;
+      saveSettings();
+    });
+  });
+
+  // ===== PROVIDER DETECTION =====
+  var PROVIDER_DOMAINS = {
+    gmail: ['gmail.com', 'googlemail.com'],
+    outlook: ['outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'outlook.co.uk', 'hotmail.co.uk'],
+    yahoo: ['yahoo.com', 'yahoo.co.uk', 'yahoo.co.jp', 'ymail.com', 'rocketmail.com'],
+    yandex: ['yandex.ru', 'yandex.com', 'ya.ru', 'yandex.ua', 'yandex.by', 'yandex.kz'],
+    proton: ['protonmail.com', 'proton.me', 'pm.me', 'protonmail.ch']
+  };
+
+  var PROVIDER_RULES = {
+    gmail:   { dots: true,  plus: 'confirmed', case: 'confirmed', normalizeDots: true,  normalizeDomain: 'gmail.com' },
+    outlook: { dots: false, plus: 'likely',    case: 'confirmed', normalizeDots: false, normalizeDomain: null },
+    yahoo:   { dots: false, plus: 'uncertain', case: 'confirmed', normalizeDots: false, normalizeDomain: null },
+    yandex:  { dots: false, plus: 'likely',    case: 'confirmed', normalizeDots: false, normalizeDomain: 'yandex.ru' },
+    proton:  { dots: false, plus: 'confirmed', case: 'confirmed', normalizeDots: false, normalizeDomain: null },
+    custom:  { dots: false, plus: 'uncertain', case: 'uncertain', normalizeDots: false, normalizeDomain: null }
+  };
+
+  function detectProvider(email) {
+    var parts = email.split('@');
+    if (parts.length !== 2) return null;
+    var domain = parts[1].toLowerCase();
+    for (var provider in PROVIDER_DOMAINS) {
+      if (PROVIDER_DOMAINS[provider].indexOf(domain) > -1) return provider;
+    }
+    return 'custom';
+  }
+
+  function getProviderName(provider) {
+    var names = {
+      gmail: i18n.providerGmail, outlook: i18n.providerOutlook,
+      yahoo: i18n.providerYahoo, yandex: i18n.providerYandex,
+      proton: i18n.providerProton, custom: i18n.providerCustom
+    };
+    return names[provider] || provider;
+  }
+
+  // ===== EMAIL PARSER =====
+  function parseEmail(email) {
+    var at = email.lastIndexOf('@');
+    if (at === -1) return null;
+    var local = email.substring(0, at);
+    var domain = email.substring(at + 1).toLowerCase();
+    var plusIdx = local.indexOf('+');
+    var baseLocal = plusIdx > -1 ? local.substring(0, plusIdx) : local;
+    return {
+      original: email,
+      local: local,
+      baseLocal: baseLocal.toLowerCase(),
+      existingTag: plusIdx > -1 ? local.substring(plusIdx + 1) : '',
+      domain: domain
+    };
+  }
+
+  // ===== DOT VARIATION GENERATOR =====
+  function generateDotVariations(str, maxCount) {
+    if (str.length <= 1) return [str];
+    var clean = str.replace(/\./g, '');
+    if (clean.length <= 1) return [clean];
+
+    var results = new Set();
+    results.add(clean);
+    results.add(str);
+
+    var positions = clean.length - 1;
+    var totalCombinations = Math.pow(2, positions);
+    var limit = Math.min(totalCombinations, maxCount);
+
+    if (totalCombinations <= 64) {
+      for (var mask = 1; mask < totalCombinations && results.size < limit; mask++) {
+        var variant = '';
+        for (var i = 0; i < clean.length; i++) {
+          variant += clean[i];
+          if (i < clean.length - 1 && (mask & (1 << i))) variant += '.';
+        }
+        results.add(variant);
+      }
+    } else {
+      for (var attempts = 0; attempts < limit * 4 && results.size < limit; attempts++) {
+        var variant = '';
+        for (var i = 0; i < clean.length; i++) {
+          variant += clean[i];
+          if (i < clean.length - 1 && Math.random() > 0.5) variant += '.';
+        }
+        results.add(variant);
+      }
+    }
+
+    return Array.from(results).slice(0, limit);
+  }
+
+  // ===== PLUS TAG VARIATIONS =====
+  var PLUS_TAGS = [
+    'test', 'dev', 'spam', 'newsletter', 'signup', 'login',
+    'shop', 'social', 'work', 'temp', 'promo', 'verify',
+    'qa', 'staging', 'prod', 'debug', 'beta', 'alpha'
+  ];
+
+  function generatePlusVariations(baseLocal, domain, count) {
+    var limit = Math.min(PLUS_TAGS.length, count);
+    var results = [];
+    for (var i = 0; i < limit; i++) {
+      results.push(baseLocal + '+' + PLUS_TAGS[i] + '@' + domain);
+    }
+    return results;
+  }
+
+  // ===== CASE VARIATIONS =====
+  function generateCaseVariations(baseLocal, domain, maxCount) {
+    var results = new Set();
+    var lower = baseLocal.toLowerCase();
+    var upper = baseLocal.toUpperCase();
+    var limit = maxCount || 6;
+
+    results.add(upper + '@' + domain);
+    results.add(lower.charAt(0).toUpperCase() + lower.substring(1) + '@' + domain);
+
+    for (var n = 0; n < limit * 3 && results.size < limit; n++) {
+      var mixed = '';
+      for (var i = 0; i < lower.length; i++) {
+        mixed += Math.random() > 0.5 ? lower[i].toUpperCase() : lower[i];
+      }
+      var candidate = mixed + '@' + domain;
+      if (candidate !== baseLocal + '@' + domain) results.add(candidate);
+    }
+
+    return Array.from(results).slice(0, limit);
+  }
+
+  // ===== DASH TAGS =====
+  var DASH_TAGS = [
+    'test', 'dev', 'temp', 'work', 'shop',
+    'promo', 'news', 'social', 'app', 'mail'
+  ];
+
+  // ===== COMBINED VARIATIONS =====
+  function generateCombinedVariations(baseLocal, domain, maxCount) {
+    var results = [];
+    var dotsForCombined = Math.min(getCount('dots'), 5);
+    var dotVars = generateDotVariations(baseLocal, dotsForCombined);
+    var tags = PLUS_TAGS.slice(0, 4);
+    var limit = maxCount;
+    var count = 0;
+
+    for (var d = 0; d < dotVars.length && count < limit; d++) {
+      for (var t = 0; t < tags.length && count < limit; t++) {
+        results.push(dotVars[d] + '+' + tags[t] + '@' + domain);
+        count++;
+      }
+    }
+    return results;
+  }
+
+  // ===================================================================
+  // PROVIDER GENERATORS — with user-controlled counts
+  // ===================================================================
+
+  function generateForGmail(parsed) {
+    var groups = [];
+    var countDots = getCount('dots');
+    var countPlus = getCount('plus');
+    var countCombined = getCount('combined');
+    var countCase = getCount('case');
+
+    // Enforce real max for dots based on username
+    var cleanLen = parsed.baseLocal.replace(/\./g, '').length;
+    var realDotsMax = getDotsMax(cleanLen);
+    countDots = Math.min(countDots, realDotsMax);
+
+    var dotEmails = generateDotVariations(parsed.baseLocal, countDots).map(function(v) {
+      return v + '@' + parsed.domain;
+    });
+    groups.push({
+      method: 'dots', label: i18n.methodDots, desc: i18n.methodDotsDesc,
+      delivery: 'confirmed', emails: dotEmails
+    });
+
+    var plusEmails = generatePlusVariations(parsed.baseLocal, parsed.domain, countPlus);
+    groups.push({
+      method: 'plus', label: i18n.methodPlus, desc: i18n.methodPlusDesc,
+      delivery: 'confirmed', emails: plusEmails
+    });
+
+    // Enforce combined max
+    var realCombinedMax = getCombinedMax();
+    countCombined = Math.min(countCombined, realCombinedMax);
+
+    var combinedEmails = generateCombinedVariations(parsed.baseLocal, parsed.domain, countCombined);
+    groups.push({
+      method: 'combined', label: i18n.methodCombined, desc: i18n.methodCombinedDesc,
+      delivery: 'confirmed', emails: combinedEmails
+    });
+
+    var realCaseMax = getCaseMax(cleanLen);
+    countCase = Math.min(countCase, realCaseMax);
+
+    var caseEmails = generateCaseVariations(parsed.baseLocal, parsed.domain, countCase);
+    groups.push({
+      method: 'case', label: i18n.methodCase, desc: i18n.methodCaseDesc,
+      delivery: 'confirmed', emails: caseEmails
+    });
+
+    // Domain alias
+    if (parsed.domain === 'gmail.com') {
+      groups.push({
+        method: 'subaddress', label: i18n.methodDomain,
+        desc: 'googlemail.com = gmail.com (Google official)',
+        delivery: 'confirmed', emails: [parsed.baseLocal + '@googlemail.com']
+      });
+    } else if (parsed.domain === 'googlemail.com') {
+      groups.push({
+        method: 'subaddress', label: i18n.methodDomain,
+        desc: 'gmail.com = googlemail.com (Google official)',
+        delivery: 'confirmed', emails: [parsed.baseLocal + '@gmail.com']
+      });
+    }
+
+    return groups;
+  }
+
+  function generateForOutlook(parsed) {
+    var groups = [];
+    var countPlus = getCount('plus');
+    var countCase = getCount('case');
+    var realCaseMax = getCaseMax(parsed.baseLocal.length);
+    countCase = Math.min(countCase, realCaseMax);
+
+    var plusEmails = generatePlusVariations(parsed.baseLocal, parsed.domain, countPlus);
+    groups.push({
+      method: 'plus', label: i18n.methodPlus, desc: i18n.methodPlusDesc,
+      delivery: 'likely', emails: plusEmails
+    });
+
+    var caseEmails = generateCaseVariations(parsed.baseLocal, parsed.domain, countCase);
+    groups.push({
+      method: 'case', label: i18n.methodCase, desc: i18n.methodCaseDesc,
+      delivery: 'confirmed', emails: caseEmails
+    });
+
+    return groups;
+  }
+
+  function generateForYahoo(parsed) {
+    var groups = [];
+    var countDash = getCount('dash');
+    var countPlus = getCount('plus');
+    var countCase = getCount('case');
+    var realCaseMax = getCaseMax(parsed.baseLocal.length);
+    countCase = Math.min(countCase, realCaseMax);
+
+    var dashLimit = Math.min(DASH_TAGS.length, countDash);
+    var dashEmails = DASH_TAGS.slice(0, dashLimit).map(function(t) {
+      return parsed.baseLocal + '-' + t + '@' + parsed.domain;
+    });
+    groups.push({
+      method: 'dash', label: i18n.methodDash, desc: i18n.methodDashDesc,
+      delivery: 'uncertain', emails: dashEmails
+    });
+
+    var plusEmails = generatePlusVariations(parsed.baseLocal, parsed.domain, countPlus);
+    groups.push({
+      method: 'plus', label: i18n.methodPlus, desc: i18n.methodPlusDesc,
+      delivery: 'uncertain', emails: plusEmails
+    });
+
+    var caseEmails = generateCaseVariations(parsed.baseLocal, parsed.domain, countCase);
+    groups.push({
+      method: 'case', label: i18n.methodCase, desc: i18n.methodCaseDesc,
+      delivery: 'confirmed', emails: caseEmails
+    });
+
+    return groups;
+  }
+
+  function generateForYandex(parsed) {
+    var groups = [];
+    var countPlus = getCount('plus');
+    var countCase = getCount('case');
+    var realCaseMax = getCaseMax(parsed.baseLocal.length);
+    countCase = Math.min(countCase, realCaseMax);
+
+    var plusEmails = generatePlusVariations(parsed.baseLocal, parsed.domain, countPlus);
+    groups.push({
+      method: 'plus', label: i18n.methodPlus, desc: i18n.methodPlusDesc,
+      delivery: 'likely', emails: plusEmails
+    });
+
+    var yandexDomains = ['yandex.ru', 'yandex.com', 'ya.ru', 'yandex.ua', 'yandex.by', 'yandex.kz'];
+    var domainAliases = yandexDomains.filter(function(d) {
+      return d !== parsed.domain;
+    }).map(function(d) {
+      return parsed.baseLocal + '@' + d;
+    });
+    if (domainAliases.length > 0) {
+      groups.push({
+        method: 'subaddress', label: i18n.methodDomain, desc: i18n.methodDomainDesc,
+        delivery: 'uncertain', emails: domainAliases
+      });
+    }
+
+    var caseEmails = generateCaseVariations(parsed.baseLocal, parsed.domain, countCase);
+    groups.push({
+      method: 'case', label: i18n.methodCase, desc: i18n.methodCaseDesc,
+      delivery: 'confirmed', emails: caseEmails
+    });
+
+    return groups;
+  }
+
+  function generateForProton(parsed) {
+    var groups = [];
+    var countPlus = getCount('plus');
+    var countCase = getCount('case');
+    var realCaseMax = getCaseMax(parsed.baseLocal.length);
+    countCase = Math.min(countCase, realCaseMax);
+
+    var plusEmails = generatePlusVariations(parsed.baseLocal, parsed.domain, countPlus);
+    groups.push({
+      method: 'plus', label: i18n.methodPlus, desc: i18n.methodPlusDesc,
+      delivery: 'confirmed', emails: plusEmails
+    });
+
+    var protonDomains = ['protonmail.com', 'proton.me', 'pm.me', 'protonmail.ch'];
+    var domainAliases = protonDomains.filter(function(d) {
+      return d !== parsed.domain;
+    }).map(function(d) {
+      return parsed.baseLocal + '@' + d;
+    });
+    if (domainAliases.length > 0) {
+      groups.push({
+        method: 'subaddress', label: i18n.methodDomain, desc: i18n.methodDomainDesc,
+        delivery: 'likely', emails: domainAliases
+      });
+    }
+
+    var caseEmails = generateCaseVariations(parsed.baseLocal, parsed.domain, countCase);
+    groups.push({
+      method: 'case', label: i18n.methodCase, desc: i18n.methodCaseDesc,
+      delivery: 'confirmed', emails: caseEmails
+    });
+
+    return groups;
+  }
+
+  function generateForCustom(parsed) {
+    var groups = [];
+    var countPlus = getCount('plus');
+    var countCase = getCount('case');
+    var realCaseMax = getCaseMax(parsed.baseLocal.length);
+    countCase = Math.min(countCase, realCaseMax);
+
+    var plusEmails = generatePlusVariations(parsed.baseLocal, parsed.domain, countPlus);
+    groups.push({
+      method: 'plus', label: i18n.methodPlus, desc: i18n.methodPlusDesc,
+      delivery: 'uncertain', emails: plusEmails
+    });
+
+    var caseEmails = generateCaseVariations(parsed.baseLocal, parsed.domain, countCase);
+    groups.push({
+      method: 'case', label: i18n.methodCase, desc: i18n.methodCaseDesc,
+      delivery: 'uncertain', emails: caseEmails
+    });
+
+    return groups;
+  }
+
+  // ===== NORMALIZATION =====
+  function normalizeEmail(email, provider) {
+    var parsed = parseEmail(email);
+    if (!parsed) return null;
+
+    var rules = [];
+    var normalLocal = parsed.local;
+    var normalDomain = parsed.domain;
+
+    var lowered = normalLocal.toLowerCase();
+    if (normalLocal !== lowered) {
+      rules.push(i18n.normRuleCase);
+      normalLocal = lowered;
+    }
+
+    var providerRules = PROVIDER_RULES[provider] || PROVIDER_RULES.custom;
+
+    if (providerRules.normalizeDots) {
+      var withoutDots = normalLocal.replace(/\./g, '');
+      if (withoutDots !== normalLocal) {
+        normalLocal = withoutDots;
+        rules.push(i18n.normRuleDots);
+      }
+    }
+
+    if (provider !== 'custom') {
+      var plusIdx = normalLocal.indexOf('+');
+      if (plusIdx > -1) {
+        normalLocal = normalLocal.substring(0, plusIdx);
+        rules.push(i18n.normRulePlus);
+      }
+    }
+
+    if (providerRules.normalizeDomain && normalDomain !== providerRules.normalizeDomain) {
+      if (provider === 'gmail') {
+        rules.push(i18n.normRuleGoogleapps);
+        normalDomain = providerRules.normalizeDomain;
+      } else if (provider === 'yandex') {
+        rules.push(i18n.normRuleYandex + ' (uncertain)');
+        normalDomain = providerRules.normalizeDomain;
+      }
+    }
+
+    return { original: email, normalized: normalLocal + '@' + normalDomain, rules: rules };
+  }
+
+  // ===== UI HELPERS =====
+  function showToast(msg) {
+    var toast = document.getElementById('toast');
+    document.getElementById('toast-message').textContent = msg;
+    toast.classList.remove('hidden');
+    setTimeout(function() { toast.classList.add('hidden'); }, 2000);
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function getDeliveryBadge(delivery) {
+    if (delivery === 'confirmed') {
+      return '<span class="badge badge-xs badge-success gap-0.5"><ion-icon name="checkmark-circle-outline" class="text-[10px]"></ion-icon> ' + i18n.deliveryConfirmed + '</span>';
+    } else if (delivery === 'likely') {
+      return '<span class="badge badge-xs badge-warning gap-0.5"><ion-icon name="help-circle-outline" class="text-[10px]"></ion-icon> ' + i18n.deliveryLikely + '</span>';
+    }
+    return '<span class="badge badge-xs badge-ghost gap-0.5"><ion-icon name="alert-circle-outline" class="text-[10px]"></ion-icon> ' + i18n.deliveryUncertain + '</span>';
+  }
+
+  function getMethodIcon(method) {
+    return { dots: 'ellipsis-horizontal-outline', plus: 'add-circle-outline',
+      combined: 'git-merge-outline', case: 'text-outline',
+      dash: 'remove-outline', subaddress: 'at-outline'
+    }[method] || 'mail-outline';
+  }
+
+  // ===== RENDER RESULTS =====
+  var allGeneratedEmails = [];
+  var allGeneratedGroups = [];
+
+  function setExportButtons(enabled) {
+    document.getElementById('btn-copy-all').disabled = !enabled;
+    document.getElementById('btn-export-txt').disabled = !enabled;
+    document.getElementById('btn-export-json').disabled = !enabled;
+    document.getElementById('btn-export-csv').disabled = !enabled;
+  }
+
+  function renderResults(groups) {
+    var container = document.getElementById('results-container');
+    var emptyState = document.getElementById('results-empty');
+    var countBadge = document.getElementById('results-count');
+
+    container.innerHTML = '';
+    var totalCount = 0;
+    allGeneratedEmails = [];
+    allGeneratedGroups = groups;
+
+    groups.forEach(function(group) {
+      if (group.emails.length === 0) return;
+      totalCount += group.emails.length;
+
+      var groupEl = document.createElement('div');
+      groupEl.className = 'bg-base-200/30 rounded-lg sm:rounded-xl overflow-hidden';
+
+      var headerHtml = '<div class="flex flex-wrap items-center gap-2 p-2.5 sm:p-3 border-b border-base-200 dark:border-base-content/10">';
+      headerHtml += '<ion-icon name="' + getMethodIcon(group.method) + '" class="text-primary shrink-0"></ion-icon>';
+      headerHtml += '<div class="min-w-0 flex-1">';
+      headerHtml += '<div class="font-semibold text-xs sm:text-sm">' + escapeHtml(group.label) + '</div>';
+      headerHtml += '<div class="text-[9px] sm:text-[10px] text-base-content/50">' + escapeHtml(group.desc) + '</div>';
+      headerHtml += '</div>';
+      headerHtml += '<span class="badge badge-sm badge-outline">' + group.emails.length + ' ' + i18n.variationsCount + '</span>';
+      headerHtml += getDeliveryBadge(group.delivery);
+      headerHtml += '</div>';
+
+      var listHtml = '<div class="p-2 sm:p-3 space-y-1 max-h-60 overflow-y-auto">';
+      group.emails.forEach(function(email) {
+        allGeneratedEmails.push(email);
+        listHtml += '<div class="flex items-center gap-2 p-1.5 rounded-md hover:bg-base-200/50 transition-colors group/item">';
+        listHtml += '<code class="flex-1 text-[10px] sm:text-xs font-mono break-all select-all">' + escapeHtml(email) + '</code>';
+        listHtml += '<button type="button" class="btn btn-ghost btn-xs opacity-0 group-hover/item:opacity-100 transition-opacity shrink-0 copy-single-btn" data-email="' + escapeHtml(email) + '" title="' + i18n.copyAlias + '">';
+        listHtml += '<ion-icon name="copy-outline"></ion-icon></button></div>';
+      });
+      listHtml += '</div>';
+
+      groupEl.innerHTML = headerHtml + listHtml;
+      container.appendChild(groupEl);
+    });
+
+    if (totalCount > 0) {
+      container.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+      countBadge.textContent = totalCount;
+      countBadge.classList.remove('hidden');
+      setExportButtons(true);
+    } else {
+      container.classList.add('hidden');
+      emptyState.classList.remove('hidden');
+      countBadge.classList.add('hidden');
+      setExportButtons(false);
+    }
+
+    container.querySelectorAll('.copy-single-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        navigator.clipboard.writeText(btn.getAttribute('data-email')).then(function() {
+          showToast(i18n.copied);
+        });
+      });
+    });
+
+    document.getElementById('status-text').textContent =
+      i18n.statusGenerated + ' ' + totalCount + ' ' + i18n.statusAliases;
+  }
+
+  function renderNormalization(email, provider) {
+    var norm = normalizeEmail(email, provider);
+    if (!norm) return;
+
+    var panel = document.getElementById('norm-panel');
+    document.getElementById('norm-input').textContent = norm.original;
+    document.getElementById('norm-result').textContent = norm.normalized;
+
+    var rulesContainer = document.getElementById('norm-rules');
+    rulesContainer.innerHTML = '';
+
+    if (norm.rules.length === 0) {
+      rulesContainer.innerHTML = '<div class="text-[10px] sm:text-xs text-base-content/40 italic">No transformations applied</div>';
+    } else {
+      norm.rules.forEach(function(rule) {
+        var el = document.createElement('div');
+        el.className = 'flex items-center gap-1.5 text-[10px] sm:text-xs';
+        el.innerHTML = '<ion-icon name="checkmark-outline" class="text-success shrink-0"></ion-icon> ' + escapeHtml(rule);
+        rulesContainer.appendChild(el);
+      });
+    }
+
+    panel.classList.remove('hidden');
+  }
+
+  // ===== MAIN GENERATE =====
+  function generate() {
+    var emailInput = document.getElementById('email-input');
+    var email = emailInput.value.trim();
+
+    if (!email || email.indexOf('@') === -1) {
+      emailInput.classList.add('input-error');
+      setTimeout(function() { emailInput.classList.remove('input-error'); }, 1500);
+      return;
+    }
+
+    var selectedProvider = document.getElementById('provider-select').value;
+    var provider = selectedProvider === 'auto' ? detectProvider(email) : selectedProvider;
+    if (!provider) provider = 'custom';
+
+    document.getElementById('detected-provider-text').textContent = getProviderName(provider);
+    document.getElementById('detected-provider').classList.remove('hidden');
+
+    var parsed = parseEmail(email);
+    if (!parsed) return;
+
+    // Update count controls visibility and limits for this provider/username
+    var cleanLen = parsed.baseLocal.replace(/\./g, '').length;
+    updateCountVisibility(provider);
+    updateCountDisplays(cleanLen);
+
+    var groups = [];
+    switch (provider) {
+      case 'gmail':   groups = generateForGmail(parsed); break;
+      case 'outlook':  groups = generateForOutlook(parsed); break;
+      case 'yahoo':   groups = generateForYahoo(parsed); break;
+      case 'yandex':  groups = generateForYandex(parsed); break;
+      case 'proton':  groups = generateForProton(parsed); break;
+      default:      groups = generateForCustom(parsed);
+    }
+
+    renderResults(groups);
+    renderNormalization(email, provider);
+  }
+
+  // ===== EXPORT =====
+  function downloadFile(content, filename, type) {
+    var blob = new Blob([content], { type: type + ';charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = filename; a.style.display = 'none';
+    document.body.appendChild(a); a.click();
+    setTimeout(function() { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+  }
+
+  function getExportFilename(ext) {
+    var now = new Date();
+    var date = now.getFullYear() + '-' +
+      String(now.getMonth() + 1).padStart(2, '0') + '-' +
+      String(now.getDate()).padStart(2, '0');
+    return date + '_email-aliases' + ext;
+  }
+
+  // ===== EVENT BINDINGS =====
+  document.getElementById('btn-generate').addEventListener('click', generate);
+
+  document.getElementById('email-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); generate(); }
+  });
+
+  document.getElementById('email-input').addEventListener('input', function() {
+    var email = this.value.trim();
+    if (email.indexOf('@') > -1) {
+      var provider = detectProvider(email);
+      if (provider) {
+        document.getElementById('detected-provider-text').textContent = getProviderName(provider);
+        document.getElementById('detected-provider').classList.remove('hidden');
+        updateCountVisibility(provider);
+
+        var parsed = parseEmail(email);
+        if (parsed) {
+          var cleanLen = parsed.baseLocal.replace(/\./g, '').length;
+          updateCountDisplays(cleanLen);
+        }
+      }
+    } else {
+      document.getElementById('detected-provider').classList.add('hidden');
+    }
+  });
+
+  // Provider change → update count visibility
+  document.getElementById('provider-select').addEventListener('change', function() {
+    var selected = this.value;
+    var email = document.getElementById('email-input').value.trim();
+    var provider = selected === 'auto' ? (email.indexOf('@') > -1 ? detectProvider(email) : 'custom') : selected;
+    updateCountVisibility(provider || 'custom');
+  });
+
+  document.getElementById('btn-copy-all').addEventListener('click', function() {
+    if (!allGeneratedEmails.length) return;
+    navigator.clipboard.writeText(allGeneratedEmails.join('\n')).then(function() { showToast(i18n.copied); });
+  });
+
+  document.getElementById('btn-export-txt').addEventListener('click', function() {
+    if (!allGeneratedEmails.length) return;
+    downloadFile(allGeneratedEmails.join('\n'), getExportFilename('.txt'), 'text/plain');
+    showToast(i18n.copied);
+  });
+
+  document.getElementById('btn-export-json').addEventListener('click', function() {
+    if (!allGeneratedGroups.length) return;
+    var data = {
+      source: document.getElementById('email-input').value.trim(),
+      generated: new Date().toISOString(),
+      groups: allGeneratedGroups.map(function(g) {
+        return { method: g.method, label: g.label, delivery: g.delivery, count: g.emails.length, emails: g.emails };
+      }),
+      total: allGeneratedEmails.length
+    };
+    downloadFile(JSON.stringify(data, null, 2), getExportFilename('.json'), 'application/json');
+    showToast(i18n.copied);
+  });
+
+  document.getElementById('btn-export-csv').addEventListener('click', function() {
+    if (!allGeneratedGroups.length) return;
+    var lines = ['email,method,delivery'];
+    allGeneratedGroups.forEach(function(g) {
+      g.emails.forEach(function(email) {
+        lines.push('"' + email + '","' + g.method + '","' + g.delivery + '"');
+      });
+    });
+    downloadFile(lines.join('\n'), getExportFilename('.csv'), 'text/csv');
+    showToast(i18n.copied);
+  });
+
+  // ===== INIT =====
+  loadSettings();
+  updateCountDisplays(7); // default display for ~7 char username
+  updateCountVisibility('gmail'); // default visibility
+
+})();
+</script>
+{{ end }}

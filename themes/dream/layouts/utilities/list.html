@@ -18,7 +18,7 @@
 <!-- Hero секция -->
 <section class="relative overflow-hidden">
   
-  <!-- Анимированный фон — убраны лишние blur, уменьшено количество частиц -->
+  <!-- Анимированный фон -->
   <div class="absolute inset-0 -z-10 overflow-hidden">
     <div class="absolute top-20 left-10 w-72 h-72 bg-primary/8 rounded-full blur-3xl will-change-[opacity] animate-pulse" 
          style="animation-duration: 4s;"></div>
@@ -122,98 +122,159 @@
         
       </div>
       
-      <!-- Визуальный блок -->
-      <div class="flex-shrink-0 w-full max-w-sm lg:max-w-md xl:max-w-lg">
-        <div class="relative group">
+    <!-- Визуальный блок — терминал/утилиты -->
+    <div class="flex-shrink-0 w-full max-w-sm lg:max-w-md xl:max-w-lg">
+      <div class="relative group">
+        
+        <!-- Декоративные карточки на фоне -->
+        <div class="absolute -top-4 -left-4 w-full h-full rounded-3xl 
+                    bg-gradient-to-br from-primary/8 to-secondary/5 
+                    rotate-3 group-hover:rotate-4 transition-transform duration-500"></div>
+        <div class="absolute -top-2 -left-2 w-full h-full rounded-3xl 
+                    bg-gradient-to-br from-secondary/6 to-accent/4 
+                    rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+        
+        <!-- Основная карточка -->
+        <div class="relative rounded-3xl overflow-hidden
+                    bg-base-100 dark:bg-[#1a1b26]
+                    shadow-2xl shadow-base-content/8 dark:shadow-base-content/10 
+                    border border-base-300 dark:border-white/5
+                    transition-shadow duration-500
+                    group-hover:shadow-[0_25px_60px_-12px_rgba(0,0,0,0.12)]
+                    dark:group-hover:shadow-[0_25px_60px_-12px_rgba(0,0,0,0.3)]">
           
-          <!-- Декоративные карточки на фоне -->
-          <div class="absolute -top-4 -left-4 w-full h-full rounded-3xl 
-                      bg-gradient-to-br from-primary/8 to-secondary/5 
-                      rotate-3 group-hover:rotate-4 transition-transform duration-500"></div>
-          <div class="absolute -top-2 -left-2 w-full h-full rounded-3xl 
-                      bg-gradient-to-br from-secondary/6 to-accent/4 
-                      rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+          <!-- Строка заголовка окна -->
+          <div class="flex items-center gap-2 px-5 py-3.5 
+                      bg-base-200/50 dark:bg-white/[0.03] 
+                      border-b border-base-300 dark:border-white/5">
+            <div class="flex gap-1.5">
+              <div class="w-3 h-3 rounded-full bg-error/70 dark:bg-[#ff5f57]"></div>
+              <div class="w-3 h-3 rounded-full bg-warning/70 dark:bg-[#febc2e]"></div>
+              <div class="w-3 h-3 rounded-full bg-success/70 dark:bg-[#28c840]"></div>
+            </div>
+            <div class="flex-1 flex items-center justify-center gap-2">
+              <ion-icon name="terminal-outline" class="text-base-content/20 dark:text-white/20 text-xs"></ion-icon>
+              <span class="text-[11px] text-base-content/30 dark:text-white/25 font-mono tracking-wider">
+                {{ i18n "utilities.terminalTitle" | default "dev-toolbox" }}
+              </span>
+            </div>
+            <div class="w-[54px]"></div>
+          </div>
           
-          <!-- Основная карточка -->
-          <div class="relative bg-base-100/90 rounded-3xl p-6 sm:p-8 
-                      shadow-2xl shadow-base-content/5 
-                      border border-base-200 dark:border-base-content/10
-                      transition-shadow duration-500
-                      group-hover:shadow-[0_25px_60px_-12px_rgba(0,0,0,0.15)]">
+          <!-- Содержимое терминала -->
+          <div class="p-5 sm:p-6 font-mono text-[13px] leading-relaxed space-y-4">
             
-            <!-- Строка заголовка "окна" -->
-            <div class="flex items-center gap-2 mb-5">
-              <div class="flex gap-1.5">
-                <div class="w-3 h-3 rounded-full bg-error/60"></div>
-                <div class="w-3 h-3 rounded-full bg-warning/60"></div>
-                <div class="w-3 h-3 rounded-full bg-success/60"></div>
+            <!-- Команда 1: Base64 encode -->
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-success dark:text-[#9ece6a]">❯</span>
+                <span class="text-secondary dark:text-[#bb9af7]">base64</span>
+                <span class="text-base-content/50 dark:text-white/60">encode</span>
+                <span class="text-warning dark:text-[#e0af68]">"Hello World"</span>
               </div>
-              <div class="flex-1 h-6 rounded-lg bg-base-200/60 dark:bg-base-content/5 mx-2 
-                          flex items-center justify-center">
-                <span class="text-[10px] text-base-content/30 font-mono tracking-wider">
-                  {{ i18n "utilities.toolbox" | default "toolbox" }}
-                </span>
+              <div class="mt-1.5 ml-5 px-3 py-1.5 rounded-lg 
+                          bg-success/5 dark:bg-white/[0.04] 
+                          text-success dark:text-[#9ece6a] 
+                          border border-success/10 dark:border-white/[0.04]">
+                SGVsbG8gV29ybGQ=
               </div>
             </div>
             
-            <!-- Мини-превью утилит -->
-            <div class="grid grid-cols-3 gap-3 mb-6">
-              {{ range $index, $utility := first 6 $allUtilities }}
-              <div class="group/card aspect-square rounded-2xl 
-                          bg-gradient-to-br from-base-200/80 to-base-300/60 
-                          dark:from-base-content/5 dark:to-base-content/10
-                          flex flex-col items-center justify-center gap-1
-                          hover:scale-110 hover:-translate-y-1 
-                          hover:shadow-lg hover:shadow-primary/10
-                          transition-all duration-300 cursor-pointer
-                          border border-transparent hover:border-primary/20"
-                   title="{{ .Title }}">
-                <span class="text-2xl group-hover/card:scale-110 transition-transform duration-300">
-                  {{ with .Params.icon }}{{ . }}{{ else }}🔧{{ end }}
-                </span>
-                <span class="text-[9px] text-base-content/40 font-medium truncate w-full text-center px-1 
-                             group-hover/card:text-base-content/70 transition-colors">
-                  {{ .Title | truncate 10 }}
-                </span>
+            <!-- Команда 2: Hash -->
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-success dark:text-[#9ece6a]">❯</span>
+                <span class="text-secondary dark:text-[#bb9af7]">hash</span>
+                <span class="text-base-content/50 dark:text-white/60">sha256</span>
+                <span class="text-warning dark:text-[#e0af68]">"secret"</span>
               </div>
-              {{ end }}
+              <div class="mt-1.5 ml-5 px-3 py-1.5 rounded-lg 
+                          bg-accent/5 dark:bg-white/[0.04] 
+                          text-accent dark:text-[#73daca] 
+                          border border-accent/10 dark:border-white/[0.04] 
+                          break-all text-[11px]">
+                2bb80d537b1da3e3…c1b273e95a5d136
+              </div>
             </div>
             
-            <!-- Разделитель -->
-            <div class="h-px bg-gradient-to-r from-transparent via-base-content/10 to-transparent mb-5"></div>
+            <!-- Команда 3: JSON format -->
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-success dark:text-[#9ece6a]">❯</span>
+                <span class="text-secondary dark:text-[#bb9af7]">json</span>
+                <span class="text-base-content/50 dark:text-white/60">format</span>
+                <span class="text-warning dark:text-[#e0af68]">'{{ "{{" }}"a":1{{ "}}" }}'</span>
+              </div>
+              <div class="mt-1.5 ml-5 px-3 py-1.5 rounded-lg 
+                          bg-base-200/50 dark:bg-white/[0.04] 
+                          border border-base-300/50 dark:border-white/[0.04] text-[12px]">
+                <div class="text-base-content/60 dark:text-white/70">{{ "{" }}</div>
+                <div class="ml-4">
+                  <span class="text-primary dark:text-[#7aa2f7]">"a"</span><span class="text-base-content/30 dark:text-white/40">:</span> 
+                  <span class="text-error dark:text-[#ff9e64]">1</span>
+                </div>
+                <div class="text-base-content/60 dark:text-white/70">{{ "}" }}</div>
+              </div>
+            </div>
             
-            <!-- Статистика -->
-            <div class="grid grid-cols-2 gap-4">
-              <div class="text-center p-4 rounded-2xl 
-                          bg-gradient-to-br from-primary/5 to-primary/10 
-                          border border-primary/10
-                          hover:border-primary/20 transition-colors duration-300">
-                <div class="text-3xl sm:text-4xl font-black bg-gradient-to-br from-primary to-primary/70 
-                            bg-clip-text text-transparent mb-1">
+            <!-- Курсор мигающий -->
+            <div class="flex items-center gap-2">
+              <span class="text-success dark:text-[#9ece6a]">❯</span>
+              <span class="w-2.5 h-5 bg-primary dark:bg-[#7aa2f7] animate-pulse rounded-sm" 
+                    style="animation-duration: 1s;"></span>
+            </div>
+            
+          </div>
+          
+          <!-- Нижняя панель со статистикой -->
+          <div class="px-5 sm:px-6 pb-5 sm:pb-6">
+            <div class="h-px bg-gradient-to-r from-transparent via-base-content/10 dark:via-white/10 to-transparent mb-4"></div>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="text-center p-3 rounded-xl 
+                          bg-primary/5 dark:bg-white/[0.03] 
+                          border border-primary/10 dark:border-white/[0.05]
+                          hover:bg-primary/10 dark:hover:bg-white/[0.06] 
+                          hover:border-primary/20 dark:hover:border-white/[0.08] 
+                          transition-colors duration-300">
+                <div class="text-xl sm:text-2xl font-black text-primary dark:text-[#7aa2f7] mb-0.5">
                   {{ len $allUtilities }}
                 </div>
-                <div class="text-[11px] text-base-content/50 uppercase tracking-widest font-semibold">
+                <div class="text-[9px] text-base-content/40 dark:text-white/30 uppercase tracking-widest font-semibold">
                   {{ i18n "utilities.tools" | default "Утилит" }}
                 </div>
               </div>
-              <div class="text-center p-4 rounded-2xl 
-                          bg-gradient-to-br from-secondary/5 to-secondary/10 
-                          border border-secondary/10
-                          hover:border-secondary/20 transition-colors duration-300">
-                <div class="text-3xl sm:text-4xl font-black bg-gradient-to-br from-secondary to-secondary/70 
-                            bg-clip-text text-transparent mb-1">
+              <div class="text-center p-3 rounded-xl 
+                          bg-success/5 dark:bg-white/[0.03] 
+                          border border-success/10 dark:border-white/[0.05]
+                          hover:bg-success/10 dark:hover:bg-white/[0.06] 
+                          hover:border-success/20 dark:hover:border-white/[0.08] 
+                          transition-colors duration-300">
+                <div class="text-xl sm:text-2xl font-black text-success dark:text-[#9ece6a] mb-0.5">
                   {{ len $uniqueCategories }}
                 </div>
-                <div class="text-[11px] text-base-content/50 uppercase tracking-widest font-semibold">
+                <div class="text-[9px] text-base-content/40 dark:text-white/30 uppercase tracking-widest font-semibold">
                   {{ i18n "utilities.categories" | default "Категорий" }}
                 </div>
               </div>
+              <div class="text-center p-3 rounded-xl 
+                          bg-secondary/5 dark:bg-white/[0.03] 
+                          border border-secondary/10 dark:border-white/[0.05]
+                          hover:bg-secondary/10 dark:hover:bg-white/[0.06] 
+                          hover:border-secondary/20 dark:hover:border-white/[0.08] 
+                          transition-colors duration-300">
+                <div class="text-xl sm:text-2xl font-black text-secondary dark:text-[#bb9af7] mb-0.5">
+                  0<span class="text-sm">ms</span>
+                </div>
+                <div class="text-[9px] text-base-content/40 dark:text-white/30 uppercase tracking-widest font-semibold">
+                  {{ i18n "utilities.latency" | default "Задержка" }}
+                </div>
+              </div>
             </div>
-          
-            
           </div>
+          
         </div>
       </div>
+    </div>
       
     </div>
     
@@ -439,13 +500,13 @@
             <!-- Теги -->
             <div class="flex items-center gap-1.5 overflow-hidden">
               {{ with .Params.tags }}
-                {{ range first 2 . }}
+                {{ range first 3 . }}
                 <span class="inline-block px-2 py-0.5 text-xs rounded bg-base-300/50 text-base-content/60 truncate max-w-[80px]">
                   {{ . }}
                 </span>
                 {{ end }}
-                {{ if gt (len .) 2 }}
-                <span class="text-xs text-base-content/40">+{{ sub (len .) 2 }}</span>
+                {{ if gt (len .) 3 }}
+                <span class="text-xs text-base-content/40">+{{ sub (len .) 3 }}</span>
                 {{ end }}
               {{ end }}
             </div>

@@ -1452,3 +1452,244 @@ tplChecklistName = "Чеклист"
 tplChecklistContent = "# Задачи\n\n- [ ] Задача 1\n- [ ] Задача 2\n- [ ] Задача 3\n- [x] Выполнено"
 tplNotesName = "Заметки"
 tplNotesContent = "# Заметки\n\n## Идеи\n\n- Идея 1\n- Идея 2\n\n## Задачи\n\n1. Первая\n2. Вторая\n\n> Важная мысль"
+
+# ==========================================
+# TreeSnap
+# ==========================================
+[treesnap]
+# Badges
+badgeGenerator = "Генератор дерева"
+badgeGitignore = ".gitignore"
+badgeExport = "Экспорт"
+badgeSearch = "Поиск и фильтр"
+
+# Main
+dropzoneTitle = "Перетащите папку сюда"
+dropzoneSubtitle = "или нажмите для выбора"
+dropzoneHint = "Поддерживаются папки с любой структурой"
+selectFolder = "Выбрать папку"
+processing = "Обработка..."
+
+# Toolbar
+copyTree = "Копировать"
+downloadTxt = "Скачать .txt"
+downloadMd = "Скачать .md"
+clearAll = "Очистить"
+collapseAll = "Свернуть все"
+expandAll = "Развернуть все"
+
+# Search
+searchPlaceholder = "Поиск файлов и папок..."
+
+# Presets
+presetsTitle = "Быстрые пресеты"
+
+# Settings
+settings = "Настройки"
+gitignoreSupport = "Учитывать .gitignore"
+gitignoreDesc = "Автоматически исключать файлы из .gitignore"
+showTags = "Показывать теги"
+showTagsDesc = "Добавлять [JS], [CSS] и т.д. перед файлами"
+showHidden = "Показывать скрытые"
+showHiddenDesc = "Файлы и папки, начинающиеся с точки"
+interactiveMode = "Интерактивное дерево"
+interactiveModeDesc = "Кликайте по папкам для сворачивания/разворачивания"
+maxDepth = "Макс. глубина"
+maxDepthUnlimited = "Без ограничений"
+excludePatterns = "Дополнительные исключения"
+excludePatternsPlaceholder = "node_modules, dist, .cache"
+excludePatternsHint = "Через запятую, помимо .gitignore"
+
+# Suggestions
+suggestionsTitle = "Рекомендации"
+
+# Results
+resultTitle = "Структура проекта"
+files = "файлов"
+folders = "папок"
+totalSize = "Размер"
+depth = "Глубина"
+
+# AI Summary
+aiSummaryTitle = "Анализ проекта"
+aiSummarize = "Анализировать"
+aiSummaryEmpty = "Сначала отсканируйте папку, затем нажмите «Анализировать» для получения сводки по проекту."
+
+# Status
+statusReady = "Готов к работе"
+statusProcessing = "Сканирование файлов..."
+statusDone = "Готово!"
+statusBrowser = "Все файлы обрабатываются локально в браузере"
+copied = "Скопировано!"
+downloaded = "Файл скачан!"
+cleared = "Очищено"
+emptyResult = "Нет файлов для отображения"
+noFolder = "Папка не выбрана"
+folderNotSupported = "Ваш браузер не поддерживает выбор папок. Попробуйте Chrome или Edge."
+
+# Tags section
+tagsTitle = "Поддерживаемые теги"
+tagsSubtitle = "Автоматическая разметка по расширению файла"
+tagLabel = "Тег"
+tagExtensions = "Расширения"
+
+# How it works
+howTitle = "Как это работает?"
+howSubtitle = "Возможности и принцип действия"
+howScan = "Сканирование"
+howScanDesc = "Рекурсивно обходит все файлы и папки выбранной директории через File System Access API."
+howFilter = "Фильтрация"
+howFilterDesc = "Читает .gitignore и исключает совпадающие файлы. Папка .git всегда исключается."
+howFormat = "Форматирование"
+howFormatDesc = "Строит ASCII-дерево с отступами, тегами расширений и красивым форматированием."
+howExport = "Экспорт"
+howExportDesc = "Копируйте в буфер или скачивайте как .txt/.md для README и документации."
+
+# Gitignore info
+gitignoreTitle = "Поддержка .gitignore"
+gitignoreSubtitle = "Автоматическое исключение файлов"
+gitignorePattern = "Паттерн"
+gitignoreExcludes = "Что исключается"
+gitignoreAlways = "Папка .git исключается всегда, даже без .gitignore"
+patternNodeModules = "Папка целиком"
+patternDist = "Папка целиком"
+patternLog = "Все файлы .log"
+patternEnv = "Конкретный файл"
+patternIde = "Папка IDE"
+
+# Styles
+styleLabel = "Стиль оформления"
+styleClassic = "Классический"
+styleClassicDesc = "├── └── — стандартный Unicode"
+styleAscii = "ASCII"
+styleAsciiDesc = "+-- \\-- — совместимость везде"
+styleMinimal = "Минимальный"
+styleMinimalDesc = "Только отступы, без линий"
+styleDots = "Точечный"
+styleDotsDesc = "... пунктирные линии"
+styleArrow = "Стрелки"
+styleArrowDesc = "→ указатели на элементы"
+styleMarkdown = "Markdown"
+styleMarkdownDesc = "Вложенные списки для README"
+styleIndented = "С отступами"
+styleIndentedDesc = "Табуляция, как в IDE"
+styleFancy = "Fancy"
+styleFancyDesc = "╠══ ╚══ — двойные линии"
+
+# ==========================================
+# Email Alias Tester
+# ==========================================
+[emailalias]
+# Badges
+badgeGenerator = "Генератор алиасов"
+badgeNormalization = "Нормализация"
+badgeExport = "Экспорт"
+badgeProviders = "Провайдеры"
+
+# Main
+inputTitle = "Введите email"
+inputPlaceholder = "john.doe@gmail.com"
+inputHint = "Провайдер определяется автоматически по домену"
+providerLabel = "Провайдер"
+providerAuto = "Автоопределение"
+generateBtn = "Сгенерировать вариации"
+generateBtnProcessing = "Генерация..."
+
+# Providers
+providerGmail = "Gmail / Google Workspace"
+providerOutlook = "Outlook / Hotmail"
+providerYahoo = "Yahoo"
+providerYandex = "Yandex"
+providerProton = "ProtonMail"
+providerCustom = "Другой домен"
+
+# Results
+resultsTitle = "Сгенерированные алиасы"
+resultsEmpty = "Введите email и нажмите «Сгенерировать»"
+methodDots = "Точечные вариации"
+methodDotsDesc = "Gmail игнорирует точки в локальной части"
+methodPlus = "Plus-адресация"
+methodPlusDesc = "Добавление +тег перед @"
+methodCombined = "Комбинированные"
+methodCombinedDesc = "Точки + plus-тег"
+methodCase = "Регистр"
+methodCaseDesc = "RFC допускает разный регистр, но большинство провайдеров его игнорируют"
+methodDash = "Dash-алиасы"
+methodDashDesc = "Yahoo поддерживает базовые имена через дефис"
+methodSubaddress = "Подадреса"
+methodSubaddressDesc = "Вариации подадресации для этого провайдера"
+variationsCount = "вариаций"
+deliveryConfirmed = "Доставка подтверждена"
+deliveryLikely = "Скорее всего доставится"
+deliveryUncertain = "Поведение неизвестно"
+copyAlias = "Копировать"
+copiedAlias = "Скопировано!"
+
+# Normalization
+normTitle = "Нормализация email"
+normSubtitle = "Как бэкенды и провайдеры могут интерпретировать этот адрес"
+normInput = "Исходный"
+normResult = "Нормализованный"
+normRules = "Применённые правила"
+normRuleDots = "Точки удалены из локальной части"
+normRulePlus = "Суффикс после + удалён"
+normRuleCase = "Приведено к нижнему регистру"
+normRuleDomain = "Домен нормализован"
+normRuleGoogleapps = "googlemail.com → gmail.com"
+normRuleYandex = "ya.ru → yandex.ru"
+normWarning = "Нормализация зависит от конкретного сервиса. Эти правила описывают типичное поведение."
+
+# Provider rules
+rulesTitle = "Правила провайдеров"
+rulesSubtitle = "Как разные сервисы обрабатывают email-адреса"
+ruleFeature = "Возможность"
+ruleSupported = "Поддержка"
+ruleDotIgnore = "Точки игнорируются"
+rulePlusAddress = "Plus-адресация"
+ruleCaseInsensitive = "Регистронезависимый"
+ruleYes = "Да"
+ruleNo = "Нет"
+ruleLimited = "Ограничено"
+ruleUnknown = "Неизвестно"
+
+# Export
+exportTitle = "Экспорт"
+copyAll = "Копировать все"
+exportTxt = "Скачать .txt"
+exportJson = "Скачать .json"
+exportCsv = "Скачать .csv"
+
+# Safety
+safetyNote = "Этот инструмент предназначен для разработчиков и QA-тестирования обработки и нормализации email-адресов. Не используйте его для обхода ограничений сервисов."
+
+# Status
+statusReady = "Готов к работе"
+statusGenerated = "Сгенерировано"
+statusBrowser = "Все данные обрабатываются локально в браузере"
+statusAliases = "алиасов"
+
+# How it works
+howTitle = "Как это работает?"
+howSubtitle = "Принцип работы генератора алиасов"
+howDetect = "Определение"
+howDetectDesc = "Автоматически определяет провайдера по домену email-адреса и применяет соответствующие правила."
+howGenerate = "Генерация"
+howGenerateDesc = "Создаёт валидные вариации адреса: точки, plus-теги, регистр и их комбинации."
+howNormalize = "Нормализация"
+howNormalizeDesc = "Показывает, как бэкенд или провайдер может привести адрес к каноническому виду."
+howExport = "Экспорт"
+howExportDesc = "Копируйте отдельные алиасы или экспортируйте все в TXT, JSON или CSV формат."
+
+methodDomain = "Доменные алиасы"
+methodDomainDesc = "Альтернативные домены этого провайдера (доставка не гарантирована)"
+
+# Generation count
+countLabel = "Количество вариаций"
+countDots = "Точечные"
+countPlus = "Plus-теги"
+countCombined = "Комбинированные"
+countCase = "Регистр"
+countDomain = "Домены"
+countDash = "Dash-алиасы"
+countMin = "мин"
+countMax = "макс"

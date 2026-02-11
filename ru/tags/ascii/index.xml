@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ascii on 0x69.ru</title>
+    <link>https://0x69.ru/ru/tags/ascii/</link>
+    <description>Recent content in Ascii on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>ru</language>
+    <lastBuildDate>Wed, 11 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://0x69.ru/ru/tags/ascii/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TreeSnap</title>
+      <link>https://0x69.ru/ru/utilities/treesnap/</link>
+      <pubDate>Wed, 11 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/ru/utilities/treesnap/</guid>
+      <description>&lt;p&gt;Создание древовидной структуры проекта с поддержкой .gitignore&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

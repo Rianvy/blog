@@ -1,0 +1,2518 @@
+<!DOCTYPE html>
+<html lang="ru"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+Email Alias Tester
+ | 0x69.ru</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Ox69" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="canonical" href="https://0x69.ru/ru/utilities/email-alias-tester/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/ru/utilities/email-alias-tester/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="Email Alias Tester">
+  <meta property="og:description" content="Генерация email-алиасов и тестирование нормализации адресов для разных провайдеров">
+  <meta property="og:locale" content="ru">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="utilities">
+    <meta property="article:published_time" content="2026-02-11T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-11T00:00:00+00:00">
+    <meta property="article:tag" content="Email">
+    <meta property="article:tag" content="Alias">
+    <meta property="article:tag" content="Gmail">
+    <meta property="article:tag" content="Нормализация">
+    <meta property="article:tag" content="Тестирование">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Email Alias Tester">
+  <meta name="twitter:description" content="Генерация email-алиасов и тестирование нормализации адресов для разных провайдеров">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Повернуть!"
+                aria-label="Повернуть!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/ru/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">Документируй сегодня то, что забудешь завтра</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="Обо мне">Обо мне</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/ru/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Поиск"
+   aria-label="Поиск">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/ru/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Категории"
+   aria-label="Категории">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/ru/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Портфолио"
+   aria-label="Портфолио">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/ru/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Утилиты"
+   aria-label="Утилиты">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/utilities/email-alias-tester/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/ru/utilities/email-alias-tester/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/ru/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/ru/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">163</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/ru/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Меню</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="Обо мне"
+                aria-label="Обо мне">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">Обо мне</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/utilities/email-alias-tester/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/utilities/email-alias-tester/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/ru/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Поиск</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Категории</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Портфолио</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Утилиты">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Утилиты</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">21</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">163</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/ru/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="max-w-5xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
+
+  
+  <div class="text-center mb-5 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">📧</span>
+    </div>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">Email Alias Tester</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">Генерация email-алиасов и тестирование нормализации адресов для разных провайдеров</p>
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="mail-outline"></ion-icon>
+        Генератор алиасов
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+        <ion-icon name="git-compare-outline"></ion-icon>
+        Нормализация
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="download-outline"></ion-icon>
+        Экспорт
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="globe-outline"></ion-icon>
+        Провайдеры
+      </span>
+    </div>
+  </div>
+
+  
+  <div class="alert alert-warning shadow-lg mb-4 sm:mb-6 text-xs sm:text-sm">
+    <ion-icon name="shield-checkmark-outline" class="text-lg shrink-0"></ion-icon>
+    <span>Этот инструмент предназначен для разработчиков и QA-тестирования обработки и нормализации email-адресов. Не используйте его для обхода ограничений сервисов.</span>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+
+    
+    <div class="lg:col-span-1 space-y-3 sm:space-y-4">
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="mail-outline" class="text-primary"></ion-icon>
+            Введите email
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-3">
+          <div class="form-control">
+            <input type="email" id="email-input" class="input input-bordered input-sm sm:input-md w-full font-mono text-xs sm:text-sm" placeholder="john.doe@gmail.com" autocomplete="off" spellcheck="false" />
+            <label class="label py-0.5">
+              <span class="label-text-alt text-[10px] sm:text-xs text-base-content/50">Провайдер определяется автоматически по домену</span>
+            </label>
+          </div>
+
+          <div class="form-control">
+            <label class="label py-1">
+              <span class="label-text text-xs sm:text-sm font-medium">Провайдер</span>
+            </label>
+            <select id="provider-select" class="select select-bordered select-sm text-xs sm:text-sm">
+              <option value="auto">Автоопределение</option>
+              <option value="gmail">Gmail / Google Workspace</option>
+              <option value="outlook">Outlook / Hotmail</option>
+              <option value="yahoo">Yahoo</option>
+              <option value="yandex">Yandex</option>
+              <option value="proton">ProtonMail</option>
+              <option value="custom">Другой домен</option>
+            </select>
+          </div>
+
+          <div id="detected-provider" class="hidden">
+            <div class="flex items-center gap-2 p-2 rounded-lg bg-info/5 border border-info/20">
+              <ion-icon name="information-circle-outline" class="text-info shrink-0"></ion-icon>
+              <span class="text-xs" id="detected-provider-text"></span>
+            </div>
+          </div>
+
+          <button type="button" id="btn-generate" class="btn btn-primary btn-sm sm:btn-md w-full gap-2">
+            <ion-icon name="flash-outline"></ion-icon>
+            Сгенерировать вариации
+          </button>
+        </div>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="options-outline" class="text-secondary"></ion-icon>
+            Количество вариаций
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-3" id="count-settings">
+
+          
+          <div class="form-control" id="count-dots-group">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium flex items-center gap-1.5">
+                <ion-icon name="ellipsis-horizontal-outline" class="text-primary text-sm"></ion-icon>
+                Точечные
+              </span>
+              <span class="label-text-alt text-[10px] text-base-content/40" id="count-dots-range"></span>
+            </label>
+            <div class="flex items-center gap-2">
+              <input type="range" id="count-dots" min="2" max="30" value="15" class="range range-xs range-primary flex-1" />
+              <span class="text-xs font-mono font-bold w-6 text-center" id="count-dots-val">15</span>
+            </div>
+          </div>
+
+          
+          <div class="form-control">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium flex items-center gap-1.5">
+                <ion-icon name="add-circle-outline" class="text-success text-sm"></ion-icon>
+                Plus-теги
+              </span>
+              <span class="label-text-alt text-[10px] text-base-content/40" id="count-plus-range"></span>
+            </label>
+            <div class="flex items-center gap-2">
+              <input type="range" id="count-plus" min="2" max="18" value="12" class="range range-xs range-success flex-1" />
+              <span class="text-xs font-mono font-bold w-6 text-center" id="count-plus-val">12</span>
+            </div>
+          </div>
+
+          
+          <div class="form-control" id="count-combined-group">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium flex items-center gap-1.5">
+                <ion-icon name="git-merge-outline" class="text-accent text-sm"></ion-icon>
+                Комбинированные
+              </span>
+              <span class="label-text-alt text-[10px] text-base-content/40" id="count-combined-range"></span>
+            </label>
+            <div class="flex items-center gap-2">
+              <input type="range" id="count-combined" min="2" max="20" value="10" class="range range-xs range-accent flex-1" />
+              <span class="text-xs font-mono font-bold w-6 text-center" id="count-combined-val">10</span>
+            </div>
+          </div>
+
+          
+          <div class="form-control">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium flex items-center gap-1.5">
+                <ion-icon name="text-outline" class="text-warning text-sm"></ion-icon>
+                Регистр
+              </span>
+              <span class="label-text-alt text-[10px] text-base-content/40" id="count-case-range"></span>
+            </label>
+            <div class="flex items-center gap-2">
+              <input type="range" id="count-case" min="2" max="10" value="6" class="range range-xs range-warning flex-1" />
+              <span class="text-xs font-mono font-bold w-6 text-center" id="count-case-val">6</span>
+            </div>
+          </div>
+
+          
+          <div class="form-control" id="count-dash-group">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium flex items-center gap-1.5">
+                <ion-icon name="remove-outline" class="text-error text-sm"></ion-icon>
+                Dash-алиасы
+              </span>
+              <span class="label-text-alt text-[10px] text-base-content/40" id="count-dash-range"></span>
+            </label>
+            <div class="flex items-center gap-2">
+              <input type="range" id="count-dash" min="1" max="10" value="5" class="range range-xs range-error flex-1" />
+              <span class="text-xs font-mono font-bold w-6 text-center" id="count-dash-val">5</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      
+      <div id="norm-panel" class="hidden bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="git-compare-outline" class="text-warning"></ion-icon>
+            Нормализация email
+          </h2>
+          <p class="text-[10px] sm:text-xs text-base-content/50 mt-0.5">Как бэкенды и провайдеры могут интерпретировать этот адрес</p>
+        </div>
+        <div class="p-3 sm:p-4 space-y-3">
+          <div class="space-y-2">
+            <div class="p-2 rounded-lg bg-base-200/50">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5">Исходный</div>
+              <div class="font-mono text-xs sm:text-sm font-medium break-all" id="norm-input"></div>
+            </div>
+            <div class="flex justify-center">
+              <ion-icon name="arrow-down-outline" class="text-base-content/30"></ion-icon>
+            </div>
+            <div class="p-2 rounded-lg bg-success/5 border border-success/20">
+              <div class="text-[10px] sm:text-xs text-success/70 mb-0.5">Нормализованный</div>
+              <div class="font-mono text-xs sm:text-sm font-bold text-success break-all" id="norm-result"></div>
+            </div>
+          </div>
+          <div>
+            <div class="text-[10px] sm:text-xs font-medium text-base-content/70 mb-1">Применённые правила</div>
+            <div id="norm-rules" class="space-y-1"></div>
+          </div>
+          <div class="text-[9px] sm:text-[10px] text-base-content/40 italic">Нормализация зависит от конкретного сервиса. Эти правила описывают типичное поведение.</div>
+        </div>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+            <div class="flex items-center gap-2.5 sm:gap-3">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-secondary/10 flex items-center justify-center shrink-0">
+                <ion-icon name="globe-outline" class="text-lg sm:text-xl text-secondary"></ion-icon>
+              </div>
+              <div>
+                <h3 class="font-semibold text-sm sm:text-base">Правила провайдеров</h3>
+                <p class="text-[10px] sm:text-xs text-base-content/60">Как разные сервисы обрабатывают email-адреса</p>
+              </div>
+            </div>
+            <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+          </summary>
+          <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+            <div class="overflow-x-auto">
+              <table class="table table-xs sm:table-sm">
+                <thead>
+                  <tr>
+                    <th class="text-xs">Провайдер</th>
+                    <th class="text-xs">Точки игнорируются</th>
+                    <th class="text-xs">Plus-адресация</th>
+                    <th class="text-xs">Регистронезависимый</th>
+                  </tr>
+                </thead>
+                <tbody class="text-[10px] sm:text-xs">
+                  <tr>
+                    <td class="font-medium">Gmail</td>
+                    <td><span class="badge badge-xs badge-success">Да</span></td>
+                    <td><span class="badge badge-xs badge-success">Да</span></td>
+                    <td><span class="badge badge-xs badge-success">Да</span></td>
+                  </tr>
+                  <tr>
+                    <td class="font-medium">Outlook</td>
+                    <td><span class="badge badge-xs badge-error">Нет</span></td>
+                    <td><span class="badge badge-xs badge-warning">Ограничено</span></td>
+                    <td><span class="badge badge-xs badge-success">Да</span></td>
+                  </tr>
+                  <tr>
+                    <td class="font-medium">Yahoo</td>
+                    <td><span class="badge badge-xs badge-error">Нет</span></td>
+                    <td><span class="badge badge-xs badge-warning">Ограничено</span></td>
+                    <td><span class="badge badge-xs badge-success">Да</span></td>
+                  </tr>
+                  <tr>
+                    <td class="font-medium">Yandex</td>
+                    <td><span class="badge badge-xs badge-error">Нет</span></td>
+                    <td><span class="badge badge-xs badge-warning">Ограничено</span></td>
+                    <td><span class="badge badge-xs badge-success">Да</span></td>
+                  </tr>
+                  <tr>
+                    <td class="font-medium">ProtonMail</td>
+                    <td><span class="badge badge-xs badge-error">Нет</span></td>
+                    <td><span class="badge badge-xs badge-success">Да</span></td>
+                    <td><span class="badge badge-xs badge-success">Да</span></td>
+                  </tr>
+                  <tr>
+                    <td class="font-medium">Custom</td>
+                    <td><span class="badge badge-xs badge-ghost">Неизвестно</span></td>
+                    <td><span class="badge badge-xs badge-ghost">Неизвестно</span></td>
+                    <td><span class="badge badge-xs badge-ghost">Неизвестно</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    
+    <div class="lg:col-span-2 space-y-3 sm:space-y-4">
+
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="list-outline" class="text-success"></ion-icon>
+            Сгенерированные алиасы
+          </h2>
+          <span id="results-count" class="badge badge-sm badge-primary hidden">0</span>
+          <div class="flex-1"></div>
+          <button type="button" id="btn-copy-all" class="btn btn-primary btn-xs sm:btn-sm gap-1" disabled>
+            <ion-icon name="copy-outline"></ion-icon>
+            <span class="hidden sm:inline text-xs">Копировать все</span>
+          </button>
+          <button type="button" id="btn-export-txt" class="btn btn-ghost btn-xs sm:btn-sm gap-1" disabled>
+            <ion-icon name="document-text-outline"></ion-icon>
+            <span class="hidden sm:inline text-xs">.txt</span>
+          </button>
+          <button type="button" id="btn-export-json" class="btn btn-ghost btn-xs sm:btn-sm gap-1" disabled>
+            <ion-icon name="code-slash-outline"></ion-icon>
+            <span class="hidden sm:inline text-xs">.json</span>
+          </button>
+          <button type="button" id="btn-export-csv" class="btn btn-ghost btn-xs sm:btn-sm gap-1" disabled>
+            <ion-icon name="grid-outline"></ion-icon>
+            <span class="hidden sm:inline text-xs">.csv</span>
+          </button>
+        </div>
+
+        <div class="p-3 sm:p-4">
+          <div id="results-empty" class="py-12 sm:py-16 text-center">
+            <ion-icon name="mail-unread-outline" class="text-4xl sm:text-5xl text-base-content/20 mb-3"></ion-icon>
+            <p class="text-sm text-base-content/40">Введите email и нажмите «Сгенерировать»</p>
+          </div>
+          <div id="results-container" class="hidden space-y-4"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-info/10 flex items-center justify-center shrink-0">
+            <ion-icon name="help-circle-outline" class="text-lg sm:text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">Как это работает?</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Принцип работы генератора алиасов</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <ion-icon name="scan-outline" class="text-primary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Определение</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Автоматически определяет провайдера по домену email-адреса и применяет соответствующие правила.</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center">
+                <ion-icon name="flash-outline" class="text-success"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Генерация</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Создаёт валидные вариации адреса: точки, plus-теги, регистр и их комбинации.</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-warning/10 flex items-center justify-center">
+                <ion-icon name="git-compare-outline" class="text-warning"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Нормализация</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Показывает, как бэкенд или провайдер может привести адрес к каноническому виду.</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center">
+                <ion-icon name="download-outline" class="text-secondary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Экспорт</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Копируйте отдельные алиасы или экспортируйте все в TXT, JSON или CSV формат.</p>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span id="status-text">Готов к работе</span>
+    <span>Все данные обрабатываются локально в браузере</span>
+  </div>
+</div>
+
+
+<div id="toast" class="toast toast-top toast-center hidden z-50">
+  <div class="alert alert-success py-2 px-4">
+    <ion-icon name="checkmark-circle-outline" class="text-lg"></ion-icon>
+    <span id="toast-message" class="text-sm"></span>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  
+  var i18n = {
+    copied: "Скопировано!",
+    copyAll: "Копировать все",
+    statusReady: "Готов к работе",
+    statusGenerated: "Сгенерировано",
+    statusAliases: "алиасов",
+    deliveryConfirmed: "Доставка подтверждена",
+    deliveryLikely: "Скорее всего доставится",
+    deliveryUncertain: "Поведение неизвестно",
+    copyAlias: "Копировать",
+    variationsCount: "вариаций",
+    methodDots: "Точечные вариации",
+    methodDotsDesc: "Gmail игнорирует точки в локальной части",
+    methodPlus: "Plus-адресация",
+    methodPlusDesc: "Добавление \u002bтег перед @",
+    methodCombined: "Комбинированные",
+    methodCombinedDesc: "Точки \u002b plus-тег",
+    methodCase: "Регистр",
+    methodCaseDesc: "RFC допускает разный регистр, но большинство провайдеров его игнорируют",
+    methodDash: "Dash-алиасы",
+    methodDashDesc: "Yahoo поддерживает базовые имена через дефис",
+    methodSubaddress: "Подадреса",
+    methodSubaddressDesc: "Вариации подадресации для этого провайдера",
+    methodDomain: "Доменные алиасы",
+    methodDomainDesc: "Альтернативные домены этого провайдера (доставка не гарантирована)",
+    normRuleDots: "Точки удалены из локальной части",
+    normRulePlus: "Суффикс после \u002b удалён",
+    normRuleCase: "Приведено к нижнему регистру",
+    normRuleDomain: "Домен нормализован",
+    normRuleGoogleapps: "googlemail.com → gmail.com",
+    normRuleYandex: "ya.ru → yandex.ru",
+    providerGmail: "Gmail \/ Google Workspace",
+    providerOutlook: "Outlook \/ Hotmail",
+    providerYahoo: "Yahoo",
+    providerYandex: "Yandex",
+    providerProton: "ProtonMail",
+    providerCustom: "Другой домен",
+    countMin: "мин",
+    countMax: "макс"
+  };
+
+  
+  var STORAGE_KEY = 'emailalias-settings';
+
+  function saveSettings() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        countDots: getCount('dots'),
+        countPlus: getCount('plus'),
+        countCombined: getCount('combined'),
+        countCase: getCount('case'),
+        countDash: getCount('dash')
+      }));
+    } catch(e) {}
+  }
+
+  function loadSettings() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s.countDots) document.getElementById('count-dots').value = s.countDots;
+      if (s.countPlus) document.getElementById('count-plus').value = s.countPlus;
+      if (s.countCombined) document.getElementById('count-combined').value = s.countCombined;
+      if (s.countCase) document.getElementById('count-case').value = s.countCase;
+      if (s.countDash) document.getElementById('count-dash').value = s.countDash;
+    } catch(e) {}
+  }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  var COUNT_LIMITS = {
+    dots:     { min: 2, max: 30, default: 15 },
+    plus:     { min: 2, max: 18, default: 12 },
+    combined: { min: 2, max: 20, default: 10 },
+    case:     { min: 2, max: 10, default: 6  },
+    dash:     { min: 1, max: 10, default: 5  }
+  };
+
+  function getCount(type) {
+    var el = document.getElementById('count-' + type);
+    return el ? parseInt(el.value) || COUNT_LIMITS[type].default : COUNT_LIMITS[type].default;
+  }
+
+  
+  function getDotsMax(usernameLength) {
+    if (usernameLength <= 1) return 1;
+    var clean = usernameLength; 
+    var theoretical = Math.pow(2, clean - 1);
+    return Math.min(theoretical, COUNT_LIMITS.dots.max);
+  }
+
+  
+  function getCombinedMax() {
+    var dotsCount = Math.min(getCount('dots'), 5);
+    var plusTags = 4; 
+    return Math.min(dotsCount * plusTags, COUNT_LIMITS.combined.max);
+  }
+
+  
+  function getCaseMax(usernameLength) {
+    if (usernameLength <= 1) return 1;
+    
+    return Math.min(Math.pow(2, usernameLength) - 1, COUNT_LIMITS.case.max);
+  }
+
+  
+  function updateCountDisplays(usernameLength) {
+    var types = ['dots', 'plus', 'combined', 'case', 'dash'];
+
+    types.forEach(function(type) {
+      var slider = document.getElementById('count-' + type);
+      var valEl = document.getElementById('count-' + type + '-val');
+      var rangeEl = document.getElementById('count-' + type + '-range');
+      if (!slider || !valEl) return;
+
+      var limits = COUNT_LIMITS[type];
+      var actualMax = limits.max;
+
+      
+      if (type === 'dots' && usernameLength) {
+        actualMax = getDotsMax(usernameLength);
+      } else if (type === 'combined') {
+        actualMax = getCombinedMax();
+      } else if (type === 'case' && usernameLength) {
+        actualMax = getCaseMax(usernameLength);
+      }
+
+      
+      slider.max = actualMax;
+      if (parseInt(slider.value) > actualMax) {
+        slider.value = actualMax;
+      }
+
+      valEl.textContent = slider.value;
+
+      if (rangeEl) {
+        rangeEl.textContent = i18n.countMin + ' ' + limits.min + ' · ' + i18n.countMax + ' ' + actualMax;
+      }
+    });
+  }
+
+  
+  function updateCountVisibility(provider) {
+    var dotsGroup = document.getElementById('count-dots-group');
+    var combinedGroup = document.getElementById('count-combined-group');
+    var dashGroup = document.getElementById('count-dash-group');
+
+    
+    if (provider === 'gmail') {
+      dotsGroup.classList.remove('hidden');
+      combinedGroup.classList.remove('hidden');
+    } else {
+      dotsGroup.classList.add('hidden');
+      combinedGroup.classList.add('hidden');
+    }
+
+    
+    if (provider === 'yahoo') {
+      dashGroup.classList.remove('hidden');
+    } else {
+      dashGroup.classList.add('hidden');
+    }
+  }
+
+  
+  ['dots', 'plus', 'combined', 'case', 'dash'].forEach(function(type) {
+    var slider = document.getElementById('count-' + type);
+    if (!slider) return;
+    slider.addEventListener('input', function() {
+      document.getElementById('count-' + type + '-val').textContent = slider.value;
+      saveSettings();
+    });
+  });
+
+  
+  var PROVIDER_DOMAINS = {
+    gmail: ['gmail.com', 'googlemail.com'],
+    outlook: ['outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'outlook.co.uk', 'hotmail.co.uk'],
+    yahoo: ['yahoo.com', 'yahoo.co.uk', 'yahoo.co.jp', 'ymail.com', 'rocketmail.com'],
+    yandex: ['yandex.ru', 'yandex.com', 'ya.ru', 'yandex.ua', 'yandex.by', 'yandex.kz'],
+    proton: ['protonmail.com', 'proton.me', 'pm.me', 'protonmail.ch']
+  };
+
+  var PROVIDER_RULES = {
+    gmail:   { dots: true,  plus: 'confirmed', case: 'confirmed', normalizeDots: true,  normalizeDomain: 'gmail.com' },
+    outlook: { dots: false, plus: 'likely',    case: 'confirmed', normalizeDots: false, normalizeDomain: null },
+    yahoo:   { dots: false, plus: 'uncertain', case: 'confirmed', normalizeDots: false, normalizeDomain: null },
+    yandex:  { dots: false, plus: 'likely',    case: 'confirmed', normalizeDots: false, normalizeDomain: 'yandex.ru' },
+    proton:  { dots: false, plus: 'confirmed', case: 'confirmed', normalizeDots: false, normalizeDomain: null },
+    custom:  { dots: false, plus: 'uncertain', case: 'uncertain', normalizeDots: false, normalizeDomain: null }
+  };
+
+  function detectProvider(email) {
+    var parts = email.split('@');
+    if (parts.length !== 2) return null;
+    var domain = parts[1].toLowerCase();
+    for (var provider in PROVIDER_DOMAINS) {
+      if (PROVIDER_DOMAINS[provider].indexOf(domain) > -1) return provider;
+    }
+    return 'custom';
+  }
+
+  function getProviderName(provider) {
+    var names = {
+      gmail: i18n.providerGmail, outlook: i18n.providerOutlook,
+      yahoo: i18n.providerYahoo, yandex: i18n.providerYandex,
+      proton: i18n.providerProton, custom: i18n.providerCustom
+    };
+    return names[provider] || provider;
+  }
+
+  
+  function parseEmail(email) {
+    var at = email.lastIndexOf('@');
+    if (at === -1) return null;
+    var local = email.substring(0, at);
+    var domain = email.substring(at + 1).toLowerCase();
+    var plusIdx = local.indexOf('+');
+    var baseLocal = plusIdx > -1 ? local.substring(0, plusIdx) : local;
+    return {
+      original: email,
+      local: local,
+      baseLocal: baseLocal.toLowerCase(),
+      existingTag: plusIdx > -1 ? local.substring(plusIdx + 1) : '',
+      domain: domain
+    };
+  }
+
+  
+  function generateDotVariations(str, maxCount) {
+    if (str.length <= 1) return [str];
+    var clean = str.replace(/\./g, '');
+    if (clean.length <= 1) return [clean];
+
+    var results = new Set();
+    results.add(clean);
+    results.add(str);
+
+    var positions = clean.length - 1;
+    var totalCombinations = Math.pow(2, positions);
+    var limit = Math.min(totalCombinations, maxCount);
+
+    if (totalCombinations <= 64) {
+      for (var mask = 1; mask < totalCombinations && results.size < limit; mask++) {
+        var variant = '';
+        for (var i = 0; i < clean.length; i++) {
+          variant += clean[i];
+          if (i < clean.length - 1 && (mask & (1 << i))) variant += '.';
+        }
+        results.add(variant);
+      }
+    } else {
+      for (var attempts = 0; attempts < limit * 4 && results.size < limit; attempts++) {
+        var variant = '';
+        for (var i = 0; i < clean.length; i++) {
+          variant += clean[i];
+          if (i < clean.length - 1 && Math.random() > 0.5) variant += '.';
+        }
+        results.add(variant);
+      }
+    }
+
+    return Array.from(results).slice(0, limit);
+  }
+
+  
+  var PLUS_TAGS = [
+    'test', 'dev', 'spam', 'newsletter', 'signup', 'login',
+    'shop', 'social', 'work', 'temp', 'promo', 'verify',
+    'qa', 'staging', 'prod', 'debug', 'beta', 'alpha'
+  ];
+
+  function generatePlusVariations(baseLocal, domain, count) {
+    var limit = Math.min(PLUS_TAGS.length, count);
+    var results = [];
+    for (var i = 0; i < limit; i++) {
+      results.push(baseLocal + '+' + PLUS_TAGS[i] + '@' + domain);
+    }
+    return results;
+  }
+
+  
+  function generateCaseVariations(baseLocal, domain, maxCount) {
+    var results = new Set();
+    var lower = baseLocal.toLowerCase();
+    var upper = baseLocal.toUpperCase();
+    var limit = maxCount || 6;
+
+    results.add(upper + '@' + domain);
+    results.add(lower.charAt(0).toUpperCase() + lower.substring(1) + '@' + domain);
+
+    for (var n = 0; n < limit * 3 && results.size < limit; n++) {
+      var mixed = '';
+      for (var i = 0; i < lower.length; i++) {
+        mixed += Math.random() > 0.5 ? lower[i].toUpperCase() : lower[i];
+      }
+      var candidate = mixed + '@' + domain;
+      if (candidate !== baseLocal + '@' + domain) results.add(candidate);
+    }
+
+    return Array.from(results).slice(0, limit);
+  }
+
+  
+  var DASH_TAGS = [
+    'test', 'dev', 'temp', 'work', 'shop',
+    'promo', 'news', 'social', 'app', 'mail'
+  ];
+
+  
+  function generateCombinedVariations(baseLocal, domain, maxCount) {
+    var results = [];
+    var dotsForCombined = Math.min(getCount('dots'), 5);
+    var dotVars = generateDotVariations(baseLocal, dotsForCombined);
+    var tags = PLUS_TAGS.slice(0, 4);
+    var limit = maxCount;
+    var count = 0;
+
+    for (var d = 0; d < dotVars.length && count < limit; d++) {
+      for (var t = 0; t < tags.length && count < limit; t++) {
+        results.push(dotVars[d] + '+' + tags[t] + '@' + domain);
+        count++;
+      }
+    }
+    return results;
+  }
+
+  
+  
+  
+
+  function generateForGmail(parsed) {
+    var groups = [];
+    var countDots = getCount('dots');
+    var countPlus = getCount('plus');
+    var countCombined = getCount('combined');
+    var countCase = getCount('case');
+
+    
+    var cleanLen = parsed.baseLocal.replace(/\./g, '').length;
+    var realDotsMax = getDotsMax(cleanLen);
+    countDots = Math.min(countDots, realDotsMax);
+
+    var dotEmails = generateDotVariations(parsed.baseLocal, countDots).map(function(v) {
+      return v + '@' + parsed.domain;
+    });
+    groups.push({
+      method: 'dots', label: i18n.methodDots, desc: i18n.methodDotsDesc,
+      delivery: 'confirmed', emails: dotEmails
+    });
+
+    var plusEmails = generatePlusVariations(parsed.baseLocal, parsed.domain, countPlus);
+    groups.push({
+      method: 'plus', label: i18n.methodPlus, desc: i18n.methodPlusDesc,
+      delivery: 'confirmed', emails: plusEmails
+    });
+
+    
+    var realCombinedMax = getCombinedMax();
+    countCombined = Math.min(countCombined, realCombinedMax);
+
+    var combinedEmails = generateCombinedVariations(parsed.baseLocal, parsed.domain, countCombined);
+    groups.push({
+      method: 'combined', label: i18n.methodCombined, desc: i18n.methodCombinedDesc,
+      delivery: 'confirmed', emails: combinedEmails
+    });
+
+    var realCaseMax = getCaseMax(cleanLen);
+    countCase = Math.min(countCase, realCaseMax);
+
+    var caseEmails = generateCaseVariations(parsed.baseLocal, parsed.domain, countCase);
+    groups.push({
+      method: 'case', label: i18n.methodCase, desc: i18n.methodCaseDesc,
+      delivery: 'confirmed', emails: caseEmails
+    });
+
+    
+    if (parsed.domain === 'gmail.com') {
+      groups.push({
+        method: 'subaddress', label: i18n.methodDomain,
+        desc: 'googlemail.com = gmail.com (Google official)',
+        delivery: 'confirmed', emails: [parsed.baseLocal + '@googlemail.com']
+      });
+    } else if (parsed.domain === 'googlemail.com') {
+      groups.push({
+        method: 'subaddress', label: i18n.methodDomain,
+        desc: 'gmail.com = googlemail.com (Google official)',
+        delivery: 'confirmed', emails: [parsed.baseLocal + '@gmail.com']
+      });
+    }
+
+    return groups;
+  }
+
+  function generateForOutlook(parsed) {
+    var groups = [];
+    var countPlus = getCount('plus');
+    var countCase = getCount('case');
+    var realCaseMax = getCaseMax(parsed.baseLocal.length);
+    countCase = Math.min(countCase, realCaseMax);
+
+    var plusEmails = generatePlusVariations(parsed.baseLocal, parsed.domain, countPlus);
+    groups.push({
+      method: 'plus', label: i18n.methodPlus, desc: i18n.methodPlusDesc,
+      delivery: 'likely', emails: plusEmails
+    });
+
+    var caseEmails = generateCaseVariations(parsed.baseLocal, parsed.domain, countCase);
+    groups.push({
+      method: 'case', label: i18n.methodCase, desc: i18n.methodCaseDesc,
+      delivery: 'confirmed', emails: caseEmails
+    });
+
+    return groups;
+  }
+
+  function generateForYahoo(parsed) {
+    var groups = [];
+    var countDash = getCount('dash');
+    var countPlus = getCount('plus');
+    var countCase = getCount('case');
+    var realCaseMax = getCaseMax(parsed.baseLocal.length);
+    countCase = Math.min(countCase, realCaseMax);
+
+    var dashLimit = Math.min(DASH_TAGS.length, countDash);
+    var dashEmails = DASH_TAGS.slice(0, dashLimit).map(function(t) {
+      return parsed.baseLocal + '-' + t + '@' + parsed.domain;
+    });
+    groups.push({
+      method: 'dash', label: i18n.methodDash, desc: i18n.methodDashDesc,
+      delivery: 'uncertain', emails: dashEmails
+    });
+
+    var plusEmails = generatePlusVariations(parsed.baseLocal, parsed.domain, countPlus);
+    groups.push({
+      method: 'plus', label: i18n.methodPlus, desc: i18n.methodPlusDesc,
+      delivery: 'uncertain', emails: plusEmails
+    });
+
+    var caseEmails = generateCaseVariations(parsed.baseLocal, parsed.domain, countCase);
+    groups.push({
+      method: 'case', label: i18n.methodCase, desc: i18n.methodCaseDesc,
+      delivery: 'confirmed', emails: caseEmails
+    });
+
+    return groups;
+  }
+
+  function generateForYandex(parsed) {
+    var groups = [];
+    var countPlus = getCount('plus');
+    var countCase = getCount('case');
+    var realCaseMax = getCaseMax(parsed.baseLocal.length);
+    countCase = Math.min(countCase, realCaseMax);
+
+    var plusEmails = generatePlusVariations(parsed.baseLocal, parsed.domain, countPlus);
+    groups.push({
+      method: 'plus', label: i18n.methodPlus, desc: i18n.methodPlusDesc,
+      delivery: 'likely', emails: plusEmails
+    });
+
+    var yandexDomains = ['yandex.ru', 'yandex.com', 'ya.ru', 'yandex.ua', 'yandex.by', 'yandex.kz'];
+    var domainAliases = yandexDomains.filter(function(d) {
+      return d !== parsed.domain;
+    }).map(function(d) {
+      return parsed.baseLocal + '@' + d;
+    });
+    if (domainAliases.length > 0) {
+      groups.push({
+        method: 'subaddress', label: i18n.methodDomain, desc: i18n.methodDomainDesc,
+        delivery: 'uncertain', emails: domainAliases
+      });
+    }
+
+    var caseEmails = generateCaseVariations(parsed.baseLocal, parsed.domain, countCase);
+    groups.push({
+      method: 'case', label: i18n.methodCase, desc: i18n.methodCaseDesc,
+      delivery: 'confirmed', emails: caseEmails
+    });
+
+    return groups;
+  }
+
+  function generateForProton(parsed) {
+    var groups = [];
+    var countPlus = getCount('plus');
+    var countCase = getCount('case');
+    var realCaseMax = getCaseMax(parsed.baseLocal.length);
+    countCase = Math.min(countCase, realCaseMax);
+
+    var plusEmails = generatePlusVariations(parsed.baseLocal, parsed.domain, countPlus);
+    groups.push({
+      method: 'plus', label: i18n.methodPlus, desc: i18n.methodPlusDesc,
+      delivery: 'confirmed', emails: plusEmails
+    });
+
+    var protonDomains = ['protonmail.com', 'proton.me', 'pm.me', 'protonmail.ch'];
+    var domainAliases = protonDomains.filter(function(d) {
+      return d !== parsed.domain;
+    }).map(function(d) {
+      return parsed.baseLocal + '@' + d;
+    });
+    if (domainAliases.length > 0) {
+      groups.push({
+        method: 'subaddress', label: i18n.methodDomain, desc: i18n.methodDomainDesc,
+        delivery: 'likely', emails: domainAliases
+      });
+    }
+
+    var caseEmails = generateCaseVariations(parsed.baseLocal, parsed.domain, countCase);
+    groups.push({
+      method: 'case', label: i18n.methodCase, desc: i18n.methodCaseDesc,
+      delivery: 'confirmed', emails: caseEmails
+    });
+
+    return groups;
+  }
+
+  function generateForCustom(parsed) {
+    var groups = [];
+    var countPlus = getCount('plus');
+    var countCase = getCount('case');
+    var realCaseMax = getCaseMax(parsed.baseLocal.length);
+    countCase = Math.min(countCase, realCaseMax);
+
+    var plusEmails = generatePlusVariations(parsed.baseLocal, parsed.domain, countPlus);
+    groups.push({
+      method: 'plus', label: i18n.methodPlus, desc: i18n.methodPlusDesc,
+      delivery: 'uncertain', emails: plusEmails
+    });
+
+    var caseEmails = generateCaseVariations(parsed.baseLocal, parsed.domain, countCase);
+    groups.push({
+      method: 'case', label: i18n.methodCase, desc: i18n.methodCaseDesc,
+      delivery: 'uncertain', emails: caseEmails
+    });
+
+    return groups;
+  }
+
+  
+  function normalizeEmail(email, provider) {
+    var parsed = parseEmail(email);
+    if (!parsed) return null;
+
+    var rules = [];
+    var normalLocal = parsed.local;
+    var normalDomain = parsed.domain;
+
+    var lowered = normalLocal.toLowerCase();
+    if (normalLocal !== lowered) {
+      rules.push(i18n.normRuleCase);
+      normalLocal = lowered;
+    }
+
+    var providerRules = PROVIDER_RULES[provider] || PROVIDER_RULES.custom;
+
+    if (providerRules.normalizeDots) {
+      var withoutDots = normalLocal.replace(/\./g, '');
+      if (withoutDots !== normalLocal) {
+        normalLocal = withoutDots;
+        rules.push(i18n.normRuleDots);
+      }
+    }
+
+    if (provider !== 'custom') {
+      var plusIdx = normalLocal.indexOf('+');
+      if (plusIdx > -1) {
+        normalLocal = normalLocal.substring(0, plusIdx);
+        rules.push(i18n.normRulePlus);
+      }
+    }
+
+    if (providerRules.normalizeDomain && normalDomain !== providerRules.normalizeDomain) {
+      if (provider === 'gmail') {
+        rules.push(i18n.normRuleGoogleapps);
+        normalDomain = providerRules.normalizeDomain;
+      } else if (provider === 'yandex') {
+        rules.push(i18n.normRuleYandex + ' (uncertain)');
+        normalDomain = providerRules.normalizeDomain;
+      }
+    }
+
+    return { original: email, normalized: normalLocal + '@' + normalDomain, rules: rules };
+  }
+
+  
+  function showToast(msg) {
+    var toast = document.getElementById('toast');
+    document.getElementById('toast-message').textContent = msg;
+    toast.classList.remove('hidden');
+    setTimeout(function() { toast.classList.add('hidden'); }, 2000);
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function getDeliveryBadge(delivery) {
+    if (delivery === 'confirmed') {
+      return '<span class="badge badge-xs badge-success gap-0.5"><ion-icon name="checkmark-circle-outline" class="text-[10px]"></ion-icon> ' + i18n.deliveryConfirmed + '</span>';
+    } else if (delivery === 'likely') {
+      return '<span class="badge badge-xs badge-warning gap-0.5"><ion-icon name="help-circle-outline" class="text-[10px]"></ion-icon> ' + i18n.deliveryLikely + '</span>';
+    }
+    return '<span class="badge badge-xs badge-ghost gap-0.5"><ion-icon name="alert-circle-outline" class="text-[10px]"></ion-icon> ' + i18n.deliveryUncertain + '</span>';
+  }
+
+  function getMethodIcon(method) {
+    return { dots: 'ellipsis-horizontal-outline', plus: 'add-circle-outline',
+      combined: 'git-merge-outline', case: 'text-outline',
+      dash: 'remove-outline', subaddress: 'at-outline'
+    }[method] || 'mail-outline';
+  }
+
+  
+  var allGeneratedEmails = [];
+  var allGeneratedGroups = [];
+
+  function setExportButtons(enabled) {
+    document.getElementById('btn-copy-all').disabled = !enabled;
+    document.getElementById('btn-export-txt').disabled = !enabled;
+    document.getElementById('btn-export-json').disabled = !enabled;
+    document.getElementById('btn-export-csv').disabled = !enabled;
+  }
+
+  function renderResults(groups) {
+    var container = document.getElementById('results-container');
+    var emptyState = document.getElementById('results-empty');
+    var countBadge = document.getElementById('results-count');
+
+    container.innerHTML = '';
+    var totalCount = 0;
+    allGeneratedEmails = [];
+    allGeneratedGroups = groups;
+
+    groups.forEach(function(group) {
+      if (group.emails.length === 0) return;
+      totalCount += group.emails.length;
+
+      var groupEl = document.createElement('div');
+      groupEl.className = 'bg-base-200/30 rounded-lg sm:rounded-xl overflow-hidden';
+
+      var headerHtml = '<div class="flex flex-wrap items-center gap-2 p-2.5 sm:p-3 border-b border-base-200 dark:border-base-content/10">';
+      headerHtml += '<ion-icon name="' + getMethodIcon(group.method) + '" class="text-primary shrink-0"></ion-icon>';
+      headerHtml += '<div class="min-w-0 flex-1">';
+      headerHtml += '<div class="font-semibold text-xs sm:text-sm">' + escapeHtml(group.label) + '</div>';
+      headerHtml += '<div class="text-[9px] sm:text-[10px] text-base-content/50">' + escapeHtml(group.desc) + '</div>';
+      headerHtml += '</div>';
+      headerHtml += '<span class="badge badge-sm badge-outline">' + group.emails.length + ' ' + i18n.variationsCount + '</span>';
+      headerHtml += getDeliveryBadge(group.delivery);
+      headerHtml += '</div>';
+
+      var listHtml = '<div class="p-2 sm:p-3 space-y-1 max-h-60 overflow-y-auto">';
+      group.emails.forEach(function(email) {
+        allGeneratedEmails.push(email);
+        listHtml += '<div class="flex items-center gap-2 p-1.5 rounded-md hover:bg-base-200/50 transition-colors group/item">';
+        listHtml += '<code class="flex-1 text-[10px] sm:text-xs font-mono break-all select-all">' + escapeHtml(email) + '</code>';
+        listHtml += '<button type="button" class="btn btn-ghost btn-xs opacity-0 group-hover/item:opacity-100 transition-opacity shrink-0 copy-single-btn" data-email="' + escapeHtml(email) + '" title="' + i18n.copyAlias + '">';
+        listHtml += '<ion-icon name="copy-outline"></ion-icon></button></div>';
+      });
+      listHtml += '</div>';
+
+      groupEl.innerHTML = headerHtml + listHtml;
+      container.appendChild(groupEl);
+    });
+
+    if (totalCount > 0) {
+      container.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+      countBadge.textContent = totalCount;
+      countBadge.classList.remove('hidden');
+      setExportButtons(true);
+    } else {
+      container.classList.add('hidden');
+      emptyState.classList.remove('hidden');
+      countBadge.classList.add('hidden');
+      setExportButtons(false);
+    }
+
+    container.querySelectorAll('.copy-single-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        navigator.clipboard.writeText(btn.getAttribute('data-email')).then(function() {
+          showToast(i18n.copied);
+        });
+      });
+    });
+
+    document.getElementById('status-text').textContent =
+      i18n.statusGenerated + ' ' + totalCount + ' ' + i18n.statusAliases;
+  }
+
+  function renderNormalization(email, provider) {
+    var norm = normalizeEmail(email, provider);
+    if (!norm) return;
+
+    var panel = document.getElementById('norm-panel');
+    document.getElementById('norm-input').textContent = norm.original;
+    document.getElementById('norm-result').textContent = norm.normalized;
+
+    var rulesContainer = document.getElementById('norm-rules');
+    rulesContainer.innerHTML = '';
+
+    if (norm.rules.length === 0) {
+      rulesContainer.innerHTML = '<div class="text-[10px] sm:text-xs text-base-content/40 italic">No transformations applied</div>';
+    } else {
+      norm.rules.forEach(function(rule) {
+        var el = document.createElement('div');
+        el.className = 'flex items-center gap-1.5 text-[10px] sm:text-xs';
+        el.innerHTML = '<ion-icon name="checkmark-outline" class="text-success shrink-0"></ion-icon> ' + escapeHtml(rule);
+        rulesContainer.appendChild(el);
+      });
+    }
+
+    panel.classList.remove('hidden');
+  }
+
+  
+  function generate() {
+    var emailInput = document.getElementById('email-input');
+    var email = emailInput.value.trim();
+
+    if (!email || email.indexOf('@') === -1) {
+      emailInput.classList.add('input-error');
+      setTimeout(function() { emailInput.classList.remove('input-error'); }, 1500);
+      return;
+    }
+
+    var selectedProvider = document.getElementById('provider-select').value;
+    var provider = selectedProvider === 'auto' ? detectProvider(email) : selectedProvider;
+    if (!provider) provider = 'custom';
+
+    document.getElementById('detected-provider-text').textContent = getProviderName(provider);
+    document.getElementById('detected-provider').classList.remove('hidden');
+
+    var parsed = parseEmail(email);
+    if (!parsed) return;
+
+    
+    var cleanLen = parsed.baseLocal.replace(/\./g, '').length;
+    updateCountVisibility(provider);
+    updateCountDisplays(cleanLen);
+
+    var groups = [];
+    switch (provider) {
+      case 'gmail':   groups = generateForGmail(parsed); break;
+      case 'outlook':  groups = generateForOutlook(parsed); break;
+      case 'yahoo':   groups = generateForYahoo(parsed); break;
+      case 'yandex':  groups = generateForYandex(parsed); break;
+      case 'proton':  groups = generateForProton(parsed); break;
+      default:      groups = generateForCustom(parsed);
+    }
+
+    renderResults(groups);
+    renderNormalization(email, provider);
+  }
+
+  
+  function downloadFile(content, filename, type) {
+    var blob = new Blob([content], { type: type + ';charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = filename; a.style.display = 'none';
+    document.body.appendChild(a); a.click();
+    setTimeout(function() { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+  }
+
+  function getExportFilename(ext) {
+    var now = new Date();
+    var date = now.getFullYear() + '-' +
+      String(now.getMonth() + 1).padStart(2, '0') + '-' +
+      String(now.getDate()).padStart(2, '0');
+    return date + '_email-aliases' + ext;
+  }
+
+  
+  document.getElementById('btn-generate').addEventListener('click', generate);
+
+  document.getElementById('email-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); generate(); }
+  });
+
+  document.getElementById('email-input').addEventListener('input', function() {
+    var email = this.value.trim();
+    if (email.indexOf('@') > -1) {
+      var provider = detectProvider(email);
+      if (provider) {
+        document.getElementById('detected-provider-text').textContent = getProviderName(provider);
+        document.getElementById('detected-provider').classList.remove('hidden');
+        updateCountVisibility(provider);
+
+        var parsed = parseEmail(email);
+        if (parsed) {
+          var cleanLen = parsed.baseLocal.replace(/\./g, '').length;
+          updateCountDisplays(cleanLen);
+        }
+      }
+    } else {
+      document.getElementById('detected-provider').classList.add('hidden');
+    }
+  });
+
+  
+  document.getElementById('provider-select').addEventListener('change', function() {
+    var selected = this.value;
+    var email = document.getElementById('email-input').value.trim();
+    var provider = selected === 'auto' ? (email.indexOf('@') > -1 ? detectProvider(email) : 'custom') : selected;
+    updateCountVisibility(provider || 'custom');
+  });
+
+  document.getElementById('btn-copy-all').addEventListener('click', function() {
+    if (!allGeneratedEmails.length) return;
+    navigator.clipboard.writeText(allGeneratedEmails.join('\n')).then(function() { showToast(i18n.copied); });
+  });
+
+  document.getElementById('btn-export-txt').addEventListener('click', function() {
+    if (!allGeneratedEmails.length) return;
+    downloadFile(allGeneratedEmails.join('\n'), getExportFilename('.txt'), 'text/plain');
+    showToast(i18n.copied);
+  });
+
+  document.getElementById('btn-export-json').addEventListener('click', function() {
+    if (!allGeneratedGroups.length) return;
+    var data = {
+      source: document.getElementById('email-input').value.trim(),
+      generated: new Date().toISOString(),
+      groups: allGeneratedGroups.map(function(g) {
+        return { method: g.method, label: g.label, delivery: g.delivery, count: g.emails.length, emails: g.emails };
+      }),
+      total: allGeneratedEmails.length
+    };
+    downloadFile(JSON.stringify(data, null, 2), getExportFilename('.json'), 'application/json');
+    showToast(i18n.copied);
+  });
+
+  document.getElementById('btn-export-csv').addEventListener('click', function() {
+    if (!allGeneratedGroups.length) return;
+    var lines = ['email,method,delivery'];
+    allGeneratedGroups.forEach(function(g) {
+      g.emails.forEach(function(email) {
+        lines.push('"' + email + '","' + g.method + '","' + g.delivery + '"');
+      });
+    });
+    downloadFile(lines.join('\n'), getExportFilename('.csv'), 'text/csv');
+    showToast(i18n.copied);
+  });
+
+  
+  loadSettings();
+  updateCountDisplays(7); 
+  updateCountVisibility('gmail'); 
+
+})();
+</script>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Максим Александров<br>
+<strong>Age:</strong> 28
+<strong>Location:</strong> Тула, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>Этот блог — мой personal knowledge base, где я пушу заметки про tech stack, life experience и всё, что триггерит мой interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — готов к мёрджу идей и совместным проектам.</p>
+<p><img src="/img/meme.webp" alt="meme"></p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-яп">💻 ЯП</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Адаптивная вёрстка (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST API</strong></li>
+</ul>
+<h2 id="-базы-данных">🗄️ Базы данных</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-дизайн-и-графика">🎨 Дизайн и графика</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX дизайн и прототипирование</li>
+<li><strong>Photoshop</strong> — графика и обработка изображений</li>
+<li><strong>After Effects</strong> — моушн-дизайн и анимация 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои Open Source проекты 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои проекты 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN-сервис в Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN-сервис в Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Социальные сети</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+     
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

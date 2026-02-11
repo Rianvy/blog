@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://0x69.ru/ru/</loc>
-    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -14,6 +14,168 @@
                 hreflang="ru"
                 href="https://0x69.ru/ru/"
                 />
+  </url><url>
+    <loc>https://0x69.ru/ru/tags/alias/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/alias/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/alias/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/ru/tags/ascii/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/ascii/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/ascii/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/ru/tags/email/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/email/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/email/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/ru/utilities/email-alias-tester/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/utilities/email-alias-tester/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/utilities/email-alias-tester/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/ru/tags/files/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/files/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/files/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/ru/tags/gitignore/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/gitignore/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/gitignore/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/ru/tags/gmail/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/gmail/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/gmail/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/ru/tags/project/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/project/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/project/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/ru/tags/structure/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/structure/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/structure/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/ru/tags/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/ru/tags/tree/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/tree/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/tags/tree/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/ru/utilities/treesnap/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/utilities/treesnap/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/ru/utilities/treesnap/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/ru/tags/%D0%BD%D0%BE%D1%80%D0%BC%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://0x69.ru/ru/tags/%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/</loc>
+    <lastmod>2026-02-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://0x69.ru/ru/tags/accounts/</loc>
     <lastmod>2026-02-10T00:00:00+00:00</lastmod>
@@ -104,19 +266,6 @@
                 rel="alternate"
                 hreflang="ru"
                 href="https://0x69.ru/ru/utilities/super-logout/"
-                />
-  </url><url>
-    <loc>https://0x69.ru/ru/tags/</loc>
-    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.ru/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.ru/ru/tags/"
                 />
   </url><url>
     <loc>https://0x69.ru/ru/tags/bulk/</loc>

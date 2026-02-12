@@ -6,8 +6,15 @@
     <description>Recent content in Html on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>ru</language>
-    <lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://0x69.ru/ru/tags/html/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HTML Formatter</title>
+      <link>https://0x69.ru/ru/utilities/html-formatter/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/ru/utilities/html-formatter/</guid>
+      <description>&lt;p&gt;Форматирование, минификация и оптимизация HTML кода с поддержкой шаблонизаторов&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Markdown Editor</title>
       <link>https://0x69.ru/ru/utilities/markdown-editor/</link>

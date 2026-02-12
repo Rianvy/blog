@@ -6,8 +6,15 @@
     <description>Recent content in Optimization on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 11 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://0x69.ru/en/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CSS Formatter</title>
+      <link>https://0x69.ru/en/utilities/css-formatter/</link>
+      <pubDate>Wed, 11 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/css-formatter/</guid>
+      <description>&lt;p&gt;Format, minify and optimize CSS code with flexible settings&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Image Compressor</title>
       <link>https://0x69.ru/en/utilities/image-compressor/</link>

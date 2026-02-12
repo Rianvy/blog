@@ -1,0 +1,2694 @@
+<!DOCTYPE html>
+<html lang="ru"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+HTML Formatter
+ | 0x69.ru</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Ox69" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="canonical" href="https://0x69.ru/ru/utilities/html-formatter/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/ru/utilities/html-formatter/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="HTML Formatter">
+  <meta property="og:description" content="Форматирование, минификация и оптимизация HTML кода с поддержкой шаблонизаторов">
+  <meta property="og:locale" content="ru">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="utilities">
+    <meta property="article:published_time" content="2026-02-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-12T00:00:00+00:00">
+    <meta property="article:tag" content="Html">
+    <meta property="article:tag" content="Formatter">
+    <meta property="article:tag" content="Minify">
+    <meta property="article:tag" content="Beautify">
+    <meta property="article:tag" content="Шаблоны">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="HTML Formatter">
+  <meta name="twitter:description" content="Форматирование, минификация и оптимизация HTML кода с поддержкой шаблонизаторов">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Повернуть!"
+                aria-label="Повернуть!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/ru/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">Документируй сегодня то, что забудешь завтра</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="Обо мне">Обо мне</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/ru/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Поиск"
+   aria-label="Поиск">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/ru/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Категории"
+   aria-label="Категории">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/ru/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Портфолио"
+   aria-label="Портфолио">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/ru/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Утилиты"
+   aria-label="Утилиты">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/utilities/html-formatter/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/ru/utilities/html-formatter/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/ru/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/ru/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">168</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/ru/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Меню</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="Обо мне"
+                aria-label="Обо мне">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">Обо мне</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/utilities/html-formatter/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/utilities/html-formatter/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/ru/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Поиск</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Категории</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Портфолио</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Утилиты">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Утилиты</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">24</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">168</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/ru/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
+
+  
+  <div class="text-center mb-5 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">🌐</span>
+    </div>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">HTML Formatter</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">Форматирование, минификация и оптимизация HTML кода с поддержкой шаблонизаторов</p>
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="code-outline"></ion-icon>
+        Форматирование
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+        <ion-icon name="contract-outline"></ion-icon>
+        Минификация
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="layers-outline"></ion-icon>
+        Шаблоны
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="analytics-outline"></ion-icon>
+        Анализ
+      </span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
+
+    
+    <div class="xl:col-span-1 space-y-3 sm:space-y-4 order-2 xl:order-1">
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="flash-outline" class="text-warning"></ion-icon>
+            Настройки
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-2">
+          <div class="grid grid-cols-2 gap-1.5">
+            <button type="button" id="btn-html-pretty" class="btn btn-success btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="sparkles-outline"></ion-icon>
+              Beautify
+            </button>
+            <button type="button" id="btn-html-expanded" class="btn btn-info btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="expand-outline"></ion-icon>
+              Expanded
+            </button>
+            <button type="button" id="btn-html-compact" class="btn btn-secondary btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="contract-outline"></ion-icon>
+              Compact
+            </button>
+            <button type="button" id="btn-html-inline" class="btn btn-accent btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="reorder-two-outline"></ion-icon>
+              Inline
+            </button>
+          </div>
+          <button type="button" id="btn-html-oneline" class="btn btn-outline btn-xs sm:btn-sm w-full gap-1 justify-start">
+            <ion-icon name="remove-outline"></ion-icon>
+            В одну строку
+          </button>
+          <div class="divider my-1 text-[10px]">Опции минификации</div>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button type="button" id="btn-html-minify" class="btn btn-warning btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="resize-outline"></ion-icon>
+              Minify
+            </button>
+            <button type="button" id="btn-html-safe" class="btn btn-outline btn-warning btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="shield-checkmark-outline"></ion-icon>
+              Safe Minify
+            </button>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="options-outline" class="text-primary"></ion-icon>
+              Настройки
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+            <div class="form-control">
+              <label class="label py-0.5"><span class="label-text text-xs font-medium">Размер отступа</span></label>
+              <div class="grid grid-cols-3 gap-1">
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="html-indent" value="2" class="hidden" checked /><span class="text-xs font-mono">2</span>
+                </label>
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="html-indent" value="4" class="hidden" /><span class="text-xs font-mono">4</span>
+                </label>
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="html-indent" value="tab" class="hidden" /><span class="text-xs font-mono">Tab</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-control">
+              <label class="label py-0.5"><span class="label-text text-xs font-medium">Перенос атрибутов</span></label>
+              <select id="opt-wrap-attrs" class="select select-bordered select-xs text-xs">
+                <option value="auto">Авто</option>
+                <option value="force">Каждый на новой строке</option>
+                <option value="aligned">С выравниванием</option>
+                <option value="none">Не переносить</option>
+              </select>
+            </div>
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">Макс. длина строки</span>
+                <span class="label-text-alt text-[10px] font-mono" id="html-max-line-val">120</span>
+              </label>
+              <input type="range" id="opt-html-max-line" min="40" max="200" value="120" class="range range-xs range-primary" />
+            </div>
+            <div class="divider my-0.5"></div>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">Самозакрывающиеся теги</span><p class="text-[9px] text-base-content/50">&lt;br /&gt; вместо &lt;br&gt;</p></div>
+              <input type="checkbox" id="opt-self-closing" class="toggle toggle-xs toggle-primary" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">Сортировать атрибуты</span><p class="text-[9px] text-base-content/50">id, class, name, type, ...</p></div>
+              <input type="checkbox" id="opt-sort-attrs" class="toggle toggle-xs toggle-secondary" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">Слэш в void элементах</span></div>
+              <input type="checkbox" id="opt-void-slash" class="toggle toggle-xs toggle-primary" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">Inline-элементы</span><p class="text-[9px] text-base-content/50">span, a, strong, em — без переносов</p></div>
+              <input type="checkbox" id="opt-unformatted" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+          </div>
+        </details>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="construct-outline" class="text-warning"></ion-icon>
+              Опции минификации
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Удалить комментарии</span>
+              <input type="checkbox" id="opt-html-remove-comments" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">Сохранить условные</span><p class="text-[9px] text-base-content/50">&lt;!--[if IE]&gt; ... &lt;![endif]--&gt;</p></div>
+              <input type="checkbox" id="opt-keep-conditional" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Свернуть пробелы</span>
+              <input type="checkbox" id="opt-collapse-ws" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">Удалить пустые атрибуты</span></div>
+              <input type="checkbox" id="opt-remove-empty-attrs" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">Сократить boolean</span><p class="text-[9px] text-base-content/50">disabled=&#34;disabled&#34; → disabled</p></div>
+              <input type="checkbox" id="opt-collapse-bool" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">Удалить необязательные теги</span><p class="text-[9px] text-base-content/50">&lt;/li&gt;, &lt;/td&gt;, &lt;/p&gt;</p></div>
+              <input type="checkbox" id="opt-remove-optional" class="toggle toggle-xs toggle-error" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">Удалить type атрибуты</span><p class="text-[9px] text-base-content/50">type=&#34;text/javascript&#34;, type=&#34;text/css&#34;</p></div>
+              <input type="checkbox" id="opt-remove-type" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">Удалить избыточные</span><p class="text-[9px] text-base-content/50">method=&#34;get&#34;, charset на script</p></div>
+              <input type="checkbox" id="opt-remove-redundant" class="toggle toggle-xs toggle-warning" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Минифицировать inline CSS</span>
+              <input type="checkbox" id="opt-minify-css" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Минифицировать inline JS</span>
+              <input type="checkbox" id="opt-minify-js" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+          </div>
+        </details>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="lock-closed-outline" class="text-success"></ion-icon>
+              Сохранение формата
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Сохранять &lt;pre&gt;</span>
+              <input type="checkbox" id="opt-preserve-pre" class="toggle toggle-xs toggle-success" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Сохранять &lt;code&gt;</span>
+              <input type="checkbox" id="opt-preserve-code" class="toggle toggle-xs toggle-success" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Сохранять &lt;textarea&gt;</span>
+              <input type="checkbox" id="opt-preserve-textarea" class="toggle toggle-xs toggle-success" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Сохранять &lt;script&gt;</span>
+              <input type="checkbox" id="opt-preserve-script" class="toggle toggle-xs toggle-success" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Сохранять &lt;style&gt;</span>
+              <input type="checkbox" id="opt-preserve-style" class="toggle toggle-xs toggle-success" checked />
+            </label>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    
+    <div class="xl:col-span-3 space-y-3 sm:space-y-4 order-1 xl:order-2">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+        
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="create-outline" class="text-primary"></ion-icon>
+              Исходный HTML
+            </h2>
+            <button type="button" id="btn-html-paste" class="btn btn-ghost btn-xs gap-1"><ion-icon name="clipboard-outline"></ion-icon></button>
+            <button type="button" id="btn-html-sample" class="btn btn-ghost btn-xs gap-1"><ion-icon name="code-outline"></ion-icon></button>
+            <button type="button" id="btn-html-clear" class="btn btn-ghost btn-xs gap-1"><ion-icon name="trash-outline"></ion-icon></button>
+          </div>
+          <div class="relative">
+            <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="html-input-stats"></div>
+            <textarea id="html-input" class="w-full h-[350px] sm:h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none" placeholder="Вставьте HTML код..." spellcheck="false"></textarea>
+          </div>
+        </div>
+        
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="checkmark-circle-outline" class="text-success"></ion-icon>
+              Результат
+            </h2>
+            <button type="button" id="btn-html-copy" class="btn btn-primary btn-xs gap-1" disabled>
+              <ion-icon name="copy-outline"></ion-icon><span class="hidden sm:inline">Копировать</span>
+            </button>
+            <button type="button" id="btn-html-download" class="btn btn-ghost btn-xs gap-1" disabled>
+              <ion-icon name="download-outline"></ion-icon><span class="hidden sm:inline">.html</span>
+            </button>
+          </div>
+          <div class="relative">
+            <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="html-output-stats"></div>
+            <textarea id="html-output" class="w-full h-[350px] sm:h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none" readonly placeholder="Результат появится здесь"></textarea>
+          </div>
+        </div>
+      </div>
+
+      
+      <div id="html-error-panel" class="hidden bg-error/5 border border-error/20 rounded-xl sm:rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-2 p-3 sm:p-4">
+          <ion-icon name="alert-circle-outline" class="text-error text-xl shrink-0"></ion-icon>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-xs sm:text-sm text-error">Ошибка парсинга</div>
+            <pre class="text-[10px] sm:text-xs mt-1 text-error/80 font-mono whitespace-pre-wrap break-all" id="html-error-message"></pre>
+          </div>
+        </div>
+      </div>
+
+      
+      <div id="html-stats-bar" class="hidden">
+        <div class="grid grid-cols-3 gap-3 sm:gap-4">
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Исходный</div>
+            <div class="text-sm sm:text-lg font-bold text-primary" id="html-stat-original">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Результат</div>
+            <div class="text-sm sm:text-lg font-bold text-success" id="html-stat-formatted">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Сжатие</div>
+            <div class="text-sm sm:text-lg font-bold text-warning" id="html-stat-reduction">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-info/10 flex items-center justify-center shrink-0">
+            <ion-icon name="help-circle-outline" class="text-lg sm:text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">Как это работает?</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Возможности инструмента</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          
+          
+          
+          
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <ion-icon name="scan-outline" class="text-primary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Парсинг</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Анализирует HTML: теги, атрибуты, текст, комментарии, шаблоны и вложенность.</p>
+          </div>
+          
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center">
+                <ion-icon name="sparkles-outline" class="text-success"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Форматирование</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Применяет стиль: отступы, переносы атрибутов, порядок, inline-элементы.</p>
+          </div>
+          
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-warning/10 flex items-center justify-center">
+                <ion-icon name="contract-outline" class="text-warning"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Минификация</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Удаляет пробелы, комментарии, необязательные теги и атрибуты.</p>
+          </div>
+          
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center">
+                <ion-icon name="download-outline" class="text-secondary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Экспорт</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Копируйте результат или скачайте как .html файл.</p>
+          </div>
+          
+        </div>
+      </div>
+    </details>
+  </div>
+
+  
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span id="html-status-text">Готов к работе</span>
+    <span>Всё работает локально в браузере</span>
+  </div>
+</div>
+
+
+<div id="html-toast" class="toast toast-top toast-center hidden z-50">
+  <div class="alert alert-success py-2 px-4">
+    <ion-icon name="checkmark-circle-outline" class="text-lg"></ion-icon>
+    <span id="html-toast-message" class="text-sm"></span>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  var i18n = {
+    copied: "\"Скопировано!\"",
+    cleared: "\"Очищено\"",
+    downloaded: "\"Файл скачан!\"",
+    statusReady: "\"Готов к работе\"",
+    statusFormatted: "\"Отформатировано\"",
+    statusMinified: "\"Минифицировано\"",
+    statusError: "\"Ошибка\"",
+    statsLines: "\"строк\"",
+    statsChars: "\"символов\""
+  };
+
+  var STORAGE_KEY = 'htmlformatter-settings';
+
+  
+
+  var VOID_ELEMENTS = new Set([
+    'area','base','br','col','embed','hr','img','input','link','meta',
+    'param','source','track','wbr','command','keygen','menuitem'
+  ]);
+
+  var RAW_TEXT_ELEMENTS = new Set(['script','style','textarea','title']);
+
+  var INLINE_ELEMENTS = new Set([
+    'a','abbr','acronym','b','bdo','big','br','button','cite','code','dfn',
+    'em','i','img','input','kbd','label','map','object','output','q','samp',
+    'select','small','span','strong','sub','sup','textarea','time','tt','u','var','wbr'
+  ]);
+
+  var PRESERVE_ELEMENTS = new Set(['pre','code','textarea','script','style','xmp']);
+
+  var BOOLEAN_ATTRS = new Set([
+    'allowfullscreen','async','autofocus','autoplay','checked','controls',
+    'default','defer','disabled','formnovalidate','hidden','inert','ismap',
+    'itemscope','loop','multiple','muted','nomodule','novalidate','open',
+    'playsinline','readonly','required','reversed','selected','shadowrootclonable',
+    'shadowrootdelegatesfocus','shadowrootserializable'
+  ]);
+
+  var REDUNDANT_ATTRS = {
+    'form': { 'method': 'get' },
+    'script': { 'charset': 'utf-8' },
+    'a': { 'shape': 'rect' },
+    'area': { 'shape': 'rect' }
+  };
+
+  var ATTR_SORT_ORDER = [
+    'id','class','name','type','for','href','src','action','method',
+    'value','placeholder','title','alt','role','aria-*','data-*',
+    'style','width','height','rel','target','disabled','checked',
+    'readonly','required','selected','hidden'
+  ];
+
+  var OPTIONAL_CLOSING_TAGS = new Set([
+    'html','head','body','li','dt','dd','p','rt','rp',
+    'optgroup','option','colgroup','caption','thead','tbody','tfoot',
+    'tr','td','th'
+  ]);
+
+  
+  var DBLOPEN = String.fromCharCode(123, 123);   
+  var DBLCLOSE = String.fromCharCode(125, 125);   
+  var PCTOPEN = String.fromCharCode(123, 37);     
+  var PCTCLOSE = String.fromCharCode(37, 125);    
+  var EJSOPEN = String.fromCharCode(60, 37);      
+  var EJSCLOSE = String.fromCharCode(37, 62);     
+
+  
+  var SAMPLE_HTML = '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>Sample Page</title>\n  <link rel="stylesheet" href="styles.css" type="text/css">\n  <style>\n    .container { max-width: 1200px; margin: 0 auto; padding: 0px 16px; }\n    .header { background-color: #3366ff; color: #ffffff; }\n  </style>\n</head>\n<body>\n  \x3C!-- Main navigation -->\n  <header class="header">\n    <nav role="navigation">\n      <a href="/" class="logo">Logo</a>\n      <ul>\n        <li><a href="/about">About</a></li>\n        <li><a href="/contact">Contact</a></li>\n        <li><a href="/blog">Blog</a></li>\n      </ul>\n    </nav>\n  </header>\n\n  <main class="container">\n    <article>\n      <h1 class="title" id="main-title">Welcome</h1>\n      <p>This is a <strong>sample</strong> page with <em>various</em> elements.</p>\n      <img src="hero.jpg" alt="Hero image" width="800" height="400" />\n      <br>\n      <input type="text" name="search" placeholder="Search..." disabled="disabled" required="required" readonly="readonly">\n      <button type="submit" class="" id="">Search</button>\n    </article>\n\n    <section>\n      <h2>Code Example</h2>\n      <pre><code>function hello() {\n  console.log("Hello, World!");\n  return true;\n}</code></pre>\n    </section>\n\n    \x3C!--[if IE]>\n    <div class="ie-warning">Please upgrade your browser.</div>\n    <![endif]-->\n\n    \x3C!-- TODO: Add more content -->\n    <div class="cards">\n      <div class="card" data-id="1" data-category="tech">\n        <h3>Card Title</h3>\n        <p>Card description goes here.</p>\n        <a href="#" target="_blank" rel="noopener">Read more</a>\n      </div>\n      <div class="card" data-id="2" data-category="design">\n        <h3>Another Card</h3>\n        <p>More content here.</p>\n      </div>\n    </div>\n  </main>\n\n  <footer>\n    <p>&copy; 2025 Sample Site</p>\n  </footer>\n\n  \x3Cscript type="text/javascript">\n    document.addEventListener("DOMContentLoaded", function() {\n      console.log("Page loaded");\n      var items = document.querySelectorAll(".card");\n      items.forEach(function(item) {\n        item.addEventListener("click", function() {\n          console.log("Clicked:", item.dataset.id);\n        });\n      });\n    });\n  <\/script>\n</body>\n</html>';
+
+  
+  
+  
+
+  var TK = {
+    DOCTYPE: 'doctype',
+    OPEN_TAG: 'open',
+    CLOSE_TAG: 'close',
+    SELF_CLOSE: 'selfclose',
+    TEXT: 'text',
+    COMMENT: 'comment',
+    CDATA: 'cdata',
+    TEMPLATE: 'template',
+    RAW: 'raw'
+  };
+
+  function tokenizeHTML(html) {
+    var tokens = [];
+    var i = 0;
+    var len = html.length;
+
+    while (i < len) {
+      
+      var tplMatch = matchTemplate(html, i);
+      if (tplMatch) {
+        tokens.push({ type: TK.TEMPLATE, value: tplMatch });
+        i += tplMatch.length;
+        continue;
+      }
+
+      if (html[i] === '<') {
+        
+        if (html.substring(i, i + 4) === '\x3C!--') {
+          var endComment = html.indexOf('-->', i + 4);
+          if (endComment === -1) endComment = len - 3;
+          var comment = html.substring(i, endComment + 3);
+          tokens.push({ type: TK.COMMENT, value: comment });
+          i = endComment + 3;
+          continue;
+        }
+
+        
+        if (html.substring(i, i + 9) === '<![CDATA[') {
+          var endCdata = html.indexOf(']]>', i + 9);
+          if (endCdata === -1) endCdata = len - 3;
+          tokens.push({ type: TK.CDATA, value: html.substring(i, endCdata + 3) });
+          i = endCdata + 3;
+          continue;
+        }
+
+        
+        if (html.substring(i, i + 9).toUpperCase() === '<!DOCTYPE') {
+          var endDoctype = html.indexOf('>', i);
+          if (endDoctype === -1) endDoctype = len - 1;
+          tokens.push({ type: TK.DOCTYPE, value: html.substring(i, endDoctype + 1) });
+          i = endDoctype + 1;
+          continue;
+        }
+
+        
+        if (html[i + 1] === '/') {
+          var endClose = html.indexOf('>', i);
+          if (endClose === -1) endClose = len - 1;
+          var tagName = html.substring(i + 2, endClose).trim().toLowerCase();
+          tokens.push({ type: TK.CLOSE_TAG, tag: tagName, value: html.substring(i, endClose + 1) });
+          i = endClose + 1;
+          continue;
+        }
+
+        
+        var tag = parseOpenTag(html, i);
+        if (tag) {
+          tokens.push(tag.token);
+          i = tag.end;
+
+          
+          if (RAW_TEXT_ELEMENTS.has(tag.token.tag)) {
+            var closePattern = '</' + tag.token.tag;
+            var rawEnd = html.toLowerCase().indexOf(closePattern, i);
+            if (rawEnd === -1) rawEnd = len;
+            var rawContent = html.substring(i, rawEnd);
+            if (rawContent) {
+              tokens.push({ type: TK.RAW, value: rawContent, parentTag: tag.token.tag });
+            }
+            i = rawEnd;
+          }
+          continue;
+        }
+      }
+
+      
+      var nextTag = html.indexOf('<', i + 1);
+      if (nextTag === -1) nextTag = len;
+      
+      var nextTpl = findNextTemplate(html, i);
+      if (nextTpl > -1 && nextTpl < nextTag) nextTag = nextTpl;
+
+      var text = html.substring(i, nextTag);
+      if (text) {
+        tokens.push({ type: TK.TEXT, value: text });
+      }
+      i = nextTag;
+    }
+
+    return tokens;
+  }
+
+  function parseOpenTag(html, start) {
+    var i = start + 1;
+    var len = html.length;
+
+    
+    var tagStart = i;
+    while (i < len && /[a-zA-Z0-9\-_:.]/.test(html[i])) i++;
+    var tagName = html.substring(tagStart, i).toLowerCase();
+    if (!tagName) return null;
+
+    
+    var attrs = [];
+    while (i < len) {
+      while (i < len && /\s/.test(html[i])) i++;
+      if (i >= len || html[i] === '>' || (html[i] === '/' && i + 1 < len && html[i + 1] === '>')) break;
+
+      
+      var tpl = matchTemplate(html, i);
+      if (tpl) {
+        attrs.push({ name: tpl, value: null, template: true });
+        i += tpl.length;
+        continue;
+      }
+
+      
+      var nameStart = i;
+      while (i < len && !/[\s=\/>]/.test(html[i])) i++;
+      var attrName = html.substring(nameStart, i);
+      if (!attrName) { i++; continue; }
+
+      while (i < len && /\s/.test(html[i])) i++;
+
+      if (i < len && html[i] === '=') {
+        i++;
+        while (i < len && /\s/.test(html[i])) i++;
+
+        var attrValue = '';
+        if (i < len && (html[i] === '"' || html[i] === "'")) {
+          var quote = html[i];
+          i++;
+          var valStart = i;
+          while (i < len && html[i] !== quote) {
+            if (html[i] === '\\') i++;
+            i++;
+          }
+          attrValue = html.substring(valStart, i);
+          if (i < len) i++;
+          attrs.push({ name: attrName, value: attrValue, quote: quote });
+        } else {
+          var valStart = i;
+          while (i < len && !/[\s>]/.test(html[i])) i++;
+          attrValue = html.substring(valStart, i);
+          attrs.push({ name: attrName, value: attrValue, quote: '' });
+        }
+      } else {
+        attrs.push({ name: attrName, value: null });
+      }
+    }
+
+    var selfClosing = false;
+    if (i < len && html[i] === '/') { selfClosing = true; i++; }
+    if (i < len && html[i] === '>') i++;
+
+    var isVoid = VOID_ELEMENTS.has(tagName);
+    var type = (selfClosing || isVoid) ? TK.SELF_CLOSE : TK.OPEN_TAG;
+
+    return {
+      token: { type: type, tag: tagName, attrs: attrs, selfClosing: selfClosing, isVoid: isVoid },
+      end: i
+    };
+  }
+
+  
+  function matchTemplate(html, i) {
+    var c0 = html[i];
+    var c1 = i + 1 < html.length ? html[i + 1] : '';
+    var sub2 = c0 + c1;
+
+    
+    if (sub2 === DBLOPEN) {
+      var end = html.indexOf(DBLCLOSE, i + 2);
+      if (end > -1) return html.substring(i, end + 2);
+    }
+
+    
+    if (sub2 === PCTOPEN) {
+      var end = html.indexOf(PCTCLOSE, i + 2);
+      if (end > -1) return html.substring(i, end + 2);
+    }
+
+    
+    if (sub2 === EJSOPEN) {
+      var end = html.indexOf(EJSCLOSE, i + 2);
+      if (end > -1) return html.substring(i, end + 2);
+    }
+
+    
+    if (c0 === '@' && /[a-zA-Z]/.test(c1)) {
+      var j = i + 1;
+      while (j < html.length && /[a-zA-Z]/.test(html[j])) j++;
+      if (j < html.length && html[j] === '(') {
+        var depth = 1;
+        j++;
+        while (j < html.length && depth > 0) {
+          if (html[j] === '(') depth++;
+          if (html[j] === ')') depth--;
+          j++;
+        }
+        return html.substring(i, j);
+      }
+      return html.substring(i, j);
+    }
+
+    return null;
+  }
+
+  function findNextTemplate(html, start) {
+    var markers = [DBLOPEN, PCTOPEN, EJSOPEN, '@'];
+    var min = -1;
+    markers.forEach(function(m) {
+      var idx = html.indexOf(m, start + 1);
+      if (idx > -1 && (min === -1 || idx < min)) min = idx;
+    });
+    return min;
+  }
+
+  
+  
+  
+
+  function getOpts() {
+    var ir = document.querySelector('input[name="html-indent"]:checked');
+    var iv = ir ? ir.value : '2';
+    return {
+      indentStr: iv === 'tab' ? '\t' : ' '.repeat(parseInt(iv)),
+      wrapAttrs: document.getElementById('opt-wrap-attrs').value,
+      maxLineLength: parseInt(document.getElementById('opt-html-max-line').value) || 120,
+      selfClosing: document.getElementById('opt-self-closing').checked,
+      sortAttrs: document.getElementById('opt-sort-attrs').checked,
+      voidSlash: document.getElementById('opt-void-slash').checked,
+      unformatted: document.getElementById('opt-unformatted').checked,
+      removeComments: document.getElementById('opt-html-remove-comments').checked,
+      keepConditional: document.getElementById('opt-keep-conditional').checked,
+      collapseWs: document.getElementById('opt-collapse-ws').checked,
+      removeEmptyAttrs: document.getElementById('opt-remove-empty-attrs').checked,
+      collapseBool: document.getElementById('opt-collapse-bool').checked,
+      removeOptional: document.getElementById('opt-remove-optional').checked,
+      removeType: document.getElementById('opt-remove-type').checked,
+      removeRedundant: document.getElementById('opt-remove-redundant').checked,
+      minifyCSS: document.getElementById('opt-minify-css').checked,
+      minifyJS: document.getElementById('opt-minify-js').checked,
+      preservePre: document.getElementById('opt-preserve-pre').checked,
+      preserveCode: document.getElementById('opt-preserve-code').checked,
+      preserveTextarea: document.getElementById('opt-preserve-textarea').checked,
+      preserveScript: document.getElementById('opt-preserve-script').checked,
+      preserveStyle: document.getElementById('opt-preserve-style').checked
+    };
+  }
+
+  function shouldPreserve(tag, opts) {
+    if (tag === 'pre' && opts.preservePre) return true;
+    if (tag === 'code' && opts.preserveCode) return true;
+    if (tag === 'textarea' && opts.preserveTextarea) return true;
+    if (tag === 'script' && opts.preserveScript) return true;
+    if (tag === 'style' && opts.preserveStyle) return true;
+    return false;
+  }
+
+  
+  
+  
+
+  function sortAttributes(attrs) {
+    return attrs.slice().sort(function(a, b) {
+      if (a.template) return 1;
+      if (b.template) return -1;
+      return getAttrOrder(a.name) - getAttrOrder(b.name);
+    });
+  }
+
+  function getAttrOrder(name) {
+    var n = name.toLowerCase();
+    for (var i = 0; i < ATTR_SORT_ORDER.length; i++) {
+      var pattern = ATTR_SORT_ORDER[i];
+      if (pattern.endsWith('*')) {
+        if (n.startsWith(pattern.slice(0, -1))) return i;
+      } else if (n === pattern) return i;
+    }
+    return ATTR_SORT_ORDER.length;
+  }
+
+  function renderAttrs(attrs, tag, opts, indentStr, tagIndent) {
+    if (!attrs || attrs.length === 0) return '';
+
+    var processed = attrs;
+
+    processed = processed.filter(function(a) {
+      if (a.template) return true;
+      if (opts.removeEmptyAttrs && a.value === '' &&
+          !BOOLEAN_ATTRS.has(a.name.toLowerCase())) return false;
+      if (opts.removeType) {
+        if (tag === 'script' && a.name.toLowerCase() === 'type' &&
+            (a.value === 'text/javascript' || a.value === 'application/javascript')) return false;
+        if ((tag === 'style' || tag === 'link') && a.name.toLowerCase() === 'type' && a.value === 'text/css') return false;
+      }
+      if (opts.removeRedundant && REDUNDANT_ATTRS[tag]) {
+        var rv = REDUNDANT_ATTRS[tag][a.name.toLowerCase()];
+        if (rv && a.value && a.value.toLowerCase() === rv) return false;
+      }
+      return true;
+    });
+
+    if (opts.sortAttrs) processed = sortAttributes(processed);
+
+    var attrStrs = processed.map(function(a) {
+      if (a.template) return a.name;
+      var name = a.name;
+      if (opts.collapseBool && BOOLEAN_ATTRS.has(name.toLowerCase())) {
+        if (a.value === null || a.value === '' || a.value.toLowerCase() === name.toLowerCase()) {
+          return name;
+        }
+      }
+      if (a.value === null) return name;
+      var q = a.quote || '"';
+      if (!q) q = '"';
+      return name + '=' + q + a.value + q;
+    });
+
+    if (attrStrs.length === 0) return '';
+
+    var inlineStr = ' ' + attrStrs.join(' ');
+
+    if (opts.wrapAttrs === 'none') return inlineStr;
+
+    var tagLine = tagIndent + '<' + tag + inlineStr;
+    var shouldWrap = false;
+
+    if (opts.wrapAttrs === 'force' && attrStrs.length > 1) {
+      shouldWrap = true;
+    } else if (opts.wrapAttrs === 'auto' && tagLine.length > opts.maxLineLength) {
+      shouldWrap = true;
+    } else if (opts.wrapAttrs === 'aligned' && attrStrs.length > 1) {
+      shouldWrap = true;
+    }
+
+    if (!shouldWrap) return inlineStr;
+
+    var attrIndent;
+    if (opts.wrapAttrs === 'aligned') {
+      attrIndent = tagIndent + ' '.repeat(tag.length + 2);
+    } else {
+      attrIndent = tagIndent + opts.indentStr;
+    }
+
+    return '\n' + attrStrs.map(function(a) { return attrIndent + a; }).join('\n');
+  }
+
+  
+  
+  
+
+  function minifyInlineCSS(css) {
+    return css
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/\s+/g, ' ')
+      .replace(/\s*([{}:;,])\s*/g, '$1')
+      .replace(/;}/g, '}')
+      .trim();
+  }
+
+  function minifyInlineJS(js) {
+    var lines = js.split('\n');
+    var result = [];
+    lines.forEach(function(line) {
+      var trimmed = line.trim();
+      if (trimmed && !trimmed.startsWith('//')) {
+        result.push(trimmed);
+      }
+    });
+    return result.join('\n');
+  }
+
+  
+  
+  
+
+  function renderPretty(tokens, opts) {
+    var lines = [];
+    var indent = 0;
+    var preserveStack = [];
+
+    function ind() { return opts.indentStr.repeat(indent); }
+
+    for (var i = 0; i < tokens.length; i++) {
+      var tok = tokens[i];
+      var inPreserve = preserveStack.length > 0;
+
+      switch (tok.type) {
+        case TK.DOCTYPE:
+          lines.push(ind() + tok.value.replace(/\s+/g, ' ').trim());
+          break;
+
+        case TK.COMMENT:
+          if (inPreserve) { lines.push(tok.value); break; }
+          if (tok.value.indexOf('\x3C!--[if') === 0 || tok.value.indexOf('\x3C!--<![') === 0) {
+            lines.push(ind() + tok.value);
+            break;
+          }
+          var commentLines = tok.value.split('\n');
+          if (commentLines.length > 1) {
+            commentLines.forEach(function(cl, ci) {
+              lines.push(ind() + (ci === 0 ? cl.trimEnd() : cl.trim()));
+            });
+          } else {
+            lines.push(ind() + tok.value.trim());
+          }
+          break;
+
+        case TK.TEMPLATE:
+          lines.push((inPreserve ? '' : ind()) + tok.value);
+          break;
+
+        case TK.CDATA:
+          lines.push(ind() + tok.value);
+          break;
+
+        case TK.OPEN_TAG:
+        case TK.SELF_CLOSE:
+          if (inPreserve) {
+            lines.push(renderTag(tok, opts, ''));
+            if (tok.type === TK.OPEN_TAG && shouldPreserve(tok.tag, opts)) {
+              preserveStack.push(tok.tag);
+            }
+            break;
+          }
+
+          if (opts.unformatted && INLINE_ELEMENTS.has(tok.tag) && tok.type === TK.OPEN_TAG) {
+            var inlineContent = collectInlineContent(tokens, i);
+            if (inlineContent !== null) {
+              lines.push(ind() + inlineContent.text);
+              i = inlineContent.endIdx;
+              break;
+            }
+          }
+
+          lines.push(ind() + renderTag(tok, opts, ind()));
+
+          if (tok.type === TK.OPEN_TAG) {
+            if (shouldPreserve(tok.tag, opts)) {
+              preserveStack.push(tok.tag);
+            }
+            if (!VOID_ELEMENTS.has(tok.tag)) {
+              indent++;
+            }
+          }
+          break;
+
+        case TK.CLOSE_TAG:
+          if (inPreserve) {
+            if (preserveStack.length > 0 && preserveStack[preserveStack.length - 1] === tok.tag) {
+              preserveStack.pop();
+            }
+            lines.push('</' + tok.tag + '>');
+            break;
+          }
+          indent = Math.max(0, indent - 1);
+          lines.push(ind() + '</' + tok.tag + '>');
+          break;
+
+        case TK.RAW:
+          if (inPreserve || shouldPreserve(tok.parentTag, opts)) {
+            lines.push(tok.value);
+          } else {
+            var rawLines = tok.value.split('\n');
+            rawLines.forEach(function(rl) {
+              var trimmed = rl.trim();
+              if (trimmed) lines.push(ind() + trimmed);
+            });
+          }
+          break;
+
+        case TK.TEXT:
+          if (inPreserve) { lines.push(tok.value); break; }
+          var text = tok.value;
+          if (opts.collapseWs) text = text.replace(/\s+/g, ' ');
+          text = text.trim();
+          if (text) lines.push(ind() + text);
+          break;
+      }
+    }
+
+    return lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  }
+
+  function renderTag(tok, opts, currentIndent) {
+    var tag = '<' + tok.tag;
+    tag += renderAttrs(tok.attrs, tok.tag, opts, opts.indentStr, currentIndent);
+
+    if (tok.type === TK.SELF_CLOSE || tok.isVoid) {
+      if (opts.voidSlash || opts.selfClosing) {
+        tag += ' />';
+      } else {
+        tag += '>';
+      }
+    } else {
+      tag += '>';
+    }
+
+    return tag;
+  }
+
+  function collectInlineContent(tokens, startIdx) {
+    var tok = tokens[startIdx];
+    if (tok.type !== TK.OPEN_TAG) return null;
+    var tag = tok.tag;
+    var opts = getOpts();
+    var parts = [renderTag(tok, opts, '')];
+    var j = startIdx + 1;
+    var depth = 1;
+
+    while (j < tokens.length && depth > 0) {
+      var t = tokens[j];
+      if (t.type === TK.OPEN_TAG && t.tag === tag) depth++;
+      if (t.type === TK.CLOSE_TAG && t.tag === tag) {
+        depth--;
+        if (depth === 0) {
+          parts.push('</' + tag + '>');
+          break;
+        }
+      }
+      if (t.type === TK.TEXT) {
+        var text = t.value.replace(/\s+/g, ' ').trim();
+        if (text) parts.push(text);
+      } else if (t.type === TK.OPEN_TAG || t.type === TK.SELF_CLOSE) {
+        parts.push(renderTag(t, opts, ''));
+      } else if (t.type === TK.CLOSE_TAG) {
+        parts.push('</' + t.tag + '>');
+      } else if (t.type === TK.RAW) {
+        parts.push(t.value);
+      } else if (t.type === TK.TEMPLATE) {
+        parts.push(t.value);
+      }
+      j++;
+    }
+
+    var combined = parts.join('');
+    if (combined.length > 200) return null;
+
+    return { text: combined, endIdx: j };
+  }
+
+  
+  function renderExpanded(tokens, opts) {
+    return renderPretty(tokens, Object.assign({}, opts, {
+      wrapAttrs: 'force',
+      unformatted: false
+    }));
+  }
+
+  
+  function renderCompact(tokens, opts) {
+    var lines = [];
+    var preserveStack = [];
+
+    for (var i = 0; i < tokens.length; i++) {
+      var tok = tokens[i];
+      var inPreserve = preserveStack.length > 0;
+
+      switch (tok.type) {
+        case TK.DOCTYPE:
+          lines.push(tok.value.replace(/\s+/g, ' ').trim());
+          break;
+        case TK.COMMENT:
+          if (!opts.removeComments || (opts.keepConditional && isConditionalComment(tok.value))) {
+            lines.push(tok.value.replace(/\s+/g, ' ').trim());
+          }
+          break;
+        case TK.TEMPLATE:
+          lines.push(tok.value);
+          break;
+        case TK.OPEN_TAG:
+        case TK.SELF_CLOSE:
+          var tagStr = renderTag(tok, Object.assign({}, opts, { wrapAttrs: 'none' }), '');
+          if (tok.type === TK.OPEN_TAG && !RAW_TEXT_ELEMENTS.has(tok.tag)) {
+            var content = collectUntilClose(tokens, i, tok.tag);
+            if (content && content.text.length < 200) {
+              lines.push(tagStr + content.text);
+              i = content.endIdx;
+              break;
+            }
+          }
+          if (shouldPreserve(tok.tag, opts)) preserveStack.push(tok.tag);
+          lines.push(tagStr);
+          break;
+        case TK.CLOSE_TAG:
+          if (inPreserve && preserveStack[preserveStack.length - 1] === tok.tag) preserveStack.pop();
+          lines.push('</' + tok.tag + '>');
+          break;
+        case TK.RAW:
+          if (inPreserve) { lines.push(tok.value); }
+          else { lines.push(tok.value.replace(/\s+/g, ' ').trim()); }
+          break;
+        case TK.TEXT:
+          var t = inPreserve ? tok.value : tok.value.replace(/\s+/g, ' ').trim();
+          if (t) lines.push(t);
+          break;
+      }
+    }
+
+    return lines.join('\n').trim();
+  }
+
+  function collectUntilClose(tokens, startIdx, tag) {
+    var parts = [];
+    var j = startIdx + 1;
+    var depth = 1;
+    var opts = getOpts();
+
+    while (j < tokens.length && depth > 0) {
+      var t = tokens[j];
+      if (t.type === TK.OPEN_TAG && t.tag === tag) depth++;
+      if (t.type === TK.CLOSE_TAG && t.tag === tag) {
+        depth--;
+        if (depth === 0) { parts.push('</' + tag + '>'); break; }
+      }
+      if (t.type === TK.TEXT) { parts.push(t.value.replace(/\s+/g, ' ').trim()); }
+      else if (t.type === TK.OPEN_TAG || t.type === TK.SELF_CLOSE) {
+        parts.push(renderTag(t, opts, ''));
+      }
+      else if (t.type === TK.CLOSE_TAG) { parts.push('</' + t.tag + '>'); }
+      else if (t.type === TK.RAW) { parts.push(t.value.trim()); }
+      else if (t.type === TK.TEMPLATE) { parts.push(t.value); }
+      j++;
+    }
+
+    if (depth !== 0) return null;
+    return { text: parts.join(''), endIdx: j };
+  }
+
+  
+  function renderInline(tokens, opts) {
+    return renderCompact(tokens, Object.assign({}, opts, { unformatted: true }));
+  }
+
+  
+  function renderOneLine(tokens, opts) {
+    var parts = [];
+    var preserveStack = [];
+
+    for (var i = 0; i < tokens.length; i++) {
+      var tok = tokens[i];
+      var inPreserve = preserveStack.length > 0;
+
+      switch (tok.type) {
+        case TK.DOCTYPE: parts.push(tok.value.replace(/\s+/g, ' ').trim()); break;
+        case TK.COMMENT:
+          if (!opts.removeComments) parts.push(tok.value.replace(/\s+/g, ' '));
+          break;
+        case TK.TEMPLATE: parts.push(tok.value); break;
+        case TK.CDATA: parts.push(tok.value); break;
+        case TK.OPEN_TAG:
+        case TK.SELF_CLOSE:
+          parts.push(renderTag(tok, Object.assign({}, opts, { wrapAttrs: 'none' }), ''));
+          if (shouldPreserve(tok.tag, opts)) preserveStack.push(tok.tag);
+          break;
+        case TK.CLOSE_TAG:
+          if (inPreserve && preserveStack[preserveStack.length - 1] === tok.tag) preserveStack.pop();
+          parts.push('</' + tok.tag + '>');
+          break;
+        case TK.RAW:
+          if (inPreserve) parts.push(tok.value);
+          else parts.push(tok.value.replace(/\s+/g, ' ').trim());
+          break;
+        case TK.TEXT:
+          var text = inPreserve ? tok.value : tok.value.replace(/\s+/g, ' ').trim();
+          if (text) parts.push(text);
+          break;
+      }
+    }
+
+    return parts.join('').replace(/>\s+</g, '><');
+  }
+
+  
+  function renderMinify(tokens, opts) {
+    var parts = [];
+    var preserveStack = [];
+
+    var minOpts = Object.assign({}, opts, {
+      removeComments: true,
+      collapseWs: true,
+      collapseBool: true,
+      removeEmptyAttrs: true,
+      removeType: true,
+      wrapAttrs: 'none'
+    });
+
+    for (var i = 0; i < tokens.length; i++) {
+      var tok = tokens[i];
+      var inPreserve = preserveStack.length > 0;
+
+      switch (tok.type) {
+        case TK.DOCTYPE:
+          parts.push('<!DOCTYPE html>');
+          break;
+        case TK.COMMENT:
+          if (minOpts.keepConditional && isConditionalComment(tok.value)) {
+            parts.push(tok.value);
+          }
+          break;
+        case TK.TEMPLATE: parts.push(tok.value); break;
+        case TK.CDATA: parts.push(tok.value); break;
+        case TK.OPEN_TAG:
+        case TK.SELF_CLOSE:
+          parts.push(renderTag(tok, minOpts, ''));
+          if (shouldPreserve(tok.tag, minOpts)) preserveStack.push(tok.tag);
+          break;
+        case TK.CLOSE_TAG:
+          if (inPreserve && preserveStack[preserveStack.length - 1] === tok.tag) preserveStack.pop();
+          if (minOpts.removeOptional && OPTIONAL_CLOSING_TAGS.has(tok.tag)) break;
+          parts.push('</' + tok.tag + '>');
+          break;
+        case TK.RAW:
+          if (inPreserve) {
+            var raw = tok.value;
+            if (tok.parentTag === 'style' && minOpts.minifyCSS) {
+              raw = minifyInlineCSS(raw);
+            }
+            if (tok.parentTag === 'script' && minOpts.minifyJS) {
+              raw = minifyInlineJS(raw);
+            }
+            parts.push(raw);
+          } else {
+            parts.push(tok.value.replace(/\s+/g, ' ').trim());
+          }
+          break;
+        case TK.TEXT:
+          var text = tok.value;
+          if (!inPreserve) {
+            text = text.replace(/\s+/g, ' ');
+            var prev = i > 0 ? tokens[i - 1] : null;
+            var next = i < tokens.length - 1 ? tokens[i + 1] : null;
+            if (prev && (prev.type === TK.OPEN_TAG || prev.type === TK.CLOSE_TAG || prev.type === TK.SELF_CLOSE)) {
+              text = text.replace(/^\s+/, '');
+            }
+            if (next && (next.type === TK.OPEN_TAG || next.type === TK.CLOSE_TAG || next.type === TK.SELF_CLOSE)) {
+              text = text.replace(/\s+$/, '');
+            }
+          }
+          if (text) parts.push(text);
+          break;
+      }
+    }
+
+    return parts.join('');
+  }
+
+  
+  function renderSafeMinify(tokens, opts) {
+    return renderMinify(tokens, Object.assign({}, opts, {
+      removeOptional: false,
+      removeRedundant: false,
+      minifyJS: false
+    }));
+  }
+
+  function isConditionalComment(value) {
+    return value.indexOf('\x3C!--[if') === 0 || value.indexOf('\x3C!--<![') === 0;
+  }
+
+  
+  
+  
+
+  var inputEl = document.getElementById('html-input');
+  var outputEl = document.getElementById('html-output');
+  var statusText = document.getElementById('html-status-text');
+
+  function showToast(msg) {
+    var t = document.getElementById('html-toast');
+    document.getElementById('html-toast-message').textContent = msg;
+    t.classList.remove('hidden');
+    setTimeout(function() { t.classList.add('hidden'); }, 2000);
+  }
+
+  function showError(msg) {
+    document.getElementById('html-error-message').textContent = msg;
+    document.getElementById('html-error-panel').classList.remove('hidden');
+    statusText.textContent = i18n.statusError;
+  }
+
+  function hideError() {
+    document.getElementById('html-error-panel').classList.add('hidden');
+  }
+
+  function formatBytes(b) { return b < 1024 ? b + ' B' : (b / 1024).toFixed(1) + ' KB'; }
+
+  function updateStats(original, formatted) {
+    var ob = new Blob([original]).size;
+    var fb = new Blob([formatted]).size;
+    var ol = original.split('\n').length;
+    var fl = formatted.split('\n').length;
+    var red = ob > 0 ? Math.round((1 - fb / ob) * 100) : 0;
+
+    document.getElementById('html-stat-original').textContent = ol + ' ' + i18n.statsLines + ' · ' + formatBytes(ob);
+    document.getElementById('html-stat-formatted').textContent = fl + ' ' + i18n.statsLines + ' · ' + formatBytes(fb);
+    document.getElementById('html-stat-reduction').textContent = (red >= 0 ? '-' : '+') + Math.abs(red) + '%';
+    document.getElementById('html-stats-bar').classList.remove('hidden');
+    document.getElementById('html-input-stats').textContent = ol + ' ' + i18n.statsLines + ' · ' + original.length + ' ' + i18n.statsChars;
+    document.getElementById('html-output-stats').textContent = fl + ' ' + i18n.statsLines + ' · ' + formatted.length + ' ' + i18n.statsChars;
+  }
+
+  function process(renderer, statusMsg) {
+    var code = inputEl.value;
+    if (!code.trim()) return;
+    hideError();
+    try {
+      var tokens = tokenizeHTML(code);
+      var opts = getOpts();
+      var result = renderer(tokens, opts);
+      outputEl.value = result;
+      document.getElementById('btn-html-copy').disabled = false;
+      document.getElementById('btn-html-download').disabled = false;
+      statusText.textContent = statusMsg;
+      updateStats(code, result);
+    } catch(e) {
+      showError(e.message || String(e));
+    }
+  }
+
+  
+  document.getElementById('btn-html-pretty').addEventListener('click', function() {
+    process(renderPretty, i18n.statusFormatted + ' (Beautify)');
+  });
+  document.getElementById('btn-html-expanded').addEventListener('click', function() {
+    process(renderExpanded, i18n.statusFormatted + ' (Expanded)');
+  });
+  document.getElementById('btn-html-compact').addEventListener('click', function() {
+    process(renderCompact, i18n.statusFormatted + ' (Compact)');
+  });
+  document.getElementById('btn-html-inline').addEventListener('click', function() {
+    process(renderInline, i18n.statusFormatted + ' (Inline)');
+  });
+  document.getElementById('btn-html-oneline').addEventListener('click', function() {
+    process(renderOneLine, i18n.statusFormatted + ' (One Line)');
+  });
+  document.getElementById('btn-html-minify').addEventListener('click', function() {
+    process(renderMinify, i18n.statusMinified);
+  });
+  document.getElementById('btn-html-safe').addEventListener('click', function() {
+    process(renderSafeMinify, i18n.statusMinified + ' (Safe)');
+  });
+
+  document.getElementById('btn-html-copy').addEventListener('click', function() {
+    if (!outputEl.value) return;
+    navigator.clipboard.writeText(outputEl.value).then(function() { showToast(i18n.copied); });
+  });
+
+  document.getElementById('btn-html-download').addEventListener('click', function() {
+    if (!outputEl.value) return;
+    var d = new Date();
+    var fn = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0') + '_formatted.html';
+    var blob = new Blob([outputEl.value], { type: 'text/html;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a'); a.href = url; a.download = fn; a.click();
+    setTimeout(function() { URL.revokeObjectURL(url); }, 100);
+    showToast(i18n.downloaded);
+  });
+
+  document.getElementById('btn-html-paste').addEventListener('click', function() {
+    navigator.clipboard.readText().then(function(t) { inputEl.value = t; updateInputStats(); }).catch(function() {});
+  });
+
+  document.getElementById('btn-html-sample').addEventListener('click', function() {
+    inputEl.value = SAMPLE_HTML;
+    updateInputStats();
+  });
+
+  document.getElementById('btn-html-clear').addEventListener('click', function() {
+    inputEl.value = ''; outputEl.value = '';
+    document.getElementById('btn-html-copy').disabled = true;
+    document.getElementById('btn-html-download').disabled = true;
+    document.getElementById('html-stats-bar').classList.add('hidden');
+    document.getElementById('html-input-stats').textContent = '';
+    document.getElementById('html-output-stats').textContent = '';
+    hideError();
+    statusText.textContent = i18n.statusReady;
+    showToast(i18n.cleared);
+  });
+
+  document.getElementById('opt-html-max-line').addEventListener('input', function() {
+    document.getElementById('html-max-line-val').textContent = this.value;
+  });
+
+  function updateInputStats() {
+    var c = inputEl.value;
+    var l = c ? c.split('\n').length : 0;
+    document.getElementById('html-input-stats').textContent = l + ' ' + i18n.statsLines + ' · ' + c.length + ' ' + i18n.statsChars;
+  }
+
+  inputEl.addEventListener('input', updateInputStats);
+
+  inputEl.addEventListener('dragover', function(e) { e.preventDefault(); });
+  inputEl.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var f = e.dataTransfer.files;
+    if (f.length > 0 && f[0].name.match(/\.(html?|vue|blade\.php|hbs|ejs|svelte)$/i)) {
+      var r = new FileReader();
+      r.onload = function(ev) { inputEl.value = ev.target.result; updateInputStats(); };
+      r.readAsText(f[0]);
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      process(renderPretty, i18n.statusFormatted);
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key === 'm') {
+      e.preventDefault();
+      process(renderMinify, i18n.statusMinified);
+    }
+  });
+
+  
+  function saveSettings() {
+    try {
+      var ir = document.querySelector('input[name="html-indent"]:checked');
+      var s = { indent: ir ? ir.value : '2' };
+      var selects = ['opt-wrap-attrs', 'opt-html-max-line'];
+      selects.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) s[id] = el.value;
+      });
+      var checkboxes = document.querySelectorAll('.xl\\:col-span-1 input[type="checkbox"]');
+      checkboxes.forEach(function(cb) {
+        if (cb.id) s[cb.id] = cb.checked;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+    } catch(e) {}
+  }
+
+  function loadSettings() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s.indent) {
+        var r = document.querySelector('input[name="html-indent"][value="' + s.indent + '"]');
+        if (r) r.checked = true;
+      }
+      ['opt-wrap-attrs', 'opt-html-max-line'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el && s[id]) el.value = s[id];
+      });
+      for (var key in s) {
+        if (typeof s[key] === 'boolean') {
+          var el = document.getElementById(key);
+          if (el) el.checked = s[key];
+        }
+      }
+      var mlv = document.getElementById('opt-html-max-line');
+      if (mlv) document.getElementById('html-max-line-val').textContent = mlv.value;
+    } catch(e) {}
+  }
+
+  document.querySelectorAll('input[type="checkbox"], input[type="radio"], select, input[type="range"]').forEach(function(el) {
+    el.addEventListener('change', saveSettings);
+    el.addEventListener('input', saveSettings);
+  });
+
+  loadSettings();
+
+})();
+</script>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Максим Александров<br>
+<strong>Age:</strong> 28
+<strong>Location:</strong> Тула, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>Этот блог — мой personal knowledge base, где я пушу заметки про tech stack, life experience и всё, что триггерит мой interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — готов к мёрджу идей и совместным проектам.</p>
+<p><img src="/img/meme.webp" alt="meme"></p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-яп">💻 ЯП</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Адаптивная вёрстка (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST API</strong></li>
+</ul>
+<h2 id="-базы-данных">🗄️ Базы данных</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-дизайн-и-графика">🎨 Дизайн и графика</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX дизайн и прототипирование</li>
+<li><strong>Photoshop</strong> — графика и обработка изображений</li>
+<li><strong>After Effects</strong> — моушн-дизайн и анимация 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои Open Source проекты 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои проекты 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN-сервис в Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN-сервис в Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Социальные сети</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+     
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

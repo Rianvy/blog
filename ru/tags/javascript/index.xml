@@ -6,8 +6,15 @@
     <description>Recent content in Javascript on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>ru</language>
-    <lastBuildDate>Mon, 09 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://0x69.ru/ru/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaScript Formatter</title>
+      <link>https://0x69.ru/ru/utilities/js-formatter/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/ru/utilities/js-formatter/</guid>
+      <description>&lt;p&gt;Форматирование, минификация и beautify JavaScript кода с гибкими настройками&lt;/p&gt;</description>
+    </item>
     <item>
       <title>JavaScript Obfuscator</title>
       <link>https://0x69.ru/ru/utilities/javascript-obfuscator/</link>

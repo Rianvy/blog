@@ -1,0 +1,2709 @@
+<!DOCTYPE html>
+<html lang="ru"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+CSS Formatter
+ | 0x69.ru</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Ox69" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="canonical" href="https://0x69.ru/ru/utilities/css-formatter/" />
+
+
+
+<meta name="author" content="Rianvy" />
+<meta name="description" content="В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет." />
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+<meta property="og:url" content="https://0x69.ru/ru/utilities/css-formatter/">
+  <meta property="og:site_name" content="0x69.ru">
+  <meta property="og:title" content="CSS Formatter">
+  <meta property="og:description" content="Форматирование, минификация и оптимизация CSS кода с гибкими настройками">
+  <meta property="og:locale" content="ru">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="utilities">
+    <meta property="article:published_time" content="2026-02-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-12T00:00:00+00:00">
+    <meta property="article:tag" content="Css">
+    <meta property="article:tag" content="Formatter">
+    <meta property="article:tag" content="Minify">
+    <meta property="article:tag" content="Beautify">
+    <meta property="article:tag" content="Оптимизация">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CSS Formatter">
+  <meta name="twitter:description" content="Форматирование, минификация и оптимизация CSS кода с гибкими настройками">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Повернуть!"
+                aria-label="Повернуть!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/ru/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">Документируй сегодня то, что забудешь завтра</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="Обо мне">Обо мне</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/ru/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Поиск"
+   aria-label="Поиск">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/ru/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Категории"
+   aria-label="Категории">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/ru/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Портфолио"
+   aria-label="Портфолио">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/ru/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Утилиты"
+   aria-label="Утилиты">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/utilities/css-formatter/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+
+                
+                
+                  
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/ru/utilities/css-formatter/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/ru/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/ru/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">168</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/ru/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Меню</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="Обо мне"
+                aria-label="Обо мне">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">Обо мне</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/utilities/css-formatter/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      hover:bg-base-200
+                    "
+             >
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">English</span>
+            
+          </a>
+        </li>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/ru/utilities/css-formatter/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-200
+                    
+                      bg-primary/10 text-primary font-medium
+                    "
+             aria-current="true">
+            <ion-icon name="language" class="text-lg"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/ru/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Поиск</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Категории</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Портфолио</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Утилиты">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Утилиты</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">24</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/ru/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">168</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/ru/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+	
+	<style>
+	.flip-container .back {
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.flip-container.flip-it .back {
+	  opacity: 1;
+	  visibility: visible;
+	}
+	</style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
+
+  
+  <div class="text-center mb-5 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">🎨</span>
+    </div>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">CSS Formatter</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">Форматирование, минификация и оптимизация CSS кода с гибкими настройками</p>
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="color-palette-outline"></ion-icon>
+        Форматирование
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+        <ion-icon name="contract-outline"></ion-icon>
+        Минификация
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="flash-outline"></ion-icon>
+        Оптимизация
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="analytics-outline"></ion-icon>
+        Анализ
+      </span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
+
+    
+    <div class="xl:col-span-1 space-y-3 sm:space-y-4 order-2 xl:order-1">
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="flash-outline" class="text-warning"></ion-icon>
+            Настройки
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-2">
+          <div class="grid grid-cols-2 gap-1.5">
+            <button type="button" id="btn-pretty" class="btn btn-success btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="sparkles-outline"></ion-icon>
+              Beautify
+            </button>
+            <button type="button" id="btn-expanded" class="btn btn-info btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="expand-outline"></ion-icon>
+              Expanded
+            </button>
+            <button type="button" id="btn-compact" class="btn btn-secondary btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="contract-outline"></ion-icon>
+              Compact
+            </button>
+            <button type="button" id="btn-nested" class="btn btn-accent btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="git-branch-outline"></ion-icon>
+              Nested
+            </button>
+          </div>
+          <button type="button" id="btn-oneline" class="btn btn-outline btn-xs sm:btn-sm w-full gap-1 justify-start">
+            <ion-icon name="reorder-two-outline"></ion-icon>
+            В одну строку
+          </button>
+          <div class="divider my-1 text-[10px]">Опции минификации</div>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button type="button" id="btn-minify" class="btn btn-warning btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="resize-outline"></ion-icon>
+              Minify
+            </button>
+            <button type="button" id="btn-safe-minify" class="btn btn-outline btn-warning btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="shield-checkmark-outline"></ion-icon>
+              Safe Minify
+            </button>
+          </div>
+          <button type="button" id="btn-compressed" class="btn btn-error btn-xs sm:btn-sm w-full gap-1 justify-start">
+            <ion-icon name="archive-outline"></ion-icon>
+            Compressed
+          </button>
+        </div>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="options-outline" class="text-primary"></ion-icon>
+              Настройки
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">Размер отступа</span>
+              </label>
+              <div class="grid grid-cols-3 gap-1">
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="css-indent" value="2" class="hidden" checked />
+                  <span class="text-xs font-mono">2</span>
+                </label>
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="css-indent" value="4" class="hidden" />
+                  <span class="text-xs font-mono">4</span>
+                </label>
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="css-indent" value="tab" class="hidden" />
+                  <span class="text-xs font-mono">Tab</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">Стиль скобок</span>
+              </label>
+              <select id="opt-css-brace" class="select select-bordered select-xs text-xs">
+                <option value="same">На той же строке</option>
+                <option value="next">На следующей строке</option>
+              </select>
+            </div>
+
+            <div class="divider my-0.5"></div>
+
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Пробел до двоеточия</span>
+              <input type="checkbox" id="opt-space-before-colon" class="toggle toggle-xs toggle-primary" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Пробел после двоеточия</span>
+              <input type="checkbox" id="opt-space-after-colon" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Селекторы на новых строках</span>
+              <input type="checkbox" id="opt-selector-newline" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Последняя точка с запятой</span>
+              <input type="checkbox" id="opt-last-semicolon" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Сортировать свойства</span>
+              <input type="checkbox" id="opt-sort-props" class="toggle toggle-xs toggle-secondary" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Выравнивать значения</span>
+              <input type="checkbox" id="opt-align-props" class="toggle toggle-xs toggle-secondary" />
+            </label>
+          </div>
+        </details>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="construct-outline" class="text-warning"></ion-icon>
+              Оптимизация
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">Удалить комментарии</span>
+              </div>
+              <input type="checkbox" id="opt-css-remove-comments" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">Сохранить /*! ... */</span>
+                <p class="text-[9px] text-base-content/50">Комментарии с лицензиями</p>
+              </div>
+              <input type="checkbox" id="opt-css-keep-important" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">Сократить цвета</span>
+                <p class="text-[9px] text-base-content/50">#ffffff → #fff</p>
+              </div>
+              <input type="checkbox" id="opt-shorten-colors" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">Убрать единицы у 0</span>
+                <p class="text-[9px] text-base-content/50">0px → 0</p>
+              </div>
+              <input type="checkbox" id="opt-zero-units" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">Убрать последнюю ;</span>
+              </div>
+              <input type="checkbox" id="opt-remove-last-semi" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">Объединить селекторы</span>
+                <p class="text-[9px] text-base-content/50">Одинаковые правила → один селектор</p>
+              </div>
+              <input type="checkbox" id="opt-merge-selectors" class="toggle toggle-xs toggle-error" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">Объединить дублирующиеся правила</span>
+              </div>
+              <input type="checkbox" id="opt-merge-rules" class="toggle toggle-xs toggle-error" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">Группировать @media</span>
+                <p class="text-[9px] text-base-content/50">Объединить одинаковые медиа-запросы</p>
+              </div>
+              <input type="checkbox" id="opt-group-media" class="toggle toggle-xs toggle-error" />
+            </label>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    
+    <div class="xl:col-span-3 space-y-3 sm:space-y-4 order-1 xl:order-2">
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+
+        
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="create-outline" class="text-primary"></ion-icon>
+              Исходный CSS
+            </h2>
+            <button type="button" id="btn-css-paste" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="clipboard-outline"></ion-icon>
+            </button>
+            <button type="button" id="btn-css-sample" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="code-outline"></ion-icon>
+            </button>
+            <button type="button" id="btn-css-clear" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+          <div class="relative">
+            <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="css-input-stats"></div>
+            <textarea id="css-input" class="w-full h-[350px] sm:h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none" placeholder="Вставьте CSS код..." spellcheck="false"></textarea>
+          </div>
+        </div>
+
+        
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="checkmark-circle-outline" class="text-success"></ion-icon>
+              Результат
+            </h2>
+            <button type="button" id="btn-css-copy" class="btn btn-primary btn-xs gap-1" disabled>
+              <ion-icon name="copy-outline"></ion-icon>
+              <span class="hidden sm:inline">Копировать</span>
+            </button>
+            <button type="button" id="btn-css-download" class="btn btn-ghost btn-xs gap-1" disabled>
+              <ion-icon name="download-outline"></ion-icon>
+              <span class="hidden sm:inline">.css</span>
+            </button>
+          </div>
+          <div class="relative">
+            <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="css-output-stats"></div>
+            <textarea id="css-output" class="w-full h-[350px] sm:h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none" readonly placeholder="Результат появится здесь"></textarea>
+          </div>
+        </div>
+      </div>
+
+      
+      <div id="css-error-panel" class="hidden bg-error/5 border border-error/20 rounded-xl sm:rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-2 p-3 sm:p-4">
+          <ion-icon name="alert-circle-outline" class="text-error text-xl shrink-0"></ion-icon>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-xs sm:text-sm text-error">Ошибка парсинга</div>
+            <pre class="text-[10px] sm:text-xs mt-1 text-error/80 font-mono whitespace-pre-wrap break-all" id="css-error-message"></pre>
+          </div>
+        </div>
+      </div>
+
+      
+      <div id="css-stats-bar" class="hidden">
+        <div class="grid grid-cols-3 gap-3 sm:gap-4">
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Исходный</div>
+            <div class="text-sm sm:text-lg font-bold text-primary" id="css-stat-original">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Результат</div>
+            <div class="text-sm sm:text-lg font-bold text-success" id="css-stat-formatted">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Сжатие</div>
+            <div class="text-sm sm:text-lg font-bold text-warning" id="css-stat-reduction">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-info/10 flex items-center justify-center shrink-0">
+            <ion-icon name="help-circle-outline" class="text-lg sm:text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">Как это работает?</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Возможности инструмента</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <ion-icon name="scan-outline" class="text-primary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Парсинг</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Анализирует CSS: селекторы, свойства, @-правила, комментарии и вложенность.</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center">
+                <ion-icon name="sparkles-outline" class="text-success"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Форматирование</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Применяет стиль: отступы, переносы, порядок свойств, выравнивание.</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-warning/10 flex items-center justify-center">
+                <ion-icon name="contract-outline" class="text-warning"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Минификация</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Удаляет пробелы, комментарии, сокращает цвета и единицы.</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center">
+                <ion-icon name="download-outline" class="text-secondary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Экспорт</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Копируйте результат или скачайте как .css файл.</p>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span id="css-status-text">Готов к работе</span>
+    <span>Всё работает локально в браузере</span>
+  </div>
+</div>
+
+
+<div id="css-toast" class="toast toast-top toast-center hidden z-50">
+  <div class="alert alert-success py-2 px-4">
+    <ion-icon name="checkmark-circle-outline" class="text-lg"></ion-icon>
+    <span id="css-toast-message" class="text-sm"></span>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  var i18n = {
+    copied: "Скопировано!",
+    cleared: "Очищено",
+    downloaded: "Файл скачан!",
+    statusReady: "Готов к работе",
+    statusFormatted: "Отформатировано",
+    statusMinified: "Минифицировано",
+    statusError: "Ошибка",
+    statsLines: "строк",
+    statsChars: "символов",
+    errorLine: "Строка"
+  };
+
+  var STORAGE_KEY = 'cssformatter-settings';
+
+  
+  var SAMPLE_CSS = [
+    '/* Main Styles */',
+    '/*! License: MIT */',
+    '',
+    ':root {',
+    '  --primary-color: #3366ff;',
+    '  --secondary-color: #ffffff;',
+    '  --spacing: 16px;',
+    '  --font-family: "Inter", sans-serif;',
+    '}',
+    '',
+    'body,',
+    'html {',
+    '  margin: 0px;',
+    '  padding: 0px;',
+    '  font-family: var(--font-family);',
+    '  background-color: #f5f5f5;',
+    '  color: #333333;',
+    '  line-height: 1.6;',
+    '}',
+    '',
+    '.container {',
+    '  max-width: 1200px;',
+    '  margin-left: auto;',
+    '  margin-right: auto;',
+    '  margin-top: 0px;',
+    '  margin-bottom: 0px;',
+    '  padding-left: var(--spacing);',
+    '  padding-right: var(--spacing);',
+    '}',
+    '',
+    '.header {',
+    '  background-color: var(--primary-color);',
+    '  padding: 20px;',
+    '  display: flex;',
+    '  align-items: center;',
+    '  justify-content: space-between;',
+    '}',
+    '',
+    '.header .logo {',
+    '  font-size: 24px;',
+    '  font-weight: 700;',
+    '  color: #ffffff;',
+    '}',
+    '',
+    '.nav a,',
+    '.nav button {',
+    '  color: #ffffff;',
+    '  text-decoration: none;',
+    '  padding: 8px 16px;',
+    '  border-radius: 4px;',
+    '  transition: background-color 0.2s ease;',
+    '}',
+    '',
+    '.nav a:hover,',
+    '.nav button:hover {',
+    '  background-color: rgba(255, 255, 255, 0.1);',
+    '}',
+    '',
+    '.card {',
+    '  background-color: #ffffff;',
+    '  border-radius: 8px;',
+    '  padding: 24px;',
+    '  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);',
+    '  margin-bottom: var(--spacing);',
+    '}',
+    '',
+    '.btn {',
+    '  display: inline-flex;',
+    '  align-items: center;',
+    '  padding: 0px 0px;',
+    '  border: 0px solid transparent;',
+    '  cursor: pointer;',
+    '}',
+    '',
+    '@media (max-width: 768px) {',
+    '  .container {',
+    '    padding-left: 8px;',
+    '    padding-right: 8px;',
+    '  }',
+    '  .header {',
+    '    flex-direction: column;',
+    '  }',
+    '}',
+    '',
+    '@media (max-width: 768px) {',
+    '  .card {',
+    '    padding: 16px;',
+    '  }',
+    '}',
+    '',
+    '@keyframes fadeIn {',
+    '  from {',
+    '    opacity: 0;',
+    '    transform: translateY(-10px);',
+    '  }',
+    '  to {',
+    '    opacity: 1;',
+    '    transform: translateY(0px);',
+    '  }',
+    '}',
+    '',
+    '.animate-in {',
+    '  animation: fadeIn 0.3s ease forwards;',
+    '}'
+  ].join('\n');
+
+  
+  
+  
+
+  
+  var NODE = {
+    STYLESHEET: 'stylesheet',
+    RULE: 'rule',
+    DECLARATION: 'declaration',
+    COMMENT: 'comment',
+    ATRULE: 'atrule'
+  };
+
+  
+  function parseCSS(css) {
+    var pos = 0;
+    var len = css.length;
+    var line = 1;
+    var col = 1;
+
+    function error(msg) {
+      return { error: true, message: msg, line: line, col: col, pos: pos };
+    }
+
+    function advance(n) {
+      for (var i = 0; i < (n || 1); i++) {
+        if (css[pos] === '\n') { line++; col = 1; }
+        else { col++; }
+        pos++;
+      }
+    }
+
+    function skipWhitespace() {
+      while (pos < len && /\s/.test(css[pos])) advance();
+    }
+
+    function readComment() {
+      var start = pos;
+      advance(2); 
+      while (pos < len - 1) {
+        if (css[pos] === '*' && css[pos + 1] === '/') {
+          advance(2);
+          return { type: NODE.COMMENT, value: css.substring(start, pos) };
+        }
+        advance();
+      }
+      advance(); 
+      return { type: NODE.COMMENT, value: css.substring(start, pos) };
+    }
+
+    function readString(quote) {
+      var start = pos;
+      advance(); 
+      while (pos < len) {
+        if (css[pos] === '\\') { advance(2); continue; }
+        if (css[pos] === quote) { advance(); break; }
+        advance();
+      }
+      return css.substring(start, pos);
+    }
+
+    function readUntil(chars) {
+      var start = pos;
+      var depth = 0;
+      while (pos < len) {
+        var ch = css[pos];
+        if (ch === '\\') { advance(2); continue; }
+        if (ch === '"' || ch === "'") { readString(ch); continue; }
+        if (ch === '(') { depth++; advance(); continue; }
+        if (ch === ')') { depth--; advance(); continue; }
+        if (depth === 0 && chars.indexOf(ch) > -1) break;
+        advance();
+      }
+      return css.substring(start, pos).trim();
+    }
+
+    function parseDeclarations() {
+      var declarations = [];
+      skipWhitespace();
+
+      while (pos < len && css[pos] !== '}') {
+        skipWhitespace();
+        if (pos >= len || css[pos] === '}') break;
+
+        
+        if (css[pos] === '/' && pos + 1 < len && css[pos + 1] === '*') {
+          declarations.push(readComment());
+          skipWhitespace();
+          continue;
+        }
+
+        
+        if (css[pos] === '@') {
+          declarations.push(parseAtRule());
+          skipWhitespace();
+          continue;
+        }
+
+        
+        var lookAhead = css.substring(pos, Math.min(pos + 500, len));
+        var braceIdx = -1;
+        var semiIdx = -1;
+        var laDepth = 0;
+        for (var la = 0; la < lookAhead.length; la++) {
+          var lch = lookAhead[la];
+          if (lch === '"' || lch === "'") {
+            la++;
+            while (la < lookAhead.length && lookAhead[la] !== lch) {
+              if (lookAhead[la] === '\\') la++;
+              la++;
+            }
+            continue;
+          }
+          if (lch === '(') { laDepth++; continue; }
+          if (lch === ')') { laDepth--; continue; }
+          if (laDepth === 0) {
+            if (lch === '{' && braceIdx === -1) { braceIdx = la; break; }
+            if (lch === ';' && semiIdx === -1) { semiIdx = la; break; }
+            if (lch === '}') break;
+          }
+        }
+
+        if (braceIdx > -1 && (semiIdx === -1 || braceIdx < semiIdx)) {
+          
+          declarations.push(parseRule());
+          skipWhitespace();
+          continue;
+        }
+
+        
+        var prop = readUntil(':;}');
+        if (!prop) { if (pos < len) advance(); continue; }
+
+        if (pos < len && css[pos] === ':') {
+          advance(); 
+          skipWhitespace();
+          var value = readUntil(';}');
+          declarations.push({
+            type: NODE.DECLARATION,
+            property: prop.trim(),
+            value: value.trim()
+          });
+          if (pos < len && css[pos] === ';') advance();
+        } else {
+          
+          if (pos < len && css[pos] === ';') advance();
+        }
+
+        skipWhitespace();
+      }
+
+      return declarations;
+    }
+
+    function parseRule() {
+      skipWhitespace();
+      var selector = readUntil('{');
+      if (pos < len && css[pos] === '{') advance();
+      var declarations = parseDeclarations();
+      if (pos < len && css[pos] === '}') advance();
+
+      return {
+        type: NODE.RULE,
+        selector: selector.trim(),
+        declarations: declarations
+      };
+    }
+
+    function parseAtRule() {
+      var start = pos;
+      advance(); 
+      var name = '';
+      while (pos < len && /[a-zA-Z-]/.test(css[pos])) {
+        name += css[pos];
+        advance();
+      }
+      skipWhitespace();
+
+      var params = readUntil('{;');
+
+      if (pos < len && css[pos] === '{') {
+        advance();
+        var body = parseDeclarations();
+        if (pos < len && css[pos] === '}') advance();
+        return {
+          type: NODE.ATRULE,
+          name: name,
+          params: params.trim(),
+          body: body,
+          hasBlock: true
+        };
+      }
+
+      
+      if (pos < len && css[pos] === ';') advance();
+      return {
+        type: NODE.ATRULE,
+        name: name,
+        params: params.trim(),
+        body: [],
+        hasBlock: false
+      };
+    }
+
+    function parseStylesheet() {
+      var nodes = [];
+
+      while (pos < len) {
+        skipWhitespace();
+        if (pos >= len) break;
+
+        if (css[pos] === '/' && pos + 1 < len && css[pos + 1] === '*') {
+          nodes.push(readComment());
+          continue;
+        }
+
+        if (css[pos] === '@') {
+          nodes.push(parseAtRule());
+          continue;
+        }
+
+        if (css[pos] === '}') { advance(); continue; } 
+
+        nodes.push(parseRule());
+      }
+
+      return { type: NODE.STYLESHEET, nodes: nodes };
+    }
+
+    try {
+      return parseStylesheet();
+    } catch(e) {
+      return { type: NODE.STYLESHEET, nodes: [], error: e.message };
+    }
+  }
+
+  
+  
+  
+
+  function shortenColor(value) {
+    
+    return value.replace(/#([0-9a-fA-F])\1([0-9a-fA-F])\2([0-9a-fA-F])\3\b/g, '#$1$2$3');
+  }
+
+  function removeZeroUnits(value) {
+    
+    
+    return value.replace(/\b0(px|em|rem|pt|pc|in|cm|mm|ex|ch|vw|vh|vmin|vmax)\b/g, '0');
+  }
+
+  function optimizeValue(value, opts) {
+    var result = value;
+    if (opts.shortenColors) result = shortenColor(result);
+    if (opts.zeroUnits) result = removeZeroUnits(result);
+    return result;
+  }
+
+  
+  var PROPERTY_ORDER = [
+    'content', 'position', 'top', 'right', 'bottom', 'left', 'z-index',
+    'display', 'visibility', 'flex', 'flex-direction', 'flex-wrap', 'flex-flow',
+    'flex-grow', 'flex-shrink', 'flex-basis', 'align-items', 'align-self',
+    'align-content', 'justify-content', 'justify-items', 'justify-self',
+    'order', 'grid', 'grid-template', 'grid-template-columns', 'grid-template-rows',
+    'grid-template-areas', 'grid-gap', 'gap', 'grid-column', 'grid-row',
+    'float', 'clear', 'overflow', 'overflow-x', 'overflow-y',
+    'width', 'min-width', 'max-width', 'height', 'min-height', 'max-height',
+    'margin', 'margin-top', 'margin-right', 'margin-bottom', 'margin-left',
+    'padding', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
+    'border', 'border-width', 'border-style', 'border-color',
+    'border-top', 'border-right', 'border-bottom', 'border-left', 'border-radius',
+    'outline', 'background', 'background-color', 'background-image', 'background-position',
+    'background-size', 'background-repeat', 'background-attachment', 'background-clip',
+    'color', 'font', 'font-family', 'font-size', 'font-weight', 'font-style',
+    'font-variant', 'line-height', 'letter-spacing', 'word-spacing',
+    'text-align', 'text-decoration', 'text-transform', 'text-indent', 'text-shadow',
+    'white-space', 'word-break', 'word-wrap', 'overflow-wrap',
+    'list-style', 'table-layout', 'vertical-align', 'cursor', 'pointer-events',
+    'opacity', 'filter', 'box-shadow', 'transform', 'transition', 'animation',
+    'will-change'
+  ];
+
+  function getPropertyIndex(prop) {
+    var clean = prop.replace(/^-webkit-|-moz-|-ms-|-o-/, '');
+    var idx = PROPERTY_ORDER.indexOf(clean);
+    return idx > -1 ? idx : PROPERTY_ORDER.length;
+  }
+
+  function sortDeclarations(declarations) {
+    return declarations.slice().sort(function(a, b) {
+      if (a.type === NODE.COMMENT || b.type === NODE.COMMENT) return 0;
+      if (a.type !== NODE.DECLARATION || b.type !== NODE.DECLARATION) return 0;
+      return getPropertyIndex(a.property) - getPropertyIndex(b.property);
+    });
+  }
+
+  
+  function mergeSelectors(nodes) {
+    var map = {};
+    var result = [];
+    var order = [];
+
+    nodes.forEach(function(node) {
+      if (node.type !== NODE.RULE) { result.push(node); return; }
+      var key = serializeDeclarations(node.declarations);
+      if (map[key]) {
+        map[key].selector += ',\n' + node.selector;
+      } else {
+        map[key] = { type: NODE.RULE, selector: node.selector, declarations: node.declarations };
+        order.push(key);
+      }
+    });
+
+    order.forEach(function(key) { result.push(map[key]); });
+    return result;
+  }
+
+  function serializeDeclarations(decls) {
+    return decls.filter(function(d) { return d.type === NODE.DECLARATION; })
+      .map(function(d) { return d.property + ':' + d.value; }).sort().join(';');
+  }
+
+  
+  function mergeRules(nodes) {
+    var map = {};
+    var result = [];
+
+    nodes.forEach(function(node) {
+      if (node.type !== NODE.RULE) { result.push(node); return; }
+      var sel = node.selector.replace(/\s+/g, ' ').trim();
+      if (map[sel]) {
+        
+        var existing = map[sel];
+        node.declarations.forEach(function(d) {
+          if (d.type !== NODE.DECLARATION) return;
+          var found = false;
+          for (var i = 0; i < existing.declarations.length; i++) {
+            if (existing.declarations[i].property === d.property) {
+              existing.declarations[i].value = d.value;
+              found = true;
+              break;
+            }
+          }
+          if (!found) existing.declarations.push(d);
+        });
+      } else {
+        map[sel] = node;
+        result.push(node);
+      }
+    });
+
+    return result;
+  }
+
+  
+  function groupMediaQueries(nodes) {
+    var media = {};
+    var result = [];
+    var mediaOrder = [];
+
+    nodes.forEach(function(node) {
+      if (node.type === NODE.ATRULE && node.name === 'media' && node.hasBlock) {
+        var key = node.params;
+        if (!media[key]) {
+          media[key] = { type: NODE.ATRULE, name: 'media', params: key, body: [], hasBlock: true };
+          mediaOrder.push(key);
+        }
+        media[key].body = media[key].body.concat(node.body);
+      } else {
+        result.push(node);
+      }
+    });
+
+    mediaOrder.forEach(function(key) { result.push(media[key]); });
+    return result;
+  }
+
+  
+  
+  
+
+  function getOpts() {
+    var indentRadio = document.querySelector('input[name="css-indent"]:checked');
+    var indentVal = indentRadio ? indentRadio.value : '2';
+
+    return {
+      indentStr: indentVal === 'tab' ? '\t' : ' '.repeat(parseInt(indentVal)),
+      braceStyle: document.getElementById('opt-css-brace').value,
+      spaceBeforeColon: document.getElementById('opt-space-before-colon').checked,
+      spaceAfterColon: document.getElementById('opt-space-after-colon').checked,
+      selectorNewline: document.getElementById('opt-selector-newline').checked,
+      lastSemicolon: document.getElementById('opt-last-semicolon').checked,
+      sortProps: document.getElementById('opt-sort-props').checked,
+      alignProps: document.getElementById('opt-align-props').checked,
+      removeComments: document.getElementById('opt-css-remove-comments').checked,
+      keepImportant: document.getElementById('opt-css-keep-important').checked,
+      shortenColors: document.getElementById('opt-shorten-colors').checked,
+      zeroUnits: document.getElementById('opt-zero-units').checked,
+      removeLastSemi: document.getElementById('opt-remove-last-semi').checked,
+      mergeSelectors: document.getElementById('opt-merge-selectors').checked,
+      mergeRules: document.getElementById('opt-merge-rules').checked,
+      groupMedia: document.getElementById('opt-group-media').checked
+    };
+  }
+
+  
+  function isImportantComment(comment) {
+    return comment.value.indexOf('/*!') === 0;
+  }
+
+  function filterComments(nodes, opts) {
+    if (!opts.removeComments) return nodes;
+    return nodes.filter(function(n) {
+      if (n.type !== NODE.COMMENT) {
+        if (n.declarations) {
+          n.declarations = filterComments(n.declarations, opts);
+        }
+        if (n.body) {
+          n.body = filterComments(n.body, opts);
+        }
+        return true;
+      }
+      if (opts.keepImportant && isImportantComment(n)) return true;
+      return false;
+    });
+  }
+
+  
+  function renderPretty(ast, opts, depth) {
+    if (typeof depth === 'undefined') depth = 0;
+    var indent = opts.indentStr.repeat(depth);
+    var innerIndent = opts.indentStr.repeat(depth + 1);
+    var lines = [];
+    var nodes = ast.nodes || ast;
+
+    if (Array.isArray(ast)) nodes = ast;
+
+    
+    if (depth === 0) {
+      nodes = filterComments(nodes, opts);
+      if (opts.mergeSelectors) nodes = mergeSelectors(nodes);
+      if (opts.mergeRules) nodes = mergeRules(nodes);
+      if (opts.groupMedia) nodes = groupMediaQueries(nodes);
+    }
+
+    for (var i = 0; i < nodes.length; i++) {
+      var node = nodes[i];
+
+      if (node.type === NODE.COMMENT) {
+        lines.push(indent + node.value);
+        lines.push('');
+        continue;
+      }
+
+      if (node.type === NODE.ATRULE) {
+        if (!node.hasBlock) {
+          lines.push(indent + '@' + node.name + ' ' + node.params + ';');
+          lines.push('');
+          continue;
+        }
+
+        var atHeader = indent + '@' + node.name + ' ' + node.params;
+        if (opts.braceStyle === 'next') {
+          lines.push(atHeader);
+          lines.push(indent + '{');
+        } else {
+          lines.push(atHeader + ' {');
+        }
+
+        var bodyLines = renderPretty(node.body, opts, depth + 1);
+        lines.push(bodyLines);
+        lines.push(indent + '}');
+        lines.push('');
+        continue;
+      }
+
+      if (node.type === NODE.RULE) {
+        var selector = node.selector;
+        if (opts.selectorNewline) {
+          selector = selector.split(',').map(function(s) { return s.trim(); }).join(',\n' + indent);
+        }
+
+        if (opts.braceStyle === 'next') {
+          lines.push(indent + selector);
+          lines.push(indent + '{');
+        } else {
+          lines.push(indent + selector + ' {');
+        }
+
+        var decls = node.declarations || [];
+        if (opts.sortProps) decls = sortDeclarations(decls);
+
+        
+        var maxPropLen = 0;
+        if (opts.alignProps) {
+          decls.forEach(function(d) {
+            if (d.type === NODE.DECLARATION && d.property.length > maxPropLen) {
+              maxPropLen = d.property.length;
+            }
+          });
+        }
+
+        for (var j = 0; j < decls.length; j++) {
+          var d = decls[j];
+
+          if (d.type === NODE.COMMENT) {
+            lines.push(innerIndent + d.value);
+            continue;
+          }
+
+          if (d.type === NODE.RULE || d.type === NODE.ATRULE) {
+            lines.push(renderPretty([d], opts, depth + 1));
+            continue;
+          }
+
+          if (d.type !== NODE.DECLARATION) continue;
+
+          var prop = d.property;
+          var value = optimizeValue(d.value, opts);
+          var colon = (opts.spaceBeforeColon ? ' ' : '') + ':' + (opts.spaceAfterColon ? ' ' : '');
+
+          if (opts.alignProps) {
+            prop = prop + ' '.repeat(maxPropLen - prop.length);
+          }
+
+          var semi = ';';
+          if (!opts.lastSemicolon && j === decls.length - 1) semi = '';
+
+          lines.push(innerIndent + prop + colon + value + semi);
+        }
+
+        lines.push(indent + '}');
+        lines.push('');
+        continue;
+      }
+
+      if (node.type === NODE.DECLARATION) {
+        var value = optimizeValue(node.value, opts);
+        var colon = (opts.spaceBeforeColon ? ' ' : '') + ':' + (opts.spaceAfterColon ? ' ' : '');
+        lines.push(indent + node.property + colon + value + ';');
+      }
+    }
+
+    return lines.join('\n');
+  }
+
+  
+  function renderExpanded(ast, opts) {
+    var expandedOpts = Object.assign({}, opts, {
+      selectorNewline: true,
+      lastSemicolon: true,
+      spaceAfterColon: true,
+      braceStyle: 'same'
+    });
+    var result = renderPretty(ast.nodes || ast, expandedOpts, 0);
+    
+    result = result.replace(/\}\n([^\n}])/g, '}\n\n$1');
+    return result;
+  }
+
+  
+  function renderCompact(ast, opts) {
+    var nodes = filterComments(ast.nodes || ast, opts);
+    if (opts.mergeSelectors) nodes = mergeSelectors(nodes);
+    if (opts.mergeRules) nodes = mergeRules(nodes);
+    if (opts.groupMedia) nodes = groupMediaQueries(nodes);
+
+    var lines = [];
+
+    function renderNodes(items, depth) {
+      var indent = opts.indentStr.repeat(depth);
+      items.forEach(function(node) {
+        if (node.type === NODE.COMMENT) {
+          if (!opts.removeComments || (opts.keepImportant && isImportantComment(node))) {
+            lines.push(indent + node.value);
+          }
+          return;
+        }
+        if (node.type === NODE.ATRULE) {
+          if (!node.hasBlock) {
+            lines.push(indent + '@' + node.name + ' ' + node.params + ';');
+            return;
+          }
+          lines.push(indent + '@' + node.name + ' ' + node.params + ' {');
+          renderNodes(node.body, depth + 1);
+          lines.push(indent + '}');
+          return;
+        }
+        if (node.type === NODE.RULE) {
+          var decls = (node.declarations || []).filter(function(d) { return d.type === NODE.DECLARATION; });
+          if (opts.sortProps) decls = sortDeclarations(decls);
+          var props = decls.map(function(d, idx) {
+            var v = optimizeValue(d.value, opts);
+            var semi = (idx < decls.length - 1 || opts.lastSemicolon) ? ';' : '';
+            return d.property + ': ' + v + semi;
+          }).join(' ');
+          var sel = node.selector.replace(/\s*\n\s*/g, ' ');
+          lines.push(indent + sel + ' { ' + props + ' }');
+        }
+      });
+    }
+
+    renderNodes(nodes, 0);
+    return lines.join('\n');
+  }
+
+  
+  function renderNested(ast, opts) {
+    
+    var nestedOpts = Object.assign({}, opts, {
+      selectorNewline: true,
+      lastSemicolon: true
+    });
+    return renderPretty(ast.nodes || ast, nestedOpts, 0);
+  }
+
+  
+  function renderOneLine(ast, opts) {
+    var nodes = filterComments(ast.nodes || ast, Object.assign({}, opts, { removeComments: true }));
+    if (opts.mergeSelectors) nodes = mergeSelectors(nodes);
+    if (opts.mergeRules) nodes = mergeRules(nodes);
+
+    function serializeNodes(items) {
+      var parts = [];
+      items.forEach(function(node) {
+        if (node.type === NODE.ATRULE) {
+          if (!node.hasBlock) {
+            parts.push('@' + node.name + ' ' + node.params + ';');
+          } else {
+            parts.push('@' + node.name + ' ' + node.params + '{' + serializeNodes(node.body) + '}');
+          }
+          return;
+        }
+        if (node.type === NODE.RULE) {
+          var decls = (node.declarations || []).filter(function(d) { return d.type === NODE.DECLARATION; });
+          var props = decls.map(function(d) {
+            return d.property + ':' + optimizeValue(d.value, opts);
+          }).join(';');
+          var sel = node.selector.replace(/\s*\n\s*/g, ',').replace(/\s+/g, ' ');
+          parts.push(sel + '{' + props + '}');
+        }
+      });
+      return parts.join('');
+    }
+
+    return serializeNodes(nodes);
+  }
+
+  
+  function renderMinify(ast, opts) {
+    var minOpts = Object.assign({}, opts, {
+      removeComments: true,
+      shortenColors: true,
+      zeroUnits: true,
+      removeLastSemi: true
+    });
+
+    var nodes = filterComments(ast.nodes || ast, minOpts);
+    if (opts.mergeSelectors) nodes = mergeSelectors(nodes);
+    if (opts.mergeRules) nodes = mergeRules(nodes);
+    if (opts.groupMedia) nodes = groupMediaQueries(nodes);
+
+    function minNodes(items) {
+      var result = '';
+      items.forEach(function(node) {
+        if (node.type === NODE.COMMENT) {
+          if (opts.keepImportant && isImportantComment(node)) {
+            result += node.value;
+          }
+          return;
+        }
+        if (node.type === NODE.ATRULE) {
+          if (!node.hasBlock) {
+            result += '@' + node.name + ' ' + node.params.trim() + ';';
+          } else {
+            result += '@' + node.name + ' ' + node.params.trim() + '{' + minNodes(node.body) + '}';
+          }
+          return;
+        }
+        if (node.type === NODE.RULE) {
+          var decls = (node.declarations || []).filter(function(d) { return d.type === NODE.DECLARATION; });
+          if (decls.length === 0) return;
+          var props = decls.map(function(d, idx) {
+            var v = optimizeValue(d.value, minOpts);
+            
+            var semi = (minOpts.removeLastSemi && idx === decls.length - 1) ? '' : ';';
+            return d.property + ':' + v + semi;
+          }).join('');
+          var sel = node.selector.replace(/\s*\n\s*/g, ',').replace(/\s*,\s*/g, ',').replace(/\s+/g, ' ').trim();
+          result += sel + '{' + props + '}';
+        }
+      });
+      return result;
+    }
+
+    return minNodes(nodes);
+  }
+
+  
+  function renderSafeMinify(ast, opts) {
+    
+    return renderMinify(ast, Object.assign({}, opts, {
+      mergeSelectors: false,
+      mergeRules: false,
+      groupMedia: false
+    }));
+  }
+
+  
+  function renderCompressed(ast, opts) {
+    return renderMinify(ast, Object.assign({}, opts, {
+      removeComments: true,
+      shortenColors: true,
+      zeroUnits: true,
+      removeLastSemi: true,
+      mergeSelectors: true,
+      mergeRules: true,
+      groupMedia: true
+    }));
+  }
+
+  
+  
+  
+
+  var inputEl = document.getElementById('css-input');
+  var outputEl = document.getElementById('css-output');
+  var statusText = document.getElementById('css-status-text');
+
+  function showToast(msg) {
+    var t = document.getElementById('css-toast');
+    document.getElementById('css-toast-message').textContent = msg;
+    t.classList.remove('hidden');
+    setTimeout(function() { t.classList.add('hidden'); }, 2000);
+  }
+
+  function showError(msg) {
+    document.getElementById('css-error-message').textContent = msg;
+    document.getElementById('css-error-panel').classList.remove('hidden');
+    statusText.textContent = i18n.statusError;
+  }
+
+  function hideError() {
+    document.getElementById('css-error-panel').classList.add('hidden');
+  }
+
+  function formatBytes(bytes) {
+    return bytes < 1024 ? bytes + ' B' : (bytes / 1024).toFixed(1) + ' KB';
+  }
+
+  function updateStats(original, formatted) {
+    var ob = new Blob([original]).size;
+    var fb = new Blob([formatted]).size;
+    var ol = original.split('\n').length;
+    var fl = formatted.split('\n').length;
+    var red = ob > 0 ? Math.round((1 - fb / ob) * 100) : 0;
+
+    document.getElementById('css-stat-original').textContent = ol + ' ' + i18n.statsLines + ' · ' + formatBytes(ob);
+    document.getElementById('css-stat-formatted').textContent = fl + ' ' + i18n.statsLines + ' · ' + formatBytes(fb);
+    document.getElementById('css-stat-reduction').textContent = (red >= 0 ? '-' : '+') + Math.abs(red) + '%';
+    document.getElementById('css-stats-bar').classList.remove('hidden');
+
+    document.getElementById('css-input-stats').textContent = ol + ' ' + i18n.statsLines + ' · ' + original.length + ' ' + i18n.statsChars;
+    document.getElementById('css-output-stats').textContent = fl + ' ' + i18n.statsLines + ' · ' + formatted.length + ' ' + i18n.statsChars;
+  }
+
+  function process(renderer, statusMsg) {
+    var code = inputEl.value;
+    if (!code.trim()) return;
+    hideError();
+
+    try {
+      var ast = parseCSS(code);
+      if (ast.error) showError(ast.error);
+      var opts = getOpts();
+      var result = renderer(ast, opts);
+      outputEl.value = result;
+      document.getElementById('btn-css-copy').disabled = false;
+      document.getElementById('btn-css-download').disabled = false;
+      statusText.textContent = statusMsg;
+      updateStats(code, result);
+    } catch(e) {
+      showError(e.message || String(e));
+    }
+  }
+
+  
+  document.getElementById('btn-pretty').addEventListener('click', function() {
+    process(function(ast, opts) { return renderPretty(ast.nodes, opts, 0); }, i18n.statusFormatted + ' (Beautify)');
+  });
+  document.getElementById('btn-expanded').addEventListener('click', function() {
+    process(renderExpanded, i18n.statusFormatted + ' (Expanded)');
+  });
+  document.getElementById('btn-compact').addEventListener('click', function() {
+    process(renderCompact, i18n.statusFormatted + ' (Compact)');
+  });
+  document.getElementById('btn-nested').addEventListener('click', function() {
+    process(renderNested, i18n.statusFormatted + ' (Nested)');
+  });
+  document.getElementById('btn-oneline').addEventListener('click', function() {
+    process(renderOneLine, i18n.statusFormatted + ' (One Line)');
+  });
+  document.getElementById('btn-minify').addEventListener('click', function() {
+    process(renderMinify, i18n.statusMinified);
+  });
+  document.getElementById('btn-safe-minify').addEventListener('click', function() {
+    process(renderSafeMinify, i18n.statusMinified + ' (Safe)');
+  });
+  document.getElementById('btn-compressed').addEventListener('click', function() {
+    process(renderCompressed, i18n.statusMinified + ' (Compressed)');
+  });
+
+  
+  document.getElementById('btn-css-copy').addEventListener('click', function() {
+    if (!outputEl.value) return;
+    navigator.clipboard.writeText(outputEl.value).then(function() { showToast(i18n.copied); });
+  });
+
+  
+  document.getElementById('btn-css-download').addEventListener('click', function() {
+    if (!outputEl.value) return;
+    var now = new Date();
+    var date = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+    var blob = new Blob([outputEl.value], { type: 'text/css;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a'); a.href = url; a.download = date + '_formatted.css'; a.click();
+    setTimeout(function() { URL.revokeObjectURL(url); }, 100);
+    showToast(i18n.downloaded);
+  });
+
+  
+  document.getElementById('btn-css-paste').addEventListener('click', function() {
+    navigator.clipboard.readText().then(function(t) { inputEl.value = t; updateInputStats(); }).catch(function() {});
+  });
+
+  
+  document.getElementById('btn-css-sample').addEventListener('click', function() {
+    inputEl.value = SAMPLE_CSS;
+    updateInputStats();
+  });
+
+  
+  document.getElementById('btn-css-clear').addEventListener('click', function() {
+    inputEl.value = ''; outputEl.value = '';
+    document.getElementById('btn-css-copy').disabled = true;
+    document.getElementById('btn-css-download').disabled = true;
+    document.getElementById('css-stats-bar').classList.add('hidden');
+    document.getElementById('css-input-stats').textContent = '';
+    document.getElementById('css-output-stats').textContent = '';
+    hideError();
+    statusText.textContent = i18n.statusReady;
+    showToast(i18n.cleared);
+  });
+
+  function updateInputStats() {
+    var c = inputEl.value;
+    var l = c ? c.split('\n').length : 0;
+    document.getElementById('css-input-stats').textContent = l + ' ' + i18n.statsLines + ' · ' + c.length + ' ' + i18n.statsChars;
+  }
+
+  inputEl.addEventListener('input', updateInputStats);
+
+  
+  inputEl.addEventListener('dragover', function(e) { e.preventDefault(); });
+  inputEl.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var f = e.dataTransfer.files;
+    if (f.length > 0 && f[0].name.match(/\.(css|scss|less)$/i)) {
+      var r = new FileReader();
+      r.onload = function(ev) { inputEl.value = ev.target.result; updateInputStats(); };
+      r.readAsText(f[0]);
+    }
+  });
+
+  
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      process(function(ast, opts) { return renderPretty(ast.nodes, opts, 0); }, i18n.statusFormatted);
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key === 'm') {
+      e.preventDefault();
+      process(renderMinify, i18n.statusMinified);
+    }
+  });
+
+  
+  function saveSettings() {
+    try {
+      var ir = document.querySelector('input[name="css-indent"]:checked');
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        indent: ir ? ir.value : '2',
+        brace: document.getElementById('opt-css-brace').value,
+        spaceBeforeColon: document.getElementById('opt-space-before-colon').checked,
+        spaceAfterColon: document.getElementById('opt-space-after-colon').checked,
+        selectorNewline: document.getElementById('opt-selector-newline').checked,
+        lastSemicolon: document.getElementById('opt-last-semicolon').checked,
+        sortProps: document.getElementById('opt-sort-props').checked,
+        alignProps: document.getElementById('opt-align-props').checked,
+        removeComments: document.getElementById('opt-css-remove-comments').checked,
+        keepImportant: document.getElementById('opt-css-keep-important').checked,
+        shortenColors: document.getElementById('opt-shorten-colors').checked,
+        zeroUnits: document.getElementById('opt-zero-units').checked,
+        removeLastSemi: document.getElementById('opt-remove-last-semi').checked,
+        mergeSelectors: document.getElementById('opt-merge-selectors').checked,
+        mergeRules: document.getElementById('opt-merge-rules').checked,
+        groupMedia: document.getElementById('opt-group-media').checked
+      }));
+    } catch(e) {}
+  }
+
+  function loadSettings() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s.indent) { var r = document.querySelector('input[name="css-indent"][value="' + s.indent + '"]'); if (r) r.checked = true; }
+      if (s.brace) document.getElementById('opt-css-brace').value = s.brace;
+      var bools = {
+        'opt-space-before-colon': 'spaceBeforeColon',
+        'opt-space-after-colon': 'spaceAfterColon',
+        'opt-selector-newline': 'selectorNewline',
+        'opt-last-semicolon': 'lastSemicolon',
+        'opt-sort-props': 'sortProps',
+        'opt-align-props': 'alignProps',
+        'opt-css-remove-comments': 'removeComments',
+        'opt-css-keep-important': 'keepImportant',
+        'opt-shorten-colors': 'shortenColors',
+        'opt-zero-units': 'zeroUnits',
+        'opt-remove-last-semi': 'removeLastSemi',
+        'opt-merge-selectors': 'mergeSelectors',
+        'opt-merge-rules': 'mergeRules',
+        'opt-group-media': 'groupMedia'
+      };
+      for (var id in bools) {
+        if (typeof s[bools[id]] === 'boolean') document.getElementById(id).checked = s[bools[id]];
+      }
+    } catch(e) {}
+  }
+
+  document.querySelectorAll('#css-input ~ *, input[type="checkbox"], input[type="radio"], select').forEach(function(el) {
+    el.addEventListener('change', saveSettings);
+  });
+
+  loadSettings();
+
+})();
+</script>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Максим Александров<br>
+<strong>Age:</strong> 28
+<strong>Location:</strong> Тула, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>Этот блог — мой personal knowledge base, где я пушу заметки про tech stack, life experience и всё, что триггерит мой interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — готов к мёрджу идей и совместным проектам.</p>
+<p><img src="/img/meme.webp" alt="meme"></p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-яп">💻 ЯП</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Адаптивная вёрстка (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST API</strong></li>
+</ul>
+<h2 id="-базы-данных">🗄️ Базы данных</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-дизайн-и-графика">🎨 Дизайн и графика</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX дизайн и прототипирование</li>
+<li><strong>Photoshop</strong> — графика и обработка изображений</li>
+<li><strong>After Effects</strong> — моушн-дизайн и анимация 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои Open Source проекты 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои проекты 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN-сервис в Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN-сервис в Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Социальные сети</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+     
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+	
+    
+	
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym("99568144", "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

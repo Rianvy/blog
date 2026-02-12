@@ -6,8 +6,29 @@
     <description>Recent content on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 11 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://0x69.ru/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HTML Formatter</title>
+      <link>https://0x69.ru/en/utilities/html-formatter/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/html-formatter/</guid>
+      <description>&lt;p&gt;Format, minify and optimize HTML code with template engine support&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>JavaScript Formatter</title>
+      <link>https://0x69.ru/en/utilities/js-formatter/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/js-formatter/</guid>
+      <description>&lt;p&gt;Format, minify and beautify JavaScript code with flexible settings&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CSS Formatter</title>
+      <link>https://0x69.ru/en/utilities/css-formatter/</link>
+      <pubDate>Wed, 11 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/utilities/css-formatter/</guid>
+      <description>&lt;p&gt;Format, minify and optimize CSS code with flexible settings&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Email Alias Tester</title>
       <link>https://0x69.ru/en/utilities/email-alias-tester/</link>
@@ -128,7 +149,7 @@
       <description>&lt;p&gt;Compress PNG, JPG, WebP images without quality loss&lt;/p&gt;</description>
     </item>
     <item>
-      <title>JSON Normalizer</title>
+      <title>JSON Formatter</title>
       <link>https://0x69.ru/en/utilities/json-normalizer/</link>
       <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
       <guid>https://0x69.ru/en/utilities/json-normalizer/</guid>

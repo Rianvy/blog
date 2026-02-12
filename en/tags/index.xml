@@ -6,8 +6,57 @@
     <description>Recent content in Tags on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 11 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://0x69.ru/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Beautify</title>
+      <link>https://0x69.ru/en/tags/beautify/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/tags/beautify/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Code</title>
+      <link>https://0x69.ru/en/tags/code/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/tags/code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Formatter</title>
+      <link>https://0x69.ru/en/tags/formatter/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/tags/formatter/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Html</title>
+      <link>https://0x69.ru/en/tags/html/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/tags/html/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Javascript</title>
+      <link>https://0x69.ru/en/tags/javascript/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/tags/javascript/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Minify</title>
+      <link>https://0x69.ru/en/tags/minify/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/tags/minify/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Templates</title>
+      <link>https://0x69.ru/en/tags/templates/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/tags/templates/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Alias</title>
       <link>https://0x69.ru/en/tags/alias/</link>
@@ -20,6 +69,13 @@
       <link>https://0x69.ru/en/tags/ascii/</link>
       <pubDate>Wed, 11 Feb 2026 00:00:00 +0000</pubDate>
       <guid>https://0x69.ru/en/tags/ascii/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Css</title>
+      <link>https://0x69.ru/en/tags/css/</link>
+      <pubDate>Wed, 11 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/tags/css/</guid>
       <description></description>
     </item>
     <item>
@@ -55,6 +111,13 @@
       <link>https://0x69.ru/en/tags/normalization/</link>
       <pubDate>Wed, 11 Feb 2026 00:00:00 +0000</pubDate>
       <guid>https://0x69.ru/en/tags/normalization/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Optimization</title>
+      <link>https://0x69.ru/en/tags/optimization/</link>
+      <pubDate>Wed, 11 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/en/tags/optimization/</guid>
       <description></description>
     </item>
     <item>
@@ -135,13 +198,6 @@
       <description></description>
     </item>
     <item>
-      <title>Code</title>
-      <link>https://0x69.ru/en/tags/code/</link>
-      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://0x69.ru/en/tags/code/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Converter</title>
       <link>https://0x69.ru/en/tags/converter/</link>
       <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
@@ -209,13 +265,6 @@
       <link>https://0x69.ru/en/tags/images/</link>
       <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
       <guid>https://0x69.ru/en/tags/images/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Javascript</title>
-      <link>https://0x69.ru/en/tags/javascript/</link>
-      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://0x69.ru/en/tags/javascript/</guid>
       <description></description>
     </item>
     <item>
@@ -569,13 +618,6 @@
       <description></description>
     </item>
     <item>
-      <title>Html</title>
-      <link>https://0x69.ru/en/tags/html/</link>
-      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://0x69.ru/en/tags/html/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Jpg</title>
       <link>https://0x69.ru/en/tags/jpg/</link>
       <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
@@ -601,13 +643,6 @@
       <link>https://0x69.ru/en/tags/md5/</link>
       <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
       <guid>https://0x69.ru/en/tags/md5/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Optimization</title>
-      <link>https://0x69.ru/en/tags/optimization/</link>
-      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://0x69.ru/en/tags/optimization/</guid>
       <description></description>
     </item>
     <item>

@@ -1693,3 +1693,309 @@ countDomain = "Домены"
 countDash = "Dash-алиасы"
 countMin = "мин"
 countMax = "макс"
+
+# ==========================================
+# JS Formatter
+# ==========================================
+[jsformatter]
+# Badges
+badgeFormatter = "Форматирование"
+badgeMinify = "Минификация"
+badgeBeautify = "Beautify"
+badgeAnalysis = "Анализ"
+
+# Input
+inputTitle = "Исходный код"
+inputPlaceholder = "Вставьте JavaScript код..."
+inputHint = "Вставьте код или перетащите .js файл"
+
+# Actions
+formatPretty = "Beautify"
+formatCompact = "Compact"
+formatOneLine = "В одну строку"
+formatMinify = "Minify"
+formatSafeMinify = "Safe Minify"
+clearAll = "Очистить"
+copyResult = "Копировать"
+pasteCode = "Вставить"
+loadSample = "Пример"
+
+# Settings
+settingsTitle = "Настройки"
+indentSize = "Размер отступа"
+indentTab = "Tab"
+quoteStyle = "Кавычки"
+quoteSingle = "Одинарные"
+quoteDouble = "Двойные"
+maxLineLength = "Макс. длина строки"
+semicolons = "Точки с запятой"
+trailingCommas = "Trailing commas"
+bracketSpacing = "Пробелы в скобках"
+arrowParens = "Скобки у стрелочных"
+spaceAfterFunction = "Пробел после function"
+braceStyle = "Стиль скобок"
+braceStyleSame = "На той же строке"
+braceStyleNext = "На следующей строке"
+
+# Minify options
+minifyTitle = "Опции минификации"
+removeComments = "Удалить комментарии"
+removeConsole = "Удалить console.log"
+removeDebugger = "Удалить debugger"
+shortenBools = "Сократить boolean"
+shortenBoolsDesc = "true → !0, false → !1"
+mangleVars = "Сократить переменные"
+mangleVarsDesc = "Переименовать локальные переменные"
+
+# Format options
+formatTitle = "Опции форматирования"
+sortImports = "Сортировать imports"
+normalizeQuotes = "Нормализовать кавычки"
+keepComments = "Сохранить комментарии"
+
+# Output
+outputTitle = "Результат"
+outputEmpty = "Результат появится здесь"
+
+# Stats
+statsOriginal = "Исходный"
+statsFormatted = "Результат"
+statsReduction = "Сжатие"
+statsLines = "строк"
+statsChars = "символов"
+statsBytes = "байт"
+
+# Errors
+errorTitle = "Ошибка парсинга"
+errorLine = "Строка"
+errorCol = "Столбец"
+errorExpected = "Ожидалось"
+
+# Status
+statusReady = "Готов к работе"
+statusFormatted = "Отформатировано"
+statusMinified = "Минифицировано"
+statusError = "Ошибка"
+statusBrowser = "Всё работает локально в браузере"
+copied = "Скопировано!"
+cleared = "Очищено"
+downloaded = "Файл скачан!"
+
+# How it works
+howTitle = "Как это работает?"
+howSubtitle = "Возможности инструмента"
+howParse = "Парсинг"
+howParseDesc = "Анализирует JavaScript код, строит AST и проверяет синтаксис."
+howFormat = "Форматирование"
+howFormatDesc = "Применяет выбранный стиль: отступы, кавычки, точки с запятой."
+howMinify = "Минификация"
+howMinifyDesc = "Удаляет пробелы, комментарии, сокращает конструкции."
+howExport = "Экспорт"
+howExportDesc = "Копируйте результат или скачайте как .js файл."
+
+# ==========================================
+# CSS Formatter
+# ==========================================
+[cssformatter]
+# Badges
+badgeFormatter = "Форматирование"
+badgeMinify = "Минификация"
+badgeOptimize = "Оптимизация"
+badgeAnalysis = "Анализ"
+
+# Input
+inputTitle = "Исходный CSS"
+inputPlaceholder = "Вставьте CSS код..."
+inputHint = "Вставьте код или перетащите .css файл"
+
+# Actions
+formatPretty = "Beautify"
+formatExpanded = "Expanded"
+formatCompact = "Compact"
+formatOneLine = "В одну строку"
+formatMinify = "Minify"
+formatSafeMinify = "Safe Minify"
+formatNested = "Nested"
+formatCompressed = "Compressed"
+clearAll = "Очистить"
+copyResult = "Копировать"
+pasteCode = "Вставить"
+loadSample = "Пример"
+
+# Settings
+settingsTitle = "Настройки"
+indentSize = "Размер отступа"
+indentTab = "Tab"
+braceStyle = "Стиль скобок"
+braceStyleSame = "На той же строке"
+braceStyleNext = "На следующей строке"
+spaceBeforeColon = "Пробел до двоеточия"
+spaceAfterColon = "Пробел после двоеточия"
+selectorNewline = "Селекторы на новых строках"
+lastSemicolon = "Последняя точка с запятой"
+alignProperties = "Выравнивать значения"
+sortProperties = "Сортировать свойства"
+
+# Optimize options
+optimizeTitle = "Оптимизация"
+shortenColors = "Сократить цвета"
+shortenColorsDesc = "#ffffff → #fff"
+removeZeroUnits = "Убрать единицы у 0"
+removeZeroUnitsDesc = "0px → 0"
+mergeSelectors = "Объединить селекторы"
+mergeSelectorsDesc = "Одинаковые правила → один селектор"
+groupMedia = "Группировать @media"
+groupMediaDesc = "Объединить одинаковые медиа-запросы"
+optimizeFonts = "Оптимизировать шрифты"
+optimizeFontsDesc = "font shorthand оптимизация"
+mergeMargins = "Объединить margin/padding"
+mergeMarginDesc = "margin-top/right/bottom/left → margin"
+
+# Minify options
+minifyTitle = "Опции минификации"
+removeComments = "Удалить комментарии"
+keepImportant = "Сохранить /*! ... */"
+keepImportantDesc = "Комментарии с лицензиями"
+removeLastSemicolon = "Убрать последнюю ;"
+mergeRules = "Объединить дублирующиеся правила"
+
+# Output
+outputTitle = "Результат"
+outputEmpty = "Результат появится здесь"
+
+# Stats
+statsOriginal = "Исходный"
+statsFormatted = "Результат"
+statsReduction = "Сжатие"
+statsSelectors = "селекторов"
+statsProperties = "свойств"
+statsRules = "правил"
+statsLines = "строк"
+statsChars = "символов"
+statsBytes = "байт"
+
+# Errors
+errorTitle = "Ошибка парсинга"
+errorLine = "Строка"
+errorCol = "Столбец"
+
+# Status
+statusReady = "Готов к работе"
+statusFormatted = "Отформатировано"
+statusMinified = "Минифицировано"
+statusError = "Ошибка"
+statusBrowser = "Всё работает локально в браузере"
+copied = "Скопировано!"
+cleared = "Очищено"
+downloaded = "Файл скачан!"
+
+# How it works
+howTitle = "Как это работает?"
+howSubtitle = "Возможности инструмента"
+howParse = "Парсинг"
+howParseDesc = "Анализирует CSS: селекторы, свойства, @-правила, комментарии и вложенность."
+howFormat = "Форматирование"
+howFormatDesc = "Применяет стиль: отступы, переносы, порядок свойств, выравнивание."
+howMinify = "Минификация"
+howMinifyDesc = "Удаляет пробелы, комментарии, сокращает цвета и единицы."
+howExport = "Экспорт"
+howExportDesc = "Копируйте результат или скачайте как .css файл."
+
+# ==========================================
+# HTML Formatter
+# ==========================================
+[htmlformatter]
+badgeFormatter = "Форматирование"
+badgeMinify = "Минификация"
+badgeTemplates = "Шаблоны"
+badgeAnalysis = "Анализ"
+
+inputTitle = "Исходный HTML"
+inputPlaceholder = "Вставьте HTML код..."
+inputHint = "Вставьте код или перетащите .html файл"
+
+formatPretty = "Beautify"
+formatExpanded = "Expanded"
+formatCompact = "Compact"
+formatOneLine = "В одну строку"
+formatInline = "Inline"
+formatMinify = "Minify"
+formatSafeMinify = "Safe Minify"
+clearAll = "Очистить"
+copyResult = "Копировать"
+pasteCode = "Вставить"
+loadSample = "Пример"
+
+settingsTitle = "Настройки"
+indentSize = "Размер отступа"
+indentTab = "Tab"
+wrapAttrs = "Перенос атрибутов"
+wrapAttrsAuto = "Авто"
+wrapAttrsForce = "Каждый на новой строке"
+wrapAttrsAligned = "С выравниванием"
+wrapAttrsNone = "Не переносить"
+maxLineLength = "Макс. длина строки"
+selfClosingTags = "Самозакрывающиеся теги"
+selfClosingDesc = "<br /> вместо <br>"
+sortAttributes = "Сортировать атрибуты"
+sortAttributesDesc = "id, class, name, type, ..."
+voidSlash = "Слэш в void элементах"
+unformatted = "Inline-элементы"
+unformattedDesc = "span, a, strong, em — без переносов"
+
+minifyTitle = "Опции минификации"
+removeComments = "Удалить комментарии"
+keepConditional = "Сохранить условные"
+keepConditionalDesc = "<!--[if IE]> ... <![endif]-->"
+collapseWhitespace = "Свернуть пробелы"
+removeEmptyAttrs = "Удалить пустые атрибуты"
+collapseBoolAttrs = "Сократить boolean"
+collapseBoolDesc = 'disabled="disabled" → disabled'
+removeOptionalTags = "Удалить необязательные теги"
+removeOptionalDesc = "</li>, </td>, </p>"
+removeTypeAttrs = "Удалить type атрибуты"
+removeTypeDesc = 'type="text/javascript", type="text/css"'
+removeRedundant = "Удалить избыточные"
+removeRedundantDesc = 'method="get", charset на script'
+minifyInlineCSS = "Минифицировать inline CSS"
+minifyInlineJS = "Минифицировать inline JS"
+
+preserveTitle = "Сохранение формата"
+preservePre = "Сохранять <pre>"
+preserveCode = "Сохранять <code>"
+preserveTextarea = "Сохранять <textarea>"
+preserveScript = "Сохранять <script>"
+preserveStyle = "Сохранять <style>"
+
+outputTitle = "Результат"
+outputEmpty = "Результат появится здесь"
+
+statsOriginal = "Исходный"
+statsFormatted = "Результат"
+statsReduction = "Сжатие"
+statsLines = "строк"
+statsChars = "символов"
+statsElements = "элементов"
+
+errorTitle = "Ошибка парсинга"
+errorLine = "Строка"
+
+statusReady = "Готов к работе"
+statusFormatted = "Отформатировано"
+statusMinified = "Минифицировано"
+statusError = "Ошибка"
+statusBrowser = "Всё работает локально в браузере"
+copied = "Скопировано!"
+cleared = "Очищено"
+downloaded = "Файл скачан!"
+
+howTitle = "Как это работает?"
+howSubtitle = "Возможности инструмента"
+howParse = "Парсинг"
+howParseDesc = "Анализирует HTML: теги, атрибуты, текст, комментарии, шаблоны и вложенность."
+howFormat = "Форматирование"
+howFormatDesc = "Применяет стиль: отступы, переносы атрибутов, порядок, inline-элементы."
+howMinify = "Минификация"
+howMinifyDesc = "Удаляет пробелы, комментарии, необязательные теги и атрибуты."
+howExport = "Экспорт"
+howExportDesc = "Копируйте результат или скачайте как .html файл."

@@ -1,0 +1,1412 @@
+{{ define "title" }}
+{{ .Title }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-5 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}⚡{{ end }}</span>
+    </div>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">{{ .Title }}</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">{{ .Description }}</p>
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="code-slash-outline"></ion-icon>
+        {{ T "jsformatter.badgeFormatter" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+        <ion-icon name="contract-outline"></ion-icon>
+        {{ T "jsformatter.badgeMinify" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="sparkles-outline"></ion-icon>
+        {{ T "jsformatter.badgeBeautify" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="analytics-outline"></ion-icon>
+        {{ T "jsformatter.badgeAnalysis" }}
+      </span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
+
+    <!-- Settings Panel -->
+    <div class="xl:col-span-1 space-y-3 sm:space-y-4 order-2 xl:order-1">
+
+      <!-- Format Actions -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="flash-outline" class="text-warning"></ion-icon>
+            {{ T "jsformatter.formatTitle" }}
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-2">
+          <button type="button" id="btn-pretty" class="btn btn-success btn-sm w-full gap-2 justify-start">
+            <ion-icon name="sparkles-outline"></ion-icon>
+            {{ T "jsformatter.formatPretty" }}
+          </button>
+          <button type="button" id="btn-compact" class="btn btn-info btn-sm w-full gap-2 justify-start">
+            <ion-icon name="contract-outline"></ion-icon>
+            {{ T "jsformatter.formatCompact" }}
+          </button>
+          <button type="button" id="btn-oneline" class="btn btn-secondary btn-sm w-full gap-2 justify-start">
+            <ion-icon name="reorder-two-outline"></ion-icon>
+            {{ T "jsformatter.formatOneLine" }}
+          </button>
+          <div class="divider my-1 text-[10px]">{{ T "jsformatter.minifyTitle" }}</div>
+          <button type="button" id="btn-minify" class="btn btn-warning btn-sm w-full gap-2 justify-start">
+            <ion-icon name="resize-outline"></ion-icon>
+            {{ T "jsformatter.formatMinify" }}
+          </button>
+          <button type="button" id="btn-safe-minify" class="btn btn-outline btn-sm w-full gap-2 justify-start">
+            <ion-icon name="shield-checkmark-outline"></ion-icon>
+            {{ T "jsformatter.formatSafeMinify" }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Settings -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+            {{ T "jsformatter.settingsTitle" }}
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-3">
+          <div class="form-control">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium">{{ T "jsformatter.indentSize" }}</span>
+            </label>
+            <div class="grid grid-cols-3 gap-1">
+              <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                <input type="radio" name="indent" value="2" class="hidden" checked />
+                <span class="text-xs font-mono">2</span>
+              </label>
+              <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                <input type="radio" name="indent" value="4" class="hidden" />
+                <span class="text-xs font-mono">4</span>
+              </label>
+              <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                <input type="radio" name="indent" value="tab" class="hidden" />
+                <span class="text-xs font-mono">{{ T "jsformatter.indentTab" }}</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-control">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium">{{ T "jsformatter.quoteStyle" }}</span>
+            </label>
+            <div class="grid grid-cols-2 gap-1">
+              <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                <input type="radio" name="quotes" value="single" class="hidden" checked />
+                <span class="text-xs font-mono">{{ T "jsformatter.quoteSingle" }} '</span>
+              </label>
+              <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                <input type="radio" name="quotes" value="double" class="hidden" />
+                <span class="text-xs font-mono">{{ T "jsformatter.quoteDouble" }} "</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-control">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium">{{ T "jsformatter.maxLineLength" }}</span>
+              <span class="label-text-alt text-[10px] font-mono" id="max-line-val">80</span>
+            </label>
+            <input type="range" id="opt-max-line" min="40" max="160" value="80" class="range range-xs range-primary" />
+          </div>
+          <div class="form-control">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium">{{ T "jsformatter.braceStyle" }}</span>
+            </label>
+            <select id="opt-brace-style" class="select select-bordered select-xs text-xs">
+              <option value="same">{{ T "jsformatter.braceStyleSame" }}</option>
+              <option value="next">{{ T "jsformatter.braceStyleNext" }}</option>
+            </select>
+          </div>
+          <div class="divider my-1"></div>
+          <label class="flex items-center justify-between cursor-pointer">
+            <span class="text-xs font-medium">{{ T "jsformatter.semicolons" }}</span>
+            <input type="checkbox" id="opt-semicolons" class="toggle toggle-xs toggle-primary" checked />
+          </label>
+          <label class="flex items-center justify-between cursor-pointer">
+            <span class="text-xs font-medium">{{ T "jsformatter.trailingCommas" }}</span>
+            <input type="checkbox" id="opt-trailing-commas" class="toggle toggle-xs toggle-primary" />
+          </label>
+          <label class="flex items-center justify-between cursor-pointer">
+            <span class="text-xs font-medium">{{ T "jsformatter.bracketSpacing" }}</span>
+            <input type="checkbox" id="opt-bracket-spacing" class="toggle toggle-xs toggle-primary" checked />
+          </label>
+          <label class="flex items-center justify-between cursor-pointer">
+            <span class="text-xs font-medium">{{ T "jsformatter.spaceAfterFunction" }}</span>
+            <input type="checkbox" id="opt-space-function" class="toggle toggle-xs toggle-primary" />
+          </label>
+          <label class="flex items-center justify-between cursor-pointer">
+            <span class="text-xs font-medium">{{ T "jsformatter.arrowParens" }}</span>
+            <input type="checkbox" id="opt-arrow-parens" class="toggle toggle-xs toggle-primary" checked />
+          </label>
+          <div class="divider my-1"></div>
+          <label class="flex items-center justify-between cursor-pointer">
+            <span class="text-xs font-medium">{{ T "jsformatter.sortImports" }}</span>
+            <input type="checkbox" id="opt-sort-imports" class="toggle toggle-xs toggle-secondary" />
+          </label>
+          <label class="flex items-center justify-between cursor-pointer">
+            <span class="text-xs font-medium">{{ T "jsformatter.normalizeQuotes" }}</span>
+            <input type="checkbox" id="opt-normalize-quotes" class="toggle toggle-xs toggle-secondary" checked />
+          </label>
+          <label class="flex items-center justify-between cursor-pointer">
+            <span class="text-xs font-medium">{{ T "jsformatter.keepComments" }}</span>
+            <input type="checkbox" id="opt-keep-comments" class="toggle toggle-xs toggle-secondary" checked />
+          </label>
+        </div>
+      </div>
+
+      <!-- Minify options -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="construct-outline" class="text-warning"></ion-icon>
+            {{ T "jsformatter.minifyTitle" }}
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-3">
+          <label class="flex items-center justify-between cursor-pointer">
+            <span class="text-xs font-medium">{{ T "jsformatter.removeComments" }}</span>
+            <input type="checkbox" id="opt-remove-comments" class="toggle toggle-xs toggle-warning" checked />
+          </label>
+          <label class="flex items-center justify-between cursor-pointer">
+            <span class="text-xs font-medium">{{ T "jsformatter.removeConsole" }}</span>
+            <input type="checkbox" id="opt-remove-console" class="toggle toggle-xs toggle-warning" />
+          </label>
+          <label class="flex items-center justify-between cursor-pointer">
+            <span class="text-xs font-medium">{{ T "jsformatter.removeDebugger" }}</span>
+            <input type="checkbox" id="opt-remove-debugger" class="toggle toggle-xs toggle-warning" checked />
+          </label>
+          <label class="flex items-center justify-between cursor-pointer">
+            <div>
+              <span class="text-xs font-medium">{{ T "jsformatter.shortenBools" }}</span>
+              <p class="text-[9px] text-base-content/50">{{ T "jsformatter.shortenBoolsDesc" }}</p>
+            </div>
+            <input type="checkbox" id="opt-shorten-bools" class="toggle toggle-xs toggle-warning" checked />
+          </label>
+          <label class="flex items-center justify-between cursor-pointer">
+            <div>
+              <span class="text-xs font-medium">{{ T "jsformatter.mangleVars" }}</span>
+              <p class="text-[9px] text-base-content/50">{{ T "jsformatter.mangleVarsDesc" }}</p>
+            </div>
+            <input type="checkbox" id="opt-mangle" class="toggle toggle-xs toggle-error" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Editor panels -->
+    <div class="xl:col-span-3 space-y-3 sm:space-y-4 order-1 xl:order-2">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+        <!-- Input -->
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="create-outline" class="text-primary"></ion-icon>
+              {{ T "jsformatter.inputTitle" }}
+            </h2>
+            <button type="button" id="btn-paste" class="btn btn-ghost btn-xs gap-1" title="{{ T "jsformatter.pasteCode" }}">
+              <ion-icon name="clipboard-outline"></ion-icon>
+            </button>
+            <button type="button" id="btn-sample" class="btn btn-ghost btn-xs gap-1" title="{{ T "jsformatter.loadSample" }}">
+              <ion-icon name="code-outline"></ion-icon>
+            </button>
+            <button type="button" id="btn-clear" class="btn btn-ghost btn-xs gap-1" title="{{ T "jsformatter.clearAll" }}">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+          <div class="relative">
+            <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="input-stats"></div>
+            <textarea id="code-input" class="w-full h-[350px] sm:h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none" placeholder="{{ T "jsformatter.inputPlaceholder" }}" spellcheck="false"></textarea>
+          </div>
+        </div>
+        <!-- Output -->
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="checkmark-circle-outline" class="text-success"></ion-icon>
+              {{ T "jsformatter.outputTitle" }}
+            </h2>
+            <button type="button" id="btn-copy" class="btn btn-primary btn-xs gap-1" disabled>
+              <ion-icon name="copy-outline"></ion-icon>
+              <span class="hidden sm:inline">{{ T "jsformatter.copyResult" }}</span>
+            </button>
+            <button type="button" id="btn-download" class="btn btn-ghost btn-xs gap-1" disabled>
+              <ion-icon name="download-outline"></ion-icon>
+              <span class="hidden sm:inline">.js</span>
+            </button>
+          </div>
+          <div class="relative">
+            <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="output-stats"></div>
+            <textarea id="code-output" class="w-full h-[350px] sm:h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none" readonly placeholder="{{ T "jsformatter.outputEmpty" }}"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Warning -->
+      <div id="warning-panel" class="hidden bg-warning/5 border border-warning/20 rounded-xl sm:rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-2 p-3 sm:p-4">
+          <ion-icon name="warning-outline" class="text-warning text-xl shrink-0"></ion-icon>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-xs sm:text-sm text-warning">{{ T "jsformatter.warningTitle" }}</div>
+            <pre class="text-[10px] sm:text-xs mt-1 text-warning/80 font-mono whitespace-pre-wrap break-all" id="warning-message"></pre>
+          </div>
+          <button type="button" id="btn-dismiss-warning" class="btn btn-ghost btn-xs text-warning">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div id="error-panel" class="hidden bg-error/5 border border-error/20 rounded-xl sm:rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-2 p-3 sm:p-4">
+          <ion-icon name="alert-circle-outline" class="text-error text-xl shrink-0"></ion-icon>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-xs sm:text-sm text-error">{{ T "jsformatter.errorTitle" }}</div>
+            <pre class="text-[10px] sm:text-xs mt-1 text-error/80 font-mono whitespace-pre-wrap break-all" id="error-message"></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div id="stats-bar" class="hidden">
+        <div class="grid grid-cols-3 gap-3 sm:gap-4">
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "jsformatter.statsOriginal" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-primary" id="stat-original">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "jsformatter.statsFormatted" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-success" id="stat-formatted">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "jsformatter.statsReduction" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-warning" id="stat-reduction">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-info/10 flex items-center justify-center shrink-0">
+            <ion-icon name="help-circle-outline" class="text-lg sm:text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">{{ T "jsformatter.howTitle" }}</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "jsformatter.howSubtitle" }}</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <ion-icon name="scan-outline" class="text-primary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "jsformatter.howParse" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "jsformatter.howParseDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center">
+                <ion-icon name="sparkles-outline" class="text-success"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "jsformatter.howFormat" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "jsformatter.howFormatDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-warning/10 flex items-center justify-center">
+                <ion-icon name="contract-outline" class="text-warning"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "jsformatter.howMinify" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "jsformatter.howMinifyDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center">
+                <ion-icon name="download-outline" class="text-secondary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "jsformatter.howExport" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "jsformatter.howExportDesc" }}</p>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- Status -->
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span id="status-text">{{ T "jsformatter.statusReady" }}</span>
+    <span>{{ T "jsformatter.statusBrowser" }}</span>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast toast-top toast-center hidden z-50">
+  <div class="alert alert-success py-2 px-4">
+    <ion-icon name="checkmark-circle-outline" class="text-lg"></ion-icon>
+    <span id="toast-message" class="text-sm"></span>
+  </div>
+</div>
+
+<script>
+// ===========================================================================
+// JS FORMATTER v3.0 — Production build
+// Architecture: character-level scanner → token stream → ASI-aware renderer
+// ===========================================================================
+(function () {
+  'use strict';
+
+  // ── i18n ────────────────────────────────────────────────────────────────
+  var L = {
+    copied:          {{ printf "%q" (T "jsformatter.copied") }},
+    cleared:         {{ printf "%q" (T "jsformatter.cleared") }},
+    downloaded:      {{ printf "%q" (T "jsformatter.downloaded") }},
+    statusReady:     {{ printf "%q" (T "jsformatter.statusReady") }},
+    statusFormatted: {{ printf "%q" (T "jsformatter.statusFormatted") }},
+    statusMinified:  {{ printf "%q" (T "jsformatter.statusMinified") }},
+    statusError:     {{ printf "%q" (T "jsformatter.statusError") }},
+    lines:           {{ printf "%q" (T "jsformatter.statsLines") }},
+    chars:           {{ printf "%q" (T "jsformatter.statsChars") }},
+    errorLine:       {{ printf "%q" (T "jsformatter.errorLine") }},
+    errorCol:        {{ printf "%q" (T "jsformatter.errorCol") }},
+    warningPossible: {{ printf "%q" (T "jsformatter.warningPossible") }}
+  };
+
+  // ── Sample code ─────────────────────────────────────────────────────────
+  var SAMPLE = [
+    'import { useState, useEffect } from "react";',
+    'import axios from "axios";',
+    '',
+    'const greet = (name, age) => {',
+    '  console.log("Hello, " + name);',
+    '  debugger;',
+    '  if (age >= 18) {',
+    '    return true;',
+    '  } else {',
+    '    return false;',
+    '  }',
+    '};',
+    '',
+    '// fetch helper',
+    'async function fetchData(url, options) {',
+    '  /* default config */',
+    '  const TIMEOUT = 5000;',
+    '  const config = { timeout: TIMEOUT, ...options };',
+    '  try {',
+    '    const res = await fetch(url, config);',
+    '    const data = await res.json();',
+    '    return data;',
+    '  } catch (err) {',
+    '    console.error("Fetch failed:", err);',
+    '    return null;',
+    '  }',
+    '}',
+    '',
+    'const PI = 3.14159;',
+    'const items = [1, 2, 3, 4, 5];',
+    'const result = items.filter(x => x > 2).map(x => x * PI);',
+    '',
+    'export default { greet, fetchData, result };'
+  ].join('\n');
+
+  // ======================================================================
+  //  1.  SCANNER  —  source → token[]
+  // ======================================================================
+  var T_WS = 1, T_NL = 2, T_LINE_CMT = 3, T_BLOCK_CMT = 4,
+      T_STR = 5, T_TPL = 6, T_REGEX = 7, T_PUNCT = 8,
+      T_WORD = 9, T_NUM = 10;
+
+  function scan(src) {
+    var out = [], i = 0, n = src.length;
+
+    while (i < n) {
+      var c = src.charCodeAt(i), c2 = i + 1 < n ? src.charCodeAt(i + 1) : 0;
+
+      // ── newline ────────────────────────────────────────────────────────
+      if (c === 10) { out.push(T_NL, i, i + 1); i++; continue; }
+      if (c === 13) {
+        var e = (c2 === 10) ? i + 2 : i + 1;
+        out.push(T_NL, i, e); i = e; continue;
+      }
+
+      // ── whitespace ─────────────────────────────────────────────────────
+      if (c === 32 || c === 9) {
+        var s = i; while (i < n && (src.charCodeAt(i) === 32 || src.charCodeAt(i) === 9)) i++;
+        out.push(T_WS, s, i); continue;
+      }
+
+      // ── line comment ───────────────────────────────────────────────────
+      if (c === 47 && c2 === 47) {
+        var s = i; i += 2;
+        while (i < n && src.charCodeAt(i) !== 10) i++;
+        out.push(T_LINE_CMT, s, i); continue;
+      }
+
+      // ── block comment ──────────────────────────────────────────────────
+      if (c === 47 && c2 === 42) {
+        var s = i; i += 2;
+        while (i < n - 1 && !(src.charCodeAt(i) === 42 && src.charCodeAt(i + 1) === 47)) i++;
+        i += 2; if (i > n) i = n;
+        out.push(T_BLOCK_CMT, s, i); continue;
+      }
+
+      // ── template literal  (backtick = 96) ──────────────────────────────
+      if (c === 96) {
+        var s = i; i++;
+        i = scanTemplate(src, i);
+        out.push(T_TPL, s, i); continue;
+      }
+
+      // ── string ─────────────────────────────────────────────────────────
+      if (c === 34 || c === 39) {
+        var q = c, s = i; i++;
+        while (i < n) {
+          var x = src.charCodeAt(i);
+          if (x === 92) { i += 2; continue; }   // backslash
+          if (x === q)  { i++; break; }
+          if (x === 10) break;                    // unterminated
+          i++;
+        }
+        out.push(T_STR, s, i); continue;
+      }
+
+      // ── regex ──────────────────────────────────────────────────────────
+      if (c === 47) {
+        var pt = prevSigType(out, src);
+        if (isRegexAllowed(pt)) {
+          var s = i; i++;
+          var cls = false;
+          while (i < n) {
+            var x = src.charCodeAt(i);
+            if (x === 92)  { i += 2; continue; }
+            if (x === 91)  cls = true;
+            if (x === 93)  cls = false;
+            if (x === 47 && !cls) { i++; break; }
+            if (x === 10)  break;
+            i++;
+          }
+          while (i < n && isLetter(src.charCodeAt(i))) i++;
+          out.push(T_REGEX, s, i); continue;
+        }
+      }
+
+      // ── number ─────────────────────────────────────────────────────────
+      if (isDigit(c) || (c === 46 && isDigit(c2))) {
+        var s = i;
+        if (c === 48 && (c2 === 120 || c2 === 88 || c2 === 111 || c2 === 79 || c2 === 98 || c2 === 66)) {
+          i += 2; while (i < n && isHexDigit(src.charCodeAt(i))) i++;
+        } else {
+          while (i < n && (isDigit(src.charCodeAt(i)) || src.charCodeAt(i) === 95)) i++;
+          if (i < n && src.charCodeAt(i) === 46) { i++; while (i < n && isDigit(src.charCodeAt(i))) i++; }
+          if (i < n && (src.charCodeAt(i) === 101 || src.charCodeAt(i) === 69)) {
+            i++;
+            if (i < n && (src.charCodeAt(i) === 43 || src.charCodeAt(i) === 45)) i++;
+            while (i < n && isDigit(src.charCodeAt(i))) i++;
+          }
+        }
+        if (i < n && src.charCodeAt(i) === 110) i++; // bigint n
+        out.push(T_NUM, s, i); continue;
+      }
+
+      // ── word / keyword ─────────────────────────────────────────────────
+      if (isIdStart(c)) {
+        var s = i; i++;
+        while (i < n && isIdPart(src.charCodeAt(i))) i++;
+        out.push(T_WORD, s, i); continue;
+      }
+
+      // ── multi-char punctuation ─────────────────────────────────────────
+      var p3 = src.substring(i, i + 3);
+      if (PUNCT3.has(p3)) { out.push(T_PUNCT, i, i + 3); i += 3; continue; }
+      var p2 = src.substring(i, i + 2);
+      if (PUNCT2.has(p2)) { out.push(T_PUNCT, i, i + 2); i += 2; continue; }
+
+      // ── single-char punct ──────────────────────────────────────────────
+      out.push(T_PUNCT, i, i + 1); i++;
+    }
+    return out;
+  }
+
+  var PUNCT3 = new Set(['===','!==','>>>','**=','&&=','||=','??=','<<=','>>=','...']);
+  var PUNCT2 = new Set(['==','!=','<=','>=','&&','||','??','++','--','+=','-=','*=','/=','%=','=>','**','<<','>>','?.']);
+
+  function scanTemplate(src, pos) {
+    var i = pos, n = src.length;
+    while (i < n) {
+      var c = src.charCodeAt(i);
+      if (c === 92) { i += 2; continue; }       // backslash
+      if (c === 96) { i++; return i; }            // end of template
+      if (c === 36 && i + 1 < n && src.charCodeAt(i + 1) === 123) {
+        i += 2; // ${
+        var depth = 1;
+        while (i < n && depth > 0) {
+          var x = src.charCodeAt(i);
+          if (x === 92) { i += 2; continue; }
+          if (x === 123) { depth++; i++; continue; }
+          if (x === 125) { depth--; if (depth === 0) { i++; break; } i++; continue; }
+          if (x === 96) { i++; i = scanTemplate(src, i); continue; } // nested template
+          if (x === 34 || x === 39) { i = skipString(src, i); continue; }
+          i++;
+        }
+        continue;
+      }
+      i++;
+    }
+    return i;
+  }
+
+  function skipString(src, pos) {
+    var q = src.charCodeAt(pos), i = pos + 1, n = src.length;
+    while (i < n) {
+      var x = src.charCodeAt(i);
+      if (x === 92) { i += 2; continue; }
+      if (x === q)  { i++; return i; }
+      if (x === 10) return i;
+      i++;
+    }
+    return i;
+  }
+
+  // Character tests
+  function isDigit(c)    { return c >= 48 && c <= 57; }
+  function isHexDigit(c) { return isDigit(c) || (c >= 65 && c <= 70) || (c >= 97 && c <= 102) || c === 95; }
+  function isLetter(c)   { return (c >= 65 && c <= 90) || (c >= 97 && c <= 122); }
+  function isIdStart(c)  { return isLetter(c) || c === 95 || c === 36 || c > 127; }
+  function isIdPart(c)   { return isIdStart(c) || isDigit(c); }
+
+  // Get previous significant token type (from flat array)
+  function prevSigType(arr, src) {
+    for (var j = arr.length - 3; j >= 0; j -= 3) {
+      var t = arr[j];
+      if (t !== T_WS && t !== T_NL) {
+        if (t === T_PUNCT || t === T_WORD || t === T_NUM ||
+            t === T_STR || t === T_TPL || t === T_REGEX) {
+          return { type: t, val: src.substring(arr[j + 1], arr[j + 2]) };
+        }
+        return null;
+      }
+    }
+    return null;
+  }
+
+  function isRegexAllowed(prev) {
+    if (!prev) return true;
+    if (prev.type === T_NUM || prev.type === T_STR || prev.type === T_TPL || prev.type === T_REGEX) return false;
+    if (prev.type === T_WORD) {
+      return /^(return|case|typeof|instanceof|in|of|void|delete|throw|new|yield|await|else|do)$/.test(prev.val);
+    }
+    if (prev.type === T_PUNCT) {
+      if (prev.val === ')' || prev.val === ']' || prev.val === '}') return false;
+      if (prev.val === '++' || prev.val === '--') return false;
+      return true;
+    }
+    return true;
+  }
+
+  // ======================================================================
+  //  2.  TOKEN HELPERS  —  work with flat triplet arrays
+  // ======================================================================
+
+  // Extract token objects: { t, v } (type, value) — only significant tokens
+  function toObjects(flat, src, keepComments) {
+    var out = [];
+    for (var i = 0; i < flat.length; i += 3) {
+      var t = flat[i];
+      if (t === T_WS) continue;
+      if (t === T_NL) { out.push({ t: T_NL, v: '\n' }); continue; }
+      if (!keepComments && (t === T_LINE_CMT || t === T_BLOCK_CMT)) continue;
+      out.push({ t: t, v: src.substring(flat[i + 1], flat[i + 2]) });
+    }
+    return out;
+  }
+
+  // ======================================================================
+  //  3.  ASI  —  insert synthetic semicolons where newlines separate stmts
+  // ======================================================================
+
+  var DECL_KW = /^(var|let|const|function|class|async|import|export)$/;
+  var CTRL_KW = /^(if|else|for|while|do|switch|try|catch|finally|return|throw|break|continue|debugger|with)$/;
+  var RESTRICTED = /^(return|throw|yield|await)$/;
+  var CONTINUE_KW = /^(else|catch|finally|while)$/;
+
+  function addASI(tokens) {
+    var out = [], parenD = 0, prev = null;
+
+    for (var i = 0; i < tokens.length; i++) {
+      var tk = tokens[i];
+
+      if (tk.t === T_NL) {
+        // Newline found — check if ASI semicolon is needed
+        // Find next significant token
+        var next = null;
+        for (var j = i + 1; j < tokens.length; j++) {
+          if (tokens[j].t !== T_NL && tokens[j].t !== T_WS) { next = tokens[j]; break; }
+        }
+        if (prev && next && parenD === 0 && shouldASI(prev, next)) {
+          out.push({ t: T_PUNCT, v: ';', asi: true });
+        }
+        continue; // skip newline token
+      }
+
+      // Track paren depth to skip ASI inside for(;;)
+      if (tk.t === T_PUNCT) {
+        if (tk.v === '(') parenD++;
+        if (tk.v === ')') parenD = Math.max(0, parenD - 1);
+      }
+
+      out.push(tk);
+      if (tk.t !== T_WS && tk.t !== T_LINE_CMT && tk.t !== T_BLOCK_CMT) prev = tk;
+    }
+    return out;
+  }
+
+  function shouldASI(prev, next) {
+    // prev can't end a statement → no ASI
+    if (!canEnd(prev)) return false;
+
+    // next is continuation punctuation → no ASI
+    if (next.t === T_PUNCT) {
+      var v = next.v;
+      // operators, accessors, comma, colon, closing brackets
+      if (v === '.' || v === '?.' || v === ',' || v === ':' || v === ';') return false;
+      if (v === ')' || v === ']' || v === '}') return false;
+      if (v === '=>') return false;
+      if (/^(===|!==|==|!=|<=|>=|&&|\|\||\?\?|\*\*|<<|>>|>>>|\+=|-=|\*=|\/=|%=|\*\*=|<<=|>>=|>>>=|&&=|\|\|=|\?\?=|[*/%<>&|^~?])$/.test(v)) return false;
+
+      // + and - are ambiguous (binary or unary)
+      // In real JS: `a\n+b` is `a + b` (no ASI) — continuation
+      // But `a\n++b` → ASI: `a; ++b`
+      if (v === '+' || v === '-') return false;
+      if (v === '++' || v === '--') return true;
+
+      // ( and [ after expression → continuation (call/member access)
+      // Exception: after restricted keywords
+      if (v === '(' || v === '[') {
+        if (prev.t === T_WORD && RESTRICTED.test(prev.v)) return true;
+        return false;
+      }
+
+      // { could start a block statement — ASI before it is unusual
+      // but `x\n{}` in real JS: `x; {}` — yes ASI
+      if (v === '{') {
+        // After ) → no ASI: `if(x)\n{` → `if(x){`
+        if (prev.v === ')') return false;
+        // After keyword expecting block → no ASI
+        if (prev.t === T_WORD && /^(else|do|try|finally)$/.test(prev.v)) return false;
+        // After => → no ASI
+        if (prev.v === '=>') return false;
+        return true;
+      }
+
+      // ! and ~ start unary expressions → ASI
+      if (v === '!' || v === '~') return true;
+    }
+
+    // } followed by continuing keyword → no ASI
+    if (prev.v === '}' && next.t === T_WORD && CONTINUE_KW.test(next.v)) return false;
+
+    // Restricted productions: return/throw/yield on their own line
+    if (prev.t === T_WORD && RESTRICTED.test(prev.v)) return true;
+
+    // Next is keyword starting new statement
+    if (next.t === T_WORD && (DECL_KW.test(next.v) || CTRL_KW.test(next.v))) return true;
+
+    // Next is identifier, number, string, template, regex → new expression statement
+    if (next.t === T_WORD || next.t === T_NUM || next.t === T_STR ||
+        next.t === T_TPL || next.t === T_REGEX) {
+      return true;
+    }
+
+    return false;
+  }
+
+  function canEnd(tk) {
+    if (tk.t === T_WORD) {
+      // These keywords can appear at end of statement
+      if (/^(return|throw|break|continue|debugger|yield|await)$/.test(tk.v)) return true;
+      // Other keywords can't end (else, if, for, etc.)
+      if (DECL_KW.test(tk.v) || /^(if|else|for|while|do|switch|try|catch|finally|with|case|default|extends|instanceof|in|of|typeof|void|delete|new)$/.test(tk.v)) return false;
+      return true; // identifiers
+    }
+    if (tk.t === T_NUM || tk.t === T_STR || tk.t === T_TPL || tk.t === T_REGEX) return true;
+    if (tk.t === T_PUNCT) return tk.v === ')' || tk.v === ']' || tk.v === '}' || tk.v === '++' || tk.v === '--';
+    return false;
+  }
+
+  // ======================================================================
+  //  4.  TRANSFORMS  —  quote normalization, import sort, etc.
+  // ======================================================================
+
+  function normalizeQuotes(tokens, qChar) {
+    var other = qChar === "'" ? '"' : "'";
+    for (var i = 0; i < tokens.length; i++) {
+      var tk = tokens[i];
+      if (tk.t !== T_STR || tk.v.length < 2) continue;
+      var cur = tk.v[0];
+      if (cur === qChar) continue;
+      var inner = tk.v.slice(1, -1);
+      // Check if target quote appears unescaped
+      var safe = true;
+      for (var j = 0; j < inner.length; j++) {
+        if (inner[j] === '\\') { j++; continue; }
+        if (inner[j] === qChar) { safe = false; break; }
+      }
+      if (!safe) continue;
+      // Unescape old quote, no need to escape new (we checked)
+      var newInner = '';
+      for (var j = 0; j < inner.length; j++) {
+        if (inner[j] === '\\' && j + 1 < inner.length && inner[j + 1] === cur) {
+          newInner += inner[j + 1]; j++; continue;
+        }
+        newInner += inner[j];
+      }
+      tk.v = qChar + newInner + qChar;
+    }
+  }
+
+  function sortImports(code) {
+    var lines = code.split('\n');
+    var imps = [], idxs = [];
+    for (var i = 0; i < lines.length; i++) {
+      if (/^\s*import\s/.test(lines[i])) { imps.push(lines[i]); idxs.push(i); }
+      else if (lines[i].trim() && !/^\s*\/[/*]/.test(lines[i]) && imps.length) break;
+    }
+    if (imps.length < 2) return code;
+    imps.sort(function (a, b) {
+      var sa = (a.match(/from\s+['"]([^'"]+)['"]/) || ['', a])[1];
+      var sb = (b.match(/from\s+['"]([^'"]+)['"]/) || ['', b])[1];
+      var ra = sa[0] === '.', rb = sb[0] === '.';
+      if (ra !== rb) return ra ? 1 : -1;
+      return sa.localeCompare(sb);
+    });
+    for (var j = 0; j < idxs.length; j++) lines[idxs[j]] = imps[j];
+    return lines.join('\n');
+  }
+
+  // ======================================================================
+  //  5.  SPACE RULES  —  when a space is mandatory between two tokens
+  // ======================================================================
+
+  function mustSpace(a, b) {
+    // word + word / number
+    if (a.t === T_WORD && (b.t === T_WORD || b.t === T_NUM)) return true;
+    if (a.t === T_NUM  && b.t === T_WORD) return true;
+
+    // word + string/template/regex
+    if (a.t === T_WORD && (b.t === T_STR || b.t === T_TPL || b.t === T_REGEX)) return true;
+    // string/regex/template + word
+    if ((a.t === T_STR || a.t === T_TPL || a.t === T_REGEX) && b.t === T_WORD) return true;
+
+    // ) ] } + word/num/str/tpl/regex
+    if (a.t === T_PUNCT && (a.v === ')' || a.v === ']' || a.v === '}')) {
+      if (b.t === T_WORD || b.t === T_NUM || b.t === T_STR || b.t === T_TPL || b.t === T_REGEX) return true;
+    }
+
+    // keyword + (
+    if (a.t === T_WORD && b.v === '(' &&
+        /^(if|for|while|switch|catch|return|throw|new|delete|typeof|instanceof|void|yield|await|in|of|case|import|export|from|async|do)$/.test(a.v)) return true;
+
+    // keyword + {
+    if (a.t === T_WORD && b.v === '{' &&
+        /^(else|try|finally|do|class|extends|return|export)$/.test(a.v)) return true;
+
+    // ) + {
+    if (a.v === ')' && b.v === '{') return true;
+
+    // ++ -- + word/num (prefix ambiguity)
+    if ((a.v === '++' || a.v === '--') && (b.t === T_WORD || b.t === T_NUM)) return true;
+
+    // + + / - -  ambiguity
+    if (a.t === T_PUNCT && b.t === T_PUNCT) {
+      if ((a.v === '+' && (b.v === '+' || b.v === '++')) ||
+          (a.v === '-' && (b.v === '-' || b.v === '--'))) return true;
+    }
+
+    // num + string/tpl
+    if (a.t === T_NUM && (b.t === T_STR || b.t === T_TPL)) return true;
+
+    return false;
+  }
+
+  // ======================================================================
+  //  6.  RENDERERS
+  // ======================================================================
+
+  // ── render: minify ─────────────────────────────────────────────────────
+  function renderMinify(tokens) {
+    var out = '';
+    for (var i = 0; i < tokens.length; i++) {
+      var tk = tokens[i], prev = i > 0 ? tokens[i - 1] : null;
+      if (prev && mustSpace(prev, tk)) out += ' ';
+      out += tk.v;
+    }
+    return out.replace(/;}/g, '}').replace(/;;+/g, ';').trim();
+  }
+
+  // ── render: one line ───────────────────────────────────────────────────
+  function renderOneLine(tokens) {
+    var out = '';
+    for (var i = 0; i < tokens.length; i++) {
+      var tk = tokens[i], prev = i > 0 ? tokens[i - 1] : null;
+      if (prev && mustSpace(prev, tk)) out += ' ';
+      out += tk.v;
+    }
+    return out.trim();
+  }
+
+  // ── render: compact (newline after { } ;) ──────────────────────────────
+  function renderCompact(tokens) {
+    var out = '';
+    for (var i = 0; i < tokens.length; i++) {
+      var tk = tokens[i], prev = i > 0 ? tokens[i - 1] : null;
+      if (prev && mustSpace(prev, tk)) out += ' ';
+      out += tk.v;
+      if (tk.v === '{' || tk.v === '}' || tk.v === ';') out += '\n';
+    }
+    return out.replace(/\n{2,}/g, '\n').trim();
+  }
+
+  // ── render: pretty ─────────────────────────────────────────────────────
+  function renderPretty(tokens, opts) {
+    var ind   = opts.indentStr;
+    var semi  = opts.semicolons;
+    var brace = opts.braceStyle;
+
+    var lines = [], cur = '', depth = 0;
+    function flush() { if (cur.trim()) { lines.push(ind.repeat(depth) + cur.trim()); cur = ''; } }
+    function push(s) { lines.push(ind.repeat(depth) + s); }
+
+    for (var i = 0; i < tokens.length; i++) {
+      var tk = tokens[i];
+      var prev = i > 0 ? tokens[i - 1] : null;
+      var next = i + 1 < tokens.length ? tokens[i + 1] : null;
+      var v = tk.v;
+
+      // ── closing brace / bracket ─────────────────────────────────────
+      if (tk.t === T_PUNCT && (v === '}' || v === ']')) {
+        flush();
+        depth = Math.max(0, depth - 1);
+        // Add trailing comma if configured
+        if (opts.trailingCommas && prev && prev.v !== '{' && prev.v !== '[' && prev.v !== ',') {
+          var ll = lines[lines.length - 1];
+          if (ll && !/[,{[\s]$/.test(ll.trim())) lines[lines.length - 1] = ll + ',';
+        }
+        cur = v;
+        // Don't flush if next is ; , ) ]
+        if (next && (next.v === ';' || next.v === ',' || next.v === ')' || next.v === ']')) {
+          // keep on same line
+        } else {
+          flush();
+        }
+        continue;
+      }
+
+      // ── close paren ─────────────────────────────────────────────────
+      if (tk.t === T_PUNCT && v === ')') { cur += v; continue; }
+
+      // ── opening brace / bracket ─────────────────────────────────────
+      if (tk.t === T_PUNCT && (v === '{' || v === '[')) {
+        if (brace === 'next' && v === '{') {
+          flush(); push(v);
+        } else {
+          cur += (cur.trim() ? ' ' : '') + v;
+          flush();
+        }
+        depth++;
+        continue;
+      }
+
+      // ── semicolon ───────────────────────────────────────────────────
+      if (tk.t === T_PUNCT && v === ';') {
+        if (semi) cur += ';';
+        flush();
+        continue;
+      }
+
+      // ── comma ───────────────────────────────────────────────────────
+      if (tk.t === T_PUNCT && v === ',') {
+        cur += ',';
+        if (depth > 0) { flush(); } else { cur += ' '; }
+        continue;
+      }
+
+      // ── comments ────────────────────────────────────────────────────
+      if (tk.t === T_LINE_CMT) {
+        if (cur.trim()) { cur += ' ' + v; flush(); }
+        else push(v);
+        continue;
+      }
+      if (tk.t === T_BLOCK_CMT) {
+        flush();
+        v.split('\n').forEach(function (line, idx) {
+          push(idx === 0 ? line.trim() : ' ' + line.trim());
+        });
+        continue;
+      }
+
+      // ── arrow ───────────────────────────────────────────────────────
+      if (tk.t === T_PUNCT && v === '=>') { cur += ' => '; continue; }
+
+      // ── spread / ++ / -- ────────────────────────────────────────────
+      if (v === '...' || v === '++' || v === '--') { cur += v; continue; }
+
+      // ── unary ! ~ ──────────────────────────────────────────────────
+      if (tk.t === T_PUNCT && (v === '!' || v === '~')) {
+        if (cur.trim() && /[a-zA-Z0-9_$)\]]$/.test(cur)) cur += ' ';
+        cur += v;
+        continue;
+      }
+
+      // ── binary / assignment operators ───────────────────────────────
+      if (tk.t === T_PUNCT && /^(===|!==|==|!=|<=|>=|&&|\|\||\?\?|\*\*|[+\-*/%=<>]|<<|>>|>>>|\+=|-=|\*=|\/=|%=|\*\*=|<<=|>>=|>>>=|&&=|\|\|=|\?\?=)$/.test(v)) {
+        // Detect unary + / -
+        if ((v === '+' || v === '-') && isUnaryContext(prev)) {
+          if (cur.trim() && /[a-zA-Z0-9_$)\]]$/.test(cur)) cur += ' ';
+          cur += v;
+        } else {
+          cur += ' ' + v + ' ';
+        }
+        continue;
+      }
+
+      // ── colon ───────────────────────────────────────────────────────
+      if (tk.t === T_PUNCT && v === ':') { cur += ': '; continue; }
+
+      // ── open paren ──────────────────────────────────────────────────
+      if (tk.t === T_PUNCT && v === '(') {
+        if (prev && prev.t === T_WORD && prev.v === 'function' && opts.spaceAfterFunction) cur += ' ';
+        cur += v;
+        continue;
+      }
+
+      // ── ternary ? ───────────────────────────────────────────────────
+      if (tk.t === T_PUNCT && v === '?') { cur += ' ? '; continue; }
+      if (tk.t === T_PUNCT && v === '?.') { cur += '?.'; continue; }
+
+      // ── default: add space if needed ────────────────────────────────
+      if (cur.trim() && (tk.t === T_WORD || tk.t === T_NUM || tk.t === T_STR || tk.t === T_TPL || tk.t === T_REGEX)) {
+        var lc = cur.slice(-1);
+        if (/[a-zA-Z0-9_$)\]"'`]/.test(lc)) cur += ' ';
+      }
+
+      cur += v;
+    }
+
+    // Flush remaining
+    if (cur.trim()) {
+      var tr = cur.trim();
+      if (semi && !/[;{})\]\/]$/.test(tr) && !/^\/\//.test(tr)) tr += ';';
+      push(tr);
+    }
+
+    return lines.join('\n').replace(/\n{3,}/g, '\n\n');
+  }
+
+  function isUnaryContext(prev) {
+    if (!prev) return true;
+    if (prev.t === T_PUNCT) {
+      return /^[=(:,;!&|?{}\[+\-~^%<>]$/.test(prev.v) || prev.v === '=>' ||
+             /^(===|!==|==|!=|<=|>=|&&|\|\||\?\?|return|throw)$/.test(prev.v);
+    }
+    if (prev.t === T_WORD) {
+      return /^(return|throw|case|typeof|void|delete|new|yield|await|in|of|instanceof)$/.test(prev.v);
+    }
+    return false;
+  }
+
+  // ======================================================================
+  //  7.  POST-PROCESSING  —  console removal, debugger, booleans, mangle
+  // ======================================================================
+
+  function rmConsole(code) {
+    // Tokenize → find `console.method(` patterns → skip them
+    var flat = scan(code), src = code, out = '', last = 0;
+    for (var i = 0; i < flat.length; i += 3) {
+      if (flat[i] !== T_WORD) continue;
+      var w = src.substring(flat[i + 1], flat[i + 2]);
+      if (w !== 'console') continue;
+      // Check prev char not . or letter
+      if (flat[i + 1] > 0 && /[a-zA-Z0-9_$.]/.test(src[flat[i + 1] - 1])) continue;
+      // Look ahead: .method(
+      var j = i + 3;
+      while (j < flat.length && flat[j] === T_WS) j += 3;
+      if (j >= flat.length || src.substring(flat[j + 1], flat[j + 2]) !== '.') continue;
+      j += 3;
+      while (j < flat.length && flat[j] === T_WS) j += 3;
+      if (j >= flat.length || flat[j] !== T_WORD) continue;
+      var method = src.substring(flat[j + 1], flat[j + 2]);
+      if (!/^(log|warn|error|info|debug|trace|dir|table|time|timeEnd|group|groupEnd|assert|clear|count)$/.test(method)) continue;
+      j += 3;
+      while (j < flat.length && flat[j] === T_WS) j += 3;
+      if (j >= flat.length || src.substring(flat[j + 1], flat[j + 2]) !== '(') continue;
+      // Find matching )
+      var depth = 1; j += 3;
+      while (j < flat.length && depth > 0) {
+        var ch = src.substring(flat[j + 1], flat[j + 2]);
+        if (ch === '(') depth++;
+        if (ch === ')') depth--;
+        j += 3;
+      }
+      // Skip optional ;
+      while (j < flat.length && flat[j] === T_WS) j += 3;
+      if (j < flat.length && src.substring(flat[j + 1], flat[j + 2]) === ';') j += 3;
+      // Emit everything before console, skip to after
+      out += src.substring(last, flat[i + 1]);
+      last = flat[j - 1] !== undefined ? flat[j + 2 - 3] : src.length;
+      if (j < flat.length) last = flat[j + 1];
+      else last = src.length;
+      i = j - 3; // will be incremented by loop
+    }
+    out += src.substring(last);
+    return out;
+  }
+
+  function rmDebugger(code) { return code.replace(/\bdebugger\s*;?/g, ''); }
+  function shortenBools(code) { return code.replace(/\btrue\b/g, '!0').replace(/\bfalse\b/g, '!1'); }
+
+  function mangleVars(code) {
+    var flat = scan(code), src = code, cnt = 0;
+    var az = 'abcdefghijklmnopqrstuvwxyz';
+    function next() { var n = cnt++; return n < 26 ? az[n] : az[n % 26] + (n / 26 | 0); }
+    var reserved = new Set([
+      'break','case','catch','continue','debugger','default','delete','do','else',
+      'finally','for','function','if','in','instanceof','new','return','switch',
+      'this','throw','try','typeof','var','void','while','with','class','const',
+      'enum','export','extends','import','super','let','yield','undefined','null',
+      'true','false','NaN','Infinity','arguments','eval','console','window',
+      'document','global','process','require','module','exports','async','await',
+      'from','of','as','get','set'
+    ]);
+    // Find declarations
+    var map = {};
+    for (var i = 0; i < flat.length; i += 3) {
+      if (flat[i] !== T_WORD) continue;
+      var w = src.substring(flat[i + 1], flat[i + 2]);
+      if (w !== 'let' && w !== 'const' && w !== 'var') continue;
+      var j = i + 3;
+      while (j < flat.length && (flat[j] === T_WS || flat[j] === T_NL)) j += 3;
+      if (j < flat.length && flat[j] === T_WORD) {
+        var name = src.substring(flat[j + 1], flat[j + 2]);
+        if (!reserved.has(name) && name.length > 1 && !map[name]) map[name] = next();
+      }
+    }
+    if (!Object.keys(map).length) return code;
+    // Replace — only non-property-access identifiers
+    var out = '';
+    for (var i = 0; i < flat.length; i += 3) {
+      if (flat[i] === T_WORD) {
+        var w = src.substring(flat[i + 1], flat[i + 2]);
+        if (map[w]) {
+          // Check not preceded by .
+          var k = i - 3;
+          while (k >= 0 && flat[k] === T_WS) k -= 3;
+          if (k >= 0 && flat[k] === T_PUNCT && (src.substring(flat[k + 1], flat[k + 2]) === '.' || src.substring(flat[k + 1], flat[k + 2]) === '?.')) {
+            out += w;
+          } else {
+            out += map[w];
+          }
+          continue;
+        }
+      }
+      out += src.substring(flat[i + 1], flat[i + 2]);
+    }
+    return out;
+  }
+
+  // ======================================================================
+  //  8.  SYNTAX VALIDATOR  (warning only, never blocks)
+  // ======================================================================
+
+  function validate(code) {
+    function tryParse(c) { try { new Function(c); return true; } catch(e) { return e; } }
+    var s = code.replace(/^\s*import\s+.*$/gm, '//').replace(/^\s*export\s+(default\s+)?/gm, 'var _ = ');
+    var r = tryParse(s);
+    if (r === true) return null;
+    r = tryParse('return (async function(){' + s + '})()');
+    if (r === true) return null;
+    if (/<[A-Z]/.test(code) || /:\s*(string|number|boolean)\b/.test(code)) return null;
+    var msg = (r && r.message) || 'Syntax error';
+    return { message: msg };
+  }
+
+  // ======================================================================
+  //  9.  OPTIONS
+  // ======================================================================
+
+  function getOpts() {
+    var iv = (document.querySelector('input[name="indent"]:checked') || {}).value || '2';
+    var qv = (document.querySelector('input[name="quotes"]:checked') || {}).value || 'single';
+    return {
+      indentStr:       iv === 'tab' ? '\t' : ' '.repeat(+iv),
+      quoteChar:       qv === 'single' ? "'" : '"',
+      semicolons:      ck('opt-semicolons'),
+      trailingCommas:  ck('opt-trailing-commas'),
+      bracketSpacing:  ck('opt-bracket-spacing'),
+      spaceAfterFunction: ck('opt-space-function'),
+      arrowParens:     ck('opt-arrow-parens'),
+      braceStyle:      document.getElementById('opt-brace-style').value,
+      sortImports:     ck('opt-sort-imports'),
+      normalizeQuotes: ck('opt-normalize-quotes'),
+      keepComments:    ck('opt-keep-comments'),
+      removeComments:  ck('opt-remove-comments'),
+      removeConsole:   ck('opt-remove-console'),
+      removeDebugger:  ck('opt-remove-debugger'),
+      shortenBools:    ck('opt-shorten-bools'),
+      mangle:          ck('opt-mangle')
+    };
+  }
+  function ck(id) { var el = document.getElementById(id); return el ? el.checked : false; }
+
+  // ======================================================================
+  //  10.  PIPELINE  —  format functions
+  // ======================================================================
+
+  function pipeline(code, opts, renderer) {
+    var flat = scan(code);
+    var toks = toObjects(flat, code, opts.keepComments);
+    if (opts.normalizeQuotes) normalizeQuotes(toks, opts.quoteChar);
+
+    // Remove newlines but inject ASI where needed
+    var withASI = addASI(toks);
+
+    // Remove comments for non-pretty modes if removeComments is on
+    // (pretty mode keeps them based on keepComments already filtered above)
+
+    return renderer(withASI, opts);
+  }
+
+  function doPretty(code, opts) {
+    var flat = scan(code);
+    var toks = toObjects(flat, code, opts.keepComments);
+    if (opts.normalizeQuotes) normalizeQuotes(toks, opts.quoteChar);
+    // For pretty: strip newlines, add ASI, then pretty-print
+    var withASI = addASI(toks);
+    var result = renderPretty(withASI, opts);
+    if (opts.sortImports) result = sortImports(result);
+    return result;
+  }
+
+  function doCompact(code, opts) {
+    var result = pipeline(code, opts, renderCompact);
+    if (opts.sortImports) result = sortImports(result);
+    return result;
+  }
+
+  function doOneLine(code, opts) {
+    // Force strip comments for one-line
+    var o2 = Object.assign({}, opts, { keepComments: false });
+    return pipeline(code, o2, renderOneLine);
+  }
+
+  function doMinify(code, opts) {
+    var o2 = Object.assign({}, opts, { keepComments: false });
+    var result = pipeline(code, o2, renderMinify);
+    // Post-process transforms
+    if (opts.mangle) result = mangleVars(result);
+    if (opts.removeConsole) result = rmConsole(result);
+    if (opts.removeDebugger) result = rmDebugger(result);
+    if (opts.shortenBools) result = shortenBools(result);
+    return result.replace(/;;+/g, ';').replace(/  +/g, ' ').trim();
+  }
+
+  function doSafeMinify(code, opts) {
+    return doMinify(code, Object.assign({}, opts, { mangle: false, shortenBools: false, removeConsole: false }));
+  }
+
+  // ======================================================================
+  //  11.  UI
+  // ======================================================================
+
+  var $in      = document.getElementById('code-input');
+  var $out     = document.getElementById('code-output');
+  var $status  = document.getElementById('status-text');
+  var $toast   = document.getElementById('toast');
+  var $toastM  = document.getElementById('toast-message');
+
+  function toast(m) { $toastM.textContent = m; $toast.classList.remove('hidden'); setTimeout(function() { $toast.classList.add('hidden'); }, 2000); }
+
+  function showWarn(e) {
+    var p = document.getElementById('warning-panel');
+    document.getElementById('warning-message').textContent = L.warningPossible + ': ' + (e.message || e);
+    p.classList.remove('hidden');
+  }
+  function hideWarn() { document.getElementById('warning-panel').classList.add('hidden'); }
+
+  function showErr(e) {
+    var p = document.getElementById('error-panel');
+    document.getElementById('error-message').textContent = e.message || e;
+    p.classList.remove('hidden');
+    $status.textContent = L.statusError;
+  }
+  function hideErr() { document.getElementById('error-panel').classList.add('hidden'); }
+
+  function stats(orig, fmt) {
+    var ob = new Blob([orig]).size, fb = new Blob([fmt]).size;
+    var ol = orig.split('\n').length, fl = fmt.split('\n').length;
+    var rd = ob > 0 ? Math.round((1 - fb / ob) * 100) : 0;
+    function fmtB(b) { return b < 1024 ? b + ' B' : (b / 1024).toFixed(1) + ' KB'; }
+    document.getElementById('stat-original').textContent  = ol + ' ' + L.lines + ' \u00B7 ' + fmtB(ob);
+    document.getElementById('stat-formatted').textContent = fl + ' ' + L.lines + ' \u00B7 ' + fmtB(fb);
+    document.getElementById('stat-reduction').textContent = (rd >= 0 ? '-' : '+') + Math.abs(rd) + '%';
+    document.getElementById('stats-bar').classList.remove('hidden');
+    document.getElementById('input-stats').textContent  = ol + ' ' + L.lines + ' \u00B7 ' + orig.length + ' ' + L.chars;
+    document.getElementById('output-stats').textContent = fl + ' ' + L.lines + ' \u00B7 ' + fmt.length + ' ' + L.chars;
+  }
+
+  function run(fn, label) {
+    var code = $in.value;
+    if (!code.trim()) return;
+    hideErr(); hideWarn();
+    var warn = validate(code);
+    try {
+      var opts = getOpts();
+      var result = fn(code, opts);
+      $out.value = result;
+      document.getElementById('btn-copy').disabled = false;
+      document.getElementById('btn-download').disabled = false;
+      $status.textContent = label;
+      stats(code, result);
+      if (warn) showWarn(warn);
+    } catch(e) {
+      showErr({ message: e.message || String(e) });
+    }
+  }
+
+  // ── Buttons ─────────────────────────────────────────────────────────────
+  document.getElementById('btn-pretty').onclick      = function() { run(doPretty,     L.statusFormatted + ' (Beautify)'); };
+  document.getElementById('btn-compact').onclick     = function() { run(doCompact,    L.statusFormatted + ' (Compact)'); };
+  document.getElementById('btn-oneline').onclick     = function() { run(doOneLine,    L.statusFormatted + ' (One Line)'); };
+  document.getElementById('btn-minify').onclick      = function() { run(doMinify,     L.statusMinified); };
+  document.getElementById('btn-safe-minify').onclick = function() { run(doSafeMinify, L.statusMinified + ' (Safe)'); };
+  document.getElementById('btn-dismiss-warning').onclick = hideWarn;
+
+  document.getElementById('btn-copy').onclick = function() {
+    if (!$out.value) return;
+    navigator.clipboard.writeText($out.value).then(function() { toast(L.copied); });
+  };
+
+  document.getElementById('btn-download').onclick = function() {
+    if (!$out.value) return;
+    var d = new Date();
+    var name = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0') + '_formatted.js';
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([$out.value], { type: 'text/javascript' }));
+    a.download = name; a.click();
+    setTimeout(function() { URL.revokeObjectURL(a.href); }, 100);
+    toast(L.downloaded);
+  };
+
+  document.getElementById('btn-paste').onclick = function() {
+    navigator.clipboard.readText().then(function(t) { $in.value = t; updIn(); }).catch(function() {});
+  };
+
+  document.getElementById('btn-sample').onclick = function() { $in.value = SAMPLE; updIn(); };
+
+  document.getElementById('btn-clear').onclick = function() {
+    $in.value = ''; $out.value = '';
+    document.getElementById('btn-copy').disabled = true;
+    document.getElementById('btn-download').disabled = true;
+    document.getElementById('stats-bar').classList.add('hidden');
+    document.getElementById('input-stats').textContent = '';
+    document.getElementById('output-stats').textContent = '';
+    hideErr(); hideWarn();
+    $status.textContent = L.statusReady;
+    toast(L.cleared);
+  };
+
+  document.getElementById('opt-max-line').oninput = function() {
+    document.getElementById('max-line-val').textContent = this.value;
+  };
+
+  function updIn() {
+    var c = $in.value, ln = c ? c.split('\n').length : 0;
+    document.getElementById('input-stats').textContent = ln + ' ' + L.lines + ' \u00B7 ' + (c ? c.length : 0) + ' ' + L.chars;
+  }
+  $in.oninput = updIn;
+
+  // Drag & drop
+  $in.ondragover = function(e) { e.preventDefault(); };
+  $in.ondrop = function(e) {
+    e.preventDefault();
+    var f = e.dataTransfer.files;
+    if (f.length && /\.(js|mjs|cjs|jsx|ts|tsx)$/i.test(f[0].name)) {
+      var r = new FileReader();
+      r.onload = function(ev) { $in.value = ev.target.result; updIn(); };
+      r.readAsText(f[0]);
+    }
+  };
+
+  // Keyboard shortcuts
+  document.onkeydown = function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); run(doPretty, L.statusFormatted + ' (Beautify)'); }
+    if ((e.ctrlKey || e.metaKey) && e.key === 'm')     { e.preventDefault(); run(doMinify, L.statusMinified); }
+  };
+
+  // ── Settings persistence ────────────────────────────────────────────────
+  var SK = 'jsformatter-settings';
+  var settingsIds = ['opt-semicolons','opt-trailing-commas','opt-bracket-spacing','opt-space-function',
+    'opt-arrow-parens','opt-sort-imports','opt-normalize-quotes','opt-keep-comments',
+    'opt-remove-comments','opt-remove-console','opt-remove-debugger','opt-shorten-bools','opt-mangle'];
+
+  function saveS() {
+    try {
+      var o = {
+        indent: (document.querySelector('input[name="indent"]:checked') || {}).value || '2',
+        quotes: (document.querySelector('input[name="quotes"]:checked') || {}).value || 'single',
+        maxLine: document.getElementById('opt-max-line').value,
+        braceStyle: document.getElementById('opt-brace-style').value
+      };
+      settingsIds.forEach(function(id) { o[id] = ck(id); });
+      localStorage.setItem(SK, JSON.stringify(o));
+    } catch(e) {}
+  }
+
+  function loadS() {
+    try {
+      var raw = localStorage.getItem(SK);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s.indent) { var r = document.querySelector('input[name="indent"][value="' + s.indent + '"]'); if (r) r.checked = true; }
+      if (s.quotes) { var r = document.querySelector('input[name="quotes"][value="' + s.quotes + '"]'); if (r) r.checked = true; }
+      if (s.maxLine) document.getElementById('opt-max-line').value = s.maxLine;
+      if (s.braceStyle) document.getElementById('opt-brace-style').value = s.braceStyle;
+      settingsIds.forEach(function(id) {
+        if (typeof s[id] === 'boolean') { var el = document.getElementById(id); if (el) el.checked = s[id]; }
+      });
+      document.getElementById('max-line-val').textContent = document.getElementById('opt-max-line').value;
+    } catch(e) {}
+  }
+
+  document.querySelectorAll('input[type="checkbox"],input[type="radio"],select,input[type="range"]').forEach(function(el) {
+    el.addEventListener('change', saveS);
+    el.addEventListener('input', saveS);
+  });
+
+  loadS();
+})();
+</script>
+{{ end }}

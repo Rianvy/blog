@@ -1,5 +1,5 @@
 ---
-title: "JSON Normalizer"
+title: "JSON Formatter"
 description: "Format, minify and validate JSON online"
 icon: "📋"
 layout: "json-normalizer"

@@ -1,0 +1,1417 @@
+{{ define "title" }}
+{{ .Title }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-5 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}🌐{{ end }}</span>
+    </div>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">{{ .Title }}</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">{{ .Description }}</p>
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="code-outline"></ion-icon>
+        {{ T "htmlformatter.badgeFormatter" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+        <ion-icon name="contract-outline"></ion-icon>
+        {{ T "htmlformatter.badgeMinify" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="layers-outline"></ion-icon>
+        {{ T "htmlformatter.badgeTemplates" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="analytics-outline"></ion-icon>
+        {{ T "htmlformatter.badgeAnalysis" }}
+      </span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
+
+    <!-- Settings -->
+    <div class="xl:col-span-1 space-y-3 sm:space-y-4 order-2 xl:order-1">
+
+      <!-- Actions -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="flash-outline" class="text-warning"></ion-icon>
+            {{ T "htmlformatter.settingsTitle" }}
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-2">
+          <div class="grid grid-cols-2 gap-1.5">
+            <button type="button" id="btn-html-pretty" class="btn btn-success btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="sparkles-outline"></ion-icon>
+              {{ T "htmlformatter.formatPretty" }}
+            </button>
+            <button type="button" id="btn-html-expanded" class="btn btn-info btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="expand-outline"></ion-icon>
+              {{ T "htmlformatter.formatExpanded" }}
+            </button>
+            <button type="button" id="btn-html-compact" class="btn btn-secondary btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="contract-outline"></ion-icon>
+              {{ T "htmlformatter.formatCompact" }}
+            </button>
+            <button type="button" id="btn-html-inline" class="btn btn-accent btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="reorder-two-outline"></ion-icon>
+              {{ T "htmlformatter.formatInline" }}
+            </button>
+          </div>
+          <button type="button" id="btn-html-oneline" class="btn btn-outline btn-xs sm:btn-sm w-full gap-1 justify-start">
+            <ion-icon name="remove-outline"></ion-icon>
+            {{ T "htmlformatter.formatOneLine" }}
+          </button>
+          <div class="divider my-1 text-[10px]">{{ T "htmlformatter.minifyTitle" }}</div>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button type="button" id="btn-html-minify" class="btn btn-warning btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="resize-outline"></ion-icon>
+              {{ T "htmlformatter.formatMinify" }}
+            </button>
+            <button type="button" id="btn-html-safe" class="btn btn-outline btn-warning btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="shield-checkmark-outline"></ion-icon>
+              {{ T "htmlformatter.formatSafeMinify" }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Format settings -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="options-outline" class="text-primary"></ion-icon>
+              {{ T "htmlformatter.settingsTitle" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+            <div class="form-control">
+              <label class="label py-0.5"><span class="label-text text-xs font-medium">{{ T "htmlformatter.indentSize" }}</span></label>
+              <div class="grid grid-cols-3 gap-1">
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="html-indent" value="2" class="hidden" checked /><span class="text-xs font-mono">2</span>
+                </label>
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="html-indent" value="4" class="hidden" /><span class="text-xs font-mono">4</span>
+                </label>
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="html-indent" value="tab" class="hidden" /><span class="text-xs font-mono">{{ T "htmlformatter.indentTab" }}</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-control">
+              <label class="label py-0.5"><span class="label-text text-xs font-medium">{{ T "htmlformatter.wrapAttrs" }}</span></label>
+              <select id="opt-wrap-attrs" class="select select-bordered select-xs text-xs">
+                <option value="auto">{{ T "htmlformatter.wrapAttrsAuto" }}</option>
+                <option value="force">{{ T "htmlformatter.wrapAttrsForce" }}</option>
+                <option value="aligned">{{ T "htmlformatter.wrapAttrsAligned" }}</option>
+                <option value="none">{{ T "htmlformatter.wrapAttrsNone" }}</option>
+              </select>
+            </div>
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "htmlformatter.maxLineLength" }}</span>
+                <span class="label-text-alt text-[10px] font-mono" id="html-max-line-val">120</span>
+              </label>
+              <input type="range" id="opt-html-max-line" min="40" max="200" value="120" class="range range-xs range-primary" />
+            </div>
+            <div class="divider my-0.5"></div>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">{{ T "htmlformatter.selfClosingTags" }}</span><p class="text-[9px] text-base-content/50">{{ T "htmlformatter.selfClosingDesc" }}</p></div>
+              <input type="checkbox" id="opt-self-closing" class="toggle toggle-xs toggle-primary" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">{{ T "htmlformatter.sortAttributes" }}</span><p class="text-[9px] text-base-content/50">{{ T "htmlformatter.sortAttributesDesc" }}</p></div>
+              <input type="checkbox" id="opt-sort-attrs" class="toggle toggle-xs toggle-secondary" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">{{ T "htmlformatter.voidSlash" }}</span></div>
+              <input type="checkbox" id="opt-void-slash" class="toggle toggle-xs toggle-primary" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">{{ T "htmlformatter.unformatted" }}</span><p class="text-[9px] text-base-content/50">{{ T "htmlformatter.unformattedDesc" }}</p></div>
+              <input type="checkbox" id="opt-unformatted" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+          </div>
+        </details>
+      </div>
+
+      <!-- Minify options -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="construct-outline" class="text-warning"></ion-icon>
+              {{ T "htmlformatter.minifyTitle" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "htmlformatter.removeComments" }}</span>
+              <input type="checkbox" id="opt-html-remove-comments" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">{{ T "htmlformatter.keepConditional" }}</span><p class="text-[9px] text-base-content/50">{{ T "htmlformatter.keepConditionalDesc" }}</p></div>
+              <input type="checkbox" id="opt-keep-conditional" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "htmlformatter.collapseWhitespace" }}</span>
+              <input type="checkbox" id="opt-collapse-ws" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">{{ T "htmlformatter.removeEmptyAttrs" }}</span></div>
+              <input type="checkbox" id="opt-remove-empty-attrs" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">{{ T "htmlformatter.collapseBoolAttrs" }}</span><p class="text-[9px] text-base-content/50">{{ T "htmlformatter.collapseBoolDesc" }}</p></div>
+              <input type="checkbox" id="opt-collapse-bool" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">{{ T "htmlformatter.removeOptionalTags" }}</span><p class="text-[9px] text-base-content/50">{{ T "htmlformatter.removeOptionalDesc" }}</p></div>
+              <input type="checkbox" id="opt-remove-optional" class="toggle toggle-xs toggle-error" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">{{ T "htmlformatter.removeTypeAttrs" }}</span><p class="text-[9px] text-base-content/50">{{ T "htmlformatter.removeTypeDesc" }}</p></div>
+              <input type="checkbox" id="opt-remove-type" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div><span class="text-xs font-medium">{{ T "htmlformatter.removeRedundant" }}</span><p class="text-[9px] text-base-content/50">{{ T "htmlformatter.removeRedundantDesc" }}</p></div>
+              <input type="checkbox" id="opt-remove-redundant" class="toggle toggle-xs toggle-warning" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "htmlformatter.minifyInlineCSS" }}</span>
+              <input type="checkbox" id="opt-minify-css" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "htmlformatter.minifyInlineJS" }}</span>
+              <input type="checkbox" id="opt-minify-js" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+          </div>
+        </details>
+      </div>
+
+      <!-- Preserve -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="lock-closed-outline" class="text-success"></ion-icon>
+              {{ T "htmlformatter.preserveTitle" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "htmlformatter.preservePre" }}</span>
+              <input type="checkbox" id="opt-preserve-pre" class="toggle toggle-xs toggle-success" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "htmlformatter.preserveCode" }}</span>
+              <input type="checkbox" id="opt-preserve-code" class="toggle toggle-xs toggle-success" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "htmlformatter.preserveTextarea" }}</span>
+              <input type="checkbox" id="opt-preserve-textarea" class="toggle toggle-xs toggle-success" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "htmlformatter.preserveScript" }}</span>
+              <input type="checkbox" id="opt-preserve-script" class="toggle toggle-xs toggle-success" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "htmlformatter.preserveStyle" }}</span>
+              <input type="checkbox" id="opt-preserve-style" class="toggle toggle-xs toggle-success" checked />
+            </label>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Editor panels -->
+    <div class="xl:col-span-3 space-y-3 sm:space-y-4 order-1 xl:order-2">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+        <!-- Input -->
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="create-outline" class="text-primary"></ion-icon>
+              {{ T "htmlformatter.inputTitle" }}
+            </h2>
+            <button type="button" id="btn-html-paste" class="btn btn-ghost btn-xs gap-1"><ion-icon name="clipboard-outline"></ion-icon></button>
+            <button type="button" id="btn-html-sample" class="btn btn-ghost btn-xs gap-1"><ion-icon name="code-outline"></ion-icon></button>
+            <button type="button" id="btn-html-clear" class="btn btn-ghost btn-xs gap-1"><ion-icon name="trash-outline"></ion-icon></button>
+          </div>
+          <div class="relative">
+            <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="html-input-stats"></div>
+            <textarea id="html-input" class="w-full h-[350px] sm:h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none" placeholder="{{ T "htmlformatter.inputPlaceholder" }}" spellcheck="false"></textarea>
+          </div>
+        </div>
+        <!-- Output -->
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="checkmark-circle-outline" class="text-success"></ion-icon>
+              {{ T "htmlformatter.outputTitle" }}
+            </h2>
+            <button type="button" id="btn-html-copy" class="btn btn-primary btn-xs gap-1" disabled>
+              <ion-icon name="copy-outline"></ion-icon><span class="hidden sm:inline">{{ T "htmlformatter.copyResult" }}</span>
+            </button>
+            <button type="button" id="btn-html-download" class="btn btn-ghost btn-xs gap-1" disabled>
+              <ion-icon name="download-outline"></ion-icon><span class="hidden sm:inline">.html</span>
+            </button>
+          </div>
+          <div class="relative">
+            <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="html-output-stats"></div>
+            <textarea id="html-output" class="w-full h-[350px] sm:h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none" readonly placeholder="{{ T "htmlformatter.outputEmpty" }}"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error panel -->
+      <div id="html-error-panel" class="hidden bg-error/5 border border-error/20 rounded-xl sm:rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-2 p-3 sm:p-4">
+          <ion-icon name="alert-circle-outline" class="text-error text-xl shrink-0"></ion-icon>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-xs sm:text-sm text-error">{{ T "htmlformatter.errorTitle" }}</div>
+            <pre class="text-[10px] sm:text-xs mt-1 text-error/80 font-mono whitespace-pre-wrap break-all" id="html-error-message"></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div id="html-stats-bar" class="hidden">
+        <div class="grid grid-cols-3 gap-3 sm:gap-4">
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "htmlformatter.statsOriginal" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-primary" id="html-stat-original">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "htmlformatter.statsFormatted" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-success" id="html-stat-formatted">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "htmlformatter.statsReduction" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-warning" id="html-stat-reduction">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-info/10 flex items-center justify-center shrink-0">
+            <ion-icon name="help-circle-outline" class="text-lg sm:text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">{{ T "htmlformatter.howTitle" }}</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "htmlformatter.howSubtitle" }}</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          {{ $steps := slice "howParse" "howFormat" "howMinify" "howExport" }}
+          {{ $icons := slice "scan-outline" "sparkles-outline" "contract-outline" "download-outline" }}
+          {{ $colors := slice "primary" "success" "warning" "secondary" }}
+          {{ range $i, $step := $steps }}
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-{{ index $colors $i }}/10 flex items-center justify-center">
+                <ion-icon name="{{ index $icons $i }}" class="text-{{ index $colors $i }}"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T (printf "htmlformatter.%s" $step) }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T (printf "htmlformatter.%sDesc" $step) }}</p>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- Status bar -->
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span id="html-status-text">{{ T "htmlformatter.statusReady" }}</span>
+    <span>{{ T "htmlformatter.statusBrowser" }}</span>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="html-toast" class="toast toast-top toast-center hidden z-50">
+  <div class="alert alert-success py-2 px-4">
+    <ion-icon name="checkmark-circle-outline" class="text-lg"></ion-icon>
+    <span id="html-toast-message" class="text-sm"></span>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  var i18n = {
+    copied: {{ printf "%q" (T "htmlformatter.copied") }},
+    cleared: {{ printf "%q" (T "htmlformatter.cleared") }},
+    downloaded: {{ printf "%q" (T "htmlformatter.downloaded") }},
+    statusReady: {{ printf "%q" (T "htmlformatter.statusReady") }},
+    statusFormatted: {{ printf "%q" (T "htmlformatter.statusFormatted") }},
+    statusMinified: {{ printf "%q" (T "htmlformatter.statusMinified") }},
+    statusError: {{ printf "%q" (T "htmlformatter.statusError") }},
+    statsLines: {{ printf "%q" (T "htmlformatter.statsLines") }},
+    statsChars: {{ printf "%q" (T "htmlformatter.statsChars") }}
+  };
+
+  var STORAGE_KEY = 'htmlformatter-settings';
+
+  // ===== CONSTANTS =====
+
+  var VOID_ELEMENTS = new Set([
+    'area','base','br','col','embed','hr','img','input','link','meta',
+    'param','source','track','wbr','command','keygen','menuitem'
+  ]);
+
+  var RAW_TEXT_ELEMENTS = new Set(['script','style','textarea','title']);
+
+  var INLINE_ELEMENTS = new Set([
+    'a','abbr','acronym','b','bdo','big','br','button','cite','code','dfn',
+    'em','i','img','input','kbd','label','map','object','output','q','samp',
+    'select','small','span','strong','sub','sup','textarea','time','tt','u','var','wbr'
+  ]);
+
+  var PRESERVE_ELEMENTS = new Set(['pre','code','textarea','script','style','xmp']);
+
+  var BOOLEAN_ATTRS = new Set([
+    'allowfullscreen','async','autofocus','autoplay','checked','controls',
+    'default','defer','disabled','formnovalidate','hidden','inert','ismap',
+    'itemscope','loop','multiple','muted','nomodule','novalidate','open',
+    'playsinline','readonly','required','reversed','selected','shadowrootclonable',
+    'shadowrootdelegatesfocus','shadowrootserializable'
+  ]);
+
+  var REDUNDANT_ATTRS = {
+    'form': { 'method': 'get' },
+    'script': { 'charset': 'utf-8' },
+    'a': { 'shape': 'rect' },
+    'area': { 'shape': 'rect' }
+  };
+
+  var ATTR_SORT_ORDER = [
+    'id','class','name','type','for','href','src','action','method',
+    'value','placeholder','title','alt','role','aria-*','data-*',
+    'style','width','height','rel','target','disabled','checked',
+    'readonly','required','selected','hidden'
+  ];
+
+  var OPTIONAL_CLOSING_TAGS = new Set([
+    'html','head','body','li','dt','dd','p','rt','rp',
+    'optgroup','option','colgroup','caption','thead','tbody','tfoot',
+    'tr','td','th'
+  ]);
+
+  // Template delimiters stored as char codes to avoid Hugo parsing
+  var DBLOPEN = String.fromCharCode(123, 123);   // two opening braces
+  var DBLCLOSE = String.fromCharCode(125, 125);   // two closing braces
+  var PCTOPEN = String.fromCharCode(123, 37);     // {%
+  var PCTCLOSE = String.fromCharCode(37, 125);    // %}
+  var EJSOPEN = String.fromCharCode(60, 37);      // <%
+  var EJSCLOSE = String.fromCharCode(37, 62);     // %>
+
+  // ===== SAMPLE HTML =====
+  var SAMPLE_HTML = '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>Sample Page</title>\n  <link rel="stylesheet" href="styles.css" type="text/css">\n  <style>\n    .container { max-width: 1200px; margin: 0 auto; padding: 0px 16px; }\n    .header { background-color: #3366ff; color: #ffffff; }\n  </style>\n</head>\n<body>\n  <!-- Main navigation -->\n  <header class="header">\n    <nav role="navigation">\n      <a href="/" class="logo">Logo</a>\n      <ul>\n        <li><a href="/about">About</a></li>\n        <li><a href="/contact">Contact</a></li>\n        <li><a href="/blog">Blog</a></li>\n      </ul>\n    </nav>\n  </header>\n\n  <main class="container">\n    <article>\n      <h1 class="title" id="main-title">Welcome</h1>\n      <p>This is a <strong>sample</strong> page with <em>various</em> elements.</p>\n      <img src="hero.jpg" alt="Hero image" width="800" height="400" />\n      <br>\n      <input type="text" name="search" placeholder="Search..." disabled="disabled" required="required" readonly="readonly">\n      <button type="submit" class="" id="">Search</button>\n    </article>\n\n    <section>\n      <h2>Code Example</h2>\n      <pre><code>function hello() {\n  console.log("Hello, World!");\n  return true;\n}</code></pre>\n    </section>\n\n    <!--[if IE]>\n    <div class="ie-warning">Please upgrade your browser.</div>\n    <![endif]-->\n\n    <!-- TODO: Add more content -->\n    <div class="cards">\n      <div class="card" data-id="1" data-category="tech">\n        <h3>Card Title</h3>\n        <p>Card description goes here.</p>\n        <a href="#" target="_blank" rel="noopener">Read more</a>\n      </div>\n      <div class="card" data-id="2" data-category="design">\n        <h3>Another Card</h3>\n        <p>More content here.</p>\n      </div>\n    </div>\n  </main>\n\n  <footer>\n    <p>&copy; 2025 Sample Site</p>\n  </footer>\n\n  <script type="text/javascript">\n    document.addEventListener("DOMContentLoaded", function() {\n      console.log("Page loaded");\n      var items = document.querySelectorAll(".card");\n      items.forEach(function(item) {\n        item.addEventListener("click", function() {\n          console.log("Clicked:", item.dataset.id);\n        });\n      });\n    });\n  <\/script>\n</body>\n</html>';
+
+  // ======================================================================
+  // HTML TOKENIZER
+  // ======================================================================
+
+  var TK = {
+    DOCTYPE: 'doctype',
+    OPEN_TAG: 'open',
+    CLOSE_TAG: 'close',
+    SELF_CLOSE: 'selfclose',
+    TEXT: 'text',
+    COMMENT: 'comment',
+    CDATA: 'cdata',
+    TEMPLATE: 'template',
+    RAW: 'raw'
+  };
+
+  function tokenizeHTML(html) {
+    var tokens = [];
+    var i = 0;
+    var len = html.length;
+
+    while (i < len) {
+      // Template expressions — must check before tags
+      var tplMatch = matchTemplate(html, i);
+      if (tplMatch) {
+        tokens.push({ type: TK.TEMPLATE, value: tplMatch });
+        i += tplMatch.length;
+        continue;
+      }
+
+      if (html[i] === '<') {
+        // Comment
+        if (html.substring(i, i + 4) === '<!--') {
+          var endComment = html.indexOf('-->', i + 4);
+          if (endComment === -1) endComment = len - 3;
+          var comment = html.substring(i, endComment + 3);
+          tokens.push({ type: TK.COMMENT, value: comment });
+          i = endComment + 3;
+          continue;
+        }
+
+        // CDATA
+        if (html.substring(i, i + 9) === '<![CDATA[') {
+          var endCdata = html.indexOf(']]>', i + 9);
+          if (endCdata === -1) endCdata = len - 3;
+          tokens.push({ type: TK.CDATA, value: html.substring(i, endCdata + 3) });
+          i = endCdata + 3;
+          continue;
+        }
+
+        // DOCTYPE
+        if (html.substring(i, i + 9).toUpperCase() === '<!DOCTYPE') {
+          var endDoctype = html.indexOf('>', i);
+          if (endDoctype === -1) endDoctype = len - 1;
+          tokens.push({ type: TK.DOCTYPE, value: html.substring(i, endDoctype + 1) });
+          i = endDoctype + 1;
+          continue;
+        }
+
+        // Closing tag
+        if (html[i + 1] === '/') {
+          var endClose = html.indexOf('>', i);
+          if (endClose === -1) endClose = len - 1;
+          var tagName = html.substring(i + 2, endClose).trim().toLowerCase();
+          tokens.push({ type: TK.CLOSE_TAG, tag: tagName, value: html.substring(i, endClose + 1) });
+          i = endClose + 1;
+          continue;
+        }
+
+        // Opening tag
+        var tag = parseOpenTag(html, i);
+        if (tag) {
+          tokens.push(tag.token);
+          i = tag.end;
+
+          // Raw text elements: read content as-is until closing tag
+          if (RAW_TEXT_ELEMENTS.has(tag.token.tag)) {
+            var closePattern = '</' + tag.token.tag;
+            var rawEnd = html.toLowerCase().indexOf(closePattern, i);
+            if (rawEnd === -1) rawEnd = len;
+            var rawContent = html.substring(i, rawEnd);
+            if (rawContent) {
+              tokens.push({ type: TK.RAW, value: rawContent, parentTag: tag.token.tag });
+            }
+            i = rawEnd;
+          }
+          continue;
+        }
+      }
+
+      // Text node
+      var nextTag = html.indexOf('<', i + 1);
+      if (nextTag === -1) nextTag = len;
+      // Check for template expression in text
+      var nextTpl = findNextTemplate(html, i);
+      if (nextTpl > -1 && nextTpl < nextTag) nextTag = nextTpl;
+
+      var text = html.substring(i, nextTag);
+      if (text) {
+        tokens.push({ type: TK.TEXT, value: text });
+      }
+      i = nextTag;
+    }
+
+    return tokens;
+  }
+
+  function parseOpenTag(html, start) {
+    var i = start + 1;
+    var len = html.length;
+
+    // Tag name
+    var tagStart = i;
+    while (i < len && /[a-zA-Z0-9\-_:.]/.test(html[i])) i++;
+    var tagName = html.substring(tagStart, i).toLowerCase();
+    if (!tagName) return null;
+
+    // Attributes
+    var attrs = [];
+    while (i < len) {
+      while (i < len && /\s/.test(html[i])) i++;
+      if (i >= len || html[i] === '>' || (html[i] === '/' && i + 1 < len && html[i + 1] === '>')) break;
+
+      // Template expression as attribute
+      var tpl = matchTemplate(html, i);
+      if (tpl) {
+        attrs.push({ name: tpl, value: null, template: true });
+        i += tpl.length;
+        continue;
+      }
+
+      // Attribute name
+      var nameStart = i;
+      while (i < len && !/[\s=\/>]/.test(html[i])) i++;
+      var attrName = html.substring(nameStart, i);
+      if (!attrName) { i++; continue; }
+
+      while (i < len && /\s/.test(html[i])) i++;
+
+      if (i < len && html[i] === '=') {
+        i++;
+        while (i < len && /\s/.test(html[i])) i++;
+
+        var attrValue = '';
+        if (i < len && (html[i] === '"' || html[i] === "'")) {
+          var quote = html[i];
+          i++;
+          var valStart = i;
+          while (i < len && html[i] !== quote) {
+            if (html[i] === '\\') i++;
+            i++;
+          }
+          attrValue = html.substring(valStart, i);
+          if (i < len) i++;
+          attrs.push({ name: attrName, value: attrValue, quote: quote });
+        } else {
+          var valStart = i;
+          while (i < len && !/[\s>]/.test(html[i])) i++;
+          attrValue = html.substring(valStart, i);
+          attrs.push({ name: attrName, value: attrValue, quote: '' });
+        }
+      } else {
+        attrs.push({ name: attrName, value: null });
+      }
+    }
+
+    var selfClosing = false;
+    if (i < len && html[i] === '/') { selfClosing = true; i++; }
+    if (i < len && html[i] === '>') i++;
+
+    var isVoid = VOID_ELEMENTS.has(tagName);
+    var type = (selfClosing || isVoid) ? TK.SELF_CLOSE : TK.OPEN_TAG;
+
+    return {
+      token: { type: type, tag: tagName, attrs: attrs, selfClosing: selfClosing, isVoid: isVoid },
+      end: i
+    };
+  }
+
+  // Template matching using char-code-based delimiters to avoid Hugo conflicts
+  function matchTemplate(html, i) {
+    var c0 = html[i];
+    var c1 = i + 1 < html.length ? html[i + 1] : '';
+    var sub2 = c0 + c1;
+
+    // Double-brace: Vue/Handlebars
+    if (sub2 === DBLOPEN) {
+      var end = html.indexOf(DBLCLOSE, i + 2);
+      if (end > -1) return html.substring(i, end + 2);
+    }
+
+    // Percent-brace: Jinja/Blade
+    if (sub2 === PCTOPEN) {
+      var end = html.indexOf(PCTCLOSE, i + 2);
+      if (end > -1) return html.substring(i, end + 2);
+    }
+
+    // EJS
+    if (sub2 === EJSOPEN) {
+      var end = html.indexOf(EJSCLOSE, i + 2);
+      if (end > -1) return html.substring(i, end + 2);
+    }
+
+    // Blade @directive(...)
+    if (c0 === '@' && /[a-zA-Z]/.test(c1)) {
+      var j = i + 1;
+      while (j < html.length && /[a-zA-Z]/.test(html[j])) j++;
+      if (j < html.length && html[j] === '(') {
+        var depth = 1;
+        j++;
+        while (j < html.length && depth > 0) {
+          if (html[j] === '(') depth++;
+          if (html[j] === ')') depth--;
+          j++;
+        }
+        return html.substring(i, j);
+      }
+      return html.substring(i, j);
+    }
+
+    return null;
+  }
+
+  function findNextTemplate(html, start) {
+    var markers = [DBLOPEN, PCTOPEN, EJSOPEN, '@'];
+    var min = -1;
+    markers.forEach(function(m) {
+      var idx = html.indexOf(m, start + 1);
+      if (idx > -1 && (min === -1 || idx < min)) min = idx;
+    });
+    return min;
+  }
+
+  // ======================================================================
+  // OPTIONS
+  // ======================================================================
+
+  function getOpts() {
+    var ir = document.querySelector('input[name="html-indent"]:checked');
+    var iv = ir ? ir.value : '2';
+    return {
+      indentStr: iv === 'tab' ? '\t' : ' '.repeat(parseInt(iv)),
+      wrapAttrs: document.getElementById('opt-wrap-attrs').value,
+      maxLineLength: parseInt(document.getElementById('opt-html-max-line').value) || 120,
+      selfClosing: document.getElementById('opt-self-closing').checked,
+      sortAttrs: document.getElementById('opt-sort-attrs').checked,
+      voidSlash: document.getElementById('opt-void-slash').checked,
+      unformatted: document.getElementById('opt-unformatted').checked,
+      removeComments: document.getElementById('opt-html-remove-comments').checked,
+      keepConditional: document.getElementById('opt-keep-conditional').checked,
+      collapseWs: document.getElementById('opt-collapse-ws').checked,
+      removeEmptyAttrs: document.getElementById('opt-remove-empty-attrs').checked,
+      collapseBool: document.getElementById('opt-collapse-bool').checked,
+      removeOptional: document.getElementById('opt-remove-optional').checked,
+      removeType: document.getElementById('opt-remove-type').checked,
+      removeRedundant: document.getElementById('opt-remove-redundant').checked,
+      minifyCSS: document.getElementById('opt-minify-css').checked,
+      minifyJS: document.getElementById('opt-minify-js').checked,
+      preservePre: document.getElementById('opt-preserve-pre').checked,
+      preserveCode: document.getElementById('opt-preserve-code').checked,
+      preserveTextarea: document.getElementById('opt-preserve-textarea').checked,
+      preserveScript: document.getElementById('opt-preserve-script').checked,
+      preserveStyle: document.getElementById('opt-preserve-style').checked
+    };
+  }
+
+  function shouldPreserve(tag, opts) {
+    if (tag === 'pre' && opts.preservePre) return true;
+    if (tag === 'code' && opts.preserveCode) return true;
+    if (tag === 'textarea' && opts.preserveTextarea) return true;
+    if (tag === 'script' && opts.preserveScript) return true;
+    if (tag === 'style' && opts.preserveStyle) return true;
+    return false;
+  }
+
+  // ======================================================================
+  // ATTRIBUTE PROCESSING
+  // ======================================================================
+
+  function sortAttributes(attrs) {
+    return attrs.slice().sort(function(a, b) {
+      if (a.template) return 1;
+      if (b.template) return -1;
+      return getAttrOrder(a.name) - getAttrOrder(b.name);
+    });
+  }
+
+  function getAttrOrder(name) {
+    var n = name.toLowerCase();
+    for (var i = 0; i < ATTR_SORT_ORDER.length; i++) {
+      var pattern = ATTR_SORT_ORDER[i];
+      if (pattern.endsWith('*')) {
+        if (n.startsWith(pattern.slice(0, -1))) return i;
+      } else if (n === pattern) return i;
+    }
+    return ATTR_SORT_ORDER.length;
+  }
+
+  function renderAttrs(attrs, tag, opts, indentStr, tagIndent) {
+    if (!attrs || attrs.length === 0) return '';
+
+    var processed = attrs;
+
+    processed = processed.filter(function(a) {
+      if (a.template) return true;
+      if (opts.removeEmptyAttrs && a.value === '' &&
+          !BOOLEAN_ATTRS.has(a.name.toLowerCase())) return false;
+      if (opts.removeType) {
+        if (tag === 'script' && a.name.toLowerCase() === 'type' &&
+            (a.value === 'text/javascript' || a.value === 'application/javascript')) return false;
+        if ((tag === 'style' || tag === 'link') && a.name.toLowerCase() === 'type' && a.value === 'text/css') return false;
+      }
+      if (opts.removeRedundant && REDUNDANT_ATTRS[tag]) {
+        var rv = REDUNDANT_ATTRS[tag][a.name.toLowerCase()];
+        if (rv && a.value && a.value.toLowerCase() === rv) return false;
+      }
+      return true;
+    });
+
+    if (opts.sortAttrs) processed = sortAttributes(processed);
+
+    var attrStrs = processed.map(function(a) {
+      if (a.template) return a.name;
+      var name = a.name;
+      if (opts.collapseBool && BOOLEAN_ATTRS.has(name.toLowerCase())) {
+        if (a.value === null || a.value === '' || a.value.toLowerCase() === name.toLowerCase()) {
+          return name;
+        }
+      }
+      if (a.value === null) return name;
+      var q = a.quote || '"';
+      if (!q) q = '"';
+      return name + '=' + q + a.value + q;
+    });
+
+    if (attrStrs.length === 0) return '';
+
+    var inlineStr = ' ' + attrStrs.join(' ');
+
+    if (opts.wrapAttrs === 'none') return inlineStr;
+
+    var tagLine = tagIndent + '<' + tag + inlineStr;
+    var shouldWrap = false;
+
+    if (opts.wrapAttrs === 'force' && attrStrs.length > 1) {
+      shouldWrap = true;
+    } else if (opts.wrapAttrs === 'auto' && tagLine.length > opts.maxLineLength) {
+      shouldWrap = true;
+    } else if (opts.wrapAttrs === 'aligned' && attrStrs.length > 1) {
+      shouldWrap = true;
+    }
+
+    if (!shouldWrap) return inlineStr;
+
+    var attrIndent;
+    if (opts.wrapAttrs === 'aligned') {
+      attrIndent = tagIndent + ' '.repeat(tag.length + 2);
+    } else {
+      attrIndent = tagIndent + opts.indentStr;
+    }
+
+    return '\n' + attrStrs.map(function(a) { return attrIndent + a; }).join('\n');
+  }
+
+  // ======================================================================
+  // INLINE MINIFIERS
+  // ======================================================================
+
+  function minifyInlineCSS(css) {
+    return css
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/\s+/g, ' ')
+      .replace(/\s*([{}:;,])\s*/g, '$1')
+      .replace(/;}/g, '}')
+      .trim();
+  }
+
+  function minifyInlineJS(js) {
+    var lines = js.split('\n');
+    var result = [];
+    lines.forEach(function(line) {
+      var trimmed = line.trim();
+      if (trimmed && !trimmed.startsWith('//')) {
+        result.push(trimmed);
+      }
+    });
+    return result.join('\n');
+  }
+
+  // ======================================================================
+  // RENDERERS
+  // ======================================================================
+
+  function renderPretty(tokens, opts) {
+    var lines = [];
+    var indent = 0;
+    var preserveStack = [];
+
+    function ind() { return opts.indentStr.repeat(indent); }
+
+    for (var i = 0; i < tokens.length; i++) {
+      var tok = tokens[i];
+      var inPreserve = preserveStack.length > 0;
+
+      switch (tok.type) {
+        case TK.DOCTYPE:
+          lines.push(ind() + tok.value.replace(/\s+/g, ' ').trim());
+          break;
+
+        case TK.COMMENT:
+          if (inPreserve) { lines.push(tok.value); break; }
+          if (tok.value.indexOf('<!--[if') === 0 || tok.value.indexOf('<!--<![') === 0) {
+            lines.push(ind() + tok.value);
+            break;
+          }
+          var commentLines = tok.value.split('\n');
+          if (commentLines.length > 1) {
+            commentLines.forEach(function(cl, ci) {
+              lines.push(ind() + (ci === 0 ? cl.trimEnd() : cl.trim()));
+            });
+          } else {
+            lines.push(ind() + tok.value.trim());
+          }
+          break;
+
+        case TK.TEMPLATE:
+          lines.push((inPreserve ? '' : ind()) + tok.value);
+          break;
+
+        case TK.CDATA:
+          lines.push(ind() + tok.value);
+          break;
+
+        case TK.OPEN_TAG:
+        case TK.SELF_CLOSE:
+          if (inPreserve) {
+            lines.push(renderTag(tok, opts, ''));
+            if (tok.type === TK.OPEN_TAG && shouldPreserve(tok.tag, opts)) {
+              preserveStack.push(tok.tag);
+            }
+            break;
+          }
+
+          if (opts.unformatted && INLINE_ELEMENTS.has(tok.tag) && tok.type === TK.OPEN_TAG) {
+            var inlineContent = collectInlineContent(tokens, i);
+            if (inlineContent !== null) {
+              lines.push(ind() + inlineContent.text);
+              i = inlineContent.endIdx;
+              break;
+            }
+          }
+
+          lines.push(ind() + renderTag(tok, opts, ind()));
+
+          if (tok.type === TK.OPEN_TAG) {
+            if (shouldPreserve(tok.tag, opts)) {
+              preserveStack.push(tok.tag);
+            }
+            if (!VOID_ELEMENTS.has(tok.tag)) {
+              indent++;
+            }
+          }
+          break;
+
+        case TK.CLOSE_TAG:
+          if (inPreserve) {
+            if (preserveStack.length > 0 && preserveStack[preserveStack.length - 1] === tok.tag) {
+              preserveStack.pop();
+            }
+            lines.push('</' + tok.tag + '>');
+            break;
+          }
+          indent = Math.max(0, indent - 1);
+          lines.push(ind() + '</' + tok.tag + '>');
+          break;
+
+        case TK.RAW:
+          if (inPreserve || shouldPreserve(tok.parentTag, opts)) {
+            lines.push(tok.value);
+          } else {
+            var rawLines = tok.value.split('\n');
+            rawLines.forEach(function(rl) {
+              var trimmed = rl.trim();
+              if (trimmed) lines.push(ind() + trimmed);
+            });
+          }
+          break;
+
+        case TK.TEXT:
+          if (inPreserve) { lines.push(tok.value); break; }
+          var text = tok.value;
+          if (opts.collapseWs) text = text.replace(/\s+/g, ' ');
+          text = text.trim();
+          if (text) lines.push(ind() + text);
+          break;
+      }
+    }
+
+    return lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  }
+
+  function renderTag(tok, opts, currentIndent) {
+    var tag = '<' + tok.tag;
+    tag += renderAttrs(tok.attrs, tok.tag, opts, opts.indentStr, currentIndent);
+
+    if (tok.type === TK.SELF_CLOSE || tok.isVoid) {
+      if (opts.voidSlash || opts.selfClosing) {
+        tag += ' />';
+      } else {
+        tag += '>';
+      }
+    } else {
+      tag += '>';
+    }
+
+    return tag;
+  }
+
+  function collectInlineContent(tokens, startIdx) {
+    var tok = tokens[startIdx];
+    if (tok.type !== TK.OPEN_TAG) return null;
+    var tag = tok.tag;
+    var opts = getOpts();
+    var parts = [renderTag(tok, opts, '')];
+    var j = startIdx + 1;
+    var depth = 1;
+
+    while (j < tokens.length && depth > 0) {
+      var t = tokens[j];
+      if (t.type === TK.OPEN_TAG && t.tag === tag) depth++;
+      if (t.type === TK.CLOSE_TAG && t.tag === tag) {
+        depth--;
+        if (depth === 0) {
+          parts.push('</' + tag + '>');
+          break;
+        }
+      }
+      if (t.type === TK.TEXT) {
+        var text = t.value.replace(/\s+/g, ' ').trim();
+        if (text) parts.push(text);
+      } else if (t.type === TK.OPEN_TAG || t.type === TK.SELF_CLOSE) {
+        parts.push(renderTag(t, opts, ''));
+      } else if (t.type === TK.CLOSE_TAG) {
+        parts.push('</' + t.tag + '>');
+      } else if (t.type === TK.RAW) {
+        parts.push(t.value);
+      } else if (t.type === TK.TEMPLATE) {
+        parts.push(t.value);
+      }
+      j++;
+    }
+
+    var combined = parts.join('');
+    if (combined.length > 200) return null;
+
+    return { text: combined, endIdx: j };
+  }
+
+  // ----- EXPANDED -----
+  function renderExpanded(tokens, opts) {
+    return renderPretty(tokens, Object.assign({}, opts, {
+      wrapAttrs: 'force',
+      unformatted: false
+    }));
+  }
+
+  // ----- COMPACT -----
+  function renderCompact(tokens, opts) {
+    var lines = [];
+    var preserveStack = [];
+
+    for (var i = 0; i < tokens.length; i++) {
+      var tok = tokens[i];
+      var inPreserve = preserveStack.length > 0;
+
+      switch (tok.type) {
+        case TK.DOCTYPE:
+          lines.push(tok.value.replace(/\s+/g, ' ').trim());
+          break;
+        case TK.COMMENT:
+          if (!opts.removeComments || (opts.keepConditional && isConditionalComment(tok.value))) {
+            lines.push(tok.value.replace(/\s+/g, ' ').trim());
+          }
+          break;
+        case TK.TEMPLATE:
+          lines.push(tok.value);
+          break;
+        case TK.OPEN_TAG:
+        case TK.SELF_CLOSE:
+          var tagStr = renderTag(tok, Object.assign({}, opts, { wrapAttrs: 'none' }), '');
+          if (tok.type === TK.OPEN_TAG && !RAW_TEXT_ELEMENTS.has(tok.tag)) {
+            var content = collectUntilClose(tokens, i, tok.tag);
+            if (content && content.text.length < 200) {
+              lines.push(tagStr + content.text);
+              i = content.endIdx;
+              break;
+            }
+          }
+          if (shouldPreserve(tok.tag, opts)) preserveStack.push(tok.tag);
+          lines.push(tagStr);
+          break;
+        case TK.CLOSE_TAG:
+          if (inPreserve && preserveStack[preserveStack.length - 1] === tok.tag) preserveStack.pop();
+          lines.push('</' + tok.tag + '>');
+          break;
+        case TK.RAW:
+          if (inPreserve) { lines.push(tok.value); }
+          else { lines.push(tok.value.replace(/\s+/g, ' ').trim()); }
+          break;
+        case TK.TEXT:
+          var t = inPreserve ? tok.value : tok.value.replace(/\s+/g, ' ').trim();
+          if (t) lines.push(t);
+          break;
+      }
+    }
+
+    return lines.join('\n').trim();
+  }
+
+  function collectUntilClose(tokens, startIdx, tag) {
+    var parts = [];
+    var j = startIdx + 1;
+    var depth = 1;
+    var opts = getOpts();
+
+    while (j < tokens.length && depth > 0) {
+      var t = tokens[j];
+      if (t.type === TK.OPEN_TAG && t.tag === tag) depth++;
+      if (t.type === TK.CLOSE_TAG && t.tag === tag) {
+        depth--;
+        if (depth === 0) { parts.push('</' + tag + '>'); break; }
+      }
+      if (t.type === TK.TEXT) { parts.push(t.value.replace(/\s+/g, ' ').trim()); }
+      else if (t.type === TK.OPEN_TAG || t.type === TK.SELF_CLOSE) {
+        parts.push(renderTag(t, opts, ''));
+      }
+      else if (t.type === TK.CLOSE_TAG) { parts.push('</' + t.tag + '>'); }
+      else if (t.type === TK.RAW) { parts.push(t.value.trim()); }
+      else if (t.type === TK.TEMPLATE) { parts.push(t.value); }
+      j++;
+    }
+
+    if (depth !== 0) return null;
+    return { text: parts.join(''), endIdx: j };
+  }
+
+  // ----- INLINE -----
+  function renderInline(tokens, opts) {
+    return renderCompact(tokens, Object.assign({}, opts, { unformatted: true }));
+  }
+
+  // ----- ONE LINE -----
+  function renderOneLine(tokens, opts) {
+    var parts = [];
+    var preserveStack = [];
+
+    for (var i = 0; i < tokens.length; i++) {
+      var tok = tokens[i];
+      var inPreserve = preserveStack.length > 0;
+
+      switch (tok.type) {
+        case TK.DOCTYPE: parts.push(tok.value.replace(/\s+/g, ' ').trim()); break;
+        case TK.COMMENT:
+          if (!opts.removeComments) parts.push(tok.value.replace(/\s+/g, ' '));
+          break;
+        case TK.TEMPLATE: parts.push(tok.value); break;
+        case TK.CDATA: parts.push(tok.value); break;
+        case TK.OPEN_TAG:
+        case TK.SELF_CLOSE:
+          parts.push(renderTag(tok, Object.assign({}, opts, { wrapAttrs: 'none' }), ''));
+          if (shouldPreserve(tok.tag, opts)) preserveStack.push(tok.tag);
+          break;
+        case TK.CLOSE_TAG:
+          if (inPreserve && preserveStack[preserveStack.length - 1] === tok.tag) preserveStack.pop();
+          parts.push('</' + tok.tag + '>');
+          break;
+        case TK.RAW:
+          if (inPreserve) parts.push(tok.value);
+          else parts.push(tok.value.replace(/\s+/g, ' ').trim());
+          break;
+        case TK.TEXT:
+          var text = inPreserve ? tok.value : tok.value.replace(/\s+/g, ' ').trim();
+          if (text) parts.push(text);
+          break;
+      }
+    }
+
+    return parts.join('').replace(/>\s+</g, '><');
+  }
+
+  // ----- MINIFY -----
+  function renderMinify(tokens, opts) {
+    var parts = [];
+    var preserveStack = [];
+
+    var minOpts = Object.assign({}, opts, {
+      removeComments: true,
+      collapseWs: true,
+      collapseBool: true,
+      removeEmptyAttrs: true,
+      removeType: true,
+      wrapAttrs: 'none'
+    });
+
+    for (var i = 0; i < tokens.length; i++) {
+      var tok = tokens[i];
+      var inPreserve = preserveStack.length > 0;
+
+      switch (tok.type) {
+        case TK.DOCTYPE:
+          parts.push('<!DOCTYPE html>');
+          break;
+        case TK.COMMENT:
+          if (minOpts.keepConditional && isConditionalComment(tok.value)) {
+            parts.push(tok.value);
+          }
+          break;
+        case TK.TEMPLATE: parts.push(tok.value); break;
+        case TK.CDATA: parts.push(tok.value); break;
+        case TK.OPEN_TAG:
+        case TK.SELF_CLOSE:
+          parts.push(renderTag(tok, minOpts, ''));
+          if (shouldPreserve(tok.tag, minOpts)) preserveStack.push(tok.tag);
+          break;
+        case TK.CLOSE_TAG:
+          if (inPreserve && preserveStack[preserveStack.length - 1] === tok.tag) preserveStack.pop();
+          if (minOpts.removeOptional && OPTIONAL_CLOSING_TAGS.has(tok.tag)) break;
+          parts.push('</' + tok.tag + '>');
+          break;
+        case TK.RAW:
+          if (inPreserve) {
+            var raw = tok.value;
+            if (tok.parentTag === 'style' && minOpts.minifyCSS) {
+              raw = minifyInlineCSS(raw);
+            }
+            if (tok.parentTag === 'script' && minOpts.minifyJS) {
+              raw = minifyInlineJS(raw);
+            }
+            parts.push(raw);
+          } else {
+            parts.push(tok.value.replace(/\s+/g, ' ').trim());
+          }
+          break;
+        case TK.TEXT:
+          var text = tok.value;
+          if (!inPreserve) {
+            text = text.replace(/\s+/g, ' ');
+            var prev = i > 0 ? tokens[i - 1] : null;
+            var next = i < tokens.length - 1 ? tokens[i + 1] : null;
+            if (prev && (prev.type === TK.OPEN_TAG || prev.type === TK.CLOSE_TAG || prev.type === TK.SELF_CLOSE)) {
+              text = text.replace(/^\s+/, '');
+            }
+            if (next && (next.type === TK.OPEN_TAG || next.type === TK.CLOSE_TAG || next.type === TK.SELF_CLOSE)) {
+              text = text.replace(/\s+$/, '');
+            }
+          }
+          if (text) parts.push(text);
+          break;
+      }
+    }
+
+    return parts.join('');
+  }
+
+  // ----- SAFE MINIFY -----
+  function renderSafeMinify(tokens, opts) {
+    return renderMinify(tokens, Object.assign({}, opts, {
+      removeOptional: false,
+      removeRedundant: false,
+      minifyJS: false
+    }));
+  }
+
+  function isConditionalComment(value) {
+    return value.indexOf('<!--[if') === 0 || value.indexOf('<!--<![') === 0;
+  }
+
+  // ======================================================================
+  // UI
+  // ======================================================================
+
+  var inputEl = document.getElementById('html-input');
+  var outputEl = document.getElementById('html-output');
+  var statusText = document.getElementById('html-status-text');
+
+  function showToast(msg) {
+    var t = document.getElementById('html-toast');
+    document.getElementById('html-toast-message').textContent = msg;
+    t.classList.remove('hidden');
+    setTimeout(function() { t.classList.add('hidden'); }, 2000);
+  }
+
+  function showError(msg) {
+    document.getElementById('html-error-message').textContent = msg;
+    document.getElementById('html-error-panel').classList.remove('hidden');
+    statusText.textContent = i18n.statusError;
+  }
+
+  function hideError() {
+    document.getElementById('html-error-panel').classList.add('hidden');
+  }
+
+  function formatBytes(b) { return b < 1024 ? b + ' B' : (b / 1024).toFixed(1) + ' KB'; }
+
+  function updateStats(original, formatted) {
+    var ob = new Blob([original]).size;
+    var fb = new Blob([formatted]).size;
+    var ol = original.split('\n').length;
+    var fl = formatted.split('\n').length;
+    var red = ob > 0 ? Math.round((1 - fb / ob) * 100) : 0;
+
+    document.getElementById('html-stat-original').textContent = ol + ' ' + i18n.statsLines + ' · ' + formatBytes(ob);
+    document.getElementById('html-stat-formatted').textContent = fl + ' ' + i18n.statsLines + ' · ' + formatBytes(fb);
+    document.getElementById('html-stat-reduction').textContent = (red >= 0 ? '-' : '+') + Math.abs(red) + '%';
+    document.getElementById('html-stats-bar').classList.remove('hidden');
+    document.getElementById('html-input-stats').textContent = ol + ' ' + i18n.statsLines + ' · ' + original.length + ' ' + i18n.statsChars;
+    document.getElementById('html-output-stats').textContent = fl + ' ' + i18n.statsLines + ' · ' + formatted.length + ' ' + i18n.statsChars;
+  }
+
+  function process(renderer, statusMsg) {
+    var code = inputEl.value;
+    if (!code.trim()) return;
+    hideError();
+    try {
+      var tokens = tokenizeHTML(code);
+      var opts = getOpts();
+      var result = renderer(tokens, opts);
+      outputEl.value = result;
+      document.getElementById('btn-html-copy').disabled = false;
+      document.getElementById('btn-html-download').disabled = false;
+      statusText.textContent = statusMsg;
+      updateStats(code, result);
+    } catch(e) {
+      showError(e.message || String(e));
+    }
+  }
+
+  // Buttons
+  document.getElementById('btn-html-pretty').addEventListener('click', function() {
+    process(renderPretty, i18n.statusFormatted + ' (Beautify)');
+  });
+  document.getElementById('btn-html-expanded').addEventListener('click', function() {
+    process(renderExpanded, i18n.statusFormatted + ' (Expanded)');
+  });
+  document.getElementById('btn-html-compact').addEventListener('click', function() {
+    process(renderCompact, i18n.statusFormatted + ' (Compact)');
+  });
+  document.getElementById('btn-html-inline').addEventListener('click', function() {
+    process(renderInline, i18n.statusFormatted + ' (Inline)');
+  });
+  document.getElementById('btn-html-oneline').addEventListener('click', function() {
+    process(renderOneLine, i18n.statusFormatted + ' (One Line)');
+  });
+  document.getElementById('btn-html-minify').addEventListener('click', function() {
+    process(renderMinify, i18n.statusMinified);
+  });
+  document.getElementById('btn-html-safe').addEventListener('click', function() {
+    process(renderSafeMinify, i18n.statusMinified + ' (Safe)');
+  });
+
+  document.getElementById('btn-html-copy').addEventListener('click', function() {
+    if (!outputEl.value) return;
+    navigator.clipboard.writeText(outputEl.value).then(function() { showToast(i18n.copied); });
+  });
+
+  document.getElementById('btn-html-download').addEventListener('click', function() {
+    if (!outputEl.value) return;
+    var d = new Date();
+    var fn = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0') + '_formatted.html';
+    var blob = new Blob([outputEl.value], { type: 'text/html;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a'); a.href = url; a.download = fn; a.click();
+    setTimeout(function() { URL.revokeObjectURL(url); }, 100);
+    showToast(i18n.downloaded);
+  });
+
+  document.getElementById('btn-html-paste').addEventListener('click', function() {
+    navigator.clipboard.readText().then(function(t) { inputEl.value = t; updateInputStats(); }).catch(function() {});
+  });
+
+  document.getElementById('btn-html-sample').addEventListener('click', function() {
+    inputEl.value = SAMPLE_HTML;
+    updateInputStats();
+  });
+
+  document.getElementById('btn-html-clear').addEventListener('click', function() {
+    inputEl.value = ''; outputEl.value = '';
+    document.getElementById('btn-html-copy').disabled = true;
+    document.getElementById('btn-html-download').disabled = true;
+    document.getElementById('html-stats-bar').classList.add('hidden');
+    document.getElementById('html-input-stats').textContent = '';
+    document.getElementById('html-output-stats').textContent = '';
+    hideError();
+    statusText.textContent = i18n.statusReady;
+    showToast(i18n.cleared);
+  });
+
+  document.getElementById('opt-html-max-line').addEventListener('input', function() {
+    document.getElementById('html-max-line-val').textContent = this.value;
+  });
+
+  function updateInputStats() {
+    var c = inputEl.value;
+    var l = c ? c.split('\n').length : 0;
+    document.getElementById('html-input-stats').textContent = l + ' ' + i18n.statsLines + ' · ' + c.length + ' ' + i18n.statsChars;
+  }
+
+  inputEl.addEventListener('input', updateInputStats);
+
+  inputEl.addEventListener('dragover', function(e) { e.preventDefault(); });
+  inputEl.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var f = e.dataTransfer.files;
+    if (f.length > 0 && f[0].name.match(/\.(html?|vue|blade\.php|hbs|ejs|svelte)$/i)) {
+      var r = new FileReader();
+      r.onload = function(ev) { inputEl.value = ev.target.result; updateInputStats(); };
+      r.readAsText(f[0]);
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      process(renderPretty, i18n.statusFormatted);
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key === 'm') {
+      e.preventDefault();
+      process(renderMinify, i18n.statusMinified);
+    }
+  });
+
+  // Settings persistence
+  function saveSettings() {
+    try {
+      var ir = document.querySelector('input[name="html-indent"]:checked');
+      var s = { indent: ir ? ir.value : '2' };
+      var selects = ['opt-wrap-attrs', 'opt-html-max-line'];
+      selects.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) s[id] = el.value;
+      });
+      var checkboxes = document.querySelectorAll('.xl\\:col-span-1 input[type="checkbox"]');
+      checkboxes.forEach(function(cb) {
+        if (cb.id) s[cb.id] = cb.checked;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+    } catch(e) {}
+  }
+
+  function loadSettings() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s.indent) {
+        var r = document.querySelector('input[name="html-indent"][value="' + s.indent + '"]');
+        if (r) r.checked = true;
+      }
+      ['opt-wrap-attrs', 'opt-html-max-line'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el && s[id]) el.value = s[id];
+      });
+      for (var key in s) {
+        if (typeof s[key] === 'boolean') {
+          var el = document.getElementById(key);
+          if (el) el.checked = s[key];
+        }
+      }
+      var mlv = document.getElementById('opt-html-max-line');
+      if (mlv) document.getElementById('html-max-line-val').textContent = mlv.value;
+    } catch(e) {}
+  }
+
+  document.querySelectorAll('input[type="checkbox"], input[type="radio"], select, input[type="range"]').forEach(function(el) {
+    el.addEventListener('change', saveSettings);
+    el.addEventListener('input', saveSettings);
+  });
+
+  loadSettings();
+
+})();
+</script>
+{{ end }}

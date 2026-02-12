@@ -1663,3 +1663,309 @@ countDomain = "Domains"
 countDash = "Dash aliases"
 countMin = "min"
 countMax = "max"
+
+# ==========================================
+# JS Formatter
+# ==========================================
+[jsformatter]
+# Badges
+badgeFormatter = "Formatting"
+badgeMinify = "Minification"
+badgeBeautify = "Beautify"
+badgeAnalysis = "Analysis"
+
+# Input
+inputTitle = "Source code"
+inputPlaceholder = "Paste JavaScript code..."
+inputHint = "Paste code or drag & drop a .js file"
+
+# Actions
+formatPretty = "Beautify"
+formatCompact = "Compact"
+formatOneLine = "One line"
+formatMinify = "Minify"
+formatSafeMinify = "Safe Minify"
+clearAll = "Clear"
+copyResult = "Copy"
+pasteCode = "Paste"
+loadSample = "Sample"
+
+# Settings
+settingsTitle = "Settings"
+indentSize = "Indent size"
+indentTab = "Tab"
+quoteStyle = "Quotes"
+quoteSingle = "Single"
+quoteDouble = "Double"
+maxLineLength = "Max line length"
+semicolons = "Semicolons"
+trailingCommas = "Trailing commas"
+bracketSpacing = "Bracket spacing"
+arrowParens = "Arrow parens"
+spaceAfterFunction = "Space after function"
+braceStyle = "Brace style"
+braceStyleSame = "Same line"
+braceStyleNext = "Next line"
+
+# Minify options
+minifyTitle = "Minification options"
+removeComments = "Remove comments"
+removeConsole = "Remove console.log"
+removeDebugger = "Remove debugger"
+shortenBools = "Shorten booleans"
+shortenBoolsDesc = "true → !0, false → !1"
+mangleVars = "Mangle variables"
+mangleVarsDesc = "Rename local variables"
+
+# Format options
+formatTitle = "Formatting options"
+sortImports = "Sort imports"
+normalizeQuotes = "Normalize quotes"
+keepComments = "Keep comments"
+
+# Output
+outputTitle = "Result"
+outputEmpty = "Result will appear here"
+
+# Stats
+statsOriginal = "Original"
+statsFormatted = "Result"
+statsReduction = "Reduction"
+statsLines = "lines"
+statsChars = "chars"
+statsBytes = "bytes"
+
+# Errors
+errorTitle = "Parse error"
+errorLine = "Line"
+errorCol = "Column"
+errorExpected = "Expected"
+
+# Status
+statusReady = "Ready"
+statusFormatted = "Formatted"
+statusMinified = "Minified"
+statusError = "Error"
+statusBrowser = "Everything runs locally in your browser"
+copied = "Copied!"
+cleared = "Cleared"
+downloaded = "File downloaded!"
+
+# How it works
+howTitle = "How does it work?"
+howSubtitle = "Tool capabilities"
+howParse = "Parsing"
+howParseDesc = "Analyzes JavaScript code, builds AST and checks syntax."
+howFormat = "Formatting"
+howFormatDesc = "Applies selected style: indentation, quotes, semicolons."
+howMinify = "Minification"
+howMinifyDesc = "Removes whitespace, comments, shortens constructs."
+howExport = "Export"
+howExportDesc = "Copy the result or download as a .js file."
+
+# ==========================================
+# CSS Formatter
+# ==========================================
+[cssformatter]
+# Badges
+badgeFormatter = "Formatting"
+badgeMinify = "Minification"
+badgeOptimize = "Optimization"
+badgeAnalysis = "Analysis"
+
+# Input
+inputTitle = "Source CSS"
+inputPlaceholder = "Paste CSS code..."
+inputHint = "Paste code or drag & drop a .css file"
+
+# Actions
+formatPretty = "Beautify"
+formatExpanded = "Expanded"
+formatCompact = "Compact"
+formatOneLine = "One line"
+formatMinify = "Minify"
+formatSafeMinify = "Safe Minify"
+formatNested = "Nested"
+formatCompressed = "Compressed"
+clearAll = "Clear"
+copyResult = "Copy"
+pasteCode = "Paste"
+loadSample = "Sample"
+
+# Settings
+settingsTitle = "Settings"
+indentSize = "Indent size"
+indentTab = "Tab"
+braceStyle = "Brace style"
+braceStyleSame = "Same line"
+braceStyleNext = "Next line"
+spaceBeforeColon = "Space before colon"
+spaceAfterColon = "Space after colon"
+selectorNewline = "Selectors on new lines"
+lastSemicolon = "Last semicolon"
+alignProperties = "Align values"
+sortProperties = "Sort properties"
+
+# Optimize options
+optimizeTitle = "Optimization"
+shortenColors = "Shorten colors"
+shortenColorsDesc = "#ffffff → #fff"
+removeZeroUnits = "Remove units from 0"
+removeZeroUnitsDesc = "0px → 0"
+mergeSelectors = "Merge selectors"
+mergeSelectorsDesc = "Same rules → one selector"
+groupMedia = "Group @media"
+groupMediaDesc = "Merge identical media queries"
+optimizeFonts = "Optimize fonts"
+optimizeFontsDesc = "Font shorthand optimization"
+mergeMargins = "Merge margin/padding"
+mergeMarginDesc = "margin-top/right/bottom/left → margin"
+
+# Minify options
+minifyTitle = "Minification options"
+removeComments = "Remove comments"
+keepImportant = "Keep /*! ... */"
+keepImportantDesc = "License comments"
+removeLastSemicolon = "Remove last ;"
+mergeRules = "Merge duplicate rules"
+
+# Output
+outputTitle = "Result"
+outputEmpty = "Result will appear here"
+
+# Stats
+statsOriginal = "Original"
+statsFormatted = "Result"
+statsReduction = "Reduction"
+statsSelectors = "selectors"
+statsProperties = "properties"
+statsRules = "rules"
+statsLines = "lines"
+statsChars = "chars"
+statsBytes = "bytes"
+
+# Errors
+errorTitle = "Parse error"
+errorLine = "Line"
+errorCol = "Column"
+
+# Status
+statusReady = "Ready"
+statusFormatted = "Formatted"
+statusMinified = "Minified"
+statusError = "Error"
+statusBrowser = "Everything runs locally in your browser"
+copied = "Copied!"
+cleared = "Cleared"
+downloaded = "File downloaded!"
+
+# How it works
+howTitle = "How does it work?"
+howSubtitle = "Tool capabilities"
+howParse = "Parsing"
+howParseDesc = "Analyzes CSS: selectors, properties, at-rules, comments and nesting."
+howFormat = "Formatting"
+howFormatDesc = "Applies style: indentation, line breaks, property order, alignment."
+howMinify = "Minification"
+howMinifyDesc = "Removes whitespace, comments, shortens colors and units."
+howExport = "Export"
+howExportDesc = "Copy the result or download as a .css file."
+
+# ==========================================
+# HTML Formatter
+# ==========================================
+[htmlformatter]
+badgeFormatter = "Formatting"
+badgeMinify = "Minification"
+badgeTemplates = "Templates"
+badgeAnalysis = "Analysis"
+
+inputTitle = "Source HTML"
+inputPlaceholder = "Paste HTML code..."
+inputHint = "Paste code or drag & drop an .html file"
+
+formatPretty = "Beautify"
+formatExpanded = "Expanded"
+formatCompact = "Compact"
+formatOneLine = "One line"
+formatInline = "Inline"
+formatMinify = "Minify"
+formatSafeMinify = "Safe Minify"
+clearAll = "Clear"
+copyResult = "Copy"
+pasteCode = "Paste"
+loadSample = "Sample"
+
+settingsTitle = "Settings"
+indentSize = "Indent size"
+indentTab = "Tab"
+wrapAttrs = "Wrap attributes"
+wrapAttrsAuto = "Auto"
+wrapAttrsForce = "Force each on new line"
+wrapAttrsAligned = "Aligned"
+wrapAttrsNone = "Don't wrap"
+maxLineLength = "Max line length"
+selfClosingTags = "Self-closing tags"
+selfClosingDesc = "<br /> instead of <br>"
+sortAttributes = "Sort attributes"
+sortAttributesDesc = "id, class, name, type, ..."
+voidSlash = "Slash in void elements"
+unformatted = "Inline elements"
+unformattedDesc = "span, a, strong, em — no line breaks"
+
+minifyTitle = "Minification options"
+removeComments = "Remove comments"
+keepConditional = "Keep conditional"
+keepConditionalDesc = "<!--[if IE]> ... <![endif]-->"
+collapseWhitespace = "Collapse whitespace"
+removeEmptyAttrs = "Remove empty attributes"
+collapseBoolAttrs = "Collapse booleans"
+collapseBoolDesc = 'disabled="disabled" → disabled'
+removeOptionalTags = "Remove optional tags"
+removeOptionalDesc = "</li>, </td>, </p>"
+removeTypeAttrs = "Remove type attributes"
+removeTypeDesc = 'type="text/javascript", type="text/css"'
+removeRedundant = "Remove redundant"
+removeRedundantDesc = 'method="get", charset on script'
+minifyInlineCSS = "Minify inline CSS"
+minifyInlineJS = "Minify inline JS"
+
+preserveTitle = "Preserve formatting"
+preservePre = "Preserve <pre>"
+preserveCode = "Preserve <code>"
+preserveTextarea = "Preserve <textarea>"
+preserveScript = "Preserve <script>"
+preserveStyle = "Preserve <style>"
+
+outputTitle = "Result"
+outputEmpty = "Result will appear here"
+
+statsOriginal = "Original"
+statsFormatted = "Result"
+statsReduction = "Reduction"
+statsLines = "lines"
+statsChars = "chars"
+statsElements = "elements"
+
+errorTitle = "Parse error"
+errorLine = "Line"
+
+statusReady = "Ready"
+statusFormatted = "Formatted"
+statusMinified = "Minified"
+statusError = "Error"
+statusBrowser = "Everything runs locally in your browser"
+copied = "Copied!"
+cleared = "Cleared"
+downloaded = "File downloaded!"
+
+howTitle = "How does it work?"
+howSubtitle = "Tool capabilities"
+howParse = "Parsing"
+howParseDesc = "Analyzes HTML: tags, attributes, text, comments, templates and nesting."
+howFormat = "Formatting"
+howFormatDesc = "Applies style: indentation, attribute wrapping, ordering, inline elements."
+howMinify = "Minification"
+howMinifyDesc = "Removes whitespace, comments, optional tags and attributes."
+howExport = "Export"
+howExportDesc = "Copy the result or download as an .html file."

@@ -1,0 +1,1462 @@
+{{ define "title" }}
+{{ .Title }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-5 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}🎨{{ end }}</span>
+    </div>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">{{ .Title }}</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">{{ .Description }}</p>
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="color-palette-outline"></ion-icon>
+        {{ T "cssformatter.badgeFormatter" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+        <ion-icon name="contract-outline"></ion-icon>
+        {{ T "cssformatter.badgeMinify" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="flash-outline"></ion-icon>
+        {{ T "cssformatter.badgeOptimize" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="analytics-outline"></ion-icon>
+        {{ T "cssformatter.badgeAnalysis" }}
+      </span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
+
+    <!-- Settings Panel -->
+    <div class="xl:col-span-1 space-y-3 sm:space-y-4 order-2 xl:order-1">
+
+      <!-- Format Actions -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="flash-outline" class="text-warning"></ion-icon>
+            {{ T "cssformatter.settingsTitle" }}
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-2">
+          <div class="grid grid-cols-2 gap-1.5">
+            <button type="button" id="btn-pretty" class="btn btn-success btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="sparkles-outline"></ion-icon>
+              {{ T "cssformatter.formatPretty" }}
+            </button>
+            <button type="button" id="btn-expanded" class="btn btn-info btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="expand-outline"></ion-icon>
+              {{ T "cssformatter.formatExpanded" }}
+            </button>
+            <button type="button" id="btn-compact" class="btn btn-secondary btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="contract-outline"></ion-icon>
+              {{ T "cssformatter.formatCompact" }}
+            </button>
+            <button type="button" id="btn-nested" class="btn btn-accent btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="git-branch-outline"></ion-icon>
+              {{ T "cssformatter.formatNested" }}
+            </button>
+          </div>
+          <button type="button" id="btn-oneline" class="btn btn-outline btn-xs sm:btn-sm w-full gap-1 justify-start">
+            <ion-icon name="reorder-two-outline"></ion-icon>
+            {{ T "cssformatter.formatOneLine" }}
+          </button>
+          <div class="divider my-1 text-[10px]">{{ T "cssformatter.minifyTitle" }}</div>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button type="button" id="btn-minify" class="btn btn-warning btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="resize-outline"></ion-icon>
+              {{ T "cssformatter.formatMinify" }}
+            </button>
+            <button type="button" id="btn-safe-minify" class="btn btn-outline btn-warning btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="shield-checkmark-outline"></ion-icon>
+              {{ T "cssformatter.formatSafeMinify" }}
+            </button>
+          </div>
+          <button type="button" id="btn-compressed" class="btn btn-error btn-xs sm:btn-sm w-full gap-1 justify-start">
+            <ion-icon name="archive-outline"></ion-icon>
+            {{ T "cssformatter.formatCompressed" }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Format Settings -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="options-outline" class="text-primary"></ion-icon>
+              {{ T "cssformatter.settingsTitle" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "cssformatter.indentSize" }}</span>
+              </label>
+              <div class="grid grid-cols-3 gap-1">
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="css-indent" value="2" class="hidden" checked />
+                  <span class="text-xs font-mono">2</span>
+                </label>
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="css-indent" value="4" class="hidden" />
+                  <span class="text-xs font-mono">4</span>
+                </label>
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="css-indent" value="tab" class="hidden" />
+                  <span class="text-xs font-mono">{{ T "cssformatter.indentTab" }}</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "cssformatter.braceStyle" }}</span>
+              </label>
+              <select id="opt-css-brace" class="select select-bordered select-xs text-xs">
+                <option value="same">{{ T "cssformatter.braceStyleSame" }}</option>
+                <option value="next">{{ T "cssformatter.braceStyleNext" }}</option>
+              </select>
+            </div>
+
+            <div class="divider my-0.5"></div>
+
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "cssformatter.spaceBeforeColon" }}</span>
+              <input type="checkbox" id="opt-space-before-colon" class="toggle toggle-xs toggle-primary" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "cssformatter.spaceAfterColon" }}</span>
+              <input type="checkbox" id="opt-space-after-colon" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "cssformatter.selectorNewline" }}</span>
+              <input type="checkbox" id="opt-selector-newline" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "cssformatter.lastSemicolon" }}</span>
+              <input type="checkbox" id="opt-last-semicolon" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "cssformatter.sortProperties" }}</span>
+              <input type="checkbox" id="opt-sort-props" class="toggle toggle-xs toggle-secondary" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "cssformatter.alignProperties" }}</span>
+              <input type="checkbox" id="opt-align-props" class="toggle toggle-xs toggle-secondary" />
+            </label>
+          </div>
+        </details>
+      </div>
+
+      <!-- Optimize & Minify Options -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="construct-outline" class="text-warning"></ion-icon>
+              {{ T "cssformatter.optimizeTitle" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">{{ T "cssformatter.removeComments" }}</span>
+              </div>
+              <input type="checkbox" id="opt-css-remove-comments" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">{{ T "cssformatter.keepImportant" }}</span>
+                <p class="text-[9px] text-base-content/50">{{ T "cssformatter.keepImportantDesc" }}</p>
+              </div>
+              <input type="checkbox" id="opt-css-keep-important" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">{{ T "cssformatter.shortenColors" }}</span>
+                <p class="text-[9px] text-base-content/50">{{ T "cssformatter.shortenColorsDesc" }}</p>
+              </div>
+              <input type="checkbox" id="opt-shorten-colors" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">{{ T "cssformatter.removeZeroUnits" }}</span>
+                <p class="text-[9px] text-base-content/50">{{ T "cssformatter.removeZeroUnitsDesc" }}</p>
+              </div>
+              <input type="checkbox" id="opt-zero-units" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">{{ T "cssformatter.removeLastSemicolon" }}</span>
+              </div>
+              <input type="checkbox" id="opt-remove-last-semi" class="toggle toggle-xs toggle-warning" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">{{ T "cssformatter.mergeSelectors" }}</span>
+                <p class="text-[9px] text-base-content/50">{{ T "cssformatter.mergeSelectorsDesc" }}</p>
+              </div>
+              <input type="checkbox" id="opt-merge-selectors" class="toggle toggle-xs toggle-error" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">{{ T "cssformatter.mergeRules" }}</span>
+              </div>
+              <input type="checkbox" id="opt-merge-rules" class="toggle toggle-xs toggle-error" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">{{ T "cssformatter.groupMedia" }}</span>
+                <p class="text-[9px] text-base-content/50">{{ T "cssformatter.groupMediaDesc" }}</p>
+              </div>
+              <input type="checkbox" id="opt-group-media" class="toggle toggle-xs toggle-error" />
+            </label>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Editor panels -->
+    <div class="xl:col-span-3 space-y-3 sm:space-y-4 order-1 xl:order-2">
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+
+        <!-- Input -->
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="create-outline" class="text-primary"></ion-icon>
+              {{ T "cssformatter.inputTitle" }}
+            </h2>
+            <button type="button" id="btn-css-paste" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="clipboard-outline"></ion-icon>
+            </button>
+            <button type="button" id="btn-css-sample" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="code-outline"></ion-icon>
+            </button>
+            <button type="button" id="btn-css-clear" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+          <div class="relative">
+            <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="css-input-stats"></div>
+            <textarea id="css-input" class="w-full h-[350px] sm:h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none" placeholder="{{ T "cssformatter.inputPlaceholder" }}" spellcheck="false"></textarea>
+          </div>
+        </div>
+
+        <!-- Output -->
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="checkmark-circle-outline" class="text-success"></ion-icon>
+              {{ T "cssformatter.outputTitle" }}
+            </h2>
+            <button type="button" id="btn-css-copy" class="btn btn-primary btn-xs gap-1" disabled>
+              <ion-icon name="copy-outline"></ion-icon>
+              <span class="hidden sm:inline">{{ T "cssformatter.copyResult" }}</span>
+            </button>
+            <button type="button" id="btn-css-download" class="btn btn-ghost btn-xs gap-1" disabled>
+              <ion-icon name="download-outline"></ion-icon>
+              <span class="hidden sm:inline">.css</span>
+            </button>
+          </div>
+          <div class="relative">
+            <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="css-output-stats"></div>
+            <textarea id="css-output" class="w-full h-[350px] sm:h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none" readonly placeholder="{{ T "cssformatter.outputEmpty" }}"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error panel -->
+      <div id="css-error-panel" class="hidden bg-error/5 border border-error/20 rounded-xl sm:rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-2 p-3 sm:p-4">
+          <ion-icon name="alert-circle-outline" class="text-error text-xl shrink-0"></ion-icon>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-xs sm:text-sm text-error">{{ T "cssformatter.errorTitle" }}</div>
+            <pre class="text-[10px] sm:text-xs mt-1 text-error/80 font-mono whitespace-pre-wrap break-all" id="css-error-message"></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div id="css-stats-bar" class="hidden">
+        <div class="grid grid-cols-3 gap-3 sm:gap-4">
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "cssformatter.statsOriginal" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-primary" id="css-stat-original">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "cssformatter.statsFormatted" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-success" id="css-stat-formatted">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "cssformatter.statsReduction" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-warning" id="css-stat-reduction">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-info/10 flex items-center justify-center shrink-0">
+            <ion-icon name="help-circle-outline" class="text-lg sm:text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">{{ T "cssformatter.howTitle" }}</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "cssformatter.howSubtitle" }}</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <ion-icon name="scan-outline" class="text-primary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "cssformatter.howParse" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "cssformatter.howParseDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center">
+                <ion-icon name="sparkles-outline" class="text-success"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "cssformatter.howFormat" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "cssformatter.howFormatDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-warning/10 flex items-center justify-center">
+                <ion-icon name="contract-outline" class="text-warning"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "cssformatter.howMinify" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "cssformatter.howMinifyDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center">
+                <ion-icon name="download-outline" class="text-secondary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "cssformatter.howExport" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "cssformatter.howExportDesc" }}</p>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- Status bar -->
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span id="css-status-text">{{ T "cssformatter.statusReady" }}</span>
+    <span>{{ T "cssformatter.statusBrowser" }}</span>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="css-toast" class="toast toast-top toast-center hidden z-50">
+  <div class="alert alert-success py-2 px-4">
+    <ion-icon name="checkmark-circle-outline" class="text-lg"></ion-icon>
+    <span id="css-toast-message" class="text-sm"></span>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  var i18n = {
+    copied: "{{ T "cssformatter.copied" }}",
+    cleared: "{{ T "cssformatter.cleared" }}",
+    downloaded: "{{ T "cssformatter.downloaded" }}",
+    statusReady: "{{ T "cssformatter.statusReady" }}",
+    statusFormatted: "{{ T "cssformatter.statusFormatted" }}",
+    statusMinified: "{{ T "cssformatter.statusMinified" }}",
+    statusError: "{{ T "cssformatter.statusError" }}",
+    statsLines: "{{ T "cssformatter.statsLines" }}",
+    statsChars: "{{ T "cssformatter.statsChars" }}",
+    errorLine: "{{ T "cssformatter.errorLine" }}"
+  };
+
+  var STORAGE_KEY = 'cssformatter-settings';
+
+  // ===== SAMPLE CSS =====
+  var SAMPLE_CSS = [
+    '/* Main Styles */',
+    '/*! License: MIT */',
+    '',
+    ':root {',
+    '  --primary-color: #3366ff;',
+    '  --secondary-color: #ffffff;',
+    '  --spacing: 16px;',
+    '  --font-family: "Inter", sans-serif;',
+    '}',
+    '',
+    'body,',
+    'html {',
+    '  margin: 0px;',
+    '  padding: 0px;',
+    '  font-family: var(--font-family);',
+    '  background-color: #f5f5f5;',
+    '  color: #333333;',
+    '  line-height: 1.6;',
+    '}',
+    '',
+    '.container {',
+    '  max-width: 1200px;',
+    '  margin-left: auto;',
+    '  margin-right: auto;',
+    '  margin-top: 0px;',
+    '  margin-bottom: 0px;',
+    '  padding-left: var(--spacing);',
+    '  padding-right: var(--spacing);',
+    '}',
+    '',
+    '.header {',
+    '  background-color: var(--primary-color);',
+    '  padding: 20px;',
+    '  display: flex;',
+    '  align-items: center;',
+    '  justify-content: space-between;',
+    '}',
+    '',
+    '.header .logo {',
+    '  font-size: 24px;',
+    '  font-weight: 700;',
+    '  color: #ffffff;',
+    '}',
+    '',
+    '.nav a,',
+    '.nav button {',
+    '  color: #ffffff;',
+    '  text-decoration: none;',
+    '  padding: 8px 16px;',
+    '  border-radius: 4px;',
+    '  transition: background-color 0.2s ease;',
+    '}',
+    '',
+    '.nav a:hover,',
+    '.nav button:hover {',
+    '  background-color: rgba(255, 255, 255, 0.1);',
+    '}',
+    '',
+    '.card {',
+    '  background-color: #ffffff;',
+    '  border-radius: 8px;',
+    '  padding: 24px;',
+    '  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);',
+    '  margin-bottom: var(--spacing);',
+    '}',
+    '',
+    '.btn {',
+    '  display: inline-flex;',
+    '  align-items: center;',
+    '  padding: 0px 0px;',
+    '  border: 0px solid transparent;',
+    '  cursor: pointer;',
+    '}',
+    '',
+    '@media (max-width: 768px) {',
+    '  .container {',
+    '    padding-left: 8px;',
+    '    padding-right: 8px;',
+    '  }',
+    '  .header {',
+    '    flex-direction: column;',
+    '  }',
+    '}',
+    '',
+    '@media (max-width: 768px) {',
+    '  .card {',
+    '    padding: 16px;',
+    '  }',
+    '}',
+    '',
+    '@keyframes fadeIn {',
+    '  from {',
+    '    opacity: 0;',
+    '    transform: translateY(-10px);',
+    '  }',
+    '  to {',
+    '    opacity: 1;',
+    '    transform: translateY(0px);',
+    '  }',
+    '}',
+    '',
+    '.animate-in {',
+    '  animation: fadeIn 0.3s ease forwards;',
+    '}'
+  ].join('\n');
+
+  // ======================================================================
+  // CSS PARSER
+  // ======================================================================
+
+  // AST node types
+  var NODE = {
+    STYLESHEET: 'stylesheet',
+    RULE: 'rule',
+    DECLARATION: 'declaration',
+    COMMENT: 'comment',
+    ATRULE: 'atrule'
+  };
+
+  // Tokenize CSS into a simple AST
+  function parseCSS(css) {
+    var pos = 0;
+    var len = css.length;
+    var line = 1;
+    var col = 1;
+
+    function error(msg) {
+      return { error: true, message: msg, line: line, col: col, pos: pos };
+    }
+
+    function advance(n) {
+      for (var i = 0; i < (n || 1); i++) {
+        if (css[pos] === '\n') { line++; col = 1; }
+        else { col++; }
+        pos++;
+      }
+    }
+
+    function skipWhitespace() {
+      while (pos < len && /\s/.test(css[pos])) advance();
+    }
+
+    function readComment() {
+      var start = pos;
+      advance(2); // skip /*
+      while (pos < len - 1) {
+        if (css[pos] === '*' && css[pos + 1] === '/') {
+          advance(2);
+          return { type: NODE.COMMENT, value: css.substring(start, pos) };
+        }
+        advance();
+      }
+      advance(); // unterminated
+      return { type: NODE.COMMENT, value: css.substring(start, pos) };
+    }
+
+    function readString(quote) {
+      var start = pos;
+      advance(); // skip opening quote
+      while (pos < len) {
+        if (css[pos] === '\\') { advance(2); continue; }
+        if (css[pos] === quote) { advance(); break; }
+        advance();
+      }
+      return css.substring(start, pos);
+    }
+
+    function readUntil(chars) {
+      var start = pos;
+      var depth = 0;
+      while (pos < len) {
+        var ch = css[pos];
+        if (ch === '\\') { advance(2); continue; }
+        if (ch === '"' || ch === "'") { readString(ch); continue; }
+        if (ch === '(') { depth++; advance(); continue; }
+        if (ch === ')') { depth--; advance(); continue; }
+        if (depth === 0 && chars.indexOf(ch) > -1) break;
+        advance();
+      }
+      return css.substring(start, pos).trim();
+    }
+
+    function parseDeclarations() {
+      var declarations = [];
+      skipWhitespace();
+
+      while (pos < len && css[pos] !== '}') {
+        skipWhitespace();
+        if (pos >= len || css[pos] === '}') break;
+
+        // Comment inside rule
+        if (css[pos] === '/' && pos + 1 < len && css[pos + 1] === '*') {
+          declarations.push(readComment());
+          skipWhitespace();
+          continue;
+        }
+
+        // Nested at-rule (e.g. @media inside @supports)
+        if (css[pos] === '@') {
+          declarations.push(parseAtRule());
+          skipWhitespace();
+          continue;
+        }
+
+        // Check for nested rule (selector { ... })
+        var lookAhead = css.substring(pos, Math.min(pos + 500, len));
+        var braceIdx = -1;
+        var semiIdx = -1;
+        var laDepth = 0;
+        for (var la = 0; la < lookAhead.length; la++) {
+          var lch = lookAhead[la];
+          if (lch === '"' || lch === "'") {
+            la++;
+            while (la < lookAhead.length && lookAhead[la] !== lch) {
+              if (lookAhead[la] === '\\') la++;
+              la++;
+            }
+            continue;
+          }
+          if (lch === '(') { laDepth++; continue; }
+          if (lch === ')') { laDepth--; continue; }
+          if (laDepth === 0) {
+            if (lch === '{' && braceIdx === -1) { braceIdx = la; break; }
+            if (lch === ';' && semiIdx === -1) { semiIdx = la; break; }
+            if (lch === '}') break;
+          }
+        }
+
+        if (braceIdx > -1 && (semiIdx === -1 || braceIdx < semiIdx)) {
+          // Nested rule
+          declarations.push(parseRule());
+          skipWhitespace();
+          continue;
+        }
+
+        // Property declaration
+        var prop = readUntil(':;}');
+        if (!prop) { if (pos < len) advance(); continue; }
+
+        if (pos < len && css[pos] === ':') {
+          advance(); // skip :
+          skipWhitespace();
+          var value = readUntil(';}');
+          declarations.push({
+            type: NODE.DECLARATION,
+            property: prop.trim(),
+            value: value.trim()
+          });
+          if (pos < len && css[pos] === ';') advance();
+        } else {
+          // Malformed — skip
+          if (pos < len && css[pos] === ';') advance();
+        }
+
+        skipWhitespace();
+      }
+
+      return declarations;
+    }
+
+    function parseRule() {
+      skipWhitespace();
+      var selector = readUntil('{');
+      if (pos < len && css[pos] === '{') advance();
+      var declarations = parseDeclarations();
+      if (pos < len && css[pos] === '}') advance();
+
+      return {
+        type: NODE.RULE,
+        selector: selector.trim(),
+        declarations: declarations
+      };
+    }
+
+    function parseAtRule() {
+      var start = pos;
+      advance(); // skip @
+      var name = '';
+      while (pos < len && /[a-zA-Z-]/.test(css[pos])) {
+        name += css[pos];
+        advance();
+      }
+      skipWhitespace();
+
+      var params = readUntil('{;');
+
+      if (pos < len && css[pos] === '{') {
+        advance();
+        var body = parseDeclarations();
+        if (pos < len && css[pos] === '}') advance();
+        return {
+          type: NODE.ATRULE,
+          name: name,
+          params: params.trim(),
+          body: body,
+          hasBlock: true
+        };
+      }
+
+      // No block (@import, @charset, etc)
+      if (pos < len && css[pos] === ';') advance();
+      return {
+        type: NODE.ATRULE,
+        name: name,
+        params: params.trim(),
+        body: [],
+        hasBlock: false
+      };
+    }
+
+    function parseStylesheet() {
+      var nodes = [];
+
+      while (pos < len) {
+        skipWhitespace();
+        if (pos >= len) break;
+
+        if (css[pos] === '/' && pos + 1 < len && css[pos + 1] === '*') {
+          nodes.push(readComment());
+          continue;
+        }
+
+        if (css[pos] === '@') {
+          nodes.push(parseAtRule());
+          continue;
+        }
+
+        if (css[pos] === '}') { advance(); continue; } // stray closing brace
+
+        nodes.push(parseRule());
+      }
+
+      return { type: NODE.STYLESHEET, nodes: nodes };
+    }
+
+    try {
+      return parseStylesheet();
+    } catch(e) {
+      return { type: NODE.STYLESHEET, nodes: [], error: e.message };
+    }
+  }
+
+  // ======================================================================
+  // CSS OPTIMIZER
+  // ======================================================================
+
+  function shortenColor(value) {
+    // #aabbcc → #abc
+    return value.replace(/#([0-9a-fA-F])\1([0-9a-fA-F])\2([0-9a-fA-F])\3\b/g, '#$1$2$3');
+  }
+
+  function removeZeroUnits(value) {
+    // 0px → 0, but NOT inside calc(), var(), etc.
+    // Also preserve 0% in some contexts, 0s for animations
+    return value.replace(/\b0(px|em|rem|pt|pc|in|cm|mm|ex|ch|vw|vh|vmin|vmax)\b/g, '0');
+  }
+
+  function optimizeValue(value, opts) {
+    var result = value;
+    if (opts.shortenColors) result = shortenColor(result);
+    if (opts.zeroUnits) result = removeZeroUnits(result);
+    return result;
+  }
+
+  // Property sort order (CSScomb-like)
+  var PROPERTY_ORDER = [
+    'content', 'position', 'top', 'right', 'bottom', 'left', 'z-index',
+    'display', 'visibility', 'flex', 'flex-direction', 'flex-wrap', 'flex-flow',
+    'flex-grow', 'flex-shrink', 'flex-basis', 'align-items', 'align-self',
+    'align-content', 'justify-content', 'justify-items', 'justify-self',
+    'order', 'grid', 'grid-template', 'grid-template-columns', 'grid-template-rows',
+    'grid-template-areas', 'grid-gap', 'gap', 'grid-column', 'grid-row',
+    'float', 'clear', 'overflow', 'overflow-x', 'overflow-y',
+    'width', 'min-width', 'max-width', 'height', 'min-height', 'max-height',
+    'margin', 'margin-top', 'margin-right', 'margin-bottom', 'margin-left',
+    'padding', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
+    'border', 'border-width', 'border-style', 'border-color',
+    'border-top', 'border-right', 'border-bottom', 'border-left', 'border-radius',
+    'outline', 'background', 'background-color', 'background-image', 'background-position',
+    'background-size', 'background-repeat', 'background-attachment', 'background-clip',
+    'color', 'font', 'font-family', 'font-size', 'font-weight', 'font-style',
+    'font-variant', 'line-height', 'letter-spacing', 'word-spacing',
+    'text-align', 'text-decoration', 'text-transform', 'text-indent', 'text-shadow',
+    'white-space', 'word-break', 'word-wrap', 'overflow-wrap',
+    'list-style', 'table-layout', 'vertical-align', 'cursor', 'pointer-events',
+    'opacity', 'filter', 'box-shadow', 'transform', 'transition', 'animation',
+    'will-change'
+  ];
+
+  function getPropertyIndex(prop) {
+    var clean = prop.replace(/^-webkit-|-moz-|-ms-|-o-/, '');
+    var idx = PROPERTY_ORDER.indexOf(clean);
+    return idx > -1 ? idx : PROPERTY_ORDER.length;
+  }
+
+  function sortDeclarations(declarations) {
+    return declarations.slice().sort(function(a, b) {
+      if (a.type === NODE.COMMENT || b.type === NODE.COMMENT) return 0;
+      if (a.type !== NODE.DECLARATION || b.type !== NODE.DECLARATION) return 0;
+      return getPropertyIndex(a.property) - getPropertyIndex(b.property);
+    });
+  }
+
+  // Merge duplicate selectors
+  function mergeSelectors(nodes) {
+    var map = {};
+    var result = [];
+    var order = [];
+
+    nodes.forEach(function(node) {
+      if (node.type !== NODE.RULE) { result.push(node); return; }
+      var key = serializeDeclarations(node.declarations);
+      if (map[key]) {
+        map[key].selector += ',\n' + node.selector;
+      } else {
+        map[key] = { type: NODE.RULE, selector: node.selector, declarations: node.declarations };
+        order.push(key);
+      }
+    });
+
+    order.forEach(function(key) { result.push(map[key]); });
+    return result;
+  }
+
+  function serializeDeclarations(decls) {
+    return decls.filter(function(d) { return d.type === NODE.DECLARATION; })
+      .map(function(d) { return d.property + ':' + d.value; }).sort().join(';');
+  }
+
+  // Merge duplicate rules (same selector)
+  function mergeRules(nodes) {
+    var map = {};
+    var result = [];
+
+    nodes.forEach(function(node) {
+      if (node.type !== NODE.RULE) { result.push(node); return; }
+      var sel = node.selector.replace(/\s+/g, ' ').trim();
+      if (map[sel]) {
+        // Merge declarations (later wins)
+        var existing = map[sel];
+        node.declarations.forEach(function(d) {
+          if (d.type !== NODE.DECLARATION) return;
+          var found = false;
+          for (var i = 0; i < existing.declarations.length; i++) {
+            if (existing.declarations[i].property === d.property) {
+              existing.declarations[i].value = d.value;
+              found = true;
+              break;
+            }
+          }
+          if (!found) existing.declarations.push(d);
+        });
+      } else {
+        map[sel] = node;
+        result.push(node);
+      }
+    });
+
+    return result;
+  }
+
+  // Group media queries
+  function groupMediaQueries(nodes) {
+    var media = {};
+    var result = [];
+    var mediaOrder = [];
+
+    nodes.forEach(function(node) {
+      if (node.type === NODE.ATRULE && node.name === 'media' && node.hasBlock) {
+        var key = node.params;
+        if (!media[key]) {
+          media[key] = { type: NODE.ATRULE, name: 'media', params: key, body: [], hasBlock: true };
+          mediaOrder.push(key);
+        }
+        media[key].body = media[key].body.concat(node.body);
+      } else {
+        result.push(node);
+      }
+    });
+
+    mediaOrder.forEach(function(key) { result.push(media[key]); });
+    return result;
+  }
+
+  // ======================================================================
+  // CSS RENDERER
+  // ======================================================================
+
+  function getOpts() {
+    var indentRadio = document.querySelector('input[name="css-indent"]:checked');
+    var indentVal = indentRadio ? indentRadio.value : '2';
+
+    return {
+      indentStr: indentVal === 'tab' ? '\t' : ' '.repeat(parseInt(indentVal)),
+      braceStyle: document.getElementById('opt-css-brace').value,
+      spaceBeforeColon: document.getElementById('opt-space-before-colon').checked,
+      spaceAfterColon: document.getElementById('opt-space-after-colon').checked,
+      selectorNewline: document.getElementById('opt-selector-newline').checked,
+      lastSemicolon: document.getElementById('opt-last-semicolon').checked,
+      sortProps: document.getElementById('opt-sort-props').checked,
+      alignProps: document.getElementById('opt-align-props').checked,
+      removeComments: document.getElementById('opt-css-remove-comments').checked,
+      keepImportant: document.getElementById('opt-css-keep-important').checked,
+      shortenColors: document.getElementById('opt-shorten-colors').checked,
+      zeroUnits: document.getElementById('opt-zero-units').checked,
+      removeLastSemi: document.getElementById('opt-remove-last-semi').checked,
+      mergeSelectors: document.getElementById('opt-merge-selectors').checked,
+      mergeRules: document.getElementById('opt-merge-rules').checked,
+      groupMedia: document.getElementById('opt-group-media').checked
+    };
+  }
+
+  // Check if a comment is a "important" (license) comment
+  function isImportantComment(comment) {
+    return comment.value.indexOf('/*!') === 0;
+  }
+
+  function filterComments(nodes, opts) {
+    if (!opts.removeComments) return nodes;
+    return nodes.filter(function(n) {
+      if (n.type !== NODE.COMMENT) {
+        if (n.declarations) {
+          n.declarations = filterComments(n.declarations, opts);
+        }
+        if (n.body) {
+          n.body = filterComments(n.body, opts);
+        }
+        return true;
+      }
+      if (opts.keepImportant && isImportantComment(n)) return true;
+      return false;
+    });
+  }
+
+  // ===== PRETTY =====
+  function renderPretty(ast, opts, depth) {
+    if (typeof depth === 'undefined') depth = 0;
+    var indent = opts.indentStr.repeat(depth);
+    var innerIndent = opts.indentStr.repeat(depth + 1);
+    var lines = [];
+    var nodes = ast.nodes || ast;
+
+    if (Array.isArray(ast)) nodes = ast;
+
+    // Apply transforms
+    if (depth === 0) {
+      nodes = filterComments(nodes, opts);
+      if (opts.mergeSelectors) nodes = mergeSelectors(nodes);
+      if (opts.mergeRules) nodes = mergeRules(nodes);
+      if (opts.groupMedia) nodes = groupMediaQueries(nodes);
+    }
+
+    for (var i = 0; i < nodes.length; i++) {
+      var node = nodes[i];
+
+      if (node.type === NODE.COMMENT) {
+        lines.push(indent + node.value);
+        lines.push('');
+        continue;
+      }
+
+      if (node.type === NODE.ATRULE) {
+        if (!node.hasBlock) {
+          lines.push(indent + '@' + node.name + ' ' + node.params + ';');
+          lines.push('');
+          continue;
+        }
+
+        var atHeader = indent + '@' + node.name + ' ' + node.params;
+        if (opts.braceStyle === 'next') {
+          lines.push(atHeader);
+          lines.push(indent + '{');
+        } else {
+          lines.push(atHeader + ' {');
+        }
+
+        var bodyLines = renderPretty(node.body, opts, depth + 1);
+        lines.push(bodyLines);
+        lines.push(indent + '}');
+        lines.push('');
+        continue;
+      }
+
+      if (node.type === NODE.RULE) {
+        var selector = node.selector;
+        if (opts.selectorNewline) {
+          selector = selector.split(',').map(function(s) { return s.trim(); }).join(',\n' + indent);
+        }
+
+        if (opts.braceStyle === 'next') {
+          lines.push(indent + selector);
+          lines.push(indent + '{');
+        } else {
+          lines.push(indent + selector + ' {');
+        }
+
+        var decls = node.declarations || [];
+        if (opts.sortProps) decls = sortDeclarations(decls);
+
+        // Find max property length for alignment
+        var maxPropLen = 0;
+        if (opts.alignProps) {
+          decls.forEach(function(d) {
+            if (d.type === NODE.DECLARATION && d.property.length > maxPropLen) {
+              maxPropLen = d.property.length;
+            }
+          });
+        }
+
+        for (var j = 0; j < decls.length; j++) {
+          var d = decls[j];
+
+          if (d.type === NODE.COMMENT) {
+            lines.push(innerIndent + d.value);
+            continue;
+          }
+
+          if (d.type === NODE.RULE || d.type === NODE.ATRULE) {
+            lines.push(renderPretty([d], opts, depth + 1));
+            continue;
+          }
+
+          if (d.type !== NODE.DECLARATION) continue;
+
+          var prop = d.property;
+          var value = optimizeValue(d.value, opts);
+          var colon = (opts.spaceBeforeColon ? ' ' : '') + ':' + (opts.spaceAfterColon ? ' ' : '');
+
+          if (opts.alignProps) {
+            prop = prop + ' '.repeat(maxPropLen - prop.length);
+          }
+
+          var semi = ';';
+          if (!opts.lastSemicolon && j === decls.length - 1) semi = '';
+
+          lines.push(innerIndent + prop + colon + value + semi);
+        }
+
+        lines.push(indent + '}');
+        lines.push('');
+        continue;
+      }
+
+      if (node.type === NODE.DECLARATION) {
+        var value = optimizeValue(node.value, opts);
+        var colon = (opts.spaceBeforeColon ? ' ' : '') + ':' + (opts.spaceAfterColon ? ' ' : '');
+        lines.push(indent + node.property + colon + value + ';');
+      }
+    }
+
+    return lines.join('\n');
+  }
+
+  // ===== EXPANDED (one prop per line, extra spacing) =====
+  function renderExpanded(ast, opts) {
+    var expandedOpts = Object.assign({}, opts, {
+      selectorNewline: true,
+      lastSemicolon: true,
+      spaceAfterColon: true,
+      braceStyle: 'same'
+    });
+    var result = renderPretty(ast.nodes || ast, expandedOpts, 0);
+    // Add extra blank line between rules
+    result = result.replace(/\}\n([^\n}])/g, '}\n\n$1');
+    return result;
+  }
+
+  // ===== COMPACT (each rule on one line) =====
+  function renderCompact(ast, opts) {
+    var nodes = filterComments(ast.nodes || ast, opts);
+    if (opts.mergeSelectors) nodes = mergeSelectors(nodes);
+    if (opts.mergeRules) nodes = mergeRules(nodes);
+    if (opts.groupMedia) nodes = groupMediaQueries(nodes);
+
+    var lines = [];
+
+    function renderNodes(items, depth) {
+      var indent = opts.indentStr.repeat(depth);
+      items.forEach(function(node) {
+        if (node.type === NODE.COMMENT) {
+          if (!opts.removeComments || (opts.keepImportant && isImportantComment(node))) {
+            lines.push(indent + node.value);
+          }
+          return;
+        }
+        if (node.type === NODE.ATRULE) {
+          if (!node.hasBlock) {
+            lines.push(indent + '@' + node.name + ' ' + node.params + ';');
+            return;
+          }
+          lines.push(indent + '@' + node.name + ' ' + node.params + ' {');
+          renderNodes(node.body, depth + 1);
+          lines.push(indent + '}');
+          return;
+        }
+        if (node.type === NODE.RULE) {
+          var decls = (node.declarations || []).filter(function(d) { return d.type === NODE.DECLARATION; });
+          if (opts.sortProps) decls = sortDeclarations(decls);
+          var props = decls.map(function(d, idx) {
+            var v = optimizeValue(d.value, opts);
+            var semi = (idx < decls.length - 1 || opts.lastSemicolon) ? ';' : '';
+            return d.property + ': ' + v + semi;
+          }).join(' ');
+          var sel = node.selector.replace(/\s*\n\s*/g, ' ');
+          lines.push(indent + sel + ' { ' + props + ' }');
+        }
+      });
+    }
+
+    renderNodes(nodes, 0);
+    return lines.join('\n');
+  }
+
+  // ===== NESTED (SCSS-like indentation style) =====
+  function renderNested(ast, opts) {
+    // Group rules by common parent selector prefix
+    var nestedOpts = Object.assign({}, opts, {
+      selectorNewline: true,
+      lastSemicolon: true
+    });
+    return renderPretty(ast.nodes || ast, nestedOpts, 0);
+  }
+
+  // ===== ONE LINE =====
+  function renderOneLine(ast, opts) {
+    var nodes = filterComments(ast.nodes || ast, Object.assign({}, opts, { removeComments: true }));
+    if (opts.mergeSelectors) nodes = mergeSelectors(nodes);
+    if (opts.mergeRules) nodes = mergeRules(nodes);
+
+    function serializeNodes(items) {
+      var parts = [];
+      items.forEach(function(node) {
+        if (node.type === NODE.ATRULE) {
+          if (!node.hasBlock) {
+            parts.push('@' + node.name + ' ' + node.params + ';');
+          } else {
+            parts.push('@' + node.name + ' ' + node.params + '{' + serializeNodes(node.body) + '}');
+          }
+          return;
+        }
+        if (node.type === NODE.RULE) {
+          var decls = (node.declarations || []).filter(function(d) { return d.type === NODE.DECLARATION; });
+          var props = decls.map(function(d) {
+            return d.property + ':' + optimizeValue(d.value, opts);
+          }).join(';');
+          var sel = node.selector.replace(/\s*\n\s*/g, ',').replace(/\s+/g, ' ');
+          parts.push(sel + '{' + props + '}');
+        }
+      });
+      return parts.join('');
+    }
+
+    return serializeNodes(nodes);
+  }
+
+  // ===== MINIFY =====
+  function renderMinify(ast, opts) {
+    var minOpts = Object.assign({}, opts, {
+      removeComments: true,
+      shortenColors: true,
+      zeroUnits: true,
+      removeLastSemi: true
+    });
+
+    var nodes = filterComments(ast.nodes || ast, minOpts);
+    if (opts.mergeSelectors) nodes = mergeSelectors(nodes);
+    if (opts.mergeRules) nodes = mergeRules(nodes);
+    if (opts.groupMedia) nodes = groupMediaQueries(nodes);
+
+    function minNodes(items) {
+      var result = '';
+      items.forEach(function(node) {
+        if (node.type === NODE.COMMENT) {
+          if (opts.keepImportant && isImportantComment(node)) {
+            result += node.value;
+          }
+          return;
+        }
+        if (node.type === NODE.ATRULE) {
+          if (!node.hasBlock) {
+            result += '@' + node.name + ' ' + node.params.trim() + ';';
+          } else {
+            result += '@' + node.name + ' ' + node.params.trim() + '{' + minNodes(node.body) + '}';
+          }
+          return;
+        }
+        if (node.type === NODE.RULE) {
+          var decls = (node.declarations || []).filter(function(d) { return d.type === NODE.DECLARATION; });
+          if (decls.length === 0) return;
+          var props = decls.map(function(d, idx) {
+            var v = optimizeValue(d.value, minOpts);
+            // Remove last semicolon
+            var semi = (minOpts.removeLastSemi && idx === decls.length - 1) ? '' : ';';
+            return d.property + ':' + v + semi;
+          }).join('');
+          var sel = node.selector.replace(/\s*\n\s*/g, ',').replace(/\s*,\s*/g, ',').replace(/\s+/g, ' ').trim();
+          result += sel + '{' + props + '}';
+        }
+      });
+      return result;
+    }
+
+    return minNodes(nodes);
+  }
+
+  // ===== SAFE MINIFY =====
+  function renderSafeMinify(ast, opts) {
+    // Like minify but no selector merging, no rule merging (safe)
+    return renderMinify(ast, Object.assign({}, opts, {
+      mergeSelectors: false,
+      mergeRules: false,
+      groupMedia: false
+    }));
+  }
+
+  // ===== COMPRESSED (ultra-minified) =====
+  function renderCompressed(ast, opts) {
+    return renderMinify(ast, Object.assign({}, opts, {
+      removeComments: true,
+      shortenColors: true,
+      zeroUnits: true,
+      removeLastSemi: true,
+      mergeSelectors: true,
+      mergeRules: true,
+      groupMedia: true
+    }));
+  }
+
+  // ======================================================================
+  // UI LOGIC
+  // ======================================================================
+
+  var inputEl = document.getElementById('css-input');
+  var outputEl = document.getElementById('css-output');
+  var statusText = document.getElementById('css-status-text');
+
+  function showToast(msg) {
+    var t = document.getElementById('css-toast');
+    document.getElementById('css-toast-message').textContent = msg;
+    t.classList.remove('hidden');
+    setTimeout(function() { t.classList.add('hidden'); }, 2000);
+  }
+
+  function showError(msg) {
+    document.getElementById('css-error-message').textContent = msg;
+    document.getElementById('css-error-panel').classList.remove('hidden');
+    statusText.textContent = i18n.statusError;
+  }
+
+  function hideError() {
+    document.getElementById('css-error-panel').classList.add('hidden');
+  }
+
+  function formatBytes(bytes) {
+    return bytes < 1024 ? bytes + ' B' : (bytes / 1024).toFixed(1) + ' KB';
+  }
+
+  function updateStats(original, formatted) {
+    var ob = new Blob([original]).size;
+    var fb = new Blob([formatted]).size;
+    var ol = original.split('\n').length;
+    var fl = formatted.split('\n').length;
+    var red = ob > 0 ? Math.round((1 - fb / ob) * 100) : 0;
+
+    document.getElementById('css-stat-original').textContent = ol + ' ' + i18n.statsLines + ' · ' + formatBytes(ob);
+    document.getElementById('css-stat-formatted').textContent = fl + ' ' + i18n.statsLines + ' · ' + formatBytes(fb);
+    document.getElementById('css-stat-reduction').textContent = (red >= 0 ? '-' : '+') + Math.abs(red) + '%';
+    document.getElementById('css-stats-bar').classList.remove('hidden');
+
+    document.getElementById('css-input-stats').textContent = ol + ' ' + i18n.statsLines + ' · ' + original.length + ' ' + i18n.statsChars;
+    document.getElementById('css-output-stats').textContent = fl + ' ' + i18n.statsLines + ' · ' + formatted.length + ' ' + i18n.statsChars;
+  }
+
+  function process(renderer, statusMsg) {
+    var code = inputEl.value;
+    if (!code.trim()) return;
+    hideError();
+
+    try {
+      var ast = parseCSS(code);
+      if (ast.error) showError(ast.error);
+      var opts = getOpts();
+      var result = renderer(ast, opts);
+      outputEl.value = result;
+      document.getElementById('btn-css-copy').disabled = false;
+      document.getElementById('btn-css-download').disabled = false;
+      statusText.textContent = statusMsg;
+      updateStats(code, result);
+    } catch(e) {
+      showError(e.message || String(e));
+    }
+  }
+
+  // ===== BUTTONS =====
+  document.getElementById('btn-pretty').addEventListener('click', function() {
+    process(function(ast, opts) { return renderPretty(ast.nodes, opts, 0); }, i18n.statusFormatted + ' (Beautify)');
+  });
+  document.getElementById('btn-expanded').addEventListener('click', function() {
+    process(renderExpanded, i18n.statusFormatted + ' (Expanded)');
+  });
+  document.getElementById('btn-compact').addEventListener('click', function() {
+    process(renderCompact, i18n.statusFormatted + ' (Compact)');
+  });
+  document.getElementById('btn-nested').addEventListener('click', function() {
+    process(renderNested, i18n.statusFormatted + ' (Nested)');
+  });
+  document.getElementById('btn-oneline').addEventListener('click', function() {
+    process(renderOneLine, i18n.statusFormatted + ' (One Line)');
+  });
+  document.getElementById('btn-minify').addEventListener('click', function() {
+    process(renderMinify, i18n.statusMinified);
+  });
+  document.getElementById('btn-safe-minify').addEventListener('click', function() {
+    process(renderSafeMinify, i18n.statusMinified + ' (Safe)');
+  });
+  document.getElementById('btn-compressed').addEventListener('click', function() {
+    process(renderCompressed, i18n.statusMinified + ' (Compressed)');
+  });
+
+  // Copy
+  document.getElementById('btn-css-copy').addEventListener('click', function() {
+    if (!outputEl.value) return;
+    navigator.clipboard.writeText(outputEl.value).then(function() { showToast(i18n.copied); });
+  });
+
+  // Download
+  document.getElementById('btn-css-download').addEventListener('click', function() {
+    if (!outputEl.value) return;
+    var now = new Date();
+    var date = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+    var blob = new Blob([outputEl.value], { type: 'text/css;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a'); a.href = url; a.download = date + '_formatted.css'; a.click();
+    setTimeout(function() { URL.revokeObjectURL(url); }, 100);
+    showToast(i18n.downloaded);
+  });
+
+  // Paste
+  document.getElementById('btn-css-paste').addEventListener('click', function() {
+    navigator.clipboard.readText().then(function(t) { inputEl.value = t; updateInputStats(); }).catch(function() {});
+  });
+
+  // Sample
+  document.getElementById('btn-css-sample').addEventListener('click', function() {
+    inputEl.value = SAMPLE_CSS;
+    updateInputStats();
+  });
+
+  // Clear
+  document.getElementById('btn-css-clear').addEventListener('click', function() {
+    inputEl.value = ''; outputEl.value = '';
+    document.getElementById('btn-css-copy').disabled = true;
+    document.getElementById('btn-css-download').disabled = true;
+    document.getElementById('css-stats-bar').classList.add('hidden');
+    document.getElementById('css-input-stats').textContent = '';
+    document.getElementById('css-output-stats').textContent = '';
+    hideError();
+    statusText.textContent = i18n.statusReady;
+    showToast(i18n.cleared);
+  });
+
+  function updateInputStats() {
+    var c = inputEl.value;
+    var l = c ? c.split('\n').length : 0;
+    document.getElementById('css-input-stats').textContent = l + ' ' + i18n.statsLines + ' · ' + c.length + ' ' + i18n.statsChars;
+  }
+
+  inputEl.addEventListener('input', updateInputStats);
+
+  // Drag & drop
+  inputEl.addEventListener('dragover', function(e) { e.preventDefault(); });
+  inputEl.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var f = e.dataTransfer.files;
+    if (f.length > 0 && f[0].name.match(/\.(css|scss|less)$/i)) {
+      var r = new FileReader();
+      r.onload = function(ev) { inputEl.value = ev.target.result; updateInputStats(); };
+      r.readAsText(f[0]);
+    }
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      process(function(ast, opts) { return renderPretty(ast.nodes, opts, 0); }, i18n.statusFormatted);
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key === 'm') {
+      e.preventDefault();
+      process(renderMinify, i18n.statusMinified);
+    }
+  });
+
+  // Settings persistence
+  function saveSettings() {
+    try {
+      var ir = document.querySelector('input[name="css-indent"]:checked');
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        indent: ir ? ir.value : '2',
+        brace: document.getElementById('opt-css-brace').value,
+        spaceBeforeColon: document.getElementById('opt-space-before-colon').checked,
+        spaceAfterColon: document.getElementById('opt-space-after-colon').checked,
+        selectorNewline: document.getElementById('opt-selector-newline').checked,
+        lastSemicolon: document.getElementById('opt-last-semicolon').checked,
+        sortProps: document.getElementById('opt-sort-props').checked,
+        alignProps: document.getElementById('opt-align-props').checked,
+        removeComments: document.getElementById('opt-css-remove-comments').checked,
+        keepImportant: document.getElementById('opt-css-keep-important').checked,
+        shortenColors: document.getElementById('opt-shorten-colors').checked,
+        zeroUnits: document.getElementById('opt-zero-units').checked,
+        removeLastSemi: document.getElementById('opt-remove-last-semi').checked,
+        mergeSelectors: document.getElementById('opt-merge-selectors').checked,
+        mergeRules: document.getElementById('opt-merge-rules').checked,
+        groupMedia: document.getElementById('opt-group-media').checked
+      }));
+    } catch(e) {}
+  }
+
+  function loadSettings() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s.indent) { var r = document.querySelector('input[name="css-indent"][value="' + s.indent + '"]'); if (r) r.checked = true; }
+      if (s.brace) document.getElementById('opt-css-brace').value = s.brace;
+      var bools = {
+        'opt-space-before-colon': 'spaceBeforeColon',
+        'opt-space-after-colon': 'spaceAfterColon',
+        'opt-selector-newline': 'selectorNewline',
+        'opt-last-semicolon': 'lastSemicolon',
+        'opt-sort-props': 'sortProps',
+        'opt-align-props': 'alignProps',
+        'opt-css-remove-comments': 'removeComments',
+        'opt-css-keep-important': 'keepImportant',
+        'opt-shorten-colors': 'shortenColors',
+        'opt-zero-units': 'zeroUnits',
+        'opt-remove-last-semi': 'removeLastSemi',
+        'opt-merge-selectors': 'mergeSelectors',
+        'opt-merge-rules': 'mergeRules',
+        'opt-group-media': 'groupMedia'
+      };
+      for (var id in bools) {
+        if (typeof s[bools[id]] === 'boolean') document.getElementById(id).checked = s[bools[id]];
+      }
+    } catch(e) {}
+  }
+
+  document.querySelectorAll('#css-input ~ *, input[type="checkbox"], input[type="radio"], select').forEach(function(el) {
+    el.addEventListener('change', saveSettings);
+  });
+
+  loadSettings();
+
+})();
+</script>
+{{ end }}

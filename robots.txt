@@ -1,3 +1,11 @@
 User-agent: *
-Sitemap: https://0x69.ru/ru/index.xml
-Sitemap: https://0x69.ru/en/index.xml
+Allow: /
+
+Sitemap: https://0x69.ru/sitemap.xml
+
+# Служебные страницы
+Disallow: /admin/
+Disallow: /private/
+
+# Параметры поиска
+Disallow: /*?*

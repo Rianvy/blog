@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Landing Pages on 0x69.ru</title>
+    <link>https://0x69.ru/en/tags/landing-pages/</link>
+    <description>Recent content in Landing Pages on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 28 Jan 2026 00:35:23 +0300</lastBuildDate>
+    <atom:link href="https://0x69.ru/en/tags/landing-pages/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Portfolio</title>
+      <link>https://0x69.ru/en/portfolio/</link>
+      <pubDate>Wed, 28 Jan 2026 00:35:23 +0300</pubDate>
+      <guid>https://0x69.ru/en/portfolio/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

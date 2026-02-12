@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on 0x69.ru</title>
+    <title>Теги on 0x69.ru</title>
     <link>https://0x69.ru/ru/tags/</link>
-    <description>Recent content in Tags on 0x69.ru</description>
+    <description>Recent content in Теги on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>ru</language>
     <lastBuildDate>Thu, 12 Feb 2026 00:00:00 +0000</lastBuildDate>
@@ -793,6 +793,20 @@
       <description></description>
     </item>
     <item>
+      <title>Инструменты</title>
+      <link>https://0x69.ru/ru/tags/%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Нейросети</title>
+      <link>https://0x69.ru/ru/tags/%D0%BD%D0%B5%D0%B9%D1%80%D0%BE%D1%81%D0%B5%D1%82%D0%B8/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/%D0%BD%D0%B5%D0%B9%D1%80%D0%BE%D1%81%D0%B5%D1%82%D0%B8/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Перехват-Трафика</title>
       <link>https://0x69.ru/ru/tags/%D0%BF%D0%B5%D1%80%D0%B5%D1%85%D0%B2%D0%B0%D1%82-%D1%82%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0/</link>
       <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
@@ -800,10 +814,31 @@
       <description></description>
     </item>
     <item>
+      <title>Разработка</title>
+      <link>https://0x69.ru/ru/tags/%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Серверы</title>
+      <link>https://0x69.ru/ru/tags/%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D1%8B/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D1%8B/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Сниффер</title>
       <link>https://0x69.ru/ru/tags/%D1%81%D0%BD%D0%B8%D1%84%D1%84%D0%B5%D1%80/</link>
       <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
       <guid>https://0x69.ru/ru/tags/%D1%81%D0%BD%D0%B8%D1%84%D1%84%D0%B5%D1%80/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Туториалы</title>
+      <link>https://0x69.ru/ru/tags/%D1%82%D1%83%D1%82%D0%BE%D1%80%D0%B8%D0%B0%D0%BB%D1%8B/</link>
+      <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/%D1%82%D1%83%D1%82%D0%BE%D1%80%D0%B8%D0%B0%D0%BB%D1%8B/</guid>
       <description></description>
     </item>
     <item>
@@ -839,6 +874,34 @@
       <link>https://0x69.ru/ru/tags/ui/ux/</link>
       <pubDate>Wed, 28 Jan 2026 00:35:23 +0300</pubDate>
       <guid>https://0x69.ru/ru/tags/ui/ux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Дизайн</title>
+      <link>https://0x69.ru/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD/</link>
+      <pubDate>Wed, 28 Jan 2026 00:35:23 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Лендинги</title>
+      <link>https://0x69.ru/ru/tags/%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B8/</link>
+      <pubDate>Wed, 28 Jan 2026 00:35:23 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B8/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Расширения</title>
+      <link>https://0x69.ru/ru/tags/%D1%80%D0%B0%D1%81%D1%88%D0%B8%D1%80%D0%B5%D0%BD%D0%B8%D1%8F/</link>
+      <pubDate>Wed, 28 Jan 2026 00:35:23 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/%D1%80%D0%B0%D1%81%D1%88%D0%B8%D1%80%D0%B5%D0%BD%D0%B8%D1%8F/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Фронтенд</title>
+      <link>https://0x69.ru/ru/tags/%D1%84%D1%80%D0%BE%D0%BD%D1%82%D0%B5%D0%BD%D0%B4/</link>
+      <pubDate>Wed, 28 Jan 2026 00:35:23 +0300</pubDate>
+      <guid>https://0x69.ru/ru/tags/%D1%84%D1%80%D0%BE%D0%BD%D1%82%D0%B5%D0%BD%D0%B4/</guid>
       <description></description>
     </item>
     <item>
@@ -1059,13 +1122,6 @@
       <description></description>
     </item>
     <item>
-      <title>Нейросети</title>
-      <link>https://0x69.ru/ru/tags/%D0%BD%D0%B5%D0%B9%D1%80%D0%BE%D1%81%D0%B5%D1%82%D0%B8/</link>
-      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
-      <guid>https://0x69.ru/ru/tags/%D0%BD%D0%B5%D0%B9%D1%80%D0%BE%D1%81%D0%B5%D1%82%D0%B8/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Руководство</title>
       <link>https://0x69.ru/ru/tags/%D1%80%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE/</link>
       <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
@@ -1084,13 +1140,6 @@
       <link>https://0x69.ru/ru/tags/%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</link>
       <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
       <guid>https://0x69.ru/ru/tags/%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9-%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Дизайн</title>
-      <link>https://0x69.ru/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD/</link>
-      <pubDate>Mon, 27 Jan 2025 18:00:34 +0300</pubDate>
-      <guid>https://0x69.ru/ru/tags/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD/</guid>
       <description></description>
     </item>
     <item>
@@ -1175,13 +1224,6 @@
       <link>https://0x69.ru/ru/tags/%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C/</link>
       <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
       <guid>https://0x69.ru/ru/tags/%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Серверы</title>
-      <link>https://0x69.ru/ru/tags/%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D1%8B/</link>
-      <pubDate>Sun, 12 Jan 2025 21:27:20 +0300</pubDate>
-      <guid>https://0x69.ru/ru/tags/%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D1%8B/</guid>
       <description></description>
     </item>
   </channel>

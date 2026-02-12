@@ -719,14 +719,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-{{/* Video Player */}}
-{{ if .Page.Store.Get "hasVideoShortcode" }}
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    Plyr.setup('.plyr-video');
-  });
-</script>
+{{ if .Store.Get "hasVideoShortcode" }}
+<link rel="stylesheet" href="https://cdn.vidstack.io/player/theme.css" />
+<link rel="stylesheet" href="https://cdn.vidstack.io/player/video.css" />
+<script type="module" src="https://cdn.vidstack.io/player" defer></script>
 {{ end }}
 
 {{/* Swiper */}}

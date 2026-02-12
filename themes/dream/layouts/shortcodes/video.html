@@ -21,15 +21,20 @@
   {{- end -}}
 {{- end -}}
 
-<video 
-  class="plyr-video"
-  playsinline 
-  controls 
-  {{ if ne $posterURL "" }}data-poster="{{ $posterURL }}"{{ end }}
-  loop 
+<media-player
+  src="{{ $src }}"
+  {{ if ne $posterURL "" }}poster="{{ $posterURL }}"{{ end }}
+  playsinline
+  loop
   muted
+  crossorigin
+  class="vidstack-player"
 >
-  <source src="{{ $src }}" type="video/mp4">
-  {{- with .Get 2 }}<source src="{{ . }}" type="video/webm">{{ end -}}
-  <p>{{ i18n "video.not_supported" }}</p>
-</video>
+  <media-provider>
+    <source src="{{ $src }}" type="video/mp4" />
+    {{- with .Get 2 }}
+    <source src="{{ . }}" type="video/webm" />
+    {{ end -}}
+  </media-provider>
+  <media-video-layout></media-video-layout>
+</media-player>

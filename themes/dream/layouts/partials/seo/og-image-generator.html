@@ -6,7 +6,7 @@
 {{- $logoPath := site.Params.seo.ogLogoPath | default "img/avatar.jpg" -}}
 
 {{- $textColor := site.Params.seo.ogTextColor | default "f1f5f9" -}}
-{{- $textMutedColor := site.Params.seo.ogTextMutedColor | default "94a3b8" -}}
+{{- $textMutedColor := site.Params.seo.ogTextMutedColor | default "cbd5e1" -}}
 {{- $brandColor := site.Params.seo.ogBrandColor | default "22c55e" -}}
 {{- $separatorColor := site.Params.seo.ogSeparatorColor | default "475569" -}}
 
@@ -19,25 +19,12 @@
 
 {{- if and $bg $fontBold -}}
 
-  {{/* ============================================================ */}}
-  {{/*  ХОЛСТ — без агрессивного затемнения                         */}}
-  {{/* ============================================================ */}}
-
   {{- $canvas := $bg.Fill "1200x630 Center" -}}
 
-  {{/*
-    Фон уже должен быть цвета #2A303C (dim тема).
-    Минимальная коррекция — только если используется фото/текстура.
-    Для сплошного цвета можно убрать полностью.
-  */}}
   {{- $canvas = $canvas | images.Filter
     (images.Brightness -3)
     (images.Contrast 3)
   -}}
-
-  {{/* ============================================================ */}}
-  {{/*  ОПРЕДЕЛЕНИЕ ЯЗЫКА И ТИПА СТРАНИЦЫ                           */}}
-  {{/* ============================================================ */}}
 
   {{- $isRu := eq .Language.Lang "ru" -}}
 
@@ -80,10 +67,7 @@
     {{- end -}}
   {{- end -}}
 
-  {{/* ============================================================ */}}
-  {{/*  АКЦЕНТНАЯ ПОЛОСА СВЕРХУ                                     */}}
-  {{/* ============================================================ */}}
-
+  {{/* АКЦЕНТНАЯ ПОЛОСА */}}
   {{- $accentBar := resources.Get "images/og-accent-bar.png" -}}
   {{- if $accentBar -}}
     {{- $accentBarResized := $accentBar.Resize "1200x" -}}
@@ -92,10 +76,7 @@
     -}}
   {{- end -}}
 
-  {{/* ============================================================ */}}
-  {{/*  ЛОГОТИП                                                     */}}
-  {{/* ============================================================ */}}
-
+  {{/* ЛОГОТИП */}}
   {{- if $logo -}}
     {{- $logoSize := 64 -}}
     {{- $logoResized := $logo.Fill (printf "%dx%d Center" $logoSize $logoSize) -}}
@@ -104,30 +85,24 @@
     -}}
   {{- end -}}
 
-  {{/* ============================================================ */}}
-  {{/*  МЕТКА ТИПА СТРАНИЦЫ                                         */}}
-  {{/* ============================================================ */}}
-
+  {{/* МЕТКА ТИПА */}}
   {{- $contentStartY := 48 -}}
 
   {{- if ne $pageLabel "" -}}
     {{- $canvas = $canvas | images.Filter
       (images.Text $pageLabel (dict
         "color" (printf "#%s" $brandColor)
-        "size" 18
+        "size" 20
         "linespacing" 0
         "x" 80
         "y" $contentStartY
         "font" $fontBold
       ))
     -}}
-    {{- $contentStartY = (add $contentStartY 40) -}}
+    {{- $contentStartY = (add $contentStartY 42) -}}
   {{- end -}}
 
-  {{/* ============================================================ */}}
-  {{/*  ЗАГОЛОВОК                                                   */}}
-  {{/* ============================================================ */}}
-
+  {{/* ЗАГОЛОВОК */}}
   {{- $title := .Title | default site.Title -}}
   {{- $titleRunes := len (split $title "") -}}
 
@@ -146,7 +121,6 @@
     {{- $maxCharsPerLine = 32 -}}
   {{- end -}}
 
-  {{/* Перенос слов */}}
   {{- $titleLines := slice -}}
   {{- $words := split $title " " -}}
   {{- $currentLine := "" -}}
@@ -173,7 +147,6 @@
     {{- $titleLines = $titleLines | append $currentLine -}}
   {{- end -}}
 
-  {{/* Обрезка до максимума строк */}}
   {{- if gt (len $titleLines) $maxTitleLines -}}
     {{- $truncated := slice -}}
     {{- range $i, $line := $titleLines -}}
@@ -191,7 +164,6 @@
     {{- $titleLines = $truncated -}}
   {{- end -}}
 
-  {{/* Рендер заголовка */}}
   {{- $titleY := $contentStartY -}}
   {{- $lineHeight := (add $fontSize 12) -}}
 
@@ -209,12 +181,9 @@
   {{- end -}}
 
   {{- $currentY := (add $titleY (mul (len $titleLines) $lineHeight)) -}}
-  {{- $currentY = (add $currentY 12) -}}
+  {{- $currentY = (add $currentY 16) -}}
 
-  {{/* ============================================================ */}}
-  {{/*  ОПИСАНИЕ                                                    */}}
-  {{/* ============================================================ */}}
-
+  {{/* ОПИСАНИЕ — крупнее и ярче */}}
   {{- $descRaw := "" -}}
   {{- if .Params.description -}}
     {{- $descRaw = .Params.description -}}
@@ -228,21 +197,23 @@
     {{- with site.Params.description }}{{ $descRaw = . }}{{ end -}}
   {{- end -}}
 
-  {{- if and (ne $descRaw "") (lt $currentY 360) -}}
+  {{- if and (ne $descRaw "") (lt $currentY 340) -}}
     {{- $descClean := $descRaw | plainify | htmlUnescape -}}
     {{- $descClean = replaceRE `\s+` " " $descClean -}}
     {{- $descClean = strings.TrimSpace $descClean -}}
 
-    {{- $descFontSize := 22 -}}
-    {{- $descMaxChars := 65 -}}
-    {{- $descMaxLines := 2 -}}
-    {{- $descLineHeight := 34 -}}
+    {{- $descFontSize := 26 -}}
+    {{- $descMaxChars := 55 -}}
+    {{- $descMaxLines := 3 -}}
+    {{- $descLineHeight := 40 -}}
 
-    {{- $availableForDesc := (sub 430 $currentY) -}}
+    {{- $availableForDesc := (sub 440 $currentY) -}}
     {{- if lt $availableForDesc $descLineHeight -}}
       {{- $descMaxLines = 0 -}}
     {{- else if lt $availableForDesc (mul $descLineHeight 2) -}}
       {{- $descMaxLines = 1 -}}
+    {{- else if lt $availableForDesc (mul $descLineHeight 3) -}}
+      {{- $descMaxLines = 2 -}}
     {{- end -}}
 
     {{- if gt $descMaxLines 0 -}}
@@ -294,7 +265,7 @@
           (images.Text $line (dict
             "color" (printf "#%s" $textMutedColor)
             "size" $descFontSize
-            "linespacing" 10
+            "linespacing" 12
             "x" 80
             "y" (add $currentY (mul $i $descLineHeight))
             "font" $fontLight
@@ -306,10 +277,7 @@
     {{- end -}}
   {{- end -}}
 
-  {{/* ============================================================ */}}
-  {{/*  ТЕГИ                                                        */}}
-  {{/* ============================================================ */}}
-
+  {{/* ТЕГИ */}}
   {{- if and .IsPage .Params.tags -}}
     {{- $tagStr := "" -}}
     {{- $tagCount := 0 -}}
@@ -325,42 +293,39 @@
       {{- end -}}
     {{- end -}}
     {{- if ne $tagStr "" -}}
-      {{- $tagsY := 480 -}}
-      {{- if gt $currentY 460 }}{{ $tagsY = (add $currentY 12) }}{{ end -}}
-      {{- if gt $tagsY 500 }}{{ $tagsY = 500 }}{{ end -}}
+      {{- $tagsY := 475 -}}
+      {{- if gt $currentY 455 }}{{ $tagsY = (add $currentY 12) }}{{ end -}}
+      {{- if gt $tagsY 495 }}{{ $tagsY = 495 }}{{ end -}}
 
       {{- $canvas = $canvas | images.Filter
         (images.Text $tagStr (dict
           "color" (printf "#%s" $brandColor)
-          "size" 18
+          "size" 20
           "x" 80
           "y" $tagsY
-          "font" $fontLight
+          "font" $fontBold
         ))
       -}}
     {{- end -}}
   {{- end -}}
 
-  {{/* ============================================================ */}}
-  {{/*  НИЖНИЙ БЛОК                                                 */}}
-  {{/* ============================================================ */}}
-
-  {{- $separatorY := 530 -}}
+  {{/* НИЖНИЙ БЛОК — крупнее */}}
+  {{- $separatorY := 525 -}}
   {{- $canvas = $canvas | images.Filter
     (images.Text "________________________________________________________________________________" (dict
       "color" (printf "#%s" $separatorColor)
-      "size" 10
+      "size" 12
       "x" 80
       "y" $separatorY
       "font" $fontLight
     ))
   -}}
 
-  {{- $footerY := 556 -}}
+  {{- $footerY := 550 -}}
   {{- $canvas = $canvas | images.Filter
     (images.Text site.Title (dict
       "color" (printf "#%s" $brandColor)
-      "size" 22
+      "size" 28
       "x" 80
       "y" $footerY
       "font" $fontBold
@@ -401,9 +366,9 @@
     {{- $canvas = $canvas | images.Filter
       (images.Text $footerMeta (dict
         "color" (printf "#%s" $textMutedColor)
-        "size" 18
+        "size" 22
         "x" 80
-        "y" (add $footerY 32)
+        "y" (add $footerY 36)
         "font" $fontLight
       ))
     -}}

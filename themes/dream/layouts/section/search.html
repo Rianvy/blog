@@ -488,7 +488,18 @@ x-init="$refs.searchInput.focus()"
 {{ $page := . }}
 {{ $coverURL := "" }}
 {{ with $page.Params.Cover }}
-  {{ $coverURL = printf "%s%s" $page.RelPermalink . | absURL }}
+  {{ $coverRes := $page.Resources.GetMatch . }}
+  {{ if $coverRes }}
+    {{ $mediaType := $coverRes.MediaType.SubType }}
+    {{ if and (ne $mediaType "svg+xml") (ne $mediaType "gif") }}
+      {{ $processed := $coverRes | images.Filter (images.Process "webp") }}
+      {{ $coverURL = $processed.Permalink }}
+    {{ else }}
+      {{ $coverURL = $coverRes.Permalink }}
+    {{ end }}
+  {{ else }}
+    {{ $coverURL = printf "%s%s" $page.RelPermalink . | absURL }}
+  {{ end }}
 {{ end }}
 
 {{ $data = $data | append (dict 
@@ -512,7 +523,18 @@ x-init="$refs.searchInput.focus()"
 {{ $page := . }}
 {{ $coverURL := "" }}
 {{ with $page.Params.Cover }}
-  {{ $coverURL = printf "%s%s" $page.RelPermalink . | absURL }}
+  {{ $coverRes := $page.Resources.GetMatch . }}
+  {{ if $coverRes }}
+    {{ $mediaType := $coverRes.MediaType.SubType }}
+    {{ if and (ne $mediaType "svg+xml") (ne $mediaType "gif") }}
+      {{ $processed := $coverRes | images.Filter (images.Process "webp") }}
+      {{ $coverURL = $processed.Permalink }}
+    {{ else }}
+      {{ $coverURL = $coverRes.Permalink }}
+    {{ end }}
+  {{ else }}
+    {{ $coverURL = printf "%s%s" $page.RelPermalink . | absURL }}
+  {{ end }}
 {{ end }}
 
 {{ $data = $data | append (dict 
@@ -533,7 +555,7 @@ x-init="$refs.searchInput.focus()"
 ) }}
 {{ end }}
 
-<!-- Сбор данных из утилит -->
+<!-- Сбор данных из утилит (без изображений — не трогаем) -->
 {{ range (where site.RegularPages "Type" "utilities") }}
 
 {{ $page := . }}

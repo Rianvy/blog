@@ -347,18 +347,16 @@
           <div class="relative overflow-hidden aspect-video bg-base-200">
             {{ if .Params.cover }}
               {{ with .Resources.Get .Params.cover }}
-                {{ if eq .MediaType.SubType "svg" }}
+                {{ $mediaType := .MediaType.SubType }}
+                {{ if or (eq $mediaType "svg+xml") (eq $mediaType "gif") }}
                   <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" 
                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
                        loading="lazy" />
                 {{ else }}
-                  {{ $webp := .Resize (printf "%dx%d webp" .Width .Height) }}
-                  <picture>
-                    <source srcset="{{ $webp.RelPermalink }}" type="image/webp" />
-                    <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" 
-                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                         loading="lazy" />
-                  </picture>
+                  {{ $webp := . | images.Filter (images.Process "webp") }}
+                  <img src="{{ $webp.RelPermalink }}" alt="{{ $.Title }}" 
+                       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                       loading="lazy" />
                 {{ end }}
               {{ else }}
                 <img src="{{ .Params.cover }}" alt="{{ .Title }}" 
@@ -367,13 +365,10 @@
               {{ end }}
             {{ else if not site.Params.noDefaultSummaryCover }}
               {{ with resources.Get (printf "images/default%d.jpg" (index (seq 4 | shuffle) 0)) }}
-                {{ $webp := .Resize (printf "%dx%d webp" .Width .Height) }}
-                <picture>
-                  <source srcset="{{ $webp.RelPermalink }}" type="image/webp" />
-                  <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" 
-                       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                       loading="lazy" />
-                </picture>
+                {{ $webp := . | images.Filter (images.Process "webp") }}
+                <img src="{{ $webp.RelPermalink }}" alt="{{ $.Title }}" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                     loading="lazy" />
               {{ end }}
             {{ else }}
               <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-base-200 to-base-300">

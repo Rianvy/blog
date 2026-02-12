@@ -1,0 +1,69 @@
+<!-- layouts/_default/_markup/render-image.html -->
+
+{{- $alt := .Text -}}
+{{- $title := .Title -}}
+{{- $src := .Destination -}}
+
+{{- $imgResource := .Page.Resources.GetMatch $src -}}
+{{- if not $imgResource -}}
+  {{- $imgResource = .Page.Resources.GetMatch (printf "**/%s" (path.Base $src)) -}}
+{{- end -}}
+
+{{- with $imgResource -}}
+
+  {{- $mediaType := .MediaType.SubType -}}
+  {{- $skipProcessing := or (eq $mediaType "svg+xml") (eq $mediaType "gif") -}}
+
+  {{- if $skipProcessing -}}
+
+    <figure class="my-4">
+      <img
+        src="{{ .RelPermalink }}"
+        alt="{{ $alt }}"
+        {{ with $title }}title="{{ . }}"{{ end }}
+        {{ if ne $mediaType "svg+xml" }}width="{{ .Width }}" height="{{ .Height }}"{{ end }}
+        loading="lazy"
+        decoding="async"
+      />
+      {{- with $title -}}
+      <figcaption class="text-center text-sm text-base-content/60 mt-2">{{ . }}</figcaption>
+      {{- end -}}
+    </figure>
+
+  {{- else -}}
+
+    {{- $processed := . | images.Filter (images.Process "webp") -}}
+
+    <figure class="my-4">
+      <img
+        src="{{ $processed.RelPermalink }}"
+        alt="{{ $alt }}"
+        {{ with $title }}title="{{ . }}"{{ end }}
+        width="{{ $processed.Width }}"
+        height="{{ $processed.Height }}"
+        loading="lazy"
+        decoding="async"
+      />
+      {{- with $title -}}
+      <figcaption class="text-center text-sm text-base-content/60 mt-2">{{ . }}</figcaption>
+      {{- end -}}
+    </figure>
+
+  {{- end -}}
+
+{{- else -}}
+
+  <figure class="my-4">
+    <img
+      src="{{ $src }}"
+      alt="{{ $alt }}"
+      {{ with $title }}title="{{ . }}"{{ end }}
+      loading="lazy"
+      decoding="async"
+    />
+    {{- with $title -}}
+    <figcaption class="text-center text-sm text-base-content/60 mt-2">{{ . }}</figcaption>
+    {{- end -}}
+  </figure>
+
+{{- end -}}

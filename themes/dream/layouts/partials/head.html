@@ -1,50 +1,8 @@
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="Ox69" />
-<link rel="manifest" href="/site.webmanifest" />
+{{/*
+  Переопределение head.html из темы dream.
+  Убраны внутренние Hugo-шаблоны opengraph/twitter_cards.
+  Всё SEO вынесено в seo/head-seo.html.
+*/}}
 
-<link rel="canonical" href="{{ .Permalink }}" />
-
-{{ if or (eq .Type "posts") (eq .Type "portfolio") }}
-<!-- Page Author & Description -->
-<meta name="author" content="{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ site.Params.author }}{{ end }}" />
-<meta name="description" content="{{ .Summary | plainify }}" />
-
-<!-- Keywords -->
-{{- $keywords := slice }}
-{{- with .Keywords }}
-  {{- $keywords = . }}
-{{- else }}
-  {{- range .GetTerms "tags" }}
-    {{- $keywords = $keywords | append .Title }}
-  {{- else }}
-    {{- range $taxonomy, $_ := site.Taxonomies }}
-      {{- range $.GetTerms $taxonomy }}
-        {{- $keywords = $keywords | append .Title }}
-      {{- end }}
-    {{- end }}
-  {{- end }}
-{{- end }}
-<meta name="keywords" content="{{ delimit $keywords `,` }}">
-{{ else }}
-<!-- Site Author & Description -->
-<meta name="author" content="{{ site.Params.author }}" />
-<meta name="description" content="{{ site.Params.description | plainify }}" />
-{{ end }}
-
-<!-- Site Generator -->
-{{ hugo.Generator }}
-
-<!-- Open Graph -->
-{{ template "_internal/opengraph.html" . }}
-
-<!-- Twitter Cards -->
-{{ template "_internal/twitter_cards.html" . }}
-
-{{ $outputCss := resources.Get "css/output.css" }}
-{{ if hugo.IsProduction }}
-  {{ $outputCss = $outputCss | minify }}
-{{ end }}
-<link rel="stylesheet" href="{{ $outputCss.RelPermalink }}" />
+{{/* ===== ВСЕ SEO (meta, OG, Twitter, JSON-LD, hreflang) ===== */}}
+{{ partial "seo/head-seo.html" . }}

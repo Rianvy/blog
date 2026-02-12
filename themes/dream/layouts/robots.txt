@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Sitemap: {{ "sitemap.xml" | absURL }}
+
+# Служебные страницы
+Disallow: /admin/
+Disallow: /private/
+
+# Параметры поиска
+Disallow: /*?*

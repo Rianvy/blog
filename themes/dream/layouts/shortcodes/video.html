@@ -1,12 +1,33 @@
+{{/* layouts/shortcodes/video.html */}}
+
 {{ .Page.Store.Set "hasVideoShortcode" true }}
 {{- $src := .Get 0 | default "" -}}
-{{- $poster := .Get 1 | default "" -}}
+{{- $posterPath := .Get 1 | default "" -}}
+
+{{- $posterURL := "" -}}
+{{- if ne $posterPath "" -}}
+  {{- $posterResource := .Page.Resources.GetMatch $posterPath -}}
+  {{- if not $posterResource -}}
+    {{- $posterResource = .Page.Resources.GetMatch (printf "**/%s" (path.Base $posterPath)) -}}
+  {{- end -}}
+  {{- with $posterResource -}}
+    {{- $mediaType := .MediaType.SubType -}}
+    {{- if and (ne $mediaType "svg+xml") (ne $mediaType "gif") -}}
+      {{- $processed := . | images.Filter (images.Process "webp") -}}
+      {{- $posterURL = $processed.RelPermalink -}}
+    {{- else -}}
+      {{- $posterURL = .RelPermalink -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $posterURL = $posterPath -}}
+  {{- end -}}
+{{- end -}}
 
 <video 
   class="plyr-video"
   playsinline 
   controls 
-  {{ if $poster }}data-poster="{{ $poster }}"{{ end }}
+  {{ if ne $posterURL "" }}data-poster="{{ $posterURL }}"{{ end }}
   loop 
   muted
 >

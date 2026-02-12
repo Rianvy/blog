@@ -1,0 +1,186 @@
+{{/*
+  Базовые SEO-метатеги: author, description, keywords, robots.
+  Универсальная fallback-логика для ВСЕХ типов страниц:
+  - posts, portfolio, utilities, about (single pages)
+  - tags, categories (term/taxonomy)
+  - секции (section lists)
+  - главная (home)
+*/}}
+
+
+{{/* ===== AUTHOR ===== */}}
+{{- $author := "" -}}
+{{- with .Params.author }}{{ $author = . }}{{ end -}}
+{{- if eq $author "" }}{{ $author = site.Params.author | default site.Title }}{{ end -}}
+<meta name="author" content="{{ $author }}" />
+
+
+{{/* ===== DESCRIPTION ===== */}}
+{{- $description := "" -}}
+
+{{/* 1. Кастомное SEO-описание */}}
+{{- with .Params.seo }}{{ with .description }}{{ $description = . }}{{ end }}{{ end -}}
+
+{{/* 2. description из front matter */}}
+{{- if eq $description "" -}}
+  {{- with .Params.description }}{{ $description = . }}{{ end -}}
+{{- end -}}
+
+{{/* 3. Summary для страниц с контентом (posts, portfolio, utilities, about) */}}
+{{- if eq $description "" -}}
+  {{- if .IsPage -}}
+    {{- with .Summary -}}
+      {{- $description = . | plainify | htmlUnescape -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 4. Для term-страниц (конкретный тег/категория) */}}
+{{- if eq $description "" -}}
+  {{- if eq .Kind "term" -}}
+    {{- if eq .Data.Singular "tag" -}}
+      {{- if eq .Language.Lang "ru" -}}
+        {{- $description = printf "Все публикации с тегом «%s» на сайте %s" .Title site.Title -}}
+      {{- else -}}
+        {{- $description = printf "All posts tagged with \"%s\" on %s" .Title site.Title -}}
+      {{- end -}}
+    {{- else if eq .Data.Singular "category" -}}
+      {{- if eq .Language.Lang "ru" -}}
+        {{- $description = printf "Все публикации в категории «%s» на сайте %s" .Title site.Title -}}
+      {{- else -}}
+        {{- $description = printf "All posts in category \"%s\" on %s" .Title site.Title -}}
+      {{- end -}}
+    {{- else -}}
+      {{- if eq .Language.Lang "ru" -}}
+        {{- $description = printf "Все материалы по теме «%s» на сайте %s" .Title site.Title -}}
+      {{- else -}}
+        {{- $description = printf "All materials about \"%s\" on %s" .Title site.Title -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 5. Для taxonomy-страниц (/tags/, /categories/) */}}
+{{- if eq $description "" -}}
+  {{- if eq .Kind "taxonomy" -}}
+    {{- if eq .Data.Plural "tags" -}}
+      {{- if eq .Language.Lang "ru" -}}
+        {{- $description = printf "Все теги на сайте %s" site.Title -}}
+      {{- else -}}
+        {{- $description = printf "All tags on %s" site.Title -}}
+      {{- end -}}
+    {{- else if eq .Data.Plural "categories" -}}
+      {{- if eq .Language.Lang "ru" -}}
+        {{- $description = printf "Все категории на сайте %s" site.Title -}}
+      {{- else -}}
+        {{- $description = printf "All categories on %s" site.Title -}}
+      {{- end -}}
+    {{- else -}}
+      {{- if eq .Language.Lang "ru" -}}
+        {{- $description = printf "Список %s на сайте %s" .Title site.Title -}}
+      {{- else -}}
+        {{- $description = printf "List of %s on %s" .Title site.Title -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 6. Для секций (posts list, portfolio list, utilities list) */}}
+{{- if eq $description "" -}}
+  {{- if .IsSection -}}
+    {{- if eq .Language.Lang "ru" -}}
+      {{- $description = printf "Раздел «%s» на сайте %s" .Title site.Title -}}
+    {{- else -}}
+      {{- $description = printf "Section \"%s\" on %s" .Title site.Title -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 7. Для главной */}}
+{{- if eq $description "" -}}
+  {{- if .IsHome -}}
+    {{- with .Language.Params.description -}}
+      {{- $description = . -}}
+    {{- else -}}
+      {{- $description = site.Params.description | default "" -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 8. Глобальный fallback */}}
+{{- if eq $description "" -}}
+  {{- $description = site.Params.description
+      | default (printf "Страница сайта %s" site.Title) -}}
+{{- end -}}
+
+{{/* Очищаем и обрезаем */}}
+{{- $description = $description | plainify | htmlUnescape | truncate 160 -}}
+<meta name="description" content="{{ $description }}" />
+
+
+{{/* ===== KEYWORDS ===== */}}
+{{- $keywords := slice -}}
+
+{{/* 1. keywords из front matter */}}
+{{- with .Params.keywords -}}
+  {{- $keywords = . -}}
+{{- end -}}
+
+{{/* 2. .Keywords (Hugo built-in — из front matter keywords + tags) */}}
+{{- if eq (len $keywords) 0 -}}
+  {{- with .Keywords -}}
+    {{- $keywords = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 3. Теги страницы */}}
+{{- if eq (len $keywords) 0 -}}
+  {{- range .GetTerms "tags" -}}
+    {{- $keywords = $keywords | append .Title -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 4. Категории */}}
+{{- if eq (len $keywords) 0 -}}
+  {{- range .GetTerms "categories" -}}
+    {{- $keywords = $keywords | append .Title -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 5. Для всех таксономий — собираем из всех taxonomy terms */}}
+{{- if eq (len $keywords) 0 -}}
+  {{- range $taxonomy, $_ := site.Taxonomies -}}
+    {{- range $.GetTerms $taxonomy -}}
+      {{- $keywords = $keywords | append .Title -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 6. Для term/taxonomy страниц — само название */}}
+{{- if eq (len $keywords) 0 -}}
+  {{- if or (eq .Kind "term") (eq .Kind "taxonomy") -}}
+    {{- $keywords = slice .Title -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 7. Языковые keywords из конфига */}}
+{{- if eq (len $keywords) 0 -}}
+  {{- with .Language.Params.keywords -}}
+    {{- $keywords = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if gt (len $keywords) 0 -}}
+<meta name="keywords" content="{{ delimit $keywords ", " }}" />
+{{- end -}}
+
+
+{{/* ===== ROBOTS ===== */}}
+{{- $noindex := false -}}
+{{- with .Params.seo }}{{ with .noindex }}{{ $noindex = . }}{{ end }}{{ end -}}
+
+{{- if $noindex -}}
+<meta name="robots" content="noindex, nofollow" />
+{{- else -}}
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+{{- end -}}

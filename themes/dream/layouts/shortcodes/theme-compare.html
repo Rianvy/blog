@@ -6,13 +6,44 @@
 
 {{- $id := delimit (shuffle (seq 1 9)) "" -}}
 
+{{/* Обработка изображений в WebP */}}
+{{- $lightURL := $lightImage -}}
+{{- $darkURL := $darkImage -}}
+
+{{- $lightResource := .Page.Resources.GetMatch $lightImage -}}
+{{- if not $lightResource -}}
+  {{- $lightResource = .Page.Resources.GetMatch (printf "**/%s" (path.Base $lightImage)) -}}
+{{- end -}}
+{{- with $lightResource -}}
+  {{- $mediaType := .MediaType.SubType -}}
+  {{- if and (ne $mediaType "svg+xml") (ne $mediaType "gif") -}}
+    {{- $processed := . | images.Filter (images.Process "webp") -}}
+    {{- $lightURL = $processed.RelPermalink -}}
+  {{- else -}}
+    {{- $lightURL = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $darkResource := .Page.Resources.GetMatch $darkImage -}}
+{{- if not $darkResource -}}
+  {{- $darkResource = .Page.Resources.GetMatch (printf "**/%s" (path.Base $darkImage)) -}}
+{{- end -}}
+{{- with $darkResource -}}
+  {{- $mediaType := .MediaType.SubType -}}
+  {{- if and (ne $mediaType "svg+xml") (ne $mediaType "gif") -}}
+    {{- $processed := . | images.Filter (images.Process "webp") -}}
+    {{- $darkURL = $processed.RelPermalink -}}
+  {{- else -}}
+    {{- $darkURL = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
 <div class="theme-compare-{{ $id }} my-8 not-prose" data-mode="{{ $mode }}" {{ if eq $mode "slider" }}data-tc-exclude{{ end }}>
   {{- if $title }}
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">{{ $title }}</h4>
   {{- end }}
 
   {{- if eq $mode "toggle" }}
-  <!-- Toggle Mode -->
   <div class="tc-toggle-{{ $id }}">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
@@ -40,20 +71,18 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <!-- Контейнер для светлого изображения -->
       <div class="tc-light-wrap-{{ $id }} relative leading-[0] transition-opacity duration-500">
         <img 
-          src="{{ $lightImage }}" 
+          src="{{ $lightURL }}" 
           alt="{{ $title }} - {{ i18n "themeCompare.lightTheme" }}"
           title="{{ i18n "themeCompare.lightTheme" }}"
           class="w-full block"
           loading="lazy"
         />
       </div>
-      <!-- Контейнер для тёмного изображения (абсолютно позиционирован) -->
       <div class="tc-dark-wrap-{{ $id }} absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
-          src="{{ $darkImage }}" 
+          src="{{ $darkURL }}" 
           alt="{{ $title }} - {{ i18n "themeCompare.darkTheme" }}"
           title="{{ i18n "themeCompare.darkTheme" }}"
           class="w-full block"
@@ -64,7 +93,6 @@
   </div>
 
   {{- else if eq $mode "side-by-side" }}
-  <!-- Side by Side Mode -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div class="tc-card-{{ $id }} rounded-xl overflow-hidden shadow-lg border border-base-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 px-4 py-2 flex items-center gap-2 border-b border-base-300">
@@ -74,7 +102,7 @@
         <span class="text-sm font-medium text-amber-700 dark:text-amber-300">{{ i18n "themeCompare.lightTheme" }}</span>
       </div>
       <img 
-        src="{{ $lightImage }}" 
+        src="{{ $lightURL }}" 
         alt="{{ $title }} - {{ i18n "themeCompare.lightTheme" }}"
         title="{{ i18n "themeCompare.lightTheme" }}"
         class="w-full block"
@@ -90,7 +118,7 @@
         <span class="text-sm font-medium text-indigo-700 dark:text-indigo-300">{{ i18n "themeCompare.darkTheme" }}</span>
       </div>
       <img 
-        src="{{ $darkImage }}" 
+        src="{{ $darkURL }}" 
         alt="{{ $title }} - {{ i18n "themeCompare.darkTheme" }}"
         title="{{ i18n "themeCompare.darkTheme" }}"
         class="w-full block"
@@ -100,22 +128,19 @@
   </div>
 
   {{- else if eq $mode "slider" }}
-  <!-- Slider Mode - LightGallery ОТКЛЮЧЕНА -->
   <div class="tc-slider-{{ $id }} relative overflow-hidden rounded-xl shadow-lg border border-base-300">
     <div class="tc-slider-container-{{ $id }} relative select-none" style="--pos: 50%;">
-      <!-- Dark Image (Background) -->
       <img 
-        src="{{ $darkImage }}" 
+        src="{{ $darkURL }}" 
         alt="{{ $title }} - {{ i18n "themeCompare.darkTheme" }}"
         class="w-full block"
         loading="lazy"
         draggable="false"
       />
       
-      <!-- Light Image (Overlay) -->
       <div class="tc-overlay-{{ $id }} absolute inset-0 overflow-hidden" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0);">
         <img 
-          src="{{ $lightImage }}" 
+          src="{{ $lightURL }}" 
           alt="{{ $title }} - {{ i18n "themeCompare.lightTheme" }}"
           class="w-full block"
           loading="lazy"
@@ -123,7 +148,6 @@
         />
       </div>
       
-      <!-- Slider Handle -->
       <div class="tc-handle-{{ $id }} absolute top-0 bottom-0 cursor-ew-resize z-10 flex items-center justify-center" style="left: var(--pos); transform: translateX(-50%); width: 44px;">
         <div class="absolute top-0 bottom-0 w-0.5 bg-white" style="box-shadow: 0 0 10px rgba(0,0,0,0.5);"></div>
         <div class="relative w-11 h-11 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-white/50" style="box-shadow: 0 2px 20px rgba(0,0,0,0.3);">
@@ -136,7 +160,6 @@
         </div>
       </div>
       
-      <!-- Labels -->
       <div class="absolute top-3 left-3 px-2.5 py-1 bg-white/95 backdrop-blur-sm rounded-lg text-xs font-medium text-gray-700 shadow-sm pointer-events-none">
         {{ i18n "themeCompare.lightLabel" }}
       </div>
@@ -153,7 +176,6 @@
 </div>
 
 <style>
-  /* Toggle Mode */
   .tc-btn-{{ $id }} {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
@@ -169,7 +191,6 @@
     background: oklch(var(--b1) / 0.5);
   }
 
-  /* Slider Mode */
   .tc-slider-container-{{ $id }} {
     touch-action: pan-y pinch-zoom;
   }

@@ -1,0 +1,214 @@
+{{/* ===== PERSON ===== */}}
+{{- $authorName := site.Params.author | default "Rianvy" -}}
+{{- $siteURL := site.BaseURL -}}
+{{- $avatarURL := (site.Params.avatar | default "/img/avatar.jpg") | absURL -}}
+{{- $email := site.Params.email | default "" -}}
+{{- $githubURL := "" -}}
+{{- with (index site.Params.navItems "github") -}}
+  {{- $githubURL = .href -}}
+{{- end -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": {{ $authorName }},
+  "url": {{ $siteURL }},
+  "image": {{ $avatarURL }}
+  {{- if ne $email "" -}}
+  ,"email": {{ $email }}
+  {{- end -}}
+  {{- if ne $githubURL "" -}}
+  ,"sameAs": [{{ $githubURL }}]
+  {{- end -}}
+}
+</script>
+
+
+{{/* ===== WEBSITE (только главная) ===== */}}
+{{- if .IsHome -}}
+{{- $siteDesc := .Language.Params.description | default site.Params.description | default "" -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site.Title }},
+  "url": {{ $siteURL }},
+  "description": {{ $siteDesc }},
+  "inLanguage": {{ .Language.Lang }},
+  "author": {
+    "@type": "Person",
+    "name": {{ $authorName }}
+  }
+}
+</script>
+{{- end -}}
+
+
+{{/* ===== ARTICLE (посты) ===== */}}
+{{- if and .IsPage (in (slice "posts" "post" "blog") .Section) -}}
+
+{{- $articleDesc := "" -}}
+{{- with .Params.description }}{{ $articleDesc = . }}{{ end -}}
+{{- if eq $articleDesc "" -}}
+  {{- with .Summary }}{{ $articleDesc = . | plainify | htmlUnescape | truncate 200 }}{{ end -}}
+{{- end -}}
+
+{{/* Ищем изображение */}}
+{{- $articleImage := "" -}}
+{{- with .Params.images -}}
+  {{- $articleImage = index . 0 | absURL -}}
+{{- end -}}
+{{- if eq $articleImage "" -}}
+  {{- with .Params.cover -}}
+    {{- if reflect.IsMap . -}}
+      {{- with .image -}}
+        {{- $res := $.Resources.GetMatch . -}}
+        {{- with $res -}}
+          {{- $resized := .Fill "1200x630 Center" -}}
+          {{- $webp := $resized | images.Filter (images.Process "webp") -}}
+          {{- $articleImage = $webp.Permalink -}}
+        {{- end -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $res := $.Resources.GetMatch . -}}
+      {{- with $res -}}
+        {{- $resized := .Fill "1200x630 Center" -}}
+        {{- $webp := $resized | images.Filter (images.Process "webp") -}}
+        {{- $articleImage = $webp.Permalink -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq $articleImage "" -}}
+  {{- $res := .Resources.GetMatch "Cover.*" -}}
+  {{- with $res -}}
+    {{- $resized := .Fill "1200x630 Center" -}}
+    {{- $webp := $resized | images.Filter (images.Process "webp") -}}
+    {{- $articleImage = $webp.Permalink -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq $articleImage "" -}}
+  {{- $articleImage = (site.Params.seo.ogImageDefault | default "/img/avatar.jpg") | absURL -}}
+{{- end -}}
+
+{{/* Собираем keywords */}}
+{{- $kwList := slice -}}
+{{- range .GetTerms "tags" -}}
+  {{- $kwList = $kwList | append .Title -}}
+{{- end -}}
+{{- $kwString := delimit $kwList ", " -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ .Title }},
+  "description": {{ $articleDesc }},
+  "url": {{ .Permalink }},
+  "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" }},
+  "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }},
+  "author": {
+    "@type": "Person",
+    "name": {{ (.Params.author | default $authorName) }}
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": {{ $authorName }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ $avatarURL }}
+    }
+  },
+  "image": {{ $articleImage }},
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink }}
+  },
+  "inLanguage": {{ .Language.Lang }}
+  {{- if gt (len $kwList) 0 -}}
+  ,"keywords": {{ $kwString }}
+  {{- end -}}
+  {{- with .WordCount -}}
+  ,"wordCount": {{ . }}
+  {{- end -}}
+}
+</script>
+{{- end -}}
+
+
+{{/* ===== CREATIVE WORK (портфолио) ===== */}}
+{{- if and .IsPage (eq .Section "portfolio") -}}
+
+{{- $portfolioDesc := "" -}}
+{{- with .Params.description }}{{ $portfolioDesc = . }}{{ end -}}
+{{- if eq $portfolioDesc "" -}}
+  {{- with .Summary }}{{ $portfolioDesc = . | plainify | htmlUnescape | truncate 200 }}{{ end -}}
+{{- end -}}
+
+{{- $portfolioImage := "" -}}
+{{- $res := .Resources.GetMatch "Cover.*" -}}
+{{- with $res -}}
+  {{- $resized := .Fill "1200x630 Center" -}}
+  {{- $webp := $resized | images.Filter (images.Process "webp") -}}
+  {{- $portfolioImage = $webp.Permalink -}}
+{{- end -}}
+{{- if eq $portfolioImage "" -}}
+  {{- $portfolioImage = (site.Params.seo.ogImageDefault | default "/img/avatar.jpg") | absURL -}}
+{{- end -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": {{ .Title }},
+  "description": {{ $portfolioDesc }},
+  "url": {{ .Permalink }},
+  "image": {{ $portfolioImage }},
+  "author": {
+    "@type": "Person",
+    "name": {{ $authorName }}
+  },
+  "dateCreated": {{ .Date.Format "2006-01-02" }},
+  "inLanguage": {{ .Language.Lang }}
+}
+</script>
+{{- end -}}
+
+
+{{/* ===== BREADCRUMBS ===== */}}
+{{- if not .IsHome -}}
+{{- $langBase := printf "%s%s/" site.BaseURL .Language.Lang -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": {{ site.Title }},
+      "item": {{ $langBase }}
+    }
+    {{- $pos := 2 -}}
+    {{- range .Ancestors.Reverse -}}
+      {{- if not .IsHome -}}
+    ,{
+      "@type": "ListItem",
+      "position": {{ $pos }},
+      "name": {{ (.Title | default .Section) }},
+      "item": {{ .Permalink }}
+    }
+        {{- $pos = add $pos 1 -}}
+      {{- end -}}
+    {{- end -}}
+    ,{
+      "@type": "ListItem",
+      "position": {{ $pos }},
+      "name": {{ .Title }},
+      "item": {{ .Permalink }}
+    }
+  ]
+}
+</script>
+{{- end -}}

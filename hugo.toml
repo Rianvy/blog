@@ -3,98 +3,129 @@ defaultContentLanguage = "ru"
 defaultContentLanguageInSubdir = true
 title = "0x69.ru"
 theme = "dream"
+enableRobotsTXT = true
 
+# ===== SITEMAP =====
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+# ===== IMAGING =====
+[imaging]
+  quality = 100
+  hint = "photo"
+  resampleFilter = "Lanczos"
+
+[imaging.exif]
+  disableDate = false
+  disableLatLong = true
+  includeFields = ""
+  excludeFields = ""
+
+# ===== LANGUAGES =====
 [languages]
   [languages.ru]
     languageName = "Русский"
     languageCode = "ru"
     contentDir = "content/russian"
     weight = 1
+    [languages.ru.params]
+      description = "В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет."
+      keywords = ["блог", "технологии", "программирование", "разработка", "веб"]
+      ogLocale = "ru_RU"
   [languages.en]
     languageName = "English"
     languageCode = "en"
     contentDir = "content/english"
     weight = 2
+    [languages.en.params]
+      description = "In this personal blog, I share notes on technology, life, and everything that inspires me."
+      keywords = ["blog", "technologies", "programming", "development", "web"]
+      ogLocale = "en_US"
 
+# ===== SERVICES =====
 [services]
   [services.googleAnalytics]
     ID = "G-EGGNL85KC3"
 
-[params]
-yandexMetricaId = "99568144"
-lightTheme = "emerald"
-darkTheme = "dim"
-author = "Rianvy"
-description = "В этом личном блоге я делюсь заметками о технологиях, жизни и обо всём, что меня вдохновляет."
-avatar = "img/avatar.jpg"
-motto = "Document today what you will forget tomorrow"
-headerTitle = "0x69.ru </>"
-footerBottomText = "Powered by ❤️"
-rss = true
-# utterancesRepo = ""
-# valine = true
-# LEANCLOUD_APP_ID = ""
-# LEANCLOUD_APP_KEY = ""
-# waline = true
-# walineServer = ""
-#comments.app
-commentsApp = false
-commentsAppSiteID = "YjlEv4KV"
-commentsAppLimit = "10"
-#Telegram Comments
-#telegramComments = true
-#telegramCommentsHomeId = ""
-email = "blackghost.v1@gmail.com"
-siteStartYear = 2025
-# Syntax highlighting
-#https://github.com/highlightjs/highlight.js/tree/main/src/languages
-SyntaxHighlighting = true
-SyntaxHighlightingThemeLight = "atom-one-light"
-SyntaxHighlightingThemeDark = "github-dark-dimmed"
-SyntaxHighlightingLanguages = ["apache", "json", "javascript", "typescript", "bash", "shell", "sh", "zsh", "powershell", "ini", "nginx", "php"]
-# options
-stickyNav = true
-portfolio = true
-utilities = true
-reorderNavItems = ["search", "categories", "portfolio", "posts", "utilities", "tags", "github", "rss",]
-collapseNavItems = ["posts", "tags", "github", "rss"]
-# noDefaultSummaryCover = true
-showTableOfContents = true
-showSummaryCoverInPost = true
-imageZoomableInPost = true
-showPrevNextPost = true
-# reorderShares = ["x", "facebook", "whatsapp", "share"]
-backToTop = false
-
-[params.advanced]
-customCSS = ["css/custom.css"]
-customJS = ["js/custom.js"]
-
+# ===== MARKUP =====
 [markup]
   [markup.highlight]
     codeFences = false
     guessSyntax = false
 
-[params.navItems]
-github = { href = "https://github.com/rianvy", target = "_blank", icon = "logo-github", title = "GitHub" }
+# ===== PARAMS =====
+[params]
+  yandexMetricaId = "99568144"
+  lightTheme = "emerald"
+  darkTheme = "dim"
+  author = "Rianvy"
+  avatar = "img/avatar.jpg"
+  motto = "Document today what you will forget tomorrow"
+  headerTitle = "0x69.ru </>"
+  footerBottomText = "Powered by ❤️"
+  rss = true
+  commentsApp = false
+  commentsAppSiteID = "YjlEv4KV"
+  commentsAppLimit = "10"
+  email = "blackghost.v1@gmail.com"
+  siteStartYear = 2025
+  SyntaxHighlighting = true
+  SyntaxHighlightingThemeLight = "atom-one-light"
+  SyntaxHighlightingThemeDark = "github-dark-dimmed"
+  SyntaxHighlightingLanguages = ["apache", "json", "javascript", "typescript", "bash", "shell", "sh", "zsh", "powershell", "ini", "nginx", "php"]
+  stickyNav = true
+  portfolio = true
+  utilities = true
+  reorderNavItems = ["search", "categories", "portfolio", "posts", "utilities", "tags", "github", "rss"]
+  collapseNavItems = ["posts", "tags", "github", "rss"]
+  showTableOfContents = true
+  showSummaryCoverInPost = true
+  imageZoomableInPost = true
+  showPrevNextPost = true
+  backToTop = false
 
-[params.navLang]
-ru = { href = "/ru/", icon = "language", title = "Русский" }
-en = { href = "/en/", icon = "language", title = "English" }
+  # ===== SEO =====
+  [params.seo]
+    siteName = "0x69.ru"
+    ogFontPath = "fonts/Roboto-Bold.ttf"
+    ogFontLightPath = "fonts/Roboto-Light.ttf"
+    ogBackgroundPath = "images/og-background.png"
+    ogLogoPath = "img/avatar.jpg"
+    ogTextColor = "f1f5f9"
+    ogTextMutedColor = "94a3b8"
+    ogBrandColor = "22c55e"
+    ogSeparatorColor = "475569"
 
-[params.experimental]
-jsDate = true
-jsDateFormat = "dd.MM.yyyy, HH:mm"
+  # ===== ADVANCED =====
+  [params.advanced]
+    customCSS = ["css/custom.css"]
+    customJS = ["js/custom.js"]
 
-[params.giscus]
-enable = true
-repo = "Rianvy/blog"
-repoId = "R_kgDONpZnjw"
-category = "Comments"
-categoryId = "DIC_kwDONpZnj84C2KjB"
-mapping = "pathname"
-strict = true
-reactionsEnabled = true
-inputPosition = "top"
-lang = "ru"
-loading = "lazy"
+  # ===== NAV =====
+  [params.navItems]
+    github = { href = "https://github.com/rianvy", target = "_blank", icon = "logo-github", title = "GitHub" }
+
+  [params.navLang]
+    ru = { href = "/ru/", icon = "language", title = "Русский" }
+    en = { href = "/en/", icon = "language", title = "English" }
+
+  # ===== EXPERIMENTAL =====
+  [params.experimental]
+    jsDate = true
+    jsDateFormat = "dd.MM.yyyy, HH:mm"
+
+  # ===== GISCUS =====
+  [params.giscus]
+    enable = true
+    repo = "Rianvy/blog"
+    repoId = "R_kgDONpZnjw"
+    category = "Comments"
+    categoryId = "DIC_kwDONpZnj84C2KjB"
+    mapping = "pathname"
+    strict = true
+    reactionsEnabled = true
+    inputPosition = "top"
+    lang = "ru"
+    loading = "lazy"

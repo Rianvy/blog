@@ -1,0 +1,423 @@
+{{- $result := "" -}}
+
+{{- $bgPath := site.Params.seo.ogBackgroundPath | default "images/og-background.png" -}}
+{{- $fontBoldPath := site.Params.seo.ogFontPath | default "fonts/Roboto-Bold.ttf" -}}
+{{- $fontLightPath := site.Params.seo.ogFontLightPath | default "fonts/Roboto-Light.ttf" -}}
+{{- $logoPath := site.Params.seo.ogLogoPath | default "img/avatar.jpg" -}}
+
+{{- $textColor := site.Params.seo.ogTextColor | default "f1f5f9" -}}
+{{- $textMutedColor := site.Params.seo.ogTextMutedColor | default "94a3b8" -}}
+{{- $brandColor := site.Params.seo.ogBrandColor | default "22c55e" -}}
+{{- $separatorColor := site.Params.seo.ogSeparatorColor | default "475569" -}}
+
+{{- $bg := resources.Get $bgPath -}}
+{{- $fontBold := resources.Get $fontBoldPath -}}
+{{- $fontLight := resources.Get $fontLightPath -}}
+{{- $logo := resources.Get $logoPath -}}
+
+{{- if not $fontLight }}{{ $fontLight = $fontBold }}{{ end -}}
+
+{{- if and $bg $fontBold -}}
+
+  {{/* ============================================================ */}}
+  {{/*  ХОЛСТ — без агрессивного затемнения                         */}}
+  {{/* ============================================================ */}}
+
+  {{- $canvas := $bg.Fill "1200x630 Center" -}}
+
+  {{/*
+    Фон уже должен быть цвета #2A303C (dim тема).
+    Минимальная коррекция — только если используется фото/текстура.
+    Для сплошного цвета можно убрать полностью.
+  */}}
+  {{- $canvas = $canvas | images.Filter
+    (images.Brightness -3)
+    (images.Contrast 3)
+  -}}
+
+  {{/* ============================================================ */}}
+  {{/*  ОПРЕДЕЛЕНИЕ ЯЗЫКА И ТИПА СТРАНИЦЫ                           */}}
+  {{/* ============================================================ */}}
+
+  {{- $isRu := eq .Language.Lang "ru" -}}
+
+  {{- $pageLabel := "" -}}
+  {{- if .IsHome -}}
+    {{- if $isRu }}{{ $pageLabel = "ГЛАВНАЯ" }}{{ else }}{{ $pageLabel = "HOME" }}{{ end -}}
+  {{- else if eq .Kind "term" -}}
+    {{- if eq .Data.Singular "tag" -}}
+      {{- $pageLabel = "TAG" -}}
+    {{- else if eq .Data.Singular "category" -}}
+      {{- if $isRu }}{{ $pageLabel = "КАТЕГОРИЯ" }}{{ else }}{{ $pageLabel = "CATEGORY" }}{{ end -}}
+    {{- else -}}
+      {{- $pageLabel = upper .Data.Singular -}}
+    {{- end -}}
+  {{- else if eq .Kind "taxonomy" -}}
+    {{- if eq .Data.Plural "tags" -}}
+      {{- if $isRu }}{{ $pageLabel = "ТЕГИ" }}{{ else }}{{ $pageLabel = "TAGS" }}{{ end -}}
+    {{- else if eq .Data.Plural "categories" -}}
+      {{- if $isRu }}{{ $pageLabel = "КАТЕГОРИИ" }}{{ else }}{{ $pageLabel = "CATEGORIES" }}{{ end -}}
+    {{- end -}}
+  {{- else if .IsSection -}}
+    {{- if eq .Section "posts" -}}
+      {{- if $isRu }}{{ $pageLabel = "БЛОГ" }}{{ else }}{{ $pageLabel = "BLOG" }}{{ end -}}
+    {{- else if eq .Section "portfolio" -}}
+      {{- if $isRu }}{{ $pageLabel = "ПОРТФОЛИО" }}{{ else }}{{ $pageLabel = "PORTFOLIO" }}{{ end -}}
+    {{- else if eq .Section "utilities" -}}
+      {{- if $isRu }}{{ $pageLabel = "УТИЛИТЫ" }}{{ else }}{{ $pageLabel = "UTILITIES" }}{{ end -}}
+    {{- else -}}
+      {{- $pageLabel = upper .Title -}}
+    {{- end -}}
+  {{- else if .IsPage -}}
+    {{- if eq .Section "posts" -}}
+      {{- if $isRu }}{{ $pageLabel = "СТАТЬЯ" }}{{ else }}{{ $pageLabel = "ARTICLE" }}{{ end -}}
+    {{- else if eq .Section "portfolio" -}}
+      {{- if $isRu }}{{ $pageLabel = "ПРОЕКТ" }}{{ else }}{{ $pageLabel = "PROJECT" }}{{ end -}}
+    {{- else if eq .Section "utilities" -}}
+      {{- if $isRu }}{{ $pageLabel = "УТИЛИТА" }}{{ else }}{{ $pageLabel = "UTILITY" }}{{ end -}}
+    {{- else if eq .Section "about" -}}
+      {{- if $isRu }}{{ $pageLabel = "ОБО МНЕ" }}{{ else }}{{ $pageLabel = "ABOUT" }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{/* ============================================================ */}}
+  {{/*  АКЦЕНТНАЯ ПОЛОСА СВЕРХУ                                     */}}
+  {{/* ============================================================ */}}
+
+  {{- $accentBar := resources.Get "images/og-accent-bar.png" -}}
+  {{- if $accentBar -}}
+    {{- $accentBarResized := $accentBar.Resize "1200x" -}}
+    {{- $canvas = $canvas | images.Filter
+      (images.Overlay $accentBarResized 0 0)
+    -}}
+  {{- end -}}
+
+  {{/* ============================================================ */}}
+  {{/*  ЛОГОТИП                                                     */}}
+  {{/* ============================================================ */}}
+
+  {{- if $logo -}}
+    {{- $logoSize := 64 -}}
+    {{- $logoResized := $logo.Fill (printf "%dx%d Center" $logoSize $logoSize) -}}
+    {{- $canvas = $canvas | images.Filter
+      (images.Overlay $logoResized 1056 40)
+    -}}
+  {{- end -}}
+
+  {{/* ============================================================ */}}
+  {{/*  МЕТКА ТИПА СТРАНИЦЫ                                         */}}
+  {{/* ============================================================ */}}
+
+  {{- $contentStartY := 48 -}}
+
+  {{- if ne $pageLabel "" -}}
+    {{- $canvas = $canvas | images.Filter
+      (images.Text $pageLabel (dict
+        "color" (printf "#%s" $brandColor)
+        "size" 18
+        "linespacing" 0
+        "x" 80
+        "y" $contentStartY
+        "font" $fontBold
+      ))
+    -}}
+    {{- $contentStartY = (add $contentStartY 40) -}}
+  {{- end -}}
+
+  {{/* ============================================================ */}}
+  {{/*  ЗАГОЛОВОК                                                   */}}
+  {{/* ============================================================ */}}
+
+  {{- $title := .Title | default site.Title -}}
+  {{- $titleRunes := len (split $title "") -}}
+
+  {{- $fontSize := 52 -}}
+  {{- $maxCharsPerLine := 28 -}}
+  {{- $maxTitleLines := 3 -}}
+
+  {{- if gt $titleRunes 80 -}}
+    {{- $fontSize = 32 -}}
+    {{- $maxCharsPerLine = 44 -}}
+  {{- else if gt $titleRunes 55 -}}
+    {{- $fontSize = 38 -}}
+    {{- $maxCharsPerLine = 38 -}}
+  {{- else if gt $titleRunes 35 -}}
+    {{- $fontSize = 44 -}}
+    {{- $maxCharsPerLine = 32 -}}
+  {{- end -}}
+
+  {{/* Перенос слов */}}
+  {{- $titleLines := slice -}}
+  {{- $words := split $title " " -}}
+  {{- $currentLine := "" -}}
+
+  {{- range $words -}}
+    {{- $candidate := "" -}}
+    {{- if ne $currentLine "" -}}
+      {{- $candidate = printf "%s %s" $currentLine . -}}
+    {{- else -}}
+      {{- $candidate = . -}}
+    {{- end -}}
+
+    {{- $candidateRunes := len (split $candidate "") -}}
+
+    {{- if and (gt $candidateRunes $maxCharsPerLine) (ne $currentLine "") -}}
+      {{- $titleLines = $titleLines | append $currentLine -}}
+      {{- $currentLine = . -}}
+    {{- else -}}
+      {{- $currentLine = $candidate -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if ne $currentLine "" -}}
+    {{- $titleLines = $titleLines | append $currentLine -}}
+  {{- end -}}
+
+  {{/* Обрезка до максимума строк */}}
+  {{- if gt (len $titleLines) $maxTitleLines -}}
+    {{- $truncated := slice -}}
+    {{- range $i, $line := $titleLines -}}
+      {{- if lt $i (sub $maxTitleLines 1) -}}
+        {{- $truncated = $truncated | append $line -}}
+      {{- else if eq $i (sub $maxTitleLines 1) -}}
+        {{- $lineRunes := len (split $line "") -}}
+        {{- if gt $lineRunes (sub $maxCharsPerLine 1) -}}
+          {{- $truncated = $truncated | append (printf "%s..." (substr $line 0 (sub $maxCharsPerLine 4))) -}}
+        {{- else -}}
+          {{- $truncated = $truncated | append (printf "%s..." $line) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $titleLines = $truncated -}}
+  {{- end -}}
+
+  {{/* Рендер заголовка */}}
+  {{- $titleY := $contentStartY -}}
+  {{- $lineHeight := (add $fontSize 12) -}}
+
+  {{- range $i, $line := $titleLines -}}
+    {{- $canvas = $canvas | images.Filter
+      (images.Text $line (dict
+        "color" (printf "#%s" $textColor)
+        "size" $fontSize
+        "linespacing" 12
+        "x" 80
+        "y" (add $titleY (mul $i $lineHeight))
+        "font" $fontBold
+      ))
+    -}}
+  {{- end -}}
+
+  {{- $currentY := (add $titleY (mul (len $titleLines) $lineHeight)) -}}
+  {{- $currentY = (add $currentY 12) -}}
+
+  {{/* ============================================================ */}}
+  {{/*  ОПИСАНИЕ                                                    */}}
+  {{/* ============================================================ */}}
+
+  {{- $descRaw := "" -}}
+  {{- if .Params.description -}}
+    {{- $descRaw = .Params.description -}}
+  {{- else if and .IsPage .Summary -}}
+    {{- $descRaw = printf "%s" .Summary -}}
+  {{- end -}}
+  {{- if eq $descRaw "" -}}
+    {{- with .Language.Params.description }}{{ $descRaw = . }}{{ end -}}
+  {{- end -}}
+  {{- if eq $descRaw "" -}}
+    {{- with site.Params.description }}{{ $descRaw = . }}{{ end -}}
+  {{- end -}}
+
+  {{- if and (ne $descRaw "") (lt $currentY 360) -}}
+    {{- $descClean := $descRaw | plainify | htmlUnescape -}}
+    {{- $descClean = replaceRE `\s+` " " $descClean -}}
+    {{- $descClean = strings.TrimSpace $descClean -}}
+
+    {{- $descFontSize := 22 -}}
+    {{- $descMaxChars := 65 -}}
+    {{- $descMaxLines := 2 -}}
+    {{- $descLineHeight := 34 -}}
+
+    {{- $availableForDesc := (sub 430 $currentY) -}}
+    {{- if lt $availableForDesc $descLineHeight -}}
+      {{- $descMaxLines = 0 -}}
+    {{- else if lt $availableForDesc (mul $descLineHeight 2) -}}
+      {{- $descMaxLines = 1 -}}
+    {{- end -}}
+
+    {{- if gt $descMaxLines 0 -}}
+      {{- $descLines := slice -}}
+      {{- $dWords := split $descClean " " -}}
+      {{- $dCurrentLine := "" -}}
+
+      {{- range $dWords -}}
+        {{- $dCandidate := "" -}}
+        {{- if ne $dCurrentLine "" -}}
+          {{- $dCandidate = printf "%s %s" $dCurrentLine . -}}
+        {{- else -}}
+          {{- $dCandidate = . -}}
+        {{- end -}}
+
+        {{- $dCandidateRunes := len (split $dCandidate "") -}}
+
+        {{- if and (gt $dCandidateRunes $descMaxChars) (ne $dCurrentLine "") -}}
+          {{- $descLines = $descLines | append $dCurrentLine -}}
+          {{- $dCurrentLine = . -}}
+        {{- else -}}
+          {{- $dCurrentLine = $dCandidate -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- if ne $dCurrentLine "" -}}
+        {{- $descLines = $descLines | append $dCurrentLine -}}
+      {{- end -}}
+
+      {{- if gt (len $descLines) $descMaxLines -}}
+        {{- $dTruncated := slice -}}
+        {{- range $i, $line := $descLines -}}
+          {{- if lt $i (sub $descMaxLines 1) -}}
+            {{- $dTruncated = $dTruncated | append $line -}}
+          {{- else if eq $i (sub $descMaxLines 1) -}}
+            {{- $lineRunes := len (split $line "") -}}
+            {{- if gt $lineRunes (sub $descMaxChars 1) -}}
+              {{- $dTruncated = $dTruncated | append (printf "%s..." (substr $line 0 (sub $descMaxChars 4))) -}}
+            {{- else -}}
+              {{- $dTruncated = $dTruncated | append (printf "%s..." $line) -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+        {{- $descLines = $dTruncated -}}
+      {{- end -}}
+
+      {{- range $i, $line := $descLines -}}
+        {{- $canvas = $canvas | images.Filter
+          (images.Text $line (dict
+            "color" (printf "#%s" $textMutedColor)
+            "size" $descFontSize
+            "linespacing" 10
+            "x" 80
+            "y" (add $currentY (mul $i $descLineHeight))
+            "font" $fontLight
+          ))
+        -}}
+      {{- end -}}
+
+      {{- $currentY = (add $currentY (add (mul (len $descLines) $descLineHeight) 8)) -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{/* ============================================================ */}}
+  {{/*  ТЕГИ                                                        */}}
+  {{/* ============================================================ */}}
+
+  {{- if and .IsPage .Params.tags -}}
+    {{- $tagStr := "" -}}
+    {{- $tagCount := 0 -}}
+    {{- $maxTags := 4 -}}
+    {{- range .Params.tags -}}
+      {{- if lt $tagCount $maxTags -}}
+        {{- if ne $tagStr "" -}}
+          {{- $tagStr = printf "%s    #%s" $tagStr . -}}
+        {{- else -}}
+          {{- $tagStr = printf "#%s" . -}}
+        {{- end -}}
+        {{- $tagCount = add $tagCount 1 -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if ne $tagStr "" -}}
+      {{- $tagsY := 480 -}}
+      {{- if gt $currentY 460 }}{{ $tagsY = (add $currentY 12) }}{{ end -}}
+      {{- if gt $tagsY 500 }}{{ $tagsY = 500 }}{{ end -}}
+
+      {{- $canvas = $canvas | images.Filter
+        (images.Text $tagStr (dict
+          "color" (printf "#%s" $brandColor)
+          "size" 18
+          "x" 80
+          "y" $tagsY
+          "font" $fontLight
+        ))
+      -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{/* ============================================================ */}}
+  {{/*  НИЖНИЙ БЛОК                                                 */}}
+  {{/* ============================================================ */}}
+
+  {{- $separatorY := 530 -}}
+  {{- $canvas = $canvas | images.Filter
+    (images.Text "________________________________________________________________________________" (dict
+      "color" (printf "#%s" $separatorColor)
+      "size" 10
+      "x" 80
+      "y" $separatorY
+      "font" $fontLight
+    ))
+  -}}
+
+  {{- $footerY := 556 -}}
+  {{- $canvas = $canvas | images.Filter
+    (images.Text site.Title (dict
+      "color" (printf "#%s" $brandColor)
+      "size" 22
+      "x" 80
+      "y" $footerY
+      "font" $fontBold
+    ))
+  -}}
+
+  {{- $metaParts := slice -}}
+
+  {{- $authorName := site.Params.author | default "" -}}
+  {{- if ne $authorName "" -}}
+    {{- $metaParts = $metaParts | append $authorName -}}
+  {{- end -}}
+
+  {{- if and .IsPage (not .Date.IsZero) -}}
+    {{- $dateStr := "" -}}
+    {{- if $isRu -}}
+      {{- $dateStr = .Date.Format "02.01.2006" -}}
+    {{- else -}}
+      {{- $dateStr = .Date.Format "Jan 2, 2006" -}}
+    {{- end -}}
+    {{- $metaParts = $metaParts | append $dateStr -}}
+  {{- end -}}
+
+  {{- if and .IsPage (eq .Section "posts") -}}
+    {{- if gt .ReadingTime 0 -}}
+      {{- $rtLabel := "" -}}
+      {{- if $isRu -}}
+        {{- $rtLabel = printf "%d мин чтения" .ReadingTime -}}
+      {{- else -}}
+        {{- $rtLabel = printf "%d min read" .ReadingTime -}}
+      {{- end -}}
+      {{- $metaParts = $metaParts | append $rtLabel -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if gt (len $metaParts) 0 -}}
+    {{- $footerMeta := delimit $metaParts "  /  " -}}
+    {{- $canvas = $canvas | images.Filter
+      (images.Text $footerMeta (dict
+        "color" (printf "#%s" $textMutedColor)
+        "size" 18
+        "x" 80
+        "y" (add $footerY 32)
+        "font" $fontLight
+      ))
+    -}}
+  {{- end -}}
+
+  {{- $result = $canvas.Permalink -}}
+
+{{- else -}}
+  {{- if not $bg -}}
+    {{- warnf "[OG] Background not found: assets/%s" $bgPath -}}
+  {{- end -}}
+  {{- if not $fontBold -}}
+    {{- warnf "[OG] Font not found: assets/%s" $fontBoldPath -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $result -}}

@@ -1,13 +1,28 @@
 {{- $images := split (.Get "images") "," -}}
 
 <div class="not-prose">
-  <!-- Адаптивная сетка: 1 → 2 → 3 колонки -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 xl:gap-10">
     {{- range $index, $image := $images }}
       {{- $name := strings.TrimSpace $image -}}
 
+      {{/* Обработка изображения в WebP */}}
+      {{- $imgSrc := printf "work/%s-mobile.png" $name -}}
+      {{- $imgURL := $imgSrc -}}
+      {{- $imgResource := $.Page.Resources.GetMatch $imgSrc -}}
+      {{- if not $imgResource -}}
+        {{- $imgResource = $.Page.Resources.GetMatch (printf "**/%s-mobile.png" $name) -}}
+      {{- end -}}
+      {{- with $imgResource -}}
+        {{- $mediaType := .MediaType.SubType -}}
+        {{- if and (ne $mediaType "svg+xml") (ne $mediaType "gif") -}}
+          {{- $processed := . | images.Filter (images.Process "webp") -}}
+          {{- $imgURL = $processed.RelPermalink -}}
+        {{- else -}}
+          {{- $imgURL = .RelPermalink -}}
+        {{- end -}}
+      {{- end -}}
+
       <article class="group relative cursor-pointer">
-        <!-- Многослойная тень для глубины -->
         <div
           class="absolute inset-x-4 bottom-0 h-1/2
                  bg-gradient-to-t from-black/25 to-transparent
@@ -19,7 +34,6 @@
           aria-hidden="true">
         </div>
 
-        <!-- Карточка с hover-эффектами -->
         <div
           class="relative
                  transform-gpu
@@ -35,12 +49,10 @@
                       group-hover:ring-neutral-300 dark:group-hover:ring-neutral-600
                       transition-all duration-300">
 
-            <!-- Аспект-контейнер -->
             <div class="relative aspect-[9/16] sm:aspect-[9/17] md:aspect-[9/18] lg:aspect-[9/19] xl:aspect-[9/20] w-full overflow-hidden">
               
-              <!-- Изображение с zoom-эффектом -->
               <img
-                src="work/{{ $name }}-mobile.png"
+                src="{{ $imgURL }}"
                 alt="Скриншот мобильной версии {{ $name | humanize }}"
                 class="w-full h-full object-cover object-top
                        transform-gpu
@@ -50,7 +62,6 @@
                 decoding="async"
               >
 
-              <!-- Overlay на hover -->
               <div
                 class="absolute inset-0
                        bg-gradient-to-t from-black/60 via-transparent to-transparent
@@ -60,7 +71,6 @@
                 aria-hidden="true">
               </div>
 
-              <!-- Иконка просмотра -->
               <div
                 class="absolute inset-0 flex items-center justify-center
                        opacity-0 group-hover:opacity-100
@@ -82,7 +92,6 @@
           </div>
         </div>
 
-        <!-- Лейбл (всегда видимый) -->
         <div class="mt-3 sm:mt-4 text-center pointer-events-none">
           <h3 class="text-sm sm:text-base font-medium 
                      text-neutral-600 dark:text-neutral-400
@@ -91,7 +100,6 @@
             {{ $name | humanize }}
           </h3>
           
-          <!-- Подчёркивание -->
           <div class="mt-1.5 mx-auto w-8 h-0.5 rounded-full
                       bg-neutral-300 dark:bg-neutral-700
                       group-hover:w-16 group-hover:bg-primary-500 dark:group-hover:bg-primary-400

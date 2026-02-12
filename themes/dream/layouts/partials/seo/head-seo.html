@@ -1,0 +1,48 @@
+{{/*
+  Центральный SEO partial.
+  Подключает все компоненты и содержит элементы из оригинального head.html.
+*/}}
+
+{{/* ===== FAVICON & MANIFEST (из оригинального head.html темы) ===== */}}
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="0x69" />
+<link rel="manifest" href="/site.webmanifest" />
+
+{{/* ===== CANONICAL ===== */}}
+{{- $canonical := .Permalink -}}
+{{- with .Params.seo }}{{ with .canonical }}{{ $canonical = . }}{{ end }}{{ end -}}
+<link rel="canonical" href="{{ $canonical }}" />
+
+{{/* ===== HREFLANG (мультиязычность ru/en) ===== */}}
+{{ partial "seo/hreflang.html" . }}
+
+{{/* ===== META (author, description, keywords, robots) ===== */}}
+{{ partial "seo/meta.html" . }}
+
+{{/* ===== OPEN GRAPH (включая og:image с автогенерацией) ===== */}}
+{{ partial "seo/open-graph.html" . }}
+
+{{/* ===== TWITTER CARDS ===== */}}
+{{ partial "seo/twitter-cards.html" . }}
+
+{{/* ===== STRUCTURED DATA (JSON-LD) ===== */}}
+{{ partial "seo/structured-data.html" . }}
+
+{{/* ===== RSS ===== */}}
+{{ with .OutputFormats.Get "RSS" }}
+<link rel="alternate" type="application/rss+xml"
+      title="{{ $.Site.Title }}" href="{{ .Permalink }}" />
+{{ end }}
+
+{{/* ===== GENERATOR ===== */}}
+{{ hugo.Generator }}
+
+{{/* ===== CSS (из оригинального head.html темы) ===== */}}
+{{ $outputCss := resources.Get "css/output.css" }}
+{{ if hugo.IsProduction }}
+  {{ $outputCss = $outputCss | minify }}
+{{ end }}
+<link rel="stylesheet" href="{{ $outputCss.RelPermalink }}" />

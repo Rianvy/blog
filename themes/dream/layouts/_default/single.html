@@ -270,7 +270,21 @@
     {{/* Cover Image */}}
     {{ if and .Params.Cover site.Params.showSummaryCoverInPost }}
     <figure class="not-prose mb-8">
-      <img src="{{ (printf "%s/%s" $.Page.RelPermalink .Params.Cover) | absURL }}" alt="{{ .Title }}" class="w-full rounded-xl shadow-lg" loading="lazy"/>
+      {{- $coverRes := .Resources.GetMatch .Params.Cover -}}
+      {{- with $coverRes -}}
+        {{- $resized := .Resize "1200x webp" -}}
+        <img src="{{ $resized.RelPermalink }}" 
+             alt="{{ $.Title }}" 
+             width="{{ $resized.Width }}" 
+             height="{{ $resized.Height }}"
+             class="w-full rounded-xl shadow-lg" 
+             loading="eager"/>
+      {{- else -}}
+        <img src="{{ (printf "%s/%s" $.Page.RelPermalink $.Params.Cover) | absURL }}" 
+             alt="{{ $.Title }}" 
+             class="w-full rounded-xl shadow-lg" 
+             loading="eager"/>
+      {{- end -}}
     </figure>
     {{ end }}
 
@@ -402,7 +416,21 @@
         <a href="{{ .RelPermalink }}" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
           {{ if .Params.Cover }}
           <figure class="overflow-hidden">
-            <img src="{{ (printf "%s/%s" .RelPermalink .Params.Cover) | absURL }}" alt="{{ .Title }}" class="w-full h-32 object-cover transition-transform group-hover:scale-105" loading="lazy"/>
+            {{- $relCover := .Resources.GetMatch .Params.Cover -}}
+            {{- with $relCover -}}
+              {{- $thumb := .Fill "400x200 Center webp" -}}
+              <img src="{{ $thumb.RelPermalink }}" 
+                   alt="{{ $.Title }}" 
+                   width="{{ $thumb.Width }}" 
+                   height="{{ $thumb.Height }}"
+                   class="w-full h-32 object-cover transition-transform group-hover:scale-105" 
+                   loading="lazy"/>
+            {{- else -}}
+              <img src="{{ (printf "%s/%s" .RelPermalink .Params.Cover) | absURL }}" 
+                   alt="{{ .Title }}" 
+                   class="w-full h-32 object-cover transition-transform group-hover:scale-105" 
+                   loading="lazy"/>
+            {{- end -}}
           </figure>
           {{ end }}
           <div class="card-body p-4">

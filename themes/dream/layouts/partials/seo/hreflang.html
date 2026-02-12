@@ -1,0 +1,31 @@
+{{/*
+  Hreflang теги для мультиязычного сайта (ru + en).
+  Критически важно для SEO — без них Google может
+  показывать неправильную языковую версию.
+*/}}
+
+{{- if .IsTranslated -}}
+  {{/* Текущая страница */}}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
+
+  {{/* Все переводы */}}
+  {{- range .Translations -}}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
+  {{- end -}}
+
+  {{/* x-default — указывает на основной язык (ru) */}}
+  {{- $defaultLang := site.Language.Lang -}}
+  {{- if eq .Language.Lang $defaultLang -}}
+  <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}" />
+  {{- else -}}
+    {{- range .Translations -}}
+      {{- if eq .Language.Lang $defaultLang -}}
+  <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}" />
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{/* Страница без переводов */}}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
+  <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}" />
+{{- end -}}

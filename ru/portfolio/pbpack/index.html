@@ -982,7 +982,7 @@
   <meta itemprop="description" content="Разработка визуального стиля для бренда PBPack в социальных сетях, включая YouTube и Telegram.">
   <meta itemprop="datePublished" content="2025-01-19T20:25:20+03:00">
   <meta itemprop="dateModified" content="2025-01-19T20:25:20+03:00">
-  <meta itemprop="wordCount" content="227">
+  <meta itemprop="wordCount" content="215">
   <meta itemprop="image" content="https://0x69.ru/ru/portfolio/pbpack/Cover.png">
   <meta itemprop="keywords" content="Дизайн,Брендинг,Айдентика,Telegram,Анимированный Логотип,Визуальный Стиль">
 
@@ -1031,7 +1031,7 @@
         
         <span class="hidden sm:flex items-center gap-1">
           <ion-icon name="document-text-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
-          227 слов
+          215 слов
         </span>
 
         
@@ -1361,16 +1361,19 @@
 <hr>
 <h2 id="-ключевые-элементы">🚀 Ключевые элементы</h2>
 <h3 id="-анимированный-логотип">🌀 Анимированный логотип</h3>
-<video 
-  class="plyr-video"
-  playsinline 
-  controls 
-  data-poster="/ru/portfolio/pbpack/work/Cover_video_logo-final_hu_7fb2f8eebb4470e.webp"
-  loop 
+<media-player
+  src="work/Logo-final.mp4"
+  poster="/ru/portfolio/pbpack/work/Cover_video_logo-final_hu_7fb2f8eebb4470e.webp"
+  playsinline
+  loop
   muted
+  crossorigin
+  class="vidstack-player"
 >
-  <source src="work/Logo-final.mp4" type="video/mp4"><p>Ваш браузер не поддерживает воспроизведение видео.</p>
-</video>
+  <media-provider>
+    <source src="work/Logo-final.mp4" type="video/mp4" /></media-provider>
+  <media-video-layout></media-video-layout>
+</media-player>
 
 
 
@@ -1419,16 +1422,19 @@
 </ul>
 <hr>
 <h2 id="-процесс-создания-обложки">🎨 Процесс создания обложки</h2>
-<video 
-  class="plyr-video"
-  playsinline 
-  controls 
-  data-poster="/ru/portfolio/pbpack/work/Cover_video_creation-process_hu_fd2733c9ff59cbc2.webp"
-  loop 
+<media-player
+  src="work/Creation-process.mp4"
+  poster="/ru/portfolio/pbpack/work/Cover_video_creation-process_hu_fd2733c9ff59cbc2.webp"
+  playsinline
+  loop
   muted
+  crossorigin
+  class="vidstack-player"
 >
-  <source src="work/Creation-process.mp4" type="video/mp4"><p>Ваш браузер не поддерживает воспроизведение видео.</p>
-</video>
+  <media-provider>
+    <source src="work/Creation-process.mp4" type="video/mp4" /></media-provider>
+  <media-video-layout></media-video-layout>
+</media-player>
 
 
 
@@ -2351,13 +2357,9 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    Plyr.setup('.plyr-video');
-  });
-</script>
+<link rel="stylesheet" href="https://cdn.vidstack.io/player/theme.css" />
+<link rel="stylesheet" href="https://cdn.vidstack.io/player/video.css" />
+<script type="module" src="https://cdn.vidstack.io/player" defer></script>
 
 
 

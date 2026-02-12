@@ -982,7 +982,7 @@
   <meta itemprop="description" content="Developed visual identity for PBPack&#39;s social media brand, including YouTube and Telegram.">
   <meta itemprop="datePublished" content="2025-01-19T20:25:20+03:00">
   <meta itemprop="dateModified" content="2025-01-19T20:25:20+03:00">
-  <meta itemprop="wordCount" content="244">
+  <meta itemprop="wordCount" content="230">
   <meta itemprop="image" content="https://0x69.ru/en/portfolio/pbpack/Cover.png">
   <meta itemprop="keywords" content="Design,Branding,Identity,Telegram,Animated Logo,Visual Style">
 
@@ -1031,7 +1031,7 @@
         
         <span class="hidden sm:flex items-center gap-1">
           <ion-icon name="document-text-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
-          244 words
+          230 words
         </span>
 
         
@@ -1361,16 +1361,19 @@ Creating a unified visual style for PBPack brand, focused on YouTube and Telegra
 <hr>
 <h2 id="-key-elements">🚀 Key elements</h2>
 <h3 id="-animated-logo">🌀 Animated logo</h3>
-<video 
-  class="plyr-video"
-  playsinline 
-  controls 
-  data-poster="/en/portfolio/pbpack/work/Cover_video_logo-final_hu_7fb2f8eebb4470e.webp"
-  loop 
+<media-player
+  src="work/Logo-final.mp4"
+  poster="/en/portfolio/pbpack/work/Cover_video_logo-final_hu_7fb2f8eebb4470e.webp"
+  playsinline
+  loop
   muted
+  crossorigin
+  class="vidstack-player"
 >
-  <source src="work/Logo-final.mp4" type="video/mp4"><p>Your browser does not support video playback.</p>
-</video>
+  <media-provider>
+    <source src="work/Logo-final.mp4" type="video/mp4" /></media-provider>
+  <media-video-layout></media-video-layout>
+</media-player>
 
 
 
@@ -1419,16 +1422,19 @@ Creating a unified visual style for PBPack brand, focused on YouTube and Telegra
 </ul>
 <hr>
 <h2 id="-cover-creation-process">🎨 Cover creation process</h2>
-<video 
-  class="plyr-video"
-  playsinline 
-  controls 
-  data-poster="/en/portfolio/pbpack/work/Cover_video_creation-process_hu_fd2733c9ff59cbc2.webp"
-  loop 
+<media-player
+  src="work/Creation-process.mp4"
+  poster="/en/portfolio/pbpack/work/Cover_video_creation-process_hu_fd2733c9ff59cbc2.webp"
+  playsinline
+  loop
   muted
+  crossorigin
+  class="vidstack-player"
 >
-  <source src="work/Creation-process.mp4" type="video/mp4"><p>Your browser does not support video playback.</p>
-</video>
+  <media-provider>
+    <source src="work/Creation-process.mp4" type="video/mp4" /></media-provider>
+  <media-video-layout></media-video-layout>
+</media-player>
 
 
 
@@ -2351,13 +2357,9 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    Plyr.setup('.plyr-video');
-  });
-</script>
+<link rel="stylesheet" href="https://cdn.vidstack.io/player/theme.css" />
+<link rel="stylesheet" href="https://cdn.vidstack.io/player/video.css" />
+<script type="module" src="https://cdn.vidstack.io/player" defer></script>
 
 
 

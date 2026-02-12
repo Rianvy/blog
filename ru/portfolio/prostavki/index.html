@@ -982,7 +982,7 @@
   <meta itemprop="description" content="Разработка лендинга для проекта спортивной аналитики, включая интеграцию с Google Sheets и уникальный визуальный стиль.">
   <meta itemprop="datePublished" content="2025-01-27T18:00:34+03:00">
   <meta itemprop="dateModified" content="2025-01-27T18:00:34+03:00">
-  <meta itemprop="wordCount" content="362">
+  <meta itemprop="wordCount" content="356">
   <meta itemprop="image" content="https://0x69.ru/ru/portfolio/prostavki/Cover.png">
   <meta itemprop="keywords" content="Дизайн,Адаптивный Лендинг,Разработка Лендинга,Веб-Разработка,Дизайн Лендинга,Интерактивный Лендинг,Адаптация,Figma">
 
@@ -1031,7 +1031,7 @@
         
         <span class="hidden sm:flex items-center gap-1">
           <ion-icon name="document-text-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
-          362 слов
+          356 слов
         </span>
 
         
@@ -1504,16 +1504,19 @@
 </script>
 <hr>
 <h2 id="-демонстрация-десктопной-версии">🚀 Демонстрация десктопной версии</h2>
-<video 
-  class="plyr-video"
-  playsinline 
-  controls 
+<media-player
+  src="work/demo-desktop.mp4"
   
-  loop 
+  playsinline
+  loop
   muted
+  crossorigin
+  class="vidstack-player"
 >
-  <source src="work/demo-desktop.mp4" type="video/mp4"><p>Ваш браузер не поддерживает воспроизведение видео.</p>
-</video>
+  <media-provider>
+    <source src="work/demo-desktop.mp4" type="video/mp4" /></media-provider>
+  <media-video-layout></media-video-layout>
+</media-player>
 
 
 
@@ -2730,13 +2733,9 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    Plyr.setup('.plyr-video');
-  });
-</script>
+<link rel="stylesheet" href="https://cdn.vidstack.io/player/theme.css" />
+<link rel="stylesheet" href="https://cdn.vidstack.io/player/video.css" />
+<script type="module" src="https://cdn.vidstack.io/player" defer></script>
 
 
 

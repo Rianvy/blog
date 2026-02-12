@@ -982,7 +982,7 @@
   <meta itemprop="description" content="Landing Page development for a sports analytics project, including Google Sheets integration and unique visual style.">
   <meta itemprop="datePublished" content="2025-01-27T18:00:34+03:00">
   <meta itemprop="dateModified" content="2025-01-27T18:00:34+03:00">
-  <meta itemprop="wordCount" content="418">
+  <meta itemprop="wordCount" content="411">
   <meta itemprop="image" content="https://0x69.ru/en/portfolio/prostavki/Cover.png">
   <meta itemprop="keywords" content="Design,Adaptive Landing,Landing Development,Web-Development,Landing Design,Interactive Landing,Adaptation for Mobile Devices,Figma">
 
@@ -1031,7 +1031,7 @@
         
         <span class="hidden sm:flex items-center gap-1">
           <ion-icon name="document-text-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
-          418 words
+          411 words
         </span>
 
         
@@ -1504,16 +1504,19 @@
 </script>
 <hr>
 <h2 id="-demo-of-the-desktop-version">🚀 Demo of the desktop version</h2>
-<video 
-  class="plyr-video"
-  playsinline 
-  controls 
+<media-player
+  src="work/demo-desktop.mp4"
   
-  loop 
+  playsinline
+  loop
   muted
+  crossorigin
+  class="vidstack-player"
 >
-  <source src="work/demo-desktop.mp4" type="video/mp4"><p>Your browser does not support video playback.</p>
-</video>
+  <media-provider>
+    <source src="work/demo-desktop.mp4" type="video/mp4" /></media-provider>
+  <media-video-layout></media-video-layout>
+</media-player>
 
 
 
@@ -2730,13 +2733,9 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    Plyr.setup('.plyr-video');
-  });
-</script>
+<link rel="stylesheet" href="https://cdn.vidstack.io/player/theme.css" />
+<link rel="stylesheet" href="https://cdn.vidstack.io/player/video.css" />
+<script type="module" src="https://cdn.vidstack.io/player" defer></script>
 
 
 

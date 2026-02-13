@@ -7,45 +7,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/{{ site.Params.SyntaxHighlightingThemeDark }}.min.css" data-syntax-highlight="true" id="syntax-theme">
 {{ end }}
 
-{{/* Video Player */}}
-{{ if .Page.Store.Get "hasVideoShortcode" }}
-<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css"/>
-{{ end }}
-
-{{/* Swiper */}}
-{{ if .Page.Store.Get "hasSwiperShortcode" }}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-{{ end }}
-
 <style>
   /* Base Styles */
   pre { border-radius: 0.5rem; {{ if not site.Params.SyntaxHighlighting }}padding: 1rem; overflow: auto;{{ end }} }
-  
-  /* Swiper */
-  {{ if .Page.Store.Get "hasSwiperShortcode" }}
-  .swiper-slide { position: relative; overflow: hidden; }
-  .swiper-slide img { display: block; width: 100%; height: 300px; object-fit: cover; border-radius: 0.625rem; object-position: top; }
-  .swiper-pagination { position: absolute; bottom: 0.625rem; left: 50%; width: 90%; height: 0.3rem; background: rgba(255,255,255,0.3); border-radius: 0.2rem; }
-  .swiper-pagination-progressbar-fill { background: oklch(var(--p)); border-radius: 0.2rem; }
-  @media (max-width: 768px) { .swiper-slide img { height: auto; max-height: 200px; } }
-  {{ end }}
   
   /* Reading Progress with percentage */
   .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: oklch(var(--p)); z-index: 9999; transition: width 0.1s ease-out; }
   .reading-progress-text { position: fixed; top: 0.75rem; right: 1rem; z-index: 9999; font-size: 0.75rem; font-weight: 600; color: oklch(var(--p)); background: oklch(var(--b1) / 0.9); backdrop-filter: blur(8px); padding: 0.25rem 0.75rem; border-radius: 1rem; opacity: 0; transition: opacity 0.3s ease; }
   .reading-progress-text.visible { opacity: 1; }
   
-  /* Copy code button */
-  pre { position: relative; }
-  .copy-code-btn { position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.75rem; background: oklch(var(--b3)); border-radius: 0.25rem; cursor: pointer; opacity: 0; transition: opacity 0.2s, background 0.2s; }
-  pre:hover .copy-code-btn { opacity: 1; }
-  .copy-code-btn:hover { background: oklch(var(--p)); color: oklch(var(--pc)); }
-  .copy-code-btn.copied { background: oklch(var(--su)); color: oklch(var(--suc)); }
-  
   /* Smooth anchor scroll */
   html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
   
-  /* Enhanced TOC with scrollbar */
+  /* Enhanced TOC */
   #TableOfContents { 
     max-height: calc(100vh - 12rem); 
     overflow-y: auto;
@@ -403,44 +377,62 @@
     {{ partial "portfolio/relatedProjects.html" . }}
     {{ end }}
 
-    {{/* Related Posts */}}
-    {{ $related := .Site.RegularPages.Related . | first 3 }}
-    {{ if $related }}
-    <div class="not-prose mt-12 pt-6 border-t border-base-300 fade-in-up">
-      <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
-        <ion-icon name="reader-outline" class="text-2xl"></ion-icon>
-        {{ T "relatedPosts" | default "Читайте также" }}
-      </h3>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {{ range $related }}
-        <a href="{{ .RelPermalink }}" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
-          {{ if .Params.Cover }}
-          <figure class="overflow-hidden">
-            {{- $relCover := .Resources.GetMatch .Params.Cover -}}
-            {{- with $relCover -}}
-              {{- $thumb := .Fill "400x200 Center webp" -}}
-              <img src="{{ $thumb.RelPermalink }}" 
-                   alt="{{ $.Title }}" 
-                   width="{{ $thumb.Width }}" 
-                   height="{{ $thumb.Height }}"
-                   class="w-full h-32 object-cover transition-transform group-hover:scale-105" 
-                   loading="lazy"/>
-            {{- else -}}
-              <img src="{{ (printf "%s/%s" .RelPermalink .Params.Cover) | absURL }}" 
-                   alt="{{ .Title }}" 
-                   class="w-full h-32 object-cover transition-transform group-hover:scale-105" 
-                   loading="lazy"/>
-            {{- end -}}
-          </figure>
+    {{ if ne .Section "portfolio" }}
+      {{/* Пробуем найти связанные */}}
+      {{ $related := .Site.RegularPages.Related . | first 3 }}
+
+      {{/* Если связанных нет — берём последние посты из той же секции */}}
+      {{ if not $related }}
+        {{ $sectionPages := where .Site.RegularPages "Section" .Section }}
+        {{ $filtered := where $sectionPages "Permalink" "ne" .Permalink }}
+        {{ $related = $filtered | first 3 }}
+      {{ end }}
+
+      {{/* Если и в секции ничего — берём просто последние посты */}}
+      {{ if not $related }}
+        {{ $allOther := where .Site.RegularPages "Permalink" "ne" .Permalink }}
+        {{ $related = $allOther | first 3 }}
+      {{ end }}
+
+      {{ if $related }}
+      <div class="not-prose mt-12 pt-6 border-t border-base-300 fade-in-up">
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+          <ion-icon name="reader-outline" class="text-2xl"></ion-icon>
+          {{ T "relatedPosts" | default "Читайте также" }}
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {{ range $related }}
+          <a href="{{ .RelPermalink }}" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+            {{ if .Params.Cover }}
+            <figure class="overflow-hidden">
+              {{- $relCover := .Resources.GetMatch .Params.Cover -}}
+              {{- with $relCover -}}
+                {{- $thumb := .Fit "400x200 webp" -}}
+                <img src="{{ $thumb.RelPermalink }}"
+                     alt="{{ $.Title }}"
+                     width="{{ $thumb.Width }}"
+                     height="{{ $thumb.Height }}"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/>
+              {{- else -}}
+                <img src="{{ (printf "%s/%s" .RelPermalink .Params.Cover) | absURL }}"
+                     alt="{{ .Title }}"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/>
+              {{- end -}}
+            </figure>
+            {{ end }}
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm line-clamp-2">{{ .Title }}</h4>
+              <p class="text-xs text-base-content/60">
+                {{ .ReadingTime }} {{ T "minuteRead" .ReadingTime }}
+              </p>
+            </div>
+          </a>
           {{ end }}
-          <div class="card-body p-4">
-            <h4 class="card-title text-sm line-clamp-2">{{ .Title }}</h4>
-            <p class="text-xs text-base-content/60">{{ .ReadingTime }} {{ T "minuteRead" .ReadingTime }}</p>
-          </div>
-        </a>
-        {{ end }}
+        </div>
       </div>
-    </div>
+      {{ end }}
     {{ end }}
 
     {{/* Tags */}}
@@ -725,23 +717,26 @@ document.addEventListener('DOMContentLoaded', () => {
 <script type="module" src="https://cdn.vidstack.io/player" defer></script>
 {{ end }}
 
-{{/* Swiper */}}
-{{ if .Page.Store.Get "hasSwiperShortcode" }}
-<script>
-window.initSwiper = function(config) {
-  import('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs').then((SwiperModule) => {
-    const Swiper = SwiperModule.default;
-    const swiperOptions = {
-      loop: config.loop || false,
-      autoplay: config.autoplay ? { delay: parseInt(config.autoplay, 10), disableOnInteraction: false } : undefined,
-      pagination: config.pagination ? { el: `.swiper-container.${config.id} .swiper-pagination`, type: 'progressbar' } : undefined,
-    };
-    new Swiper(`.${config.id}-mySwiper`, swiperOptions);
-  }).catch((error) => {
-    console.error('Failed to load Swiper:', error);
-  });
-};
-</script>
+{{ if .Page.Store.Get "hasSliderShortcode" }}
+<style>
+  .embla-wrapper{position:relative}
+  .embla__viewport{overflow:hidden;border-radius:12px}
+  .embla__container{display:flex;touch-action:pan-y pinch-zoom}
+  .embla__slide{flex:0 0 100%;min-width:0;position:relative}
+  .embla__slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;-webkit-user-drag:none;user-select:none}
+  .embla--fixed-height .embla__viewport{height:500px}
+  @media(max-width:768px){.embla--fixed-height .embla__viewport{height:300px}}
+  @media(max-width:480px){.embla--fixed-height .embla__viewport{height:200px}}
+  .embla__btn{position:absolute;top:50%;transform:translateY(-50%);z-index:2;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:none;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;cursor:pointer;backdrop-filter:blur(4px);transition:background .2s,opacity .2s}
+  .embla__btn:hover{background:rgba(0,0,0,.7)}
+  .embla__btn:disabled{opacity:.3;cursor:default}
+  .embla__btn--prev{left:12px}
+  .embla__btn--next{right:12px}
+  .embla__progress{height:3px;background:rgba(0,0,0,.1);border-radius:2px;margin-top:12px;overflow:hidden}
+  .embla__progress-bar{height:100%;background:currentColor;transform-origin:left;transform:scaleX(0);transition:transform .15s ease-out;border-radius:2px}
+  @media(prefers-color-scheme:dark){.embla__progress{background:rgba(255,255,255,.15)}}
+</style>
+<script src="https://unpkg.com/embla-carousel@8.5.1/embla-carousel.umd.js"></script>
 {{ end }}
 
 {{/* Luxon Date */}}

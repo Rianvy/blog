@@ -175,14 +175,11 @@ Modern browsers can use their own DNS independent of system settings.
 Configuration at the system level ensures DNS works for all applications, not just the browser.
 
 #### Windows 11
-{{< swiper id="first-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="img/ApplicationFrameHost_M4HJZqIXDT.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/ApplicationFrameHost_YT6QkS1Pwb.png">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+
+{{< slider pagination="true" loop="true" autoplay="2500" >}}
+![](img/ApplicationFrameHost_M4HJZqIXDT.png)
+![](img/ApplicationFrameHost_YT6QkS1Pwb.png)
+{{< /slider >}}
 
 1. **Settings** → **Network & internet**.
 2. Select **Wi-Fi** or **Ethernet** (depending on connection).
@@ -239,20 +236,12 @@ Configuration at the system level ensures DNS works for all applications, not ju
 
 Excellent solution for a quick start. Requires no technical knowledge, set up in a couple of minutes. Suitable as a basic measure or for users who need a simple method without unnecessary complexity.
 
-{{< swiper id="second-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_7fcq7MCsWq.png" alt="ChatGPT" title="ChatGPT">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_b3mfbxuoGx.png" alt="Gemini" title="Gemini">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_YlE4m2YXq3.png" alt="Grok" title="Grok">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_mvmj9ZKulV.png" alt="Claude" title="Claude">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+{{< slider pagination="true" loop="true" autoplay="2500" >}}
+![ChatGPT](img/comet_7fcq7MCsWq.png "ChatGPT")
+![Gemini](img/comet_b3mfbxuoGx.png "Gemini")
+![Grok](img/comet_YlE4m2YXq3.png "Grok")
+![Claude](img/comet_mvmj9ZKulV.png "Claude")
+{{< /slider >}}
 
 ---
 
@@ -299,32 +288,20 @@ The file location depends on the operating system:
 2. Right-click → "Run as administrator".
 3. In Notepad: File → Open.
 4. In the path field, paste: `C:\Windows\System32\drivers\etc\`.
-{{< swiper id="third-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="img/Notepad_qHj9Ua856p.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/Notepad_9EXvMFEpui.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/Notepad_YNVqm5pPs8.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/Notepad_Q1QoStC2gL.png">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+{{< slider pagination="true" loop="true" autoplay="2500" >}}
+![](img/Notepad_qHj9Ua856p.png)
+![](img/Notepad_9EXvMFEpui.png)
+![](img/Notepad_YNVqm5pPs8.png)
+![](img/Notepad_Q1QoStC2gL.png)
+{{< /slider >}}
 5. In the "File type" dropdown, select **"All Files"** (otherwise hosts won't appear).
 6. Open the file.
 7. Scroll to the very end.
 8. Add the necessary entries (each on a new line).
-{{< swiper id="fourth-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="img/Notepad_gjZkCJ9Tun.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/Notepad_Or2cEaoEe3.png">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+{{< slider id="fourth-slider" pagination="true" loop="true" autoplay="2500" >}}
+![](img/Notepad_gjZkCJ9Tun.png)
+![](img/Notepad_Or2cEaoEe3.png)
+{{< /slider >}}
 9. Save (Ctrl + S).
 
 **Critical Points:**
@@ -486,17 +463,11 @@ You'll get a personal address like:
 - **DNS-over-TLS**: `tls://your_id.d.adguard-dns.com`
 - **Regular DNS**: simple IP addresses (less secure, but simpler).
 
-{{< swiper id="fifth-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_fi3bau44Mo.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_eR2iMRSBiW.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_l6eMQgwPRL.png">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+{{< slider pagination="true" loop="true" autoplay="2500" >}}
+![](img/comet_fi3bau44Mo.png)
+![](img/comet_eR2iMRSBiW.png)
+![](img/comet_l6eMQgwPRL.png)
+{{< /slider >}}
 
 **Step 3: Applying DNS**
 

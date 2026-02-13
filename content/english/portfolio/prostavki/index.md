@@ -4,7 +4,6 @@ date: 2025-01-27T18:00:34+03:00
 status: completed  # completed | in-progress | archived | planned | paused
 author: Rianvy
 avatar: /img/avatar.jpg
-# authorlink: https://author.site
 description: Landing Page development for a sports analytics project, including Google Sheets integration and unique visual style.
 cover: Cover.png
 images:
@@ -62,32 +61,17 @@ Within the framework of the project implementation, an adaptive web site was cre
 ---
 
 ### Result of work
-{{< swiper id="first-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="work/work-result-cover.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/header-final.png" alt="Header with logo" title="Logo and navigation in the header">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/advantages-section.png" alt="Block of advantages" title="Section with 6 key advantages">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/live-stats.png" alt="Dynamic statistics" title="Automatic loading of data from Google Sheets">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/reviews-section.png" alt="Feedback about us" title="Feedback block">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/about-us-section.png" alt="About us" title="Information about the team and its goals">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/faq-section.png" alt="Frequently Asked Questions" title="Section with drop-down answers to questions">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/footer-section.png" alt="Landing page footer">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+
+{{< gallery id="first-slider" cols="3" gap="8px" >}}
+![Work result](work/work-result-cover.png "Final look of the landing page")
+![Header with logo](work/header-final.png "Logo and navigation in the header")
+![Advantages block](work/advantages-section.png "Section with 6 key advantages")
+![Dynamic statistics](work/live-stats.png "Automatic loading of data from Google Sheets")
+![Reviews about us](work/reviews-section.png "Feedback block")
+![About us](work/about-us-section.png "Information about the team and its goals")
+![Frequently Asked Questions](work/faq-section.png "Section with drop-down answers to questions")
+![Landing page footer](work/footer-section.png "Footer with contacts and social networks")
+{{< /gallery >}}
 
 ---
 
@@ -103,21 +87,14 @@ Within the framework of the project implementation, an adaptive web site was cre
 ![Full screen view](work/desktop-view.png "Display on widescreens")
 ![Full screen view](work/privacy-desktop-view.png "Display on widescreens")
 
-### Mobile version  
-{{< swiper id="second-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="work/mobile/mobile-version-cover.png" alt="Mobile adaptation">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/mobile/mobile-version-slide1.png" alt="Mobile adaptation" title="Optimized interface for smartphones">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/mobile/mobile-version-slide2.png" alt="Mobile adaptation" title="Optimized interface for smartphones">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/mobile/mobile-version-slide3.png" alt="Mobile adaptation" title="Optimized interface for smartphones">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+### Mobile version
+
+{{< slider id="second-slider" pagination="true" loop="true" autoplay="2500" >}}
+![Mobile adaptation](work/mobile/mobile-version-cover.png)
+![Mobile adaptation](work/mobile/mobile-version-slide1.png "Optimized interface for smartphones")
+![Mobile adaptation](work/mobile/mobile-version-slide2.png "Optimized interface for smartphones")
+![Mobile adaptation](work/mobile/mobile-version-slide3.png "Optimized interface for smartphones")
+{{< /slider >}}
 
 ---
 

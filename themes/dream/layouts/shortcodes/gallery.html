@@ -1,0 +1,392 @@
+{{- .Page.Store.Set "hasGalleryShortcode" true -}}
+
+{{- $id     := .Get "id"     | default (printf "gallery-%s" (substr (md5 (printf "%s-%d" .Inner .Ordinal)) 0 8)) -}}
+{{- $cols   := .Get "cols"   | default "3" -}}
+{{- $gap    := .Get "gap"    | default "4" -}}
+{{- $hover  := .Get "hover"  | default "zoom" -}}
+{{- $radius := .Get "radius" | default "2xl" -}}
+{{- $ratio  := .Get "ratio"  | default "" -}}
+{{- $cap    := .Get "captions" | default "auto" -}}
+
+{{/* ── Gap mapping ── */}}
+{{- $gapPx := dict
+    "0" "0"
+    "1" "0.25rem"
+    "2" "0.5rem"
+    "3" "0.75rem"
+    "4" "1rem"
+    "5" "1.25rem"
+    "6" "1.5rem"
+    "8" "2rem"
+    "10" "2.5rem"
+    "12" "3rem"
+-}}
+{{- $gapValue := index $gapPx $gap | default "1rem" -}}
+
+{{/* ── Radius mapping ── */}}
+{{- $radiusMap := dict
+    "none" "0"
+    "sm"   "0.125rem"
+    "md"   "0.375rem"
+    "lg"   "0.5rem"
+    "xl"   "0.75rem"
+    "2xl"  "1rem"
+    "3xl"  "1.5rem"
+    "full" "9999px"
+-}}
+{{- $radiusValue := index $radiusMap $radius | default "1rem" -}}
+
+{{/* ── Aspect ratio mapping ── */}}
+{{- $ratioMap := dict
+    "square" "1 / 1"
+    "4/3"    "4 / 3"
+    "3/2"    "3 / 2"
+    "16/9"   "16 / 9"
+    "3/4"    "3 / 4"
+    "2/3"    "2 / 3"
+    "9/16"   "9 / 16"
+-}}
+{{- $ratioValue := "" -}}
+{{- if ne $ratio "" -}}
+  {{- $ratioValue = index $ratioMap $ratio | default "" -}}
+{{- end -}}
+
+{{- $staggerId := printf "stagger-%s" $id -}}
+
+
+<!-- ======================== GALLERY ======================== -->
+<section
+  class="not-prose gallery-section my-8 w-full"
+  aria-label="Галерея изображений"
+  data-gallery-id="{{ $id }}"
+>
+
+
+  <div
+    class="gallery gallery--hover-{{ $hover }}{{ with $ratio }} gallery--grid{{ end }}"
+    id="{{ $id }}"
+    role="list"
+    data-cols="{{ $cols }}"
+    data-gap="{{ $gap }}"
+    data-hover="{{ $hover }}"
+    data-captions="{{ $cap }}"
+  >
+    {{- .Inner | markdownify -}}
+  </div>
+</section>
+
+
+<!-- ======================== SCOPED STYLES ======================== -->
+<style>
+  /* ============================================================
+     LAYOUT
+     ============================================================ */
+
+  {{ if eq $ratio "" }}
+  #{{ $id }}.gallery {
+    columns: 1;
+    column-gap: {{ $gapValue }};
+  }
+
+  @media (min-width: 640px) {
+    #{{ $id }}.gallery {
+      columns: {{ if le (int $cols) 2 }}{{ $cols }}{{ else }}2{{ end }};
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #{{ $id }}.gallery {
+      columns: {{ $cols }};
+    }
+  }
+  {{ else }}
+  #{{ $id }}.gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: {{ $gapValue }};
+  }
+
+  @media (min-width: 640px) {
+    #{{ $id }}.gallery {
+      grid-template-columns: repeat({{ if le (int $cols) 2 }}{{ $cols }}{{ else }}2{{ end }}, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #{{ $id }}.gallery {
+      grid-template-columns: repeat({{ $cols }}, 1fr);
+    }
+  }
+  {{ end }}
+
+  /* ============================================================
+     ITEMS
+     ============================================================ */
+  #{{ $id }} figure,
+  #{{ $id }} > p {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: {{ $radiusValue }};
+    background: oklch(var(--b2, 0.93 0 0));
+    break-inside: avoid;
+    {{ if eq $ratio "" }}
+    margin-bottom: {{ $gapValue }};
+    {{ end }}
+
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    animation: {{ $staggerId }}-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  @keyframes {{ $staggerId }}-enter {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Hover: lift */
+  #{{ $id }}.gallery--hover-lift figure:hover,
+  #{{ $id }}.gallery--hover-lift > p:hover {
+    transform: translateY(-4px);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ============================================================
+     LINK WRAPPER
+     ============================================================ */
+  #{{ $id }} figure a,
+  #{{ $id }} > p > a {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ $radiusValue }};
+    line-height: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ============================================================
+     IMAGES
+     ============================================================ */
+  #{{ $id }} img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: {{ $radiusValue }};
+    cursor: pointer;
+    user-select: none;
+    margin: 0 !important;
+    transition:
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      filter    0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity   0.4s ease;
+    will-change: transform;
+    {{ if ne $ratioValue "" }}
+    aspect-ratio: {{ $ratioValue }};
+    object-fit: cover;
+    {{ end }}
+  }
+
+  /* Zoom */
+  #{{ $id }}.gallery--hover-zoom figure:hover img,
+  #{{ $id }}.gallery--hover-zoom > p:hover img {
+    transform: scale(1.06);
+    filter: brightness(1.05);
+  }
+
+  /* Fade */
+  #{{ $id }}.gallery--hover-fade figure:hover img,
+  #{{ $id }}.gallery--hover-fade > p:hover img {
+    opacity: 0.85;
+  }
+
+  /* Lift */
+  #{{ $id }}.gallery--hover-lift figure:hover img,
+  #{{ $id }}.gallery--hover-lift > p:hover img {
+    filter: brightness(1.03);
+  }
+
+  /* None */
+  #{{ $id }}.gallery--hover-none figure:hover img,
+  #{{ $id }}.gallery--hover-none > p:hover img {
+    transform: none;
+    filter: none;
+  }
+
+  /* ============================================================
+     GRADIENT OVERLAY
+     ============================================================ */
+  #{{ $id }} figure a::after,
+  #{{ $id }} > p > a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: {{ $radiusValue }};
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.25) 0%,
+      oklch(0 0 0 / 0.06) 40%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #{{ $id }}.gallery--hover-none figure a::after,
+  #{{ $id }}.gallery--hover-none > p > a::after {
+    display: none;
+  }
+
+  #{{ $id }} figure:hover a::after,
+  #{{ $id }} > p:hover > a::after {
+    opacity: 1;
+  }
+
+  /* ============================================================
+     FIGCAPTION
+     ============================================================ */
+  #{{ $id }} figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.25rem 1rem 0.75rem;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.55) 0%,
+      transparent 100%
+    );
+    color: white;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    border-radius: 0 0 {{ $radiusValue }} {{ $radiusValue }};
+    pointer-events: none;
+    z-index: 2;
+
+    {{ if eq $cap "auto" }}
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity   0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    {{ else if eq $cap "always" }}
+    opacity: 1;
+    {{ else }}
+    display: none;
+    {{ end }}
+  }
+
+  {{ if eq $cap "auto" }}
+  #{{ $id }} figure:hover figcaption,
+  #{{ $id }} figure:focus-within figcaption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  {{ end }}
+
+  /* ============================================================
+     FOCUS & ACCESSIBILITY
+     ============================================================ */
+  #{{ $id }} a:focus-visible,
+  #{{ $id }} img:focus-visible {
+    outline: 2px solid oklch(var(--p, 0.65 0.25 260));
+    outline-offset: 2px;
+    border-radius: {{ $radiusValue }};
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #{{ $id }} figure,
+    #{{ $id }} > p {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    #{{ $id }} img {
+      transition-duration: 0.01ms !important;
+    }
+
+    #{{ $id }} figure a::after,
+    #{{ $id }} > p > a::after,
+    #{{ $id }} figcaption {
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ============================================================
+     LOADING PLACEHOLDER
+     ============================================================ */
+  #{{ $id }} img[loading="lazy"] {
+    background:
+      linear-gradient(
+        110deg,
+        oklch(var(--b2, 0.93 0 0)) 30%,
+        oklch(var(--b3, 0.88 0 0)) 50%,
+        oklch(var(--b2, 0.93 0 0)) 70%
+      );
+    background-size: 200% 100%;
+    animation: {{ $id }}-shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes {{ $id }}-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  #{{ $id }} img.loaded {
+    animation: none;
+    background: none;
+  }
+</style>
+
+
+<!-- ======================== RUNTIME JS ======================== -->
+<script>
+  (() => {
+    const gallery = document.getElementById('{{ $id }}');
+    if (!gallery) return;
+
+    const items = gallery.querySelectorAll('figure, :scope > p');
+    items.forEach((el, i) => {
+      el.style.setProperty('--i', i);
+      el.setAttribute('role', 'listitem');
+    });
+
+    gallery.querySelectorAll('img').forEach(img => {
+      const markLoaded = () => img.classList.add('loaded');
+      if (img.complete) {
+        markLoaded();
+      } else {
+        img.addEventListener('load', markLoaded, { once: true });
+        img.addEventListener('error', markLoaded, { once: true });
+      }
+
+      if (!img.closest('a')) {
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('role', 'button');
+      }
+    });
+
+    const counter = document.getElementById('{{ $id }}-count');
+    if (counter) {
+      const total = gallery.querySelectorAll('img').length;
+      counter.textContent = `Галерея: ${total} ${total === 1 ? 'изображение' : 'изображений'}`;
+    }
+
+    gallery.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const img = e.target;
+        if (img.tagName === 'IMG') {
+          e.preventDefault();
+          const link = img.closest('a');
+          if (link) link.click();
+        }
+      }
+    });
+  })();
+</script>

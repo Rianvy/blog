@@ -1,5 +1,5 @@
 ---
-title: "Social media design PBPack"
+title: "Дизайн для социальных сетей PBPack"
 date: 2025-01-19T20:25:20+03:00
 status: completed  # completed | in-progress | archived | planned | paused
 author: Rianvy

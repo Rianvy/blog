@@ -295,5 +295,3 @@ When changing themes, CSS transition is applied to background-color and color wi
 - High performance and SEO optimization
 - Responsive design for all devices
 - Integration with the browser extension
-
----

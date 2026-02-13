@@ -175,14 +175,11 @@ tags:
 Настройка на уровне системы обеспечит работу DNS для всех приложений, а не только для браузера.
 
 #### Windows 11
-{{< swiper id="first-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="img/ApplicationFrameHost_M4HJZqIXDT.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/ApplicationFrameHost_YT6QkS1Pwb.png">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+
+{{< slider pagination="true" loop="true" autoplay="2500" height="500px" >}}
+![](img/ApplicationFrameHost_M4HJZqIXDT.png)
+![](img/ApplicationFrameHost_YT6QkS1Pwb.png)
+{{< /slider >}}
 
 1. **Настройки** → **Сеть и интернет**
 2. Выберите **Wi-Fi** или **Ethernet** (в зависимости от подключения)
@@ -239,20 +236,12 @@ tags:
 
 Отличное решение для быстрого старта. Не требует технических знаний, настраивается за пару минут. Подходит как базовая мера или для пользователей, которым нужен простой способ без лишних сложностей.
 
-{{< swiper id="second-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_7fcq7MCsWq.png" alt="ChatGPT" title="ChatGPT">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_b3mfbxuoGx.png" alt="Gemini" title="Gemini">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_YlE4m2YXq3.png" alt="Grok" title="Grok">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_mvmj9ZKulV.png" alt="Claude" title="Claude">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+{{< slider pagination="true" loop="true" autoplay="2500" height="500px" >}}
+![ChatGPT](img/comet_7fcq7MCsWq.png)
+![Gemini](img/comet_b3mfbxuoGx.png)
+![Grok](img/comet_YlE4m2YXq3.png)
+![Claude](img/comet_mvmj9ZKulV.png)
+{{< /slider >}}
 
 ---
 
@@ -299,32 +288,20 @@ IP-адрес    домен
 2. Кликните правой кнопкой → "Запустить от имени администратора"
 3. В Блокноте: Файл → Открыть
 4. В поле пути вставьте: `C:\Windows\System32\drivers\etc\`
-{{< swiper id="third-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="img/Notepad_qHj9Ua856p.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/Notepad_9EXvMFEpui.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/Notepad_YNVqm5pPs8.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/Notepad_Q1QoStC2gL.png">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+{{< slider pagination="true" loop="true" autoplay="2500" height="500px" >}}
+![](img/Notepad_qHj9Ua856p.png)
+![](img/Notepad_9EXvMFEpui.png)
+![](img/Notepad_YNVqm5pPs8.png)
+![](img/Notepad_Q1QoStC2gL.png)
+{{< /slider >}}
 5. В выпадающем списке "Тип файлов" выберите **"Все файлы"** (иначе hosts не покажется)
 6. Откройте файл
 7. Прокрутите в самый конец
 8. Добавьте нужные записи (каждая с новой строки)
-{{< swiper id="fourth-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="img/Notepad_gjZkCJ9Tun.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/Notepad_Or2cEaoEe3.png">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+{{< slider pagination="true" loop="true" autoplay="2500" height="500px" >}}
+![](img/Notepad_gjZkCJ9Tun.png)
+![](img/Notepad_Or2cEaoEe3.png)
+{{< /slider >}}
 9. Сохраните (Ctrl + S)
 
 **Критически важные моменты:**
@@ -486,17 +463,11 @@ AdGuard DNS — это не просто публичный DNS вроде Googl
 - **DNS-over-TLS**: `tls://ваш_id.d.adguard-dns.com`
 - **Обычный DNS**: просто IP-адреса (менее безопасно, но проще)
 
-{{< swiper id="fifth-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_fi3bau44Mo.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_eR2iMRSBiW.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="img/comet_l6eMQgwPRL.png">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+{{< slider pagination="true" loop="true" autoplay="2500" height="500px" >}}
+![](img/comet_fi3bau44Mo.png)
+![](img/comet_eR2iMRSBiW.png)
+![](img/comet_l6eMQgwPRL.png)
+{{< /slider >}}
 
 **Шаг 3: Применение DNS**
 

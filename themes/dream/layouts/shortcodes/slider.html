@@ -1,0 +1,404 @@
+{{- .Page.Store.Set "hasSliderShortcode" true -}}
+
+{{- $id := .Get "id" | default (printf "slider-%s" (substr (md5 (printf "%s-%d" .Inner .Ordinal)) 0 8)) -}}
+{{- $pagination := .Get "pagination" | default false -}}
+{{- $loop       := .Get "loop"       | default false -}}
+{{- $autoplay   := .Get "autoplay"   | default false -}}
+{{- $height     := .Get "height"     | default "500px" -}}
+
+
+<!-- ======================== SLIDER ======================== -->
+<div class="not-prose my-4 w-full">
+  <div
+    class="slider-wrapper group relative mx-auto w-full overflow-hidden
+           rounded-2xl bg-base-200 ring-1 ring-base-content/5"
+    id="{{ $id }}"
+    role="region"
+    aria-roledescription="carousel"
+    aria-label="Слайдер изображений"
+    tabindex="0"
+  >
+
+    <!-- Viewport -->
+    <div class="slider-viewport overflow-hidden">
+      <div class="slider-container"
+           role="list"
+           style="display: flex;">
+        {{- .Inner | markdownify -}}
+      </div>
+    </div>
+
+    <!-- Стрелка: назад -->
+    <button
+      class="slider-btn slider-btn--prev
+             absolute left-2 top-1/2 z-10 -translate-y-1/2
+             flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center
+             rounded-full
+             bg-base-100/80 backdrop-blur-sm
+             text-base-content
+             ring-1 ring-base-content/10
+             shadow-lg
+             opacity-0 transition-all duration-300
+             group-hover:opacity-100
+             hover:bg-base-100 hover:scale-110
+             active:scale-95
+             disabled:invisible
+             cursor-pointer
+             focus-visible:opacity-100 focus-visible:outline-2
+             focus-visible:outline-offset-2 focus-visible:outline-primary"
+      aria-label="Предыдущий слайд"
+    >
+      <svg class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+
+    <!-- Стрелка: вперёд -->
+    <button
+      class="slider-btn slider-btn--next
+             absolute right-2 top-1/2 z-10 -translate-y-1/2
+             flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center
+             rounded-full
+             bg-base-100/80 backdrop-blur-sm
+             text-base-content
+             ring-1 ring-base-content/10
+             shadow-lg
+             opacity-0 transition-all duration-300
+             group-hover:opacity-100
+             hover:bg-base-100 hover:scale-110
+             active:scale-95
+             disabled:invisible
+             cursor-pointer
+             focus-visible:opacity-100 focus-visible:outline-2
+             focus-visible:outline-offset-2 focus-visible:outline-primary"
+      aria-label="Следующий слайд"
+    >
+      <svg class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+
+    {{- if $pagination }}
+    <div class="absolute bottom-0 left-0 z-10 h-1 w-full bg-base-content/10">
+      <div class="slider-progress-bar h-full origin-left bg-primary transition-transform duration-200 ease-out"
+           style="transform: scaleX(0);"></div>
+    </div>
+    {{- end }}
+
+    <!-- Dots -->
+    <div class="slider-dots
+                absolute bottom-2 sm:bottom-3 left-1/2 z-10 -translate-x-1/2
+                flex items-center gap-1 sm:gap-1.5
+                rounded-full bg-base-100/70 backdrop-blur-sm
+                px-2 py-1 sm:px-3 sm:py-1.5
+                opacity-0 transition-opacity duration-300
+                group-hover:opacity-100
+                focus-within:opacity-100"
+         role="tablist"
+         aria-label="Выбор слайда">
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ======================== STYLES ======================== -->
+<style>
+  /* --- Фиксированная высота с адаптивностью --- */
+  #{{ $id }}.slider-wrapper {
+    --slider-height: {{ $height }};
+    height: var(--slider-height);
+    max-height: 75vh;
+  }
+
+  /* Мобильные: пропорционально уменьшаем */
+  @media (max-width: 640px) {
+    #{{ $id }}.slider-wrapper {
+      height: calc(var(--slider-height) * 0.5);
+      max-height: 50vh;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 1024px) {
+    #{{ $id }}.slider-wrapper {
+      height: calc(var(--slider-height) * 0.75);
+      max-height: 65vh;
+    }
+  }
+
+  /* --- Viewport и контейнер: строго по высоте --- */
+  #{{ $id }} .slider-viewport {
+    height: 100% !important;
+  }
+
+  #{{ $id }} .slider-container {
+    height: 100% !important;
+  }
+
+  /* --- Слайды: строго по высоте контейнера --- */
+  #{{ $id }} .slider-container > * {
+    flex: 0 0 100% !important;
+    min-width: 0 !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* --- Изображения: заполняют слайд, обрезаются по высоте --- */
+  #{{ $id }} .slider-container img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    user-select: none;
+  }
+
+  #{{ $id }} .slider-container figure {
+    margin: 0 !important;
+    height: 100% !important;
+  }
+
+  #{{ $id }} .slider-container figure a {
+    display: block !important;
+    height: 100% !important;
+  }
+
+  #{{ $id }} .slider-container figcaption {
+    display: none !important;
+  }
+
+  /* --- Точки --- */
+  .slider-dot {
+    height: 0.375rem;
+    width: 0.375rem;
+    border-radius: 9999px;
+    background: oklch(var(--bc) / 0.3);
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+  }
+
+  .slider-dot:hover {
+    background: oklch(var(--bc) / 0.6);
+  }
+
+  .slider-dot[aria-selected="true"] {
+    width: 1rem;
+    background: oklch(var(--p));
+  }
+
+  @media (min-width: 640px) {
+    .slider-dot {
+      height: 0.5rem;
+      width: 0.5rem;
+    }
+    .slider-dot[aria-selected="true"] {
+      width: 1.5rem;
+    }
+  }
+
+  /* --- Тачскрины --- */
+  @media (hover: none) {
+    .slider-btn,
+    .slider-dots {
+      opacity: 1 !important;
+    }
+  }
+
+  /* --- Reduced motion --- */
+  @media (prefers-reduced-motion: reduce) {
+    #{{ $id }} .slider-container,
+    #{{ $id }} .slider-container img,
+    .slider-btn,
+    .slider-dots,
+    .slider-dot {
+      transition: none !important;
+      animation: none !important;
+    }
+    .slider-btn,
+    .slider-dots {
+      opacity: 1 !important;
+    }
+  }
+</style>
+
+
+<!-- ======================== SCRIPT ======================== -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var root = document.getElementById('{{ $id }}');
+  if (!root) return;
+
+  var viewport      = root.querySelector('.slider-viewport');
+  var container     = root.querySelector('.slider-container');
+  var prevBtn       = root.querySelector('.slider-btn--prev');
+  var nextBtn       = root.querySelector('.slider-btn--next');
+  var dotsContainer = root.querySelector('.slider-dots');
+
+  /* Принудительно выставляем размеры слайдов */
+  var slides = container.children;
+  for (var i = 0; i < slides.length; i++) {
+    slides[i].style.flex = '0 0 100%';
+    slides[i].style.minWidth = '0';
+    slides[i].style.height = '100%';
+    slides[i].style.margin = '0';
+    slides[i].style.padding = '0';
+    slides[i].style.overflow = 'hidden';
+  }
+
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  var embla = EmblaCarousel(viewport, {
+    loop:           {{ $loop }},
+    align:          'start',
+    skipSnaps:      false,
+    dragFree:       false,
+    speed:          prefersReducedMotion.matches ? 100 : 10,
+    containScroll:  'trimSnaps'
+  });
+
+  /* ===================== СТРЕЛКИ ===================== */
+  prevBtn.addEventListener('click', function () { embla.scrollPrev(); });
+  nextBtn.addEventListener('click', function () { embla.scrollNext(); });
+
+  function updateButtons() {
+    prevBtn.disabled = !embla.canScrollPrev();
+    nextBtn.disabled = !embla.canScrollNext();
+  }
+
+  /* ===================== DOTS ===================== */
+  function createDots() {
+    dotsContainer.innerHTML = '';
+    var snapCount = embla.scrollSnapList().length;
+    for (var i = 0; i < snapCount; i++) {
+      var dot = document.createElement('button');
+      dot.className = 'slider-dot';
+      dot.role = 'tab';
+      dot.setAttribute('aria-selected', 'false');
+      dot.setAttribute('aria-label', 'Слайд ' + (i + 1));
+      dot.setAttribute('tabindex', '-1');
+      (function (index) {
+        dot.addEventListener('click', function () { embla.scrollTo(index); });
+      })(i);
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function updateDots() {
+    var selected = embla.selectedScrollSnap();
+    var dots = dotsContainer.querySelectorAll('.slider-dot');
+    dots.forEach(function (dot, i) {
+      var isActive = i === selected;
+      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      dot.setAttribute('tabindex', isActive ? '0' : '-1');
+    });
+  }
+
+  /* ===================== ARIA ===================== */
+  function updateSlideAria() {
+    var selected = embla.selectedScrollSnap();
+    var slideNodes = embla.slideNodes();
+    slideNodes.forEach(function (slide, i) {
+      var isActive = i === selected;
+      slide.setAttribute('role', 'listitem');
+      slide.setAttribute('aria-roledescription', 'slide');
+      slide.setAttribute('aria-label', 'Слайд ' + (i + 1) + ' из ' + slideNodes.length);
+      slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      slide.inert = !isActive;
+    });
+  }
+
+  /* ===================== INIT ===================== */
+  createDots();
+
+  embla
+    .on('init',   updateButtons)
+    .on('init',   updateDots)
+    .on('init',   updateSlideAria)
+    .on('select', updateButtons)
+    .on('select', updateDots)
+    .on('select', updateSlideAria);
+
+  /* Принудительный reInit */
+  requestAnimationFrame(function () {
+    embla.reInit();
+    createDots();
+    updateDots();
+    updateButtons();
+    updateSlideAria();
+  });
+
+  /* ===================== КЛАВИАТУРА ===================== */
+  root.addEventListener('keydown', function (e) {
+    switch (e.key) {
+      case 'ArrowLeft':
+        e.preventDefault();
+        embla.scrollPrev();
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        embla.scrollNext();
+        break;
+      case 'Home':
+        e.preventDefault();
+        embla.scrollTo(0);
+        break;
+      case 'End':
+        e.preventDefault();
+        embla.scrollTo(embla.scrollSnapList().length - 1);
+        break;
+    }
+  });
+
+  {{ if $pagination }}
+  var progressBar = root.querySelector('.slider-progress-bar');
+  function updateProgress() {
+    var progress = Math.max(0, Math.min(1, embla.scrollProgress()));
+    progressBar.style.transform = 'scaleX(' + progress + ')';
+  }
+  embla.on('scroll', updateProgress).on('init', updateProgress);
+  {{ end }}
+
+  {{ if $autoplay }}
+  var delay = {{ $autoplay }};
+  var timer = null;
+  var autoplayAllowed = !prefersReducedMotion.matches;
+
+  prefersReducedMotion.addEventListener('change', function (e) {
+    autoplayAllowed = !e.matches;
+    if (e.matches) stopAutoplay(); else startAutoplay();
+  });
+
+  function startAutoplay() {
+    if (!autoplayAllowed) return;
+    stopAutoplay();
+    timer = setInterval(function () {
+      if (embla.canScrollNext()) embla.scrollNext();
+      else embla.scrollTo(0);
+    }, delay);
+  }
+
+  function stopAutoplay() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+
+  startAutoplay();
+  root.addEventListener('mouseenter', stopAutoplay);
+  root.addEventListener('mouseleave', startAutoplay);
+  root.addEventListener('focusin', stopAutoplay);
+  root.addEventListener('focusout', function (e) {
+    if (!root.contains(e.relatedTarget)) startAutoplay();
+  });
+  embla.on('pointerDown', stopAutoplay);
+  embla.on('pointerUp', function () { setTimeout(startAutoplay, delay); });
+  {{ end }}
+});
+</script>

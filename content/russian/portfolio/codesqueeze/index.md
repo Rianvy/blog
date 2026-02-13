@@ -1,5 +1,5 @@
 ---
-title: CodeSqueeze — Online Code Minifier
+title: CodeSqueeze — онлайн-минификатор кода
 date: 2026-01-19T08:05:59+03:00
 status: in-progress  # completed | in-progress | archived | planned | paused
 author: Rianvy

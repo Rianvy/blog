@@ -1,10 +1,9 @@
 ---
-title: Landing Page ProStavki
+title: Лендинг ProStavki
 date: 2025-01-27T18:00:34+03:00
 author: Rianvy
 status: completed  # completed | in-progress | archived | planned | paused
 avatar: /img/avatar.jpg
-# authorlink: https://author.site
 description: Разработка лендинга для проекта спортивной аналитики, включая интеграцию с Google Sheets и уникальный визуальный стиль.
 cover: Cover.png
 images:
@@ -62,32 +61,17 @@ tools:
 ---
 
 ### Результат работы
-{{< swiper id="first-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="work/work-result-cover.png">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/header-final.png" alt="Хедер с логотипом" title="Логотип и навигация в хедере">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/advantages-section.png" alt="Блок преимуществ" title="Секция с 6 ключевыми преимуществами">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/live-stats.png" alt="Динамическая статистика" title="Автоматическая загрузка данных из Google Sheets">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/reviews-section.png" alt="Отзывы о нас" title="Блок отзывов">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/about-us-section.png" alt="О нас" title="Информация о команде и её целях">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/faq-section.png" alt="Часто задаваемые вопросы" title="Раздел с раскрывающимися ответами на вопросы">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/footer-section.png" alt="Футер лендинга">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+
+{{< gallery id="project-screens" cols="3" gap="8px" >}}
+![Результат работы](work/work-result-cover.png)
+![Хедер с логотипом](work/header-final.png)
+![Блок преимуществ](work/advantages-section.png)
+![Динамическая статистика](work/live-stats.png)
+![Отзывы о нас](work/reviews-section.png)
+![О нас](work/about-us-section.png)
+![Часто задаваемые вопросы](work/faq-section.png)
+![Футер лендинга](work/footer-section.png)
+{{< /gallery >}}
 
 ---
 
@@ -104,20 +88,13 @@ tools:
 ![Полноэкранный вид](work/privacy-desktop-view.png "Отображение на широкоформатных экранах")
 
 ### Мобильная версия  
-{{< swiper id="second-slider" pagination="true" loop="true" autoplay="2500" >}}
-  {{< swiper-slide >}}
-    <img src="work/mobile/mobile-version-cover.png" alt="Мобильная адаптация">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/mobile/mobile-version-slide1.png" alt="Мобильная адаптация" title="Оптимизированный интерфейс для смартфонов">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/mobile/mobile-version-slide2.png" alt="Мобильная адаптация" title="Оптимизированный интерфейс для смартфонов">
-  {{< /swiper-slide >}}
-  {{< swiper-slide >}}
-    <img src="work/mobile/mobile-version-slide3.png" alt="Мобильная адаптация" title="Оптимизированный интерфейс для смартфонов">
-  {{< /swiper-slide >}}
-{{< /swiper >}}
+
+{{< slider id="second-slider" pagination="true" loop="true" autoplay="2500" >}}
+![Мобильная адаптация](work/mobile/mobile-version-cover.png)
+![Мобильная адаптация](work/mobile/mobile-version-slide1.png "Оптимизированный интерфейс для смартфонов")
+![Мобильная адаптация](work/mobile/mobile-version-slide2.png "Оптимизированный интерфейс для смартфонов")
+![Мобильная адаптация](work/mobile/mobile-version-slide3.png "Оптимизированный интерфейс для смартфонов")
+{{< /slider >}}
 
 ---
 

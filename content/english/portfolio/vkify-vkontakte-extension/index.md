@@ -104,29 +104,16 @@ The key goal is to create a **flexible and intuitive tool** that allows you to f
 
 ## 🖼️ Extension Interface
 
-### Appearance
+{{< gallery id="features-screens" cols="3" gap="8px" >}}
 ![Appearance](work/view.png "Width, theme, and background settings")
-
-### Filters
 ![Filters](work/filters.png "Visual filters for page and content")
-
-### Elements
 ![Elements](work/elements.png "Hiding individual VKontakte interface blocks")
-
-### Privacy
 ![Privacy](work/privacy.png "Invisible mode, skeleton, and activity protection")
-
-### Ads
 ![Ads](work/ads.png "Blocking ad blocks, posts, and stories")
-
-### Scripts
 ![Scripts](work/scripts.png "Action automation and additional scenarios")
-
-### CSS Editor
 ![CSS Editor](work/css-editor.png "Custom CSS for deep customization")
-
-### More
 ![More](work/more.png "General settings, export/import, and more")
+{{< /gallery >}}
 
 ---
 
@@ -292,5 +279,3 @@ The technical challenge was overlaying a transparent textarea on top of a pre-el
 - Flexible customization without technical knowledge
 - Secure operation — all data stored locally
 - Ready for feature expansion thanks to the handler pattern
-
----

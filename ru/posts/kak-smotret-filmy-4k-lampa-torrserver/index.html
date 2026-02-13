@@ -152,30 +152,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css" data-syntax-highlight="true" id="syntax-theme">
 
 
-
-
-
-
-
-
 <style>
    
   pre { border-radius: 0.5rem;  }
   
    
-  
-  
-   
   .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: oklch(var(--p)); z-index: 9999; transition: width 0.1s ease-out; }
   .reading-progress-text { position: fixed; top: 0.75rem; right: 1rem; z-index: 9999; font-size: 0.75rem; font-weight: 600; color: oklch(var(--p)); background: oklch(var(--b1) / 0.9); backdrop-filter: blur(8px); padding: 0.25rem 0.75rem; border-radius: 1rem; opacity: 0; transition: opacity 0.3s ease; }
   .reading-progress-text.visible { opacity: 1; }
-  
-   
-  pre { position: relative; }
-  .copy-code-btn { position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.75rem; background: oklch(var(--b3)); border-radius: 0.25rem; cursor: pointer; opacity: 0; transition: opacity 0.2s, background 0.2s; }
-  pre:hover .copy-code-btn { opacity: 1; }
-  .copy-code-btn:hover { background: oklch(var(--p)); color: oklch(var(--pc)); }
-  .copy-code-btn.copied { background: oklch(var(--su)); color: oklch(var(--suc)); }
   
    
   html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
@@ -2433,6 +2417,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <p><strong>Шаг 2.</strong> Запустите TorrServer</p>
 <p>Запустите скачанный файл. Windows может показать предупреждение SmartScreen — нажмите «Подробнее» → «Выполнить в любом случае».</p>
@@ -2445,6 +2430,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <p><strong>Шаг 3.</strong> Проверьте работу сервера</p>
 <p>Откройте браузер и перейдите по адресу:</p>
@@ -2459,6 +2445,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <p><strong>Шаг 4.</strong> Откройте Lampa в браузере</p>
 <p>В новой вкладке перейдите на:</p>
@@ -2477,6 +2464,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <p><strong>Шаг 5.</strong> Настройте подключение к TorrServer</p>
 <p>Перейдите в <strong>Настройки</strong> (иконка шестерёнки) → <strong>Основные</strong> → <strong>TorrServer</strong></p>
@@ -2506,6 +2494,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <p><strong>Шаг 6.</strong> Установите парсер (источник торрентов)</p>
 <p>Парсер — это плагин, который ищет торренты для фильмов и сериалов. <strong>Без установленного парсера Lampa не сможет находить раздачи</strong> — при попытке открыть торренты вы увидите пустой список.</p>
@@ -2632,6 +2621,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <p>Нажмите <strong>«Добавить»</strong> и перезагрузите страницу.</p>
 <p><strong>6.2.</strong> Затем активируйте парсер в настройках:</p>
@@ -2646,6 +2636,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <p><figure class="my-4">
       <img
@@ -2656,6 +2647,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <p><strong>6.3.</strong> Проверьте работу парсера:</p>
 <p>Откройте любой фильм и перейдите в раздел <strong>«Торренты»</strong>. Если всё настроено правильно, вы увидите список раздач с указанием качества, размера и количества сидов.</p>
@@ -2668,6 +2660,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 
 
@@ -2691,6 +2684,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 
 
@@ -2710,6 +2704,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <p><figure class="my-4">
       <img
@@ -2720,6 +2715,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <p><figure class="my-4">
       <img
@@ -2730,6 +2726,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <p><figure class="my-4">
       <img
@@ -2740,6 +2737,7 @@
         height="1392"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <h4 id="установка-на-macos">Установка на macOS</h4>
 <ol>
@@ -4909,62 +4907,77 @@ TorrServer отлично вписывается в экосистему с Plex
     
 
     
-    
-    
-    <div class="not-prose mt-12 pt-6 border-t border-base-300 fade-in-up">
-      <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
-        <ion-icon name="reader-outline" class="text-2xl"></ion-icon>
-        Читайте также
-      </h3>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        
-        <a href="/ru/portfolio/codesqueeze/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      <div class="not-prose mt-12 pt-6 border-t border-base-300 fade-in-up">
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+          <ion-icon name="reader-outline" class="text-2xl"></ion-icon>
+          Читайте также
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           
-          <figure class="overflow-hidden"><img src="/ru/portfolio/codesqueeze/Cover_hu_220ec1745377719c.webp" 
-                   alt="Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer" 
-                   width="400" 
-                   height="200"
-                   class="w-full h-32 object-cover transition-transform group-hover:scale-105" 
-                   loading="lazy"/></figure>
+          <a href="/ru/portfolio/codesqueeze/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+            
+            <figure class="overflow-hidden"><img src="/ru/portfolio/codesqueeze/Cover_hu_334231f1b1d8201.webp"
+                     alt="Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer"
+                     width="354"
+                     height="200"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/></figure>
+            
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm line-clamp-2">CodeSqueeze — онлайн-минификатор кода</h4>
+              <p class="text-xs text-base-content/60">
+                2  минуты чтения
+              </p>
+            </div>
+          </a>
           
-          <div class="card-body p-4">
-            <h4 class="card-title text-sm line-clamp-2">CodeSqueeze — Online Code Minifier</h4>
-            <p class="text-xs text-base-content/60">2  минуты чтения</p>
-          </div>
-        </a>
-        
-        <a href="/ru/posts/chatgpt-claude-gemini-dns-dostup/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+          <a href="/ru/posts/chatgpt-claude-gemini-dns-dostup/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+            
+            <figure class="overflow-hidden"><img src="/ru/posts/chatgpt-claude-gemini-dns-dostup/Cover_hu_ac0bea46d5fa4bfd.webp"
+                     alt="Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer"
+                     width="354"
+                     height="200"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/></figure>
+            
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm line-clamp-2">ChatGPT, Claude и Gemini — корректная настройка DNS для доступа к AI-сервисам</h4>
+              <p class="text-xs text-base-content/60">
+                17  минут чтения
+              </p>
+            </div>
+          </a>
           
-          <figure class="overflow-hidden"><img src="/ru/posts/chatgpt-claude-gemini-dns-dostup/Cover_hu_fe9d8e428d8a4eca.webp" 
-                   alt="Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer" 
-                   width="400" 
-                   height="200"
-                   class="w-full h-32 object-cover transition-transform group-hover:scale-105" 
-                   loading="lazy"/></figure>
+          <a href="/ru/portfolio/prostavki/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+            
+            <figure class="overflow-hidden"><img src="/ru/portfolio/prostavki/Cover_hu_fe1fc0f3d5c832a6.webp"
+                     alt="Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer"
+                     width="400"
+                     height="200"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/></figure>
+            
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm line-clamp-2">Лендинг ProStavki</h4>
+              <p class="text-xs text-base-content/60">
+                2  минуты чтения
+              </p>
+            </div>
+          </a>
           
-          <div class="card-body p-4">
-            <h4 class="card-title text-sm line-clamp-2">ChatGPT, Claude и Gemini — корректная настройка DNS для доступа к AI-сервисам</h4>
-            <p class="text-xs text-base-content/60">17  минут чтения</p>
-          </div>
-        </a>
-        
-        <a href="/ru/portfolio/prostavki/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
-          
-          <figure class="overflow-hidden"><img src="/ru/portfolio/prostavki/Cover_hu_9a4847e85cbd9dce.webp" 
-                   alt="Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer" 
-                   width="400" 
-                   height="200"
-                   class="w-full h-32 object-cover transition-transform group-hover:scale-105" 
-                   loading="lazy"/></figure>
-          
-          <div class="card-body p-4">
-            <h4 class="card-title text-sm line-clamp-2">Landing Page ProStavki</h4>
-            <p class="text-xs text-base-content/60">2  минуты чтения</p>
-          </div>
-        </a>
-        
+        </div>
       </div>
-    </div>
+      
     
 
     
@@ -5930,7 +5943,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
-
 
 
 

@@ -137,30 +137,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css" data-syntax-highlight="true" id="syntax-theme">
 
 
-
-
-
-
-
-
 <style>
    
   pre { border-radius: 0.5rem;  }
   
    
-  
-  
-   
   .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: oklch(var(--p)); z-index: 9999; transition: width 0.1s ease-out; }
   .reading-progress-text { position: fixed; top: 0.75rem; right: 1rem; z-index: 9999; font-size: 0.75rem; font-weight: 600; color: oklch(var(--p)); background: oklch(var(--b1) / 0.9); backdrop-filter: blur(8px); padding: 0.25rem 0.75rem; border-radius: 1rem; opacity: 0; transition: opacity 0.3s ease; }
   .reading-progress-text.visible { opacity: 1; }
-  
-   
-  pre { position: relative; }
-  .copy-code-btn { position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.75rem; background: oklch(var(--b3)); border-radius: 0.25rem; cursor: pointer; opacity: 0; transition: opacity 0.2s, background 0.2s; }
-  pre:hover .copy-code-btn { opacity: 1; }
-  .copy-code-btn:hover { background: oklch(var(--p)); color: oklch(var(--pc)); }
-  .copy-code-btn.copied { background: oklch(var(--su)); color: oklch(var(--suc)); }
   
    
   html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
@@ -982,7 +966,7 @@
   <meta itemprop="description" content="Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS.">
   <meta itemprop="datePublished" content="2026-01-27T17:35:43+03:00">
   <meta itemprop="dateModified" content="2026-01-27T17:35:43+03:00">
-  <meta itemprop="wordCount" content="1300">
+  <meta itemprop="wordCount" content="1291">
   <meta itemprop="image" content="https://0x69.ru/ru/portfolio/vkify-vkontakte-extension/Cover.png">
   <meta itemprop="keywords" content="Веб-Разработка,Browser-Extension,React,Javascript,UI/UX,ВКонтакте,Кастомизация">
 
@@ -1031,7 +1015,7 @@
         
         <span class="hidden sm:flex items-center gap-1">
           <ion-icon name="document-text-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
-          1300 слов
+          1291 слов
         </span>
 
         
@@ -1490,94 +1474,370 @@
 </ul>
 <hr>
 <h2 id="-интерфейс-расширения">🖼️ Интерфейс расширения</h2>
-<h3 id="вид">Вид</h3>
-<p><figure class="my-4">
-      <img
-        src="/ru/portfolio/vkify-vkontakte-extension/work/view_hu_867f731461d4d75f.webp"
-        alt="Вид"
-        title="Настройки ширины, тем и фона"
-        width="1800"
-        height="5886"
-        loading="lazy"
-        decoding="async"
-      /><figcaption class="text-center text-sm text-base-content/60 mt-2">Настройки ширины, тем и фона</figcaption></figure></p>
-<h3 id="фильтры">Фильтры</h3>
-<p><figure class="my-4">
-      <img
-        src="/ru/portfolio/vkify-vkontakte-extension/work/filters_hu_747bd54b6b9716e3.webp"
-        alt="Фильтры"
-        title="Визуальные фильтры для страницы и контента"
-        width="1800"
-        height="2742"
-        loading="lazy"
-        decoding="async"
-      /><figcaption class="text-center text-sm text-base-content/60 mt-2">Визуальные фильтры для страницы и контента</figcaption></figure></p>
-<h3 id="элементы">Элементы</h3>
-<p><figure class="my-4">
-      <img
-        src="/ru/portfolio/vkify-vkontakte-extension/work/elements_hu_dfe26dcd48bdbe6a.webp"
-        alt="Элементы"
-        title="Скрытие отдельных блоков интерфейса ВКонтакте"
-        width="1800"
-        height="2766"
-        loading="lazy"
-        decoding="async"
-      /><figcaption class="text-center text-sm text-base-content/60 mt-2">Скрытие отдельных блоков интерфейса ВКонтакте</figcaption></figure></p>
-<h3 id="приватность">Приватность</h3>
-<p><figure class="my-4">
-      <img
-        src="/ru/portfolio/vkify-vkontakte-extension/work/privacy_hu_8d038d528386063d.webp"
-        alt="Приватность"
-        title="Невидимка, скелетон и защита активности"
-        width="1800"
-        height="2187"
-        loading="lazy"
-        decoding="async"
-      /><figcaption class="text-center text-sm text-base-content/60 mt-2">Невидимка, скелетон и защита активности</figcaption></figure></p>
-<h3 id="реклама">Реклама</h3>
-<p><figure class="my-4">
-      <img
-        src="/ru/portfolio/vkify-vkontakte-extension/work/ads_hu_81b16c2704da484e.webp"
-        alt="Реклама"
-        title="Блокировка рекламных блоков, постов и историй"
-        width="1800"
-        height="2271"
-        loading="lazy"
-        decoding="async"
-      /><figcaption class="text-center text-sm text-base-content/60 mt-2">Блокировка рекламных блоков, постов и историй</figcaption></figure></p>
-<h3 id="скрипты">Скрипты</h3>
-<p><figure class="my-4">
-      <img
-        src="/ru/portfolio/vkify-vkontakte-extension/work/scripts_hu_b005a0cd7b92fe0a.webp"
-        alt="Скрипты"
-        title="Автоматизация действий и дополнительные сценарии"
-        width="1800"
-        height="3102"
-        loading="lazy"
-        decoding="async"
-      /><figcaption class="text-center text-sm text-base-content/60 mt-2">Автоматизация действий и дополнительные сценарии</figcaption></figure></p>
-<h3 id="css-редактор">CSS редактор</h3>
-<p><figure class="my-4">
-      <img
-        src="/ru/portfolio/vkify-vkontakte-extension/work/css-editor_hu_ddcd124a1857a8f5.webp"
-        alt="CSS редактор"
-        title="Пользовательский CSS для глубокой кастомизации"
-        width="1800"
-        height="2742"
-        loading="lazy"
-        decoding="async"
-      /><figcaption class="text-center text-sm text-base-content/60 mt-2">Пользовательский CSS для глубокой кастомизации</figcaption></figure></p>
-<h3 id="еще">Еще</h3>
-<p><figure class="my-4">
-      <img
-        src="/ru/portfolio/vkify-vkontakte-extension/work/more_hu_45b5143b5d4aa9d6.webp"
-        alt="Еще"
-        title="Общие настройки, экспорт/импорт и прочее"
-        width="1800"
-        height="2910"
-        loading="lazy"
-        decoding="async"
-      /><figcaption class="text-center text-sm text-base-content/60 mt-2">Общие настройки, экспорт/импорт и прочее</figcaption></figure></p>
+
+<section
+  class="not-prose gallery-section my-8 w-full"
+  aria-label="Галерея изображений"
+  data-gallery-id="features-screens"
+>
+
+
+  <div
+    class="gallery gallery--hover-zoom"
+    id="features-screens"
+    role="list"
+    data-cols="3"
+    data-gap="8px"
+    data-hover="zoom"
+    data-captions="auto"
+  ><figure class="my-4">
+    <img
+      src="work/view.png"
+      alt="Вид"
+      title="Настройки ширины, тем и фона"
+      loading="lazy"
+      decoding="async"
+      class="rounded-xl shadow-lg"
+    /><figcaption class="text-center text-sm text-base-content/60 mt-2">Настройки ширины, тем и фона</figcaption></figure>
+<figure class="my-4">
+    <img
+      src="work/filters.png"
+      alt="Фильтры"
+      title="Визуальные фильтры для страницы и контента"
+      loading="lazy"
+      decoding="async"
+      class="rounded-xl shadow-lg"
+    /><figcaption class="text-center text-sm text-base-content/60 mt-2">Визуальные фильтры для страницы и контента</figcaption></figure>
+<figure class="my-4">
+    <img
+      src="work/elements.png"
+      alt="Элементы"
+      title="Скрытие отдельных блоков интерфейса ВКонтакте"
+      loading="lazy"
+      decoding="async"
+      class="rounded-xl shadow-lg"
+    /><figcaption class="text-center text-sm text-base-content/60 mt-2">Скрытие отдельных блоков интерфейса ВКонтакте</figcaption></figure>
+<figure class="my-4">
+    <img
+      src="work/privacy.png"
+      alt="Приватность"
+      title="Невидимка, скелетон и защита активности"
+      loading="lazy"
+      decoding="async"
+      class="rounded-xl shadow-lg"
+    /><figcaption class="text-center text-sm text-base-content/60 mt-2">Невидимка, скелетон и защита активности</figcaption></figure>
+<figure class="my-4">
+    <img
+      src="work/ads.png"
+      alt="Реклама"
+      title="Блокировка рекламных блоков, постов и историй"
+      loading="lazy"
+      decoding="async"
+      class="rounded-xl shadow-lg"
+    /><figcaption class="text-center text-sm text-base-content/60 mt-2">Блокировка рекламных блоков, постов и историй</figcaption></figure>
+<figure class="my-4">
+    <img
+      src="work/scripts.png"
+      alt="Скрипты"
+      title="Автоматизация действий и дополнительные сценарии"
+      loading="lazy"
+      decoding="async"
+      class="rounded-xl shadow-lg"
+    /><figcaption class="text-center text-sm text-base-content/60 mt-2">Автоматизация действий и дополнительные сценарии</figcaption></figure>
+<figure class="my-4">
+    <img
+      src="work/css-editor.png"
+      alt="CSS редактор"
+      title="Пользовательский CSS для глубокой кастомизации"
+      loading="lazy"
+      decoding="async"
+      class="rounded-xl shadow-lg"
+    /><figcaption class="text-center text-sm text-base-content/60 mt-2">Пользовательский CSS для глубокой кастомизации</figcaption></figure>
+<figure class="my-4">
+    <img
+      src="work/more.png"
+      alt="Еще"
+      title="Общие настройки, экспорт/импорт и прочее"
+      loading="lazy"
+      decoding="async"
+      class="rounded-xl shadow-lg"
+    /><figcaption class="text-center text-sm text-base-content/60 mt-2">Общие настройки, экспорт/импорт и прочее</figcaption></figure></div>
+</section>
+
+
+
+<style>
+   
+
+  
+  #features-screens.gallery {
+    columns: 1;
+    column-gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    #features-screens.gallery {
+      columns: 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #features-screens.gallery {
+      columns: 3;
+    }
+  }
+  
+
+   
+  #features-screens figure,
+  #features-screens > p {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: oklch(var(--b2, 0.93 0 0));
+    break-inside: avoid;
+    
+    margin-bottom: 1rem;
+    
+
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    animation: stagger-features-screens-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  @keyframes stagger-features-screens-enter {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+   
+  #features-screens.gallery--hover-lift figure:hover,
+  #features-screens.gallery--hover-lift > p:hover {
+    transform: translateY(-4px);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+   
+  #features-screens figure a,
+  #features-screens > p > a {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    line-height: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+   
+  #features-screens img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    cursor: pointer;
+    user-select: none;
+    margin: 0 !important;
+    transition:
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      filter    0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity   0.4s ease;
+    will-change: transform;
+    
+  }
+
+   
+  #features-screens.gallery--hover-zoom figure:hover img,
+  #features-screens.gallery--hover-zoom > p:hover img {
+    transform: scale(1.06);
+    filter: brightness(1.05);
+  }
+
+   
+  #features-screens.gallery--hover-fade figure:hover img,
+  #features-screens.gallery--hover-fade > p:hover img {
+    opacity: 0.85;
+  }
+
+   
+  #features-screens.gallery--hover-lift figure:hover img,
+  #features-screens.gallery--hover-lift > p:hover img {
+    filter: brightness(1.03);
+  }
+
+   
+  #features-screens.gallery--hover-none figure:hover img,
+  #features-screens.gallery--hover-none > p:hover img {
+    transform: none;
+    filter: none;
+  }
+
+   
+  #features-screens figure a::after,
+  #features-screens > p > a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.25) 0%,
+      oklch(0 0 0 / 0.06) 40%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #features-screens.gallery--hover-none figure a::after,
+  #features-screens.gallery--hover-none > p > a::after {
+    display: none;
+  }
+
+  #features-screens figure:hover a::after,
+  #features-screens > p:hover > a::after {
+    opacity: 1;
+  }
+
+   
+  #features-screens figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.25rem 1rem 0.75rem;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.55) 0%,
+      transparent 100%
+    );
+    color: white;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    border-radius: 0 0 1rem 1rem;
+    pointer-events: none;
+    z-index: 2;
+
+    
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity   0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    
+  }
+
+  
+  #features-screens figure:hover figcaption,
+  #features-screens figure:focus-within figcaption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+
+   
+  #features-screens a:focus-visible,
+  #features-screens img:focus-visible {
+    outline: 2px solid oklch(var(--p, 0.65 0.25 260));
+    outline-offset: 2px;
+    border-radius: 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #features-screens figure,
+    #features-screens > p {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    #features-screens img {
+      transition-duration: 0.01ms !important;
+    }
+
+    #features-screens figure a::after,
+    #features-screens > p > a::after,
+    #features-screens figcaption {
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+   
+  #features-screens img[loading="lazy"] {
+    background:
+      linear-gradient(
+        110deg,
+        oklch(var(--b2, 0.93 0 0)) 30%,
+        oklch(var(--b3, 0.88 0 0)) 50%,
+        oklch(var(--b2, 0.93 0 0)) 70%
+      );
+    background-size: 200% 100%;
+    animation: features-screens-shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes features-screens-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  #features-screens img.loaded {
+    animation: none;
+    background: none;
+  }
+</style>
+
+
+
+<script>
+  (() => {
+    const gallery = document.getElementById('features-screens');
+    if (!gallery) return;
+
+    const items = gallery.querySelectorAll('figure, :scope > p');
+    items.forEach((el, i) => {
+      el.style.setProperty('--i', i);
+      el.setAttribute('role', 'listitem');
+    });
+
+    gallery.querySelectorAll('img').forEach(img => {
+      const markLoaded = () => img.classList.add('loaded');
+      if (img.complete) {
+        markLoaded();
+      } else {
+        img.addEventListener('load', markLoaded, { once: true });
+        img.addEventListener('error', markLoaded, { once: true });
+      }
+
+      if (!img.closest('a')) {
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('role', 'button');
+      }
+    });
+
+    const counter = document.getElementById('features-screens-count');
+    if (counter) {
+      const total = gallery.querySelectorAll('img').length;
+      counter.textContent = `Галерея: ${total} ${total === 1 ? 'изображение' : 'изображений'}`;
+    }
+
+    gallery.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const img = e.target;
+        if (img.tagName === 'IMG') {
+          e.preventDefault();
+          const link = img.closest('a');
+          if (link) link.click();
+        }
+      }
+    });
+  })();
+</script>
 <hr>
 <h2 id="-дизайн-система">🎨 Дизайн-система</h2>
 <h3 id="светлая-тема">Светлая тема</h3>
@@ -2290,7 +2550,7 @@
 <h3 id="синхронизация-между-вкладками">Синхронизация между вкладками</h3>
 <p>При изменении настройки в popup происходит сохранение в Chrome Storage и отправка сообщения активной вкладке VK. Content script получает сообщение и вызывает соответствующий метод FeatureManager.</p>
 <p>Обратная синхронизация работает через подписку на chrome.storage.onChanged, что позволяет нескольким открытым popup-окнам оставаться в актуальном состоянии.</p>
-<h3 id="css-редактор-1">CSS-редактор</h3>
+<h3 id="css-редактор">CSS-редактор</h3>
 <p>Встроенный редактор включает подсветку синтаксиса на основе регулярных выражений, нумерацию строк с синхронизацией скролла и историю изменений для undo/redo.</p>
 <p>Техническая сложность — наложение прозрачного textarea поверх pre-элемента с подсвеченным кодом. Это обеспечивает нативное поведение ввода при визуальной подсветке.</p>
 <hr>
@@ -2556,7 +2816,6 @@
 <li>Безопасная работа — все данные хранятся локально</li>
 <li>Готовность к расширению функционала благодаря паттерну обработчиков</li>
 </ul>
-<hr>
     </section>
 
     
@@ -2691,63 +2950,6 @@
     
 
     
-    
-    
-    <div class="not-prose mt-12 pt-6 border-t border-base-300 fade-in-up">
-      <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
-        <ion-icon name="reader-outline" class="text-2xl"></ion-icon>
-        Читайте также
-      </h3>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        
-        <a href="/ru/portfolio/codesqueeze/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
-          
-          <figure class="overflow-hidden"><img src="/ru/portfolio/codesqueeze/Cover_hu_220ec1745377719c.webp" 
-                   alt="VKify — Расширение для ВКонтакте" 
-                   width="400" 
-                   height="200"
-                   class="w-full h-32 object-cover transition-transform group-hover:scale-105" 
-                   loading="lazy"/></figure>
-          
-          <div class="card-body p-4">
-            <h4 class="card-title text-sm line-clamp-2">CodeSqueeze — Online Code Minifier</h4>
-            <p class="text-xs text-base-content/60">2  минуты чтения</p>
-          </div>
-        </a>
-        
-        <a href="/ru/portfolio/prostavki/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
-          
-          <figure class="overflow-hidden"><img src="/ru/portfolio/prostavki/Cover_hu_9a4847e85cbd9dce.webp" 
-                   alt="VKify — Расширение для ВКонтакте" 
-                   width="400" 
-                   height="200"
-                   class="w-full h-32 object-cover transition-transform group-hover:scale-105" 
-                   loading="lazy"/></figure>
-          
-          <div class="card-body p-4">
-            <h4 class="card-title text-sm line-clamp-2">Landing Page ProStavki</h4>
-            <p class="text-xs text-base-content/60">2  минуты чтения</p>
-          </div>
-        </a>
-        
-        <a href="/ru/posts/kak-smotret-filmy-4k-lampa-torrserver/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
-          
-          <figure class="overflow-hidden"><img src="/ru/posts/kak-smotret-filmy-4k-lampa-torrserver/Cover_hu_6dcb99563261aac5.webp" 
-                   alt="VKify — Расширение для ВКонтакте" 
-                   width="400" 
-                   height="200"
-                   class="w-full h-32 object-cover transition-transform group-hover:scale-105" 
-                   loading="lazy"/></figure>
-          
-          <div class="card-body p-4">
-            <h4 class="card-title text-sm line-clamp-2">Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer</h4>
-            <p class="text-xs text-base-content/60">16  минут чтения</p>
-          </div>
-        </a>
-        
-      </div>
-    </div>
-    
 
     
     
@@ -2811,7 +3013,7 @@
             <ion-icon name="chevron-forward" class="text-xl text-base-content/50 group-hover:text-primary transition-colors"></ion-icon>
             <div class="min-w-0">
               <span class="text-xs text-base-content/60 uppercase tracking-wide">Следующая</span>
-              <p class="font-medium truncate">CodeSqueeze — Online Code Minifier</p>
+              <p class="font-medium truncate">CodeSqueeze — онлайн-минификатор кода</p>
             </div>
           </div>
         </a>
@@ -2919,18 +3121,7 @@
         <li><a href="#функциональность">Функциональность</a></li>
       </ul>
     </li>
-    <li><a href="#-интерфейс-расширения">🖼️ Интерфейс расширения</a>
-      <ul>
-        <li><a href="#вид">Вид</a></li>
-        <li><a href="#фильтры">Фильтры</a></li>
-        <li><a href="#элементы">Элементы</a></li>
-        <li><a href="#приватность">Приватность</a></li>
-        <li><a href="#реклама">Реклама</a></li>
-        <li><a href="#скрипты">Скрипты</a></li>
-        <li><a href="#css-редактор">CSS редактор</a></li>
-        <li><a href="#еще">Еще</a></li>
-      </ul>
-    </li>
+    <li><a href="#-интерфейс-расширения">🖼️ Интерфейс расширения</a></li>
     <li><a href="#-дизайн-система">🎨 Дизайн-система</a>
       <ul>
         <li><a href="#светлая-тема">Светлая тема</a></li>
@@ -2951,7 +3142,7 @@
         <li><a href="#автоматизация-добавления-друзей">Автоматизация добавления друзей</a></li>
         <li><a href="#react-архитектура-popup">React-архитектура popup</a></li>
         <li><a href="#синхронизация-между-вкладками">Синхронизация между вкладками</a></li>
-        <li><a href="#css-редактор-1">CSS-редактор</a></li>
+        <li><a href="#css-редактор">CSS-редактор</a></li>
       </ul>
     </li>
     <li><a href="#-стек-технологий">🛠️ Стек технологий</a></li>
@@ -3076,18 +3267,7 @@
         <li><a href="#функциональность">Функциональность</a></li>
       </ul>
     </li>
-    <li><a href="#-интерфейс-расширения">🖼️ Интерфейс расширения</a>
-      <ul>
-        <li><a href="#вид">Вид</a></li>
-        <li><a href="#фильтры">Фильтры</a></li>
-        <li><a href="#элементы">Элементы</a></li>
-        <li><a href="#приватность">Приватность</a></li>
-        <li><a href="#реклама">Реклама</a></li>
-        <li><a href="#скрипты">Скрипты</a></li>
-        <li><a href="#css-редактор">CSS редактор</a></li>
-        <li><a href="#еще">Еще</a></li>
-      </ul>
-    </li>
+    <li><a href="#-интерфейс-расширения">🖼️ Интерфейс расширения</a></li>
     <li><a href="#-дизайн-система">🎨 Дизайн-система</a>
       <ul>
         <li><a href="#светлая-тема">Светлая тема</a></li>
@@ -3108,7 +3288,7 @@
         <li><a href="#автоматизация-добавления-друзей">Автоматизация добавления друзей</a></li>
         <li><a href="#react-архитектура-popup">React-архитектура popup</a></li>
         <li><a href="#синхронизация-между-вкладками">Синхронизация между вкладками</a></li>
-        <li><a href="#css-редактор-1">CSS-редактор</a></li>
+        <li><a href="#css-редактор">CSS-редактор</a></li>
       </ul>
     </li>
     <li><a href="#-стек-технологий">🛠️ Стек технологий</a></li>
@@ -3630,7 +3810,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
-
 
 
 

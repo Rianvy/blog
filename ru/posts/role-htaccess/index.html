@@ -152,30 +152,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css" data-syntax-highlight="true" id="syntax-theme">
 
 
-
-
-
-
-
-
 <style>
    
   pre { border-radius: 0.5rem;  }
   
    
-  
-  
-   
   .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: oklch(var(--p)); z-index: 9999; transition: width 0.1s ease-out; }
   .reading-progress-text { position: fixed; top: 0.75rem; right: 1rem; z-index: 9999; font-size: 0.75rem; font-weight: 600; color: oklch(var(--p)); background: oklch(var(--b1) / 0.9); backdrop-filter: blur(8px); padding: 0.25rem 0.75rem; border-radius: 1rem; opacity: 0; transition: opacity 0.3s ease; }
   .reading-progress-text.visible { opacity: 1; }
-  
-   
-  pre { position: relative; }
-  .copy-code-btn { position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.75rem; background: oklch(var(--b3)); border-radius: 0.25rem; cursor: pointer; opacity: 0; transition: opacity 0.2s, background 0.2s; }
-  pre:hover .copy-code-btn { opacity: 1; }
-  .copy-code-btn:hover { background: oklch(var(--p)); color: oklch(var(--pc)); }
-  .copy-code-btn.copied { background: oklch(var(--su)); color: oklch(var(--suc)); }
   
    
   html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
@@ -1500,7 +1484,81 @@ php_value error_reporting E_ALL
     
 
     
-    
+      
+      
+
+      
+      
+        
+        
+        
+      
+
+      
+      
+
+      
+      <div class="not-prose mt-12 pt-6 border-t border-base-300 fade-in-up">
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+          <ion-icon name="reader-outline" class="text-2xl"></ion-icon>
+          Читайте также
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <a href="/ru/posts/reverse-engineering-vk-long-poll/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+            
+            <figure class="overflow-hidden"><img src="/ru/posts/reverse-engineering-vk-long-poll/Cover_hu_5c1988ede9ac511e.webp"
+                     alt="Роль файла .htaccess в настройке сервера Apache"
+                     width="354"
+                     height="200"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/></figure>
+            
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm line-clamp-2">Реверс-инжиниринг Long Poll ВКонтакте: сниффер, скрытые события и WebSocket</h4>
+              <p class="text-xs text-base-content/60">
+                13  минут чтения
+              </p>
+            </div>
+          </a>
+          
+          <a href="/ru/posts/kak-smotret-filmy-4k-lampa-torrserver/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+            
+            <figure class="overflow-hidden"><img src="/ru/posts/kak-smotret-filmy-4k-lampa-torrserver/Cover_hu_dac24521797d0a9b.webp"
+                     alt="Роль файла .htaccess в настройке сервера Apache"
+                     width="354"
+                     height="200"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/></figure>
+            
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm line-clamp-2">Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer</h4>
+              <p class="text-xs text-base-content/60">
+                16  минут чтения
+              </p>
+            </div>
+          </a>
+          
+          <a href="/ru/posts/chatgpt-claude-gemini-dns-dostup/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+            
+            <figure class="overflow-hidden"><img src="/ru/posts/chatgpt-claude-gemini-dns-dostup/Cover_hu_ac0bea46d5fa4bfd.webp"
+                     alt="Роль файла .htaccess в настройке сервера Apache"
+                     width="354"
+                     height="200"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/></figure>
+            
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm line-clamp-2">ChatGPT, Claude и Gemini — корректная настройка DNS для доступа к AI-сервисам</h4>
+              <p class="text-xs text-base-content/60">
+                17  минут чтения
+              </p>
+            </div>
+          </a>
+          
+        </div>
+      </div>
+      
     
 
     
@@ -2378,7 +2436,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
-
 
 
 

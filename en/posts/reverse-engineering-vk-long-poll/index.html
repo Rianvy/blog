@@ -149,30 +149,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css" data-syntax-highlight="true" id="syntax-theme">
 
 
-
-
-
-
-
-
 <style>
    
   pre { border-radius: 0.5rem;  }
   
    
-  
-  
-   
   .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: oklch(var(--p)); z-index: 9999; transition: width 0.1s ease-out; }
   .reading-progress-text { position: fixed; top: 0.75rem; right: 1rem; z-index: 9999; font-size: 0.75rem; font-weight: 600; color: oklch(var(--p)); background: oklch(var(--b1) / 0.9); backdrop-filter: blur(8px); padding: 0.25rem 0.75rem; border-radius: 1rem; opacity: 0; transition: opacity 0.3s ease; }
   .reading-progress-text.visible { opacity: 1; }
-  
-   
-  pre { position: relative; }
-  .copy-code-btn { position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.75rem; background: oklch(var(--b3)); border-radius: 0.25rem; cursor: pointer; opacity: 0; transition: opacity 0.2s, background 0.2s; }
-  pre:hover .copy-code-btn { opacity: 1; }
-  .copy-code-btn:hover { background: oklch(var(--p)); color: oklch(var(--pc)); }
-  .copy-code-btn.copied { background: oklch(var(--su)); color: oklch(var(--suc)); }
   
    
   html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
@@ -1519,6 +1503,7 @@ ${eventCodes.size &gt; 0 ? `Codes: ${[...eventCodes.keys()].join(', ')}` : ''}
         height="648"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <p>The screenshot shows how the sniffer logs incoming events. Each <code>[Long Poll]</code> group contains a list of events with their codes and data. Note the codes: <code>63</code> is the &ldquo;typing&rdquo; event, <code>10004</code> is a new message, and so on. This is exactly how I gathered information about each event type&rsquo;s structure.</p>
 <p>After collecting enough data, you can call <code>__sniffer.codes()</code> to view statistics:</p>
@@ -1531,6 +1516,7 @@ ${eventCodes.size &gt; 0 ? `Codes: ${[...eventCodes.keys()].join(', ')}` : ''}
         height="643"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <p>The table shows all discovered event codes, how often each occurred, when it was last seen, and example data. This helps quickly understand which events happen most frequently and which deserve closer analysis.</p>
 <hr>
@@ -2456,6 +2442,7 @@ ${eventCodes.size &gt; 0 ? `Codes: ${[...eventCodes.keys()].join(', ')}` : ''}
         height="649"
         loading="lazy"
         decoding="async"
+        class="rounded-xl shadow-lg"
       /></figure></p>
 <hr>
 <h2 id="conclusions-and-recommendations">Conclusions and Recommendations</h2>
@@ -2623,7 +2610,81 @@ ${eventCodes.size &gt; 0 ? `Codes: ${[...eventCodes.keys()].join(', ')}` : ''}
     
 
     
-    
+      
+      
+
+      
+      
+        
+        
+        
+      
+
+      
+      
+
+      
+      <div class="not-prose mt-12 pt-6 border-t border-base-300 fade-in-up">
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+          <ion-icon name="reader-outline" class="text-2xl"></ion-icon>
+          Related Posts
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <a href="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+            
+            <figure class="overflow-hidden"><img src="/en/posts/kak-smotret-filmy-4k-lampa-torrserver/Cover_hu_ed9f85461a2195c5.webp"
+                     alt="Reverse Engineering VK Long Poll: Building a Sniffer, Discovering Hidden Events, and WebSocket Mysteries"
+                     width="354"
+                     height="200"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/></figure>
+            
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm line-clamp-2">How to Watch Movies and TV Shows in 4K via Lampa and TorrServer</h4>
+              <p class="text-xs text-base-content/60">
+                17  minutes read
+              </p>
+            </div>
+          </a>
+          
+          <a href="/en/posts/chatgpt-claude-gemini-dns-dostup/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+            
+            <figure class="overflow-hidden"><img src="/en/posts/chatgpt-claude-gemini-dns-dostup/Cover_hu_5d512f771562d676.webp"
+                     alt="Reverse Engineering VK Long Poll: Building a Sniffer, Discovering Hidden Events, and WebSocket Mysteries"
+                     width="354"
+                     height="200"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/></figure>
+            
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm line-clamp-2">ChatGPT, Claude, and Gemini – Proper DNS Configuration for Accessing AI Services</h4>
+              <p class="text-xs text-base-content/60">
+                19  minutes read
+              </p>
+            </div>
+          </a>
+          
+          <a href="/en/posts/role-htaccess/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+            
+            <figure class="overflow-hidden"><img src="/en/posts/role-htaccess/Cover_hu_e9eeaad292bf4c34.webp"
+                     alt="Reverse Engineering VK Long Poll: Building a Sniffer, Discovering Hidden Events, and WebSocket Mysteries"
+                     width="400"
+                     height="200"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/></figure>
+            
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm line-clamp-2">Role of the .htaccess file in Apache server configuration</h4>
+              <p class="text-xs text-base-content/60">
+                5  minutes read
+              </p>
+            </div>
+          </a>
+          
+        </div>
+      </div>
+      
     
 
     
@@ -3447,7 +3508,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
-
 
 
 

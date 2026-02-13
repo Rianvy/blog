@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sha256 on 0x69.ru</title>
+    <link>https://0x69.ru/tags/sha256/</link>
+    <description>Recent content in Sha256 on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>ru</language>
+    <lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://0x69.ru/tags/sha256/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hash Generator</title>
+      <link>https://0x69.ru/utilities/hash-generator/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/hash-generator/</guid>
+      <description>&lt;p&gt;Генерация MD5, SHA-1, SHA-256, SHA-512 хешей для текста и файлов&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

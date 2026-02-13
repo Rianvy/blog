@@ -1,0 +1,2454 @@
+<!DOCTYPE html>
+<html lang="ru"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UUID &amp; Random Generator | 0x69.ru</title>
+    
+
+
+<link rel="icon" type="image/png" href="https://0x69.ru/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="https://0x69.ru/favicon.svg" />
+<link rel="shortcut icon" href="https://0x69.ru/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://0x69.ru/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="0x69" />
+<link rel="manifest" href="https://0x69.ru/site.webmanifest" />
+
+<link rel="canonical" href="https://0x69.ru/utilities/uuid-generator/" />
+
+
+
+  <link rel="alternate" hreflang="ru" href="https://0x69.ru/utilities/uuid-generator/" />
+
+  <link rel="alternate" hreflang="en" href="https://0x69.ru/en/utilities/uuid-generator/" /><link rel="alternate" hreflang="x-default" href="https://0x69.ru/utilities/uuid-generator/" />
+
+
+
+
+
+<meta name="author" content="Rianvy" />
+
+
+<meta name="description" content="Генератор UUID v4, nanoid, случайных строк и безопасных паролей онлайн. Bulk-генерация до 10000 значений." />
+
+
+<meta name="keywords" content="Uuid, Nanoid, Random, Password, Generator, Bulk" /><meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+
+<meta property="og:title" content="UUID &amp; Random Generator" />
+
+
+<meta property="og:description" content="Генератор UUID v4, nanoid, случайных строк и безопасных паролей онлайн. Bulk-генерация до 10000 значений." />
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://0x69.ru/utilities/uuid-generator/" />
+<meta property="og:site_name" content="0x69.ru" />
+
+
+<meta property="og:locale" content="ru_RU" /><meta property="og:locale:alternate" content="en_US" />
+
+
+<meta property="og:image" content="https://0x69.ru/images/og-background_hu_cfbfbcdffd24b59b.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="UUID &amp; Random Generator" />
+
+
+<meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="UUID &amp; Random Generator" />
+
+<meta name="twitter:description" content="Генератор UUID v4, nanoid, случайных строк и безопасных паролей онлайн. Bulk-генерация до 10000 значений." />
+
+<meta name="twitter:image" content="https://0x69.ru/images/og-background_hu_cfbfbcdffd24b59b.png" />
+<meta name="twitter:image:alt" content="UUID &amp; Random Generator" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rianvy",
+  "url": "https://0x69.ru/",
+  "image": "https://0x69.ru/img/avatar.jpg","email": "blackghost.v1@gmail.com","sameAs": ["https://github.com/rianvy"]}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "0x69.ru",
+      "item": "https://0x69.ru/ru/"
+    },{
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Утилиты",
+      "item": "https://0x69.ru/utilities/"
+    },{
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "UUID \u0026 Random Generator",
+      "item": "https://0x69.ru/utilities/uuid-generator/"
+    }
+  ]
+}
+</script>
+
+
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Повернуть!"
+                aria-label="Повернуть!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">Документируй сегодня то, что забудешь завтра</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="Обо мне">Обо мне</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Поиск"
+   aria-label="Поиск">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Категории"
+   aria-label="Категории">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Портфолио"
+   aria-label="Портфолио">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Утилиты"
+   aria-label="Утилиты">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+
+                
+                
+                
+                  
+                    
+                  
+                
+
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/utilities/uuid-generator/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                  </a>
+                </li>
+              
+                
+                
+
+                
+                
+                
+                  
+                
+
+                
+                  
+                
+
+                <li role="none">
+                  <a href="/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">174</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Меню</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="Обо мне"
+                aria-label="Обо мне">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">Обо мне</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/utilities/uuid-generator/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                    "
+             >
+            <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+            <span class="flex-1">English</span>
+            
+          </a>
+        </li>
+      
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+          
+        
+        
+        <li>
+          <a href="/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                    bg-primary/10 text-primary font-semibold"
+             aria-current="true">
+            <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Поиск</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Категории</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Портфолио</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Утилиты">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Утилиты</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">24</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">174</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+
+    <style>
+    .flip-container .back {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .flip-container.flip-it .back {
+      opacity: 1;
+      visibility: visible;
+    }
+    </style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
+
+  
+  <div class="text-center mb-6 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">🎲</span>
+    </div>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">UUID &amp; Random Generator</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">Генератор UUID v4, nanoid, случайных строк и безопасных паролей онлайн. Bulk-генерация до 10000 значений.</p>
+    
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        100% в браузере
+      </span>
+      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="flash-outline"></ion-icon>
+        Мгновенная генерация
+      </span>
+      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="layers-outline"></ion-icon>
+        Bulk до 10 000
+      </span>
+    </div>
+  </div>
+
+  
+  <div class="max-w-6xl mx-auto">
+    
+    
+    <div class="tabs tabs-boxed bg-base-200 p-1 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 overflow-x-auto flex-nowrap scrollbar-none">
+      <button class="tab tab-active flex-1 sm:flex-none whitespace-nowrap text-xs sm:text-sm min-h-[36px] sm:min-h-[40px]" data-tab="uuid">
+        <ion-icon name="finger-print-outline" class="text-base sm:text-lg mr-1"></ion-icon>
+        UUID v4
+      </button>
+      <button class="tab flex-1 sm:flex-none whitespace-nowrap text-xs sm:text-sm min-h-[36px] sm:min-h-[40px]" data-tab="nanoid">
+        <ion-icon name="barcode-outline" class="text-base sm:text-lg mr-1"></ion-icon>
+        nanoid
+      </button>
+      <button class="tab flex-1 sm:flex-none whitespace-nowrap text-xs sm:text-sm min-h-[36px] sm:min-h-[40px]" data-tab="random">
+        <ion-icon name="text-outline" class="text-base sm:text-lg mr-1"></ion-icon>
+        <span class="hidden xs:inline">Случайная строка</span>
+        <span class="xs:hidden">Random</span>
+      </button>
+      <button class="tab flex-1 sm:flex-none whitespace-nowrap text-xs sm:text-sm min-h-[36px] sm:min-h-[40px]" data-tab="password">
+        <ion-icon name="key-outline" class="text-base sm:text-lg mr-1"></ion-icon>
+        <span class="hidden xs:inline">Пароль</span>
+        <span class="xs:hidden">Pass</span>
+      </button>
+    </div>
+
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+      
+      
+      <div class="lg:col-span-2 order-1 lg:order-2">
+        
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          
+          
+          <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between gap-2">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="list-outline" class="text-success"></ion-icon>
+              Результаты
+              <span class="badge badge-sm" id="results-count">0</span>
+            </h2>
+            <div class="flex items-center gap-1 sm:gap-2">
+              <button id="copy-all" class="btn btn-ghost btn-xs gap-1 text-[10px] sm:text-xs" disabled>
+                <ion-icon name="copy-outline"></ion-icon>
+                <span class="hidden sm:inline">Копировать всё</span>
+                <span class="sm:hidden">All</span>
+              </button>
+              <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-xs gap-1 text-[10px] sm:text-xs">
+                  <ion-icon name="download-outline"></ion-icon>
+                  <span class="hidden sm:inline">Скачать</span>
+                </label>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow-lg bg-base-100 rounded-box w-36 sm:w-40 border border-base-200 z-50">
+                  <li><a id="download-txt"><ion-icon name="document-text-outline"></ion-icon> .txt</a></li>
+                  <li><a id="download-json"><ion-icon name="code-outline"></ion-icon> .json</a></li>
+                  <li><a id="download-csv"><ion-icon name="grid-outline"></ion-icon> .csv</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div id="single-result" class="p-3 sm:p-6">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+              <div class="flex-1 min-w-0">
+                <div class="font-mono text-sm sm:text-lg md:text-xl break-all select-all p-3 sm:p-4 bg-base-200/50 rounded-xl leading-relaxed" id="single-value">—</div>
+              </div>
+              <button id="copy-single" class="btn btn-primary sm:btn-lg gap-2 w-full sm:w-auto flex-shrink-0">
+                <ion-icon name="copy-outline" class="text-lg sm:text-xl"></ion-icon>
+                Копировать
+              </button>
+            </div>
+            
+            
+            <div id="password-strength" class="hidden mt-4 sm:mt-6">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs sm:text-sm font-medium">Надёжность пароля</span>
+                <span class="text-xs sm:text-sm font-semibold" id="strength-label">—</span>
+              </div>
+              <div class="w-full bg-base-200 rounded-full h-2">
+                <div id="strength-bar" class="h-2 rounded-full transition-all" style="width: 0%"></div>
+              </div>
+              <div class="mt-2 sm:mt-3 grid grid-cols-2 gap-2 text-[10px] sm:text-xs text-base-content/60">
+                <div>Энтропия: <span id="entropy-value" class="font-mono">—</span> бит</div>
+                <div>Комбинаций: <span id="combinations-value" class="font-mono">—</span></div>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div id="bulk-results" class="hidden p-3 sm:p-4">
+            <textarea 
+              id="bulk-output" 
+              class="textarea textarea-bordered w-full h-64 sm:h-96 font-mono text-xs sm:text-sm leading-relaxed bg-base-200/30"
+              readonly
+              placeholder="Сгенерированные значения появятся здесь..."
+            ></textarea>
+          </div>
+          
+        </div>
+
+        
+        <div id="stats-panel" class="hidden mt-3 sm:mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+          <div class="p-2.5 sm:p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+            <div class="text-lg sm:text-xl font-bold text-primary" id="stat-total">0</div>
+            <div class="text-[10px] sm:text-xs text-base-content/60">Сгенерировано</div>
+          </div>
+          <div class="p-2.5 sm:p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+            <div class="text-lg sm:text-xl font-bold text-secondary" id="stat-length">0</div>
+            <div class="text-[10px] sm:text-xs text-base-content/60">Средняя длина</div>
+          </div>
+          <div class="p-2.5 sm:p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+            <div class="text-lg sm:text-xl font-bold text-accent" id="stat-unique">0</div>
+            <div class="text-[10px] sm:text-xs text-base-content/60">Уникальных</div>
+          </div>
+          <div class="p-2.5 sm:p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
+            <div class="text-lg sm:text-xl font-bold text-success" id="stat-time">0ms</div>
+            <div class="text-[10px] sm:text-xs text-base-content/60">Время</div>
+          </div>
+        </div>
+
+      </div>
+
+      
+      <div class="lg:col-span-1 order-2 lg:order-1">
+        
+        
+        <div id="settings-uuid" class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              Настройки
+            </h2>
+          </div>
+          
+          <div class="p-3 sm:p-4 space-y-3 sm:space-y-4">
+            
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium text-xs sm:text-sm">Формат</span>
+              </label>
+              <select id="uuid-format" class="select select-bordered select-sm w-full text-xs sm:text-sm">
+                <option value="default">xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx</option>
+                <option value="uppercase">XXXXXXXX-XXXX-4XXX-YXXX-XXXXXXXXXXXX</option>
+                <option value="no-dash">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</option>
+                <option value="braces">{xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx}</option>
+              </select>
+            </div>
+            
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium text-xs sm:text-sm">Количество</span>
+              </label>
+              <input type="number" id="uuid-count" class="input input-bordered input-sm w-full" value="1" min="1" max="10000" inputmode="numeric" />
+            </div>
+            
+            <button id="uuid-generate" class="btn btn-primary btn-sm w-full gap-2 text-sm">
+              <ion-icon name="flash-outline"></ion-icon>
+              Сгенерировать
+            </button>
+            
+          </div>
+        </div>
+
+        
+        <div id="settings-nanoid" class="hidden bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              Настройки
+            </h2>
+          </div>
+          
+          <div class="p-3 sm:p-4 space-y-3 sm:space-y-4">
+            
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium text-xs sm:text-sm">Длина</span>
+              </label>
+              <input type="number" id="nanoid-length" class="input input-bordered input-sm w-full" value="21" min="1" max="128" inputmode="numeric" />
+              <label class="label py-0.5">
+                <span class="label-text-alt text-base-content/60 text-[10px] sm:text-xs">По умолчанию: 21</span>
+              </label>
+            </div>
+            
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium text-xs sm:text-sm">Алфавит</span>
+              </label>
+              <select id="nanoid-preset" class="select select-bordered select-sm w-full text-xs sm:text-sm mb-2">
+                <option value="default">По умолчанию (A-Za-z0-9_-)</option>
+                <option value="numbers">Только цифры (0-9)</option>
+                <option value="lowercase">Строчные (a-z0-9)</option>
+                <option value="uppercase">Заглавные (A-Z0-9)</option>
+                <option value="hex">Hex (0-9a-f)</option>
+                <option value="custom">Кастомный</option>
+              </select>
+              <input type="text" id="nanoid-alphabet" class="input input-bordered input-sm font-mono hidden w-full text-xs" placeholder="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-" />
+            </div>
+            
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium text-xs sm:text-sm">Количество</span>
+              </label>
+              <input type="number" id="nanoid-count" class="input input-bordered input-sm w-full" value="1" min="1" max="10000" inputmode="numeric" />
+            </div>
+            
+            <button id="nanoid-generate" class="btn btn-primary btn-sm w-full gap-2 text-sm">
+              <ion-icon name="flash-outline"></ion-icon>
+              Сгенерировать
+            </button>
+            
+          </div>
+        </div>
+
+        
+        <div id="settings-random" class="hidden bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              Настройки
+            </h2>
+          </div>
+          
+          <div class="p-3 sm:p-4 space-y-3 sm:space-y-4">
+            
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium text-xs sm:text-sm">Длина</span>
+              </label>
+              <input type="number" id="random-length" class="input input-bordered input-sm w-full" value="16" min="1" max="256" inputmode="numeric" />
+            </div>
+            
+            <div class="space-y-2">
+              <label class="label py-1">
+                <span class="label-text font-medium text-xs sm:text-sm">Символы</span>
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer py-1">
+                <span class="text-xs sm:text-sm">Строчные (a-z)</span>
+                <input type="checkbox" id="random-lowercase" class="toggle toggle-sm toggle-primary" checked />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer py-1">
+                <span class="text-xs sm:text-sm">Заглавные (A-Z)</span>
+                <input type="checkbox" id="random-uppercase" class="toggle toggle-sm toggle-primary" checked />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer py-1">
+                <span class="text-xs sm:text-sm">Цифры (0-9)</span>
+                <input type="checkbox" id="random-numbers" class="toggle toggle-sm toggle-primary" checked />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer py-1">
+                <span class="text-xs sm:text-sm">Символы (!@#$%)</span>
+                <input type="checkbox" id="random-symbols" class="toggle toggle-sm toggle-primary" />
+              </label>
+              
+              <label class="flex items-center justify-between cursor-pointer py-1">
+                <span class="text-xs sm:text-sm">Исключить похожие (0Ol1)</span>
+                <input type="checkbox" id="random-exclude-similar" class="toggle toggle-sm toggle-primary" />
+              </label>
+            </div>
+            
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium text-xs sm:text-sm">Количество</span>
+              </label>
+              <input type="number" id="random-count" class="input input-bordered input-sm w-full" value="1" min="1" max="10000" inputmode="numeric" />
+            </div>
+            
+            <button id="random-generate" class="btn btn-primary btn-sm w-full gap-2 text-sm">
+              <ion-icon name="flash-outline"></ion-icon>
+              Сгенерировать
+            </button>
+            
+          </div>
+        </div>
+
+        
+        <div id="settings-password" class="hidden bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              Настройки
+            </h2>
+          </div>
+          
+          <div class="p-3 sm:p-4 space-y-3 sm:space-y-4">
+            
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium text-xs sm:text-sm">Длина</span>
+              </label>
+              <input type="range" id="password-length" class="range range-primary range-sm" min="6" max="128" value="16" />
+              <div class="flex justify-between text-[10px] sm:text-xs text-base-content/40 mt-1">
+                <span>6</span>
+                <span id="password-length-value" class="text-base-content font-medium text-xs sm:text-sm">16</span>
+                <span>128</span>
+              </div>
+            </div>
+            
+            <div>
+              <label class="label py-1">
+                <span class="label-text font-medium text-xs sm:text-sm">Уровень сложности</span>
+              </label>
+              <div class="space-y-1.5 sm:space-y-2">
+                <label class="flex items-center gap-2 sm:gap-3 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary active:bg-base-200/80">
+                  <input type="radio" name="password-level" value="simple" class="radio radio-sm radio-primary" />
+                  <div class="flex-1 min-w-0">
+                    <span class="text-xs sm:text-sm font-medium">Простой</span>
+                  </div>
+                  <span class="badge badge-success badge-xs sm:badge-sm text-[9px] sm:text-xs">a-z, A-Z, 0-9</span>
+                </label>
+                <label class="flex items-center gap-2 sm:gap-3 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary active:bg-base-200/80">
+                  <input type="radio" name="password-level" value="strong" class="radio radio-sm radio-primary" checked />
+                  <div class="flex-1 min-w-0">
+                    <span class="text-xs sm:text-sm font-medium">Сильный</span>
+                  </div>
+                  <span class="badge badge-warning badge-xs sm:badge-sm text-[9px] sm:text-xs">+ !@#$%</span>
+                </label>
+                <label class="flex items-center gap-2 sm:gap-3 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary active:bg-base-200/80">
+                  <input type="radio" name="password-level" value="ultra" class="radio radio-sm radio-primary" />
+                  <div class="flex-1 min-w-0">
+                    <span class="text-xs sm:text-sm font-medium">Ультра</span>
+                  </div>
+                  <span class="badge badge-error badge-xs sm:badge-sm text-[9px] sm:text-xs">+ ^&*()</span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <label class="flex items-center justify-between cursor-pointer py-1">
+                <span class="text-xs sm:text-sm">Исключить похожие</span>
+                <input type="checkbox" id="password-exclude-similar" class="toggle toggle-sm toggle-primary" />
+              </label>
+            </div>
+            
+            <div class="form-control">
+              <label class="label py-1">
+                <span class="label-text font-medium text-xs sm:text-sm">Количество</span>
+              </label>
+              <input type="number" id="password-count" class="input input-bordered input-sm w-full" value="1" min="1" max="10000" inputmode="numeric" />
+            </div>
+            
+            <button id="password-generate" class="btn btn-primary btn-sm w-full gap-2 text-sm">
+              <ion-icon name="flash-outline"></ion-icon>
+              Сгенерировать
+            </button>
+            
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+
+    
+    <div class="mt-6 sm:mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+      
+      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-primary/10 flex items-center justify-center mb-2 sm:mb-3">
+          <ion-icon name="finger-print-outline" class="text-xl sm:text-2xl text-primary"></ion-icon>
+        </div>
+        <h3 class="font-semibold text-xs sm:text-base mb-0.5 sm:mb-1">UUID v4</h3>
+        <p class="text-[10px] sm:text-sm text-base-content/60 leading-relaxed">Универсальный уникальный идентификатор. RFC 4122 стандарт.</p>
+      </div>
+      
+      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-secondary/10 flex items-center justify-center mb-2 sm:mb-3">
+          <ion-icon name="barcode-outline" class="text-xl sm:text-2xl text-secondary"></ion-icon>
+        </div>
+        <h3 class="font-semibold text-xs sm:text-base mb-0.5 sm:mb-1">nanoid</h3>
+        <p class="text-[10px] sm:text-sm text-base-content/60 leading-relaxed">Компактный URL-friendly идентификатор. Короче UUID на 40%.</p>
+      </div>
+      
+      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-accent/10 flex items-center justify-center mb-2 sm:mb-3">
+          <ion-icon name="text-outline" class="text-xl sm:text-2xl text-accent"></ion-icon>
+        </div>
+        <h3 class="font-semibold text-xs sm:text-base mb-0.5 sm:mb-1">Случайная строка</h3>
+        <p class="text-[10px] sm:text-sm text-base-content/60 leading-relaxed">Случайная строка с настраиваемым набором символов.</p>
+      </div>
+      
+      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-success/10 flex items-center justify-center mb-2 sm:mb-3">
+          <ion-icon name="key-outline" class="text-xl sm:text-2xl text-success"></ion-icon>
+        </div>
+        <h3 class="font-semibold text-xs sm:text-base mb-0.5 sm:mb-1">Пароль</h3>
+        <p class="text-[10px] sm:text-sm text-base-content/60 leading-relaxed">Криптографически стойкий пароль с индикатором надёжности.</p>
+      </div>
+      
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  
+  var i18n = {
+    copied: "\"Скопировано!\"",
+    copiedCount: "\"Скопировано {count} значений\"",
+    weak: "\"Слабый\"",
+    medium: "\"Средний\"",
+    strong: "\"Сильный\"",
+    veryStrong: "\"Очень сильный\"",
+    generated: "\"Сгенерировано\""
+  };
+  
+  
+  var currentTab = 'uuid';
+  var currentResults = [];
+  var settings = {
+    uuid: { format: 'default', count: 1 },
+    nanoid: { length: 21, alphabet: 'default', count: 1 },
+    random: { length: 16, lowercase: true, uppercase: true, numbers: true, symbols: false, excludeSimilar: false, count: 1 },
+    password: { length: 16, level: 'strong', excludeSimilar: false, count: 1 }
+  };
+  
+  
+  var tabs = document.querySelectorAll('[data-tab]');
+  var singleResult = document.getElementById('single-result');
+  var bulkResults = document.getElementById('bulk-results');
+  var singleValue = document.getElementById('single-value');
+  var bulkOutput = document.getElementById('bulk-output');
+  var resultsCount = document.getElementById('results-count');
+  var statsPanel = document.getElementById('stats-panel');
+  var passwordStrength = document.getElementById('password-strength');
+  
+  
+  
+  function copyToClipboard(text, message) {
+    var msg = message || i18n.copied;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        showToast(msg);
+      }).catch(function() {
+        fallbackCopy(text, msg);
+      });
+    } else {
+      fallbackCopy(text, msg);
+    }
+  }
+  
+  function fallbackCopy(text, message) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    ta.style.top = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try {
+      document.execCommand('copy');
+      showToast(message);
+    } catch (e) {
+      
+    }
+    document.body.removeChild(ta);
+  }
+  
+  
+  
+  function showToast(message) {
+    var existing = document.querySelectorAll('.uuid-toast');
+    existing.forEach(function(el) { el.remove(); });
+    
+    var toast = document.createElement('div');
+    toast.className = 'uuid-toast';
+    toast.style.cssText = 'position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:9999;' +
+      'padding:10px 20px;background:hsl(var(--su,158 64% 52%));color:hsl(var(--suc,0 0% 100%));' +
+      'border-radius:8px;font-size:14px;font-weight:500;box-shadow:0 4px 12px rgba(0,0,0,0.15);' +
+      'animation:uuidToastIn 0.3s ease;max-width:calc(100vw - 32px);text-align:center;';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(function() {
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity 0.3s ease';
+      setTimeout(function() { toast.remove(); }, 300);
+    }, 2000);
+  }
+  
+  
+  if (!document.getElementById('uuid-toast-style')) {
+    var style = document.createElement('style');
+    style.id = 'uuid-toast-style';
+    style.textContent = '@keyframes uuidToastIn{from{opacity:0;transform:translateX(-50%) translateY(-10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}' +
+      '.scrollbar-none::-webkit-scrollbar{display:none}.scrollbar-none{-ms-overflow-style:none;scrollbar-width:none}';
+    document.head.appendChild(style);
+  }
+  
+  
+  
+  function getRandomValues(length) {
+    var array = new Uint8Array(length);
+    crypto.getRandomValues(array);
+    return array;
+  }
+  
+  function randomInt(max) {
+    if (max <= 0) return 0;
+    
+    var array = getRandomValues(4);
+    var num = ((array[0] << 24) | (array[1] << 16) | (array[2] << 8) | array[3]) >>> 0;
+    return num % max;
+  }
+  
+  
+  
+  function generateUUID() {
+    var bytes = getRandomValues(16);
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    
+    var hex = '';
+    for (var i = 0; i < bytes.length; i++) {
+      hex += bytes[i].toString(16).padStart(2, '0');
+    }
+    return hex.substr(0,8) + '-' + hex.substr(8,4) + '-' + hex.substr(12,4) + '-' + hex.substr(16,4) + '-' + hex.substr(20,12);
+  }
+  
+  function formatUUID(uuid, format) {
+    switch (format) {
+      case 'uppercase':
+        return uuid.toUpperCase();
+      case 'no-dash':
+        return uuid.replace(/-/g, '');
+      case 'braces':
+        return '{' + uuid + '}';
+      default:
+        return uuid;
+    }
+  }
+  
+  
+  
+  var NANOID_ALPHABETS = {
+    'default': 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-',
+    numbers: '0123456789',
+    lowercase: 'abcdefghijklmnopqrstuvwxyz0123456789',
+    uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+    hex: '0123456789abcdef'
+  };
+  
+  function generateNanoid(length, alphabet) {
+    var result = '';
+    for (var i = 0; i < length; i++) {
+      result += alphabet[randomInt(alphabet.length)];
+    }
+    return result;
+  }
+  
+  
+  
+  var CHAR_SETS = {
+    lowercase: 'abcdefghijklmnopqrstuvwxyz',
+    uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    numbers: '0123456789',
+    symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?'
+  };
+  
+  var SIMILAR_CHARS = '0Oo1lI';
+  
+  function generateRandomString(length, options) {
+    var charset = '';
+    if (options.lowercase) charset += CHAR_SETS.lowercase;
+    if (options.uppercase) charset += CHAR_SETS.uppercase;
+    if (options.numbers) charset += CHAR_SETS.numbers;
+    if (options.symbols) charset += CHAR_SETS.symbols;
+    
+    if (options.excludeSimilar) {
+      charset = charset.split('').filter(function(c) { return SIMILAR_CHARS.indexOf(c) === -1; }).join('');
+    }
+    
+    if (!charset) return '';
+    
+    var result = '';
+    for (var i = 0; i < length; i++) {
+      result += charset[randomInt(charset.length)];
+    }
+    return result;
+  }
+  
+  
+  
+  var PASSWORD_SETS = {
+    simple: CHAR_SETS.lowercase + CHAR_SETS.uppercase + CHAR_SETS.numbers,
+    strong: CHAR_SETS.lowercase + CHAR_SETS.uppercase + CHAR_SETS.numbers + '!@#$%^&*',
+    ultra: CHAR_SETS.lowercase + CHAR_SETS.uppercase + CHAR_SETS.numbers + CHAR_SETS.symbols
+  };
+  
+  function generatePassword(length, level, excludeSimilar) {
+    var charset = PASSWORD_SETS[level] || PASSWORD_SETS.strong;
+    
+    if (excludeSimilar) {
+      charset = charset.split('').filter(function(c) { return SIMILAR_CHARS.indexOf(c) === -1; }).join('');
+    }
+    
+    if (!charset || length < 1) return '';
+    
+    
+    var password = '';
+    var lc = CHAR_SETS.lowercase;
+    var uc = CHAR_SETS.uppercase;
+    var nums = CHAR_SETS.numbers;
+    var syms = '!@#$%^&*';
+    
+    if (excludeSimilar) {
+      lc = lc.split('').filter(function(c) { return SIMILAR_CHARS.indexOf(c) === -1; }).join('');
+      uc = uc.split('').filter(function(c) { return SIMILAR_CHARS.indexOf(c) === -1; }).join('');
+      nums = nums.split('').filter(function(c) { return SIMILAR_CHARS.indexOf(c) === -1; }).join('');
+    }
+    
+    if (length >= 3) {
+      if (lc.length) password += lc[randomInt(lc.length)];
+      if (uc.length) password += uc[randomInt(uc.length)];
+      if (nums.length) password += nums[randomInt(nums.length)];
+    }
+    
+    if ((level === 'strong' || level === 'ultra') && length >= 4) {
+      password += syms[randomInt(syms.length)];
+    }
+    
+    
+    while (password.length < length) {
+      password += charset[randomInt(charset.length)];
+    }
+    
+    
+    password = password.substring(0, length);
+    
+    
+    var arr = password.split('');
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = randomInt(i + 1);
+      var tmp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = tmp;
+    }
+    
+    return arr.join('');
+  }
+  
+  function calculatePasswordStrength(password) {
+    var length = password.length;
+    var charsetSize = 0;
+    
+    if (/[a-z]/.test(password)) charsetSize += 26;
+    if (/[A-Z]/.test(password)) charsetSize += 26;
+    if (/[0-9]/.test(password)) charsetSize += 10;
+    if (/[^a-zA-Z0-9]/.test(password)) charsetSize += 32;
+    
+    if (charsetSize === 0) charsetSize = 1;
+    
+    var entropy = length * Math.log2(charsetSize);
+    var combinations = Math.pow(charsetSize, length);
+    
+    var strength = 'weak';
+    var strengthClass = 'bg-error';
+    var strengthWidth = 25;
+    
+    if (entropy > 100) {
+      strength = 'veryStrong';
+      strengthClass = 'bg-success';
+      strengthWidth = 100;
+    } else if (entropy > 60) {
+      strength = 'strong';
+      strengthClass = 'bg-success';
+      strengthWidth = 75;
+    } else if (entropy > 30) {
+      strength = 'medium';
+      strengthClass = 'bg-warning';
+      strengthWidth = 50;
+    }
+    
+    return {
+      entropy: entropy.toFixed(1),
+      combinations: combinations.toExponential(2),
+      strength: i18n[strength] || strength,
+      strengthClass: strengthClass,
+      strengthWidth: strengthWidth
+    };
+  }
+  
+  
+  
+  function generate(type, count) {
+    if (count < 1) count = 1;
+    if (count > 10000) count = 10000;
+    
+    var startTime = performance.now();
+    var results = [];
+    
+    for (var i = 0; i < count; i++) {
+      var value;
+      
+      switch (type) {
+        case 'uuid':
+          value = formatUUID(generateUUID(), settings.uuid.format);
+          break;
+        case 'nanoid':
+          var alphabet = settings.nanoid.alphabet === 'custom'
+            ? (document.getElementById('nanoid-alphabet').value || NANOID_ALPHABETS['default'])
+            : (NANOID_ALPHABETS[settings.nanoid.alphabet] || NANOID_ALPHABETS['default']);
+          value = generateNanoid(settings.nanoid.length, alphabet);
+          break;
+        case 'random':
+          value = generateRandomString(settings.random.length, settings.random);
+          break;
+        case 'password':
+          value = generatePassword(settings.password.length, settings.password.level, settings.password.excludeSimilar);
+          break;
+        default:
+          value = '';
+      }
+      
+      if (value) results.push(value);
+    }
+    
+    var endTime = performance.now();
+    var time = (endTime - startTime).toFixed(2);
+    
+    currentResults = results;
+    displayResults(results, time);
+  }
+  
+  
+  
+  function displayResults(results, time) {
+    var count = results.length;
+    resultsCount.textContent = count;
+    
+    if (count <= 1) {
+      singleResult.classList.remove('hidden');
+      bulkResults.classList.add('hidden');
+      singleValue.textContent = count === 1 ? results[0] : '—';
+      
+      
+      if (currentTab === 'password' && count === 1) {
+        var strength = calculatePasswordStrength(results[0]);
+        passwordStrength.classList.remove('hidden');
+        document.getElementById('strength-label').textContent = strength.strength;
+        var bar = document.getElementById('strength-bar');
+        bar.className = 'h-2 rounded-full transition-all ' + strength.strengthClass;
+        bar.style.width = strength.strengthWidth + '%';
+        document.getElementById('entropy-value').textContent = strength.entropy;
+        document.getElementById('combinations-value').textContent = strength.combinations;
+      } else {
+        passwordStrength.classList.add('hidden');
+      }
+    } else {
+      singleResult.classList.add('hidden');
+      bulkResults.classList.remove('hidden');
+      bulkOutput.value = results.join('\n');
+      passwordStrength.classList.add('hidden');
+    }
+    
+    
+    if (count > 0) {
+      var totalLen = 0;
+      for (var i = 0; i < results.length; i++) {
+        totalLen += results[i].length;
+      }
+      var avgLength = totalLen / count;
+      
+      var uniqueSet = {};
+      for (var j = 0; j < results.length; j++) {
+        uniqueSet[results[j]] = true;
+      }
+      var unique = Object.keys(uniqueSet).length;
+      
+      document.getElementById('stat-total').textContent = count;
+      document.getElementById('stat-length').textContent = avgLength.toFixed(1);
+      document.getElementById('stat-unique').textContent = unique;
+      document.getElementById('stat-time').textContent = time + 'ms';
+      
+      statsPanel.classList.remove('hidden');
+    }
+    
+    
+    document.getElementById('copy-all').disabled = count === 0;
+  }
+  
+  
+  
+  function switchTab(tab) {
+    currentTab = tab;
+    
+    tabs.forEach(function(t) {
+      if (t.dataset.tab === tab) {
+        t.classList.add('tab-active');
+      } else {
+        t.classList.remove('tab-active');
+      }
+    });
+    
+    var types = ['uuid', 'nanoid', 'random', 'password'];
+    for (var i = 0; i < types.length; i++) {
+      var el = document.getElementById('settings-' + types[i]);
+      if (el) {
+        if (types[i] === tab) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      }
+    }
+    
+    
+    currentResults = [];
+    singleResult.classList.remove('hidden');
+    bulkResults.classList.add('hidden');
+    singleValue.textContent = '—';
+    resultsCount.textContent = '0';
+    statsPanel.classList.add('hidden');
+    passwordStrength.classList.add('hidden');
+    document.getElementById('copy-all').disabled = true;
+  }
+  
+  
+  
+  function downloadFile(content, filename, type) {
+    var blob = new Blob([content], { type: type });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+  
+  function downloadTxt() {
+    if (!currentResults.length) return;
+    downloadFile(currentResults.join('\n'), currentTab + '-' + Date.now() + '.txt', 'text/plain');
+  }
+  
+  function downloadJson() {
+    if (!currentResults.length) return;
+    var json = JSON.stringify(currentResults, null, 2);
+    downloadFile(json, currentTab + '-' + Date.now() + '.json', 'application/json');
+  }
+  
+  function downloadCsv() {
+    if (!currentResults.length) return;
+    var csv = 'value\n' + currentResults.join('\n');
+    downloadFile(csv, currentTab + '-' + Date.now() + '.csv', 'text/csv');
+  }
+  
+  
+  
+  function saveSettings() {
+    try {
+      localStorage.setItem('uuid-generator-settings', JSON.stringify(settings));
+    } catch (e) {
+      
+    }
+  }
+  
+  function loadSettings() {
+    try {
+      var saved = localStorage.getItem('uuid-generator-settings');
+      if (saved) {
+        var parsed = JSON.parse(saved);
+        
+        if (parsed.uuid) {
+          for (var k in parsed.uuid) settings.uuid[k] = parsed.uuid[k];
+        }
+        if (parsed.nanoid) {
+          for (var k2 in parsed.nanoid) settings.nanoid[k2] = parsed.nanoid[k2];
+        }
+        if (parsed.random) {
+          for (var k3 in parsed.random) settings.random[k3] = parsed.random[k3];
+        }
+        if (parsed.password) {
+          for (var k4 in parsed.password) settings.password[k4] = parsed.password[k4];
+        }
+        applySettings();
+      }
+    } catch (e) {
+      
+    }
+  }
+  
+  function applySettings() {
+    
+    var uuidFormat = document.getElementById('uuid-format');
+    var uuidCount = document.getElementById('uuid-count');
+    if (uuidFormat) uuidFormat.value = settings.uuid.format;
+    if (uuidCount) uuidCount.value = settings.uuid.count;
+    
+    
+    var nanoidLength = document.getElementById('nanoid-length');
+    var nanoidPreset = document.getElementById('nanoid-preset');
+    var nanoidCount = document.getElementById('nanoid-count');
+    var nanoidAlphabet = document.getElementById('nanoid-alphabet');
+    if (nanoidLength) nanoidLength.value = settings.nanoid.length;
+    if (nanoidPreset) nanoidPreset.value = settings.nanoid.alphabet;
+    if (nanoidCount) nanoidCount.value = settings.nanoid.count;
+    if (nanoidAlphabet && settings.nanoid.alphabet === 'custom') {
+      nanoidAlphabet.classList.remove('hidden');
+    }
+    
+    
+    var randomLength = document.getElementById('random-length');
+    var randomLowercase = document.getElementById('random-lowercase');
+    var randomUppercase = document.getElementById('random-uppercase');
+    var randomNumbers = document.getElementById('random-numbers');
+    var randomSymbols = document.getElementById('random-symbols');
+    var randomExclude = document.getElementById('random-exclude-similar');
+    var randomCount = document.getElementById('random-count');
+    if (randomLength) randomLength.value = settings.random.length;
+    if (randomLowercase) randomLowercase.checked = settings.random.lowercase;
+    if (randomUppercase) randomUppercase.checked = settings.random.uppercase;
+    if (randomNumbers) randomNumbers.checked = settings.random.numbers;
+    if (randomSymbols) randomSymbols.checked = settings.random.symbols;
+    if (randomExclude) randomExclude.checked = settings.random.excludeSimilar;
+    if (randomCount) randomCount.value = settings.random.count;
+    
+    
+    var pwLength = document.getElementById('password-length');
+    var pwLengthVal = document.getElementById('password-length-value');
+    var pwExclude = document.getElementById('password-exclude-similar');
+    var pwCount = document.getElementById('password-count');
+    if (pwLength) pwLength.value = settings.password.length;
+    if (pwLengthVal) pwLengthVal.textContent = settings.password.length;
+    var pwLevel = document.querySelector('input[name="password-level"][value="' + settings.password.level + '"]');
+    if (pwLevel) pwLevel.checked = true;
+    if (pwExclude) pwExclude.checked = settings.password.excludeSimilar;
+    if (pwCount) pwCount.value = settings.password.count;
+  }
+  
+  
+  
+  
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() { switchTab(tab.dataset.tab); });
+  });
+  
+  
+  document.getElementById('uuid-format').addEventListener('change', function(e) {
+    settings.uuid.format = e.target.value;
+    saveSettings();
+  });
+  
+  document.getElementById('uuid-count').addEventListener('change', function(e) {
+    settings.uuid.count = Math.max(1, Math.min(10000, parseInt(e.target.value, 10) || 1));
+    e.target.value = settings.uuid.count;
+    saveSettings();
+  });
+  
+  document.getElementById('uuid-generate').addEventListener('click', function() {
+    generate('uuid', settings.uuid.count);
+  });
+  
+  
+  document.getElementById('nanoid-length').addEventListener('change', function(e) {
+    settings.nanoid.length = Math.max(1, Math.min(128, parseInt(e.target.value, 10) || 21));
+    e.target.value = settings.nanoid.length;
+    saveSettings();
+  });
+  
+  document.getElementById('nanoid-preset').addEventListener('change', function(e) {
+    settings.nanoid.alphabet = e.target.value;
+    var customInput = document.getElementById('nanoid-alphabet');
+    if (e.target.value === 'custom') {
+      customInput.classList.remove('hidden');
+    } else {
+      customInput.classList.add('hidden');
+    }
+    saveSettings();
+  });
+  
+  document.getElementById('nanoid-count').addEventListener('change', function(e) {
+    settings.nanoid.count = Math.max(1, Math.min(10000, parseInt(e.target.value, 10) || 1));
+    e.target.value = settings.nanoid.count;
+    saveSettings();
+  });
+  
+  document.getElementById('nanoid-generate').addEventListener('click', function() {
+    generate('nanoid', settings.nanoid.count);
+  });
+  
+  
+  document.getElementById('random-length').addEventListener('change', function(e) {
+    settings.random.length = Math.max(1, Math.min(256, parseInt(e.target.value, 10) || 16));
+    e.target.value = settings.random.length;
+    saveSettings();
+  });
+  
+  var randomOpts = [
+    { id: 'random-lowercase', key: 'lowercase' },
+    { id: 'random-uppercase', key: 'uppercase' },
+    { id: 'random-numbers', key: 'numbers' },
+    { id: 'random-symbols', key: 'symbols' },
+    { id: 'random-exclude-similar', key: 'excludeSimilar' }
+  ];
+  
+  randomOpts.forEach(function(opt) {
+    var el = document.getElementById(opt.id);
+    if (el) {
+      el.addEventListener('change', function(e) {
+        settings.random[opt.key] = e.target.checked;
+        
+        
+        if (!settings.random.lowercase && !settings.random.uppercase && !settings.random.numbers && !settings.random.symbols) {
+          settings.random.lowercase = true;
+          document.getElementById('random-lowercase').checked = true;
+        }
+        
+        saveSettings();
+      });
+    }
+  });
+  
+  document.getElementById('random-count').addEventListener('change', function(e) {
+    settings.random.count = Math.max(1, Math.min(10000, parseInt(e.target.value, 10) || 1));
+    e.target.value = settings.random.count;
+    saveSettings();
+  });
+  
+  document.getElementById('random-generate').addEventListener('click', function() {
+    generate('random', settings.random.count);
+  });
+  
+  
+  document.getElementById('password-length').addEventListener('input', function(e) {
+    settings.password.length = parseInt(e.target.value, 10) || 16;
+    document.getElementById('password-length-value').textContent = settings.password.length;
+    saveSettings();
+  });
+  
+  var pwRadios = document.querySelectorAll('input[name="password-level"]');
+  pwRadios.forEach(function(radio) {
+    radio.addEventListener('change', function(e) {
+      settings.password.level = e.target.value;
+      saveSettings();
+    });
+  });
+  
+  document.getElementById('password-exclude-similar').addEventListener('change', function(e) {
+    settings.password.excludeSimilar = e.target.checked;
+    saveSettings();
+  });
+  
+  document.getElementById('password-count').addEventListener('change', function(e) {
+    settings.password.count = Math.max(1, Math.min(10000, parseInt(e.target.value, 10) || 1));
+    e.target.value = settings.password.count;
+    saveSettings();
+  });
+  
+  document.getElementById('password-generate').addEventListener('click', function() {
+    generate('password', settings.password.count);
+  });
+  
+  
+  document.getElementById('copy-single').addEventListener('click', function() {
+    if (currentResults.length >= 1) {
+      copyToClipboard(currentResults[0]);
+    }
+  });
+  
+  document.getElementById('copy-all').addEventListener('click', function() {
+    if (currentResults.length > 0) {
+      var text = currentResults.join('\n');
+      var message = i18n.copiedCount.replace('{count}', currentResults.length);
+      copyToClipboard(text, message);
+    }
+  });
+  
+  
+  document.getElementById('download-txt').addEventListener('click', function(e) {
+    e.preventDefault();
+    downloadTxt();
+  });
+  document.getElementById('download-json').addEventListener('click', function(e) {
+    e.preventDefault();
+    downloadJson();
+  });
+  document.getElementById('download-csv').addEventListener('click', function(e) {
+    e.preventDefault();
+    downloadCsv();
+  });
+  
+  
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      var btn = document.getElementById(currentTab + '-generate');
+      if (btn) btn.click();
+    }
+  });
+  
+  
+  document.addEventListener('click', function(e) {
+    var dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(function(dd) {
+      if (!dd.contains(e.target)) {
+        var el = dd.querySelector(':focus');
+        if (el) el.blur();
+      }
+    });
+  });
+  
+  
+  loadSettings();
+  
+  
+  generate('uuid', 1);
+  
+})();
+</script>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Максим Александров<br>
+<strong>Age:</strong> 28
+<strong>Location:</strong> Тула, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>Этот блог — мой personal knowledge base, где я пушу заметки про tech stack, life experience и всё, что триггерит мой interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — готов к мёрджу идей и совместным проектам.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-яп">💻 ЯП</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Адаптивная вёрстка (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST API</strong></li>
+</ul>
+<h2 id="-базы-данных">🗄️ Базы данных</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-дизайн-и-графика">🎨 Дизайн и графика</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX дизайн и прототипирование</li>
+<li><strong>Photoshop</strong> — графика и обработка изображений</li>
+<li><strong>After Effects</strong> — моушн-дизайн и анимация 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои Open Source проекты 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои проекты 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN-сервис в Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN-сервис в Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Социальные сети</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+     
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+
+    
+    
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym("99568144", "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

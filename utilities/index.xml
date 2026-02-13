@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Утилиты on 0x69.ru</title>
+    <link>https://0x69.ru/utilities/</link>
+    <description>Recent content in Утилиты on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>ru</language>
+    <lastBuildDate>Thu, 12 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://0x69.ru/utilities/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CSS Formatter</title>
+      <link>https://0x69.ru/utilities/css-formatter/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/css-formatter/</guid>
+      <description>&lt;p&gt;Форматирование, минификация и оптимизация CSS кода с гибкими настройками&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>HTML Formatter</title>
+      <link>https://0x69.ru/utilities/html-formatter/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/html-formatter/</guid>
+      <description>&lt;p&gt;Форматирование, минификация и оптимизация HTML кода с поддержкой шаблонизаторов&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>JavaScript Formatter</title>
+      <link>https://0x69.ru/utilities/js-formatter/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/js-formatter/</guid>
+      <description>&lt;p&gt;Форматирование, минификация и beautify JavaScript кода с гибкими настройками&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Email Alias Tester</title>
+      <link>https://0x69.ru/utilities/email-alias-tester/</link>
+      <pubDate>Wed, 11 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/email-alias-tester/</guid>
+      <description>&lt;p&gt;Генерация email-алиасов и тестирование нормализации адресов для разных провайдеров&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TreeSnap</title>
+      <link>https://0x69.ru/utilities/treesnap/</link>
+      <pubDate>Wed, 11 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/treesnap/</guid>
+      <description>&lt;p&gt;Создание древовидной структуры проекта с поддержкой .gitignore&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Super Logout</title>
+      <link>https://0x69.ru/utilities/super-logout/</link>
+      <pubDate>Tue, 10 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/super-logout/</guid>
+      <description>&lt;p&gt;Массовый выход из популярных веб-сервисов одним щелчком мыши.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Favicon Generator</title>
+      <link>https://0x69.ru/utilities/favicon-generator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/favicon-generator/</guid>
+      <description>&lt;p&gt;Генератор favicon, иконок для PWA и Web App Manifest. Работает полностью в браузере.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Image Upscaler</title>
+      <link>https://0x69.ru/utilities/image-upscaler/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/image-upscaler/</guid>
+      <description>&lt;p&gt;Увеличение изображений с высоким качеством. Апскейл в 2x-4x с алгоритмом Lanczos для арта, фото и тд.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>JavaScript Obfuscator</title>
+      <link>https://0x69.ru/utilities/javascript-obfuscator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/javascript-obfuscator/</guid>
+      <description>&lt;p&gt;Обфускация JavaScript кода для защиты от копирования и анализа&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>JSON → TypeScript / Go / Zod</title>
+      <link>https://0x69.ru/utilities/json-to-types/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/json-to-types/</guid>
+      <description>&lt;p&gt;Генерация TypeScript интерфейсов, Go структур, Zod схем и JSON Schema из JSON данных&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Meta Tag Generator</title>
+      <link>https://0x69.ru/utilities/meta-tag-generator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/meta-tag-generator/</guid>
+      <description>&lt;p&gt;Генератор SEO, Open Graph, Twitter и favicon meta-тегов с live preview. Бесплатный онлайн инструмент.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>QR Code Generator</title>
+      <link>https://0x69.ru/utilities/qr-generator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/qr-generator/</guid>
+      <description>&lt;p&gt;Генератор QR-кодов с настройкой цвета, размера, логотипа и экспортом в PNG/SVG&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Regex Tester</title>
+      <link>https://0x69.ru/utilities/regex-tester/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/regex-tester/</guid>
+      <description>&lt;p&gt;Тестирование регулярных выражений с подсветкой совпадений и объяснением синтаксиса&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Timestamp Converter</title>
+      <link>https://0x69.ru/utilities/timestamp-converter/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/timestamp-converter/</guid>
+      <description>&lt;p&gt;Конвертер Unix timestamp в дату и обратно, таймзоны, калькулятор длительности&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>UUID &amp; Random Generator</title>
+      <link>https://0x69.ru/utilities/uuid-generator/</link>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/uuid-generator/</guid>
+      <description>&lt;p&gt;Генератор UUID v4, nanoid, случайных строк и безопасных паролей онлайн. Bulk-генерация до 10000 значений.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Base64 Encoder/Decoder</title>
+      <link>https://0x69.ru/utilities/base64-encoder/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/base64-encoder/</guid>
+      <description>&lt;p&gt;Кодирование и декодирование текста, файлов и изображений в Base64 онлайн&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Color Converter</title>
+      <link>https://0x69.ru/utilities/color-converter/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/color-converter/</guid>
+      <description>&lt;p&gt;Конвертация цветов между HEX, RGB, HSL и другими форматами&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Diff Tool</title>
+      <link>https://0x69.ru/utilities/diff-tool/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/diff-tool/</guid>
+      <description>&lt;p&gt;Сравнение текстов, JSON, кода с подсветкой изменений&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hash Generator</title>
+      <link>https://0x69.ru/utilities/hash-generator/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/hash-generator/</guid>
+      <description>&lt;p&gt;Генерация MD5, SHA-1, SHA-256, SHA-512 хешей для текста и файлов&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Image Compressor</title>
+      <link>https://0x69.ru/utilities/image-compressor/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/image-compressor/</guid>
+      <description>&lt;p&gt;Сжатие PNG, JPG, WebP изображений без потери качества&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>JSON Formatter</title>
+      <link>https://0x69.ru/utilities/json-normalizer/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/json-normalizer/</guid>
+      <description>&lt;p&gt;Форматирование, минификация и валидация JSON онлайн&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Lorem Ipsum Generator</title>
+      <link>https://0x69.ru/utilities/lorem-ipsum/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/lorem-ipsum/</guid>
+      <description>&lt;p&gt;Генератор текста-заполнителя для дизайна и вёрстки&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Markdown Editor</title>
+      <link>https://0x69.ru/utilities/markdown-editor/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/markdown-editor/</guid>
+      <description>&lt;p&gt;Онлайн редактор Markdown с предпросмотром в реальном времени и экспортом в HTML&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>URL Encoder/Decoder</title>
+      <link>https://0x69.ru/utilities/url-encoder/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/url-encoder/</guid>
+      <description>&lt;p&gt;Бесплатный онлайн-инструмент для безопасного кодирования и декодирования URL. Преобразуйте специальные символы в URL-формат и обратно для корректной передачи параметров и работы с URI компонентами. Поддерживает UTF-8, параметры запросов и полные ссылки.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

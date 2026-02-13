@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="ru"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>URL Encoder/Decoder | 0x69.ru</title>
+    
+
+
+<link rel="icon" type="image/png" href="https://0x69.ru/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="https://0x69.ru/favicon.svg" />
+<link rel="shortcut icon" href="https://0x69.ru/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://0x69.ru/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="0x69" />
+<link rel="manifest" href="https://0x69.ru/site.webmanifest" />
+
+<link rel="canonical" href="https://0x69.ru/utilities/url-encoder/" />
+
+
+
+  <link rel="alternate" hreflang="ru" href="https://0x69.ru/utilities/url-encoder/" />
+
+  <link rel="alternate" hreflang="en" href="https://0x69.ru/en/utilities/url-encoder/" /><link rel="alternate" hreflang="x-default" href="https://0x69.ru/utilities/url-encoder/" />
+
+
+
+
+
+<meta name="author" content="Rianvy" />
+
+
+<meta name="description" content="Бесплатный онлайн-инструмент для безопасного кодирования и декодирования URL. Преобразуйте специальные символы в URL-формат и обратно для корректной передачи …" />
+
+
+<meta name="keywords" content="Url, Encode, Decode, Uri, Параметры, Веб-Разработка, Кодировка, Процентное Кодирование" /><meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+
+<meta property="og:title" content="URL Encoder/Decoder" />
+
+
+<meta property="og:description" content="Бесплатный онлайн-инструмент для безопасного кодирования и декодирования URL. Преобразуйте специальные символы в URL-формат и обратно для корректной передачи параметров и работы с URI компонентами. …" />
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://0x69.ru/utilities/url-encoder/" />
+<meta property="og:site_name" content="0x69.ru" />
+
+
+<meta property="og:locale" content="ru_RU" /><meta property="og:locale:alternate" content="en_US" />
+
+
+<meta property="og:image" content="https://0x69.ru/images/og-background_hu_335b693d31a3174e.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="URL Encoder/Decoder" />
+
+
+<meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="URL Encoder/Decoder" />
+
+<meta name="twitter:description" content="Бесплатный онлайн-инструмент для безопасного кодирования и декодирования URL. Преобразуйте специальные символы в URL-формат и обратно для корректной передачи параметров и работы с URI компонентами. …" />
+
+<meta name="twitter:image" content="https://0x69.ru/images/og-background_hu_335b693d31a3174e.png" />
+<meta name="twitter:image:alt" content="URL Encoder/Decoder" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rianvy",
+  "url": "https://0x69.ru/",
+  "image": "https://0x69.ru/img/avatar.jpg","email": "blackghost.v1@gmail.com","sameAs": ["https://github.com/rianvy"]}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "0x69.ru",
+      "item": "https://0x69.ru/ru/"
+    },{
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Утилиты",
+      "item": "https://0x69.ru/utilities/"
+    },{
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "URL Encoder/Decoder",
+      "item": "https://0x69.ru/utilities/url-encoder/"
+    }
+  ]
+}
+</script>
+
+
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Повернуть!"
+                aria-label="Повернуть!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">Документируй сегодня то, что забудешь завтра</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="Обо мне">Обо мне</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Поиск"
+   aria-label="Поиск">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Категории"
+   aria-label="Категории">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Портфолио"
+   aria-label="Портфолио">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Утилиты"
+   aria-label="Утилиты">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+
+                
+                
+                
+                  
+                    
+                  
+                
+
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/utilities/url-encoder/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                  </a>
+                </li>
+              
+                
+                
+
+                
+                
+                
+                  
+                
+
+                
+                  
+                
+
+                <li role="none">
+                  <a href="/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">174</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Меню</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="Обо мне"
+                aria-label="Обо мне">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">Обо мне</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/utilities/url-encoder/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                    "
+             >
+            <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+            <span class="flex-1">English</span>
+            
+          </a>
+        </li>
+      
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+          
+        
+        
+        <li>
+          <a href="/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                    bg-primary/10 text-primary font-semibold"
+             aria-current="true">
+            <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Поиск</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Категории</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Портфолио</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Утилиты">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Утилиты</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">24</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">174</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+
+    <style>
+    .flip-container .back {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .flip-container.flip-it .back {
+      opacity: 1;
+      visibility: visible;
+    }
+    </style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
+
+  
+  <div class="text-center mb-6 sm:mb-12">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">🔗</span>
+    </div>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">URL Encoder/Decoder</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto px-2">Бесплатный онлайн-инструмент для безопасного кодирования и декодирования URL. Преобразуйте специальные символы в URL-формат и обратно для корректной передачи параметров и работы с URI компонентами. Поддерживает UTF-8, параметры запросов и полные ссылки.</p>
+  </div>
+
+  
+  <div class="max-w-4xl mx-auto">
+    
+    <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-lg sm:shadow-xl overflow-hidden">
+      
+      
+      <div class="flex border-b border-base-200 dark:border-base-content/10">
+        <button class="flex-1 px-2 sm:px-4 py-2.5 sm:py-3 font-medium text-xs sm:text-sm mode-tab border-b-2 border-primary text-primary flex items-center justify-center gap-1 sm:gap-1.5" data-mode="encode">
+          <ion-icon name="lock-closed-outline" class="text-sm sm:text-base"></ion-icon>
+          <span>Encode</span>
+        </button>
+        <button class="flex-1 px-2 sm:px-4 py-2.5 sm:py-3 font-medium text-xs sm:text-sm mode-tab border-b-2 border-transparent text-base-content/60 hover:text-base-content active:text-base-content flex items-center justify-center gap-1 sm:gap-1.5" data-mode="decode">
+          <ion-icon name="lock-open-outline" class="text-sm sm:text-base"></ion-icon>
+          <span>Decode</span>
+        </button>
+        <button class="flex-1 px-2 sm:px-4 py-2.5 sm:py-3 font-medium text-xs sm:text-sm mode-tab border-b-2 border-transparent text-base-content/60 hover:text-base-content active:text-base-content flex items-center justify-center gap-1 sm:gap-1.5" data-mode="parse">
+          <ion-icon name="git-branch-outline" class="text-sm sm:text-base"></ion-icon>
+          <span class="hidden xs:inline">Parse URL</span>
+          <span class="xs:hidden">Parse</span>
+        </button>
+      </div>
+
+      
+      <div id="encode-decode-panel" class="p-3 sm:p-6">
+        
+        
+        <div class="form-control mb-3 sm:mb-4">
+          <label class="label py-1 sm:py-2">
+            <span class="label-text font-medium text-sm" id="input-label">Текст для кодирования</span>
+            <button id="paste-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="clipboard-outline"></ion-icon>
+              <span class="hidden sm:inline">Вставить</span>
+            </button>
+          </label>
+          <textarea 
+            id="url-input" 
+            class="textarea textarea-bordered h-24 sm:h-32 font-mono text-xs sm:text-sm resize-y"
+            placeholder="Введите текст или URL..."
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+          ></textarea>
+        </div>
+
+        
+        <div class="flex flex-col xs:flex-row flex-wrap gap-2 xs:gap-3 sm:gap-4 mb-3 sm:mb-4">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="encode-type" value="component" class="radio radio-sm radio-primary" checked />
+            <span class="text-xs sm:text-sm">encodeURIComponent</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="encode-type" value="uri" class="radio radio-sm radio-primary" />
+            <span class="text-xs sm:text-sm">encodeURI</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="encode-spaces-plus" class="checkbox checkbox-sm checkbox-primary" />
+            <span class="text-xs sm:text-sm">Пробелы как &#43;</span>
+          </label>
+        </div>
+
+        
+        <div class="flex justify-center mb-3 sm:mb-4">
+          <button id="convert-btn" class="btn btn-primary btn-sm sm:btn-md gap-2 w-full sm:w-auto">
+            <ion-icon name="swap-vertical-outline" class="text-base sm:text-lg"></ion-icon>
+            <span id="convert-btn-text">Закодировать</span>
+          </button>
+        </div>
+
+        
+        <div class="form-control">
+          <label class="label py-1 sm:py-2">
+            <span class="label-text font-medium text-sm" id="output-label">Результат</span>
+            <button id="copy-btn" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="copy-outline"></ion-icon>
+              <span class="hidden sm:inline">Копировать</span>
+            </button>
+          </label>
+          <textarea 
+            id="url-output" 
+            class="textarea textarea-bordered h-24 sm:h-32 font-mono text-xs sm:text-sm bg-base-200/50 resize-y"
+            readonly
+          ></textarea>
+        </div>
+
+        
+        <div id="status" class="hidden alert mt-3 sm:mt-4 text-xs sm:text-sm py-2 sm:py-3">
+          <ion-icon id="status-icon" name="information-circle" class="text-base sm:text-lg"></ion-icon>
+          <span id="status-text"></span>
+        </div>
+        
+      </div>
+
+      
+      <div id="parse-panel" class="hidden p-3 sm:p-6">
+        
+        <div class="form-control mb-3 sm:mb-4">
+          <label class="label py-1 sm:py-2">
+            <span class="label-text font-medium text-sm">URL для разбора</span>
+          </label>
+          <input 
+            type="text" 
+            id="parse-input" 
+            class="input input-bordered input-sm sm:input-md font-mono text-xs sm:text-sm"
+            placeholder="https://example.com/path?param=value&foo=bar#hash"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+          />
+        </div>
+
+        <button id="parse-btn" class="btn btn-primary btn-sm sm:btn-md gap-2 mb-4 sm:mb-6 w-full sm:w-auto">
+          <ion-icon name="git-branch-outline" class="text-base sm:text-lg"></ion-icon>
+          Разобрать URL
+        </button>
+
+        
+        <div id="parse-result" class="hidden space-y-3 sm:space-y-4">
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
+            
+            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Protocol</div>
+              <div class="font-mono text-xs sm:text-sm break-all" id="parse-protocol">—</div>
+            </div>
+            
+            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Host</div>
+              <div class="font-mono text-xs sm:text-sm break-all" id="parse-host">—</div>
+            </div>
+            
+            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Port</div>
+              <div class="font-mono text-xs sm:text-sm break-all" id="parse-port">—</div>
+            </div>
+            
+            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Pathname</div>
+              <div class="font-mono text-xs sm:text-sm break-all" id="parse-pathname">—</div>
+            </div>
+            
+            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50 sm:col-span-2">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Hash</div>
+              <div class="font-mono text-xs sm:text-sm break-all" id="parse-hash">—</div>
+            </div>
+            
+          </div>
+
+          
+          <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-2 sm:mb-3">Query Parameters</div>
+            <div id="parse-params" class="space-y-1.5 sm:space-y-2">
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+
+    </div>
+
+    
+    <div class="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+      
+      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="flex sm:block items-start gap-3">
+          <ion-icon name="information-circle-outline" class="text-info text-xl sm:text-base shrink-0 mt-0.5 sm:mt-0 sm:hidden"></ion-icon>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base mb-1.5 sm:mb-3 flex items-center gap-2">
+              <ion-icon name="information-circle-outline" class="text-info hidden sm:inline-block"></ion-icon>
+              encodeURIComponent
+            </h3>
+            <p class="text-xs sm:text-sm text-base-content/70 mb-1.5 sm:mb-2">Кодирует все спецсимволы, включая / ? &amp; = #</p>
+            <div class="text-[10px] sm:text-xs font-mono bg-base-200 p-1.5 sm:p-2 rounded overflow-x-auto">
+              hello world → hello%20world
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
+        <div class="flex sm:block items-start gap-3">
+          <ion-icon name="information-circle-outline" class="text-info text-xl sm:text-base shrink-0 mt-0.5 sm:mt-0 sm:hidden"></ion-icon>
+          <div class="min-w-0 flex-1">
+            <h3 class="font-semibold text-sm sm:text-base mb-1.5 sm:mb-3 flex items-center gap-2">
+              <ion-icon name="information-circle-outline" class="text-info hidden sm:inline-block"></ion-icon>
+              encodeURI
+            </h3>
+            <p class="text-xs sm:text-sm text-base-content/70 mb-1.5 sm:mb-2">Не кодирует / ? &amp; = # : @ (для полных URL)</p>
+            <div class="text-[10px] sm:text-xs font-mono bg-base-200 p-1.5 sm:p-2 rounded overflow-x-auto">
+              <span class="whitespace-nowrap">https://site.com/путь → https://site.com/%D0%BF%D1%83%D1%82%D1%8C</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  
+  var i18n = {
+    textToEncode: 'Текст для кодирования',
+    encodedUrl: 'Закодированный URL',
+    encodedUrlInput: 'Закодированный URL',
+    decodedText: 'Декодированный текст',
+    encodeBtn: 'Закодировать',
+    decodeBtn: 'Декодировать',
+    enterText: 'Введите текст',
+    encoded: '✅ Успешно закодировано!',
+    decoded: '✅ Успешно декодировано!',
+    copied: '📋 Скопировано!',
+    error: '❌ Ошибка',
+    invalidUrl: '❌ Невалидный URL',
+    noParams: 'Нет параметров',
+    defaultPort: '(default)'
+  };
+  
+  
+  var urlInput = document.getElementById('url-input');
+  var urlOutput = document.getElementById('url-output');
+  var convertBtn = document.getElementById('convert-btn');
+  var convertBtnText = document.getElementById('convert-btn-text');
+  var inputLabel = document.getElementById('input-label');
+  var outputLabel = document.getElementById('output-label');
+  var status = document.getElementById('status');
+  var statusIcon = document.getElementById('status-icon');
+  var statusText = document.getElementById('status-text');
+  
+  var parseInput = document.getElementById('parse-input');
+  var parseResult = document.getElementById('parse-result');
+  
+  var currentMode = 'encode';
+  
+  
+  function showStatus(message, type) {
+    var colors = {
+      success: 'alert-success',
+      error: 'alert-error',
+      info: 'alert-info'
+    };
+    var icons = {
+      success: 'checkmark-circle',
+      error: 'alert-circle',
+      info: 'information-circle'
+    };
+    
+    status.className = 'alert ' + colors[type] + ' mt-4';
+    statusIcon.setAttribute('name', icons[type]);
+    statusText.textContent = message;
+    status.classList.remove('hidden');
+    
+    if (type === 'success') {
+      setTimeout(function() { status.classList.add('hidden'); }, 3000);
+    }
+  }
+  
+  
+  document.querySelectorAll('.mode-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var mode = tab.dataset.mode;
+      currentMode = mode;
+      
+      document.querySelectorAll('.mode-tab').forEach(function(t) {
+        t.classList.remove('border-primary', 'text-primary');
+        t.classList.add('border-transparent', 'text-base-content/60');
+      });
+      tab.classList.add('border-primary', 'text-primary');
+      tab.classList.remove('border-transparent', 'text-base-content/60');
+      
+      if (mode === 'parse') {
+        document.getElementById('encode-decode-panel').classList.add('hidden');
+        document.getElementById('parse-panel').classList.remove('hidden');
+      } else {
+        document.getElementById('encode-decode-panel').classList.remove('hidden');
+        document.getElementById('parse-panel').classList.add('hidden');
+        
+        if (mode === 'encode') {
+          inputLabel.textContent = i18n.textToEncode;
+          outputLabel.textContent = i18n.encodedUrl;
+          convertBtnText.textContent = i18n.encodeBtn;
+        } else {
+          inputLabel.textContent = i18n.encodedUrlInput;
+          outputLabel.textContent = i18n.decodedText;
+          convertBtnText.textContent = i18n.decodeBtn;
+        }
+      }
+    });
+  });
+  
+  
+  convertBtn.addEventListener('click', function() {
+    var input = urlInput.value;
+    if (!input) {
+      showStatus(i18n.enterText, 'error');
+      return;
+    }
+    
+    var encodeType = document.querySelector('input[name="encode-type"]:checked').value;
+    var spacesAsPlus = document.getElementById('encode-spaces-plus').checked;
+    
+    try {
+      var result;
+      
+      if (currentMode === 'encode') {
+        if (encodeType === 'component') {
+          result = encodeURIComponent(input);
+        } else {
+          result = encodeURI(input);
+        }
+        
+        if (spacesAsPlus) {
+          result = result.replace(/%20/g, '+');
+        }
+        
+        showStatus(i18n.encoded, 'success');
+      } else {
+        var decoded = input;
+        if (spacesAsPlus) {
+          decoded = decoded.replace(/\+/g, '%20');
+        }
+        result = decodeURIComponent(decoded);
+        showStatus(i18n.decoded, 'success');
+      }
+      
+      urlOutput.value = result;
+    } catch (e) {
+      showStatus(i18n.error + ': ' + e.message, 'error');
+    }
+  });
+  
+  
+  document.getElementById('parse-btn').addEventListener('click', function() {
+    var input = parseInput.value.trim();
+    if (!input) return;
+    
+    try {
+      var url = new URL(input);
+      
+      document.getElementById('parse-protocol').textContent = url.protocol || '—';
+      document.getElementById('parse-host').textContent = url.hostname || '—';
+      document.getElementById('parse-port').textContent = url.port || i18n.defaultPort;
+      document.getElementById('parse-pathname').textContent = url.pathname || '/';
+      document.getElementById('parse-hash').textContent = url.hash || '—';
+      
+      var paramsContainer = document.getElementById('parse-params');
+      var params = new URLSearchParams(url.search);
+      var paramsArray = [];
+      params.forEach(function(value, key) {
+        paramsArray.push({ key: key, value: value });
+      });
+      
+      if (paramsArray.length === 0) {
+        paramsContainer.innerHTML = '<div class="text-base-content/50 text-sm">' + i18n.noParams + '</div>';
+      } else {
+        paramsContainer.innerHTML = paramsArray.map(function(p) {
+          return '<div class="flex items-center gap-2 p-2 bg-base-100 rounded-lg">' +
+            '<span class="font-mono text-sm text-primary font-medium">' + p.key + '</span>' +
+            '<span class="text-base-content/40">=</span>' +
+            '<span class="font-mono text-sm flex-1 break-all">' + p.value + '</span>' +
+            '<button class="btn btn-ghost btn-xs copy-param" data-value="' + encodeURIComponent(p.value) + '">' +
+            '<ion-icon name="copy-outline"></ion-icon>' +
+            '</button>' +
+            '</div>';
+        }).join('');
+        
+        paramsContainer.querySelectorAll('.copy-param').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            navigator.clipboard.writeText(decodeURIComponent(btn.dataset.value));
+          });
+        });
+      }
+      
+      parseResult.classList.remove('hidden');
+    } catch (e) {
+      showStatus(i18n.invalidUrl, 'error');
+    }
+  });
+  
+  
+  document.getElementById('paste-btn').addEventListener('click', function() {
+    navigator.clipboard.readText().then(function(text) {
+      urlInput.value = text;
+    });
+  });
+  
+  
+  document.getElementById('copy-btn').addEventListener('click', function() {
+    if (urlOutput.value) {
+      navigator.clipboard.writeText(urlOutput.value);
+      showStatus(i18n.copied, 'success');
+    }
+  });
+  
+});
+</script>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Максим Александров<br>
+<strong>Age:</strong> 28
+<strong>Location:</strong> Тула, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>Этот блог — мой personal knowledge base, где я пушу заметки про tech stack, life experience и всё, что триггерит мой interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — готов к мёрджу идей и совместным проектам.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-яп">💻 ЯП</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Адаптивная вёрстка (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST API</strong></li>
+</ul>
+<h2 id="-базы-данных">🗄️ Базы данных</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-дизайн-и-графика">🎨 Дизайн и графика</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX дизайн и прототипирование</li>
+<li><strong>Photoshop</strong> — графика и обработка изображений</li>
+<li><strong>After Effects</strong> — моушн-дизайн и анимация 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои Open Source проекты 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои проекты 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN-сервис в Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN-сервис в Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Социальные сети</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+     
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+
+    
+    
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym("99568144", "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

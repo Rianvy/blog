@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Microsoft Copilot on 0x69.ru</title>
+    <link>https://0x69.ru/tags/microsoft-copilot/</link>
+    <description>Recent content in Microsoft Copilot on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>ru</language>
+    <lastBuildDate>Sat, 17 Jan 2026 22:29:50 +0300</lastBuildDate>
+    <atom:link href="https://0x69.ru/tags/microsoft-copilot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ChatGPT, Claude и Gemini — корректная настройка DNS для доступа к AI-сервисам</title>
+      <link>https://0x69.ru/posts/chatgpt-claude-gemini-dns-dostup/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/posts/chatgpt-claude-gemini-dns-dostup/</guid>
+      <description>&lt;p&gt;Корректная настройка DNS для стабильного доступа к AI-сервисам — через DNS, hosts или AdGuard.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

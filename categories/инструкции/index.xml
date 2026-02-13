@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Инструкции on 0x69.ru</title>
+    <link>https://0x69.ru/categories/%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8/</link>
+    <description>Recent content in Инструкции on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>ru</language>
+    <lastBuildDate>Sun, 25 Jan 2026 00:09:23 +0300</lastBuildDate>
+    <atom:link href="https://0x69.ru/categories/%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer</title>
+      <link>https://0x69.ru/posts/kak-smotret-filmy-4k-lampa-torrserver/</link>
+      <pubDate>Sun, 25 Jan 2026 00:09:23 +0300</pubDate>
+      <guid>https://0x69.ru/posts/kak-smotret-filmy-4k-lampa-torrserver/</guid>
+      <description>&lt;p&gt;Полное руководство по стримингу торрентов для тех, кто ценит качество и своё время&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ChatGPT, Claude и Gemini — корректная настройка DNS для доступа к AI-сервисам</title>
+      <link>https://0x69.ru/posts/chatgpt-claude-gemini-dns-dostup/</link>
+      <pubDate>Sat, 17 Jan 2026 22:29:50 +0300</pubDate>
+      <guid>https://0x69.ru/posts/chatgpt-claude-gemini-dns-dostup/</guid>
+      <description>&lt;p&gt;Корректная настройка DNS для стабильного доступа к AI-сервисам — через DNS, hosts или AdGuard.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,3128 @@
+<!DOCTYPE html>
+<html lang="ru"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Портфолио | 0x69.ru</title>
+    
+
+
+<link rel="icon" type="image/png" href="https://0x69.ru/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="https://0x69.ru/favicon.svg" />
+<link rel="shortcut icon" href="https://0x69.ru/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://0x69.ru/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="0x69" />
+<link rel="manifest" href="https://0x69.ru/site.webmanifest" />
+
+<link rel="canonical" href="https://0x69.ru/portfolio/" />
+
+
+
+  <link rel="alternate" hreflang="ru" href="https://0x69.ru/portfolio/" />
+
+  <link rel="alternate" hreflang="en" href="https://0x69.ru/en/portfolio/" /><link rel="alternate" hreflang="x-default" href="https://0x69.ru/portfolio/" />
+
+
+
+
+
+<meta name="author" content="Rianvy" />
+
+
+<meta name="description" content="Мои проекты в области веб-разработки, UI/UX дизайна и создания браузерных расширений. Лендинги, SPA, и брендинг." />
+
+
+<meta name="keywords" content="портфолио, проекты, веб-разработка, фронтенд, UI/UX дизайн, лендинги, браузерные расширения, брендинг, Figma, React, JavaScript, TypeScript" /><meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+
+<meta property="og:title" content="Портфолио" />
+
+
+<meta property="og:description" content="Мои проекты в области веб-разработки, UI/UX дизайна и создания браузерных расширений. Лендинги, SPA, и брендинг." />
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://0x69.ru/portfolio/" />
+<meta property="og:site_name" content="0x69.ru" />
+
+
+<meta property="og:locale" content="ru_RU" /><meta property="og:locale:alternate" content="en_US" />
+
+
+<meta property="og:image" content="https://0x69.ru/images/og-background_hu_912365f8bed96b5b.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Портфолио" />
+
+
+<meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="Портфолио" />
+
+<meta name="twitter:description" content="Мои проекты в области веб-разработки, UI/UX дизайна и создания браузерных расширений. Лендинги, SPA, и брендинг." />
+
+<meta name="twitter:image" content="https://0x69.ru/images/og-background_hu_912365f8bed96b5b.png" />
+<meta name="twitter:image:alt" content="Портфолио" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rianvy",
+  "url": "https://0x69.ru/",
+  "image": "https://0x69.ru/img/avatar.jpg","email": "blackghost.v1@gmail.com","sameAs": ["https://github.com/rianvy"]}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "0x69.ru",
+      "item": "https://0x69.ru/ru/"
+    },{
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Портфолио",
+      "item": "https://0x69.ru/portfolio/"
+    }
+  ]
+}
+</script>
+
+
+
+<link rel="alternate" type="application/rss+xml"
+      title="0x69.ru" href="https://0x69.ru/portfolio/index.xml" />
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
+       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Повернуть!"
+                aria-label="Повернуть!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">Документируй сегодня то, что забудешь завтра</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="Обо мне">Обо мне</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Поиск"
+   aria-label="Поиск">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Категории"
+   aria-label="Категории">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Портфолио"
+   aria-label="Портфолио">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Утилиты"
+   aria-label="Утилиты">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+
+                
+                
+                
+                  
+                    
+                  
+                
+
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/portfolio/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                  </a>
+                </li>
+              
+                
+                
+
+                
+                
+                
+                  
+                
+
+                
+                  
+                
+
+                <li role="none">
+                  <a href="/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">174</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Меню</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="Обо мне"
+                aria-label="Обо мне">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">Обо мне</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/portfolio/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                    "
+             >
+            <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+            <span class="flex-1">English</span>
+            
+          </a>
+        </li>
+      
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+          
+        
+        
+        <li>
+          <a href="/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                    bg-primary/10 text-primary font-semibold"
+             aria-current="true">
+            <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Поиск</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Категории</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Портфолио</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">9</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Утилиты">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Утилиты</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">24</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">174</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+
+    <style>
+    .flip-container .back {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .flip-container.flip-it .back {
+      opacity: 1;
+      visibility: visible;
+    }
+    </style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+
+
+
+
+
+
+
+  
+    
+      
+    
+  
+
+  
+    
+      
+    
+  
+
+  
+    
+      
+    
+  
+
+  
+    
+      
+    
+  
+
+  
+    
+      
+    
+  
+
+
+
+
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      
+    
+      
+    
+  
+
+
+
+
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+
+<section class="relative overflow-hidden">
+  
+  
+  <div class="absolute inset-0 -z-10 overflow-hidden">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/8 rounded-full blur-3xl will-change-[opacity] animate-pulse" 
+         style="animation-duration: 4s;"></div>
+    <div class="absolute top-40 right-20 w-96 h-96 bg-secondary/6 rounded-full blur-3xl will-change-[opacity] animate-pulse" 
+         style="animation-duration: 6s; animation-delay: 1s;"></div>
+    <div class="absolute -bottom-20 left-1/3 w-80 h-80 bg-accent/5 rounded-full blur-3xl will-change-[opacity] animate-pulse" 
+         style="animation-duration: 5s; animation-delay: 2s;"></div>
+    
+    
+    <div class="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]" 
+         style="background-image: linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px); background-size: 60px 60px;"></div>
+  </div>
+  
+  
+  <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
+              bg-gradient-to-r from-base-100 via-base-100/80 to-transparent 
+              z-0 pointer-events-none"></div>
+  <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
+              bg-gradient-to-l from-base-100 via-base-100/80 to-transparent 
+              z-0 pointer-events-none"></div>
+  
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-8 sm:pt-16 pb-12 sm:pb-20">
+    
+    <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
+      
+      
+      <div class="flex-1 text-center lg:text-left">
+        
+        
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl 
+                    bg-base-100 shadow-sm border border-base-200 dark:border-base-content/10 mb-6">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-success"></span>
+          </span>
+          <span class="text-sm font-medium text-base-content/70">
+            Открыт для новых проектов
+          </span>
+        </div>
+        
+        
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black mb-6 leading-[1.1] tracking-tight">
+          Проекты,
+          <span class="relative">
+            <span class="relative z-10 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              которыми горжусь
+            </span>
+          </span>
+        </h1>
+        
+        
+        <p class="text-lg sm:text-xl text-base-content/60 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+          Каждый проект — это уникальная история. Здесь собраны работы, в которые я вложил душу, знания и креативность.
+        </p>
+        
+        
+        <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
+            <ion-icon name="briefcase"></ion-icon>
+            <span>5 проектов</span>
+          </div>
+          
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-success/10 text-success text-sm font-medium">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <span>3 завершено</span>
+          </div>
+          
+          
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary text-sm font-medium">
+            <ion-icon name="code-slash"></ion-icon>
+            <span>12+ технологий</span>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      
+      <div class="flex-shrink-0 w-full max-w-sm lg:max-w-md">
+        <div class="relative">
+          
+          
+          <div class="absolute -top-4 -left-4 w-full h-full rounded-3xl bg-primary/5 rotate-3"></div>
+          <div class="absolute -top-2 -left-2 w-full h-full rounded-3xl bg-secondary/5 rotate-1"></div>
+          
+          
+          <div class="relative bg-base-100 rounded-3xl p-6 sm:p-8 shadow-2xl border border-base-200 dark:border-base-content/10">
+            
+            
+            <div class="grid grid-cols-2 gap-3 mb-6">
+              
+              <div class="relative aspect-video rounded-xl overflow-hidden bg-base-200 group cursor-pointer"
+                   title="VKify Website — Лендинг для браузерного расширения">
+                
+                  
+                    <img src="/portfolio/vkify-website-extension-landing/Cover.png" alt="Портфолио" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                         loading="lazy" />
+                  
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-base-100/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </div>
+              
+              <div class="relative aspect-video rounded-xl overflow-hidden bg-base-200 group cursor-pointer"
+                   title="VKify — Расширение для ВКонтакте">
+                
+                  
+                    <img src="/portfolio/vkify-vkontakte-extension/Cover.png" alt="Портфолио" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                         loading="lazy" />
+                  
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-base-100/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </div>
+              
+              <div class="relative aspect-video rounded-xl overflow-hidden bg-base-200 group cursor-pointer"
+                   title="CodeSqueeze — онлайн-минификатор кода">
+                
+                  
+                    <img src="/portfolio/codesqueeze/Cover.png" alt="Портфолио" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                         loading="lazy" />
+                  
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-base-100/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </div>
+              
+              <div class="relative aspect-video rounded-xl overflow-hidden bg-base-200 group cursor-pointer"
+                   title="Лендинг ProStavki">
+                
+                  
+                    <img src="/portfolio/prostavki/Cover.png" alt="Портфолио" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                         loading="lazy" />
+                  
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-base-100/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </div>
+              
+            </div>
+            
+            
+            <div class="grid grid-cols-3 gap-3">
+              <div class="text-center p-3 rounded-xl bg-base-200/50">
+                <div class="text-2xl font-black text-primary mb-0.5">5</div>
+                <div class="text-[10px] text-base-content/60 uppercase tracking-wide">Проектов</div>
+              </div>
+              <div class="text-center p-3 rounded-xl bg-base-200/50">
+                <div class="text-2xl font-black text-secondary mb-0.5">2</div>
+                <div class="text-[10px] text-base-content/60 uppercase tracking-wide">Категорий</div>
+              </div>
+              <div class="text-center p-3 rounded-xl bg-base-200/50">
+                <div class="text-2xl font-black text-accent mb-0.5">12</div>
+                <div class="text-[10px] text-base-content/60 uppercase tracking-wide">Технологий</div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+
+<section class="relative bg-base-100/50 overflow-hidden">
+  
+  
+  <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
+              bg-gradient-to-r from-base-100 via-base-100/80 to-transparent 
+              z-20 pointer-events-none"></div>
+  <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 lg:w-32 xl:w-48 
+              bg-gradient-to-l from-base-100 via-base-100/80 to-transparent 
+              z-20 pointer-events-none"></div>
+  
+  
+  <div class="absolute left-0 right-0 top-0 h-px">
+    <div class="absolute inset-0 bg-base-300 dark:bg-base-content/10"></div>
+    <div class="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 xl:w-64 bg-gradient-to-r from-base-100 to-transparent"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 xl:w-64 bg-gradient-to-l from-base-100 to-transparent"></div>
+  </div>
+  <div class="absolute left-0 right-0 bottom-0 h-px">
+    <div class="absolute inset-0 bg-base-300 dark:bg-base-content/10"></div>
+    <div class="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 xl:w-64 bg-gradient-to-r from-base-100 to-transparent"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 lg:w-48 xl:w-64 bg-gradient-to-l from-base-100 to-transparent"></div>
+  </div>
+  
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+    
+    <div class="py-5">
+      
+      <div class="flex items-center gap-4">
+        
+        
+        <div class="hidden sm:flex items-center gap-2 text-sm text-base-content/50 font-medium shrink-0">
+          <ion-icon name="filter-outline"></ion-icon>
+          Фильтр:
+        </div>
+        
+        
+        <button id="scroll-left" class="hidden sm:flex shrink-0 w-8 h-8 items-center justify-center rounded-lg
+                                        bg-base-200 hover:bg-base-300 text-base-content/60 transition-all
+                                        disabled:opacity-30 disabled:cursor-not-allowed" disabled>
+          <ion-icon name="chevron-back"></ion-icon>
+        </button>
+        
+        
+        <div id="filters-container" class="flex-1 overflow-hidden relative">
+          
+          
+          <div id="fade-left" class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-base-100 to-transparent z-10 pointer-events-none opacity-0 transition-opacity"></div>
+          <div id="fade-right" class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-base-100 to-transparent z-10 pointer-events-none opacity-0 transition-opacity"></div>
+          
+          
+          <div id="filters-scroll" class="flex items-center gap-2 overflow-x-auto scrollbar-hide scroll-smooth py-1">
+            
+            
+            <button 
+              class="portfolio-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter="*"
+              data-state="checked">
+              <ion-icon name="apps-outline"></ion-icon>
+              <span>Все</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                5
+              </span>
+            </button>
+            
+            
+            
+            
+            
+              
+              
+                
+                  
+                
+              
+            
+              
+              
+                
+                  
+                
+              
+            
+              
+              
+                
+                  
+                
+              
+            
+              
+              
+                
+                  
+                
+              
+            
+              
+              
+                
+              
+            
+            
+            
+            
+            <button 
+              class="portfolio-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".filter-0"
+              data-state="unchecked">
+              <ion-icon name="folder-outline"></ion-icon>
+              <span>Web development</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                4
+              </span>
+            </button>
+            
+            
+            
+            
+              
+              
+                
+              
+            
+              
+              
+                
+              
+            
+              
+              
+                
+              
+            
+              
+              
+                
+              
+            
+              
+              
+                
+                  
+                
+              
+            
+            
+            
+            
+            <button 
+              class="portfolio-filter-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium 
+                     transition-all duration-200 text-sm whitespace-nowrap
+                     bg-base-200 hover:bg-primary hover:text-primary-content
+                     data-[state=checked]:bg-primary data-[state=checked]:text-primary-content data-[state=checked]:shadow-md data-[state=checked]:shadow-primary/25" 
+              data-filter=".filter-1"
+              data-state="unchecked">
+              <ion-icon name="folder-outline"></ion-icon>
+              <span>Social media</span>
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 
+                          rounded text-xs font-bold opacity-70">
+                1
+              </span>
+            </button>
+            
+            
+          </div>
+        </div>
+        
+        
+        <button id="scroll-right" class="hidden sm:flex shrink-0 w-8 h-8 items-center justify-center rounded-lg
+                                         bg-base-200 hover:bg-base-300 text-base-content/60 transition-all
+                                         disabled:opacity-30 disabled:cursor-not-allowed">
+          <ion-icon name="chevron-forward"></ion-icon>
+        </button>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+
+<section class="py-10 sm:py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    
+    
+    
+    
+    <div class="portfolio-grid" id="portfolio-grid">
+      
+      
+      
+      
+      
+      
+        
+          
+            
+          
+        
+      
+        
+          
+        
+      
+      
+      <div class="portfolio-item  filter-0">
+        
+        
+        <a class="group block h-full bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
+                  border border-base-200 dark:border-base-content/10
+                  transition-all duration-300 hover:-translate-y-2" 
+           href="/portfolio/vkify-website-extension-landing/">
+          
+          
+          <div class="relative overflow-hidden aspect-video bg-base-200">
+            
+              
+                
+                
+                  
+                  <img src="/portfolio/vkify-website-extension-landing/Cover_hu_e3a49f92729f66e9.webp" alt="Портфолио" 
+                       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                       loading="lazy" />
+                
+              
+            
+            
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            
+            
+            <div class="absolute top-3 left-3">
+              
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                            bg-success/20 text-success backdrop-blur-md border border-success/30 shadow-sm">
+                  <ion-icon name="checkmark-circle-outline" class="text-sm"></ion-icon>
+                  Завершён
+                </span>
+              
+            </div>
+            
+            
+            
+            
+            
+            
+            <div class="absolute top-3 right-3">
+              <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-base-100/90 text-base-content shadow-lg" title="Связанные проекты: 1">
+                <ion-icon name="git-branch-outline" class="text-sm"></ion-icon>
+                1
+              </span>
+            </div>
+            
+            
+          </div>
+
+          
+          <div class="p-5 space-y-3">
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="badge badge-ghost badge-sm">Web development</span>
+              
+              
+            </div>
+            
+            
+            
+            <h2 class="text-xl font-bold line-clamp-2 group-hover:text-primary transition-colors">
+              VKify Website — Лендинг для браузерного расширения
+            </h2>
+
+            
+            
+            <p class="text-sm text-base-content/70 line-clamp-2">
+              Разработка современного лендинга для браузерного расширения VKify — от креативной главной страницы …
+            </p>
+            
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                React
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Tailwind CSS
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Framer Motion
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Vite
+              </span>
+              
+              
+              <span class="inline-flex items-center px-2 py-1 text-xs bg-base-200 rounded-md text-base-content/60">
+                +1
+              </span>
+              
+            </div>
+            
+
+            
+            <div class="flex items-center justify-between pt-3 border-t border-base-200">
+              
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="calendar-outline" class="text-sm"></ion-icon>
+                
+                  <span data-format="luxon">2026-01-28T00:35:23&#43;03:00</span>
+                
+              </div>
+
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="time-outline" class="text-sm"></ion-icon>
+                <span>5  минут чтения</span>
+              </div>
+            </div>
+            
+            
+            <div class="pt-2">
+              <span class="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
+                Смотреть проект
+                <ion-icon name="arrow-forward" class="text-base"></ion-icon>
+              </span>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+        
+          
+            
+          
+        
+      
+        
+          
+        
+      
+      
+      <div class="portfolio-item  filter-0">
+        
+        
+        <a class="group block h-full bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
+                  border border-base-200 dark:border-base-content/10
+                  transition-all duration-300 hover:-translate-y-2" 
+           href="/portfolio/vkify-vkontakte-extension/">
+          
+          
+          <div class="relative overflow-hidden aspect-video bg-base-200">
+            
+              
+                
+                
+                  
+                  <img src="/portfolio/vkify-vkontakte-extension/Cover_hu_29ac88152e999c8c.webp" alt="Портфолио" 
+                       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                       loading="lazy" />
+                
+              
+            
+            
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            
+            
+            <div class="absolute top-3 left-3">
+              
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                            bg-warning/20 text-warning backdrop-blur-md border border-warning/30 shadow-sm">
+                  <ion-icon name="hourglass-outline" class="text-sm"></ion-icon>
+                  В работе
+                </span>
+              
+            </div>
+            
+            
+            
+            
+            
+            
+            <div class="absolute top-3 right-3">
+              <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-base-100/90 text-base-content shadow-lg" title="Связанные проекты: 1">
+                <ion-icon name="git-branch-outline" class="text-sm"></ion-icon>
+                1
+              </span>
+            </div>
+            
+            
+          </div>
+
+          
+          <div class="p-5 space-y-3">
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="badge badge-ghost badge-sm">Web development</span>
+              
+              
+            </div>
+            
+            
+            
+            <h2 class="text-xl font-bold line-clamp-2 group-hover:text-primary transition-colors">
+              VKify — Расширение для ВКонтакте
+            </h2>
+
+            
+            
+            <p class="text-sm text-base-content/70 line-clamp-2">
+              VKify — браузерное расширение, которое делает ВКонтакте удобнее: блокировка рекламы, кастомизация …
+            </p>
+            
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                React
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Tailwind CSS
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Chrome Extension API
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Figma
+              </span>
+              
+              
+              <span class="inline-flex items-center px-2 py-1 text-xs bg-base-200 rounded-md text-base-content/60">
+                +1
+              </span>
+              
+            </div>
+            
+
+            
+            <div class="flex items-center justify-between pt-3 border-t border-base-200">
+              
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="calendar-outline" class="text-sm"></ion-icon>
+                
+                  <span data-format="luxon">2026-01-27T17:35:43&#43;03:00</span>
+                
+              </div>
+
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="time-outline" class="text-sm"></ion-icon>
+                <span>7  минут чтения</span>
+              </div>
+            </div>
+            
+            
+            <div class="pt-2">
+              <span class="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
+                Смотреть проект
+                <ion-icon name="arrow-forward" class="text-base"></ion-icon>
+              </span>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+        
+          
+            
+          
+        
+      
+        
+          
+        
+      
+      
+      <div class="portfolio-item  filter-0">
+        
+        
+        <a class="group block h-full bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
+                  border border-base-200 dark:border-base-content/10
+                  transition-all duration-300 hover:-translate-y-2" 
+           href="/portfolio/codesqueeze/">
+          
+          
+          <div class="relative overflow-hidden aspect-video bg-base-200">
+            
+              
+                
+                
+                  
+                  <img src="/portfolio/codesqueeze/Cover_hu_755201165971ceda.webp" alt="Портфолио" 
+                       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                       loading="lazy" />
+                
+              
+            
+            
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            
+            
+            <div class="absolute top-3 left-3">
+              
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                            bg-warning/20 text-warning backdrop-blur-md border border-warning/30 shadow-sm">
+                  <ion-icon name="hourglass-outline" class="text-sm"></ion-icon>
+                  В работе
+                </span>
+              
+            </div>
+            
+            
+            
+            
+          </div>
+
+          
+          <div class="p-5 space-y-3">
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="badge badge-ghost badge-sm">Web development</span>
+              
+              
+            </div>
+            
+            
+            
+            <h2 class="text-xl font-bold line-clamp-2 group-hover:text-primary transition-colors">
+              CodeSqueeze — онлайн-минификатор кода
+            </h2>
+
+            
+            
+            <p class="text-sm text-base-content/70 line-clamp-2">
+              CodeSqueeze — современный веб-инструмент для минификации HTML, CSS и JavaScript, ориентированный на …
+            </p>
+            
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Figma
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                HTML
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                CSS
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Tailwind CSS
+              </span>
+              
+              
+              <span class="inline-flex items-center px-2 py-1 text-xs bg-base-200 rounded-md text-base-content/60">
+                +1
+              </span>
+              
+            </div>
+            
+
+            
+            <div class="flex items-center justify-between pt-3 border-t border-base-200">
+              
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="calendar-outline" class="text-sm"></ion-icon>
+                
+                  <span data-format="luxon">2026-01-19T08:05:59&#43;03:00</span>
+                
+              </div>
+
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="time-outline" class="text-sm"></ion-icon>
+                <span>2  минуты чтения</span>
+              </div>
+            </div>
+            
+            
+            <div class="pt-2">
+              <span class="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
+                Смотреть проект
+                <ion-icon name="arrow-forward" class="text-base"></ion-icon>
+              </span>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+        
+          
+            
+          
+        
+      
+        
+          
+        
+      
+      
+      <div class="portfolio-item  filter-0">
+        
+        
+        <a class="group block h-full bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
+                  border border-base-200 dark:border-base-content/10
+                  transition-all duration-300 hover:-translate-y-2" 
+           href="/portfolio/prostavki/">
+          
+          
+          <div class="relative overflow-hidden aspect-video bg-base-200">
+            
+              
+                
+                
+                  
+                  <img src="/portfolio/prostavki/Cover_hu_79106a12fa9008b5.webp" alt="Портфолио" 
+                       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                       loading="lazy" />
+                
+              
+            
+            
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            
+            
+            <div class="absolute top-3 left-3">
+              
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                            bg-success/20 text-success backdrop-blur-md border border-success/30 shadow-sm">
+                  <ion-icon name="checkmark-circle-outline" class="text-sm"></ion-icon>
+                  Завершён
+                </span>
+              
+            </div>
+            
+            
+            
+            
+          </div>
+
+          
+          <div class="p-5 space-y-3">
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="badge badge-ghost badge-sm">Web development</span>
+              
+              
+            </div>
+            
+            
+            
+            <h2 class="text-xl font-bold line-clamp-2 group-hover:text-primary transition-colors">
+              Лендинг ProStavki
+            </h2>
+
+            
+            
+            <p class="text-sm text-base-content/70 line-clamp-2">
+              Разработка лендинга для проекта спортивной аналитики, включая интеграцию с Google Sheets и …
+            </p>
+            
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Figma
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                HTML
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                CSS
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                JavaScript
+              </span>
+              
+              
+              <span class="inline-flex items-center px-2 py-1 text-xs bg-base-200 rounded-md text-base-content/60">
+                +1
+              </span>
+              
+            </div>
+            
+
+            
+            <div class="flex items-center justify-between pt-3 border-t border-base-200">
+              
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="calendar-outline" class="text-sm"></ion-icon>
+                
+                  <span data-format="luxon">2025-01-27T18:00:34&#43;03:00</span>
+                
+              </div>
+
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="time-outline" class="text-sm"></ion-icon>
+                <span>2  минуты чтения</span>
+              </div>
+            </div>
+            
+            
+            <div class="pt-2">
+              <span class="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
+                Смотреть проект
+                <ion-icon name="arrow-forward" class="text-base"></ion-icon>
+              </span>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+        
+          
+        
+      
+        
+          
+            
+          
+        
+      
+      
+      <div class="portfolio-item  filter-1">
+        
+        
+        <a class="group block h-full bg-base-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
+                  border border-base-200 dark:border-base-content/10
+                  transition-all duration-300 hover:-translate-y-2" 
+           href="/portfolio/pbpack/">
+          
+          
+          <div class="relative overflow-hidden aspect-video bg-base-200">
+            
+              
+                
+                
+                  
+                  <img src="/portfolio/pbpack/Cover_hu_29d969af7ec01fdb.webp" alt="Портфолио" 
+                       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                       loading="lazy" />
+                
+              
+            
+            
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-base-100/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            
+            
+            <div class="absolute top-3 left-3">
+              
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium 
+                            bg-success/20 text-success backdrop-blur-md border border-success/30 shadow-sm">
+                  <ion-icon name="checkmark-circle-outline" class="text-sm"></ion-icon>
+                  Завершён
+                </span>
+              
+            </div>
+            
+            
+            
+            
+          </div>
+
+          
+          <div class="p-5 space-y-3">
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="badge badge-ghost badge-sm">Social media</span>
+              
+              
+            </div>
+            
+            
+            
+            <h2 class="text-xl font-bold line-clamp-2 group-hover:text-primary transition-colors">
+              Дизайн для социальных сетей PBPack
+            </h2>
+
+            
+            
+            <p class="text-sm text-base-content/70 line-clamp-2">
+              Разработка визуального стиля для бренда PBPack в социальных сетях, включая YouTube и Telegram.
+
+            </p>
+            
+            
+            
+            
+            <div class="flex flex-wrap gap-1.5">
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                Photoshop
+              </span>
+              
+              <span class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-base-200 rounded-md">
+                <ion-icon name="code-slash-outline" class="text-xs"></ion-icon>
+                After Effects
+              </span>
+              
+              
+            </div>
+            
+
+            
+            <div class="flex items-center justify-between pt-3 border-t border-base-200">
+              
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="calendar-outline" class="text-sm"></ion-icon>
+                
+                  <span data-format="luxon">2025-01-19T20:25:20&#43;03:00</span>
+                
+              </div>
+
+              
+              <div class="flex items-center gap-1.5 text-xs text-base-content/60">
+                <ion-icon name="time-outline" class="text-sm"></ion-icon>
+                <span>2  минуты чтения</span>
+              </div>
+            </div>
+            
+            
+            <div class="pt-2">
+              <span class="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
+                Смотреть проект
+                <ion-icon name="arrow-forward" class="text-base"></ion-icon>
+              </span>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+      
+    </div>
+    
+    
+    <div id="portfolio-no-results" class="hidden py-20 text-center">
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-base-200 mb-6">
+        <ion-icon name="search-outline" class="text-4xl text-base-content/30"></ion-icon>
+      </div>
+      <h3 class="text-xl font-bold mb-2">Проектов не найдено</h3>
+      <p class="text-base-content/60 mb-6">Попробуйте другую категорию</p>
+      <button id="show-all-btn" class="btn btn-primary btn-sm gap-2">
+        <ion-icon name="apps-outline"></ion-icon>
+        Показать все
+      </button>
+    </div>
+    
+    
+    
+  </div>
+</section>
+
+
+<section class="py-12 sm:py-16 lg:py-20">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+    
+    
+    <div class="text-center mb-8">
+      <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+        Процесс
+      </span>
+      <h2 class="text-2xl sm:text-3xl font-bold">Как я работаю</h2>
+      <p class="text-base-content/60 mt-2">4 этапа → готовый продукт</p>
+      <div class="flex items-center justify-center gap-2 text-sm text-base-content/50 mt-3">
+        <ion-icon name="time-outline"></ion-icon>
+        <span>Обычно 4-10 недель</span>
+      </div>
+    </div>
+    
+    
+    <div class="space-y-3">
+      
+      
+      <div class="group rounded-xl border border-base-200 dark:border-base-content/10
+                  bg-base-100 dark:bg-base-200/30
+                  overflow-hidden transition-all
+                  hover:border-primary/30 hover:shadow-md">
+        <details class="group/details">
+          <summary class="flex items-center gap-4 p-4 sm:p-5 cursor-pointer
+                         select-none list-none
+                         [&::-webkit-details-marker]:hidden">
+            
+            <span class="flex items-center justify-center shrink-0
+                        w-10 h-10 rounded-xl
+                        bg-primary text-primary-content font-bold
+                        transition-transform">
+              1
+            </span>
+            
+            <div class="flex-1 min-w-0">
+              <h3 class="font-semibold group-hover:text-primary transition-colors">
+                Обсуждение
+              </h3>
+              <p class="text-sm text-base-content/50 truncate">
+                Знакомство с проектом и оценка
+              </p>
+            </div>
+            
+            <span class="hidden sm:flex items-center gap-1 text-xs text-base-content/40 shrink-0">
+              <ion-icon name="time-outline"></ion-icon>
+              1-2 дня
+            </span>
+            
+            <ion-icon name="chevron-down" 
+                      class="text-xl text-base-content/30 shrink-0
+                             group-open/details:rotate-180 transition-transform duration-200">
+            </ion-icon>
+          </summary>
+          
+          <div class="px-4 sm:px-5 pb-5 pt-0 ml-14">
+            <div class="pt-4 border-t border-base-200 dark:border-base-content/10">
+              <ul class="space-y-2 text-sm text-base-content/70">
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-primary mt-0.5 shrink-0"></ion-icon>
+                  Переписка в Telegram или Email
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-primary mt-0.5 shrink-0"></ion-icon>
+                  Заполнение брифа с ключевыми вопросами
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-primary mt-0.5 shrink-0"></ion-icon>
+                  Предварительная оценка сроков и стоимости
+                </li>
+              </ul>
+              
+              <div class="mt-4 flex items-center gap-4">
+                <span class="text-xs px-2 py-1 rounded bg-primary/10 text-primary">
+                  Бесплатно
+                </span>
+                <span class="text-xs text-base-content/40">
+                  Без обязательств
+                </span>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+      
+      
+      <div class="group rounded-xl border border-base-200 dark:border-base-content/10
+                  bg-base-100 dark:bg-base-200/30
+                  overflow-hidden transition-all
+                  hover:border-secondary/30 hover:shadow-md">
+        <details class="group/details">
+          <summary class="flex items-center gap-4 p-4 sm:p-5 cursor-pointer
+                         select-none list-none
+                         [&::-webkit-details-marker]:hidden">
+            
+            <span class="flex items-center justify-center shrink-0
+                        w-10 h-10 rounded-xl
+                        bg-secondary text-secondary-content font-bold">
+              2
+            </span>
+            
+            <div class="flex-1 min-w-0">
+              <h3 class="font-semibold group-hover:text-secondary transition-colors">
+                Планирование
+              </h3>
+              <p class="text-sm text-base-content/50 truncate">
+                Прототип, ТЗ и договор
+              </p>
+            </div>
+            
+            <span class="hidden sm:flex items-center gap-1 text-xs text-base-content/40 shrink-0">
+              <ion-icon name="time-outline"></ion-icon>
+              3-7 дней
+            </span>
+            
+            <ion-icon name="chevron-down" 
+                      class="text-xl text-base-content/30 shrink-0
+                             group-open/details:rotate-180 transition-transform duration-200">
+            </ion-icon>
+          </summary>
+          
+          <div class="px-4 sm:px-5 pb-5 pt-0 ml-14">
+            <div class="pt-4 border-t border-base-200 dark:border-base-content/10">
+              <ul class="space-y-2 text-sm text-base-content/70">
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-secondary mt-0.5 shrink-0"></ion-icon>
+                  Интерактивный прототип в Figma
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-secondary mt-0.5 shrink-0"></ion-icon>
+                  Детальное техническое задание
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-secondary mt-0.5 shrink-0"></ion-icon>
+                  Точные сроки и стоимость
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-secondary mt-0.5 shrink-0"></ion-icon>
+                  Подписание договора
+                </li>
+              </ul>
+              
+              <div class="mt-4 flex items-center gap-4">
+                <span class="text-xs px-2 py-1 rounded bg-secondary/10 text-secondary">
+                  Предоплата 30%
+                </span>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+      
+      
+      <div class="group rounded-xl border border-base-200 dark:border-base-content/10
+                  bg-base-100 dark:bg-base-200/30
+                  overflow-hidden transition-all
+                  hover:border-accent/30 hover:shadow-md">
+        <details class="group/details">
+          <summary class="flex items-center gap-4 p-4 sm:p-5 cursor-pointer
+                         select-none list-none
+                         [&::-webkit-details-marker]:hidden">
+            
+            <span class="flex items-center justify-center shrink-0
+                        w-10 h-10 rounded-xl
+                        bg-accent text-accent-content font-bold">
+              3
+            </span>
+            
+            <div class="flex-1 min-w-0">
+              <h3 class="font-semibold group-hover:text-accent transition-colors">
+                Разработка
+              </h3>
+              <p class="text-sm text-base-content/50 truncate">
+                Спринты с еженедельными демо
+              </p>
+            </div>
+            
+            <span class="hidden sm:flex items-center gap-1 text-xs text-base-content/40 shrink-0">
+              <ion-icon name="time-outline"></ion-icon>
+              2-8 недель
+            </span>
+            
+            <ion-icon name="chevron-down" 
+                      class="text-xl text-base-content/30 shrink-0
+                             group-open/details:rotate-180 transition-transform duration-200">
+            </ion-icon>
+          </summary>
+          
+          <div class="px-4 sm:px-5 pb-5 pt-0 ml-14">
+            <div class="pt-4 border-t border-base-200 dark:border-base-content/10">
+              <ul class="space-y-2 text-sm text-base-content/70">
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-accent mt-0.5 shrink-0"></ion-icon>
+                  Работа спринтами по 1-2 недели
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-accent mt-0.5 shrink-0"></ion-icon>
+                  Демо-версия каждую пятницу
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-accent mt-0.5 shrink-0"></ion-icon>
+                  Доступ к dev-версии 24/7
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-accent mt-0.5 shrink-0"></ion-icon>
+                  Связь в Telegram/Slack
+                </li>
+              </ul>
+              
+              <div class="mt-4 flex items-center gap-4">
+                <span class="text-xs px-2 py-1 rounded bg-accent/10 text-accent">
+                  Оплата после каждого спринта
+                </span>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+      
+      
+      <div class="group rounded-xl border-2 border-success/30
+                  bg-success/5 dark:bg-success/10
+                  overflow-hidden transition-all
+                  hover:border-success/50 hover:shadow-md hover:shadow-success/10">
+        <details class="group/details" open>
+          <summary class="flex items-center gap-4 p-4 sm:p-5 cursor-pointer
+                         select-none list-none
+                         [&::-webkit-details-marker]:hidden">
+            
+            <span class="flex items-center justify-center shrink-0
+                        w-10 h-10 rounded-xl
+                        bg-success text-success-content font-bold">
+              <ion-icon name="checkmark" class="text-lg"></ion-icon>
+            </span>
+            
+            <div class="flex-1 min-w-0">
+              <h3 class="font-semibold text-success">
+                Запуск 🚀
+              </h3>
+              <p class="text-sm text-base-content/50 truncate">
+                Деплой и поддержка
+              </p>
+            </div>
+            
+            <span class="hidden sm:flex items-center gap-1 text-xs text-success shrink-0 font-medium">
+              <ion-icon name="shield-checkmark"></ion-icon>
+              Гарантия
+            </span>
+            
+            <ion-icon name="chevron-down" 
+                      class="text-xl text-success/50 shrink-0
+                             group-open/details:rotate-180 transition-transform duration-200">
+            </ion-icon>
+          </summary>
+          
+          <div class="px-4 sm:px-5 pb-5 pt-0 ml-14">
+            <div class="pt-4 border-t border-success/20">
+              <ul class="space-y-2 text-sm text-base-content/70">
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-success mt-0.5 shrink-0"></ion-icon>
+                  Деплой на ваш хостинг
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-success mt-0.5 shrink-0"></ion-icon>
+                  Передача доступов и документации
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-success mt-0.5 shrink-0"></ion-icon>
+                  Обучение работе с системой
+                </li>
+                <li class="flex items-start gap-2">
+                  <ion-icon name="checkmark-circle" class="text-success mt-0.5 shrink-0"></ion-icon>
+                  <strong>30 дней бесплатной поддержки</strong>
+                </li>
+              </ul>
+              
+              <div class="mt-4 p-3 rounded-lg bg-success/10 border border-success/20">
+                <p class="text-xs text-success font-medium">
+                  ✨ Бонус: Бесплатные правки в течение месяца после запуска
+                </p>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+      
+    </div>
+    
+    
+    <div class="mt-8 text-center">
+        
+      
+      
+      <a href="https://t.me/cyber_way" 
+         class="btn btn-primary btn-lg gap-2 shadow-lg shadow-primary/25 
+                hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5
+                transition-all duration-200"
+         target="_blank" rel="noopener">
+        
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+          </svg>
+        
+        Обсудить проект
+        <ion-icon name="arrow-forward-outline" class="text-lg"></ion-icon>
+      </a>
+      
+      <p class="text-sm text-base-content/50 mt-3">
+        Первая консультация бесплатно
+      </p>
+    </div>
+    
+  </div>
+</section>
+
+
+
+<section class="py-10 sm:py-12 border-t border-base-300">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    
+    <div class="text-center mb-6">
+      <h2 class="text-xl sm:text-2xl font-bold mb-2">
+        Технологии
+      </h2>
+      <p class="text-sm text-base-content/60">
+        Инструменты, которые я использую в работе
+      </p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-2">
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        React
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        Tailwind CSS
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        Framer Motion
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        Vite
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        Figma
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        Chrome Extension API
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        JavaScript
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        HTML
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        CSS
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        Google Sheets API
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        Photoshop
+      </span>
+      
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition-all duration-300 cursor-default">
+        After Effects
+      </span>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+
+<script>
+(function() {
+  'use strict';
+  
+  var grid = document.getElementById('portfolio-grid');
+  if (!grid) return;
+  
+  var noResults = document.getElementById('portfolio-no-results');
+  var showAllBtn = document.getElementById('show-all-btn');
+  var items = grid.querySelectorAll('.portfolio-item');
+  
+  
+  var filtersScroll = document.getElementById('filters-scroll');
+  var scrollLeftBtn = document.getElementById('scroll-left');
+  var scrollRightBtn = document.getElementById('scroll-right');
+  var fadeLeft = document.getElementById('fade-left');
+  var fadeRight = document.getElementById('fade-right');
+  
+  function updateScrollButtons() {
+    if (!filtersScroll || !scrollLeftBtn || !scrollRightBtn) return;
+    
+    var scrollL = filtersScroll.scrollLeft;
+    var maxScroll = filtersScroll.scrollWidth - filtersScroll.clientWidth;
+    
+    scrollLeftBtn.disabled = scrollL <= 0;
+    scrollRightBtn.disabled = scrollL >= maxScroll - 1;
+    
+    if (fadeLeft) fadeLeft.style.opacity = scrollL > 0 ? '1' : '0';
+    if (fadeRight) fadeRight.style.opacity = scrollL < maxScroll - 1 ? '1' : '0';
+  }
+  
+  if (scrollLeftBtn && filtersScroll) {
+    scrollLeftBtn.addEventListener('click', function() {
+      filtersScroll.scrollBy({ left: -200, behavior: 'smooth' });
+    });
+  }
+  
+  if (scrollRightBtn && filtersScroll) {
+    scrollRightBtn.addEventListener('click', function() {
+      filtersScroll.scrollBy({ left: 200, behavior: 'smooth' });
+    });
+  }
+  
+  if (filtersScroll) {
+    filtersScroll.addEventListener('scroll', updateScrollButtons);
+    window.addEventListener('resize', updateScrollButtons);
+    setTimeout(updateScrollButtons, 100);
+  }
+  
+  
+  function filterItems(filterValue) {
+    var visibleCount = 0;
+    
+    items.forEach(function(item) {
+      if (filterValue === '*' || item.classList.contains(filterValue.replace('.', ''))) {
+        item.style.display = '';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+    
+    if (noResults) {
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+        grid.style.display = 'none';
+      } else {
+        noResults.classList.add('hidden');
+        grid.style.display = '';
+      }
+    }
+  }
+  
+  
+  var filterButtons = document.querySelectorAll('.portfolio-filter-btn');
+  
+  filterButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      var filterValue = this.getAttribute('data-filter');
+      
+      filterItems(filterValue);
+      
+      filterButtons.forEach(function(btn) {
+        btn.setAttribute('data-state', 'unchecked');
+      });
+      this.setAttribute('data-state', 'checked');
+      
+      if (filtersScroll) {
+        var btnRect = this.getBoundingClientRect();
+        var containerRect = filtersScroll.getBoundingClientRect();
+        if (btnRect.left < containerRect.left || btnRect.right > containerRect.right) {
+          this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      }
+    });
+  });
+  
+  
+  if (showAllBtn) {
+    showAllBtn.addEventListener('click', function() {
+      var allBtn = document.querySelector('.portfolio-filter-btn[data-filter="*"]');
+      if (allBtn) allBtn.click();
+    });
+  }
+  
+  
+  grid.classList.add('is-loaded');
+  
+})();
+</script>
+
+<style>
+ 
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.portfolio-grid.is-loaded {
+  opacity: 1;
+}
+
+.portfolio-item {
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .portfolio-item {
+    padding: 0.75rem;
+  }
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+</style>
+
+
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Максим Александров<br>
+<strong>Age:</strong> 28
+<strong>Location:</strong> Тула, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>Этот блог — мой personal knowledge base, где я пушу заметки про tech stack, life experience и всё, что триггерит мой interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — готов к мёрджу идей и совместным проектам.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-яп">💻 ЯП</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Адаптивная вёрстка (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST API</strong></li>
+</ul>
+<h2 id="-базы-данных">🗄️ Базы данных</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-дизайн-и-графика">🎨 Дизайн и графика</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX дизайн и прототипирование</li>
+<li><strong>Photoshop</strong> — графика и обработка изображений</li>
+<li><strong>After Effects</strong> — моушн-дизайн и анимация 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои Open Source проекты 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои проекты 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN-сервис в Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN-сервис в Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Социальные сети</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+    
+
+  <script
+  src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
+  integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
+  crossorigin="anonymous"
+></script>
+<script>
+  format()
+
+  function format() {
+    document.querySelectorAll('span[data-format="luxon"]').forEach(el => {
+      const date = el.textContent
+
+      el.textContent = luxon.DateTime.fromISO(date, { locale: "ru" }).toFormat("dd.MM.yyyy, HH:mm")
+    })
+  }
+</script>
+
+
+
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+
+    
+    
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym("99568144", "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

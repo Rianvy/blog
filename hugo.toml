@@ -1,6 +1,6 @@
 baseURL = "https://0x69.ru/"
 defaultContentLanguage = "ru"
-defaultContentLanguageInSubdir = true
+defaultContentLanguageInSubdir = false
 title = "0x69.ru"
 theme = "dream"
 enableRobotsTXT = true
@@ -108,7 +108,7 @@ enableRobotsTXT = true
     github = { href = "https://github.com/rianvy", target = "_blank", icon = "logo-github", title = "GitHub" }
 
   [params.navLang]
-    ru = { href = "/ru/", icon = "language", title = "Русский" }
+    ru = { href = "/", icon = "language", title = "Русский" }
     en = { href = "/en/", icon = "language", title = "English" }
 
   # ===== EXPERIMENTAL =====

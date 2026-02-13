@@ -7,7 +7,7 @@
 {{- $menuItemActiveClass := "bg-primary/10 text-primary font-semibold" -}}
 {{- $menuIconClass := "text-lg flex-shrink-0" -}}
 
-<!-- Обёртка с x-data — охватывает и nav, и мобильное меню -->
+<!-- Обёртка с x-data -->
 <div x-data="{ isSticky: false, mobileMenuOpen: false }"
      x-init="
        {{ if site.Params.stickyNav }}
@@ -16,9 +16,7 @@
        $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
      ">
 
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
   <!-- NAV BAR -->
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
   {{ if site.Params.stickyNav }}
   <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
        :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
@@ -32,7 +30,7 @@
     <div class="container flex items-center justify-between px-4">
     {{ end }}
     
-      <!-- ЛОГОТИП И ЗАГОЛОВОК -->
+      <!-- ЛОГОТИП -->
       <section class="flex items-center gap-3">
         <button class="avatar cursor-pointer transition-all duration-200 group" 
                 @click="flip = !flip" 
@@ -61,7 +59,7 @@
         {{ end }}
       </section>
 
-      <!-- МОБИЛЬНАЯ КНОПКА (< sm) -->
+      <!-- МОБИЛЬНАЯ КНОПКА -->
       <div class="sm:hidden">
         <button @click="mobileMenuOpen = !mobileMenuOpen" 
                 class="{{ $navBtnClass }}"
@@ -72,7 +70,7 @@
         </button>
       </div>
 
-      <!-- ДЕСКТОПНОЕ МЕНЮ (≥ sm) -->
+      <!-- ДЕСКТОПНОЕ МЕНЮ -->
       <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
         
         {{ with site.GetPage "/about" }}
@@ -120,20 +118,23 @@
                 class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 {{ $dropdownMenuClass }}"
                 role="menu">
               {{ range $langCode, $langParams := $.Site.Params.navLang }}
-                {{ $translatedPage := where $.Page.Translations "Lang" $langCode | first 1 }}
-                {{ $isCategoriesPage := hasPrefix ($.Path) "/categories/" }}
-                {{ $isTagsPage := hasPrefix ($.Path) "/tags/" }}
                 {{ $isActive := eq $langCode $.Site.Language.Lang }}
-
                 {{ $link := "" }}
-                {{ if or $isCategoriesPage $isTagsPage }}
-                  {{ $section := cond $isCategoriesPage "categories" "tags" }}
-                  {{ $link = printf "%s%s/%s/" ($.Site.BaseURL | absURL) $langCode $section }}
-                {{ else if $translatedPage }}
-                  {{ $link = (index $translatedPage 0).Permalink | absURL }}
+
+                {{/* Ищем перевод текущей страницы */}}
+                {{ $translatedPage := false }}
+                {{ range $.Page.Translations }}
+                  {{ if eq .Lang $langCode }}
+                    {{ $translatedPage = . }}
+                  {{ end }}
+                {{ end }}
+
+                {{ if $translatedPage }}
+                  {{ $link = $translatedPage.Permalink }}
+                {{ else if eq $langCode "ru" }}
+                  {{ $link = "/" }}
                 {{ else }}
-                  {{ $currentPath := strings.TrimPrefix (printf "/%s/" $.Site.Language.Lang) $.Page.RelPermalink }}
-                  {{ $link = printf "%s%s/%s" ($.Site.BaseURL | absURL) $langCode $currentPath }}
+                  {{ $link = printf "/%s/" $langCode }}
                 {{ end }}
 
                 <li role="none">
@@ -153,7 +154,7 @@
             </ul>
           </div>
             
-          <!-- Свёрнутое меню (ещё) -->
+          <!-- Свёрнутое меню -->
           <div class="dropdown dropdown-end dropdown-hover">
             <button tabindex="0" 
                     class="{{ $navBtnClass }}" 
@@ -178,11 +179,9 @@
     </div>
   </nav>
 
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- МОБИЛЬНОЕ МЕНЮ — ВНЕ <nav>, но ВНУТРИ x-data обёртки -->
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- МОБИЛЬНОЕ МЕНЮ -->
   
-  <!-- Затемняющий overlay — покрывает ВСЮ страницу -->
+  <!-- Overlay -->
   <div x-show="mobileMenuOpen"
        x-transition:enter="transition ease-out duration-300"
        x-transition:enter-start="opacity-0"
@@ -196,7 +195,7 @@
        aria-hidden="true">
   </div>
   
-  <!-- Выпадающая панель -->
+  <!-- Панель -->
   <div x-show="mobileMenuOpen"
        x-transition:enter="transition ease-out duration-300"
        x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
@@ -209,7 +208,7 @@
        class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden {{ $dropdownMenuClass }}"
        style="display: none;">
     
-    <!-- Заголовок панели -->
+    <!-- Заголовок -->
     <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
       <span class="font-semibold text-base-content">{{ i18n "menu.menu" | default "Меню" }}</span>
       <button @click="mobileMenuOpen = false" 
@@ -219,7 +218,7 @@
       </button>
     </div>
     
-    <!-- Кнопка About (если есть подстраницы) -->
+    <!-- About -->
     {{ with site.GetPage "/about" }}
       {{ $aboutPages := .Resources.ByType "page" }}
       {{ if gt (len $aboutPages) 0 }}
@@ -237,7 +236,7 @@
       {{ end }}
     {{ end }}
     
-    <!-- Прокручиваемый контент -->
+    <!-- Контент -->
     <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
       {{ partial "navMobileMenu.html" . }}
     </div>

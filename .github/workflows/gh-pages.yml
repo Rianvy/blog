@@ -57,6 +57,23 @@ jobs:
       - name: Build
         run: $RUNNER_TEMP/hugo --baseURL="https://0x69.ru/"
 
+      - name: Verify build output
+        run: |
+          echo "=== Checking 404.html ==="
+          if [ -f "public/404.html" ]; then
+            echo "✅ 404.html exists"
+            head -5 public/404.html
+          else
+            echo "❌ 404.html NOT FOUND"
+            echo "=== layouts/ contents ==="
+            find layouts/ -name "404*" 2>/dev/null || echo "No 404 template found"
+            echo "=== theme layouts/ ==="
+            find themes/ -name "404*" 2>/dev/null || echo "No 404 in theme"
+          fi
+          echo ""
+          echo "=== public/ root files ==="
+          ls -la public/
+
       - name: Create .nojekyll file
         if: github.ref == 'refs/heads/main'
         run: |
@@ -66,6 +83,9 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           cp -R public/* "${{ github.workspace }}/built-site/"
+          echo ""
+          echo "=== Verify 404.html in built-site ==="
+          ls -la "${{ github.workspace }}/built-site/404.html" || echo "❌ 404.html not copied!"
           cd "${{ github.workspace }}/built-site"
           git add .
           git config user.name 'Rianvy'

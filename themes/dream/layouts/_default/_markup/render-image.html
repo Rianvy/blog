@@ -20,7 +20,6 @@
         alt="{{ $alt }}"
         {{ with $title }}title="{{ . }}"{{ end }}
         {{ if ne $mediaType "svg+xml" }}width="{{ .Width }}" height="{{ .Height }}"{{ end }}
-        loading="lazy"
         decoding="async"
         class="rounded-xl shadow-lg"
       />
@@ -40,7 +39,6 @@
         {{ with $title }}title="{{ . }}"{{ end }}
         width="{{ $processed.Width }}"
         height="{{ $processed.Height }}"
-        loading="lazy"
         decoding="async"
         class="rounded-xl shadow-lg"
       />
@@ -58,7 +56,6 @@
       src="{{ $src }}"
       alt="{{ $alt }}"
       {{ with $title }}title="{{ . }}"{{ end }}
-      loading="lazy"
       decoding="async"
       class="rounded-xl shadow-lg"
     />

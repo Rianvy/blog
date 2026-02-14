@@ -18,6 +18,14 @@
 <meta name="apple-mobile-web-app-title" content="0x69" />
 <link rel="manifest" href="https://0x69.ru/site.webmanifest" />
 
+
+
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta http-equiv="X-Frame-Options" content="DENY" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+
+
+
 <link rel="canonical" href="https://0x69.ru/utilities/uuid-generator/" />
 
 
@@ -65,6 +73,9 @@
 
 <meta name="twitter:image" content="https://0x69.ru/images/og-background_hu_cfbfbcdffd24b59b.png" />
 <meta name="twitter:image:alt" content="UUID &amp; Random Generator" />
+
+
+<meta property="vk:image" content="https://0x69.ru/images/og-background_hu_cfbfbcdffd24b59b.png" />
 
 
 <script type="application/ld+json">
@@ -850,218 +861,124 @@
 <div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
 
   
-  <div class="text-center mb-6 sm:mb-8">
+  <div class="text-center mb-5 sm:mb-8">
     <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
       <span class="text-3xl sm:text-5xl">🎲</span>
     </div>
     <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">UUID &amp; Random Generator</h1>
     <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">Генератор UUID v4, nanoid, случайных строк и безопасных паролей онлайн. Bulk-генерация до 10000 значений.</p>
-    
     <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
-      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
         <ion-icon name="shield-checkmark-outline"></ion-icon>
         100% в браузере
       </span>
-      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
         <ion-icon name="flash-outline"></ion-icon>
         Мгновенная генерация
       </span>
-      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
         <ion-icon name="layers-outline"></ion-icon>
         Bulk до 10 000
       </span>
     </div>
   </div>
 
-  
-  <div class="max-w-6xl mx-auto">
-    
-    
-    <div class="tabs tabs-boxed bg-base-200 p-1 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 overflow-x-auto flex-nowrap scrollbar-none">
-      <button class="tab tab-active flex-1 sm:flex-none whitespace-nowrap text-xs sm:text-sm min-h-[36px] sm:min-h-[40px]" data-tab="uuid">
-        <ion-icon name="finger-print-outline" class="text-base sm:text-lg mr-1"></ion-icon>
-        UUID v4
-      </button>
-      <button class="tab flex-1 sm:flex-none whitespace-nowrap text-xs sm:text-sm min-h-[36px] sm:min-h-[40px]" data-tab="nanoid">
-        <ion-icon name="barcode-outline" class="text-base sm:text-lg mr-1"></ion-icon>
-        nanoid
-      </button>
-      <button class="tab flex-1 sm:flex-none whitespace-nowrap text-xs sm:text-sm min-h-[36px] sm:min-h-[40px]" data-tab="random">
-        <ion-icon name="text-outline" class="text-base sm:text-lg mr-1"></ion-icon>
-        <span class="hidden xs:inline">Случайная строка</span>
-        <span class="xs:hidden">Random</span>
-      </button>
-      <button class="tab flex-1 sm:flex-none whitespace-nowrap text-xs sm:text-sm min-h-[36px] sm:min-h-[40px]" data-tab="password">
-        <ion-icon name="key-outline" class="text-base sm:text-lg mr-1"></ion-icon>
-        <span class="hidden xs:inline">Пароль</span>
-        <span class="xs:hidden">Pass</span>
-      </button>
-    </div>
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
 
     
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+    <div class="xl:col-span-1 space-y-3 sm:space-y-4 order-2 xl:order-1">
+
       
-      
-      <div class="lg:col-span-2 order-1 lg:order-2">
-        
-        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-          
-          
-          <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10 flex items-center justify-between gap-2">
-            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
-              <ion-icon name="list-outline" class="text-success"></ion-icon>
-              Результаты
-              <span class="badge badge-sm" id="results-count">0</span>
-            </h2>
-            <div class="flex items-center gap-1 sm:gap-2">
-              <button id="copy-all" class="btn btn-ghost btn-xs gap-1 text-[10px] sm:text-xs" disabled>
-                <ion-icon name="copy-outline"></ion-icon>
-                <span class="hidden sm:inline">Копировать всё</span>
-                <span class="sm:hidden">All</span>
-              </button>
-              <div class="dropdown dropdown-end">
-                <label tabindex="0" class="btn btn-ghost btn-xs gap-1 text-[10px] sm:text-xs">
-                  <ion-icon name="download-outline"></ion-icon>
-                  <span class="hidden sm:inline">Скачать</span>
-                </label>
-                <ul tabindex="0" class="dropdown-content menu p-2 shadow-lg bg-base-100 rounded-box w-36 sm:w-40 border border-base-200 z-50">
-                  <li><a id="download-txt"><ion-icon name="document-text-outline"></ion-icon> .txt</a></li>
-                  <li><a id="download-json"><ion-icon name="code-outline"></ion-icon> .json</a></li>
-                  <li><a id="download-csv"><ion-icon name="grid-outline"></ion-icon> .csv</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          
-          
-          <div id="single-result" class="p-3 sm:p-6">
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-              <div class="flex-1 min-w-0">
-                <div class="font-mono text-sm sm:text-lg md:text-xl break-all select-all p-3 sm:p-4 bg-base-200/50 rounded-xl leading-relaxed" id="single-value">—</div>
-              </div>
-              <button id="copy-single" class="btn btn-primary sm:btn-lg gap-2 w-full sm:w-auto flex-shrink-0">
-                <ion-icon name="copy-outline" class="text-lg sm:text-xl"></ion-icon>
-                Копировать
-              </button>
-            </div>
-            
-            
-            <div id="password-strength" class="hidden mt-4 sm:mt-6">
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-xs sm:text-sm font-medium">Надёжность пароля</span>
-                <span class="text-xs sm:text-sm font-semibold" id="strength-label">—</span>
-              </div>
-              <div class="w-full bg-base-200 rounded-full h-2">
-                <div id="strength-bar" class="h-2 rounded-full transition-all" style="width: 0%"></div>
-              </div>
-              <div class="mt-2 sm:mt-3 grid grid-cols-2 gap-2 text-[10px] sm:text-xs text-base-content/60">
-                <div>Энтропия: <span id="entropy-value" class="font-mono">—</span> бит</div>
-                <div>Комбинаций: <span id="combinations-value" class="font-mono">—</span></div>
-              </div>
-            </div>
-          </div>
-          
-          
-          <div id="bulk-results" class="hidden p-3 sm:p-4">
-            <textarea 
-              id="bulk-output" 
-              class="textarea textarea-bordered w-full h-64 sm:h-96 font-mono text-xs sm:text-sm leading-relaxed bg-base-200/30"
-              readonly
-              placeholder="Сгенерированные значения появятся здесь..."
-            ></textarea>
-          </div>
-          
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="flash-outline" class="text-warning"></ion-icon>
+            Сгенерировать
+          </h2>
         </div>
-
-        
-        <div id="stats-panel" class="hidden mt-3 sm:mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-          <div class="p-2.5 sm:p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
-            <div class="text-lg sm:text-xl font-bold text-primary" id="stat-total">0</div>
-            <div class="text-[10px] sm:text-xs text-base-content/60">Сгенерировано</div>
-          </div>
-          <div class="p-2.5 sm:p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
-            <div class="text-lg sm:text-xl font-bold text-secondary" id="stat-length">0</div>
-            <div class="text-[10px] sm:text-xs text-base-content/60">Средняя длина</div>
-          </div>
-          <div class="p-2.5 sm:p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
-            <div class="text-lg sm:text-xl font-bold text-accent" id="stat-unique">0</div>
-            <div class="text-[10px] sm:text-xs text-base-content/60">Уникальных</div>
-          </div>
-          <div class="p-2.5 sm:p-3 rounded-xl bg-base-100 border border-base-200 dark:border-base-content/10 text-center">
-            <div class="text-lg sm:text-xl font-bold text-success" id="stat-time">0ms</div>
-            <div class="text-[10px] sm:text-xs text-base-content/60">Время</div>
+        <div class="p-3 sm:p-4 space-y-2">
+          <div class="grid grid-cols-2 gap-1.5">
+            <button type="button" class="btn btn-success btn-xs sm:btn-sm gap-1 justify-start" data-tab="uuid">
+              <ion-icon name="finger-print-outline"></ion-icon>
+              UUID v4
+            </button>
+            <button type="button" class="btn btn-info btn-xs sm:btn-sm gap-1 justify-start" data-tab="nanoid">
+              <ion-icon name="barcode-outline"></ion-icon>
+              nanoid
+            </button>
+            <button type="button" class="btn btn-secondary btn-xs sm:btn-sm gap-1 justify-start" data-tab="random">
+              <ion-icon name="text-outline"></ion-icon>
+              Random
+            </button>
+            <button type="button" class="btn btn-accent btn-xs sm:btn-sm gap-1 justify-start" data-tab="password">
+              <ion-icon name="key-outline"></ion-icon>
+              Password
+            </button>
           </div>
         </div>
-
       </div>
 
       
-      <div class="lg:col-span-1 order-2 lg:order-1">
-        
-        
-        <div id="settings-uuid" class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-          <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+      <div id="settings-uuid" class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
             <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
-              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              <ion-icon name="options-outline" class="text-primary"></ion-icon>
               Настройки
             </h2>
-          </div>
-          
-          <div class="p-3 sm:p-4 space-y-3 sm:space-y-4">
-            
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
             <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">Формат</span>
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">Формат</span>
               </label>
-              <select id="uuid-format" class="select select-bordered select-sm w-full text-xs sm:text-sm">
+              <select id="uuid-format" class="select select-bordered select-xs text-xs">
                 <option value="default">xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx</option>
                 <option value="uppercase">XXXXXXXX-XXXX-4XXX-YXXX-XXXXXXXXXXXX</option>
                 <option value="no-dash">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</option>
                 <option value="braces">{xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx}</option>
               </select>
             </div>
-            
             <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">Количество</span>
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">Количество</span>
               </label>
-              <input type="number" id="uuid-count" class="input input-bordered input-sm w-full" value="1" min="1" max="10000" inputmode="numeric" />
+              <input type="number" id="uuid-count" class="input input-bordered input-sm text-xs w-full" value="1" min="1" max="10000" inputmode="numeric" />
             </div>
-            
-            <button id="uuid-generate" class="btn btn-primary btn-sm w-full gap-2 text-sm">
+            <button id="uuid-generate" class="btn btn-primary btn-xs sm:btn-sm w-full gap-1 justify-start">
               <ion-icon name="flash-outline"></ion-icon>
               Сгенерировать
             </button>
-            
           </div>
-        </div>
+        </details>
+      </div>
 
-        
-        <div id="settings-nanoid" class="hidden bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-          <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+      
+      <div id="settings-nanoid" class="hidden bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
             <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
-              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              <ion-icon name="options-outline" class="text-primary"></ion-icon>
               Настройки
             </h2>
-          </div>
-          
-          <div class="p-3 sm:p-4 space-y-3 sm:space-y-4">
-            
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
             <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">Длина</span>
-              </label>
-              <input type="number" id="nanoid-length" class="input input-bordered input-sm w-full" value="21" min="1" max="128" inputmode="numeric" />
               <label class="label py-0.5">
-                <span class="label-text-alt text-base-content/60 text-[10px] sm:text-xs">По умолчанию: 21</span>
+                <span class="label-text text-xs font-medium">Длина</span>
+              </label>
+              <input type="number" id="nanoid-length" class="input input-bordered input-sm text-xs w-full" value="21" min="1" max="128" inputmode="numeric" />
+              <label class="label py-0">
+                <span class="label-text-alt text-[9px] text-base-content/50">По умолчанию: 21</span>
               </label>
             </div>
-            
             <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">Алфавит</span>
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">Алфавит</span>
               </label>
-              <select id="nanoid-preset" class="select select-bordered select-sm w-full text-xs sm:text-sm mb-2">
+              <select id="nanoid-preset" class="select select-bordered select-xs text-xs">
                 <option value="default">По умолчанию (A-Za-z0-9_-)</option>
                 <option value="numbers">Только цифры (0-9)</option>
                 <option value="lowercase">Строчные (a-z0-9)</option>
@@ -1069,223 +986,329 @@
                 <option value="hex">Hex (0-9a-f)</option>
                 <option value="custom">Кастомный</option>
               </select>
-              <input type="text" id="nanoid-alphabet" class="input input-bordered input-sm font-mono hidden w-full text-xs" placeholder="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-" />
+              <input type="text" id="nanoid-alphabet" class="input input-bordered input-sm font-mono text-xs hidden w-full mt-1" placeholder="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-" />
             </div>
-            
             <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">Количество</span>
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">Количество</span>
               </label>
-              <input type="number" id="nanoid-count" class="input input-bordered input-sm w-full" value="1" min="1" max="10000" inputmode="numeric" />
+              <input type="number" id="nanoid-count" class="input input-bordered input-sm text-xs w-full" value="1" min="1" max="10000" inputmode="numeric" />
             </div>
-            
-            <button id="nanoid-generate" class="btn btn-primary btn-sm w-full gap-2 text-sm">
+            <button id="nanoid-generate" class="btn btn-primary btn-xs sm:btn-sm w-full gap-1 justify-start">
               <ion-icon name="flash-outline"></ion-icon>
               Сгенерировать
             </button>
-            
           </div>
-        </div>
+        </details>
+      </div>
 
-        
-        <div id="settings-random" class="hidden bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-          <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+      
+      <div id="settings-random" class="hidden bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
             <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
-              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              <ion-icon name="options-outline" class="text-primary"></ion-icon>
               Настройки
             </h2>
-          </div>
-          
-          <div class="p-3 sm:p-4 space-y-3 sm:space-y-4">
-            
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
             <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">Длина</span>
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">Длина</span>
               </label>
-              <input type="number" id="random-length" class="input input-bordered input-sm w-full" value="16" min="1" max="256" inputmode="numeric" />
+              <input type="number" id="random-length" class="input input-bordered input-sm text-xs w-full" value="16" min="1" max="256" inputmode="numeric" />
             </div>
-            
-            <div class="space-y-2">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">Символы</span>
-              </label>
-              
-              <label class="flex items-center justify-between cursor-pointer py-1">
-                <span class="text-xs sm:text-sm">Строчные (a-z)</span>
-                <input type="checkbox" id="random-lowercase" class="toggle toggle-sm toggle-primary" checked />
-              </label>
-              
-              <label class="flex items-center justify-between cursor-pointer py-1">
-                <span class="text-xs sm:text-sm">Заглавные (A-Z)</span>
-                <input type="checkbox" id="random-uppercase" class="toggle toggle-sm toggle-primary" checked />
-              </label>
-              
-              <label class="flex items-center justify-between cursor-pointer py-1">
-                <span class="text-xs sm:text-sm">Цифры (0-9)</span>
-                <input type="checkbox" id="random-numbers" class="toggle toggle-sm toggle-primary" checked />
-              </label>
-              
-              <label class="flex items-center justify-between cursor-pointer py-1">
-                <span class="text-xs sm:text-sm">Символы (!@#$%)</span>
-                <input type="checkbox" id="random-symbols" class="toggle toggle-sm toggle-primary" />
-              </label>
-              
-              <label class="flex items-center justify-between cursor-pointer py-1">
-                <span class="text-xs sm:text-sm">Исключить похожие (0Ol1)</span>
-                <input type="checkbox" id="random-exclude-similar" class="toggle toggle-sm toggle-primary" />
-              </label>
-            </div>
-            
+
+            <div class="divider my-0.5"></div>
+
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Строчные (a-z)</span>
+              <input type="checkbox" id="random-lowercase" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Заглавные (A-Z)</span>
+              <input type="checkbox" id="random-uppercase" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Цифры (0-9)</span>
+              <input type="checkbox" id="random-numbers" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Символы (!@#$%)</span>
+              <input type="checkbox" id="random-symbols" class="toggle toggle-xs toggle-secondary" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div>
+                <span class="text-xs font-medium">Исключить похожие</span>
+                <p class="text-[9px] text-base-content/50">(0Ol1)</p>
+              </div>
+              <input type="checkbox" id="random-exclude-similar" class="toggle toggle-xs toggle-secondary" />
+            </label>
+
+            <div class="divider my-0.5"></div>
+
             <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">Количество</span>
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">Количество</span>
               </label>
-              <input type="number" id="random-count" class="input input-bordered input-sm w-full" value="1" min="1" max="10000" inputmode="numeric" />
+              <input type="number" id="random-count" class="input input-bordered input-sm text-xs w-full" value="1" min="1" max="10000" inputmode="numeric" />
             </div>
-            
-            <button id="random-generate" class="btn btn-primary btn-sm w-full gap-2 text-sm">
+            <button id="random-generate" class="btn btn-primary btn-xs sm:btn-sm w-full gap-1 justify-start">
               <ion-icon name="flash-outline"></ion-icon>
               Сгенерировать
             </button>
-            
           </div>
-        </div>
+        </details>
+      </div>
 
-        
-        <div id="settings-password" class="hidden bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-          <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+      
+      <div id="settings-password" class="hidden bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
             <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
-              <ion-icon name="settings-outline" class="text-primary"></ion-icon>
+              <ion-icon name="options-outline" class="text-primary"></ion-icon>
               Настройки
             </h2>
-          </div>
-          
-          <div class="p-3 sm:p-4 space-y-3 sm:space-y-4">
-            
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
             <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">Длина</span>
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">Длина</span>
               </label>
-              <input type="range" id="password-length" class="range range-primary range-sm" min="6" max="128" value="16" />
-              <div class="flex justify-between text-[10px] sm:text-xs text-base-content/40 mt-1">
+              <input type="range" id="password-length" class="range range-primary range-xs" min="6" max="128" value="16" />
+              <div class="flex justify-between text-[9px] text-base-content/40 mt-0.5">
                 <span>6</span>
-                <span id="password-length-value" class="text-base-content font-medium text-xs sm:text-sm">16</span>
+                <span id="password-length-value" class="text-base-content font-medium text-xs">16</span>
                 <span>128</span>
               </div>
             </div>
-            
-            <div>
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">Уровень сложности</span>
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">Уровень сложности</span>
               </label>
-              <div class="space-y-1.5 sm:space-y-2">
-                <label class="flex items-center gap-2 sm:gap-3 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary active:bg-base-200/80">
-                  <input type="radio" name="password-level" value="simple" class="radio radio-sm radio-primary" />
-                  <div class="flex-1 min-w-0">
-                    <span class="text-xs sm:text-sm font-medium">Простой</span>
+              <div class="grid grid-cols-1 gap-1">
+                <label class="flex items-center justify-between p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <div class="flex items-center gap-1.5">
+                    <input type="radio" name="password-level" value="simple" class="radio radio-xs radio-primary" />
+                    <span class="text-[10px] sm:text-xs font-medium">Простой</span>
                   </div>
-                  <span class="badge badge-success badge-xs sm:badge-sm text-[9px] sm:text-xs">a-z, A-Z, 0-9</span>
+                  <span class="text-[9px] font-mono text-success">a-z A-Z 0-9</span>
                 </label>
-                <label class="flex items-center gap-2 sm:gap-3 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary active:bg-base-200/80">
-                  <input type="radio" name="password-level" value="strong" class="radio radio-sm radio-primary" checked />
-                  <div class="flex-1 min-w-0">
-                    <span class="text-xs sm:text-sm font-medium">Сильный</span>
+                <label class="flex items-center justify-between p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <div class="flex items-center gap-1.5">
+                    <input type="radio" name="password-level" value="strong" class="radio radio-xs radio-primary" checked />
+                    <span class="text-[10px] sm:text-xs font-medium">Сильный</span>
                   </div>
-                  <span class="badge badge-warning badge-xs sm:badge-sm text-[9px] sm:text-xs">+ !@#$%</span>
+                  <span class="text-[9px] font-mono text-warning">+ !@#$%</span>
                 </label>
-                <label class="flex items-center gap-2 sm:gap-3 p-2 rounded-lg bg-base-200/50 cursor-pointer hover:bg-base-200 transition-colors has-[:checked]:ring-2 has-[:checked]:ring-primary active:bg-base-200/80">
-                  <input type="radio" name="password-level" value="ultra" class="radio radio-sm radio-primary" />
-                  <div class="flex-1 min-w-0">
-                    <span class="text-xs sm:text-sm font-medium">Ультра</span>
+                <label class="flex items-center justify-between p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <div class="flex items-center gap-1.5">
+                    <input type="radio" name="password-level" value="ultra" class="radio radio-xs radio-primary" />
+                    <span class="text-[10px] sm:text-xs font-medium">Ультра</span>
                   </div>
-                  <span class="badge badge-error badge-xs sm:badge-sm text-[9px] sm:text-xs">+ ^&*()</span>
+                  <span class="text-[9px] font-mono text-error">+ ^&*()</span>
                 </label>
               </div>
             </div>
-            
-            <div class="space-y-2">
-              <label class="flex items-center justify-between cursor-pointer py-1">
-                <span class="text-xs sm:text-sm">Исключить похожие</span>
-                <input type="checkbox" id="password-exclude-similar" class="toggle toggle-sm toggle-primary" />
-              </label>
-            </div>
-            
+
+            <div class="divider my-0.5"></div>
+
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">Исключить похожие</span>
+              <input type="checkbox" id="password-exclude-similar" class="toggle toggle-xs toggle-secondary" />
+            </label>
+
             <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">Количество</span>
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">Количество</span>
               </label>
-              <input type="number" id="password-count" class="input input-bordered input-sm w-full" value="1" min="1" max="10000" inputmode="numeric" />
+              <input type="number" id="password-count" class="input input-bordered input-sm text-xs w-full" value="1" min="1" max="10000" inputmode="numeric" />
             </div>
-            
-            <button id="password-generate" class="btn btn-primary btn-sm w-full gap-2 text-sm">
+            <button id="password-generate" class="btn btn-primary btn-xs sm:btn-sm w-full gap-1 justify-start">
               <ion-icon name="flash-outline"></ion-icon>
               Сгенерировать
             </button>
-            
           </div>
-        </div>
-
+        </details>
       </div>
-      
+
     </div>
 
     
-    <div class="mt-6 sm:mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-      
-      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-primary/10 flex items-center justify-center mb-2 sm:mb-3">
-          <ion-icon name="finger-print-outline" class="text-xl sm:text-2xl text-primary"></ion-icon>
-        </div>
-        <h3 class="font-semibold text-xs sm:text-base mb-0.5 sm:mb-1">UUID v4</h3>
-        <p class="text-[10px] sm:text-sm text-base-content/60 leading-relaxed">Универсальный уникальный идентификатор. RFC 4122 стандарт.</p>
-      </div>
-      
-      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-secondary/10 flex items-center justify-center mb-2 sm:mb-3">
-          <ion-icon name="barcode-outline" class="text-xl sm:text-2xl text-secondary"></ion-icon>
-        </div>
-        <h3 class="font-semibold text-xs sm:text-base mb-0.5 sm:mb-1">nanoid</h3>
-        <p class="text-[10px] sm:text-sm text-base-content/60 leading-relaxed">Компактный URL-friendly идентификатор. Короче UUID на 40%.</p>
-      </div>
-      
-      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-accent/10 flex items-center justify-center mb-2 sm:mb-3">
-          <ion-icon name="text-outline" class="text-xl sm:text-2xl text-accent"></ion-icon>
-        </div>
-        <h3 class="font-semibold text-xs sm:text-base mb-0.5 sm:mb-1">Случайная строка</h3>
-        <p class="text-[10px] sm:text-sm text-base-content/60 leading-relaxed">Случайная строка с настраиваемым набором символов.</p>
-      </div>
-      
-      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-success/10 flex items-center justify-center mb-2 sm:mb-3">
-          <ion-icon name="key-outline" class="text-xl sm:text-2xl text-success"></ion-icon>
-        </div>
-        <h3 class="font-semibold text-xs sm:text-base mb-0.5 sm:mb-1">Пароль</h3>
-        <p class="text-[10px] sm:text-sm text-base-content/60 leading-relaxed">Криптографически стойкий пароль с индикатором надёжности.</p>
-      </div>
-      
-    </div>
+    <div class="xl:col-span-3 space-y-3 sm:space-y-4 order-1 xl:order-2">
 
+      
+      <div id="single-result" class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+            <ion-icon name="checkmark-circle-outline" class="text-success"></ion-icon>
+            Результаты
+            <span class="badge badge-xs font-mono" id="results-count">0</span>
+          </h2>
+          <button type="button" id="copy-single" class="btn btn-primary btn-xs gap-1">
+            <ion-icon name="copy-outline"></ion-icon>
+            <span class="hidden sm:inline">Копировать</span>
+          </button>
+          <button type="button" id="btn-regenerate" class="btn btn-ghost btn-xs gap-1">
+            <ion-icon name="refresh-outline"></ion-icon>
+          </button>
+        </div>
+        <div class="p-3 sm:p-4">
+          <div class="font-mono text-[11px] sm:text-xs leading-relaxed select-all p-3 sm:p-4 bg-base-200/50 rounded-lg break-all" id="single-value">—</div>
+        </div>
+
+        
+        <div id="password-strength" class="hidden px-3 pb-3 sm:px-4 sm:pb-4">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[10px] sm:text-xs font-medium">Надёжность пароля</span>
+            <span class="text-[10px] sm:text-xs font-semibold" id="strength-label">—</span>
+          </div>
+          <div class="w-full bg-base-200 rounded-full h-1.5">
+            <div id="strength-bar" class="h-1.5 rounded-full transition-all" style="width: 0%"></div>
+          </div>
+          <div class="mt-1.5 grid grid-cols-2 gap-2 text-[9px] text-base-content/50">
+            <div>Энтропия: <span id="entropy-value" class="font-mono">—</span> бит</div>
+            <div>Комбинаций: <span id="combinations-value" class="font-mono">—</span></div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div id="bulk-results" class="hidden bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+            <ion-icon name="list-outline" class="text-success"></ion-icon>
+            Результаты
+            <span class="badge badge-xs font-mono" id="results-count-bulk">0</span>
+          </h2>
+          <button type="button" id="copy-all" class="btn btn-primary btn-xs gap-1" disabled>
+            <ion-icon name="copy-outline"></ion-icon>
+            <span class="hidden sm:inline">Копировать всё</span>
+          </button>
+          <div class="dropdown dropdown-end">
+            <label tabindex="0" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="download-outline"></ion-icon>
+              <span class="hidden sm:inline">.txt</span>
+            </label>
+            <ul tabindex="0" class="dropdown-content menu p-1 shadow-lg bg-base-100 rounded-lg w-32 border border-base-200 dark:border-base-content/10 z-50">
+              <li><a id="download-txt" class="text-xs"><ion-icon name="document-text-outline"></ion-icon> .txt</a></li>
+              <li><a id="download-json" class="text-xs"><ion-icon name="code-outline"></ion-icon> .json</a></li>
+              <li><a id="download-csv" class="text-xs"><ion-icon name="grid-outline"></ion-icon> .csv</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="bulk-stats-corner"></div>
+          <textarea id="bulk-output" class="w-full h-[350px] sm:h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none" readonly placeholder="Сгенерированные значения появятся здесь..."></textarea>
+        </div>
+      </div>
+
+      
+      <div id="stats-panel" class="hidden">
+        <div class="grid grid-cols-4 gap-3 sm:gap-4">
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Сгенерировано</div>
+            <div class="text-sm sm:text-lg font-bold text-primary" id="stat-total">0</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Средняя длина</div>
+            <div class="text-sm sm:text-lg font-bold text-success" id="stat-length">0</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Уникальных</div>
+            <div class="text-sm sm:text-lg font-bold text-warning" id="stat-unique">0</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Время</div>
+            <div class="text-sm sm:text-lg font-bold text-secondary" id="stat-time">0ms</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
+  
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-info/10 flex items-center justify-center shrink-0">
+            <ion-icon name="help-circle-outline" class="text-lg sm:text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">Настройки</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">UUID v4, nanoid, Random String, Password</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <ion-icon name="finger-print-outline" class="text-primary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">UUID v4</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Универсальный уникальный идентификатор. RFC 4122 стандарт.</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center">
+                <ion-icon name="barcode-outline" class="text-success"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">nanoid</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Компактный URL-friendly идентификатор. Короче UUID на 40%.</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-warning/10 flex items-center justify-center">
+                <ion-icon name="text-outline" class="text-warning"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Случайная строка</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Случайная строка с настраиваемым набором символов.</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center">
+                <ion-icon name="key-outline" class="text-secondary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Пароль</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Криптографически стойкий пароль с индикатором надёжности.</p>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span id="uuid-status-text">UUID v4</span>
+    <span>Всё работает локально в браузере</span>
+  </div>
 </div>
 
 <script>
 (function() {
   'use strict';
-  
-  
+
   var i18n = {
     copied: "\"Скопировано!\"",
     copiedCount: "\"Скопировано {count} значений\"",
     weak: "\"Слабый\"",
     medium: "\"Средний\"",
     strong: "\"Сильный\"",
-    veryStrong: "\"Очень сильный\"",
-    generated: "\"Сгенерировано\""
+    veryStrong: "\"Очень сильный\""
   };
-  
-  
+
   var currentTab = 'uuid';
   var currentResults = [];
   var settings = {
@@ -1294,19 +1317,18 @@
     random: { length: 16, lowercase: true, uppercase: true, numbers: true, symbols: false, excludeSimilar: false, count: 1 },
     password: { length: 16, level: 'strong', excludeSimilar: false, count: 1 }
   };
-  
-  
+
   var tabs = document.querySelectorAll('[data-tab]');
   var singleResult = document.getElementById('single-result');
   var bulkResults = document.getElementById('bulk-results');
   var singleValue = document.getElementById('single-value');
   var bulkOutput = document.getElementById('bulk-output');
   var resultsCount = document.getElementById('results-count');
+  var resultsCountBulk = document.getElementById('results-count-bulk');
   var statsPanel = document.getElementById('stats-panel');
   var passwordStrength = document.getElementById('password-strength');
-  
-  
-  
+  var statusText = document.getElementById('uuid-status-text');
+
   function copyToClipboard(text, message) {
     var msg = message || i18n.copied;
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1319,7 +1341,7 @@
       fallbackCopy(text, msg);
     }
   }
-  
+
   function fallbackCopy(text, message) {
     var ta = document.createElement('textarea');
     ta.value = text;
@@ -1332,88 +1354,70 @@
     try {
       document.execCommand('copy');
       showToast(message);
-    } catch (e) {
-      
-    }
+    } catch (e) {}
     document.body.removeChild(ta);
   }
-  
-  
-  
+
   function showToast(message) {
     var existing = document.querySelectorAll('.uuid-toast');
     existing.forEach(function(el) { el.remove(); });
-    
+
     var toast = document.createElement('div');
     toast.className = 'uuid-toast';
     toast.style.cssText = 'position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:9999;' +
-      'padding:10px 20px;background:hsl(var(--su,158 64% 52%));color:hsl(var(--suc,0 0% 100%));' +
-      'border-radius:8px;font-size:14px;font-weight:500;box-shadow:0 4px 12px rgba(0,0,0,0.15);' +
+      'padding:8px 16px;background:hsl(var(--su,158 64% 52%));color:hsl(var(--suc,0 0% 100%));' +
+      'border-radius:8px;font-size:12px;font-weight:500;box-shadow:0 4px 12px rgba(0,0,0,0.15);' +
       'animation:uuidToastIn 0.3s ease;max-width:calc(100vw - 32px);text-align:center;';
     toast.textContent = message;
     document.body.appendChild(toast);
-    
+
     setTimeout(function() {
       toast.style.opacity = '0';
       toast.style.transition = 'opacity 0.3s ease';
       setTimeout(function() { toast.remove(); }, 300);
     }, 2000);
   }
-  
-  
+
   if (!document.getElementById('uuid-toast-style')) {
     var style = document.createElement('style');
     style.id = 'uuid-toast-style';
-    style.textContent = '@keyframes uuidToastIn{from{opacity:0;transform:translateX(-50%) translateY(-10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}' +
-      '.scrollbar-none::-webkit-scrollbar{display:none}.scrollbar-none{-ms-overflow-style:none;scrollbar-width:none}';
+    style.textContent = '@keyframes uuidToastIn{from{opacity:0;transform:translateX(-50%) translateY(-10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}';
     document.head.appendChild(style);
   }
-  
-  
-  
+
   function getRandomValues(length) {
     var array = new Uint8Array(length);
     crypto.getRandomValues(array);
     return array;
   }
-  
+
   function randomInt(max) {
     if (max <= 0) return 0;
-    
     var array = getRandomValues(4);
     var num = ((array[0] << 24) | (array[1] << 16) | (array[2] << 8) | array[3]) >>> 0;
     return num % max;
   }
-  
-  
-  
+
   function generateUUID() {
     var bytes = getRandomValues(16);
     bytes[6] = (bytes[6] & 0x0f) | 0x40;
     bytes[8] = (bytes[8] & 0x3f) | 0x80;
-    
     var hex = '';
     for (var i = 0; i < bytes.length; i++) {
       hex += bytes[i].toString(16).padStart(2, '0');
     }
     return hex.substr(0,8) + '-' + hex.substr(8,4) + '-' + hex.substr(12,4) + '-' + hex.substr(16,4) + '-' + hex.substr(20,12);
   }
-  
+
   function formatUUID(uuid, format) {
     switch (format) {
-      case 'uppercase':
-        return uuid.toUpperCase();
-      case 'no-dash':
-        return uuid.replace(/-/g, '');
-      case 'braces':
-        return '{' + uuid + '}';
-      default:
-        return uuid;
+      case 'uppercase': return uuid.toUpperCase();
+      case 'no-dash': return uuid.replace(/-/g, '');
+      case 'braces': return '{' + uuid + '}';
+      default: return uuid;
     }
   }
-  
-  
-  
+
   var NANOID_ALPHABETS = {
     'default': 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-',
     numbers: '0123456789',
@@ -1421,7 +1425,7 @@
     uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
     hex: '0123456789abcdef'
   };
-  
+
   function generateNanoid(length, alphabet) {
     var result = '';
     for (var i = 0; i < length; i++) {
@@ -1429,87 +1433,71 @@
     }
     return result;
   }
-  
-  
-  
+
   var CHAR_SETS = {
     lowercase: 'abcdefghijklmnopqrstuvwxyz',
     uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     numbers: '0123456789',
     symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?'
   };
-  
+
   var SIMILAR_CHARS = '0Oo1lI';
-  
+
   function generateRandomString(length, options) {
     var charset = '';
     if (options.lowercase) charset += CHAR_SETS.lowercase;
     if (options.uppercase) charset += CHAR_SETS.uppercase;
     if (options.numbers) charset += CHAR_SETS.numbers;
     if (options.symbols) charset += CHAR_SETS.symbols;
-    
     if (options.excludeSimilar) {
       charset = charset.split('').filter(function(c) { return SIMILAR_CHARS.indexOf(c) === -1; }).join('');
     }
-    
     if (!charset) return '';
-    
     var result = '';
     for (var i = 0; i < length; i++) {
       result += charset[randomInt(charset.length)];
     }
     return result;
   }
-  
-  
-  
+
   var PASSWORD_SETS = {
     simple: CHAR_SETS.lowercase + CHAR_SETS.uppercase + CHAR_SETS.numbers,
     strong: CHAR_SETS.lowercase + CHAR_SETS.uppercase + CHAR_SETS.numbers + '!@#$%^&*',
     ultra: CHAR_SETS.lowercase + CHAR_SETS.uppercase + CHAR_SETS.numbers + CHAR_SETS.symbols
   };
-  
+
   function generatePassword(length, level, excludeSimilar) {
     var charset = PASSWORD_SETS[level] || PASSWORD_SETS.strong;
-    
     if (excludeSimilar) {
       charset = charset.split('').filter(function(c) { return SIMILAR_CHARS.indexOf(c) === -1; }).join('');
     }
-    
     if (!charset || length < 1) return '';
-    
-    
+
     var password = '';
     var lc = CHAR_SETS.lowercase;
     var uc = CHAR_SETS.uppercase;
     var nums = CHAR_SETS.numbers;
     var syms = '!@#$%^&*';
-    
+
     if (excludeSimilar) {
       lc = lc.split('').filter(function(c) { return SIMILAR_CHARS.indexOf(c) === -1; }).join('');
       uc = uc.split('').filter(function(c) { return SIMILAR_CHARS.indexOf(c) === -1; }).join('');
       nums = nums.split('').filter(function(c) { return SIMILAR_CHARS.indexOf(c) === -1; }).join('');
     }
-    
+
     if (length >= 3) {
       if (lc.length) password += lc[randomInt(lc.length)];
       if (uc.length) password += uc[randomInt(uc.length)];
       if (nums.length) password += nums[randomInt(nums.length)];
     }
-    
     if ((level === 'strong' || level === 'ultra') && length >= 4) {
       password += syms[randomInt(syms.length)];
     }
-    
-    
     while (password.length < length) {
       password += charset[randomInt(charset.length)];
     }
-    
-    
     password = password.substring(0, length);
-    
-    
+
     var arr = password.split('');
     for (var i = arr.length - 1; i > 0; i--) {
       var j = randomInt(i + 1);
@@ -1517,42 +1505,28 @@
       arr[i] = arr[j];
       arr[j] = tmp;
     }
-    
     return arr.join('');
   }
-  
+
   function calculatePasswordStrength(password) {
     var length = password.length;
     var charsetSize = 0;
-    
     if (/[a-z]/.test(password)) charsetSize += 26;
     if (/[A-Z]/.test(password)) charsetSize += 26;
     if (/[0-9]/.test(password)) charsetSize += 10;
     if (/[^a-zA-Z0-9]/.test(password)) charsetSize += 32;
-    
     if (charsetSize === 0) charsetSize = 1;
-    
+
     var entropy = length * Math.log2(charsetSize);
     var combinations = Math.pow(charsetSize, length);
-    
     var strength = 'weak';
     var strengthClass = 'bg-error';
     var strengthWidth = 25;
-    
-    if (entropy > 100) {
-      strength = 'veryStrong';
-      strengthClass = 'bg-success';
-      strengthWidth = 100;
-    } else if (entropy > 60) {
-      strength = 'strong';
-      strengthClass = 'bg-success';
-      strengthWidth = 75;
-    } else if (entropy > 30) {
-      strength = 'medium';
-      strengthClass = 'bg-warning';
-      strengthWidth = 50;
-    }
-    
+
+    if (entropy > 100) { strength = 'veryStrong'; strengthClass = 'bg-success'; strengthWidth = 100; }
+    else if (entropy > 60) { strength = 'strong'; strengthClass = 'bg-success'; strengthWidth = 75; }
+    else if (entropy > 30) { strength = 'medium'; strengthClass = 'bg-warning'; strengthWidth = 50; }
+
     return {
       entropy: entropy.toFixed(1),
       combinations: combinations.toExponential(2),
@@ -1561,19 +1535,16 @@
       strengthWidth: strengthWidth
     };
   }
-  
-  
-  
+
   function generate(type, count) {
     if (count < 1) count = 1;
     if (count > 10000) count = 10000;
-    
+
     var startTime = performance.now();
     var results = [];
-    
+
     for (var i = 0; i < count; i++) {
       var value;
-      
       switch (type) {
         case 'uuid':
           value = formatUUID(generateUUID(), settings.uuid.format);
@@ -1590,38 +1561,33 @@
         case 'password':
           value = generatePassword(settings.password.length, settings.password.level, settings.password.excludeSimilar);
           break;
-        default:
-          value = '';
+        default: value = '';
       }
-      
       if (value) results.push(value);
     }
-    
+
     var endTime = performance.now();
     var time = (endTime - startTime).toFixed(2);
-    
     currentResults = results;
     displayResults(results, time);
   }
-  
-  
-  
+
   function displayResults(results, time) {
     var count = results.length;
     resultsCount.textContent = count;
-    
+    resultsCountBulk.textContent = count;
+
     if (count <= 1) {
       singleResult.classList.remove('hidden');
       bulkResults.classList.add('hidden');
       singleValue.textContent = count === 1 ? results[0] : '—';
-      
-      
+
       if (currentTab === 'password' && count === 1) {
         var strength = calculatePasswordStrength(results[0]);
         passwordStrength.classList.remove('hidden');
         document.getElementById('strength-label').textContent = strength.strength;
         var bar = document.getElementById('strength-bar');
-        bar.className = 'h-2 rounded-full transition-all ' + strength.strengthClass;
+        bar.className = 'h-1.5 rounded-full transition-all ' + strength.strengthClass;
         bar.style.width = strength.strengthWidth + '%';
         document.getElementById('entropy-value').textContent = strength.entropy;
         document.getElementById('combinations-value').textContent = strength.combinations;
@@ -1632,73 +1598,62 @@
       singleResult.classList.add('hidden');
       bulkResults.classList.remove('hidden');
       bulkOutput.value = results.join('\n');
+      document.getElementById('bulk-stats-corner').textContent = count + ' items';
       passwordStrength.classList.add('hidden');
     }
-    
-    
+
     if (count > 0) {
       var totalLen = 0;
-      for (var i = 0; i < results.length; i++) {
-        totalLen += results[i].length;
-      }
+      for (var i = 0; i < results.length; i++) totalLen += results[i].length;
       var avgLength = totalLen / count;
-      
+
       var uniqueSet = {};
-      for (var j = 0; j < results.length; j++) {
-        uniqueSet[results[j]] = true;
-      }
+      for (var j = 0; j < results.length; j++) uniqueSet[results[j]] = true;
       var unique = Object.keys(uniqueSet).length;
-      
+
       document.getElementById('stat-total').textContent = count;
       document.getElementById('stat-length').textContent = avgLength.toFixed(1);
       document.getElementById('stat-unique').textContent = unique;
       document.getElementById('stat-time').textContent = time + 'ms';
-      
       statsPanel.classList.remove('hidden');
     }
-    
-    
+
     document.getElementById('copy-all').disabled = count === 0;
   }
-  
-  
-  
+
   function switchTab(tab) {
     currentTab = tab;
-    
+
     tabs.forEach(function(t) {
       if (t.dataset.tab === tab) {
-        t.classList.add('tab-active');
+        t.classList.add('btn-active');
       } else {
-        t.classList.remove('tab-active');
+        t.classList.remove('btn-active');
       }
     });
-    
+
     var types = ['uuid', 'nanoid', 'random', 'password'];
     for (var i = 0; i < types.length; i++) {
       var el = document.getElementById('settings-' + types[i]);
       if (el) {
-        if (types[i] === tab) {
-          el.classList.remove('hidden');
-        } else {
-          el.classList.add('hidden');
-        }
+        if (types[i] === tab) { el.classList.remove('hidden'); } else { el.classList.add('hidden'); }
       }
     }
-    
-    
+
+    var labels = { uuid: 'UUID v4', nanoid: 'nanoid', random: 'Random String', password: 'Password' };
+    statusText.textContent = labels[tab] || tab;
+
     currentResults = [];
     singleResult.classList.remove('hidden');
     bulkResults.classList.add('hidden');
     singleValue.textContent = '—';
     resultsCount.textContent = '0';
+    resultsCountBulk.textContent = '0';
     statsPanel.classList.add('hidden');
     passwordStrength.classList.add('hidden');
     document.getElementById('copy-all').disabled = true;
   }
-  
-  
-  
+
   function downloadFile(content, filename, type) {
     var blob = new Blob([content], { type: type });
     var url = URL.createObjectURL(blob);
@@ -1710,165 +1665,71 @@
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }
-  
-  function downloadTxt() {
-    if (!currentResults.length) return;
-    downloadFile(currentResults.join('\n'), currentTab + '-' + Date.now() + '.txt', 'text/plain');
-  }
-  
-  function downloadJson() {
-    if (!currentResults.length) return;
-    var json = JSON.stringify(currentResults, null, 2);
-    downloadFile(json, currentTab + '-' + Date.now() + '.json', 'application/json');
-  }
-  
-  function downloadCsv() {
-    if (!currentResults.length) return;
-    var csv = 'value\n' + currentResults.join('\n');
-    downloadFile(csv, currentTab + '-' + Date.now() + '.csv', 'text/csv');
-  }
-  
-  
-  
+
   function saveSettings() {
-    try {
-      localStorage.setItem('uuid-generator-settings', JSON.stringify(settings));
-    } catch (e) {
-      
-    }
+    try { localStorage.setItem('uuid-generator-settings', JSON.stringify(settings)); } catch (e) {}
   }
-  
+
   function loadSettings() {
     try {
       var saved = localStorage.getItem('uuid-generator-settings');
       if (saved) {
         var parsed = JSON.parse(saved);
-        
-        if (parsed.uuid) {
-          for (var k in parsed.uuid) settings.uuid[k] = parsed.uuid[k];
-        }
-        if (parsed.nanoid) {
-          for (var k2 in parsed.nanoid) settings.nanoid[k2] = parsed.nanoid[k2];
-        }
-        if (parsed.random) {
-          for (var k3 in parsed.random) settings.random[k3] = parsed.random[k3];
-        }
-        if (parsed.password) {
-          for (var k4 in parsed.password) settings.password[k4] = parsed.password[k4];
-        }
+        if (parsed.uuid) { for (var k in parsed.uuid) settings.uuid[k] = parsed.uuid[k]; }
+        if (parsed.nanoid) { for (var k2 in parsed.nanoid) settings.nanoid[k2] = parsed.nanoid[k2]; }
+        if (parsed.random) { for (var k3 in parsed.random) settings.random[k3] = parsed.random[k3]; }
+        if (parsed.password) { for (var k4 in parsed.password) settings.password[k4] = parsed.password[k4]; }
         applySettings();
       }
-    } catch (e) {
-      
-    }
+    } catch (e) {}
   }
-  
+
   function applySettings() {
-    
-    var uuidFormat = document.getElementById('uuid-format');
-    var uuidCount = document.getElementById('uuid-count');
-    if (uuidFormat) uuidFormat.value = settings.uuid.format;
-    if (uuidCount) uuidCount.value = settings.uuid.count;
-    
-    
-    var nanoidLength = document.getElementById('nanoid-length');
-    var nanoidPreset = document.getElementById('nanoid-preset');
-    var nanoidCount = document.getElementById('nanoid-count');
-    var nanoidAlphabet = document.getElementById('nanoid-alphabet');
-    if (nanoidLength) nanoidLength.value = settings.nanoid.length;
-    if (nanoidPreset) nanoidPreset.value = settings.nanoid.alphabet;
-    if (nanoidCount) nanoidCount.value = settings.nanoid.count;
-    if (nanoidAlphabet && settings.nanoid.alphabet === 'custom') {
-      nanoidAlphabet.classList.remove('hidden');
-    }
-    
-    
-    var randomLength = document.getElementById('random-length');
-    var randomLowercase = document.getElementById('random-lowercase');
-    var randomUppercase = document.getElementById('random-uppercase');
-    var randomNumbers = document.getElementById('random-numbers');
-    var randomSymbols = document.getElementById('random-symbols');
-    var randomExclude = document.getElementById('random-exclude-similar');
-    var randomCount = document.getElementById('random-count');
-    if (randomLength) randomLength.value = settings.random.length;
-    if (randomLowercase) randomLowercase.checked = settings.random.lowercase;
-    if (randomUppercase) randomUppercase.checked = settings.random.uppercase;
-    if (randomNumbers) randomNumbers.checked = settings.random.numbers;
-    if (randomSymbols) randomSymbols.checked = settings.random.symbols;
-    if (randomExclude) randomExclude.checked = settings.random.excludeSimilar;
-    if (randomCount) randomCount.value = settings.random.count;
-    
-    
-    var pwLength = document.getElementById('password-length');
-    var pwLengthVal = document.getElementById('password-length-value');
-    var pwExclude = document.getElementById('password-exclude-similar');
-    var pwCount = document.getElementById('password-count');
-    if (pwLength) pwLength.value = settings.password.length;
-    if (pwLengthVal) pwLengthVal.textContent = settings.password.length;
+    var el;
+    el = document.getElementById('uuid-format'); if (el) el.value = settings.uuid.format;
+    el = document.getElementById('uuid-count'); if (el) el.value = settings.uuid.count;
+    el = document.getElementById('nanoid-length'); if (el) el.value = settings.nanoid.length;
+    el = document.getElementById('nanoid-preset'); if (el) el.value = settings.nanoid.alphabet;
+    el = document.getElementById('nanoid-count'); if (el) el.value = settings.nanoid.count;
+    el = document.getElementById('nanoid-alphabet'); if (el && settings.nanoid.alphabet === 'custom') el.classList.remove('hidden');
+    el = document.getElementById('random-length'); if (el) el.value = settings.random.length;
+    el = document.getElementById('random-lowercase'); if (el) el.checked = settings.random.lowercase;
+    el = document.getElementById('random-uppercase'); if (el) el.checked = settings.random.uppercase;
+    el = document.getElementById('random-numbers'); if (el) el.checked = settings.random.numbers;
+    el = document.getElementById('random-symbols'); if (el) el.checked = settings.random.symbols;
+    el = document.getElementById('random-exclude-similar'); if (el) el.checked = settings.random.excludeSimilar;
+    el = document.getElementById('random-count'); if (el) el.value = settings.random.count;
+    el = document.getElementById('password-length'); if (el) el.value = settings.password.length;
+    el = document.getElementById('password-length-value'); if (el) el.textContent = settings.password.length;
     var pwLevel = document.querySelector('input[name="password-level"][value="' + settings.password.level + '"]');
     if (pwLevel) pwLevel.checked = true;
-    if (pwExclude) pwExclude.checked = settings.password.excludeSimilar;
-    if (pwCount) pwCount.value = settings.password.count;
+    el = document.getElementById('password-exclude-similar'); if (el) el.checked = settings.password.excludeSimilar;
+    el = document.getElementById('password-count'); if (el) el.value = settings.password.count;
   }
-  
-  
-  
+
   
   tabs.forEach(function(tab) {
     tab.addEventListener('click', function() { switchTab(tab.dataset.tab); });
   });
+
   
+  document.getElementById('uuid-format').addEventListener('change', function(e) { settings.uuid.format = e.target.value; saveSettings(); });
+  document.getElementById('uuid-count').addEventListener('change', function(e) { settings.uuid.count = Math.max(1, Math.min(10000, parseInt(e.target.value, 10) || 1)); e.target.value = settings.uuid.count; saveSettings(); });
+  document.getElementById('uuid-generate').addEventListener('click', function() { generate('uuid', settings.uuid.count); });
+
   
-  document.getElementById('uuid-format').addEventListener('change', function(e) {
-    settings.uuid.format = e.target.value;
-    saveSettings();
-  });
-  
-  document.getElementById('uuid-count').addEventListener('change', function(e) {
-    settings.uuid.count = Math.max(1, Math.min(10000, parseInt(e.target.value, 10) || 1));
-    e.target.value = settings.uuid.count;
-    saveSettings();
-  });
-  
-  document.getElementById('uuid-generate').addEventListener('click', function() {
-    generate('uuid', settings.uuid.count);
-  });
-  
-  
-  document.getElementById('nanoid-length').addEventListener('change', function(e) {
-    settings.nanoid.length = Math.max(1, Math.min(128, parseInt(e.target.value, 10) || 21));
-    e.target.value = settings.nanoid.length;
-    saveSettings();
-  });
-  
+  document.getElementById('nanoid-length').addEventListener('change', function(e) { settings.nanoid.length = Math.max(1, Math.min(128, parseInt(e.target.value, 10) || 21)); e.target.value = settings.nanoid.length; saveSettings(); });
   document.getElementById('nanoid-preset').addEventListener('change', function(e) {
     settings.nanoid.alphabet = e.target.value;
     var customInput = document.getElementById('nanoid-alphabet');
-    if (e.target.value === 'custom') {
-      customInput.classList.remove('hidden');
-    } else {
-      customInput.classList.add('hidden');
-    }
+    if (e.target.value === 'custom') { customInput.classList.remove('hidden'); } else { customInput.classList.add('hidden'); }
     saveSettings();
   });
+  document.getElementById('nanoid-count').addEventListener('change', function(e) { settings.nanoid.count = Math.max(1, Math.min(10000, parseInt(e.target.value, 10) || 1)); e.target.value = settings.nanoid.count; saveSettings(); });
+  document.getElementById('nanoid-generate').addEventListener('click', function() { generate('nanoid', settings.nanoid.count); });
+
   
-  document.getElementById('nanoid-count').addEventListener('change', function(e) {
-    settings.nanoid.count = Math.max(1, Math.min(10000, parseInt(e.target.value, 10) || 1));
-    e.target.value = settings.nanoid.count;
-    saveSettings();
-  });
-  
-  document.getElementById('nanoid-generate').addEventListener('click', function() {
-    generate('nanoid', settings.nanoid.count);
-  });
-  
-  
-  document.getElementById('random-length').addEventListener('change', function(e) {
-    settings.random.length = Math.max(1, Math.min(256, parseInt(e.target.value, 10) || 16));
-    e.target.value = settings.random.length;
-    saveSettings();
-  });
-  
+  document.getElementById('random-length').addEventListener('change', function(e) { settings.random.length = Math.max(1, Math.min(256, parseInt(e.target.value, 10) || 16)); e.target.value = settings.random.length; saveSettings(); });
   var randomOpts = [
     { id: 'random-lowercase', key: 'lowercase' },
     { id: 'random-uppercase', key: 'uppercase' },
@@ -1876,93 +1737,52 @@
     { id: 'random-symbols', key: 'symbols' },
     { id: 'random-exclude-similar', key: 'excludeSimilar' }
   ];
-  
   randomOpts.forEach(function(opt) {
     var el = document.getElementById(opt.id);
     if (el) {
       el.addEventListener('change', function(e) {
         settings.random[opt.key] = e.target.checked;
-        
-        
         if (!settings.random.lowercase && !settings.random.uppercase && !settings.random.numbers && !settings.random.symbols) {
           settings.random.lowercase = true;
           document.getElementById('random-lowercase').checked = true;
         }
-        
         saveSettings();
       });
     }
   });
+  document.getElementById('random-count').addEventListener('change', function(e) { settings.random.count = Math.max(1, Math.min(10000, parseInt(e.target.value, 10) || 1)); e.target.value = settings.random.count; saveSettings(); });
+  document.getElementById('random-generate').addEventListener('click', function() { generate('random', settings.random.count); });
+
   
-  document.getElementById('random-count').addEventListener('change', function(e) {
-    settings.random.count = Math.max(1, Math.min(10000, parseInt(e.target.value, 10) || 1));
-    e.target.value = settings.random.count;
-    saveSettings();
+  document.getElementById('password-length').addEventListener('input', function(e) { settings.password.length = parseInt(e.target.value, 10) || 16; document.getElementById('password-length-value').textContent = settings.password.length; saveSettings(); });
+  document.querySelectorAll('input[name="password-level"]').forEach(function(radio) {
+    radio.addEventListener('change', function(e) { settings.password.level = e.target.value; saveSettings(); });
   });
-  
-  document.getElementById('random-generate').addEventListener('click', function() {
-    generate('random', settings.random.count);
-  });
-  
-  
-  document.getElementById('password-length').addEventListener('input', function(e) {
-    settings.password.length = parseInt(e.target.value, 10) || 16;
-    document.getElementById('password-length-value').textContent = settings.password.length;
-    saveSettings();
-  });
-  
-  var pwRadios = document.querySelectorAll('input[name="password-level"]');
-  pwRadios.forEach(function(radio) {
-    radio.addEventListener('change', function(e) {
-      settings.password.level = e.target.value;
-      saveSettings();
-    });
-  });
-  
-  document.getElementById('password-exclude-similar').addEventListener('change', function(e) {
-    settings.password.excludeSimilar = e.target.checked;
-    saveSettings();
-  });
-  
-  document.getElementById('password-count').addEventListener('change', function(e) {
-    settings.password.count = Math.max(1, Math.min(10000, parseInt(e.target.value, 10) || 1));
-    e.target.value = settings.password.count;
-    saveSettings();
-  });
-  
-  document.getElementById('password-generate').addEventListener('click', function() {
-    generate('password', settings.password.count);
-  });
-  
+  document.getElementById('password-exclude-similar').addEventListener('change', function(e) { settings.password.excludeSimilar = e.target.checked; saveSettings(); });
+  document.getElementById('password-count').addEventListener('change', function(e) { settings.password.count = Math.max(1, Math.min(10000, parseInt(e.target.value, 10) || 1)); e.target.value = settings.password.count; saveSettings(); });
+  document.getElementById('password-generate').addEventListener('click', function() { generate('password', settings.password.count); });
+
   
   document.getElementById('copy-single').addEventListener('click', function() {
-    if (currentResults.length >= 1) {
-      copyToClipboard(currentResults[0]);
-    }
+    if (currentResults.length >= 1) copyToClipboard(currentResults[0]);
   });
-  
   document.getElementById('copy-all').addEventListener('click', function() {
     if (currentResults.length > 0) {
-      var text = currentResults.join('\n');
-      var message = i18n.copiedCount.replace('{count}', currentResults.length);
-      copyToClipboard(text, message);
+      copyToClipboard(currentResults.join('\n'), i18n.copiedCount.replace('{count}', currentResults.length));
     }
   });
+
   
+  document.getElementById('btn-regenerate').addEventListener('click', function() {
+    var countMap = { uuid: settings.uuid.count, nanoid: settings.nanoid.count, random: settings.random.count, password: settings.password.count };
+    generate(currentTab, countMap[currentTab] || 1);
+  });
+
   
-  document.getElementById('download-txt').addEventListener('click', function(e) {
-    e.preventDefault();
-    downloadTxt();
-  });
-  document.getElementById('download-json').addEventListener('click', function(e) {
-    e.preventDefault();
-    downloadJson();
-  });
-  document.getElementById('download-csv').addEventListener('click', function(e) {
-    e.preventDefault();
-    downloadCsv();
-  });
-  
+  document.getElementById('download-txt').addEventListener('click', function(e) { e.preventDefault(); if (currentResults.length) downloadFile(currentResults.join('\n'), currentTab + '-' + Date.now() + '.txt', 'text/plain'); });
+  document.getElementById('download-json').addEventListener('click', function(e) { e.preventDefault(); if (currentResults.length) downloadFile(JSON.stringify(currentResults, null, 2), currentTab + '-' + Date.now() + '.json', 'application/json'); });
+  document.getElementById('download-csv').addEventListener('click', function(e) { e.preventDefault(); if (currentResults.length) downloadFile('value\n' + currentResults.join('\n'), currentTab + '-' + Date.now() + '.csv', 'text/csv'); });
+
   
   document.addEventListener('keydown', function(e) {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
@@ -1971,7 +1791,7 @@
       if (btn) btn.click();
     }
   });
-  
+
   
   document.addEventListener('click', function(e) {
     var dropdowns = document.querySelectorAll('.dropdown');
@@ -1982,13 +1802,10 @@
       }
     });
   });
-  
-  
+
   loadSettings();
-  
-  
   generate('uuid', 1);
-  
+
 })();
 </script>
 

@@ -2474,6 +2474,12 @@ html {
   margin-inline-end: -1rem;
 }
 
+.input-xs[type="number"]::-webkit-inner-spin-button {
+  margin-top: -0.25rem;
+  margin-bottom: -0.25rem;
+  margin-inline-end: -0px;
+}
+
 .input-sm[type="number"]::-webkit-inner-spin-button {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -5484,6 +5490,15 @@ details.collapse summary::-webkit-details-marker {
   width: 1.25rem;
 }
 
+.input-xs {
+  height: 1.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  line-height: 1.625;
+}
+
 .input-lg {
   height: 4rem;
   padding-left: 1.5rem;
@@ -6722,10 +6737,6 @@ details.collapse summary::-webkit-details-marker {
 
 .min-h-\[250px\] {
   min-height: 250px;
-}
-
-.min-h-\[28px\] {
-  min-height: 28px;
 }
 
 .min-h-\[36px\] {
@@ -8041,6 +8052,12 @@ details.collapse summary::-webkit-details-marker {
 
 .from-primary\/20 {
   --tw-gradient-from: var(--fallback-p,oklch(var(--p)/0.2)) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-primary\/5 {
+  --tw-gradient-from: var(--fallback-p,oklch(var(--p)/0.05)) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
@@ -10233,6 +10250,12 @@ details.collapse summary::-webkit-details-marker {
     margin-inline-end: -1rem;
   }
 
+  .sm\:input-sm[type="number"]::-webkit-inner-spin-button {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-inline-end: -0px;
+  }
+
   @supports not (color: oklch(0% 0 0)) {
     .sm\:prose :where(code):not(:where([class~="not-prose"] *, pre *)) {
       background-color: var(--fallback-b3,oklch(var(--b3)/1));
@@ -10367,6 +10390,14 @@ details.collapse summary::-webkit-details-marker {
     line-height: 2;
   }
 
+  .sm\:input-sm {
+    height: 2rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 2rem;
+  }
+
   .sm\:modal-middle {
     place-items: center;
   }
@@ -10384,6 +10415,20 @@ details.collapse summary::-webkit-details-marker {
   [dir="rtl"] .sm\:select-md {
     padding-left: 2.5rem;
     padding-right: 1rem;
+  }
+
+  .sm\:select-sm {
+    height: 2rem;
+    min-height: 2rem;
+    padding-left: 0.75rem;
+    padding-right: 2rem;
+    font-size: 0.875rem;
+    line-height: 2rem;
+  }
+
+  [dir="rtl"] .sm\:select-sm {
+    padding-left: 2rem;
+    padding-right: 0.75rem;
   }
 
   .sm\:modal-middle :where(.modal-box) {
@@ -10789,10 +10834,6 @@ details.collapse summary::-webkit-details-marker {
   background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity, 1)));
 }
 
-.active\:bg-base-200\/70:active {
-  background-color: var(--fallback-b2,oklch(var(--b2)/0.7));
-}
-
 .active\:bg-base-200\/80:active {
   background-color: var(--fallback-b2,oklch(var(--b2)/0.8));
 }
@@ -11162,11 +11203,6 @@ details.collapse summary::-webkit-details-marker {
     margin-right: 0px;
   }
 
-  .sm\:my-2 {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-
   .sm\:mb-1 {
     margin-bottom: 0.25rem;
   }
@@ -11305,6 +11341,10 @@ details.collapse summary::-webkit-details-marker {
     height: 6rem;
   }
 
+  .sm\:h-3 {
+    height: 0.75rem;
+  }
+
   .sm\:h-32 {
     height: 8rem;
   }
@@ -11355,10 +11395,6 @@ details.collapse summary::-webkit-details-marker {
 
   .sm\:h-\[calc\(100\%-4rem\)\] {
     height: calc(100% - 4rem);
-  }
-
-  .sm\:h-auto {
-    height: auto;
   }
 
   .sm\:max-h-20 {
@@ -11415,6 +11451,10 @@ details.collapse summary::-webkit-details-marker {
 
   .sm\:w-24 {
     width: 6rem;
+  }
+
+  .sm\:w-3 {
+    width: 0.75rem;
   }
 
   .sm\:w-40 {
@@ -11479,6 +11519,10 @@ details.collapse summary::-webkit-details-marker {
 
   .sm\:items-center {
     align-items: center;
+  }
+
+  .sm\:justify-start {
+    justify-content: flex-start;
   }
 
   .sm\:justify-end {
@@ -11572,6 +11616,10 @@ details.collapse summary::-webkit-details-marker {
 
   .sm\:p-2 {
     padding: 0.5rem;
+  }
+
+  .sm\:p-2\.5 {
+    padding: 0.625rem;
   }
 
   .sm\:p-3 {
@@ -11718,8 +11766,8 @@ details.collapse summary::-webkit-details-marker {
     padding-top: 5rem;
   }
 
-  .sm\:pt-6 {
-    padding-top: 1.5rem;
+  .sm\:pt-4 {
+    padding-top: 1rem;
   }
 
   .sm\:text-left {

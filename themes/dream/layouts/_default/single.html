@@ -153,7 +153,8 @@
           </span>
         </time>
 
-        {{/* Reading Time */}}
+        {{/* Reading Time - только для постов */}}
+        {{ if ne .Section "portfolio" }}
         <span class="flex items-center gap-1">
           <ion-icon name="time-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
           <span class="truncate">
@@ -166,6 +167,7 @@
           <ion-icon name="document-text-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
           {{ .WordCount }} {{ T "words" | default "words" }}
         </span>
+        {{ end }}
 
         {{/* Last Modified */}}
         {{ if and (ne .Params.nolastmod true) (ne .Date .Lastmod) }}
@@ -196,47 +198,47 @@
 
     {{/* Translation Notice */}}
     {{ if .IsTranslated }}
-    <div class="not-prose mb-8">
-      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-4 rounded-xl border border-base-300 bg-base-200/50">
-        {{/* Icon with pulse animation */}}
-        <div class="flex items-center gap-2 text-base-content/70">
-          <span class="relative flex h-3 w-3">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+    <div class="not-prose mb-6 sm:mb-8">
+      <div class="flex items-center gap-2 sm:gap-3
+                  p-3 sm:p-4
+                  rounded-xl border border-base-300 bg-base-200/50">
+
+        {{/* Иконка + текст */}}
+        <span class="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-full w-full bg-primary"></span>
+        </span>
+        <ion-icon name="language-outline" class="text-lg sm:text-xl shrink-0"></ion-icon>
+        <span class="text-xs sm:text-sm text-base-content/70 shrink-0">{{ i18n "post_available_in.text" }}</span>
+
+        {{/* Языки */}}
+        {{ range $index, $translation := .Translations }}
+        <a href="{{ $translation.Permalink }}"
+           class="group inline-flex items-center gap-1 sm:gap-1.5
+                  px-2.5 py-1 sm:px-3 sm:py-1.5
+                  rounded-full text-xs sm:text-sm
+                  bg-base-100 hover:bg-primary hover:text-primary-content
+                  border border-base-300 hover:border-primary
+                  transition-all duration-200 no-underline
+                  active:scale-95 shrink-0"
+           rel="noopener noreferrer"
+           hreflang="{{ $translation.Language.Lang }}">
+          <span class="opacity-70 group-hover:opacity-100">
+            {{ $lang := $translation.Language.Lang }}
+            {{- if eq $lang "en" }}🇬🇧
+            {{- else if eq $lang "ru" }}🇷🇺
+            {{- else if eq $lang "de" }}🇩🇪
+            {{- else if eq $lang "fr" }}🇫🇷
+            {{- else if eq $lang "es" }}🇪🇸
+            {{- else if eq $lang "uk" }}🇺🇦
+            {{- else }}🌐
+            {{- end }}
           </span>
-          <ion-icon name="language-outline" class="text-xl"></ion-icon>
-          <span class="text-sm whitespace-nowrap">{{ i18n "post_available_in.text" }}</span>
-        </div>
-        
-        {{/* Divider */}}
-        <div class="hidden sm:block w-px h-6 bg-base-300"></div>
-        
-        {{/* Languages */}}
-        <div class="flex flex-wrap gap-2">
-          {{ range $index, $translation := .Translations }}
-          <a href="{{ $translation.Permalink }}" 
-            class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm 
-                    bg-base-100 hover:bg-primary hover:text-primary-content 
-                    border border-base-300 hover:border-primary
-                    transition-all duration-200 no-underline"
-            rel="noopener noreferrer"
-            hreflang="{{ $translation.Language.Lang }}">
-            <span class="opacity-70 group-hover:opacity-100">
-              {{ $lang := $translation.Language.Lang }}
-              {{- if eq $lang "en" }}🇬🇧
-              {{- else if eq $lang "ru" }}🇷🇺
-              {{- else if eq $lang "de" }}🇩🇪
-              {{- else if eq $lang "fr" }}🇫🇷
-              {{- else if eq $lang "es" }}🇪🇸
-              {{- else if eq $lang "uk" }}🇺🇦
-              {{- else }}🌐
-              {{- end }}
-            </span>
-            {{ $translation.Language.LanguageName }}
-            <ion-icon name="arrow-forward" class="text-xs opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-0 transition-all"></ion-icon>
-          </a>
-          {{ end }}
-        </div>
+          {{ $translation.Language.LanguageName }}
+          <ion-icon name="arrow-forward" class="text-xs opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-0 transition-all hidden sm:block"></ion-icon>
+        </a>
+        {{ end }}
+
       </div>
     </div>
     {{ end }}

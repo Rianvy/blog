@@ -90,8 +90,6 @@ The key objective was to create a **visually appealing and informative resource*
 
 The site fully supports light and dark themes. Use the toggles to compare:
 
-### Homepage
-
 {{< theme-compare 
     light="work/home-light.png" 
     dark="work/home-dark.png" 
@@ -99,8 +97,6 @@ The site fully supports light and dark themes. Use the toggles to compare:
     caption="Hero section with extension benefits"
     mode="toggle"
 >}}
-
-### Changelog
 
 {{< theme-compare 
     light="work/changelog-light.png" 
@@ -110,8 +106,6 @@ The site fully supports light and dark themes. Use the toggles to compare:
     mode="slider"
 >}}
 
-### Update Details
-
 {{< theme-compare 
     light="work/changelog-detail-light.png" 
     dark="work/changelog-detail-dark.png" 
@@ -120,16 +114,12 @@ The site fully supports light and dark themes. Use the toggles to compare:
     mode="side-by-side"
 >}}
 
-### Privacy Policy
-
 {{< theme-compare 
     light="work/privacy-light.png" 
     dark="work/privacy-dark.png" 
     title="Privacy Policy"
     caption="Privacy Policy"
 >}}
-
-### Terms of Service
 
 {{< theme-compare 
     light="work/terms-light.png" 
@@ -138,8 +128,6 @@ The site fully supports light and dark themes. Use the toggles to compare:
     caption="Terms of Service"
 >}}
 
-### Post-Installation Page
-
 {{< theme-compare 
     light="work/welcome-light.png" 
     dark="work/welcome-dark.png" 
@@ -147,16 +135,12 @@ The site fully supports light and dark themes. Use the toggles to compare:
     caption="Post-installation page"
 >}}
 
-### Post-Uninstall Page
-
 {{< theme-compare 
     light="work/uninstall-light.png" 
     dark="work/uninstall-dark.png" 
     title="Uninstall Feedback"
     caption="Post-uninstall page"
 >}}
-
-### 404 Page
 
 {{< theme-compare 
     light="work/404-light.png" 

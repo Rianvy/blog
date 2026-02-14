@@ -1,5 +1,5 @@
 {{ define "title" }}
-{{ default "Timestamp Converter" }}
+{{ .Title }}
 {{ end }}
 
 {{ define "main" }}
@@ -7,240 +7,176 @@
 <div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
 
   <!-- Hero -->
-  <div class="text-center mb-6 sm:mb-12">
+  <div class="text-center mb-5 sm:mb-8">
     <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
-      <span class="text-3xl sm:text-5xl">⏰</span>
+      <span class="text-3xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}⏰{{ end }}</span>
     </div>
     <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">{{ .Title }}</h1>
     <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">{{ .Description }}</p>
-    
     <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
-      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
         <ion-icon name="swap-horizontal-outline"></ion-icon>
         Unix ↔ Date
       </span>
-      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
         <ion-icon name="globe-outline"></ion-icon>
         {{ T "timestamp.timezones" }}
       </span>
-      <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
         <ion-icon name="time-outline"></ion-icon>
         {{ T "timestamp.liveTime" }}
       </span>
     </div>
   </div>
 
-  <!-- Current Time Live -->
-  <div class="max-w-4xl mx-auto mb-5 sm:mb-6">
-    <div class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl sm:rounded-2xl border border-primary/20 p-3 sm:p-6">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
-        <div class="text-center sm:text-left w-full sm:w-auto">
-          <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">{{ T "timestamp.currentTime" }}</div>
-          <div class="font-mono text-xl sm:text-3xl font-bold break-all" id="live-timestamp">—</div>
-          <div class="text-xs sm:text-sm text-base-content/60 mt-0.5 sm:mt-1" id="live-date">—</div>
-        </div>
-        <div class="flex gap-2 w-full sm:w-auto">
-          <button id="copy-now-ts" class="btn btn-primary btn-sm flex-1 sm:flex-none gap-1 text-xs sm:text-sm">
-            <ion-icon name="copy-outline"></ion-icon>
-            <span class="hidden xs:inline">{{ T "timestamp.copyTimestamp" }}</span>
-            <span class="xs:hidden">Copy</span>
-          </button>
-          <button id="use-now" class="btn btn-ghost btn-sm flex-1 sm:flex-none gap-1 text-xs sm:text-sm">
-            <ion-icon name="arrow-down-outline"></ion-icon>
-            <span class="hidden xs:inline">{{ T "timestamp.useNow" }}</span>
-            <span class="xs:hidden">Use</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
 
-  <div class="max-w-4xl mx-auto">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+    <!-- Settings Panel -->
+    <div class="xl:col-span-1 space-y-3 sm:space-y-4 order-2 xl:order-1">
 
-      <!-- ========== TIMESTAMP → DATE ========== -->
+      <!-- Current Time Live -->
       <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
         <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
           <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
-            <ion-icon name="arrow-forward-outline" class="text-primary"></ion-icon>
-            {{ T "timestamp.timestampToDate" }}
+            <ion-icon name="pulse-outline" class="text-success"></ion-icon>
+            {{ T "timestamp.currentTime" }}
           </h2>
         </div>
-        
-        <div class="p-3 sm:p-4 space-y-3 sm:space-y-4">
-          
-          <!-- Input -->
-          <div class="form-control">
-            <label class="label py-1">
-              <span class="label-text font-medium text-xs sm:text-sm">Unix Timestamp</span>
-              <div class="flex gap-0.5 sm:gap-1">
-                <button class="btn btn-ghost btn-xs unit-btn text-[10px] sm:text-xs px-1.5 sm:px-2" data-unit="s" data-active="true">{{ T "timestamp.seconds" }}</button>
-                <button class="btn btn-ghost btn-xs unit-btn text-[10px] sm:text-xs px-1.5 sm:px-2" data-unit="ms">{{ T "timestamp.milliseconds" }}</button>
-              </div>
-            </label>
-            <input 
-              type="text" 
-              inputmode="numeric"
-              id="ts-input" 
-              class="input input-bordered font-mono text-base sm:text-lg w-full"
-              placeholder="1704067200"
-            />
+        <div class="p-3 sm:p-4 space-y-2">
+          <div class="text-center">
+            <div class="font-mono text-lg sm:text-2xl font-bold break-all" id="live-timestamp">—</div>
+            <div class="text-[10px] sm:text-xs text-base-content/60 mt-1 font-mono" id="live-date">—</div>
           </div>
-          
-          <!-- Quick buttons -->
-          <div class="flex flex-wrap gap-1.5 sm:gap-2">
-            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="-86400">-1d</button>
-            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="-3600">-1h</button>
-            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="-60">-1m</button>
-            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="60">+1m</button>
-            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="3600">+1h</button>
-            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="86400">+1d</button>
-            <button class="btn btn-ghost btn-xs quick-ts text-[10px] sm:text-xs min-h-[28px] h-7 sm:h-auto px-2" data-offset="604800">+1w</button>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button id="copy-now-ts" class="btn btn-primary btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="copy-outline"></ion-icon>
+              <span class="hidden sm:inline">{{ T "timestamp.copyTimestamp" }}</span>
+              <span class="sm:hidden">Copy</span>
+            </button>
+            <button id="use-now" class="btn btn-ghost btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="arrow-down-outline"></ion-icon>
+              <span class="hidden sm:inline">{{ T "timestamp.useNow" }}</span>
+              <span class="sm:hidden">Use</span>
+            </button>
           </div>
-          
-          <!-- Convert button -->
-          <button id="ts-to-date-btn" class="btn btn-primary w-full gap-2 text-sm sm:text-base">
-            <ion-icon name="calendar-outline"></ion-icon>
-            {{ T "timestamp.convertToDate" }}
-          </button>
-          
-          <!-- Result -->
-          <div id="ts-result" class="hidden space-y-2 sm:space-y-3">
-            <div class="divider text-[10px] sm:text-xs text-base-content/50 my-1 sm:my-2">{{ T "timestamp.result" }}</div>
-            
-            <div class="grid gap-2">
-              <div class="flex flex-col xs:flex-row xs:items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg gap-1">
-                <span class="text-xs sm:text-sm text-base-content/60">{{ T "timestamp.local" }}</span>
-                <code class="font-mono text-xs sm:text-sm break-all" id="result-local">—</code>
-              </div>
-              <div class="flex flex-col xs:flex-row xs:items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg gap-1">
-                <span class="text-xs sm:text-sm text-base-content/60">UTC</span>
-                <code class="font-mono text-xs sm:text-sm break-all" id="result-utc">—</code>
-              </div>
-              <div class="flex flex-col xs:flex-row xs:items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg gap-1">
-                <span class="text-xs sm:text-sm text-base-content/60">ISO 8601</span>
-                <code class="font-mono text-xs sm:text-sm break-all" id="result-iso">—</code>
-              </div>
-              <div class="flex flex-col xs:flex-row xs:items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg gap-1">
-                <span class="text-xs sm:text-sm text-base-content/60">{{ T "timestamp.relative" }}</span>
-                <code class="font-mono text-xs sm:text-sm" id="result-relative">—</code>
-              </div>
-            </div>
-          </div>
-          
         </div>
       </div>
 
-      <!-- ========== DATE → TIMESTAMP ========== -->
+      <!-- Timestamp → Date Settings -->
       <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
-          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
-            <ion-icon name="arrow-back-outline" class="text-secondary"></ion-icon>
-            {{ T "timestamp.dateToTimestamp" }}
-          </h2>
-        </div>
-        
-        <div class="p-3 sm:p-4 space-y-3 sm:space-y-4">
-          
-          <!-- Date input -->
-          <div class="grid grid-cols-2 gap-2 sm:gap-3">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="options-outline" class="text-primary"></ion-icon>
+              {{ T "timestamp.timestampToDate" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+
             <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">{{ T "timestamp.date" }}</span>
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "timestamp.seconds" }} / {{ T "timestamp.milliseconds" }}</span>
               </label>
-              <input type="date" id="date-input" class="input input-bordered input-sm sm:input-md w-full text-sm" />
-            </div>
-            <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">{{ T "timestamp.time" }}</span>
-              </label>
-              <input type="time" id="time-input" class="input input-bordered input-sm sm:input-md w-full text-sm" value="00:00" step="1" />
-            </div>
-          </div>
-          
-          <!-- Timezone -->
-          <div class="form-control">
-            <label class="label py-1">
-              <span class="label-text font-medium text-xs sm:text-sm">{{ T "timestamp.timezone" }}</span>
-            </label>
-            <select id="tz-select" class="select select-bordered select-sm sm:select-md w-full text-sm">
-              <option value="local">{{ T "timestamp.localTimezone" }}</option>
-              <option value="UTC">UTC</option>
-              <option value="America/New_York">New York (EST/EDT)</option>
-              <option value="America/Los_Angeles">Los Angeles (PST/PDT)</option>
-              <option value="Europe/London">London (GMT/BST)</option>
-              <option value="Europe/Paris">Paris (CET/CEST)</option>
-              <option value="Europe/Moscow">Moscow (MSK)</option>
-              <option value="Asia/Tokyo">Tokyo (JST)</option>
-              <option value="Asia/Shanghai">Shanghai (CST)</option>
-              <option value="Asia/Dubai">Dubai (GST)</option>
-              <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
-            </select>
-          </div>
-          
-          <!-- Convert button -->
-          <button id="date-to-ts-btn" class="btn btn-secondary w-full gap-2 text-sm sm:text-base">
-            <ion-icon name="time-outline"></ion-icon>
-            {{ T "timestamp.convertToTimestamp" }}
-          </button>
-          
-          <!-- Result -->
-          <div id="date-result" class="hidden space-y-2 sm:space-y-3">
-            <div class="divider text-[10px] sm:text-xs text-base-content/50 my-1 sm:my-2">{{ T "timestamp.result" }}</div>
-            
-            <div class="grid gap-2">
-              <div class="flex items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg">
-                <span class="text-xs sm:text-sm text-base-content/60">{{ T "timestamp.seconds" }}</span>
-                <div class="flex items-center gap-1.5 sm:gap-2">
-                  <code class="font-mono text-sm sm:text-lg font-bold" id="result-ts-sec">—</code>
-                  <button class="btn btn-ghost btn-xs copy-result" data-target="result-ts-sec">
-                    <ion-icon name="copy-outline"></ion-icon>
-                  </button>
-                </div>
-              </div>
-              <div class="flex items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg">
-                <span class="text-xs sm:text-sm text-base-content/60">{{ T "timestamp.milliseconds" }}</span>
-                <div class="flex items-center gap-1.5 sm:gap-2">
-                  <code class="font-mono text-xs sm:text-sm break-all" id="result-ts-ms">—</code>
-                  <button class="btn btn-ghost btn-xs copy-result" data-target="result-ts-ms">
-                    <ion-icon name="copy-outline"></ion-icon>
-                  </button>
-                </div>
+              <div class="grid grid-cols-2 gap-1">
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="ts-unit" value="s" class="hidden" checked />
+                  <span class="text-xs font-mono">{{ T "timestamp.seconds" }}</span>
+                </label>
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="ts-unit" value="ms" class="hidden" />
+                  <span class="text-xs font-mono">{{ T "timestamp.milliseconds" }}</span>
+                </label>
               </div>
             </div>
+
+            <div class="divider my-0.5"></div>
+
+            <div class="flex flex-wrap gap-1">
+              <button class="btn btn-ghost btn-xs quick-ts text-[10px] font-mono" data-offset="-86400">-1d</button>
+              <button class="btn btn-ghost btn-xs quick-ts text-[10px] font-mono" data-offset="-3600">-1h</button>
+              <button class="btn btn-ghost btn-xs quick-ts text-[10px] font-mono" data-offset="-60">-1m</button>
+              <button class="btn btn-ghost btn-xs quick-ts text-[10px] font-mono" data-offset="60">+1m</button>
+              <button class="btn btn-ghost btn-xs quick-ts text-[10px] font-mono" data-offset="3600">+1h</button>
+              <button class="btn btn-ghost btn-xs quick-ts text-[10px] font-mono" data-offset="86400">+1d</button>
+              <button class="btn btn-ghost btn-xs quick-ts text-[10px] font-mono" data-offset="604800">+1w</button>
+            </div>
+
           </div>
-          
-        </div>
+        </details>
       </div>
 
-    </div>
+      <!-- Date → Timestamp Settings -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="construct-outline" class="text-secondary"></ion-icon>
+              {{ T "timestamp.dateToTimestamp" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
 
-    <!-- ========== TIMEZONE CONVERTER ========== -->
-    <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-      <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
-        <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
-          <ion-icon name="globe-outline" class="text-accent"></ion-icon>
-          {{ T "timestamp.timezoneConverter" }}
-        </h2>
-      </div>
-      
-      <div class="p-3 sm:p-4">
-        
-        <!-- Current time in different zones -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3" id="world-clocks">
-          <!-- Generated by JS -->
-        </div>
-        
-        <!-- Custom timezone comparison -->
-        <div class="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-base-200 dark:border-base-content/10">
-          <h3 class="text-xs sm:text-sm font-medium mb-2 sm:mb-3">{{ T "timestamp.compareTimezones" }}</h3>
-          
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 items-end">
             <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text text-xs sm:text-sm">{{ T "timestamp.from" }}</span>
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "timestamp.date" }}</span>
               </label>
-              <select id="tz-from" class="select select-bordered select-sm w-full text-sm">
+              <input type="date" id="date-input" class="input input-bordered input-sm w-full text-xs" />
+            </div>
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "timestamp.time" }}</span>
+              </label>
+              <input type="time" id="time-input" class="input input-bordered input-sm w-full text-xs" value="00:00" step="1" />
+            </div>
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "timestamp.timezone" }}</span>
+              </label>
+              <select id="tz-select" class="select select-bordered select-xs text-xs">
+                <option value="local">{{ T "timestamp.localTimezone" }}</option>
+                <option value="UTC">UTC</option>
+                <option value="America/New_York">New York (EST/EDT)</option>
+                <option value="America/Los_Angeles">Los Angeles (PST/PDT)</option>
+                <option value="Europe/London">London (GMT/BST)</option>
+                <option value="Europe/Paris">Paris (CET/CEST)</option>
+                <option value="Europe/Moscow">Moscow (MSK)</option>
+                <option value="Asia/Tokyo">Tokyo (JST)</option>
+                <option value="Asia/Shanghai">Shanghai (CST)</option>
+                <option value="Asia/Dubai">Dubai (GST)</option>
+                <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
+              </select>
+            </div>
+
+            <button id="date-to-ts-btn" class="btn btn-secondary btn-xs sm:btn-sm w-full gap-1 justify-start">
+              <ion-icon name="time-outline"></ion-icon>
+              {{ T "timestamp.convertToTimestamp" }}
+            </button>
+
+          </div>
+        </details>
+      </div>
+
+      <!-- Timezone Converter Settings -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="globe-outline" class="text-accent"></ion-icon>
+              {{ T "timestamp.timezoneConverter" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "timestamp.from" }}</span>
+              </label>
+              <select id="tz-from" class="select select-bordered select-xs text-xs">
                 <option value="local">{{ T "timestamp.localTimezone" }}</option>
                 <option value="UTC">UTC</option>
                 <option value="America/New_York">New York</option>
@@ -249,19 +185,19 @@
                 <option value="Asia/Tokyo">Tokyo</option>
               </select>
             </div>
-            
+
             <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text text-xs sm:text-sm">{{ T "timestamp.timeValue" }}</span>
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "timestamp.timeValue" }}</span>
               </label>
-              <input type="time" id="tz-time" class="input input-bordered input-sm w-full text-sm" value="12:00" />
+              <input type="time" id="tz-time" class="input input-bordered input-sm w-full text-xs font-mono" value="12:00" />
             </div>
-            
+
             <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text text-xs sm:text-sm">{{ T "timestamp.to" }}</span>
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "timestamp.to" }}</span>
               </label>
-              <select id="tz-to" class="select select-bordered select-sm w-full text-sm">
+              <select id="tz-to" class="select select-bordered select-xs text-xs">
                 <option value="UTC">UTC</option>
                 <option value="America/New_York">New York</option>
                 <option value="Europe/London">London</option>
@@ -270,105 +206,206 @@
                 <option value="Asia/Shanghai">Shanghai</option>
               </select>
             </div>
+
           </div>
-          
-          <div id="tz-compare-result" class="mt-3 sm:mt-4 p-3 sm:p-4 bg-base-200/50 rounded-xl text-center">
-            <div class="text-xs sm:text-sm text-base-content/60 mb-1" id="tz-compare-from">—</div>
-            <div class="text-xl sm:text-2xl font-bold font-mono" id="tz-compare-to">—</div>
-          </div>
-        </div>
-        
+        </details>
       </div>
+
     </div>
 
-    <!-- ========== DURATION CALCULATOR ========== -->
-    <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-      <details class="group">
-        <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors active:bg-base-200/70">
-          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
-            <ion-icon name="hourglass-outline" class="text-warning"></ion-icon>
-            {{ T "timestamp.durationCalculator" }}
-          </h2>
-          <ion-icon name="chevron-down" class="text-lg sm:text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
-        </summary>
-        
-        <div class="p-3 sm:p-4 pt-0 space-y-3 sm:space-y-4">
-          
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-            <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">{{ T "timestamp.startDate" }}</span>
-              </label>
-              <input type="datetime-local" id="duration-start" class="input input-bordered input-sm sm:input-md w-full text-sm" />
-            </div>
-            <div class="form-control">
-              <label class="label py-1">
-                <span class="label-text font-medium text-xs sm:text-sm">{{ T "timestamp.endDate" }}</span>
-              </label>
-              <input type="datetime-local" id="duration-end" class="input input-bordered input-sm sm:input-md w-full text-sm" />
-            </div>
-          </div>
-          
-          <button id="calc-duration-btn" class="btn btn-warning w-full gap-2 text-sm sm:text-base">
-            <ion-icon name="calculator-outline"></ion-icon>
-            {{ T "timestamp.calculateDuration" }}
-          </button>
-          
-          <div id="duration-result" class="hidden">
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 text-center">
-              <div class="p-2.5 sm:p-3 bg-base-200/50 rounded-xl">
-                <div class="text-xl sm:text-2xl font-bold" id="dur-days">0</div>
-                <div class="text-[10px] sm:text-xs text-base-content/60">{{ T "timestamp.days" }}</div>
-              </div>
-              <div class="p-2.5 sm:p-3 bg-base-200/50 rounded-xl">
-                <div class="text-xl sm:text-2xl font-bold" id="dur-hours">0</div>
-                <div class="text-[10px] sm:text-xs text-base-content/60">{{ T "timestamp.hours" }}</div>
-              </div>
-              <div class="p-2.5 sm:p-3 bg-base-200/50 rounded-xl">
-                <div class="text-xl sm:text-2xl font-bold" id="dur-minutes">0</div>
-                <div class="text-[10px] sm:text-xs text-base-content/60">{{ T "timestamp.minutes" }}</div>
-              </div>
-              <div class="p-2.5 sm:p-3 bg-base-200/50 rounded-xl">
-                <div class="text-xl sm:text-2xl font-bold" id="dur-seconds">0</div>
-                <div class="text-[10px] sm:text-xs text-base-content/60">{{ T "timestamp.secondsShort" }}</div>
-              </div>
-            </div>
-            <div class="mt-2 sm:mt-3 text-center text-xs sm:text-sm text-base-content/60">
-              {{ T "timestamp.total" }}: <span class="font-mono" id="dur-total">0</span> {{ T "timestamp.secondsShort" }}
-            </div>
-          </div>
-          
-        </div>
-      </details>
-    </div>
+    <!-- Main panels -->
+    <div class="xl:col-span-3 space-y-3 sm:space-y-4 order-1 xl:order-2">
 
-    <!-- ========== COMMON TIMESTAMPS ========== -->
-    <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-      <details class="group">
-        <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors active:bg-base-200/70">
-          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
-            <ion-icon name="bookmark-outline" class="text-info"></ion-icon>
-            {{ T "timestamp.commonTimestamps" }}
-          </h2>
-          <ion-icon name="chevron-down" class="text-lg sm:text-xl text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
-        </summary>
-        
-        <div class="p-3 sm:p-4 pt-0">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3" id="common-timestamps">
-            <!-- Generated by JS -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+
+        <!-- Timestamp → Date -->
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="arrow-forward-outline" class="text-primary"></ion-icon>
+              {{ T "timestamp.timestampToDate" }}
+            </h2>
+            <button type="button" id="btn-ts-paste" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="clipboard-outline"></ion-icon>
+            </button>
+            <button type="button" id="btn-ts-clear" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+          <div class="relative">
+            <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="ts-input-stats"></div>
+            <input type="text" inputmode="numeric" id="ts-input" class="w-full p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 focus:outline-none" placeholder="1704067200" spellcheck="false" />
+          </div>
+          <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+            <button id="ts-to-date-btn" class="btn btn-primary btn-xs sm:btn-sm w-full gap-1">
+              <ion-icon name="calendar-outline"></ion-icon>
+              {{ T "timestamp.convertToDate" }}
+            </button>
           </div>
         </div>
-      </details>
-    </div>
 
+        <!-- Result: Date output -->
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="checkmark-circle-outline" class="text-success"></ion-icon>
+              {{ T "timestamp.result" }}
+            </h2>
+            <button type="button" id="btn-result-copy" class="btn btn-primary btn-xs gap-1" disabled>
+              <ion-icon name="copy-outline"></ion-icon>
+              <span class="hidden sm:inline">{{ T "timestamp.copyTimestamp" }}</span>
+            </button>
+          </div>
+          <div id="ts-result" class="p-3 sm:p-4 space-y-1.5">
+            <div class="flex items-center justify-between p-2 sm:p-2.5 bg-base-200/50 rounded-lg">
+              <span class="text-[10px] sm:text-xs text-base-content/50">{{ T "timestamp.local" }}</span>
+              <code class="font-mono text-[11px] sm:text-xs break-all" id="result-local">—</code>
+            </div>
+            <div class="flex items-center justify-between p-2 sm:p-2.5 bg-base-200/50 rounded-lg">
+              <span class="text-[10px] sm:text-xs text-base-content/50">UTC</span>
+              <code class="font-mono text-[11px] sm:text-xs break-all" id="result-utc">—</code>
+            </div>
+            <div class="flex items-center justify-between p-2 sm:p-2.5 bg-base-200/50 rounded-lg">
+              <span class="text-[10px] sm:text-xs text-base-content/50">ISO 8601</span>
+              <code class="font-mono text-[11px] sm:text-xs break-all" id="result-iso">—</code>
+            </div>
+            <div class="flex items-center justify-between p-2 sm:p-2.5 bg-base-200/50 rounded-lg">
+              <span class="text-[10px] sm:text-xs text-base-content/50">{{ T "timestamp.relative" }}</span>
+              <code class="font-mono text-[11px] sm:text-xs" id="result-relative">—</code>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Date → Timestamp Result -->
+      <div id="date-result" class="hidden">
+        <div class="grid grid-cols-2 gap-3 sm:gap-4">
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "timestamp.seconds" }}</div>
+            <div class="text-sm sm:text-lg font-bold font-mono text-primary" id="result-ts-sec">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "timestamp.milliseconds" }}</div>
+            <div class="text-sm sm:text-lg font-bold font-mono text-success" id="result-ts-ms">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timezone Compare Result -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+            <ion-icon name="globe-outline" class="text-accent"></ion-icon>
+            {{ T "timestamp.timezoneConverter" }}
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-3">
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1.5 sm:gap-2" id="world-clocks">
+          </div>
+          <div class="p-2.5 sm:p-3 bg-base-200/50 rounded-xl text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5" id="tz-compare-from">—</div>
+            <div class="text-lg sm:text-2xl font-bold font-mono" id="tz-compare-to">—</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
+  <!-- Duration Calculator -->
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-warning/10 flex items-center justify-center shrink-0">
+            <ion-icon name="hourglass-outline" class="text-lg sm:text-xl text-warning"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">{{ T "timestamp.durationCalculator" }}</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "timestamp.startDate" }} → {{ T "timestamp.endDate" }}</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4 space-y-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+          <div class="form-control">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium">{{ T "timestamp.startDate" }}</span>
+            </label>
+            <input type="datetime-local" id="duration-start" class="input input-bordered input-sm w-full text-xs" />
+          </div>
+          <div class="form-control">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium">{{ T "timestamp.endDate" }}</span>
+            </label>
+            <input type="datetime-local" id="duration-end" class="input input-bordered input-sm w-full text-xs" />
+          </div>
+        </div>
+        <button id="calc-duration-btn" class="btn btn-warning btn-xs sm:btn-sm w-full gap-1 justify-start">
+          <ion-icon name="calculator-outline"></ion-icon>
+          {{ T "timestamp.calculateDuration" }}
+        </button>
+        <div id="duration-result" class="hidden">
+          <div class="grid grid-cols-4 gap-1.5 sm:gap-2 text-center">
+            <div class="p-2 sm:p-3 bg-base-200/50 rounded-lg">
+              <div class="text-sm sm:text-lg font-bold font-mono" id="dur-days">0</div>
+              <div class="text-[9px] sm:text-[10px] text-base-content/50">{{ T "timestamp.days" }}</div>
+            </div>
+            <div class="p-2 sm:p-3 bg-base-200/50 rounded-lg">
+              <div class="text-sm sm:text-lg font-bold font-mono" id="dur-hours">0</div>
+              <div class="text-[9px] sm:text-[10px] text-base-content/50">{{ T "timestamp.hours" }}</div>
+            </div>
+            <div class="p-2 sm:p-3 bg-base-200/50 rounded-lg">
+              <div class="text-sm sm:text-lg font-bold font-mono" id="dur-minutes">0</div>
+              <div class="text-[9px] sm:text-[10px] text-base-content/50">{{ T "timestamp.minutes" }}</div>
+            </div>
+            <div class="p-2 sm:p-3 bg-base-200/50 rounded-lg">
+              <div class="text-sm sm:text-lg font-bold font-mono" id="dur-seconds">0</div>
+              <div class="text-[9px] sm:text-[10px] text-base-content/50">{{ T "timestamp.secondsShort" }}</div>
+            </div>
+          </div>
+          <div class="mt-1.5 text-center text-[10px] text-base-content/50">
+            {{ T "timestamp.total" }}: <span class="font-mono font-medium" id="dur-total">0</span> {{ T "timestamp.secondsShort" }}
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- Common Timestamps -->
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-info/10 flex items-center justify-center shrink-0">
+            <ion-icon name="bookmark-outline" class="text-lg sm:text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">{{ T "timestamp.commonTimestamps" }}</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Unix Epoch, Y2K, 2038</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 sm:gap-2" id="common-timestamps">
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- Status bar -->
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span>{{ T "timestamp.liveTime" }}</span>
+    <span>{{ T "cssformatter.statusBrowser" }}</span>
+  </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  
-  // I18N
+
   var i18n = {
     copied: '{{ T "timestamp.copied" }}',
     today: '{{ T "timestamp.today" }}',
@@ -387,16 +424,14 @@ document.addEventListener('DOMContentLoaded', function() {
     inSeconds: '{{ T "timestamp.inSeconds" }}',
     justNow: '{{ T "timestamp.justNow" }}'
   };
-  
-  // Elements
+
   var liveTimestamp = document.getElementById('live-timestamp');
   var liveDate = document.getElementById('live-date');
   var tsInput = document.getElementById('ts-input');
   var dateInput = document.getElementById('date-input');
   var timeInput = document.getElementById('time-input');
   var unitMs = false;
-  
-  // Clipboard helper with fallback
+
   function copyToClipboard(text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(function() {
@@ -408,7 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
       fallbackCopy(text);
     }
   }
-  
+
   function fallbackCopy(text) {
     var ta = document.createElement('textarea');
     ta.value = text;
@@ -421,30 +456,26 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       document.execCommand('copy');
       showToast(i18n.copied);
-    } catch (e) {
-      // silent fail
-    }
+    } catch (e) {}
     document.body.removeChild(ta);
   }
-  
-  // Live clock
+
   var liveClockInterval = null;
-  
+
   function updateLiveClock() {
     var now = Math.floor(Date.now() / 1000);
     if (liveTimestamp) liveTimestamp.textContent = now;
     if (liveDate) liveDate.textContent = new Date().toLocaleString();
   }
-  
+
   function startLiveClock() {
     updateLiveClock();
     if (liveClockInterval) clearInterval(liveClockInterval);
     liveClockInterval = setInterval(updateLiveClock, 1000);
   }
-  
+
   startLiveClock();
-  
-  // Pause live clock when tab is hidden to save resources
+
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
       if (liveClockInterval) clearInterval(liveClockInterval);
@@ -455,55 +486,55 @@ document.addEventListener('DOMContentLoaded', function() {
       startWorldClockInterval();
     }
   });
-  
-  // Copy current timestamp
+
   document.getElementById('copy-now-ts').addEventListener('click', function() {
     var now = Math.floor(Date.now() / 1000);
     copyToClipboard(now.toString());
   });
-  
-  // Use now
+
   document.getElementById('use-now').addEventListener('click', function() {
     var now = unitMs ? Date.now() : Math.floor(Date.now() / 1000);
     tsInput.value = now;
     convertTsToDate();
   });
-  
-  // Unit toggle
-  var unitBtns = document.querySelectorAll('.unit-btn');
-  unitBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      unitBtns.forEach(function(b) {
-        b.classList.remove('btn-primary', 'btn-active');
-        b.dataset.active = 'false';
-      });
-      btn.classList.add('btn-primary', 'btn-active');
-      btn.dataset.active = 'true';
-      unitMs = btn.dataset.unit === 'ms';
-      
-      // Auto-convert existing value
+
+  var unitRadios = document.querySelectorAll('input[name="ts-unit"]');
+  unitRadios.forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      var newMs = radio.value === 'ms';
       var val = tsInput.value.trim();
       if (val) {
         var num = parseInt(val, 10);
         if (!isNaN(num)) {
-          if (unitMs && val.length <= 10) {
+          if (newMs && !unitMs && val.length <= 10) {
             tsInput.value = num * 1000;
-          } else if (!unitMs && val.length > 10) {
+          } else if (!newMs && unitMs && val.length > 10) {
             tsInput.value = Math.floor(num / 1000);
           }
         }
       }
+      unitMs = newMs;
     });
   });
-  
-  // Initialize active unit button style
-  unitBtns.forEach(function(btn) {
-    if (btn.dataset.active === 'true') {
-      btn.classList.add('btn-primary', 'btn-active');
+
+  document.getElementById('btn-ts-paste').addEventListener('click', function() {
+    if (navigator.clipboard && navigator.clipboard.readText) {
+      navigator.clipboard.readText().then(function(text) {
+        tsInput.value = text.trim();
+        convertTsToDate();
+      });
     }
   });
-  
-  // Quick timestamp buttons
+
+  document.getElementById('btn-ts-clear').addEventListener('click', function() {
+    tsInput.value = '';
+    document.getElementById('result-local').textContent = '—';
+    document.getElementById('result-utc').textContent = '—';
+    document.getElementById('result-iso').textContent = '—';
+    document.getElementById('result-relative').textContent = '—';
+    document.getElementById('btn-result-copy').disabled = true;
+  });
+
   document.querySelectorAll('.quick-ts').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var offset = parseInt(btn.dataset.offset, 10);
@@ -519,47 +550,36 @@ document.addEventListener('DOMContentLoaded', function() {
       convertTsToDate();
     });
   });
-  
-  // Timestamp to Date
+
   function convertTsToDate() {
     var val = tsInput.value.trim();
     if (!val) return;
-    
+
     var ts = parseInt(val, 10);
     if (isNaN(ts)) return;
-    
-    // Auto-detect: if more than 10 digits, likely milliseconds
+
     var msValue;
     if (unitMs) {
       msValue = ts;
     } else {
-      // Heuristic: if value > 1e12, treat as ms even if "seconds" is selected
-      if (ts > 1e12) {
-        msValue = ts;
-      } else {
-        msValue = ts * 1000;
-      }
+      msValue = ts > 1e12 ? ts : ts * 1000;
     }
-    
+
     var date = new Date(msValue);
-    
-    // Validate date
     if (isNaN(date.getTime())) return;
-    
+
     document.getElementById('result-local').textContent = date.toLocaleString();
     document.getElementById('result-utc').textContent = date.toUTCString();
     document.getElementById('result-iso').textContent = date.toISOString();
     document.getElementById('result-relative').textContent = getRelativeTime(date);
-    
-    document.getElementById('ts-result').classList.remove('hidden');
+    document.getElementById('btn-result-copy').disabled = false;
   }
-  
+
   document.getElementById('ts-to-date-btn').addEventListener('click', convertTsToDate);
   tsInput.addEventListener('keyup', function(e) {
     if (e.key === 'Enter') convertTsToDate();
   });
-  
-  // Also convert on input change (debounced)
+
   var tsInputTimer = null;
   tsInput.addEventListener('input', function() {
     if (tsInputTimer) clearTimeout(tsInputTimer);
@@ -569,79 +589,75 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }, 500);
   });
-  
-  // Date to Timestamp
+
+  document.getElementById('btn-result-copy').addEventListener('click', function() {
+    var iso = document.getElementById('result-iso').textContent;
+    if (iso && iso !== '—') {
+      copyToClipboard(iso);
+    }
+  });
+
   function convertDateToTs() {
     var dateVal = dateInput.value;
     var timeVal = timeInput.value || '00:00:00';
     var tz = document.getElementById('tz-select').value;
-    
+
     if (!dateVal) return;
-    
-    // Ensure time has seconds
+
     if (timeVal.split(':').length === 2) {
       timeVal += ':00';
     }
-    
+
     var dateStr = dateVal + 'T' + timeVal;
     var date;
-    
+
     if (tz === 'local') {
       date = new Date(dateStr);
     } else if (tz === 'UTC') {
       date = new Date(dateStr + 'Z');
     } else {
-      // Use Intl to properly handle timezone conversion
       try {
-        // Create date in local time first
         var localDate = new Date(dateStr);
-        
-        // Get the offset for the target timezone
         var formatter = new Intl.DateTimeFormat('en-US', {
           timeZone: tz,
           year: 'numeric', month: '2-digit', day: '2-digit',
           hour: '2-digit', minute: '2-digit', second: '2-digit',
           hour12: false
         });
-        
-        // We need to find what UTC time corresponds to the given local time in the target TZ
-        // Binary search approach for accuracy
-        var targetStr = dateStr.replace('T', ' ');
+
         var guess = localDate.getTime();
-        
         for (var i = 0; i < 4; i++) {
           var parts = formatter.formatToParts(new Date(guess));
           var obj = {};
           parts.forEach(function(p) { obj[p.type] = p.value; });
-          var guessLocal = obj.year + '-' + obj.month + '-' + obj.day + ' ' + 
+          var guessLocal = obj.year + '-' + obj.month + '-' + obj.day + ' ' +
                           (obj.hour === '24' ? '00' : obj.hour) + ':' + obj.minute + ':' + obj.second;
-          
+
           var targetDate = new Date(dateStr);
           var guessDate = new Date(guessLocal.replace(' ', 'T'));
           var diff = targetDate - guessDate;
           guess += diff;
         }
-        
+
         date = new Date(guess);
       } catch (e) {
         date = new Date(dateStr);
       }
     }
-    
+
     if (isNaN(date.getTime())) return;
-    
+
     var ts = Math.floor(date.getTime() / 1000);
     var tsMs = date.getTime();
-    
+
     document.getElementById('result-ts-sec').textContent = ts;
     document.getElementById('result-ts-ms').textContent = tsMs;
-    
+
     document.getElementById('date-result').classList.remove('hidden');
   }
-  
+
   document.getElementById('date-to-ts-btn').addEventListener('click', convertDateToTs);
-  
-  // Also convert when date/time inputs change
+
   dateInput.addEventListener('change', function() {
     if (dateInput.value) convertDateToTs();
   });
@@ -651,41 +667,28 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('tz-select').addEventListener('change', function() {
     if (dateInput.value) convertDateToTs();
   });
-  
-  // Set today as default
+
   var today = new Date();
-  var todayStr = today.getFullYear() + '-' + 
-                 String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+  var todayStr = today.getFullYear() + '-' +
+                 String(today.getMonth() + 1).padStart(2, '0') + '-' +
                  String(today.getDate()).padStart(2, '0');
   dateInput.value = todayStr;
-  
-  // Copy result buttons
-  document.querySelectorAll('.copy-result').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var target = document.getElementById(btn.dataset.target);
-      if (target) {
-        copyToClipboard(target.textContent);
-      }
-    });
-  });
-  
-  // Relative time
+
   function getRelativeTime(date) {
     var now = new Date();
     var diff = (now - date) / 1000;
     var abs = Math.abs(diff);
     var future = diff < 0;
-    
+
     if (abs < 5) return i18n.justNow;
     if (abs < 60) return future ? i18n.inSeconds.replace('{n}', Math.floor(abs)) : i18n.secondsAgo.replace('{n}', Math.floor(abs));
     if (abs < 3600) return future ? i18n.inMinutes.replace('{n}', Math.floor(abs / 60)) : i18n.minutesAgo.replace('{n}', Math.floor(abs / 60));
     if (abs < 86400) return future ? i18n.inHours.replace('{n}', Math.floor(abs / 3600)) : i18n.hoursAgo.replace('{n}', Math.floor(abs / 3600));
     return future ? i18n.inDays.replace('{n}', Math.floor(abs / 86400)) : i18n.daysAgo.replace('{n}', Math.floor(abs / 86400));
   }
-  
-  // World clocks
+
   var worldClockInterval = null;
-  
+
   function updateWorldClocks() {
     var zones = [
       { name: 'UTC', tz: 'UTC', emoji: '🌍' },
@@ -695,109 +698,107 @@ document.addEventListener('DOMContentLoaded', function() {
       { name: 'Tokyo', tz: 'Asia/Tokyo', emoji: '🇯🇵' },
       { name: 'Sydney', tz: 'Australia/Sydney', emoji: '🇦🇺' }
     ];
-    
+
     var container = document.getElementById('world-clocks');
     if (!container) return;
-    
+
     var html = '';
     for (var i = 0; i < zones.length; i++) {
       var z = zones[i];
       try {
-        var time = new Date().toLocaleTimeString('en-US', { 
-          timeZone: z.tz, 
-          hour: '2-digit', 
+        var time = new Date().toLocaleTimeString('en-US', {
+          timeZone: z.tz,
+          hour: '2-digit',
           minute: '2-digit',
-          hour12: false 
+          hour12: false
         });
-        var date = new Date().toLocaleDateString('en-US', { 
-          timeZone: z.tz, 
+        var date = new Date().toLocaleDateString('en-US', {
+          timeZone: z.tz,
           weekday: 'short',
           day: 'numeric'
         });
-        html += '<div class="p-2.5 sm:p-3 bg-base-200/50 rounded-xl text-center">' +
-          '<div class="text-[10px] sm:text-xs text-base-content/50">' + z.emoji + ' ' + z.name + '</div>' +
-          '<div class="font-mono text-base sm:text-lg font-bold">' + time + '</div>' +
-          '<div class="text-[10px] sm:text-xs text-base-content/60">' + date + '</div>' +
+        html += '<div class="p-2 sm:p-2.5 bg-base-200/50 rounded-lg text-center">' +
+          '<div class="text-[9px] sm:text-[10px] text-base-content/50">' + z.emoji + ' ' + z.name + '</div>' +
+          '<div class="font-mono text-xs sm:text-sm font-bold">' + time + '</div>' +
+          '<div class="text-[9px] sm:text-[10px] text-base-content/50">' + date + '</div>' +
           '</div>';
       } catch (e) {
-        html += '<div class="p-2.5 sm:p-3 bg-base-200/50 rounded-xl text-center">' +
-          '<div class="text-[10px] sm:text-xs text-base-content/50">' + z.name + '</div>' +
-          '<div class="font-mono text-base sm:text-lg font-bold">—</div>' +
+        html += '<div class="p-2 sm:p-2.5 bg-base-200/50 rounded-lg text-center">' +
+          '<div class="text-[9px] sm:text-[10px] text-base-content/50">' + z.name + '</div>' +
+          '<div class="font-mono text-xs sm:text-sm font-bold">—</div>' +
           '</div>';
       }
     }
     container.innerHTML = html;
   }
-  
+
   function startWorldClockInterval() {
     if (worldClockInterval) clearInterval(worldClockInterval);
     worldClockInterval = setInterval(updateWorldClocks, 60000);
   }
-  
+
   updateWorldClocks();
   startWorldClockInterval();
-  
-  // Timezone comparison
+
   function compareTimezones() {
     var fromTz = document.getElementById('tz-from').value;
     var toTz = document.getElementById('tz-to').value;
     var timeVal = document.getElementById('tz-time').value;
-    
+
     if (!timeVal) return;
-    
+
     try {
       var now = new Date();
-      var todayDate = now.getFullYear() + '-' + 
-                      String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+      var todayDate = now.getFullYear() + '-' +
+                      String(now.getMonth() + 1).padStart(2, '0') + '-' +
                       String(now.getDate()).padStart(2, '0');
       var dateStr = todayDate + 'T' + timeVal + ':00';
-      
+
       var sourceDate;
-      
+
       if (fromTz === 'local') {
         sourceDate = new Date(dateStr);
       } else {
-        // Find UTC time for the given time in source timezone
         var guess = new Date(dateStr).getTime();
         var formatter = new Intl.DateTimeFormat('en-US', {
           timeZone: fromTz,
           hour: '2-digit', minute: '2-digit',
           hour12: false
         });
-        
+
         for (var i = 0; i < 4; i++) {
           var parts = formatter.formatToParts(new Date(guess));
           var obj = {};
           parts.forEach(function(p) { obj[p.type] = p.value; });
           var guessTime = (obj.hour === '24' ? '00' : obj.hour) + ':' + obj.minute;
-          
+
           var targetParts = timeVal.split(':');
           var guessParts = guessTime.split(':');
-          var diffMin = (parseInt(targetParts[0], 10) * 60 + parseInt(targetParts[1], 10)) - 
+          var diffMin = (parseInt(targetParts[0], 10) * 60 + parseInt(targetParts[1], 10)) -
                         (parseInt(guessParts[0], 10) * 60 + parseInt(guessParts[1], 10));
           guess += diffMin * 60000;
         }
-        
+
         sourceDate = new Date(guess);
       }
-      
+
       var targetTimeStr;
       if (toTz === 'local') {
         targetTimeStr = sourceDate.toLocaleTimeString('en-US', {
           hour: '2-digit', minute: '2-digit', hour12: false
         });
       } else {
-        targetTimeStr = sourceDate.toLocaleTimeString('en-US', { 
+        targetTimeStr = sourceDate.toLocaleTimeString('en-US', {
           timeZone: toTz,
           hour: '2-digit',
           minute: '2-digit',
           hour12: false
         });
       }
-      
+
       var fromLabel = fromTz === 'local' ? 'Local' : fromTz.split('/').pop().replace(/_/g, ' ');
       var toLabel = toTz === 'local' ? 'Local' : toTz.split('/').pop().replace(/_/g, ' ');
-      
+
       document.getElementById('tz-compare-from').textContent = timeVal + ' ' + fromLabel;
       document.getElementById('tz-compare-to').textContent = targetTimeStr + ' ' + toLabel;
     } catch (e) {
@@ -805,66 +806,63 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('tz-compare-to').textContent = '—';
     }
   }
-  
+
   document.getElementById('tz-from').addEventListener('change', compareTimezones);
   document.getElementById('tz-to').addEventListener('change', compareTimezones);
   document.getElementById('tz-time').addEventListener('input', compareTimezones);
   document.getElementById('tz-time').addEventListener('change', compareTimezones);
   compareTimezones();
-  
-  // Duration calculator
+
   document.getElementById('calc-duration-btn').addEventListener('click', function() {
     var startVal = document.getElementById('duration-start').value;
     var endVal = document.getElementById('duration-end').value;
-    
+
     if (!startVal || !endVal) return;
-    
+
     var start = new Date(startVal);
     var end = new Date(endVal);
-    
+
     if (isNaN(start.getTime()) || isNaN(end.getTime())) return;
-    
+
     var diff = Math.abs(end - start) / 1000;
-    
+
     var days = Math.floor(diff / 86400);
     var hours = Math.floor((diff % 86400) / 3600);
     var minutes = Math.floor((diff % 3600) / 60);
     var seconds = Math.floor(diff % 60);
-    
+
     document.getElementById('dur-days').textContent = days;
     document.getElementById('dur-hours').textContent = hours;
     document.getElementById('dur-minutes').textContent = minutes;
     document.getElementById('dur-seconds').textContent = seconds;
     document.getElementById('dur-total').textContent = Math.floor(diff).toLocaleString();
-    
+
     document.getElementById('duration-result').classList.remove('hidden');
   });
-  
-  // Set default duration values
+
   var nowLocal = new Date();
-  var nowStr = nowLocal.getFullYear() + '-' + 
-               String(nowLocal.getMonth() + 1).padStart(2, '0') + '-' + 
+  var nowStr = nowLocal.getFullYear() + '-' +
+               String(nowLocal.getMonth() + 1).padStart(2, '0') + '-' +
                String(nowLocal.getDate()).padStart(2, '0') + 'T' +
                String(nowLocal.getHours()).padStart(2, '0') + ':' +
                String(nowLocal.getMinutes()).padStart(2, '0');
-  
+
   var tomorrowLocal = new Date(nowLocal.getTime() + 86400000);
-  var tomorrowStr = tomorrowLocal.getFullYear() + '-' + 
-                    String(tomorrowLocal.getMonth() + 1).padStart(2, '0') + '-' + 
+  var tomorrowStr = tomorrowLocal.getFullYear() + '-' +
+                    String(tomorrowLocal.getMonth() + 1).padStart(2, '0') + '-' +
                     String(tomorrowLocal.getDate()).padStart(2, '0') + 'T' +
                     String(tomorrowLocal.getHours()).padStart(2, '0') + ':' +
                     String(tomorrowLocal.getMinutes()).padStart(2, '0');
-  
+
   var durationStart = document.getElementById('duration-start');
   var durationEnd = document.getElementById('duration-end');
   if (durationStart && !durationStart.value) durationStart.value = nowStr;
   if (durationEnd && !durationEnd.value) durationEnd.value = tomorrowStr;
-  
-  // Common timestamps
+
   function generateCommonTimestamps() {
     var now = new Date();
     var year = now.getFullYear();
-    
+
     var stamps = [
       { name: i18n.today + ' 00:00', ts: Math.floor(new Date(year, now.getMonth(), now.getDate()).getTime() / 1000) },
       { name: i18n.yesterday, ts: Math.floor(new Date(year, now.getMonth(), now.getDate() - 1).getTime() / 1000) },
@@ -876,17 +874,17 @@ document.addEventListener('DOMContentLoaded', function() {
       { name: 'Y2K', ts: 946684800 },
       { name: '2038 Problem', ts: 2147483647 }
     ];
-    
+
     var container = document.getElementById('common-timestamps');
     if (!container) return;
-    
+
     var html = '';
     for (var i = 0; i < stamps.length; i++) {
       var s = stamps[i];
-      html += '<div class="flex items-center justify-between p-2.5 sm:p-3 bg-base-200/50 rounded-lg gap-2">' +
-        '<span class="text-xs sm:text-sm truncate">' + s.name + '</span>' +
-        '<div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">' +
-        '<code class="font-mono text-[10px] sm:text-xs">' + s.ts + '</code>' +
+      html += '<div class="flex items-center justify-between p-2 sm:p-2.5 bg-base-200/50 rounded-lg gap-2">' +
+        '<span class="text-[10px] sm:text-xs truncate">' + s.name + '</span>' +
+        '<div class="flex items-center gap-1 flex-shrink-0">' +
+        '<code class="font-mono text-[10px] sm:text-xs text-base-content/70">' + s.ts + '</code>' +
         '<button class="btn btn-ghost btn-xs copy-common" data-ts="' + s.ts + '">' +
         '<ion-icon name="copy-outline"></ion-icon>' +
         '</button>' +
@@ -894,47 +892,44 @@ document.addEventListener('DOMContentLoaded', function() {
         '</div>';
     }
     container.innerHTML = html;
-    
+
     container.querySelectorAll('.copy-common').forEach(function(btn) {
       btn.addEventListener('click', function() {
         copyToClipboard(btn.dataset.ts);
       });
     });
   }
-  
+
   generateCommonTimestamps();
-  
-  // Toast notification
+
   function showToast(message) {
-    // Remove existing toasts
     var existing = document.querySelectorAll('.ts-toast');
     existing.forEach(function(el) { el.remove(); });
-    
+
     var toast = document.createElement('div');
     toast.className = 'ts-toast';
-    toast.style.cssText = 'position:fixed;top:16px;right:16px;z-index:9999;padding:10px 20px;' +
+    toast.style.cssText = 'position:fixed;top:16px;right:16px;z-index:9999;padding:8px 16px;' +
       'background:hsl(var(--su, 158 64% 52%));color:hsl(var(--suc, 0 0% 100%));' +
-      'border-radius:8px;font-size:14px;font-weight:500;' +
+      'border-radius:8px;font-size:12px;font-weight:500;' +
       'box-shadow:0 4px 12px rgba(0,0,0,0.15);' +
       'animation:tsToastIn 0.3s ease;max-width:calc(100vw - 32px);';
     toast.textContent = message;
     document.body.appendChild(toast);
-    
-    setTimeout(function() { 
+
+    setTimeout(function() {
       toast.style.opacity = '0';
       toast.style.transition = 'opacity 0.3s ease';
       setTimeout(function() { toast.remove(); }, 300);
     }, 2000);
   }
-  
-  // Add toast animation
+
   if (!document.getElementById('ts-toast-style')) {
     var style = document.createElement('style');
     style.id = 'ts-toast-style';
     style.textContent = '@keyframes tsToastIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}';
     document.head.appendChild(style);
   }
-  
+
 });
 </script>
 

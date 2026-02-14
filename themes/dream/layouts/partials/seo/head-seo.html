@@ -11,6 +11,9 @@
 <meta name="apple-mobile-web-app-title" content="0x69" />
 <link rel="manifest" href="{{ "site.webmanifest" | absURL }}" />
 
+{{/* ===== SECURITY ===== */}}
+{{ partial "seo/security.html" . }}
+
 {{/* ===== CANONICAL ===== */}}
 {{- $canonical := .Permalink -}}
 {{- with .Params.seo }}{{ with .canonical }}{{ $canonical = . }}{{ end }}{{ end -}}
@@ -27,6 +30,9 @@
 
 {{/* ===== TWITTER CARDS ===== */}}
 {{ partial "seo/twitter-cards.html" . }}
+
+{{/* ===== VK ===== */}}
+{{ partial "seo/vk.html" . }}
 
 {{/* ===== STRUCTURED DATA (JSON-LD) ===== */}}
 {{ partial "seo/structured-data.html" . }}

@@ -1,0 +1,92 @@
+{{- $image := "" -}}
+
+{{- with .Params.images -}}
+  {{- $first := index . 0 -}}
+  {{- if $first -}}
+    {{- $firstStr := printf "%s" $first -}}
+    {{- if strings.HasPrefix $firstStr "http" -}}
+      {{- $image = $firstStr -}}
+    {{- else -}}
+      {{- $res := $.Resources.GetMatch $firstStr -}}
+      {{- with $res -}}
+        {{- $resized := .Fill "1200x630 Center" -}}
+        {{- $image = $resized.Permalink -}}
+      {{- else -}}
+        {{- $image = $firstStr | absURL -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq $image "" -}}
+  {{- with .Params.featured_image -}}
+    {{- if strings.HasPrefix . "http" }}{{ $image = . }}{{ else -}}
+      {{- $res := $.Resources.GetMatch . -}}
+      {{- with $res -}}
+        {{- $resized := .Fill "1200x630 Center" -}}
+        {{- $image = $resized.Permalink -}}
+      {{- else -}}
+        {{- $image = . | absURL -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq $image "" -}}
+  {{- $coverParam := "" -}}
+  {{- with .Params.Cover }}{{ $coverParam = printf "%s" . }}{{ end -}}
+  {{- if eq $coverParam "" -}}
+    {{- with .Params.cover -}}
+      {{- if reflect.IsMap . -}}
+        {{- with .image }}{{ $coverParam = printf "%s" . }}{{ end -}}
+      {{- else -}}
+        {{- $coverParam = printf "%s" . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if ne $coverParam "" -}}
+    {{- $res := .Resources.GetMatch $coverParam -}}
+    {{- with $res -}}
+      {{- $resized := .Fill "1200x630 Center" -}}
+      {{- $image = $resized.Permalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq $image "" -}}
+  {{- $patterns := slice "Cover.*" "cover.*" "featured.*" "thumbnail.*" -}}
+  {{- range $patterns -}}
+    {{- if eq $image "" -}}
+      {{- $res := $.Resources.GetMatch . -}}
+      {{- with $res -}}
+        {{- $resized := .Fill "1200x630 Center" -}}
+        {{- $image = $resized.Permalink -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq $image "" -}}
+  {{- if .IsPage -}}
+    {{- $firstImg := .Resources.GetMatch "**.{jpg,jpeg,png,webp}" -}}
+    {{- with $firstImg -}}
+      {{- $resized := .Fill "1200x630 Center" -}}
+      {{- $image = $resized.Permalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq $image "" -}}
+  {{- $generated := partial "seo/og-image-generator.html" . -}}
+  {{- if $generated }}{{ $image = $generated }}{{ end -}}
+{{- end -}}
+
+{{- if eq $image "" -}}
+  {{- with site.Params.seo.ogImageDefault -}}
+    {{- $image = . | absURL -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $image -}}
+<meta property="vk:image" content="{{ $image }}" />
+{{- end -}}

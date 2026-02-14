@@ -1,126 +1,204 @@
 {{ define "title" }}
-{{ default "Lorem Ipsum Generator" }}
+{{ .Title }}
 {{ end }}
 
 {{ define "main" }}
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
 
   <!-- Hero -->
-  <div class="text-center mb-8">
-    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-4">
-      <span class="text-4xl sm:text-5xl">📄</span>
+  <div class="text-center mb-5 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}📄{{ end }}</span>
     </div>
-    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ .Title }}</h1>
-    <p class="text-base-content/60 max-w-2xl mx-auto">{{ .Description }}</p>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">{{ .Title }}</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">{{ .Description }}</p>
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="sparkles-outline"></ion-icon>
+        {{ T "loremIpsum.generate" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="language-outline"></ion-icon>
+        {{ T "loremIpsum.language" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="code-outline"></ion-icon>
+        {{ T "loremIpsum.format" }}
+      </span>
+    </div>
   </div>
 
-  <div class="max-w-4xl mx-auto">
-    
-    <div class="bg-base-100 rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
-      
-      <!-- Настройки -->
-      <div class="p-4 sm:p-6 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          
-          <!-- Тип -->
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text font-medium">{{ T "loremIpsum.type" }}</span>
-            </label>
-            <select id="lorem-type" class="select select-bordered">
-              <option value="paragraphs">{{ T "loremIpsum.paragraphs" }}</option>
-              <option value="sentences">{{ T "loremIpsum.sentences" }}</option>
-              <option value="words">{{ T "loremIpsum.words" }}</option>
-            </select>
-          </div>
-          
-          <!-- Количество -->
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text font-medium">{{ T "loremIpsum.count" }}</span>
-            </label>
-            <input type="number" id="lorem-count" class="input input-bordered" value="3" min="1" max="100" />
-          </div>
-          
-          <!-- Язык -->
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text font-medium">{{ T "loremIpsum.language" }}</span>
-            </label>
-            <select id="lorem-lang" class="select select-bordered">
-              <option value="latin">{{ T "loremIpsum.latin" }}</option>
-              <option value="russian">{{ T "loremIpsum.russian" }}</option>
-              <option value="hipster">{{ T "loremIpsum.hipster" }}</option>
-            </select>
-          </div>
-          
-          <!-- Формат -->
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text font-medium">{{ T "loremIpsum.format" }}</span>
-            </label>
-            <select id="lorem-format" class="select select-bordered">
-              <option value="plain">{{ T "loremIpsum.plainText" }}</option>
-              <option value="html">{{ T "loremIpsum.htmlTags" }}</option>
-            </select>
-          </div>
-          
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
+
+    <!-- Settings Panel -->
+    <div class="xl:col-span-1 space-y-3 sm:space-y-4 order-2 xl:order-1">
+
+      <!-- Generation Settings -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="flash-outline" class="text-warning"></ion-icon>
+            {{ T "loremIpsum.generate" }}
+          </h2>
         </div>
-        
-        <!-- Опции -->
-        <div class="flex flex-wrap gap-4 mt-4">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" id="lorem-start" class="checkbox checkbox-sm checkbox-primary" checked />
-            <span class="text-sm">{{ T "loremIpsum.startWithLorem" }}</span>
-          </label>
-        </div>
-        
-        <!-- Генерация -->
-        <div class="flex flex-wrap gap-2 mt-6">
-          <button id="generate-lorem" class="btn btn-primary gap-2">
+        <div class="p-3 sm:p-4 space-y-2">
+          <button type="button" id="generate-lorem" class="btn btn-primary btn-xs sm:btn-sm w-full gap-1 justify-start">
             <ion-icon name="sparkles-outline"></ion-icon>
             {{ T "loremIpsum.generate" }}
           </button>
-          <button id="copy-lorem" class="btn btn-ghost gap-2">
-            <ion-icon name="copy-outline"></ion-icon>
-            {{ T "loremIpsum.copy" }}
-          </button>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button type="button" id="copy-lorem" class="btn btn-ghost btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="copy-outline"></ion-icon>
+              {{ T "loremIpsum.copy" }}
+            </button>
+            <button type="button" id="clear-lorem" class="btn btn-ghost btn-xs sm:btn-sm gap-1 justify-start">
+              <ion-icon name="trash-outline"></ion-icon>
+              Clear
+            </button>
+          </div>
         </div>
-        
       </div>
 
-      <!-- Результат -->
-      <div class="p-4 sm:p-6">
-        <div id="lorem-output" class="prose max-w-none min-h-[200px]">
-          <p class="text-base-content/40 italic">{{ T "loremIpsum.placeholder" }}</p>
-        </div>
-        
-        <div class="flex items-center justify-between mt-4 pt-4 border-t border-base-200 text-sm text-base-content/60">
-          <span id="lorem-stats">0 {{ T "loremIpsum.characters" }} • 0 {{ T "loremIpsum.wordsCount" }}</span>
-        </div>
+      <!-- Options -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="options-outline" class="text-primary"></ion-icon>
+              {{ T "loremIpsum.type" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "loremIpsum.type" }}</span>
+              </label>
+              <div class="grid grid-cols-3 gap-1">
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="lorem-type" value="paragraphs" class="hidden" checked />
+                  <span class="text-[10px] sm:text-xs">{{ T "loremIpsum.paragraphs" }}</span>
+                </label>
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="lorem-type" value="sentences" class="hidden" />
+                  <span class="text-[10px] sm:text-xs">{{ T "loremIpsum.sentences" }}</span>
+                </label>
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="lorem-type" value="words" class="hidden" />
+                  <span class="text-[10px] sm:text-xs">{{ T "loremIpsum.words" }}</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "loremIpsum.count" }}</span>
+              </label>
+              <input type="number" id="lorem-count" class="input input-bordered input-sm text-xs w-full" value="3" min="1" max="100" />
+            </div>
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "loremIpsum.language" }}</span>
+              </label>
+              <select id="lorem-lang" class="select select-bordered select-xs text-xs">
+                <option value="latin">{{ T "loremIpsum.latin" }}</option>
+                <option value="russian">{{ T "loremIpsum.russian" }}</option>
+                <option value="hipster">{{ T "loremIpsum.hipster" }}</option>
+              </select>
+            </div>
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "loremIpsum.format" }}</span>
+              </label>
+              <select id="lorem-format" class="select select-bordered select-xs text-xs">
+                <option value="plain">{{ T "loremIpsum.plainText" }}</option>
+                <option value="html">{{ T "loremIpsum.htmlTags" }}</option>
+              </select>
+            </div>
+
+            <div class="divider my-0.5"></div>
+
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "loremIpsum.startWithLorem" }}</span>
+              <input type="checkbox" id="lorem-start" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+
+          </div>
+        </details>
       </div>
 
     </div>
 
+    <!-- Output Panel -->
+    <div class="xl:col-span-3 space-y-3 sm:space-y-4 order-1 xl:order-2">
+
+      <!-- Output -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+            <ion-icon name="checkmark-circle-outline" class="text-success"></ion-icon>
+            {{ T "loremIpsum.plainText" }}
+          </h2>
+          <button type="button" id="btn-copy-top" class="btn btn-primary btn-xs gap-1">
+            <ion-icon name="copy-outline"></ion-icon>
+            <span class="hidden sm:inline">{{ T "loremIpsum.copy" }}</span>
+          </button>
+          <button type="button" id="btn-regenerate" class="btn btn-ghost btn-xs gap-1">
+            <ion-icon name="refresh-outline"></ion-icon>
+          </button>
+        </div>
+        <div class="relative">
+          <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="lorem-stats-corner"></div>
+          <div id="lorem-output" class="w-full min-h-[350px] sm:min-h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed">
+            <p class="text-base-content/40 italic">{{ T "loremIpsum.placeholder" }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div id="lorem-stats-bar" class="hidden">
+        <div class="grid grid-cols-3 gap-3 sm:gap-4">
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "loremIpsum.characters" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-primary" id="stat-chars">0</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "loremIpsum.wordsCount" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-success" id="stat-words">0</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+            <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">{{ T "loremIpsum.paragraphs" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-warning" id="stat-paragraphs">0</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
+  <!-- Status bar -->
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span id="lorem-status-text">{{ T "loremIpsum.placeholder" }}</span>
+    <span>{{ T "cssformatter.statusBrowser" }}</span>
+  </div>
 </div>
 
 <script>
 (function() {
   'use strict';
-  
-  // ========== I18N ==========
-  const i18n = {
+
+  var i18n = {
     characters: {{ T "loremIpsum.characters" | jsonify }},
     wordsCount: {{ T "loremIpsum.wordsCount" | jsonify }},
     copied: {{ T "loremIpsum.copied" | jsonify }},
     copy: {{ T "loremIpsum.copy" | jsonify }}
   };
-  
-  const loremWords = {
+
+  var loremWords = {
     latin: [
       'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit',
       'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore',
@@ -154,137 +232,191 @@
       'disrupt', 'dreamcatcher', 'echo', 'park', 'everyday', 'carry', 'farm-to-table'
     ]
   };
-  
-  const startPhrase = {
+
+  var startPhrase = {
     latin: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
     russian: 'Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. ',
     hipster: 'Artisan authentic beard brooklyn craft beer ethical. '
   };
-  
+
   function getRandomWord(lang) {
-    const words = loremWords[lang];
+    var words = loremWords[lang];
     return words[Math.floor(Math.random() * words.length)];
   }
-  
+
   function capitalizeFirst(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
-  
-  function generateSentence(lang, minWords = 8, maxWords = 16) {
-    const wordCount = Math.floor(Math.random() * (maxWords - minWords + 1)) + minWords;
-    const words = [];
-    
-    for (let i = 0; i < wordCount; i++) {
+
+  function generateSentence(lang, minWords, maxWords) {
+    minWords = minWords || 8;
+    maxWords = maxWords || 16;
+    var wordCount = Math.floor(Math.random() * (maxWords - minWords + 1)) + minWords;
+    var words = [];
+    for (var i = 0; i < wordCount; i++) {
       words.push(getRandomWord(lang));
     }
-    
-    // Иногда добавляем запятую
     if (wordCount > 6 && Math.random() > 0.5) {
-      const commaPos = Math.floor(wordCount / 2);
+      var commaPos = Math.floor(wordCount / 2);
       words[commaPos] += ',';
     }
-    
     return capitalizeFirst(words.join(' ')) + '.';
   }
-  
-  function generateParagraph(lang, startWithLorem = false) {
-    const sentenceCount = Math.floor(Math.random() * 4) + 3; // 3-6 предложений
-    const sentences = [];
-    
-    if (startWithLorem) {
+
+  function generateParagraph(lang, withStart) {
+    var sentenceCount = Math.floor(Math.random() * 4) + 3;
+    var sentences = [];
+    if (withStart) {
       sentences.push(startPhrase[lang].trim());
     }
-    
-    for (let i = startWithLorem ? 1 : 0; i < sentenceCount; i++) {
+    for (var i = withStart ? 1 : 0; i < sentenceCount; i++) {
       sentences.push(generateSentence(lang));
     }
-    
     return sentences.join(' ');
   }
-  
-  function generateLorem(type, count, lang, format, startWithLorem) {
-    let result = [];
-    
+
+  function generateLorem(type, count, lang, format, withStart) {
+    var result = [];
+
     if (type === 'words') {
-      const words = [];
-      if (startWithLorem) {
-        words.push(...startPhrase[lang].split(' ').slice(0, Math.min(count, 5)));
+      var words = [];
+      if (withStart) {
+        var sp = startPhrase[lang].split(' ').slice(0, Math.min(count, 5));
+        for (var w = 0; w < sp.length; w++) words.push(sp[w]);
       }
       while (words.length < count) {
         words.push(getRandomWord(lang));
       }
       result = [words.slice(0, count).join(' ')];
     } else if (type === 'sentences') {
-      if (startWithLorem) {
+      if (withStart) {
         result.push(startPhrase[lang].trim());
         count--;
       }
-      for (let i = 0; i < count; i++) {
+      for (var s = 0; s < count; s++) {
         result.push(generateSentence(lang));
       }
       result = [result.join(' ')];
-    } else { // paragraphs
-      for (let i = 0; i < count; i++) {
-        result.push(generateParagraph(lang, startWithLorem && i === 0));
+    } else {
+      for (var p = 0; p < count; p++) {
+        result.push(generateParagraph(lang, withStart && p === 0));
       }
     }
-    
+
     if (format === 'html') {
-      return result.map(p => `<p>${p}</p>`).join('\n');
+      return result.map(function(p) { return '<p>' + p + '</p>'; }).join('\n');
     }
-    
     return result.join('\n\n');
   }
-  
-  // Элементы
-  const loremType = document.getElementById('lorem-type');
-  const loremCount = document.getElementById('lorem-count');
-  const loremLang = document.getElementById('lorem-lang');
-  const loremFormat = document.getElementById('lorem-format');
-  const loremStart = document.getElementById('lorem-start');
-  const loremOutput = document.getElementById('lorem-output');
-  const loremStats = document.getElementById('lorem-stats');
-  
+
+  var loremCount = document.getElementById('lorem-count');
+  var loremLang = document.getElementById('lorem-lang');
+  var loremFormat = document.getElementById('lorem-format');
+  var loremStart = document.getElementById('lorem-start');
+  var loremOutput = document.getElementById('lorem-output');
+  var statsBar = document.getElementById('lorem-stats-bar');
+  var statusText = document.getElementById('lorem-status-text');
+
+  function getSelectedType() {
+    var radios = document.querySelectorAll('input[name="lorem-type"]');
+    for (var i = 0; i < radios.length; i++) {
+      if (radios[i].checked) return radios[i].value;
+    }
+    return 'paragraphs';
+  }
+
   function generate() {
-    const text = generateLorem(
-      loremType.value,
+    var text = generateLorem(
+      getSelectedType(),
       parseInt(loremCount.value) || 3,
       loremLang.value,
       loremFormat.value,
       loremStart.checked
     );
-    
+
     if (loremFormat.value === 'html') {
       loremOutput.innerHTML = text;
     } else {
-      loremOutput.innerHTML = text.split('\n\n').map(p => `<p>${p}</p>`).join('');
+      loremOutput.innerHTML = text.split('\n\n').map(function(p) { return '<p>' + p + '</p>'; }).join('');
     }
-    
-    // Статистика
-    const plainText = loremOutput.innerText;
-    const chars = plainText.length;
-    const words = plainText.split(/\s+/).filter(w => w).length;
-    loremStats.textContent = `${chars} ${i18n.characters} • ${words} ${i18n.wordsCount}`;
+
+    var plainText = loremOutput.innerText;
+    var chars = plainText.length;
+    var wordArr = plainText.split(/\s+/).filter(function(w) { return w; });
+    var paragraphs = text.split('\n\n').length;
+
+    document.getElementById('stat-chars').textContent = chars;
+    document.getElementById('stat-words').textContent = wordArr.length;
+    document.getElementById('stat-paragraphs').textContent = paragraphs;
+    document.getElementById('lorem-stats-corner').textContent = chars + ' chars • ' + wordArr.length + ' words';
+
+    statsBar.classList.remove('hidden');
+    statusText.textContent = chars + ' ' + i18n.characters + ' • ' + wordArr.length + ' ' + i18n.wordsCount;
   }
-  
-  document.getElementById('generate-lorem').addEventListener('click', generate);
-  
-  document.getElementById('copy-lorem').addEventListener('click', async () => {
-    const text = loremFormat.value === 'html' 
-      ? loremOutput.innerHTML 
+
+  function copyOutput() {
+    var text = loremFormat.value === 'html'
+      ? loremOutput.innerHTML
       : loremOutput.innerText;
-    await navigator.clipboard.writeText(text);
-    
-    const btn = document.getElementById('copy-lorem');
-    btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> ' + i18n.copied;
-    setTimeout(() => {
-      btn.innerHTML = '<ion-icon name="copy-outline"></ion-icon> ' + i18n.copy;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        showCopied();
+      }).catch(function() {
+        fallbackCopy(text);
+      });
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    ta.style.top = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try {
+      document.execCommand('copy');
+      showCopied();
+    } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  function showCopied() {
+    var btn = document.getElementById('copy-lorem');
+    var btnTop = document.getElementById('btn-copy-top');
+    var origBtn = '<ion-icon name="copy-outline"></ion-icon> ' + i18n.copy;
+    var copiedHtml = '<ion-icon name="checkmark-outline"></ion-icon> ' + i18n.copied;
+
+    btn.innerHTML = copiedHtml;
+    btnTop.innerHTML = copiedHtml;
+    setTimeout(function() {
+      btn.innerHTML = origBtn;
+      btnTop.innerHTML = '<ion-icon name="copy-outline"></ion-icon> <span class="hidden sm:inline">' + i18n.copy + '</span>';
     }, 2000);
+  }
+
+  document.getElementById('generate-lorem').addEventListener('click', generate);
+  document.getElementById('btn-regenerate').addEventListener('click', generate);
+
+  document.getElementById('copy-lorem').addEventListener('click', copyOutput);
+  document.getElementById('btn-copy-top').addEventListener('click', copyOutput);
+
+  document.getElementById('clear-lorem').addEventListener('click', function() {
+    loremOutput.innerHTML = '<p class="text-base-content/40 italic">{{ T "loremIpsum.placeholder" }}</p>';
+    document.getElementById('stat-chars').textContent = '0';
+    document.getElementById('stat-words').textContent = '0';
+    document.getElementById('stat-paragraphs').textContent = '0';
+    document.getElementById('lorem-stats-corner').textContent = '';
+    statsBar.classList.add('hidden');
   });
-  
-  // Генерация при загрузке
+
   generate();
-  
+
 })();
 </script>
 

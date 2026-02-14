@@ -1,5 +1,5 @@
 {{ define "title" }}
-{{ default "URL Encoder/Decoder" }}
+{{ .Title }}
 {{ end }}
 
 {{ define "main" }}
@@ -7,221 +7,283 @@
 <div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
 
   <!-- Hero -->
-  <div class="text-center mb-6 sm:mb-12">
+  <div class="text-center mb-5 sm:mb-8">
     <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
-      <span class="text-3xl sm:text-5xl">🔗</span>
+      <span class="text-3xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}🔗{{ end }}</span>
     </div>
     <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">{{ .Title }}</h1>
-    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto px-2">{{ .Description }}</p>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">{{ .Description }}</p>
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        {{ T "urlEncoder.encode" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="lock-open-outline"></ion-icon>
+        {{ T "urlEncoder.decode" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="git-branch-outline"></ion-icon>
+        {{ T "urlEncoder.parseUrl" }}
+      </span>
+    </div>
   </div>
 
-  <!-- Основной контент -->
-  <div class="max-w-4xl mx-auto">
-    
-    <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-lg sm:shadow-xl overflow-hidden">
-      
-      <!-- Табы режимов -->
-      <div class="flex border-b border-base-200 dark:border-base-content/10">
-        <button class="flex-1 px-2 sm:px-4 py-2.5 sm:py-3 font-medium text-xs sm:text-sm mode-tab border-b-2 border-primary text-primary flex items-center justify-center gap-1 sm:gap-1.5" data-mode="encode">
-          <ion-icon name="lock-closed-outline" class="text-sm sm:text-base"></ion-icon>
-          <span>{{ T "urlEncoder.encode" }}</span>
-        </button>
-        <button class="flex-1 px-2 sm:px-4 py-2.5 sm:py-3 font-medium text-xs sm:text-sm mode-tab border-b-2 border-transparent text-base-content/60 hover:text-base-content active:text-base-content flex items-center justify-center gap-1 sm:gap-1.5" data-mode="decode">
-          <ion-icon name="lock-open-outline" class="text-sm sm:text-base"></ion-icon>
-          <span>{{ T "urlEncoder.decode" }}</span>
-        </button>
-        <button class="flex-1 px-2 sm:px-4 py-2.5 sm:py-3 font-medium text-xs sm:text-sm mode-tab border-b-2 border-transparent text-base-content/60 hover:text-base-content active:text-base-content flex items-center justify-center gap-1 sm:gap-1.5" data-mode="parse">
-          <ion-icon name="git-branch-outline" class="text-sm sm:text-base"></ion-icon>
-          <span class="hidden xs:inline">{{ T "urlEncoder.parseUrl" }}</span>
-          <span class="xs:hidden">Parse</span>
-        </button>
-      </div>
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
 
-      <!-- Encode/Decode панель -->
-      <div id="encode-decode-panel" class="p-3 sm:p-6">
-        
-        <!-- Ввод -->
-        <div class="form-control mb-3 sm:mb-4">
-          <label class="label py-1 sm:py-2">
-            <span class="label-text font-medium text-sm" id="input-label">{{ T "urlEncoder.textToEncode" }}</span>
-            <button id="paste-btn" class="btn btn-ghost btn-xs gap-1">
-              <ion-icon name="clipboard-outline"></ion-icon>
-              <span class="hidden sm:inline">{{ T "urlEncoder.paste" }}</span>
+    <!-- Settings Panel -->
+    <div class="xl:col-span-1 space-y-3 sm:space-y-4 order-2 xl:order-1">
+
+      <!-- Mode -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="flash-outline" class="text-warning"></ion-icon>
+            {{ T "urlEncoder.encode" }} / {{ T "urlEncoder.decode" }}
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-2">
+          <div class="grid grid-cols-1 gap-1.5">
+            <button type="button" class="btn btn-success btn-xs sm:btn-sm gap-1 justify-start mode-tab" data-mode="encode">
+              <ion-icon name="lock-closed-outline"></ion-icon>
+              {{ T "urlEncoder.encode" }}
             </button>
-          </label>
-          <textarea 
-            id="url-input" 
-            class="textarea textarea-bordered h-24 sm:h-32 font-mono text-xs sm:text-sm resize-y"
-            placeholder="{{ T "urlEncoder.inputPlaceholder" }}"
-            autocomplete="off"
-            autocorrect="off"
-            autocapitalize="off"
-            spellcheck="false"
-          ></textarea>
-        </div>
-
-        <!-- Опции -->
-        <div class="flex flex-col xs:flex-row flex-wrap gap-2 xs:gap-3 sm:gap-4 mb-3 sm:mb-4">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="encode-type" value="component" class="radio radio-sm radio-primary" checked />
-            <span class="text-xs sm:text-sm">encodeURIComponent</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="encode-type" value="uri" class="radio radio-sm radio-primary" />
-            <span class="text-xs sm:text-sm">encodeURI</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" id="encode-spaces-plus" class="checkbox checkbox-sm checkbox-primary" />
-            <span class="text-xs sm:text-sm">{{ T "urlEncoder.spacesAsPlus" }}</span>
-          </label>
-        </div>
-
-        <!-- Кнопка -->
-        <div class="flex justify-center mb-3 sm:mb-4">
-          <button id="convert-btn" class="btn btn-primary btn-sm sm:btn-md gap-2 w-full sm:w-auto">
-            <ion-icon name="swap-vertical-outline" class="text-base sm:text-lg"></ion-icon>
-            <span id="convert-btn-text">{{ T "urlEncoder.encodeBtn" }}</span>
+            <button type="button" class="btn btn-info btn-xs sm:btn-sm gap-1 justify-start mode-tab" data-mode="decode">
+              <ion-icon name="lock-open-outline"></ion-icon>
+              {{ T "urlEncoder.decode" }}
+            </button>
+          </div>
+          <div class="divider my-1 text-[10px]">{{ T "urlEncoder.parseUrl" }}</div>
+          <button type="button" class="btn btn-secondary btn-xs sm:btn-sm w-full gap-1 justify-start mode-tab" data-mode="parse">
+            <ion-icon name="git-branch-outline"></ion-icon>
+            {{ T "urlEncoder.parseUrl" }}
           </button>
         </div>
-
-        <!-- Результат -->
-        <div class="form-control">
-          <label class="label py-1 sm:py-2">
-            <span class="label-text font-medium text-sm" id="output-label">{{ T "urlEncoder.result" }}</span>
-            <button id="copy-btn" class="btn btn-ghost btn-xs gap-1">
-              <ion-icon name="copy-outline"></ion-icon>
-              <span class="hidden sm:inline">{{ T "urlEncoder.copy" }}</span>
-            </button>
-          </label>
-          <textarea 
-            id="url-output" 
-            class="textarea textarea-bordered h-24 sm:h-32 font-mono text-xs sm:text-sm bg-base-200/50 resize-y"
-            readonly
-          ></textarea>
-        </div>
-
-        <!-- Статус -->
-        <div id="status" class="hidden alert mt-3 sm:mt-4 text-xs sm:text-sm py-2 sm:py-3">
-          <ion-icon id="status-icon" name="information-circle" class="text-base sm:text-lg"></ion-icon>
-          <span id="status-text"></span>
-        </div>
-        
       </div>
 
-      <!-- Parse URL панель -->
-      <div id="parse-panel" class="hidden p-3 sm:p-6">
-        
-        <div class="form-control mb-3 sm:mb-4">
-          <label class="label py-1 sm:py-2">
-            <span class="label-text font-medium text-sm">{{ T "urlEncoder.urlToParse" }}</span>
-          </label>
-          <input 
-            type="text" 
-            id="parse-input" 
-            class="input input-bordered input-sm sm:input-md font-mono text-xs sm:text-sm"
-            placeholder="https://example.com/path?param=value&foo=bar#hash"
-            autocomplete="off"
-            autocorrect="off"
-            autocapitalize="off"
-            spellcheck="false"
-          />
-        </div>
+      <!-- Encode Options -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden" id="encode-options-panel">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="options-outline" class="text-primary"></ion-icon>
+              {{ T "urlEncoder.result" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
 
-        <button id="parse-btn" class="btn btn-primary btn-sm sm:btn-md gap-2 mb-4 sm:mb-6 w-full sm:w-auto">
-          <ion-icon name="git-branch-outline" class="text-base sm:text-lg"></ion-icon>
-          {{ T "urlEncoder.parseBtn" }}
-        </button>
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "urlEncoder.encode" }}</span>
+              </label>
+              <div class="grid grid-cols-1 gap-1">
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="encode-type" value="component" class="hidden" checked />
+                  <span class="text-[10px] sm:text-xs font-mono">encodeURIComponent</span>
+                </label>
+                <label class="flex items-center justify-center p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-primary/5 transition-all">
+                  <input type="radio" name="encode-type" value="uri" class="hidden" />
+                  <span class="text-[10px] sm:text-xs font-mono">encodeURI</span>
+                </label>
+              </div>
+            </div>
 
-        <!-- Результаты парсинга -->
-        <div id="parse-result" class="hidden space-y-3 sm:space-y-4">
-          
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
-            
-            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
-              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Protocol</div>
-              <div class="font-mono text-xs sm:text-sm break-all" id="parse-protocol">—</div>
-            </div>
-            
-            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
-              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Host</div>
-              <div class="font-mono text-xs sm:text-sm break-all" id="parse-host">—</div>
-            </div>
-            
-            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
-              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Port</div>
-              <div class="font-mono text-xs sm:text-sm break-all" id="parse-port">—</div>
-            </div>
-            
-            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
-              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Pathname</div>
-              <div class="font-mono text-xs sm:text-sm break-all" id="parse-pathname">—</div>
-            </div>
-            
-            <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50 sm:col-span-2">
-              <div class="text-[10px] sm:text-xs text-base-content/50 mb-0.5 sm:mb-1">Hash</div>
-              <div class="font-mono text-xs sm:text-sm break-all" id="parse-hash">—</div>
-            </div>
-            
+            <div class="divider my-0.5"></div>
+
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "urlEncoder.spacesAsPlus" }}</span>
+              <input type="checkbox" id="encode-spaces-plus" class="toggle toggle-xs toggle-primary" />
+            </label>
+
           </div>
-
-          <!-- Query параметры -->
-          <div class="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-base-200/50">
-            <div class="text-[10px] sm:text-xs text-base-content/50 mb-2 sm:mb-3">{{ T "urlEncoder.queryParameters" }}</div>
-            <div id="parse-params" class="space-y-1.5 sm:space-y-2">
-            </div>
-          </div>
-          
-        </div>
-        
+        </details>
       </div>
 
-    </div>
-
-    <!-- Примеры -->
-    <div class="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-      
-      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
-        <div class="flex sm:block items-start gap-3">
-          <ion-icon name="information-circle-outline" class="text-info text-xl sm:text-base shrink-0 mt-0.5 sm:mt-0 sm:hidden"></ion-icon>
-          <div>
-            <h3 class="font-semibold text-sm sm:text-base mb-1.5 sm:mb-3 flex items-center gap-2">
-              <ion-icon name="information-circle-outline" class="text-info hidden sm:inline-block"></ion-icon>
+      <!-- Info cards -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="help-circle-outline" class="text-info"></ion-icon>
               encodeURIComponent
-            </h3>
-            <p class="text-xs sm:text-sm text-base-content/70 mb-1.5 sm:mb-2">{{ T "urlEncoder.componentDesc" }}</p>
-            <div class="text-[10px] sm:text-xs font-mono bg-base-200 p-1.5 sm:p-2 rounded overflow-x-auto">
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-2">
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "urlEncoder.componentDesc" }}</p>
+            <div class="text-[10px] sm:text-xs font-mono bg-base-200/50 p-2 rounded-lg break-all">
               hello world → hello%20world
             </div>
           </div>
+        </details>
+      </div>
+
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="help-circle-outline" class="text-info"></ion-icon>
+              encodeURI
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-2">
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "urlEncoder.uriDesc" }}</p>
+            <div class="text-[10px] sm:text-xs font-mono bg-base-200/50 p-2 rounded-lg break-all">
+              https://site.com/путь → https://site.com/%D0%BF%D1%83%D1%82%D1%8C
+            </div>
+          </div>
+        </details>
+      </div>
+
+    </div>
+
+    <!-- Editor panels -->
+    <div class="xl:col-span-3 space-y-3 sm:space-y-4 order-1 xl:order-2">
+
+      <!-- Encode/Decode panels -->
+      <div id="encode-decode-panel">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+
+          <!-- Input -->
+          <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+            <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+              <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+                <ion-icon name="create-outline" class="text-primary"></ion-icon>
+                <span id="input-label">{{ T "urlEncoder.textToEncode" }}</span>
+              </h2>
+              <button type="button" id="paste-btn" class="btn btn-ghost btn-xs gap-1">
+                <ion-icon name="clipboard-outline"></ion-icon>
+              </button>
+              <button type="button" id="btn-url-clear" class="btn btn-ghost btn-xs gap-1">
+                <ion-icon name="trash-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="relative">
+              <textarea id="url-input" class="w-full h-[250px] sm:h-[400px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none" placeholder="{{ T "urlEncoder.inputPlaceholder" }}" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+            </div>
+            <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+              <button id="convert-btn" class="btn btn-primary btn-xs sm:btn-sm w-full gap-1">
+                <ion-icon name="swap-vertical-outline"></ion-icon>
+                <span id="convert-btn-text">{{ T "urlEncoder.encodeBtn" }}</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Output -->
+          <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+            <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+              <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+                <ion-icon name="checkmark-circle-outline" class="text-success"></ion-icon>
+                <span id="output-label">{{ T "urlEncoder.result" }}</span>
+              </h2>
+              <button type="button" id="copy-btn" class="btn btn-primary btn-xs gap-1">
+                <ion-icon name="copy-outline"></ion-icon>
+                <span class="hidden sm:inline">{{ T "urlEncoder.copy" }}</span>
+              </button>
+            </div>
+            <div class="relative">
+              <textarea id="url-output" class="w-full h-[250px] sm:h-[400px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none" readonly></textarea>
+            </div>
+          </div>
+
         </div>
       </div>
-      
-      <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-base-100 border border-base-200 dark:border-base-content/10">
-        <div class="flex sm:block items-start gap-3">
-          <ion-icon name="information-circle-outline" class="text-info text-xl sm:text-base shrink-0 mt-0.5 sm:mt-0 sm:hidden"></ion-icon>
-          <div class="min-w-0 flex-1">
-            <h3 class="font-semibold text-sm sm:text-base mb-1.5 sm:mb-3 flex items-center gap-2">
-              <ion-icon name="information-circle-outline" class="text-info hidden sm:inline-block"></ion-icon>
-              encodeURI
-            </h3>
-            <p class="text-xs sm:text-sm text-base-content/70 mb-1.5 sm:mb-2">{{ T "urlEncoder.uriDesc" }}</p>
-            <div class="text-[10px] sm:text-xs font-mono bg-base-200 p-1.5 sm:p-2 rounded overflow-x-auto">
-              <span class="whitespace-nowrap">https://site.com/путь → https://site.com/%D0%BF%D1%83%D1%82%D1%8C</span>
+
+      <!-- Parse URL panel -->
+      <div id="parse-panel" class="hidden">
+
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="git-branch-outline" class="text-secondary"></ion-icon>
+              {{ T "urlEncoder.urlToParse" }}
+            </h2>
+            <button type="button" id="btn-parse-clear" class="btn btn-ghost btn-xs gap-1">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+          <div class="relative">
+            <input type="text" id="parse-input" class="w-full p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 focus:outline-none" placeholder="https://example.com/path?param=value&foo=bar#hash" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" />
+          </div>
+          <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+            <button id="parse-btn" class="btn btn-secondary btn-xs sm:btn-sm w-full gap-1">
+              <ion-icon name="git-branch-outline"></ion-icon>
+              {{ T "urlEncoder.parseBtn" }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Parse Result -->
+        <div id="parse-result" class="hidden mt-3 sm:mt-4 space-y-3 sm:space-y-4">
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+            <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Protocol</div>
+              <div class="text-sm sm:text-lg font-bold font-mono text-primary" id="parse-protocol">—</div>
             </div>
+            <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Host</div>
+              <div class="text-sm sm:text-lg font-bold font-mono text-success break-all" id="parse-host">—</div>
+            </div>
+            <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3 text-center">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Port</div>
+              <div class="text-sm sm:text-lg font-bold font-mono text-warning" id="parse-port">—</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Pathname</div>
+              <div class="font-mono text-[11px] sm:text-xs break-all" id="parse-pathname">—</div>
+            </div>
+            <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-3">
+              <div class="text-[10px] sm:text-xs text-base-content/50 mb-1">Hash</div>
+              <div class="font-mono text-[11px] sm:text-xs break-all" id="parse-hash">—</div>
+            </div>
+          </div>
+
+          <!-- Query Parameters -->
+          <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+            <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+              <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+                <ion-icon name="list-outline" class="text-accent"></ion-icon>
+                {{ T "urlEncoder.queryParameters" }}
+              </h2>
+            </div>
+            <div class="p-3 sm:p-4">
+              <div id="parse-params" class="space-y-1.5">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Error panel -->
+      <div id="status" class="hidden bg-error/5 border border-error/20 rounded-xl sm:rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-2 p-3 sm:p-4">
+          <ion-icon id="status-icon" name="information-circle" class="text-xl shrink-0"></ion-icon>
+          <div class="min-w-0 flex-1">
+            <pre class="text-[10px] sm:text-xs font-mono whitespace-pre-wrap break-all" id="status-text"></pre>
           </div>
         </div>
       </div>
-      
-    </div>
 
+    </div>
   </div>
 
+  <!-- Status bar -->
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span id="url-status-text">{{ T "urlEncoder.encode" }} / {{ T "urlEncoder.decode" }}</span>
+    <span>{{ T "cssformatter.statusBrowser" }}</span>
+  </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  
-  // I18N
+
   var i18n = {
     textToEncode: '{{ T "urlEncoder.textToEncode" }}',
     encodedUrl: '{{ T "urlEncoder.encodedUrl" }}',
@@ -238,8 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
     noParams: '{{ T "urlEncoder.noParams" }}',
     defaultPort: '{{ T "urlEncoder.defaultPort" }}'
   };
-  
-  // Элементы
+
   var urlInput = document.getElementById('url-input');
   var urlOutput = document.getElementById('url-output');
   var convertBtn = document.getElementById('convert-btn');
@@ -249,93 +310,102 @@ document.addEventListener('DOMContentLoaded', function() {
   var status = document.getElementById('status');
   var statusIcon = document.getElementById('status-icon');
   var statusText = document.getElementById('status-text');
-  
   var parseInput = document.getElementById('parse-input');
   var parseResult = document.getElementById('parse-result');
-  
+  var urlStatusText = document.getElementById('url-status-text');
+
   var currentMode = 'encode';
-  
-  // Показать статус
+
   function showStatus(message, type) {
     var colors = {
-      success: 'alert-success',
-      error: 'alert-error',
-      info: 'alert-info'
+      success: 'bg-success/5 border-success/20',
+      error: 'bg-error/5 border-error/20',
+      info: 'bg-info/5 border-info/20'
     };
     var icons = {
       success: 'checkmark-circle',
       error: 'alert-circle',
       info: 'information-circle'
     };
-    
-    status.className = 'alert ' + colors[type] + ' mt-4';
+    var textColors = {
+      success: 'text-success',
+      error: 'text-error',
+      info: 'text-info'
+    };
+
+    status.className = 'border rounded-xl sm:rounded-2xl overflow-hidden ' + colors[type];
     statusIcon.setAttribute('name', icons[type]);
+    statusIcon.className = 'text-xl shrink-0 ' + textColors[type];
     statusText.textContent = message;
+    statusText.className = 'text-[10px] sm:text-xs font-mono whitespace-pre-wrap break-all ' + textColors[type] + '/80';
     status.classList.remove('hidden');
-    
+
     if (type === 'success') {
       setTimeout(function() { status.classList.add('hidden'); }, 3000);
     }
   }
-  
-  // Переключение табов
+
+  // Mode tabs
   document.querySelectorAll('.mode-tab').forEach(function(tab) {
     tab.addEventListener('click', function() {
       var mode = tab.dataset.mode;
       currentMode = mode;
-      
+
       document.querySelectorAll('.mode-tab').forEach(function(t) {
-        t.classList.remove('border-primary', 'text-primary');
-        t.classList.add('border-transparent', 'text-base-content/60');
+        t.classList.remove('btn-active');
       });
-      tab.classList.add('border-primary', 'text-primary');
-      tab.classList.remove('border-transparent', 'text-base-content/60');
-      
+      tab.classList.add('btn-active');
+
       if (mode === 'parse') {
         document.getElementById('encode-decode-panel').classList.add('hidden');
         document.getElementById('parse-panel').classList.remove('hidden');
+        document.getElementById('encode-options-panel').classList.add('hidden');
+        urlStatusText.textContent = '{{ T "urlEncoder.parseUrl" }}';
       } else {
         document.getElementById('encode-decode-panel').classList.remove('hidden');
         document.getElementById('parse-panel').classList.add('hidden');
-        
+        document.getElementById('encode-options-panel').classList.remove('hidden');
+
         if (mode === 'encode') {
           inputLabel.textContent = i18n.textToEncode;
           outputLabel.textContent = i18n.encodedUrl;
           convertBtnText.textContent = i18n.encodeBtn;
+          urlStatusText.textContent = '{{ T "urlEncoder.encode" }}';
         } else {
           inputLabel.textContent = i18n.encodedUrlInput;
           outputLabel.textContent = i18n.decodedText;
           convertBtnText.textContent = i18n.decodeBtn;
+          urlStatusText.textContent = '{{ T "urlEncoder.decode" }}';
         }
       }
+
+      status.classList.add('hidden');
     });
   });
-  
-  // Конвертация
+
+  // Convert
   convertBtn.addEventListener('click', function() {
     var input = urlInput.value;
     if (!input) {
       showStatus(i18n.enterText, 'error');
       return;
     }
-    
+
     var encodeType = document.querySelector('input[name="encode-type"]:checked').value;
     var spacesAsPlus = document.getElementById('encode-spaces-plus').checked;
-    
+
     try {
       var result;
-      
+
       if (currentMode === 'encode') {
         if (encodeType === 'component') {
           result = encodeURIComponent(input);
         } else {
           result = encodeURI(input);
         }
-        
         if (spacesAsPlus) {
           result = result.replace(/%20/g, '+');
         }
-        
         showStatus(i18n.encoded, 'success');
       } else {
         var decoded = input;
@@ -345,76 +415,119 @@ document.addEventListener('DOMContentLoaded', function() {
         result = decodeURIComponent(decoded);
         showStatus(i18n.decoded, 'success');
       }
-      
+
       urlOutput.value = result;
     } catch (e) {
       showStatus(i18n.error + ': ' + e.message, 'error');
     }
   });
-  
+
   // Parse URL
   document.getElementById('parse-btn').addEventListener('click', function() {
     var input = parseInput.value.trim();
     if (!input) return;
-    
+
     try {
       var url = new URL(input);
-      
+
       document.getElementById('parse-protocol').textContent = url.protocol || '—';
       document.getElementById('parse-host').textContent = url.hostname || '—';
       document.getElementById('parse-port').textContent = url.port || i18n.defaultPort;
       document.getElementById('parse-pathname').textContent = url.pathname || '/';
       document.getElementById('parse-hash').textContent = url.hash || '—';
-      
+
       var paramsContainer = document.getElementById('parse-params');
       var params = new URLSearchParams(url.search);
       var paramsArray = [];
       params.forEach(function(value, key) {
         paramsArray.push({ key: key, value: value });
       });
-      
+
       if (paramsArray.length === 0) {
-        paramsContainer.innerHTML = '<div class="text-base-content/50 text-sm">' + i18n.noParams + '</div>';
+        paramsContainer.innerHTML = '<div class="text-[10px] sm:text-xs text-base-content/50">' + i18n.noParams + '</div>';
       } else {
         paramsContainer.innerHTML = paramsArray.map(function(p) {
-          return '<div class="flex items-center gap-2 p-2 bg-base-100 rounded-lg">' +
-            '<span class="font-mono text-sm text-primary font-medium">' + p.key + '</span>' +
-            '<span class="text-base-content/40">=</span>' +
-            '<span class="font-mono text-sm flex-1 break-all">' + p.value + '</span>' +
+          return '<div class="flex items-center gap-2 p-2 sm:p-2.5 bg-base-200/50 rounded-lg">' +
+            '<span class="font-mono text-[10px] sm:text-xs text-primary font-medium">' + p.key + '</span>' +
+            '<span class="text-base-content/30">=</span>' +
+            '<span class="font-mono text-[10px] sm:text-xs flex-1 break-all">' + p.value + '</span>' +
             '<button class="btn btn-ghost btn-xs copy-param" data-value="' + encodeURIComponent(p.value) + '">' +
             '<ion-icon name="copy-outline"></ion-icon>' +
             '</button>' +
             '</div>';
         }).join('');
-        
+
         paramsContainer.querySelectorAll('.copy-param').forEach(function(btn) {
           btn.addEventListener('click', function() {
-            navigator.clipboard.writeText(decodeURIComponent(btn.dataset.value));
+            var val = decodeURIComponent(btn.dataset.value);
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(val);
+            } else {
+              fallbackCopy(val);
+            }
           });
         });
       }
-      
+
       parseResult.classList.remove('hidden');
+      status.classList.add('hidden');
     } catch (e) {
       showStatus(i18n.invalidUrl, 'error');
+      parseResult.classList.add('hidden');
     }
   });
-  
-  // Вставить
+
+  // Paste
   document.getElementById('paste-btn').addEventListener('click', function() {
-    navigator.clipboard.readText().then(function(text) {
-      urlInput.value = text;
-    });
+    if (navigator.clipboard && navigator.clipboard.readText) {
+      navigator.clipboard.readText().then(function(text) {
+        urlInput.value = text;
+      });
+    }
   });
-  
-  // Копировать
+
+  // Copy
   document.getElementById('copy-btn').addEventListener('click', function() {
     if (urlOutput.value) {
-      navigator.clipboard.writeText(urlOutput.value);
-      showStatus(i18n.copied, 'success');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(urlOutput.value).then(function() {
+          showStatus(i18n.copied, 'success');
+        });
+      } else {
+        fallbackCopy(urlOutput.value);
+      }
     }
   });
-  
+
+  // Clear
+  document.getElementById('btn-url-clear').addEventListener('click', function() {
+    urlInput.value = '';
+    urlOutput.value = '';
+    status.classList.add('hidden');
+  });
+
+  document.getElementById('btn-parse-clear').addEventListener('click', function() {
+    parseInput.value = '';
+    parseResult.classList.add('hidden');
+    status.classList.add('hidden');
+  });
+
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    ta.style.top = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try {
+      document.execCommand('copy');
+      showStatus(i18n.copied, 'success');
+    } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
 });
 </script>
 

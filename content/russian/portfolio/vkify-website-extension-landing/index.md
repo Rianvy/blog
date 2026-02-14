@@ -90,8 +90,6 @@ github: "https://github.com/VKify/frontend"
 
 Сайт полностью поддерживает светлую и тёмную тему. Используйте переключатели для сравнения:
 
-### Главная страница
-
 {{< theme-compare 
     light="work/home-light.png" 
     dark="work/home-dark.png" 
@@ -99,8 +97,6 @@ github: "https://github.com/VKify/frontend"
     caption="Hero-секция с преимуществами расширения"
     mode="toggle"
 >}}
-
-### История обновлений
 
 {{< theme-compare 
     light="work/changelog-light.png" 
@@ -110,8 +106,6 @@ github: "https://github.com/VKify/frontend"
     mode="slider"
 >}}
 
-### Подробности обновления
-
 {{< theme-compare 
     light="work/changelog-detail-light.png" 
     dark="work/changelog-detail-dark.png" 
@@ -120,16 +114,12 @@ github: "https://github.com/VKify/frontend"
     mode="side-by-side"
 >}}
 
-### Политика конфиденциальности
-
 {{< theme-compare 
     light="work/privacy-light.png" 
     dark="work/privacy-dark.png" 
     title="Privacy Policy"
     caption="Политика конфиденциальности"
 >}}
-
-### Условия использования
 
 {{< theme-compare 
     light="work/terms-light.png" 
@@ -138,8 +128,6 @@ github: "https://github.com/VKify/frontend"
     caption="Условия использования"
 >}}
 
-### Страница после установки
-
 {{< theme-compare 
     light="work/welcome-light.png" 
     dark="work/welcome-dark.png" 
@@ -147,16 +135,12 @@ github: "https://github.com/VKify/frontend"
     caption="Страница после установки"
 >}}
 
-### Страница после удаления
-
 {{< theme-compare 
     light="work/uninstall-light.png" 
     dark="work/uninstall-dark.png" 
     title="Uninstall Feedback"
     caption="Страница после удаления"
 >}}
-
-### Страница 404
 
 {{< theme-compare 
     light="work/404-light.png" 

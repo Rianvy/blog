@@ -7,6 +7,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#2A303C" media="(prefers-color-scheme: dark)" />
+
+    
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
     <title>VKify Website — Лендинг для браузерного расширения | 0x69.ru</title>
     
 
@@ -234,15 +241,12 @@
 <div x-data="{ isSticky: false, mobileMenuOpen: false }"
      x-init="
        
-       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
-       
        $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
      ">
 
   
   
-  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
-       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  <nav class="mt-4 lg:mt-8 py-4">
   
 
     
@@ -1442,13 +1446,13 @@
 <hr>
 <h2 id="-интерфейс-сайта">🖼️ Интерфейс сайта</h2>
 <p>Сайт полностью поддерживает светлую и тёмную тему. Используйте переключатели для сравнения:</p>
-<div class="theme-compare-351769482 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-814529673 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Лендинг VKify</h4>
-  <div class="tc-toggle-351769482">
+  <div class="tc-toggle-814529673">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-351769482 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-814529673 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Показать светлую тему"
         >
@@ -1458,7 +1462,7 @@
           Светлая
         </button>
         <button 
-          class="tc-btn-351769482 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-814529673 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Показать тёмную тему"
         >
@@ -1471,7 +1475,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-351769482 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-814529673 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/portfolio/vkify-website-extension-landing/work/home-light_hu_1fd9df1c72e669ca.webp" 
           alt="Лендинг VKify - Светлая"
@@ -1480,7 +1484,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-351769482 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-814529673 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/portfolio/vkify-website-extension-landing/work/home-dark_hu_c46dd44f23d71a6e.webp" 
           alt="Лендинг VKify - Тёмная"
@@ -1495,41 +1499,41 @@
 </div>
 
 <style>
-  .tc-btn-351769482 {
+  .tc-btn-814529673 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-351769482.active {
+  .tc-btn-814529673.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-351769482:hover:not(.active) {
+  .tc-btn-814529673:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-351769482 {
+  .tc-slider-container-814529673 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-351769482 img {
+  .tc-slider-container-814529673 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-351769482:hover > div:last-child,
-  .tc-handle-351769482:active > div:last-child {
+  .tc-handle-814529673:hover > div:last-child,
+  .tc-handle-814529673:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-351769482 > div:last-child {
+  .tc-handle-814529673 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-351769482 {
+  .tc-overlay-814529673 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -1537,7 +1541,7 @@
 
 <script>
 (function() {
-  const id = '351769482';
+  const id = '814529673';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -1563,10 +1567,10 @@
   });
 })();
 </script>
-<div class="theme-compare-246398751 my-8 not-prose" data-mode="slider" data-tc-exclude>
+<div class="theme-compare-732498156 my-8 not-prose" data-mode="slider" data-tc-exclude>
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Changelog</h4>
-  <div class="tc-slider-246398751 relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-    <div class="tc-slider-container-246398751 relative select-none" style="--pos: 50%;">
+  <div class="tc-slider-732498156 relative overflow-hidden rounded-xl shadow-lg border border-base-300">
+    <div class="tc-slider-container-732498156 relative select-none" style="--pos: 50%;">
       <img 
         src="/portfolio/vkify-website-extension-landing/work/changelog-dark_hu_fd04a0bf6a934a95.webp" 
         alt="Changelog - Тёмная"
@@ -1575,7 +1579,7 @@
         draggable="false"
       />
       
-      <div class="tc-overlay-246398751 absolute inset-0 overflow-hidden" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0);">
+      <div class="tc-overlay-732498156 absolute inset-0 overflow-hidden" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0);">
         <img 
           src="/portfolio/vkify-website-extension-landing/work/changelog-light_hu_5bc748280ee4bfc3.webp" 
           alt="Changelog - Светлая"
@@ -1585,7 +1589,7 @@
         />
       </div>
       
-      <div class="tc-handle-246398751 absolute top-0 bottom-0 cursor-ew-resize z-10 flex items-center justify-center" style="left: var(--pos); transform: translateX(-50%); width: 44px;">
+      <div class="tc-handle-732498156 absolute top-0 bottom-0 cursor-ew-resize z-10 flex items-center justify-center" style="left: var(--pos); transform: translateX(-50%); width: 44px;">
         <div class="absolute top-0 bottom-0 w-0.5 bg-white" style="box-shadow: 0 0 10px rgba(0,0,0,0.5);"></div>
         <div class="relative w-11 h-11 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-white/50" style="box-shadow: 0 2px 20px rgba(0,0,0,0.3);">
           <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
@@ -1609,41 +1613,41 @@
 </div>
 
 <style>
-  .tc-btn-246398751 {
+  .tc-btn-732498156 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-246398751.active {
+  .tc-btn-732498156.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-246398751:hover:not(.active) {
+  .tc-btn-732498156:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-246398751 {
+  .tc-slider-container-732498156 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-246398751 img {
+  .tc-slider-container-732498156 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-246398751:hover > div:last-child,
-  .tc-handle-246398751:active > div:last-child {
+  .tc-handle-732498156:hover > div:last-child,
+  .tc-handle-732498156:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-246398751 > div:last-child {
+  .tc-handle-732498156 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-246398751 {
+  .tc-overlay-732498156 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -1651,7 +1655,7 @@
 
 <script>
 (function() {
-  const id = '246398751';
+  const id = '732498156';
   const mode = 'slider';
   const sliderContainer = document.querySelector('.tc-slider-container-' + id);
   const handle = document.querySelector('.tc-handle-' + id);
@@ -1701,10 +1705,10 @@
   });
 })();
 </script>
-<div class="theme-compare-462357819 my-8 not-prose" data-mode="side-by-side" >
+<div class="theme-compare-471923658 my-8 not-prose" data-mode="side-by-side" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Детали релиза</h4>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div class="tc-card-462357819 rounded-xl overflow-hidden shadow-lg border border-base-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <div class="tc-card-471923658 rounded-xl overflow-hidden shadow-lg border border-base-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 px-4 py-2 flex items-center gap-2 border-b border-base-300">
         <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
@@ -1720,7 +1724,7 @@
       />
     </div>
     
-    <div class="tc-card-462357819 rounded-xl overflow-hidden shadow-lg border border-base-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <div class="tc-card-471923658 rounded-xl overflow-hidden shadow-lg border border-base-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       <div class="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 px-4 py-2 flex items-center gap-2 border-b border-base-300">
         <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
@@ -1740,41 +1744,41 @@
 </div>
 
 <style>
-  .tc-btn-462357819 {
+  .tc-btn-471923658 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-462357819.active {
+  .tc-btn-471923658.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-462357819:hover:not(.active) {
+  .tc-btn-471923658:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-462357819 {
+  .tc-slider-container-471923658 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-462357819 img {
+  .tc-slider-container-471923658 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-462357819:hover > div:last-child,
-  .tc-handle-462357819:active > div:last-child {
+  .tc-handle-471923658:hover > div:last-child,
+  .tc-handle-471923658:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-462357819 > div:last-child {
+  .tc-handle-471923658 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-462357819 {
+  .tc-overlay-471923658 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -1782,17 +1786,17 @@
 
 <script>
 (function() {
-  const id = '462357819';
+  const id = '471923658';
   const mode = 'side-by-side';
 })();
 </script>
-<div class="theme-compare-642351987 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-894567123 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Privacy Policy</h4>
-  <div class="tc-toggle-642351987">
+  <div class="tc-toggle-894567123">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-642351987 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-894567123 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Показать светлую тему"
         >
@@ -1802,7 +1806,7 @@
           Светлая
         </button>
         <button 
-          class="tc-btn-642351987 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-894567123 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Показать тёмную тему"
         >
@@ -1815,7 +1819,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-642351987 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-894567123 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/portfolio/vkify-website-extension-landing/work/privacy-light_hu_591edeeb1785d8ff.webp" 
           alt="Privacy Policy - Светлая"
@@ -1824,7 +1828,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-642351987 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-894567123 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/portfolio/vkify-website-extension-landing/work/privacy-dark_hu_c9596d8ed6c381fc.webp" 
           alt="Privacy Policy - Тёмная"
@@ -1839,41 +1843,41 @@
 </div>
 
 <style>
-  .tc-btn-642351987 {
+  .tc-btn-894567123 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-642351987.active {
+  .tc-btn-894567123.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-642351987:hover:not(.active) {
+  .tc-btn-894567123:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-642351987 {
+  .tc-slider-container-894567123 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-642351987 img {
+  .tc-slider-container-894567123 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-642351987:hover > div:last-child,
-  .tc-handle-642351987:active > div:last-child {
+  .tc-handle-894567123:hover > div:last-child,
+  .tc-handle-894567123:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-642351987 > div:last-child {
+  .tc-handle-894567123 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-642351987 {
+  .tc-overlay-894567123 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -1881,7 +1885,7 @@
 
 <script>
 (function() {
-  const id = '642351987';
+  const id = '894567123';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -1907,13 +1911,13 @@
   });
 })();
 </script>
-<div class="theme-compare-354691278 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-965318742 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Terms of Service</h4>
-  <div class="tc-toggle-354691278">
+  <div class="tc-toggle-965318742">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-354691278 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-965318742 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Показать светлую тему"
         >
@@ -1923,7 +1927,7 @@
           Светлая
         </button>
         <button 
-          class="tc-btn-354691278 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-965318742 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Показать тёмную тему"
         >
@@ -1936,7 +1940,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-354691278 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-965318742 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/portfolio/vkify-website-extension-landing/work/terms-light_hu_cd82937bfa8c30b1.webp" 
           alt="Terms of Service - Светлая"
@@ -1945,7 +1949,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-354691278 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-965318742 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/portfolio/vkify-website-extension-landing/work/terms-dark_hu_a4c4bfdf86adc83f.webp" 
           alt="Terms of Service - Тёмная"
@@ -1960,41 +1964,41 @@
 </div>
 
 <style>
-  .tc-btn-354691278 {
+  .tc-btn-965318742 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-354691278.active {
+  .tc-btn-965318742.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-354691278:hover:not(.active) {
+  .tc-btn-965318742:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-354691278 {
+  .tc-slider-container-965318742 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-354691278 img {
+  .tc-slider-container-965318742 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-354691278:hover > div:last-child,
-  .tc-handle-354691278:active > div:last-child {
+  .tc-handle-965318742:hover > div:last-child,
+  .tc-handle-965318742:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-354691278 > div:last-child {
+  .tc-handle-965318742 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-354691278 {
+  .tc-overlay-965318742 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2002,7 +2006,7 @@
 
 <script>
 (function() {
-  const id = '354691278';
+  const id = '965318742';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -2028,13 +2032,13 @@
   });
 })();
 </script>
-<div class="theme-compare-385641297 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-219864735 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Welcome / Onboarding</h4>
-  <div class="tc-toggle-385641297">
+  <div class="tc-toggle-219864735">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-385641297 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-219864735 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Показать светлую тему"
         >
@@ -2044,7 +2048,7 @@
           Светлая
         </button>
         <button 
-          class="tc-btn-385641297 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-219864735 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Показать тёмную тему"
         >
@@ -2057,7 +2061,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-385641297 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-219864735 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/portfolio/vkify-website-extension-landing/work/welcome-light_hu_fe91d9a2962043f7.webp" 
           alt="Welcome / Onboarding - Светлая"
@@ -2066,7 +2070,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-385641297 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-219864735 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/portfolio/vkify-website-extension-landing/work/welcome-dark_hu_4b48ce1a289a25ff.webp" 
           alt="Welcome / Onboarding - Тёмная"
@@ -2081,41 +2085,41 @@
 </div>
 
 <style>
-  .tc-btn-385641297 {
+  .tc-btn-219864735 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-385641297.active {
+  .tc-btn-219864735.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-385641297:hover:not(.active) {
+  .tc-btn-219864735:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-385641297 {
+  .tc-slider-container-219864735 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-385641297 img {
+  .tc-slider-container-219864735 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-385641297:hover > div:last-child,
-  .tc-handle-385641297:active > div:last-child {
+  .tc-handle-219864735:hover > div:last-child,
+  .tc-handle-219864735:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-385641297 > div:last-child {
+  .tc-handle-219864735 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-385641297 {
+  .tc-overlay-219864735 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2123,7 +2127,7 @@
 
 <script>
 (function() {
-  const id = '385641297';
+  const id = '219864735';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -2149,13 +2153,13 @@
   });
 })();
 </script>
-<div class="theme-compare-631289574 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-798435612 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Uninstall Feedback</h4>
-  <div class="tc-toggle-631289574">
+  <div class="tc-toggle-798435612">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-631289574 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-798435612 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Показать светлую тему"
         >
@@ -2165,7 +2169,7 @@
           Светлая
         </button>
         <button 
-          class="tc-btn-631289574 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-798435612 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Показать тёмную тему"
         >
@@ -2178,7 +2182,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-631289574 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-798435612 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/portfolio/vkify-website-extension-landing/work/uninstall-light_hu_f85404ce53526a3.webp" 
           alt="Uninstall Feedback - Светлая"
@@ -2187,7 +2191,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-631289574 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-798435612 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/portfolio/vkify-website-extension-landing/work/uninstall-dark_hu_9641a53ce14b01a6.webp" 
           alt="Uninstall Feedback - Тёмная"
@@ -2202,41 +2206,41 @@
 </div>
 
 <style>
-  .tc-btn-631289574 {
+  .tc-btn-798435612 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-631289574.active {
+  .tc-btn-798435612.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-631289574:hover:not(.active) {
+  .tc-btn-798435612:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-631289574 {
+  .tc-slider-container-798435612 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-631289574 img {
+  .tc-slider-container-798435612 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-631289574:hover > div:last-child,
-  .tc-handle-631289574:active > div:last-child {
+  .tc-handle-798435612:hover > div:last-child,
+  .tc-handle-798435612:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-631289574 > div:last-child {
+  .tc-handle-798435612 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-631289574 {
+  .tc-overlay-798435612 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2244,7 +2248,7 @@
 
 <script>
 (function() {
-  const id = '631289574';
+  const id = '798435612';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -2270,13 +2274,13 @@
   });
 })();
 </script>
-<div class="theme-compare-845236179 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-516328479 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Страница ошибки</h4>
-  <div class="tc-toggle-845236179">
+  <div class="tc-toggle-516328479">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-845236179 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-516328479 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Показать светлую тему"
         >
@@ -2286,7 +2290,7 @@
           Светлая
         </button>
         <button 
-          class="tc-btn-845236179 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-516328479 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Показать тёмную тему"
         >
@@ -2299,7 +2303,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-845236179 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-516328479 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/portfolio/vkify-website-extension-landing/work/404-light_hu_8e1d16f9ef7bcdeb.webp" 
           alt="Страница ошибки - Светлая"
@@ -2308,7 +2312,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-845236179 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-516328479 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/portfolio/vkify-website-extension-landing/work/404-dark_hu_f41509342111ea80.webp" 
           alt="Страница ошибки - Тёмная"
@@ -2323,41 +2327,41 @@
 </div>
 
 <style>
-  .tc-btn-845236179 {
+  .tc-btn-516328479 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-845236179.active {
+  .tc-btn-516328479.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-845236179:hover:not(.active) {
+  .tc-btn-516328479:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-845236179 {
+  .tc-slider-container-516328479 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-845236179 img {
+  .tc-slider-container-516328479 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-845236179:hover > div:last-child,
-  .tc-handle-845236179:active > div:last-child {
+  .tc-handle-516328479:hover > div:last-child,
+  .tc-handle-516328479:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-845236179 > div:last-child {
+  .tc-handle-516328479 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-845236179 {
+  .tc-overlay-516328479 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2365,7 +2369,7 @@
 
 <script>
 (function() {
-  const id = '845236179';
+  const id = '516328479';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);

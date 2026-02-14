@@ -7,6 +7,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#2A303C" media="(prefers-color-scheme: dark)" />
+
+    
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
     <title>Tree | 0x69.ru</title>
     
 
@@ -145,15 +152,12 @@
 <div x-data="{ isSticky: false, mobileMenuOpen: false }"
      x-init="
        
-       window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 });
-       
        $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
      ">
 
   
   
-  <nav class="sticky top-0 z-30 mt-4 lg:mt-8 py-4 transition-all duration-300 transform-gpu will-change-transform"
-       :class="{ 'bg-base-100/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]': isSticky }">
+  <nav class="mt-4 lg:mt-8 py-4">
   
 
     

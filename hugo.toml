@@ -75,7 +75,6 @@ enableRobotsTXT = true
   SyntaxHighlightingThemeLight = "atom-one-light"
   SyntaxHighlightingThemeDark = "github-dark-dimmed"
   SyntaxHighlightingLanguages = ["apache", "json", "javascript", "typescript", "bash", "shell", "sh", "zsh", "powershell", "ini", "nginx", "php"]
-  stickyNav = true
   portfolio = true
   utilities = true
   reorderNavItems = ["search", "categories", "portfolio", "posts", "utilities", "tags", "github", "rss"]

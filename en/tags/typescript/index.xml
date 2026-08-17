@@ -6,14 +6,28 @@
     <description>Recent content in Typescript on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 09 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2026 12:00:00 +0300</lastBuildDate>
     <atom:link href="https://0x69.ru/en/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CleanSlate for Reddit — Private Reddit History Cleanup</title>
+      <link>https://0x69.ru/en/portfolio/cleanslate-for-reddit/</link>
+      <pubDate>Mon, 17 Aug 2026 12:00:00 +0300</pubDate>
+      <guid>https://0x69.ru/en/portfolio/cleanslate-for-reddit/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;CleanSlate for Reddit&lt;/strong&gt; is a local browser extension for safely and deliberately cleaning your own Reddit history without a subscription, an external server, or third-party data sharing.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>JSON → TypeScript / Go / Zod</title>
       <link>https://0x69.ru/en/utilities/json-to-types/</link>
       <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
       <guid>https://0x69.ru/en/utilities/json-to-types/</guid>
       <description>&lt;p&gt;Generate TypeScript interfaces, Go structs, Zod schemas and JSON Schema from JSON data&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VKify — Extension for VKontakte</title>
+      <link>https://0x69.ru/en/portfolio/vkify-vkontakte-extension/</link>
+      <pubDate>Tue, 27 Jan 2026 17:35:43 +0300</pubDate>
+      <guid>https://0x69.ru/en/portfolio/vkify-vkontakte-extension/</guid>
+      <description>&lt;p&gt;VKify brings VK appearance controls, a cleaner feed, privacy tools, conversation export, media downloads, and automation together in one extension for Chrome, Firefox, and Opera.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

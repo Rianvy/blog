@@ -6,8 +6,22 @@
     <description>Recent content in Утилиты on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>ru</language>
-    <lastBuildDate>Thu, 12 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://0x69.ru/utilities/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GitSmith — Visual Git Command Builder</title>
+      <link>https://0x69.ru/utilities/git-smith/</link>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/git-smith/</guid>
+      <description>&lt;p&gt;Визуальный конструктор git-команд: выберите команду, настройте флаги и параметры, получите готовую команду для копирования. Подсказки для каждого флага, предупреждения о деструктивных операциях (reset &amp;ndash;hard, push &amp;ndash;force), объяснения команд на русском языке.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>HostsLens</title>
+      <link>https://0x69.ru/utilities/hostslens/</link>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/hostslens/</guid>
+      <description>&lt;p&gt;Парсинг hosts-файлов, конвертация в AdGuard DNS-фильтры, фильтрация по категориям&lt;/p&gt;</description>
+    </item>
     <item>
       <title>CSS Formatter</title>
       <link>https://0x69.ru/utilities/css-formatter/</link>

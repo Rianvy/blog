@@ -1,0 +1,2447 @@
+<!DOCTYPE html>
+<html lang="ru"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#2A303C" media="(prefers-color-scheme: dark)" />
+
+    
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+    <title>GitSmith — Visual Git Command Builder | 0x69.ru</title>
+    
+
+
+<link rel="icon" type="image/png" href="https://0x69.ru/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="https://0x69.ru/favicon.svg" />
+<link rel="shortcut icon" href="https://0x69.ru/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://0x69.ru/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="0x69" />
+<link rel="manifest" href="https://0x69.ru/site.webmanifest" />
+
+
+
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+
+
+
+<link rel="canonical" href="https://0x69.ru/utilities/git-smith/" />
+
+
+
+  <link rel="alternate" hreflang="ru" href="https://0x69.ru/utilities/git-smith/" />
+  <link rel="alternate" hreflang="x-default" href="https://0x69.ru/utilities/git-smith/" />
+
+
+
+
+
+<meta name="author" content="Rianvy" />
+
+
+<meta name="description" content="Визуальный конструктор git-команд с подсказками, предупреждениями о деструктивных операциях и объяснениями" />
+
+
+<meta name="keywords" content="git command builder online, visual git command generator, git command helper, git cheat sheet interactive, конструктор git команд онлайн" /><meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+
+<meta property="og:title" content="GitSmith — Visual Git Command Builder" />
+
+
+<meta property="og:description" content="Визуальный конструктор git-команд с подсказками, предупреждениями о деструктивных операциях и объяснениями" />
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://0x69.ru/utilities/git-smith/" />
+<meta property="og:site_name" content="0x69.ru" />
+
+
+<meta property="og:locale" content="ru_RU" />
+
+
+<meta property="og:image" content="https://0x69.ru/images/og-background_hu_c7564f2cfae0a8d.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="GitSmith — Visual Git Command Builder" />
+
+
+<meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="GitSmith — Visual Git Command Builder" />
+
+<meta name="twitter:description" content="Визуальный конструктор git-команд с подсказками, предупреждениями о деструктивных операциях и объяснениями" />
+
+<meta name="twitter:image" content="https://0x69.ru/images/og-background_hu_c7564f2cfae0a8d.png" />
+<meta name="twitter:image:alt" content="GitSmith — Visual Git Command Builder" />
+
+
+<meta property="vk:image" content="https://0x69.ru/images/og-background_hu_c7564f2cfae0a8d.png" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rianvy",
+  "url": "https://0x69.ru/",
+  "image": "https://0x69.ru/img/avatar.jpg","email": "blackghost.v1@gmail.com","sameAs": ["https://github.com/rianvy"]}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "0x69.ru",
+      "item": "https://0x69.ru/ru/"
+    },{
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Утилиты",
+      "item": "https://0x69.ru/utilities/"
+    },{
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "GitSmith — Visual Git Command Builder",
+      "item": "https://0x69.ru/utilities/git-smith/"
+    }
+  ]
+}
+</script>
+
+
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+     
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  <nav class="mt-4 lg:mt-8 py-4">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Повернуть!"
+                aria-label="Повернуть!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">Документируй сегодня то, что забудешь завтра</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="Обо мне">Обо мне</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Поиск"
+   aria-label="Поиск">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Категории"
+   aria-label="Категории">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Портфолио"
+   aria-label="Портфолио">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Утилиты"
+   aria-label="Утилиты">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+
+                
+                
+                
+
+                
+                  
+                
+
+                <li role="none">
+                  <a href="/en/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                  </a>
+                </li>
+              
+                
+                
+
+                
+                
+                
+
+                
+                  
+                
+
+                <li role="none">
+                  <a href="/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">11</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">198</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Меню</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="Обо мне"
+                aria-label="Обо мне">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">Обо мне</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+
+        
+        
+        
+
+        
+          
+        
+        
+        <li>
+          <a href="/en/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                    "
+             >
+            <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+            <span class="flex-1">English</span>
+            
+          </a>
+        </li>
+      
+        
+        
+
+        
+        
+        
+
+        
+          
+        
+        
+        <li>
+          <a href="/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                    bg-primary/10 text-primary font-semibold"
+             aria-current="true">
+            <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Поиск</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Категории</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Портфолио</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">6</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">11</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Утилиты">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Утилиты</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">26</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">198</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+
+    <style>
+    .flip-container .back {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .flip-container.flip-it .back {
+      opacity: 1;
+      visibility: visible;
+    }
+    </style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
+
+  
+  <div class="text-center mb-5 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">🔧</span>
+    </div>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">GitSmith — Visual Git Command Builder</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">Визуальный конструктор git-команд с подсказками, предупреждениями о деструктивных операциях и объяснениями</p>
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="construct-outline"></ion-icon>
+        Конструктор
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+        <ion-icon name="warning-outline"></ion-icon>
+        Безопасность
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="school-outline"></ion-icon>
+        Объяснения
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="time-outline"></ion-icon>
+        История
+      </span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
+
+    
+    <div class="xl:col-span-1 space-y-3 sm:space-y-4 order-2 xl:order-1">
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="flash-outline" class="text-success"></ion-icon>
+              Основные
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3 grid grid-cols-2 gap-1.5" id="cat-basic"></div>
+        </details>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="git-branch-outline" class="text-info"></ion-icon>
+              Ветки
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3 grid grid-cols-2 gap-1.5" id="cat-branches"></div>
+        </details>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="time-outline" class="text-accent"></ion-icon>
+              История
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3 grid grid-cols-2 gap-1.5" id="cat-history"></div>
+        </details>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="arrow-undo-outline" class="text-error"></ion-icon>
+              Отмена
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3 grid grid-cols-2 gap-1.5" id="cat-undo"></div>
+        </details>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="cloud-outline" class="text-warning"></ion-icon>
+              Удалённые
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3 grid grid-cols-2 gap-1.5" id="cat-remote"></div>
+        </details>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="rocket-outline" class="text-secondary"></ion-icon>
+              Продвинутые
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3 grid grid-cols-2 gap-1.5" id="cat-advanced"></div>
+        </details>
+      </div>
+
+      
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="receipt-outline" class="text-base-content/60"></ion-icon>
+              История команд
+              <span class="badge badge-xs badge-ghost" id="history-count">0</span>
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3">
+            <div id="history-list" class="space-y-1 max-h-60 overflow-y-auto"></div>
+            <div id="history-empty" class="text-center py-3 text-xs text-base-content/40">Пока нет команд</div>
+            <button type="button" id="btn-clear-history" class="btn btn-ghost btn-xs w-full mt-2 gap-1 hidden">
+              <ion-icon name="trash-outline"></ion-icon>
+              Очистить историю
+            </button>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    
+    <div class="xl:col-span-3 space-y-3 sm:space-y-4 order-1 xl:order-2">
+
+      
+      <div id="empty-state" class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="flex flex-col items-center justify-center py-16 sm:py-24 px-4 text-center">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-base-200/50 flex items-center justify-center mb-4">
+            <ion-icon name="git-branch-outline" class="text-3xl sm:text-4xl text-base-content/30"></ion-icon>
+          </div>
+          <h3 class="text-base sm:text-lg font-semibold text-base-content/50 mb-2">Выберите команду</h3>
+          <p class="text-xs sm:text-sm text-base-content/40 max-w-sm">Кликните на команду слева, чтобы открыть конструктор с настройками флагов и параметров</p>
+        </div>
+      </div>
+
+      
+      <div id="builder-panel" class="hidden space-y-3 sm:space-y-4">
+
+        
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0" id="cmd-icon-wrap">
+              <ion-icon id="cmd-icon" class="text-lg sm:text-xl"></ion-icon>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h2 class="font-bold text-sm sm:text-lg font-mono" id="cmd-title">git commit</h2>
+              <p class="text-[10px] sm:text-xs text-base-content/60" id="cmd-desc"></p>
+            </div>
+            <div id="cmd-danger-badge" class="hidden">
+              <span class="badge badge-error badge-xs sm:badge-sm gap-1 animate-pulse">
+                <ion-icon name="warning-outline"></ion-icon>
+                Деструктивная
+              </span>
+            </div>
+          </div>
+
+          
+          <div class="p-3 sm:p-4 space-y-3" id="cmd-fields"></div>
+        </div>
+
+        
+        <div id="danger-panel" class="hidden bg-error/5 border-2 border-error/30 rounded-xl sm:rounded-2xl overflow-hidden">
+          <div class="flex items-start gap-2.5 p-3 sm:p-4">
+            <ion-icon name="alert-circle" class="text-error text-xl sm:text-2xl shrink-0 mt-0.5"></ion-icon>
+            <div>
+              <div class="font-semibold text-xs sm:text-sm text-error mb-1">⚠ Внимание: деструктивная операция</div>
+              <p class="text-[10px] sm:text-xs text-error/80" id="danger-text"></p>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="terminal-outline" class="text-success"></ion-icon>
+              Готовая команда
+            </h2>
+            <button type="button" id="btn-copy" class="btn btn-primary btn-xs gap-1">
+              <ion-icon name="copy-outline"></ion-icon>
+              <span class="hidden sm:inline">Копировать</span>
+            </button>
+          </div>
+          <div class="p-3 sm:p-4">
+            <div class="relative bg-neutral text-neutral-content rounded-lg sm:rounded-xl p-3 sm:p-4 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto" id="cmd-result">
+              <span class="text-success/70">$</span> <span id="cmd-result-text">git commit -m "initial commit"</span>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <details class="group" open>
+            <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+              <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+                <ion-icon name="school-outline" class="text-info"></ion-icon>
+                Объяснение команды
+              </h2>
+              <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+            </summary>
+            <div class="p-3 sm:p-4">
+              <div class="prose prose-sm max-w-none text-xs sm:text-sm text-base-content/80 leading-relaxed" id="cmd-explain"></div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-info/10 flex items-center justify-center shrink-0">
+            <ion-icon name="help-circle-outline" class="text-lg sm:text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">Как пользоваться</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Выберите, настройте, скопируйте</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <ion-icon name="list-outline" class="text-primary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Выберите</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Кликните на команду из категории слева — откроется конструктор</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center">
+                <ion-icon name="options-outline" class="text-success"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Настройте</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Включите нужные флаги, заполните параметры. Подсказки помогут разобраться</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-warning/10 flex items-center justify-center">
+                <ion-icon name="copy-outline" class="text-warning"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Скопируйте</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Готовая команда формируется в реальном времени. Одним кликом — в буфер обмена</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center">
+                <ion-icon name="school-outline" class="text-secondary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">Изучайте</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">Блок «Объяснение» описывает каждый параметр. Предупреждения о деструктивных операциях</p>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span id="status-text">Выберите git-команду для конструирования</span>
+    <span>Работает в браузере</span>
+  </div>
+</div>
+
+
+<div id="gs-toast" class="toast toast-top toast-center hidden z-50">
+  <div class="alert alert-success py-2 px-4">
+    <ion-icon name="checkmark-circle-outline" class="text-lg"></ion-icon>
+    <span id="gs-toast-message" class="text-sm"></span>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  
+
+  var i18n = {
+    copied: "Скопировано!",
+    historySaved: "Сохранено в историю",
+    historyCleared: "История очищена",
+    statusReady: "Выберите git-команду для конструирования",
+    destructive: "Деструктивная",
+    explainPrefix: "Эта команда"
+  };
+
+  var STORAGE_KEY = 'gitsmith-history';
+  var MAX_HISTORY = 30;
+
+  
+
+  var COMMANDS = {
+
+     
+    init: {
+      cat: 'basic', label: 'init', icon: 'add-circle-outline', color: 'success',
+      desc: 'Инициализация нового Git-репозитория',
+      explain: 'Создаёт новый репозиторий Git в указанной директории (или текущей). Создаёт папку .git с начальной структурой',
+      fields: [
+        { id: 'dir', type: 'text', label: 'Директория', placeholder: '.', pos: 'arg' },
+        { id: 'bare', type: 'toggle', label: '--bare', tip: 'Создать bare-репозиторий (без рабочего дерева, для серверов)' },
+        { id: 'initial-branch', type: 'text', label: '--initial-branch', placeholder: 'main', tip: 'Имя начальной ветки вместо master', flag: '--initial-branch' }
+      ]
+    },
+    clone: {
+      cat: 'basic', label: 'clone', icon: 'copy-outline', color: 'success',
+      desc: 'Клонирование удалённого репозитория',
+      explain: 'Создаёт полную копию удалённого репозитория локально, включая всю историю коммитов',
+      fields: [
+        { id: 'url', type: 'text', label: 'URL репозитория', placeholder: 'https://github.com/user/repo.git', required: true, pos: 'arg' },
+        { id: 'dir', type: 'text', label: 'Директория', placeholder: '', pos: 'arg2' },
+        { id: 'depth', type: 'text', label: '--depth', placeholder: '1', tip: 'Ограничить глубину истории (shallow clone)', flag: '--depth' },
+        { id: 'branch', type: 'text', label: '--branch', placeholder: 'main', tip: 'Клонировать только указанную ветку', flag: '--branch' },
+        { id: 'single-branch', type: 'toggle', label: '--single-branch', tip: 'Скачать только одну ветку' },
+        { id: 'recursive', type: 'toggle', label: '--recursive', tip: 'Инициализировать подмодули рекурсивно' }
+      ]
+    },
+    status: {
+      cat: 'basic', label: 'status', icon: 'information-circle-outline', color: 'success',
+      desc: 'Показать состояние рабочего дерева',
+      explain: 'Показывает какие файлы изменены, добавлены в staging или не отслеживаются',
+      fields: [
+        { id: 'short', type: 'toggle', label: '-s / --short', tip: 'Короткий формат вывода', flag: '-s' },
+        { id: 'branch-flag', type: 'toggle', label: '--branch', tip: 'Показать информацию о ветке', flag: '--branch' },
+        { id: 'porcelain', type: 'toggle', label: '--porcelain', tip: 'Машиночитаемый формат вывода' }
+      ]
+    },
+    add: {
+      cat: 'basic', label: 'add', icon: 'add-outline', color: 'success',
+      desc: 'Добавить файлы в staging area',
+      explain: 'Добавляет файлы в индекс (staging area) для следующего коммита',
+      fields: [
+        { id: 'files', type: 'text', label: 'Файлы', placeholder: '.', pos: 'arg' },
+        { id: 'all', type: 'toggle', label: '--all / -A', tip: 'Добавить все изменённые и удалённые файлы', flag: '-A' },
+        { id: 'patch', type: 'toggle', label: '--patch / -p', tip: 'Интерактивный выбор частей файлов для добавления', flag: '-p' },
+        { id: 'dry-run', type: 'toggle', label: '--dry-run / -n', tip: 'Показать что будет сделано, без выполнения', flag: '-n' }
+      ]
+    },
+    commit: {
+      cat: 'basic', label: 'commit', icon: 'checkmark-circle-outline', color: 'success',
+      desc: 'Записать изменения в репозиторий',
+      explain: 'Создаёт новый коммит с файлами из staging area и сообщением',
+      fields: [
+        { id: 'message', type: 'text', label: '-m Сообщение', placeholder: 'feat: add new feature', required: true, flag: '-m', quote: true },
+        { id: 'amend', type: 'toggle', label: '--amend', tip: 'Изменить последний коммит (сообщение и\/или файлы)' },
+        { id: 'no-edit', type: 'toggle', label: '--no-edit', tip: 'Не открывать редактор для изменения сообщения' },
+        { id: 'all-flag', type: 'toggle', label: '-a', tip: 'Автоматически добавить все изменённые файлы', flag: '-a' },
+        { id: 'no-verify', type: 'toggle', label: '--no-verify', tip: 'Пропустить pre-commit и commit-msg хуки' },
+        { id: 'signoff', type: 'toggle', label: '--signoff / -s', tip: 'Добавить строку Signed-off-by', flag: '--signoff' },
+        { id: 'gpg-sign', type: 'toggle', label: '--gpg-sign / -S', tip: 'Подписать GPG-ключом', flag: '-S' },
+        { id: 'allow-empty', type: 'toggle', label: '--allow-empty', tip: 'Разрешить коммит без изменений' }
+      ]
+    },
+    push: {
+      cat: 'basic', label: 'push', icon: 'arrow-up-outline', color: 'success',
+      desc: 'Отправить коммиты на удалённый сервер',
+      explain: 'Загружает локальные коммиты в удалённый репозиторий',
+      danger: false,
+      fields: [
+        { id: 'remote', type: 'text', label: 'Удалённый', placeholder: 'origin', pos: 'arg' },
+        { id: 'branch', type: 'text', label: 'Ветка', placeholder: 'main', pos: 'arg2' },
+        { id: 'force', type: 'toggle', label: '--force / -f', tip: 'Перезаписать удалённую историю! Опасно для общих веток', danger: true },
+        { id: 'force-with-lease', type: 'toggle', label: '--force-with-lease', tip: 'Безопасный force-push: откажет если remote изменился' },
+        { id: 'set-upstream', type: 'toggle', label: '-u / --set-upstream', tip: 'Установить upstream-ветку для отслеживания', flag: '-u' },
+        { id: 'tags', type: 'toggle', label: '--tags', tip: 'Отправить все теги' },
+        { id: 'all-flag', type: 'toggle', label: '--all', tip: 'Отправить все ветки' },
+        { id: 'dry-run', type: 'toggle', label: '--dry-run / -n', tip: 'Показать что будет сделано, без выполнения', flag: '-n' }
+      ]
+    },
+    pull: {
+      cat: 'basic', label: 'pull', icon: 'arrow-down-outline', color: 'success',
+      desc: 'Получить и интегрировать изменения',
+      explain: 'Скачивает изменения из удалённого репозитория и объединяет с текущей веткой (fetch \u002b merge)',
+      fields: [
+        { id: 'remote', type: 'text', label: 'Удалённый', placeholder: 'origin', pos: 'arg' },
+        { id: 'branch', type: 'text', label: 'Ветка', placeholder: '', pos: 'arg2' },
+        { id: 'rebase', type: 'toggle', label: '--rebase', tip: 'Использовать rebase вместо merge при pull' },
+        { id: 'no-rebase', type: 'toggle', label: '--no-rebase', tip: 'Запретить rebase, использовать merge' },
+        { id: 'ff-only', type: 'toggle', label: '--ff-only', tip: 'Только fast-forward (без merge-коммитов)' },
+        { id: 'no-ff', type: 'toggle', label: '--no-ff', tip: 'Всегда создавать merge-коммит' }
+      ]
+    },
+
+     
+    branch: {
+      cat: 'branches', label: 'branch', icon: 'git-branch-outline', color: 'info',
+      desc: 'Управление ветками',
+      explain: 'Создаёт, удаляет, переименовывает или показывает список веток',
+      fields: [
+        { id: 'name', type: 'text', label: 'Имя ветки', placeholder: 'feature/new', pos: 'arg' },
+        { id: 'list', type: 'toggle', label: '--list / -l', tip: 'Показать список веток', flag: '-l' },
+        { id: 'all-flag', type: 'toggle', label: '-a / --all', tip: 'Показать локальные и удалённые ветки', flag: '-a' },
+        { id: 'delete', type: 'toggle', label: '-d / --delete', tip: 'Удалить ветку (только если полностью слита)', flag: '-d' },
+        { id: 'force-delete', type: 'toggle', label: '-D', tip: 'Принудительно удалить ветку (даже если не слита)', flag: '-D', danger: true },
+        { id: 'move', type: 'toggle', label: '-m / --move', tip: 'Переименовать ветку', flag: '-m' },
+        { id: 'verbose', type: 'toggle', label: '-v / --verbose', tip: 'Подробный вывод', flag: '-v' }
+      ]
+    },
+    checkout: {
+      cat: 'branches', label: 'checkout', icon: 'swap-horizontal-outline', color: 'info',
+      desc: 'Переключение между ветками\/коммитами',
+      explain: 'Переключает рабочее дерево на указанную ветку, тег или коммит',
+      fields: [
+        { id: 'target', type: 'text', label: 'Ветка или коммит', placeholder: 'main', pos: 'arg' },
+        { id: 'new-branch', type: 'toggle', label: '-b (новая ветка)', tip: 'Создать новую ветку и переключиться на неё', flag: '-b' },
+        { id: 'force', type: 'toggle', label: '-f / --force', tip: 'Принудительно переключиться (потерять незакоммиченные изменения)', danger: true },
+        { id: 'track', type: 'toggle', label: '--track', tip: 'Настроить отслеживание удалённой ветки' }
+      ]
+    },
+    switch: {
+      cat: 'branches', label: 'switch', icon: 'repeat-outline', color: 'info',
+      desc: 'Переключение ветки (новая команда)',
+      explain: 'Безопасная замена checkout для переключения веток (Git 2.23\u002b)',
+      fields: [
+        { id: 'branch', type: 'text', label: 'Ветка', placeholder: 'main', pos: 'arg' },
+        { id: 'create', type: 'toggle', label: '-c / --create', tip: 'Создать новую ветку и переключиться', flag: '-c' },
+        { id: 'force-create', type: 'toggle', label: '-C', tip: 'Создать (или пересоздать) ветку и переключиться', flag: '-C' },
+        { id: 'detach', type: 'toggle', label: '--detach', tip: 'Переключиться в detached HEAD' }
+      ]
+    },
+    merge: {
+      cat: 'branches', label: 'merge', icon: 'git-merge-outline', color: 'info',
+      desc: 'Слияние веток',
+      explain: 'Объединяет указанную ветку с текущей веткой',
+      fields: [
+        { id: 'branch', type: 'text', label: 'Ветка', placeholder: 'feature/new', pos: 'arg' },
+        { id: 'no-ff', type: 'toggle', label: '--no-ff', tip: 'Всегда создавать merge-коммит (без fast-forward)' },
+        { id: 'ff-only', type: 'toggle', label: '--ff-only', tip: 'Только fast-forward, иначе отказ' },
+        { id: 'squash', type: 'toggle', label: '--squash', tip: 'Собрать все коммиты ветки в один' },
+        { id: 'message', type: 'text', label: '-m Сообщение', placeholder: '', flag: '-m', quote: true },
+        { id: 'abort', type: 'toggle', label: '--abort', tip: 'Отменить текущий merge' },
+        { id: 'continue', type: 'toggle', label: '--continue', tip: 'Продолжить merge после разрешения конфликтов' }
+      ]
+    },
+    rebase: {
+      cat: 'branches', label: 'rebase', icon: 'git-commit-outline', color: 'info',
+      desc: 'Перебазирование коммитов',
+      explain: 'Переносит коммиты текущей ветки поверх указанной. Переписывает историю!',
+      danger: true,
+      fields: [
+        { id: 'branch', type: 'text', label: 'Ветка', placeholder: 'main', pos: 'arg' },
+        { id: 'onto', type: 'text', label: '--onto', placeholder: '', tip: 'Перебазировать на указанную точку', flag: '--onto' },
+        { id: 'interactive', type: 'toggle', label: '-i / --interactive', tip: 'Интерактивный режим — редактирование коммитов', flag: '-i' },
+        { id: 'autosquash', type: 'toggle', label: '--autosquash', tip: 'Автоматически применить fixup!\/squash! коммиты' },
+        { id: 'abort', type: 'toggle', label: '--abort', tip: 'Отменить текущий rebase' },
+        { id: 'continue', type: 'toggle', label: '--continue', tip: 'Продолжить rebase после разрешения конфликтов' },
+        { id: 'skip', type: 'toggle', label: '--skip', tip: 'Пропустить текущий конфликтный коммит' }
+      ]
+    },
+    'cherry-pick': {
+      cat: 'branches', label: 'cherry-pick', icon: 'color-filter-outline', color: 'info',
+      desc: 'Применить отдельные коммиты',
+      explain: 'Применяет изменения из указанных коммитов к текущей ветке',
+      fields: [
+        { id: 'commits', type: 'text', label: 'Коммиты', placeholder: 'abc1234', pos: 'arg' },
+        { id: 'no-commit', type: 'toggle', label: '--no-commit / -n', tip: 'Применить изменения без автоматического коммита', flag: '-n' },
+        { id: 'edit', type: 'toggle', label: '-e / --edit', tip: 'Открыть редактор для изменения сообщения', flag: '-e' },
+        { id: 'mainline', type: 'text', label: '-m (Номер родителя)', placeholder: '1', flag: '-m' },
+        { id: 'abort', type: 'toggle', label: '--abort', tip: 'Отменить текущий merge' },
+        { id: 'continue', type: 'toggle', label: '--continue', tip: 'Продолжить merge после разрешения конфликтов' }
+      ]
+    },
+
+     
+    log: {
+      cat: 'history', label: 'log', icon: 'list-outline', color: 'accent',
+      desc: 'Просмотр истории коммитов',
+      explain: 'Показывает историю коммитов с различными опциями форматирования',
+      fields: [
+        { id: 'oneline', type: 'toggle', label: '--oneline', tip: 'Одна строка на коммит' },
+        { id: 'graph', type: 'toggle', label: '--graph', tip: 'ASCII-граф веток' },
+        { id: 'all-flag', type: 'toggle', label: '--all', tip: 'Показать все ветки' },
+        { id: 'n', type: 'text', label: '-n (Количество)', placeholder: '10', flag: '-n' },
+        { id: 'author', type: 'text', label: '--author', placeholder: 'name', flag: '--author', quote: true },
+        { id: 'since', type: 'text', label: '--since', placeholder: '2024-01-01', flag: '--since', quote: true },
+        { id: 'until', type: 'text', label: '--until', placeholder: '2024-12-31', flag: '--until', quote: true },
+        { id: 'grep', type: 'text', label: '--grep', placeholder: 'fix', flag: '--grep', quote: true },
+        { id: 'format', type: 'text', label: '--pretty=format:', placeholder: '%h %s', flag: '--pretty=format:', quote: true, noSpace: true },
+        { id: 'stat', type: 'toggle', label: '--stat', tip: 'Показать статистику изменённых файлов' },
+        { id: 'patch', type: 'toggle', label: '-p / --patch', tip: 'Показать патч (diff) каждого коммита', flag: '-p' }
+      ]
+    },
+    diff: {
+      cat: 'history', label: 'diff', icon: 'git-compare-outline', color: 'accent',
+      desc: 'Показать различия между файлами\/коммитами',
+      explain: 'Показывает изменения между рабочим деревом, staging area и коммитами',
+      fields: [
+        { id: 'target', type: 'text', label: 'Коммит или ветка', placeholder: 'HEAD~1', pos: 'arg' },
+        { id: 'staged', type: 'toggle', label: '--staged / --cached', tip: 'Показать изменения в staging area', flag: '--staged' },
+        { id: 'stat', type: 'toggle', label: '--stat', tip: 'Только статистика (без полного diff)' },
+        { id: 'name-only', type: 'toggle', label: '--name-only', tip: 'Показать только имена изменённых файлов' },
+        { id: 'file', type: 'text', label: '-- Файл', placeholder: 'src/app.js', flag: '--', pos: 'last' }
+      ]
+    },
+    blame: {
+      cat: 'history', label: 'blame', icon: 'person-outline', color: 'accent',
+      desc: 'Показать кто изменял каждую строку',
+      explain: 'Построчно показывает автора и коммит последнего изменения',
+      fields: [
+        { id: 'file', type: 'text', label: 'Файл', placeholder: 'src/app.js', required: true, pos: 'arg' },
+        { id: 'lines', type: 'text', label: '-L (Диапазон строк)', placeholder: '10,20', flag: '-L' },
+        { id: 'email', type: 'toggle', label: '-e / --show-email', tip: 'Показать email автора', flag: '-e' }
+      ]
+    },
+    show: {
+      cat: 'history', label: 'show', icon: 'eye-outline', color: 'accent',
+      desc: 'Показать объект (коммит, тег)',
+      explain: 'Отображает информацию о коммите, теге или другом Git-объекте',
+      fields: [
+        { id: 'object', type: 'text', label: 'Коммит или тег', placeholder: 'HEAD', pos: 'arg' },
+        { id: 'stat', type: 'toggle', label: '--stat', tip: 'Показать статистику изменённых файлов' },
+        { id: 'format', type: 'text', label: '--pretty=format:', placeholder: '%H %s', flag: '--pretty=format:', quote: true, noSpace: true }
+      ]
+    },
+    stash: {
+      cat: 'history', label: 'stash', icon: 'archive-outline', color: 'accent',
+      desc: 'Спрятать незакоммиченные изменения',
+      explain: 'Сохраняет текущие изменения во временное хранилище и очищает рабочее дерево',
+      fields: [
+        { id: 'action', type: 'select', label: 'Действие', pos: 'arg', options: [
+          { value: '', label: 'save (по умолчанию)' },
+          { value: 'pop', label: 'pop' },
+          { value: 'apply', label: 'apply' },
+          { value: 'list', label: 'list' },
+          { value: 'drop', label: 'drop' },
+          { value: 'show', label: 'show' },
+          { value: 'clear', label: 'clear' }
+        ]},
+        { id: 'message', type: 'text', label: '-m Сообщение', placeholder: 'WIP: feature', flag: '-m', quote: true },
+        { id: 'include-untracked', type: 'toggle', label: '--include-untracked / -u', tip: 'Включить неотслеживаемые файлы', flag: '-u' },
+        { id: 'keep-index', type: 'toggle', label: '--keep-index', tip: 'Сохранить staging area' },
+        { id: 'index', type: 'text', label: 'stash@{n}', placeholder: '0', pos: 'arg2' }
+      ]
+    },
+
+     
+    reset: {
+      cat: 'undo', label: 'reset', icon: 'refresh-outline', color: 'error',
+      desc: 'Сброс HEAD к указанному состоянию',
+      explain: 'Перемещает HEAD и опционально изменяет staging\/рабочее дерево. Может удалить данные!',
+      danger: true,
+      fields: [
+        { id: 'mode', type: 'select', label: 'Режим', options: [
+          { value: '--mixed', label: '--mixed (убрать из staging)' },
+          { value: '--soft', label: '--soft (сохранить в staging)' },
+          { value: '--hard', label: '--hard (удалить всё)', danger: true }
+        ], pos: 'flag-select' },
+        { id: 'target', type: 'text', label: 'Коммит или ссылка', placeholder: 'HEAD~1', pos: 'arg' }
+      ]
+    },
+    revert: {
+      cat: 'undo', label: 'revert', icon: 'arrow-undo-outline', color: 'error',
+      desc: 'Отменить коммит новым коммитом',
+      explain: 'Безопасно отменяет изменения коммита, создавая новый «обратный» коммит',
+      fields: [
+        { id: 'commit', type: 'text', label: 'Коммит', placeholder: 'HEAD', pos: 'arg' },
+        { id: 'no-commit', type: 'toggle', label: '--no-commit / -n', tip: 'Отменить без создания коммита', flag: '-n' },
+        { id: 'no-edit', type: 'toggle', label: '--no-edit', tip: 'Не открывать редактор для изменения сообщения' },
+        { id: 'mainline', type: 'text', label: '-m (Номер родителя)', placeholder: '1', flag: '-m' }
+      ]
+    },
+    restore: {
+      cat: 'undo', label: 'restore', icon: 'arrow-back-outline', color: 'error',
+      desc: 'Восстановить файлы',
+      explain: 'Восстанавливает файлы из staging area или коммита (Git 2.23\u002b)',
+      fields: [
+        { id: 'file', type: 'text', label: 'Файл', placeholder: 'src/app.js', pos: 'arg' },
+        { id: 'staged', type: 'toggle', label: '--staged', tip: 'Убрать файл из staging (unstage)' },
+        { id: 'source', type: 'text', label: '--source', placeholder: 'HEAD~1', flag: '--source' },
+        { id: 'worktree', type: 'toggle', label: '--worktree', tip: 'Восстановить файл в рабочем дереве' }
+      ]
+    },
+    clean: {
+      cat: 'undo', label: 'clean', icon: 'trash-outline', color: 'error',
+      desc: 'Удалить неотслеживаемые файлы',
+      explain: 'Удаляет файлы и директории, которые не находятся под контролем Git',
+      danger: true,
+      fields: [
+        { id: 'force', type: 'toggle', label: '-f / --force', tip: 'Обязательный флаг для удаления файлов', flag: '-f', danger: true },
+        { id: 'dirs', type: 'toggle', label: '-d', tip: 'Также удалить директории', flag: '-d' },
+        { id: 'ignored', type: 'toggle', label: '-x', tip: 'Также удалить игнорируемые файлы', flag: '-x' },
+        { id: 'dry-run', type: 'toggle', label: '-n / --dry-run', tip: 'Показать что будет сделано, без выполнения', flag: '-n' },
+        { id: 'interactive', type: 'toggle', label: '-i / --interactive', tip: 'Интерактивный режим выбора', flag: '-i' }
+      ]
+    },
+
+     
+    remote: {
+      cat: 'remote', label: 'remote', icon: 'globe-outline', color: 'warning',
+      desc: 'Управление удалёнными репозиториями',
+      explain: 'Добавляет, удаляет, переименовывает и просматривает удалённые репозитории',
+      fields: [
+        { id: 'action', type: 'select', label: 'Действие', pos: 'arg', options: [
+          { value: '', label: 'list (по умолчанию)' },
+          { value: 'add', label: 'add' },
+          { value: 'remove', label: 'remove' },
+          { value: 'rename', label: 'rename' },
+          { value: 'set-url', label: 'set-url' },
+          { value: 'show', label: 'show' },
+          { value: 'prune', label: 'prune' }
+        ]},
+        { id: 'name', type: 'text', label: 'Имя remote', placeholder: 'origin', pos: 'arg2' },
+        { id: 'url', type: 'text', label: 'URL', placeholder: 'https://github.com/user/repo.git', pos: 'arg3' },
+        { id: 'verbose', type: 'toggle', label: '-v / --verbose', tip: 'Подробный вывод', flag: '-v' }
+      ]
+    },
+    fetch: {
+      cat: 'remote', label: 'fetch', icon: 'cloud-download-outline', color: 'warning',
+      desc: 'Скачать объекты без слияния',
+      explain: 'Загружает коммиты, файлы и ссылки из удалённого репозитория без слияния',
+      fields: [
+        { id: 'remote', type: 'text', label: 'Удалённый', placeholder: 'origin', pos: 'arg' },
+        { id: 'branch', type: 'text', label: 'Ветка', placeholder: '', pos: 'arg2' },
+        { id: 'all-flag', type: 'toggle', label: '--all', tip: 'Получить данные со всех remote' },
+        { id: 'prune', type: 'toggle', label: '--prune / -p', tip: 'Удалить ссылки на несуществующие удалённые ветки', flag: '--prune' },
+        { id: 'tags', type: 'toggle', label: '--tags', tip: 'Загрузить все теги' },
+        { id: 'dry-run', type: 'toggle', label: '--dry-run', tip: 'Показать что будет сделано, без выполнения' }
+      ]
+    },
+    submodule: {
+      cat: 'remote', label: 'submodule', icon: 'layers-outline', color: 'warning',
+      desc: 'Управление подмодулями',
+      explain: 'Инициализация, обновление и управление вложенными Git-репозиториями',
+      fields: [
+        { id: 'action', type: 'select', label: 'Действие', pos: 'arg', options: [
+          { value: 'add', label: 'add' },
+          { value: 'init', label: 'init' },
+          { value: 'update', label: 'update' },
+          { value: 'status', label: 'status' },
+          { value: 'deinit', label: 'deinit' },
+          { value: 'sync', label: 'sync' }
+        ]},
+        { id: 'url', type: 'text', label: 'URL / Путь', placeholder: 'https://...', pos: 'arg2' },
+        { id: 'recursive', type: 'toggle', label: '--recursive', tip: 'Инициализировать подмодули рекурсивно' },
+        { id: 'init-flag', type: 'toggle', label: '--init', tip: 'Инициализировать подмодули' },
+        { id: 'remote-flag', type: 'toggle', label: '--remote', tip: 'Обновить до последней версии с remote' }
+      ]
+    },
+
+     
+    'rebase-i': {
+      cat: 'advanced', label: 'rebase -i', icon: 'build-outline', color: 'secondary',
+      base: 'rebase -i',
+      desc: 'Интерактивный rebase',
+      explain: 'Позволяет редактировать, объединять, удалять и переставлять коммиты в интерактивном режиме',
+      danger: true,
+      fields: [
+        { id: 'target', type: 'text', label: 'Коммит или ссылка', placeholder: 'HEAD~3', pos: 'arg' },
+        { id: 'autosquash', type: 'toggle', label: '--autosquash', tip: 'Автоматически применить fixup!\/squash! коммиты' },
+        { id: 'root', type: 'toggle', label: '--root', tip: 'Перебазировать от самого первого коммита' }
+      ]
+    },
+    bisect: {
+      cat: 'advanced', label: 'bisect', icon: 'search-outline', color: 'secondary',
+      desc: 'Бинарный поиск бага в истории',
+      explain: 'Использует бинарный поиск для нахождения коммита, который ввёл баг',
+      fields: [
+        { id: 'action', type: 'select', label: 'Действие', pos: 'arg', options: [
+          { value: 'start', label: 'start' },
+          { value: 'bad', label: 'bad' },
+          { value: 'good', label: 'good' },
+          { value: 'reset', label: 'reset' },
+          { value: 'log', label: 'log' },
+          { value: 'run', label: 'run' }
+        ]},
+        { id: 'ref', type: 'text', label: 'Коммит или ссылка', placeholder: '', pos: 'arg2' }
+      ]
+    },
+    reflog: {
+      cat: 'advanced', label: 'reflog', icon: 'newspaper-outline', color: 'secondary',
+      desc: 'Журнал ссылок (reflog)',
+      explain: 'Показывает журнал всех перемещений HEAD — позволяет восстановить «потерянные» коммиты',
+      fields: [
+        { id: 'action', type: 'select', label: 'Действие', pos: 'arg', options: [
+          { value: '', label: 'show (по умолчанию)' },
+          { value: 'expire', label: 'expire' },
+          { value: 'delete', label: 'delete' }
+        ]},
+        { id: 'n', type: 'text', label: '-n (Количество)', placeholder: '20', flag: '-n' },
+        { id: 'all-flag', type: 'toggle', label: '--all', tip: 'Показать reflog для всех ссылок' }
+      ]
+    },
+    tag: {
+      cat: 'advanced', label: 'tag', icon: 'pricetag-outline', color: 'secondary',
+      desc: 'Управление тегами',
+      explain: 'Создаёт, удаляет и просматривает теги — метки для важных точек в истории',
+      fields: [
+        { id: 'name', type: 'text', label: 'Имя тега', placeholder: 'v1.0.0', pos: 'arg' },
+        { id: 'annotated', type: 'toggle', label: '-a (аннотированный)', tip: 'Создать аннотированный тег', flag: '-a' },
+        { id: 'message', type: 'text', label: '-m Сообщение', placeholder: 'Release v1.0.0', flag: '-m', quote: true },
+        { id: 'delete', type: 'toggle', label: '-d / --delete', tip: 'Удалить тег', flag: '-d' },
+        { id: 'list', type: 'toggle', label: '-l / --list', tip: 'Показать список тегов', flag: '-l' },
+        { id: 'sign', type: 'toggle', label: '-s / --sign', tip: 'Подписать GPG-ключом', flag: '-s' }
+      ]
+    }
+  };
+
+  
+
+  var catMap = { basic: 'cat-basic', branches: 'cat-branches', history: 'cat-history', undo: 'cat-undo', remote: 'cat-remote', advanced: 'cat-advanced' };
+
+  Object.keys(COMMANDS).forEach(function(key) {
+    var cmd = COMMANDS[key];
+    var container = document.getElementById(catMap[cmd.cat]);
+    if (!container) return;
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn btn-outline btn-xs sm:btn-sm gap-1 justify-start cmd-btn';
+    if (cmd.danger) btn.classList.add('btn-error');
+    btn.dataset.cmd = key;
+    btn.innerHTML = '<ion-icon name="' + cmd.icon + '"></ion-icon><span class="font-mono text-[10px] sm:text-xs truncate">' + cmd.label + '</span>';
+    container.appendChild(btn);
+  });
+
+  
+
+  var activeCmd = null;
+
+  function selectCommand(key) {
+    var cmd = COMMANDS[key];
+    if (!cmd) return;
+    activeCmd = key;
+
+    document.getElementById('empty-state').classList.add('hidden');
+    document.getElementById('builder-panel').classList.remove('hidden');
+
+    
+    var baseLabel = cmd.base || cmd.label;
+    document.getElementById('cmd-title').textContent = 'git ' + baseLabel;
+    document.getElementById('cmd-desc').textContent = cmd.desc;
+    document.getElementById('cmd-icon').setAttribute('name', cmd.icon);
+    var iconWrap = document.getElementById('cmd-icon-wrap');
+    iconWrap.className = 'w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 bg-' + cmd.color + '/10 text-' + cmd.color;
+
+    
+    document.getElementById('cmd-danger-badge').classList.toggle('hidden', !cmd.danger);
+
+    
+    document.querySelectorAll('.cmd-btn').forEach(function(b) {
+      b.classList.toggle('btn-active', b.dataset.cmd === key);
+    });
+
+    
+    renderFields(cmd);
+    buildCommand();
+    buildExplain();
+  }
+
+  function renderFields(cmd) {
+    var container = document.getElementById('cmd-fields');
+    container.innerHTML = '';
+
+    cmd.fields.forEach(function(f) {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'form-control';
+
+      if (f.type === 'toggle') {
+        wrapper.innerHTML =
+          '<label class="flex items-center justify-between cursor-pointer gap-2 py-0.5">' +
+            '<div class="flex items-center gap-2 min-w-0">' +
+              '<span class="font-mono text-xs font-medium whitespace-nowrap">' + f.label + '</span>' +
+              (f.tip ? '<div class="tooltip tooltip-right" data-tip="' + escapeAttr(f.tip) + '"><ion-icon name="help-circle-outline" class="text-base-content/30 text-sm cursor-help"></ion-icon></div>' : '') +
+              (f.danger ? '<span class="badge badge-error badge-xs">⚠</span>' : '') +
+            '</div>' +
+            '<input type="checkbox" class="toggle toggle-xs ' + (f.danger ? 'toggle-error' : 'toggle-primary') + '" data-field="' + f.id + '" />' +
+          '</label>';
+      } else if (f.type === 'select') {
+        var opts = f.options.map(function(o) {
+          return '<option value="' + escapeAttr(o.value) + '"' + (o.danger ? ' class="text-error"' : '') + '>' + o.label + '</option>';
+        }).join('');
+        wrapper.innerHTML =
+          '<label class="label py-0.5"><span class="label-text text-xs font-medium font-mono">' + f.label + '</span></label>' +
+          '<select class="select select-bordered select-xs text-xs font-mono" data-field="' + f.id + '">' + opts + '</select>';
+      } else {
+        wrapper.innerHTML =
+          '<label class="label py-0.5">' +
+            '<span class="label-text text-xs font-medium font-mono">' + f.label + '</span>' +
+            (f.tip ? '<span class="label-text-alt"><div class="tooltip tooltip-left" data-tip="' + escapeAttr(f.tip) + '"><ion-icon name="help-circle-outline" class="text-base-content/30 text-sm cursor-help"></ion-icon></div></span>' : '') +
+          '</label>' +
+          '<input type="text" class="input input-bordered input-xs font-mono text-xs" placeholder="' + escapeAttr(f.placeholder || '') + '" data-field="' + f.id + '" />';
+      }
+
+      container.appendChild(wrapper);
+    });
+
+    
+    container.querySelectorAll('[data-field]').forEach(function(el) {
+      el.addEventListener('input', function() { buildCommand(); buildExplain(); checkDanger(); });
+      el.addEventListener('change', function() { buildCommand(); buildExplain(); checkDanger(); });
+    });
+  }
+
+  function getFieldValue(id) {
+    var el = document.querySelector('[data-field="' + id + '"]');
+    if (!el) return '';
+    if (el.type === 'checkbox') return el.checked;
+    return (el.value || '').trim();
+  }
+
+  function buildCommand() {
+    if (!activeCmd) return;
+    var cmd = COMMANDS[activeCmd];
+    var baseLabel = cmd.base || cmd.label;
+    var parts = ['git', baseLabel];
+    var args = [];
+    var args2 = [];
+    var args3 = [];
+    var lastArgs = [];
+
+    cmd.fields.forEach(function(f) {
+      var val = getFieldValue(f.id);
+
+      if (f.type === 'toggle' && val) {
+        var flagName = f.flag || f.label.split(' / ')[0].split(' (')[0].trim();
+        parts.push(flagName);
+        return;
+      }
+
+      if (f.type === 'select' && f.pos === 'arg') {
+        if (val) args.push(val);
+        return;
+      }
+
+      if (f.type === 'select' && f.pos === 'flag-select') {
+        if (val) parts.push(val);
+        return;
+      }
+
+      if (f.type === 'text' && val) {
+        if (f.pos === 'arg') {
+          args.push(val);
+        } else if (f.pos === 'arg2') {
+          args2.push(val);
+        } else if (f.pos === 'arg3') {
+          args3.push(val);
+        } else if (f.pos === 'last') {
+          lastArgs.push(f.flag ? f.flag + ' ' + val : val);
+        } else if (f.flag) {
+          var sep = f.noSpace ? '' : ' ';
+          var v = f.quote ? '"' + val + '"' : val;
+          parts.push(f.flag + sep + v);
+        }
+      }
+    });
+
+    var result = parts.concat(args).concat(args2).concat(args3).concat(lastArgs).join(' ');
+    document.getElementById('cmd-result-text').textContent = result;
+    return result;
+  }
+
+  function checkDanger() {
+    if (!activeCmd) return;
+    var cmd = COMMANDS[activeCmd];
+    var isDangerous = !!cmd.danger;
+
+    
+    cmd.fields.forEach(function(f) {
+      if (f.danger && getFieldValue(f.id)) {
+        isDangerous = true;
+      }
+      
+      if (f.id === 'mode' && f.type === 'select') {
+        var v = getFieldValue(f.id);
+        if (v === '--hard') isDangerous = true;
+      }
+    });
+
+    var dangerPanel = document.getElementById('danger-panel');
+    if (isDangerous) {
+      dangerPanel.classList.remove('hidden');
+      var warnings = [];
+      if (activeCmd === 'reset' && getFieldValue('mode') === '--hard') {
+        warnings.push('reset --hard удалит все незакоммиченные изменения безвозвратно! Убедитесь что нужные файлы сохранены.');
+      }
+      if (getFieldValue('force')) {
+        warnings.push('push --force перезапишет историю на удалённом сервере! Другие разработчики потеряют свои коммиты. Используйте --force-with-lease.');
+      }
+      if (activeCmd === 'clean' && getFieldValue('force')) {
+        warnings.push('clean -f безвозвратно удалит все неотслеживаемые файлы! Сначала используйте -n (--dry-run).');
+      }
+      if (activeCmd === 'rebase' || activeCmd === 'rebase-i') {
+        warnings.push('Rebase переписывает историю коммитов. Не используйте для коммитов, которые уже отправлены в общий репозиторий!');
+      }
+      if (getFieldValue('force-delete')) {
+        warnings.push('Принудительное удаление ветки может привести к потере незамерженных коммитов!');
+      }
+      if (!warnings.length) warnings.push('Эта операция может привести к потере данных. Убедитесь что вы понимаете что делаете.');
+      document.getElementById('danger-text').textContent = warnings.join('\n');
+    } else {
+      dangerPanel.classList.add('hidden');
+    }
+  }
+
+  function buildExplain() {
+    if (!activeCmd) return;
+    var cmd = COMMANDS[activeCmd];
+    var lines = ['<strong>git ' + (cmd.base || cmd.label) + '</strong> — ' + cmd.explain];
+    var details = [];
+
+    cmd.fields.forEach(function(f) {
+      var val = getFieldValue(f.id);
+      if (!val) return;
+      var label = f.label.split(' / ')[0].split(' (')[0].trim();
+      var tip = f.tip || '';
+      if (f.type === 'toggle') {
+        details.push('<code>' + label + '</code>' + (tip ? ' — ' + tip : ''));
+      } else if (f.type === 'text' && val) {
+        details.push('<code>' + label + '</code> = <code>' + escapeHtml(val) + '</code>' + (tip ? ' — ' + tip : ''));
+      } else if (f.type === 'select' && val) {
+        var opt = (f.options || []).find(function(o) { return o.value === val; });
+        details.push('<code>' + label + '</code> = <code>' + (opt ? opt.label : val) + '</code>');
+      }
+    });
+
+    if (details.length) {
+      lines.push('<ul class="list-disc list-inside mt-2 space-y-1">');
+      details.forEach(function(d) { lines.push('<li>' + d + '</li>'); });
+      lines.push('</ul>');
+    }
+
+    document.getElementById('cmd-explain').innerHTML = lines.join('\n');
+  }
+
+  
+
+  function getHistory() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch(e) { return []; }
+  }
+
+  function saveToHistory(cmdText) {
+    var history = getHistory();
+    
+    if (history.length && history[0].cmd === cmdText) return;
+    history.unshift({ cmd: cmdText, time: Date.now() });
+    if (history.length > MAX_HISTORY) history = history.slice(0, MAX_HISTORY);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+    renderHistory();
+  }
+
+  function renderHistory() {
+    var history = getHistory();
+    var list = document.getElementById('history-list');
+    var empty = document.getElementById('history-empty');
+    var clearBtn = document.getElementById('btn-clear-history');
+    var count = document.getElementById('history-count');
+
+    count.textContent = history.length;
+
+    if (!history.length) {
+      list.innerHTML = '';
+      empty.classList.remove('hidden');
+      clearBtn.classList.add('hidden');
+      return;
+    }
+
+    empty.classList.add('hidden');
+    clearBtn.classList.remove('hidden');
+
+    list.innerHTML = history.map(function(item, idx) {
+      var ago = timeAgo(item.time);
+      return '<div class="flex items-center gap-1.5 p-1.5 rounded-lg hover:bg-base-200/50 group cursor-pointer history-item" data-idx="' + idx + '">' +
+        '<div class="flex-1 min-w-0">' +
+          '<div class="font-mono text-[10px] truncate text-base-content/80">' + escapeHtml(item.cmd) + '</div>' +
+          '<div class="text-[8px] text-base-content/40">' + ago + '</div>' +
+        '</div>' +
+        '<button type="button" class="btn btn-ghost btn-xs opacity-0 group-hover:opacity-100 history-copy" data-cmd="' + escapeAttr(item.cmd) + '">' +
+          '<ion-icon name="copy-outline"></ion-icon>' +
+        '</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  function timeAgo(ts) {
+    var diff = Math.floor((Date.now() - ts) / 1000);
+    if (diff < 60) return diff + 's ago';
+    if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+    if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+    return Math.floor(diff / 86400) + 'd ago';
+  }
+
+  
+
+  function escapeHtml(s) {
+    var d = document.createElement('div');
+    d.appendChild(document.createTextNode(s));
+    return d.innerHTML;
+  }
+
+  function escapeAttr(s) {
+    return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function showToast(msg) {
+    var t = document.getElementById('gs-toast');
+    document.getElementById('gs-toast-message').textContent = msg;
+    t.classList.remove('hidden');
+    setTimeout(function() { t.classList.add('hidden'); }, 2000);
+  }
+
+  
+
+
+  
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.cmd-btn');
+    if (btn) {
+      selectCommand(btn.dataset.cmd);
+      return;
+    }
+
+    
+    var hCopy = e.target.closest('.history-copy');
+    if (hCopy) {
+      e.stopPropagation();
+      navigator.clipboard.writeText(hCopy.dataset.cmd).then(function() { showToast(i18n.copied); });
+      return;
+    }
+
+    
+    var hItem = e.target.closest('.history-item');
+    if (hItem) {
+      var idx = parseInt(hItem.dataset.idx);
+      var history = getHistory();
+      if (history[idx]) {
+        navigator.clipboard.writeText(history[idx].cmd).then(function() { showToast(i18n.copied); });
+      }
+    }
+  });
+
+  
+  document.getElementById('btn-copy').addEventListener('click', function() {
+    var cmdText = document.getElementById('cmd-result-text').textContent;
+    if (!cmdText) return;
+    navigator.clipboard.writeText(cmdText).then(function() {
+      showToast(i18n.copied);
+      saveToHistory(cmdText);
+    });
+  });
+
+  
+  document.getElementById('btn-clear-history').addEventListener('click', function() {
+    localStorage.removeItem(STORAGE_KEY);
+    renderHistory();
+    showToast(i18n.historyCleared);
+  });
+
+  
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && activeCmd) {
+      e.preventDefault();
+      var cmdText = document.getElementById('cmd-result-text').textContent;
+      navigator.clipboard.writeText(cmdText).then(function() {
+        showToast(i18n.copied);
+        saveToHistory(cmdText);
+      });
+    }
+  });
+
+  
+  renderHistory();
+
+})();
+</script>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Максим Александров<br>
+<strong>Age:</strong> 28
+<strong>Location:</strong> Тула, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>Этот блог — мой personal knowledge base, где я пушу заметки про tech stack, life experience и всё, что триггерит мой interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — готов к мёрджу идей и совместным проектам.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-яп">💻 ЯП</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Адаптивная вёрстка (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST API</strong></li>
+</ul>
+<h2 id="-базы-данных">🗄️ Базы данных</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-дизайн-и-графика">🎨 Дизайн и графика</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX дизайн и прототипирование</li>
+<li><strong>Photoshop</strong> — графика и обработка изображений</li>
+<li><strong>After Effects</strong> — моушн-дизайн и анимация 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои Open Source проекты 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/Rianvy/CleanSlate-for-Reddit" target="_blank">CleanSlate for Reddit</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Приватное local-first расширение для очистки постов, комментариев, сохранённых публикаций и голосов Reddit прямо в браузере
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/Rianvy/CleanSlate-for-Reddit" target="_blank">CleanSlate for Reddit</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Приватное local-first расширение для очистки постов, комментариев, сохранённых публикаций и голосов Reddit прямо в браузере
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои проекты 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN-сервис в Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN-сервис в Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Социальные сети</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+     
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+
+    
+    
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym("99568144", "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

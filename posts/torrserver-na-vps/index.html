@@ -1,0 +1,4105 @@
+<!DOCTYPE html>
+<html lang="ru"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#2A303C" media="(prefers-color-scheme: dark)" />
+
+    
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+    <title>TorrServer на VPS: безопасная настройка удалённого … | 0x69.ru</title>
+    
+
+
+<link rel="icon" type="image/png" href="https://0x69.ru/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="https://0x69.ru/favicon.svg" />
+<link rel="shortcut icon" href="https://0x69.ru/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://0x69.ru/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="0x69" />
+<link rel="manifest" href="https://0x69.ru/site.webmanifest" />
+
+
+
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+
+
+
+<link rel="canonical" href="https://0x69.ru/posts/torrserver-na-vps/" />
+
+
+
+  <link rel="alternate" hreflang="ru" href="https://0x69.ru/posts/torrserver-na-vps/" />
+
+  <link rel="alternate" hreflang="en" href="https://0x69.ru/en/posts/torrserver-na-vps/" /><link rel="alternate" hreflang="x-default" href="https://0x69.ru/posts/torrserver-na-vps/" />
+
+
+
+
+
+<meta name="author" content="Rianvy" />
+
+
+<meta name="description" content="Актуальная установка TorrServer на VPS: официальный инсталлятор, systemd, авторизация, UFW, HTTPS, Lampa, Docker и безопасное обновление." />
+
+
+<meta name="keywords" content="TorrServer, VPS, Linux, Стриминг, Торренты, Lampa, Docker, Termius, Selfhosted, Сервер" /><meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+
+<meta property="og:title" content="TorrServer на VPS: безопасная настройка удалённого стриминга" />
+
+
+<meta property="og:description" content="Актуальная установка TorrServer на VPS: официальный инсталлятор, systemd, авторизация, UFW, HTTPS, Lampa, Docker и безопасное обновление." />
+
+
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0x69.ru/posts/torrserver-na-vps/" />
+<meta property="og:site_name" content="0x69.ru" />
+
+
+<meta property="og:locale" content="ru_RU" /><meta property="og:locale:alternate" content="en_US" />
+
+
+<meta property="og:image" content="https://0x69.ru/posts/torrserver-na-vps/Cover_hu_8432a80f99ba7102.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="TorrServer на VPS: безопасная настройка удалённого стриминга" /><meta property="article:published_time" content="2026-02-05T06:08:46&#43;03:00" /><meta property="article:modified_time" content="2026-08-17T12:00:00&#43;03:00" /><meta property="article:author" content="Rianvy" /><meta property="article:tag" content="TorrServer" /><meta property="article:tag" content="VPS" /><meta property="article:tag" content="Linux" /><meta property="article:tag" content="Стриминг" /><meta property="article:tag" content="Торренты" /><meta property="article:tag" content="Lampa" /><meta property="article:tag" content="Docker" /><meta property="article:tag" content="Termius" /><meta property="article:tag" content="Selfhosted" /><meta property="article:tag" content="Сервер" /><meta property="article:section" content="Инструкции" />
+
+
+<meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="TorrServer на VPS: безопасная настройка удалённого стриминга" />
+
+<meta name="twitter:description" content="Актуальная установка TorrServer на VPS: официальный инсталлятор, systemd, авторизация, UFW, HTTPS, Lampa, Docker и безопасное обновление." />
+
+<meta name="twitter:image" content="https://0x69.ru/posts/torrserver-na-vps/Cover_hu_8432a80f99ba7102.png" />
+<meta name="twitter:image:alt" content="TorrServer на VPS: безопасная настройка удалённого стриминга" />
+
+
+<meta property="vk:image" content="https://0x69.ru/posts/torrserver-na-vps/Cover_hu_8432a80f99ba7102.png" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rianvy",
+  "url": "https://0x69.ru/",
+  "image": "https://0x69.ru/img/avatar.jpg","email": "blackghost.v1@gmail.com","sameAs": ["https://github.com/rianvy"]}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "TorrServer на VPS: безопасная настройка удалённого стриминга",
+  "description": "Актуальная установка TorrServer на VPS: официальный инсталлятор, systemd, авторизация, UFW, HTTPS, Lampa, Docker и безопасное обновление.",
+  "url": "https://0x69.ru/posts/torrserver-na-vps/",
+  "datePublished": "2026-02-05T06:08:46+03:00",
+  "dateModified": "2026-08-17T12:00:00+03:00",
+  "author": {
+    "@type": "Person",
+    "name": "Rianvy"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Rianvy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://0x69.ru/img/avatar.jpg"
+    }
+  },
+  "image": "https://0x69.ru/Cover.png",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://0x69.ru/posts/torrserver-na-vps/"
+  },
+  "inLanguage": "ru","keywords": "TorrServer, VPS, Linux, Стриминг, Торренты, Lampa, Docker, Termius, Selfhosted, Сервер","wordCount":  1898 }
+</script><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "0x69.ru",
+      "item": "https://0x69.ru/ru/"
+    },{
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Блог",
+      "item": "https://0x69.ru/posts/"
+    },{
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "TorrServer на VPS: безопасная настройка удалённого стриминга",
+      "item": "https://0x69.ru/posts/torrserver-na-vps/"
+    }
+  ]
+}
+</script>
+
+
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+    
+
+
+<link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css" data-syntax-highlight="true" id="syntax-theme">
+
+
+<style>
+   
+  pre { border-radius: 0.5rem;  }
+  
+   
+  .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: oklch(var(--p)); z-index: 9999; transition: width 0.1s ease-out; }
+  .reading-progress-text { position: fixed; top: 0.75rem; right: 1rem; z-index: 9999; font-size: 0.75rem; font-weight: 600; color: oklch(var(--p)); background: oklch(var(--b1) / 0.9); backdrop-filter: blur(8px); padding: 0.25rem 0.75rem; border-radius: 1rem; opacity: 0; transition: opacity 0.3s ease; }
+  .reading-progress-text.visible { opacity: 1; }
+  
+   
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  
+   
+  #TableOfContents { 
+    max-height: calc(100vh - 12rem); 
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  #TableOfContents::-webkit-scrollbar { width: 6px; }
+  #TableOfContents::-webkit-scrollbar-track { background: transparent; }
+  #TableOfContents::-webkit-scrollbar-thumb { background: oklch(var(--b3)); border-radius: 3px; }
+  #TableOfContents::-webkit-scrollbar-thumb:hover { background: oklch(var(--bc) / 0.3); }
+  #TableOfContents a.active { color: oklch(var(--p)); font-weight: 600; }
+  #TableOfContents ul { border-left: 2px solid oklch(var(--b3)); }
+  
+   
+  #dream-single-post-content img { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  #dream-single-post-content img:hover { transform: scale(1.02); box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
+  
+   
+  #dream-single-post-content a:not(.badge):not(.btn):not(.lg-item) { 
+    text-decoration: none; 
+    background-image: linear-gradient(oklch(var(--p)), oklch(var(--p)));
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease;
+  }
+  #dream-single-post-content a:not(.badge):not(.btn):not(.lg-item):hover { background-size: 100% 2px; }
+  
+   
+  body.focus-mode aside.right-sidebar { 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.3s ease; 
+  }
+  body.focus-mode article { 
+    max-width: 65ch; 
+    margin: 0 auto; 
+  }
+  
+   
+  aside.left-sidebar {
+    transition: opacity 0.3s ease;
+  }
+  
+   
+  body.focus-mode #focus-mode-btn {
+    background: oklch(var(--p) / 0.2);
+    color: oklch(var(--p));
+  }
+  
+   
+  .lg-sub-html { backdrop-filter: blur(16px); }
+</style>
+
+
+
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  <nav class="mt-4 lg:mt-8 py-4">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Повернуть!"
+                aria-label="Повернуть!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">Документируй сегодня то, что забудешь завтра</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="Обо мне">Обо мне</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Поиск"
+   aria-label="Поиск">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Категории"
+   aria-label="Категории">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Портфолио"
+   aria-label="Портфолио">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Утилиты"
+   aria-label="Утилиты">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+
+                
+                
+                
+                  
+                    
+                  
+                
+
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/posts/torrserver-na-vps/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                  </a>
+                </li>
+              
+                
+                
+
+                
+                
+                
+                  
+                
+
+                
+                  
+                
+
+                <li role="none">
+                  <a href="/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">11</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">198</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Меню</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="Обо мне"
+                aria-label="Обо мне">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">Обо мне</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/posts/torrserver-na-vps/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                    "
+             >
+            <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+            <span class="flex-1">English</span>
+            
+          </a>
+        </li>
+      
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+          
+        
+        
+        <li>
+          <a href="/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                    bg-primary/10 text-primary font-semibold"
+             aria-current="true">
+            <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Поиск</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Категории</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Портфолио</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">6</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">11</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Утилиты">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Утилиты</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">26</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">198</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+
+    <style>
+    .flip-container .back {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .flip-container.flip-it .back {
+      opacity: 1;
+      visibility: visible;
+    }
+    </style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="reading-progress" id="reading-progress"></div>
+<div class="reading-progress-text" id="reading-progress-text">0%</div>
+
+<div class="lg:grid lg:grid-cols-12 gap-6 mt-4 px-4 max-w-screen-2xl mx-auto">
+  
+  <aside class="hidden lg:block lg:col-span-2 left-sidebar">
+    <div class="sticky top-20 space-y-4">
+      
+      <div class="flex flex-col gap-2">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn btn-ghost btn-sm gap-2" aria-label="Наверх">
+          <ion-icon name="arrow-up-outline"></ion-icon>
+          <span class="text-xs">Наверх</span>
+        </button>
+        <button onclick="toggleFocusMode()" class="btn btn-ghost btn-sm gap-2" id="focus-mode-btn" aria-label="Focus Mode">
+          <ion-icon name="eye-outline" id="focus-mode-icon"></ion-icon>
+          <span class="text-xs" id="focus-mode-text">Фокус</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  
+  <article class="lg:col-span-7 mx-auto prose prose-quoteless dark:prose-invert w-full max-w-4xl" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+    
+  <meta itemprop="name" content="TorrServer на VPS: безопасная настройка удалённого стриминга">
+  <meta itemprop="description" content="Актуальная установка TorrServer на VPS: официальный инсталлятор, systemd, авторизация, UFW, HTTPS, Lampa, Docker и безопасное обновление.">
+  <meta itemprop="datePublished" content="2026-02-05T06:08:46+03:00">
+  <meta itemprop="dateModified" content="2026-08-17T12:00:00+03:00">
+  <meta itemprop="wordCount" content="1898">
+  <meta itemprop="image" content="https://0x69.ru/posts/torrserver-na-vps/Cover.png">
+  <meta itemprop="keywords" content="TorrServer,VPS,Linux,Стриминг,Торренты,Lampa,Docker,Termius,Selfhosted,Сервер">
+
+    <header class="not-prose mb-6 sm:mb-8">
+      
+      <nav class="text-xs sm:text-sm breadcrumbs mb-3 sm:mb-4 overflow-x-auto scrollbar-none">
+        <ul class="flex-nowrap">
+          <li class="shrink-0"><a href="/">Главная</a></li>
+          
+          <li class="shrink-0"><a href="/posts">Posts</a></li>
+          
+          
+          <li class="shrink-0"><a href="/categories/%d0%98%d0%bd%d1%81%d1%82%d1%80%d1%83%d0%ba%d1%86%d0%b8%d0%b8">Инструкции</a></li>
+          
+          <li class="truncate max-w-[150px] sm:max-w-[200px] md:max-w-none">TorrServer на VPS: безопасная настройка удалённого стриминга</li>
+        </ul>
+      </nav>
+
+      
+      
+      <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+        
+        
+        <a href="/categories/%d0%b8%d0%bd%d1%81%d1%82%d1%80%d1%83%d0%ba%d1%86%d0%b8%d0%b8/" 
+          class="badge badge-sm sm:badge-md badge-ghost hover:badge-primary transition-colors" 
+          rel="category">
+          Инструкции
+        </a>
+        
+      </div>
+      
+
+      
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight sm:leading-snug mb-3 sm:mb-4 break-words hyphens-auto" 
+          itemprop="headline">
+        TorrServer на VPS: безопасная настройка удалённого стриминга
+      </h1>
+
+      
+      <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-xs sm:text-sm text-base-content/70 mb-4 sm:mb-6">
+        
+        <time datetime="2026-02-05" class="flex items-center gap-1 min-w-0">
+          <ion-icon name="calendar-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          <span class="truncate">
+            
+            <span data-format="luxon">2026-02-05T06:08:46&#43;03:00</span>
+            
+          </span>
+        </time>
+
+        
+        
+        <span class="flex items-center gap-1">
+          <ion-icon name="time-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          <span class="truncate">
+            9<span class="hidden xs:inline">  минут чтения</span><span class="xs:hidden"> мин</span>
+          </span>
+        </span>
+
+        
+        <span class="hidden sm:flex items-center gap-1">
+          <ion-icon name="document-text-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          1898 слов
+        </span>
+        
+
+        
+        
+        <span class="flex items-center gap-1 col-span-2 sm:col-span-1" title="Обновлено">
+          <ion-icon name="refresh-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          <span class="truncate">
+            
+            <span data-format="luxon">2026-08-17T12:00:00&#43;03:00</span>
+            
+          </span>
+        </span>
+        
+      </div>
+
+      
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4 py-3 sm:py-4 border-y border-base-300">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center">
+  
+  <div class="avatar mr-1">
+    <div class="w-8 rounded-full">
+      <img class="my-0" src="/img/avatar.jpg" alt="Rianvy" />
+    </div>
+  </div>
+  
+
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+  
+    
+      <span itemprop="name">Rianvy</span>
+    
+  
+  </span>
+</div>
+
+        </div>
+        <div class="flex justify-start sm:justify-end shrink-0">
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=TorrServer%20%d0%bd%d0%b0%20VPS:%20%d0%b1%d0%b5%d0%b7%d0%be%d0%bf%d0%b0%d1%81%d0%bd%d0%b0%d1%8f%20%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0%20%d1%83%d0%b4%d0%b0%d0%bb%d1%91%d0%bd%d0%bd%d0%be%d0%b3%d0%be%20%d1%81%d1%82%d1%80%d0%b8%d0%bc%d0%b8%d0%bd%d0%b3%d0%b0&amp;url=https://0x69.ru/posts/torrserver-na-vps/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=https://0x69.ru/posts/torrserver-na-vps/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=TorrServer%20%d0%bd%d0%b0%20VPS:%20%d0%b1%d0%b5%d0%b7%d0%be%d0%bf%d0%b0%d1%81%d0%bd%d0%b0%d1%8f%20%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0%20%d1%83%d0%b4%d0%b0%d0%bb%d1%91%d0%bd%d0%bd%d0%be%d0%b3%d0%be%20%d1%81%d1%82%d1%80%d0%b8%d0%bc%d0%b8%d0%bd%d0%b3%d0%b0%20https://0x69.ru/posts/torrserver-na-vps/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://t.me/share/url?url=https://0x69.ru/posts/torrserver-na-vps/&amp;resubmit=true&amp;title=TorrServer%20%d0%bd%d0%b0%20VPS:%20%d0%b1%d0%b5%d0%b7%d0%be%d0%bf%d0%b0%d1%81%d0%bd%d0%b0%d1%8f%20%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0%20%d1%83%d0%b4%d0%b0%d0%bb%d1%91%d0%bd%d0%bd%d0%be%d0%b3%d0%be%20%d1%81%d1%82%d1%80%d0%b8%d0%bc%d0%b8%d0%bd%d0%b3%d0%b0" target="_blank" rel="noopener noreferrer"
+      title="Share on Telegram">
+      <ion-icon class="group-hover:text-primary-content" name="send"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </div>
+    </header>
+
+    
+    
+    <div class="not-prose mb-6 sm:mb-8">
+      <div class="flex items-center gap-2 sm:gap-3
+                  p-3 sm:p-4
+                  rounded-xl border border-base-300 bg-base-200/50">
+
+        
+        <span class="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-full w-full bg-primary"></span>
+        </span>
+        <ion-icon name="language-outline" class="text-lg sm:text-xl shrink-0"></ion-icon>
+        <span class="text-xs sm:text-sm text-base-content/70 shrink-0">Эта запись также доступна на</span>
+
+        
+        
+        <a href="https://0x69.ru/en/posts/torrserver-na-vps/"
+           class="group inline-flex items-center gap-1 sm:gap-1.5
+                  px-2.5 py-1 sm:px-3 sm:py-1.5
+                  rounded-full text-xs sm:text-sm
+                  bg-base-100 hover:bg-primary hover:text-primary-content
+                  border border-base-300 hover:border-primary
+                  transition-all duration-200 no-underline
+                  active:scale-95 shrink-0"
+           rel="noopener noreferrer"
+           hreflang="en">
+          <span class="opacity-70 group-hover:opacity-100">
+            🇬🇧
+          </span>
+          English
+          <ion-icon name="arrow-forward" class="text-xs opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-0 transition-all hidden sm:block"></ion-icon>
+        </a>
+        
+
+      </div>
+    </div>
+    
+
+    
+    
+    <figure class="not-prose mb-8"><img src="/posts/torrserver-na-vps/Cover_hu_d653ca63be0822fb.webp" 
+             alt="TorrServer на VPS: безопасная настройка удалённого стриминга" 
+             width="1200" 
+             height="677"
+             class="w-full rounded-xl shadow-lg" 
+             loading="eager"/></figure>
+    
+
+    
+    
+
+    
+    <section id="dream-single-post-content" class="fade-in-up" itemprop="articleBody">
+      <p>Полное руководство по установке TorrServer на удалённый VPS: от выбора сервера до защищённого подключения Lampa.</p>
+<h2 id="как-работает-torrserver-на-vps">Как работает TorrServer на VPS</h2>
+<p>TorrServer получает части файла из BitTorrent-сети, держит буфер в оперативной памяти и отдаёт видеопоток клиенту по HTTP или HTTPS. После переноса на VPS пиринговый трафик идёт через сервер, но домашний интернет всё равно используется для получения готового видеопотока.</p>
+<p>Преимущества такого варианта:</p>
+<ul>
+<li>доступ с телевизора, телефона и ноутбука вне домашней сети;</li>
+<li>круглосуточная работа без включённого домашнего компьютера;</li>
+<li>быстрый канал дата-центра и независимость от исходящей скорости домашнего подключения;</li>
+<li>единый сервер для нескольких личных устройств.</li>
+</ul>
+<p>При этом появляются расходы на VPS, исходящий трафик и необходимость правильно защитить сервис.</p>
+<h2 id="что-понадобится">Что понадобится</h2>
+<h3 id="требования-к-vps">Требования к VPS</h3>
+<p>Это ориентиры, а не жёсткие системные требования: фактическая нагрузка зависит от битрейта, числа зрителей, размера кэша и использования транскодирования.</p>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Параметр
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Для старта
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Комфортный вариант
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          CPU
+        </td>
+        
+        <td 
+          class=""
+        >
+          1 vCPU для обычного проксирования
+        </td>
+        
+        <td 
+          class=""
+        >
+          2+ vCPU; больше для GStreamer-транскодирования
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          RAM
+        </td>
+        
+        <td 
+          class=""
+        >
+          1 ГБ
+        </td>
+        
+        <td 
+          class=""
+        >
+          2 ГБ для крупного кэша или нескольких потоков
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Диск
+        </td>
+        
+        <td 
+          class=""
+        >
+          5 ГБ
+        </td>
+        
+        <td 
+          class=""
+        >
+          10 ГБ с запасом под ОС, логи и метаданные
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Сеть
+        </td>
+        
+        <td 
+          class=""
+        >
+          битрейт видео + 30–50% запаса
+        </td>
+        
+        <td 
+          class=""
+        >
+          порт 200 Мбит/с и выше
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          ОС
+        </td>
+        
+        <td 
+          class=""
+        >
+          современный glibc-based Linux
+        </td>
+        
+        <td 
+          class=""
+        >
+          Ubuntu 22.04/24.04 или Debian 12/13
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Параметр
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          CPU
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Для старта
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          1 vCPU для обычного проксирования
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Комфортный вариант
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          2+ vCPU; больше для GStreamer-транскодирования
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Параметр
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          RAM
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Для старта
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          1 ГБ
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Комфортный вариант
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          2 ГБ для крупного кэша или нескольких потоков
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Параметр
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Диск
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Для старта
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          5 ГБ
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Комфортный вариант
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          10 ГБ с запасом под ОС, логи и метаданные
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Параметр
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Сеть
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Для старта
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          битрейт видео + 30–50% запаса
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Комфортный вариант
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          порт 200 Мбит/с и выше
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Параметр
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          ОС
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Для старта
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          современный glibc-based Linux
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Комфортный вариант
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Ubuntu 22.04/24.04 или Debian 12/13
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><p>Основной стриминговый кэш TorrServer находится в RAM, поэтому выделять 10–20 ГБ диска именно «под кэш» не требуется. Старые дистрибутивы и системы на musl могут быть несовместимы с актуальным бинарником: официальный инсталлятор проверяет архитектуру, ОС и версию glibc.</p>
+<p>Фиксированного требования «100 Мбит/с для любого 4K» нет. Обычный 1080p может занимать 10–40 Мбит/с, а пиковый битрейт тяжёлого 4K-remux способен превысить 100 Мбит/с. Ориентируйтесь на реальный битрейт файла и оставляйте запас.</p>
+<h3 id="выбор-vps-провайдера">Выбор VPS-провайдера</h3>
+<p>Тарифы меняются, поэтому перед оплатой проверяйте текущую цену, скорость порта, лимит исходящего трафика и допустимость BitTorrent в правилах провайдера.</p>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Провайдер
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Что проверить
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Ссылка
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Aéza</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          доступные локации, тип тарифа и правила трафика
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://aeza.net/?ref=533501" target="_blank">aeza.net</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Xorek Cloud</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          скорость порта, лимит трафика и выбранную локацию
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://xorek.cloud/?from=34730" target="_blank">xorek.cloud</a>
+
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Провайдер
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Aéza</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Что проверить
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          доступные локации, тип тарифа и правила трафика
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ссылка
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://aeza.net/?ref=533501" target="_blank">aeza.net</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Провайдер
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Xorek Cloud</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Что проверить
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          скорость порта, лимит трафика и выбранную локацию
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ссылка
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://xorek.cloud/?from=34730" target="_blank">xorek.cloud</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><p>Для обычной сборки без транскодирования важнее сеть и RAM. Для <code>-gst</code>-сборки с GStreamer, которая умеет remux и транскодирование, производительность CPU тоже имеет значение.</p>
+<h3 id="ssh-клиент">SSH-клиент</h3>
+<p>В примерах используется <a href="https://termius.com" target="_blank">Termius</a>
+, но подойдёт любой SSH-клиент. Бесплатный тариф Termius включает SSH, SFTP и автодополнение; облачная синхронизация между мобильными и настольными устройствами относится к Pro-тарифу.</p>
+<h2 id="шаг-1-подготовка-сервера">Шаг 1: подготовка сервера</h2>
+<p>Закажите VPS с Ubuntu 22.04/24.04 или Debian 12/13. После создания сервера провайдер выдаст IP-адрес, пользователя, пароль или SSH-ключ.</p>
+<p>При первом подключении сравните fingerprint SSH-ключа с данными в панели провайдера, если они доступны. Не подтверждайте неизвестный fingerprint автоматически.</p>
+<p>Подключитесь к серверу и обновите систему:</p>
+<pre><code class="language-bash">apt update &amp;&amp; apt upgrade -y
+apt install -y curl ca-certificates
+</code></pre>
+<p>Если вы вошли не как <code>root</code>, добавляйте <code>sudo</code> перед административными командами.</p>
+<h2 id="шаг-2-установка-torrserver">Шаг 2: установка TorrServer</h2>
+<h3 id="рекомендуемый-вариант-официальный-инсталлятор">Рекомендуемый вариант: официальный инсталлятор</h3>
+<p>Скачайте скрипт отдельно, просмотрите его при желании и запустите интерактивно:</p>
+<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/YouROK/TorrServer/master/installTorrServerLinux.sh \
+  -o installTorrServerLinux.sh
+chmod 755 installTorrServerLinux.sh
+sudo bash ./installTorrServerLinux.sh
+</code></pre>
+<p>В меню выберите установку последней версии. Стандартная сборка подходит для прямого стриминга. <code>-gst</code>-сборка нужна только для функций GStreamer и может потребовать больше CPU.</p>
+<p>Инсталлятор:</p>
+<ul>
+<li>определяет архитектуру и совместимость glibc;</li>
+<li>устанавливает бинарник в <code>/opt/torrserver</code>;</li>
+<li>создаёт отдельного пользователя <code>torrserver</code>;</li>
+<li>создаёт и включает systemd-сервис <code>torrserver.service</code>;</li>
+<li>умеет настроить логирование и HTTP Basic Auth;</li>
+<li>поддерживает последующие обновления и перенастройку.</li>
+</ul>
+<p>Во время установки включите HTTP-аутентификацию и задайте уникальные логин и длинный пароль. Учётные данные сохраняются в <code>/opt/torrserver/accs.db</code>, а флаг <code>--httpauth</code> включает их проверку.</p>
+<p>Проверьте сервис:</p>
+<pre><code class="language-bash">systemctl status torrserver --no-pager
+journalctl -u torrserver -n 50 --no-pager
+</code></pre>
+<p>Управление сервисом:</p>
+<pre><code class="language-bash">systemctl restart torrserver
+systemctl stop torrserver
+systemctl start torrserver
+</code></pre>
+<h3 id="как-устроена-авторизация">Как устроена авторизация</h3>
+<p>TorrServer не принимает логин и пароль в аргументе <code>-a</code>. Параметр <code>-a</code> или <code>--httpauth</code> — это только переключатель. Пользователи хранятся в <code>accs.db</code> рядом с <code>config.db</code>:</p>
+<pre><code class="language-json">{
+  &quot;admin&quot;: &quot;ЗАМЕНИТЕ_НА_ДЛИННЫЙ_УНИКАЛЬНЫЙ_ПАРОЛЬ&quot;
+}
+</code></pre>
+<p>Не существует отдельного надёжного способа создать эти учётные данные через обычные настройки веб-интерфейса. Для изменения авторизации снова запустите официальный скрипт:</p>
+<pre><code class="language-bash">sudo bash ./installTorrServerLinux.sh --reconfigure
+</code></pre>
+<h2 id="шаг-3-безопасная-проверка">Шаг 3: безопасная проверка</h2>
+<p>Не открывайте <code>8090/tcp</code> всему интернету только ради проверки. Создайте SSH-туннель с вашего компьютера:</p>
+<pre><code class="language-bash">ssh -L 8090:127.0.0.1:8090 root@IP_СЕРВЕРА
+</code></pre>
+<p>Пока SSH-сессия открыта, перейдите в браузере на <code>http://127.0.0.1:8090</code>. Введите логин и пароль TorrServer.</p>
+<p>Basic Auth кодирует, но не шифрует пароль. Поэтому публичный доступ по обычному <code>http://IP:8090</code> небезопасен даже с авторизацией. Для постоянного удалённого доступа используйте HTTPS или приватную VPN-сеть.</p>
+<h2 id="шаг-4-файрвол">Шаг 4: файрвол</h2>
+<p>Сначала разрешите реальный SSH-порт. Если сервер использует стандартный OpenSSH на порту 22:</p>
+<pre><code class="language-bash">apt install -y ufw
+ufw allow OpenSSH
+ufw enable
+ufw status verbose
+</code></pre>
+<p>Если SSH работает на другом порту, разрешите именно его до включения UFW.</p>
+<p>Для рекомендуемой схемы с Nginx не добавляйте публичное правило для 8090. Порты HTTP/HTTPS откроем после установки Nginx, когда появится профиль <code>Nginx Full</code>.</p>
+<p>Если нужно временно проверить прямое подключение, ограничьте его текущим публичным IP вашего устройства:</p>
+<pre><code class="language-bash">ufw allow from ВАШ_ПУБЛИЧНЫЙ_IP to any port 8090 proto tcp
+</code></pre>
+<p>После проверки удалите это правило командой <code>ufw status numbered</code>, затем <code>ufw delete НОМЕР</code>.</p>
+<h2 id="шаг-5-https-с-nginx">Шаг 5: HTTPS с Nginx</h2>
+<p>Для этого шага нужен домен с A/AAAA-записью, направленной на VPS.</p>
+<p>Установите Nginx и Certbot:</p>
+<pre><code class="language-bash">apt install -y nginx certbot python3-certbot-nginx
+ufw allow 'Nginx Full'
+ufw status verbose
+</code></pre>
+<p>Создайте конфигурацию:</p>
+<pre><code class="language-bash">nano /etc/nginx/sites-available/torrserver
+</code></pre>
+<pre><code class="language-nginx">server {
+    listen 80;
+    listen [::]:80;
+    server_name torr.example.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:8090;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Authorization $http_authorization;
+
+        proxy_buffering off;
+        proxy_request_buffering off;
+        proxy_read_timeout 3600s;
+        proxy_send_timeout 3600s;
+    }
+}
+</code></pre>
+<p>Замените <code>torr.example.com</code> своим доменом, активируйте сайт и проверьте синтаксис:</p>
+<pre><code class="language-bash">ln -s /etc/nginx/sites-available/torrserver /etc/nginx/sites-enabled/torrserver
+nginx -t
+systemctl reload nginx
+certbot --nginx -d torr.example.com
+</code></pre>
+<p>После выпуска сертификата используйте <code>https://torr.example.com</code>. Убедитесь, что порт 8090 не открыт в UFW или в облачном файрволе провайдера.</p>
+<p>Если домена нет, безопаснее подключить VPS и устройства через WireGuard, Tailscale или другую приватную VPN-сеть, чем публиковать TorrServer по HTTP.</p>
+<h2 id="шаг-6-подключение-lampa">Шаг 6: подключение Lampa</h2>
+<p>Пункт меню зависит от версии клиента, но обычно находится в <strong>Настройки → TorrServer</strong>.</p>
+<ol>
+<li>Откройте настройки TorrServer в Lampa.</li>
+<li>Укажите защищённый адрес, например <code>https://torr.example.com</code>.</li>
+<li>Сохраните настройки и выполните проверку соединения.</li>
+<li>Для теста используйте торрент с контентом, который вы имеете право смотреть.</li>
+</ol>
+<p>Поддержка Basic Auth различается между сборками Lampa. Если ваш клиент предоставляет отдельные поля логина и пароля, используйте их. Не рассчитывайте, что URL вида <code>https://user:password@torr.example.com</code> обязательно заработает: веб-версии часто блокируют встроенные учётные данные или запросы к небезопасному HTTP-ресурсу. В таком случае используйте VPN либо клиент/плагин с явной поддержкой авторизации — не отключайте защиту сервера.</p>
+<h2 id="альтернатива-docker">Альтернатива: Docker</h2>
+<p>Установите Docker по <a href="https://docs.docker.com/engine/install/" target="_blank">официальной инструкции</a>
+. Пример ниже предполагает Nginx на том же VPS и поэтому публикует порт только на loopback-интерфейсе.</p>
+<p>Подготовьте каталог и файл авторизации:</p>
+<pre><code class="language-bash">install -d -m 700 /var/lib/torrserver/config
+nano /var/lib/torrserver/config/accs.db
+chmod 600 /var/lib/torrserver/config/accs.db
+</code></pre>
+<p>Содержимое <code>accs.db</code>:</p>
+<pre><code class="language-json">{
+  &quot;admin&quot;: &quot;ЗАМЕНИТЕ_НА_ДЛИННЫЙ_УНИКАЛЬНЫЙ_ПАРОЛЬ&quot;
+}
+</code></pre>
+<p>Запустите контейнер:</p>
+<pre><code class="language-bash">docker run -d \
+  --name torrserver \
+  --restart unless-stopped \
+  -p 127.0.0.1:8090:8090 \
+  -e TS_HTTPAUTH=1 \
+  -v /var/lib/torrserver:/opt/ts \
+  ghcr.io/yourok/torrserver:latest
+</code></pre>
+<p>Каталог постоянных данных внутри официального контейнера — <code>/opt/ts</code>, а не <code>/data</code>. Файл авторизации при стандартном <code>TS_CONF_PATH</code> должен лежать в <code>/opt/ts/config/accs.db</code>.</p>
+<p>Полезные команды:</p>
+<pre><code class="language-bash">docker logs -f torrserver
+docker restart torrserver
+docker stop torrserver
+docker start torrserver
+</code></pre>
+<p>Для обновления загрузите новый образ, пересоздайте контейнер той же командой и не удаляйте <code>/var/lib/torrserver</code>:</p>
+<pre><code class="language-bash">docker pull ghcr.io/yourok/torrserver:latest
+docker rm -f torrserver
+# Повторите команду docker run из примера выше.
+</code></pre>
+<h2 id="настройки-производительности">Настройки производительности</h2>
+<p>Текущие значения TorrServer по умолчанию — безопасная отправная точка. Меняйте их после проверки на реальном файле.</p>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Параметр
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          По умолчанию
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Ориентир для VPS с 1–2 ГБ RAM
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Cache size</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          64 МБ
+        </td>
+        
+        <td 
+          class=""
+        >
+          128–256 МБ, если хватает RAM
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Preload cache</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          50%
+        </td>
+        
+        <td 
+          class=""
+        >
+          50–75% для нестабильных раздач
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Connections limit</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          25
+        </td>
+        
+        <td 
+          class=""
+        >
+          25–50
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Upload rate limit</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          0 — без ограничения
+        </td>
+        
+        <td 
+          class=""
+        >
+          ограничивать только при лимитном трафике
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Параметр
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Cache size</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          По умолчанию
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          64 МБ
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ориентир для VPS с 1–2 ГБ RAM
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          128–256 МБ, если хватает RAM
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Параметр
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Preload cache</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          По умолчанию
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          50%
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ориентир для VPS с 1–2 ГБ RAM
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          50–75% для нестабильных раздач
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Параметр
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Connections limit</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          По умолчанию
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          25
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ориентир для VPS с 1–2 ГБ RAM
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          25–50
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Параметр
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Upload rate limit</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          По умолчанию
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          0 — без ограничения
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ориентир для VPS с 1–2 ГБ RAM
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          ограничивать только при лимитном трафике
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><p>Upload rate в настройках задаётся в KiB/s: <code>1024</code> — примерно 1 MiB/s, <code>5120</code> — примерно 5 MiB/s. Слишком низкий upload может ухудшить участие в раздаче. Сначала изучите правила и тарификацию исходящего трафика у провайдера.</p>
+<h2 id="решение-проблем">Решение проблем</h2>
+<h3 id="сервис-не-запускается">Сервис не запускается</h3>
+<pre><code class="language-bash">systemctl status torrserver --no-pager
+journalctl -u torrserver -n 100 --no-pager
+</code></pre>
+<p>Проверьте права на <code>/opt/torrserver</code>, корректность JSON в <code>accs.db</code> и совместимость бинарника с архитектурой VPS.</p>
+<h3 id="nginx-возвращает-502-bad-gateway">Nginx возвращает 502 Bad Gateway</h3>
+<pre><code class="language-bash">ss -tlnp | grep 8090
+curl -I http://127.0.0.1:8090
+nginx -t
+journalctl -u nginx -n 50 --no-pager
+</code></pre>
+<p>При использовании reverse proxy адрес <code>127.0.0.1:8090</code> — нормальный и безопасный. Слушать <code>0.0.0.0:8090</code> для этой схемы необязательно.</p>
+<h3 id="lampa-не-подключается">Lampa не подключается</h3>
+<ol>
+<li>Откройте адрес TorrServer в браузере с того же устройства.</li>
+<li>Проверьте сертификат и используйте <code>https://</code>, если настроили Certbot.</li>
+<li>Убедитесь, что Basic Auth поддерживается вашей сборкой Lampa.</li>
+<li>Для веб-клиента проверьте ошибки mixed content и CORS в консоли браузера.</li>
+<li>Посмотрите логи: <code>journalctl -u torrserver -f</code> или <code>docker logs -f torrserver</code>.</li>
+</ol>
+<h3 id="поток-буферизуется">Поток буферизуется</h3>
+<ol>
+<li>Сравните битрейт файла со скоростью VPS и домашнего подключения.</li>
+<li>Выберите раздачу с достаточным числом доступных пиров.</li>
+<li>Увеличивайте кэш постепенно и следите за RAM через <code>free -h</code>.</li>
+<li>Проверьте потери и маршрут между устройством и VPS.</li>
+<li>Если включено транскодирование, проверьте загрузку CPU через <code>top</code>.</li>
+</ol>
+<h2 id="обновление-torrserver">Обновление TorrServer</h2>
+<p>Не используйте скрипт, который останавливает сервис до успешной загрузки нового бинарника. Официальный инсталлятор уже поддерживает безопасное обновление:</p>
+<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/YouROK/TorrServer/master/installTorrServerLinux.sh \
+  -o installTorrServerLinux.sh
+chmod 755 installTorrServerLinux.sh
+sudo bash ./installTorrServerLinux.sh --update --silent
+</code></pre>
+<p>После обновления проверьте сервис и путь к запущенному бинарнику:</p>
+<pre><code class="language-bash">systemctl status torrserver --no-pager
+systemctl show torrserver -p ExecStart --no-pager
+</code></pre>
+<p>Имя бинарника зависит от архитектуры и выбранной standard/<code>-gst</code>-сборки. Установленные файлы можно посмотреть командой <code>ls -1 /opt/torrserver/TorrServer-*</code>.</p>
+<h2 id="плюсы-и-минусы">Плюсы и минусы</h2>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Плюсы
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Минусы
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Доступ с личных устройств вне дома
+        </td>
+        
+        <td 
+          class=""
+        >
+          Ежемесячная оплата VPS
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Работа 24/7
+        </td>
+        
+        <td 
+          class=""
+        >
+          Нужно поддерживать обновления и безопасность
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Быстрый канал дата-центра
+        </td>
+        
+        <td 
+          class=""
+        >
+          Домашний downlink всё равно используется для просмотра
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Пиринговый трафик переносится на VPS
+        </td>
+        
+        <td 
+          class=""
+        >
+          Возможны лимиты или запрет BitTorrent у провайдера
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Не нужен постоянно включённый домашний ПК
+        </td>
+        
+        <td 
+          class=""
+        >
+          Несколько одновременных потоков требуют больше ресурсов
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Плюсы
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Доступ с личных устройств вне дома
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Минусы
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Ежемесячная оплата VPS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Плюсы
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Работа 24/7
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Минусы
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Нужно поддерживать обновления и безопасность
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Плюсы
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Быстрый канал дата-центра
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Минусы
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Домашний downlink всё равно используется для просмотра
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Плюсы
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Пиринговый трафик переносится на VPS
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Минусы
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Возможны лимиты или запрет BitTorrent у провайдера
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Плюсы
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Не нужен постоянно включённый домашний ПК
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Минусы
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Несколько одновременных потоков требуют больше ресурсов
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><h2 id="заключение">Заключение</h2>
+<p>TorrServer на VPS удобен, когда нужен личный сервер для нескольких устройств и доступ вне домашней сети. Для стандартного проксирования обычно достаточно недорогого VPS с 1–2 ГБ RAM, но тариф следует выбирать по реальному битрейту, лимиту исходящего трафика и правилам провайдера.</p>
+<p>Главное — не публиковать порт 8090 без защиты. Используйте отдельного системного пользователя, встроенную авторизацию, HTTPS или приватную VPN и официальный механизм обновления.</p>
+<h2 id="полезные-ссылки">Полезные ссылки</h2>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Ресурс
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Ссылка
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>TorrServer</strong> — репозиторий и документация
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/YouROK/TorrServer" target="_blank">github.com/YouROK/TorrServer</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>TorrServer releases</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/YouROK/TorrServer/releases" target="_blank">github.com/YouROK/TorrServer/releases</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Lampa</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/lampa-app/LAMPA" target="_blank">github.com/lampa-app/LAMPA</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Docker Engine</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://docs.docker.com/engine/install/" target="_blank">docs.docker.com/engine/install</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Termius</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="https://termius.com" target="_blank">termius.com</a>
+
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <strong>Предыдущая статья о Lampa</strong>
+        </td>
+        
+        <td 
+          class=""
+        >
+          <a href="/posts/kak-smotret-filmy-4k-lampa-torrserver/">0x69.ru</a>
+
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ресурс
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>TorrServer</strong> — репозиторий и документация
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ссылка
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/YouROK/TorrServer" target="_blank">github.com/YouROK/TorrServer</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ресурс
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>TorrServer releases</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ссылка
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/YouROK/TorrServer/releases" target="_blank">github.com/YouROK/TorrServer/releases</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ресурс
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Lampa</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ссылка
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/lampa-app/LAMPA" target="_blank">github.com/lampa-app/LAMPA</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ресурс
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Docker Engine</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ссылка
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://docs.docker.com/engine/install/" target="_blank">docs.docker.com/engine/install</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ресурс
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Termius</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ссылка
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://termius.com" target="_blank">termius.com</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ресурс
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <strong>Предыдущая статья о Lampa</strong>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Ссылка
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="/posts/kak-smotret-filmy-4k-lampa-torrserver/">0x69.ru</a>
+
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><div class="divider my-8 text-base-content/20"></div>
+
+<div class="flex justify-center my-6">
+  <button onclick="document.getElementById('donation-modal').showModal()"
+          class="btn btn-lg btn-primary rounded-full shadow-lg hover:shadow-xl 
+                 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] 
+                 active:scale-[0.98] gap-2 px-8 border-0 no-underline">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+    </svg>
+    <span>Поддержать проект</span>
+  </button>
+</div>
+
+<div class="divider my-8 text-base-content/20"></div>
+
+
+<dialog id="donation-modal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box bg-base-100 p-0 overflow-hidden shadow-2xl max-w-md">
+    
+    
+    <div class="bg-primary p-6 relative">
+      <form method="dialog" class="absolute top-4 right-4">
+        <button class="btn btn-sm btn-circle btn-ghost text-primary-content/70 
+                       hover:text-primary-content hover:bg-primary-content/10">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </form>
+      
+      <div class="flex items-center gap-4">
+        <div class="bg-primary-content/15 p-3 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-content" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-primary-content">Поддержать проект</h3>
+          <p class="text-primary-content/80 text-sm mt-1">Выберите удобный способ</p>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="p-6 space-y-4">
+      
+      
+      <a href="https://pay.cloudtips.ru/p/b59e1765" 
+         target="_blank"
+         rel="noopener noreferrer"
+         class="group flex items-center gap-4 p-4 rounded-xl border-2 border-base-300 
+                hover:border-primary hover:shadow-lg hover:bg-base-200/50
+                transition-all duration-200 no-underline block">
+        <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-xl 
+                    flex items-center justify-center shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z" />
+          </svg>
+        </div>
+        <div class="flex-grow min-w-0">
+          <h4 class="font-semibold text-base text-base-content">Cloudtips</h4>
+          <p class="text-sm text-base-content/60 mt-0.5">Для пользователей из России</p>
+        </div>
+        <div class="flex-shrink-0 text-base-content/30 group-hover:text-primary 
+                    transition-all group-hover:translate-x-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+      </a>
+      
+      
+      <a href="https://t.me/tribute/app?startapp=dE4k" 
+         target="_blank"
+         rel="noopener noreferrer"
+         class="group flex items-center gap-4 p-4 rounded-xl border-2 border-base-300 
+                hover:border-primary hover:shadow-lg hover:bg-base-200/50
+                transition-all duration-200 no-underline block">
+        <div class="flex-shrink-0 w-12 h-12 bg-purple-600 rounded-xl 
+                    flex items-center justify-center shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+          </svg>
+        </div>
+        <div class="flex-grow min-w-0">
+          <h4 class="font-semibold text-base text-base-content">Tribute</h4>
+          <p class="text-sm text-base-content/60 mt-0.5">Зарубежные карты, криптовалюта из кошелька Telegram: USDT, Bitcoin, Toncoin, Notcoin</p>
+        </div>
+        <div class="flex-shrink-0 text-base-content/30 group-hover:text-primary 
+                    transition-all group-hover:translate-x-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+      </a>
+      
+      
+      <div class="mt-6 p-4 bg-base-200/50 rounded-xl">
+        <div class="flex items-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+          </svg>
+          <p class="text-sm text-base-content/70">
+            Все платежи защищены. Любая поддержка помогает развивать проект и создавать новые материалы ❤️
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <form method="dialog" class="modal-backdrop bg-black/50">
+    <button>Закрыть</button>
+  </form>
+</dialog>
+    </section>
+
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      <div class="not-prose mt-12 pt-6 border-t border-base-300 fade-in-up">
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+          <ion-icon name="reader-outline" class="text-2xl"></ion-icon>
+          Читайте также
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <a href="/posts/kak-smotret-filmy-4k-lampa-torrserver/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+            
+            <figure class="overflow-hidden"><img src="/posts/kak-smotret-filmy-4k-lampa-torrserver/Cover_hu_dac24521797d0a9b.webp"
+                     alt="TorrServer на VPS: безопасная настройка удалённого стриминга"
+                     width="354"
+                     height="200"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/></figure>
+            
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm line-clamp-2">Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer</h4>
+              <p class="text-xs text-base-content/60">
+                16  минут чтения
+              </p>
+            </div>
+          </a>
+          
+          <a href="/portfolio/vkify-website-extension-landing/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+            
+            <figure class="overflow-hidden"><img src="/portfolio/vkify-website-extension-landing/Cover_hu_901b3400bf040505.webp"
+                     alt="TorrServer на VPS: безопасная настройка удалённого стриминга"
+                     width="354"
+                     height="200"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/></figure>
+            
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm line-clamp-2">VKify Website — Лендинг для браузерного расширения</h4>
+              <p class="text-xs text-base-content/60">
+                5  минут чтения
+              </p>
+            </div>
+          </a>
+          
+          <a href="/portfolio/vkify-vkontakte-extension/" class="card bg-base-200 hover:bg-base-300 transition-all hover:shadow-lg group">
+            
+            <figure class="overflow-hidden"><img src="/portfolio/vkify-vkontakte-extension/Cover_hu_1c0ac7d5c811e66e.webp"
+                     alt="TorrServer на VPS: безопасная настройка удалённого стриминга"
+                     width="355"
+                     height="200"
+                     class="w-full h-auto object-contain transition-transform group-hover:scale-105"
+                     loading="lazy"/></figure>
+            
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm line-clamp-2">VKify — Расширение для ВКонтакте</h4>
+              <p class="text-xs text-base-content/60">
+                6  минут чтения
+              </p>
+            </div>
+          </a>
+          
+        </div>
+      </div>
+      
+    
+
+    
+    
+    <footer class="not-prose mt-12 pt-6 border-t border-base-300">
+      <div class="flex flex-wrap items-center gap-2">
+        <ion-icon name="pricetags-outline" class="text-lg text-base-content/60"></ion-icon>
+        
+        
+        <a href="/tags/torrserver/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #TorrServer
+        </a>
+        
+        <a href="/tags/vps/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #VPS
+        </a>
+        
+        <a href="/tags/linux/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Linux
+        </a>
+        
+        <a href="/tags/%d1%81%d1%82%d1%80%d0%b8%d0%bc%d0%b8%d0%bd%d0%b3/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #стриминг
+        </a>
+        
+        <a href="/tags/%d1%82%d0%be%d1%80%d1%80%d0%b5%d0%bd%d1%82%d1%8b/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #торренты
+        </a>
+        
+        <a href="/tags/lampa/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Lampa
+        </a>
+        
+        <a href="/tags/docker/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Docker
+        </a>
+        
+        <a href="/tags/termius/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Termius
+        </a>
+        
+        <a href="/tags/selfhosted/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #selfhosted
+        </a>
+        
+        <a href="/tags/%d1%81%d0%b5%d1%80%d0%b2%d0%b5%d1%80/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #сервер
+        </a>
+        
+      </div>
+    </footer>
+    
+
+    
+    
+    <nav class="not-prose mt-8" aria-label="Post navigation">
+      <div class="divider"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div></div>
+
+        
+        <a href="/posts/reverse-engineering-vk-long-poll/" class="group card bg-base-200 hover:bg-base-300 transition-colors p-4 md:text-right">
+          <div class="flex items-center gap-3 md:flex-row-reverse">
+            <ion-icon name="chevron-forward" class="text-xl text-base-content/50 group-hover:text-primary transition-colors"></ion-icon>
+            <div class="min-w-0">
+              <span class="text-xs text-base-content/60 uppercase tracking-wide">Следующая</span>
+              <p class="font-medium truncate">Реверс-инжиниринг Long Poll ВКонтакте: сниффер, скрытые события и WebSocket</p>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+    </nav>
+    
+
+    
+    
+    <section class="mt-12">
+      
+
+
+<template x-if="['localhost', '127.0.0.1'].indexOf(window.location.hostname) == -1">
+  <article>
+    <div class="giscus" id="giscus-container"></div>
+    <script>
+      (function() {
+        function isDark() {
+          return document.documentElement.getAttribute('data-theme') === 'dim';
+        }
+
+        function getTheme() {
+          return isDark() ? 'https://0x69.ru/css/giscus-dim.css' : 'light';
+        }
+
+        function getLang() {
+          var path = window.location.pathname;
+          if (path.startsWith('/en/')) return 'en';
+          return 'ru';
+        }
+
+        function sendTheme() {
+          var frame = document.querySelector('iframe.giscus-frame');
+          if (!frame) return;
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: getTheme() } } },
+            'https://giscus.app'
+          );
+        }
+
+        var script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.setAttribute('data-repo', 'Rianvy\/blog');
+        script.setAttribute('data-repo-id', 'R_kgDONpZnjw');
+        script.setAttribute('data-category', 'Comments');
+        script.setAttribute('data-category-id', 'DIC_kwDONpZnj84C2KjB');
+        script.setAttribute('data-mapping', 'pathname');
+        script.setAttribute('data-strict', '1');
+        script.setAttribute('data-reactions-enabled', '1');
+        script.setAttribute('data-emit-metadata', '0');
+        script.setAttribute('data-input-position', 'top');
+        script.setAttribute('data-theme', getTheme());
+        script.setAttribute('data-lang', getLang());
+        script.setAttribute('data-loading', 'lazy');
+        script.crossOrigin = 'anonymous';
+        script.async = true;
+        document.getElementById('giscus-container').appendChild(script);
+
+        new MutationObserver(function() {
+          sendTheme();
+        }).observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['data-theme']
+        });
+
+      })();
+    </script>
+  </article>
+</template>
+
+
+
+
+
+
+
+
+
+    </section>
+    
+  </article>
+
+  
+  <aside class="hidden lg:block lg:col-span-3 right-sidebar">
+    <div class="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto space-y-6 pr-2">
+      
+      
+
+      
+      
+      <div class="card bg-base-200 p-4">
+        <h3 class="font-semibold mb-3 flex items-center gap-2">
+          <ion-icon name="list-outline"></ion-icon>
+          Содержание
+        </h3>
+        <nav class="text-sm">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#как-работает-torrserver-на-vps">Как работает TorrServer на VPS</a></li>
+    <li><a href="#что-понадобится">Что понадобится</a>
+      <ul>
+        <li><a href="#требования-к-vps">Требования к VPS</a></li>
+        <li><a href="#выбор-vps-провайдера">Выбор VPS-провайдера</a></li>
+        <li><a href="#ssh-клиент">SSH-клиент</a></li>
+      </ul>
+    </li>
+    <li><a href="#шаг-1-подготовка-сервера">Шаг 1: подготовка сервера</a></li>
+    <li><a href="#шаг-2-установка-torrserver">Шаг 2: установка TorrServer</a>
+      <ul>
+        <li><a href="#рекомендуемый-вариант-официальный-инсталлятор">Рекомендуемый вариант: официальный инсталлятор</a></li>
+        <li><a href="#как-устроена-авторизация">Как устроена авторизация</a></li>
+      </ul>
+    </li>
+    <li><a href="#шаг-3-безопасная-проверка">Шаг 3: безопасная проверка</a></li>
+    <li><a href="#шаг-4-файрвол">Шаг 4: файрвол</a></li>
+    <li><a href="#шаг-5-https-с-nginx">Шаг 5: HTTPS с Nginx</a></li>
+    <li><a href="#шаг-6-подключение-lampa">Шаг 6: подключение Lampa</a></li>
+    <li><a href="#альтернатива-docker">Альтернатива: Docker</a></li>
+    <li><a href="#настройки-производительности">Настройки производительности</a></li>
+    <li><a href="#решение-проблем">Решение проблем</a>
+      <ul>
+        <li><a href="#сервис-не-запускается">Сервис не запускается</a></li>
+        <li><a href="#nginx-возвращает-502-bad-gateway">Nginx возвращает 502 Bad Gateway</a></li>
+        <li><a href="#lampa-не-подключается">Lampa не подключается</a></li>
+        <li><a href="#поток-буферизуется">Поток буферизуется</a></li>
+      </ul>
+    </li>
+    <li><a href="#обновление-torrserver">Обновление TorrServer</a></li>
+    <li><a href="#плюсы-и-минусы">Плюсы и минусы</a></li>
+    <li><a href="#заключение">Заключение</a></li>
+    <li><a href="#полезные-ссылки">Полезные ссылки</a></li>
+  </ul>
+</nav>
+        </nav>
+      </div>
+      
+    </div>
+  </aside>
+</div>
+
+
+<div class="lg:hidden sticky bottom-6 z-50 pointer-events-none">
+  <div class="flex justify-end pr-6">
+    <button onclick="document.getElementById('mobile-actions-modal').showModal()" 
+            class="pointer-events-auto btn btn-circle btn-primary shadow-2xl w-14 h-14 group">
+      <ion-icon name="apps" class="text-2xl transition-transform duration-300 group-active:scale-90"></ion-icon>
+    </button>
+  </div>
+</div>
+
+
+<dialog id="mobile-actions-modal" class="modal modal-bottom lg:hidden">
+  <div class="modal-box rounded-t-3xl pb-8">
+    
+    <div class="flex justify-center mb-4">
+      <div class="w-12 h-1.5 bg-base-300 rounded-full"></div>
+    </div>
+    
+    
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="font-bold text-lg flex items-center gap-2">
+        <ion-icon name="apps-outline" class="text-primary"></ion-icon>
+        Быстрые действия
+      </h3>
+      <button onclick="document.getElementById('mobile-actions-modal').close()" 
+              class="btn btn-circle btn-ghost btn-sm">
+        <ion-icon name="close" class="text-xl"></ion-icon>
+      </button>
+    </div>
+    
+    
+    <div class="grid grid-cols-4 gap-3">
+      
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-info/20 flex items-center justify-center">
+          <ion-icon name="arrow-up" class="text-2xl text-info"></ion-icon>
+        </div>
+        <span class="text-xs">Наверх</span>
+      </button>
+      
+      
+      
+      <button onclick="document.getElementById('mobile-actions-modal').close(); setTimeout(() => document.getElementById('mobile-toc-modal').showModal(), 150);"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-success/20 flex items-center justify-center">
+          <ion-icon name="list" class="text-2xl text-success"></ion-icon>
+        </div>
+        <span class="text-xs">Содержание</span>
+      </button>
+      
+      
+      
+      <button onclick="navigator.share({title: 'TorrServer на VPS: безопасная настройка удалённого стриминга', url: 'https:\/\/0x69.ru\/posts\/torrserver-na-vps\/'}).catch(() => {}); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-warning/20 flex items-center justify-center">
+          <ion-icon name="share-social" class="text-2xl text-warning"></ion-icon>
+        </div>
+        <span class="text-xs">Поделиться</span>
+      </button>
+      
+      
+      <button onclick="navigator.clipboard.writeText('https:\/\/0x69.ru\/posts\/torrserver-na-vps\/'); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-error/20 flex items-center justify-center">
+          <ion-icon name="copy" class="text-2xl text-error"></ion-icon>
+        </div>
+        <span class="text-xs">Копировать</span>
+      </button>
+    </div>
+  </div>
+  
+  <form method="dialog" class="modal-backdrop bg-black/50">
+    <button>close</button>
+  </form>
+</dialog>
+
+
+
+<dialog id="mobile-toc-modal" class="modal modal-bottom">
+  <div class="modal-box rounded-t-3xl max-h-[75vh]">
+    <div class="flex justify-center mb-4">
+      <div class="w-12 h-1.5 bg-base-300 rounded-full"></div>
+    </div>
+    
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-bold text-lg">Содержание</h3>
+      <button onclick="document.getElementById('mobile-toc-modal').close()" class="btn btn-circle btn-ghost btn-sm">
+        <ion-icon name="close" class="text-xl"></ion-icon>
+      </button>
+    </div>
+    
+    <nav class="overflow-y-auto" onclick="if(event.target.tagName === 'A') document.getElementById('mobile-toc-modal').close();">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#как-работает-torrserver-на-vps">Как работает TorrServer на VPS</a></li>
+    <li><a href="#что-понадобится">Что понадобится</a>
+      <ul>
+        <li><a href="#требования-к-vps">Требования к VPS</a></li>
+        <li><a href="#выбор-vps-провайдера">Выбор VPS-провайдера</a></li>
+        <li><a href="#ssh-клиент">SSH-клиент</a></li>
+      </ul>
+    </li>
+    <li><a href="#шаг-1-подготовка-сервера">Шаг 1: подготовка сервера</a></li>
+    <li><a href="#шаг-2-установка-torrserver">Шаг 2: установка TorrServer</a>
+      <ul>
+        <li><a href="#рекомендуемый-вариант-официальный-инсталлятор">Рекомендуемый вариант: официальный инсталлятор</a></li>
+        <li><a href="#как-устроена-авторизация">Как устроена авторизация</a></li>
+      </ul>
+    </li>
+    <li><a href="#шаг-3-безопасная-проверка">Шаг 3: безопасная проверка</a></li>
+    <li><a href="#шаг-4-файрвол">Шаг 4: файрвол</a></li>
+    <li><a href="#шаг-5-https-с-nginx">Шаг 5: HTTPS с Nginx</a></li>
+    <li><a href="#шаг-6-подключение-lampa">Шаг 6: подключение Lampa</a></li>
+    <li><a href="#альтернатива-docker">Альтернатива: Docker</a></li>
+    <li><a href="#настройки-производительности">Настройки производительности</a></li>
+    <li><a href="#решение-проблем">Решение проблем</a>
+      <ul>
+        <li><a href="#сервис-не-запускается">Сервис не запускается</a></li>
+        <li><a href="#nginx-возвращает-502-bad-gateway">Nginx возвращает 502 Bad Gateway</a></li>
+        <li><a href="#lampa-не-подключается">Lampa не подключается</a></li>
+        <li><a href="#поток-буферизуется">Поток буферизуется</a></li>
+      </ul>
+    </li>
+    <li><a href="#обновление-torrserver">Обновление TorrServer</a></li>
+    <li><a href="#плюсы-и-минусы">Плюсы и минусы</a></li>
+    <li><a href="#заключение">Заключение</a></li>
+    <li><a href="#полезные-ссылки">Полезные ссылки</a></li>
+  </ul>
+</nav>
+    </nav>
+  </div>
+  
+  <form method="dialog" class="modal-backdrop bg-black/50">
+    <button>close</button>
+  </form>
+</dialog>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Максим Александров<br>
+<strong>Age:</strong> 28
+<strong>Location:</strong> Тула, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>Этот блог — мой personal knowledge base, где я пушу заметки про tech stack, life experience и всё, что триггерит мой interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — готов к мёрджу идей и совместным проектам.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-яп">💻 ЯП</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Адаптивная вёрстка (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST API</strong></li>
+</ul>
+<h2 id="-базы-данных">🗄️ Базы данных</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-дизайн-и-графика">🎨 Дизайн и графика</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX дизайн и прототипирование</li>
+<li><strong>Photoshop</strong> — графика и обработка изображений</li>
+<li><strong>After Effects</strong> — моушн-дизайн и анимация 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои Open Source проекты 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/Rianvy/CleanSlate-for-Reddit" target="_blank">CleanSlate for Reddit</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Приватное local-first расширение для очистки постов, комментариев, сохранённых публикаций и голосов Reddit прямо в браузере
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/Rianvy/CleanSlate-for-Reddit" target="_blank">CleanSlate for Reddit</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Приватное local-first расширение для очистки постов, комментариев, сохранённых публикаций и голосов Reddit прямо в браузере
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои проекты 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN-сервис в Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN-сервис в Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Социальные сети</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+    
+<script>
+
+function toggleFocusMode() {
+  const body = document.body;
+  const icon = document.getElementById('focus-mode-icon');
+  const text = document.getElementById('focus-mode-text');
+  
+  body.classList.toggle('focus-mode');
+  
+  const isFocusMode = body.classList.contains('focus-mode');
+  
+  if (icon) {
+    icon.setAttribute('name', isFocusMode ? 'eye-off-outline' : 'eye-outline');
+  }
+  
+  if (text) {
+    text.textContent = isFocusMode ? 'Exit' : 'Фокус';
+  }
+  
+  
+  localStorage.setItem('focusMode', isFocusMode ? 'on' : 'off');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  
+  if (localStorage.getItem('focusMode') === 'on') {
+    document.body.classList.add('focus-mode');
+    const icon = document.getElementById('focus-mode-icon');
+    const text = document.getElementById('focus-mode-text');
+    if (icon) icon.setAttribute('name', 'eye-off-outline');
+    if (text) text.textContent = 'Exit';
+  }
+
+  
+  const progressBar = document.getElementById('reading-progress');
+  const progressText = document.getElementById('reading-progress-text');
+  const article = document.getElementById('dream-single-post-main');
+  
+  if (progressBar && article) {
+    const updateProgress = () => {
+      const rect = article.getBoundingClientRect();
+      const scrolled = Math.max(0, -rect.top);
+      const total = rect.height - window.innerHeight;
+      const progress = Math.min(100, Math.max(0, (scrolled / total) * 100));
+      progressBar.style.width = `${progress}%`;
+      
+      if (progressText) {
+        progressText.textContent = `${Math.round(progress)}%`;
+        progressText.classList.toggle('visible', progress > 5 && progress < 95);
+      }
+    };
+    
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  
+  const tocLinks = document.querySelectorAll('#TableOfContents a');
+  const headings = document.querySelectorAll('#dream-single-post-content h1, #dream-single-post-content h2, #dream-single-post-content h3');
+  
+  if (tocLinks.length && headings.length) {
+    const tocObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => link.classList.remove('active'));
+          const activeLink = document.querySelector(`#TableOfContents a[href="#${entry.target.id}"]`);
+          activeLink?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0% -60% 0%' });
+    
+    headings.forEach(h => tocObserver.observe(h));
+  }
+});
+</script>
+
+
+
+
+
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
+  integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
+  crossorigin="anonymous"
+></script>
+<script>
+  format()
+
+  function format() {
+    document.querySelectorAll('span[data-format="luxon"]').forEach(el => {
+      const date = el.textContent
+
+      el.textContent = luxon.DateTime.fromISO(date, { locale: "ru" }).toFormat("dd.MM.yyyy, HH:mm")
+    })
+  }
+</script>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/apache.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/shell.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sh.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/zsh.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/powershell.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/ini.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/nginx.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script><script>
+  hljs.highlightAll();
+  hljs.addPlugin(new CopyButtonPlugin());
+
+  document.addEventListener('alpine:initialized', () => {
+    window.customSyntaxHighlighting = {
+      dark: 'github-dark-dimmed',
+      light: 'atom-one-light'
+    };
+
+    const updateSyntaxTheme = () => {
+      try {
+        const isDark = Alpine.store('darkMode').isDark();
+        const currentTheme = isDark ? 
+          window.customSyntaxHighlighting.dark : 
+          window.customSyntaxHighlighting.light;
+
+        let link = document.querySelector('link[data-syntax-highlight]');
+        if (link) {
+          const currentHref = link.href;
+          const updatedHref = currentHref.replace(/styles\/[^/]+\.min\.css/, `styles/${currentTheme}.min.css`);
+          link.href = updatedHref;
+        }
+      } catch (error) {
+        console.warn('Error updating syntax theme:', error);
+      }
+    };
+
+    updateSyntaxTheme();
+    Alpine.effect(() => {
+      updateSyntaxTheme();
+    });
+  });
+</script>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-fullscreen.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-thumbnail.min.css">
+
+
+<style>
+   
+  .lg-backdrop {
+    background-color: rgba(0, 0, 0, 0.95) !important;
+  }
+  
+   
+  .lg-sub-html {
+    background: linear-gradient(transparent, rgba(0,0,0,0.8)) !important;
+    padding: 20px 40px !important;
+    text-align: left !important;
+  }
+  
+  .lg-sub-html h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  
+  .lg-sub-html h2 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.8);
+  }
+  
+  .lg-sub-html .project-meta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.6);
+  }
+  
+  .lg-sub-html .project-link {
+    color: #60a5fa;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .lg-sub-html .project-link:hover {
+    color: #93c5fd;
+  }
+  
+   
+  .lg-item img {
+    transition: transform 0.3s ease;
+  }
+  
+   
+  .lg-progress-bar {
+    background-color: #3b82f6 !important;
+    height: 3px !important;
+  }
+  
+   
+  .lg-thumb-item {
+    border-radius: 4px;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  
+  .lg-thumb-item.active,
+  .lg-thumb-item:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  
+   
+  .lg-toolbar .lg-icon {
+    font-size: 1.5rem;
+  }
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/fullscreen/lg-fullscreen.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const galleryContainer = document.querySelector("#dream-single-post-content");
+  const images = galleryContainer?.querySelectorAll("img");
+
+  if (!galleryContainer || !images?.length) return;
+
+  
+  galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
+
+  images.forEach((img, index) => {
+    if (img.closest('[data-tc-exclude]')) return;
+    if (img.closest("a.lg-item")) return;
+
+    const wrapper = document.createElement("a");
+    wrapper.href = img.src;
+    wrapper.classList.add("lg-item", "not-prose");
+    
+    
+    wrapper.style.cursor = "zoom-in";
+
+    
+    const alt = img.alt || "";
+    const title = img.title || "";
+    
+    
+    const projectUrl = img.dataset.projectUrl || "";
+    const projectYear = img.dataset.year || "";
+    const projectTech = img.dataset.tech || "";
+
+    let subHtml = "";
+    
+    if (alt) {
+      subHtml += `<h1>${alt}</h1>`;
+    }
+    
+    if (title) {
+      subHtml += `<h2>${title}</h2>`;
+    }
+    
+    
+    if (projectUrl || projectYear || projectTech) {
+      subHtml += `<div class="project-meta">`;
+      
+      if (projectYear) {
+        subHtml += `<span>📅 ${projectYear}</span>`;
+      }
+      
+      if (projectTech) {
+        subHtml += `<span>🛠️ ${projectTech}</span>`;
+      }
+      
+      if (projectUrl) {
+        subHtml += `<a href="${projectUrl}" target="_blank" rel="noopener" class="project-link">🔗 Открыть проект</a>`;
+      }
+      
+      subHtml += `</div>`;
+    }
+
+    wrapper.dataset.subHtml = subHtml;
+    
+    
+    wrapper.dataset.src = img.src;
+    
+    
+    if (img.dataset.srcLarge) {
+      wrapper.dataset.src = img.dataset.srcLarge;
+    }
+
+    img.parentNode.insertBefore(wrapper, img);
+    wrapper.appendChild(img);
+  });
+
+  
+  const gallery = lightGallery(galleryContainer, {
+    selector: "a.lg-item",
+    plugins: [lgZoom, lgFullscreen, lgThumbnail],
+    
+    
+    speed: 400,
+    backdropDuration: 300,
+    startAnimationDuration: 400,
+    endAnimationDuration: 300,
+    
+    
+    loop: true,
+    slideShowAutoplay: false,
+    slideShowInterval: 4000,
+    mousewheel: true,
+    hideScrollbar: true,
+    
+    
+    closeOnTap: true,
+    closable: true,
+    escKey: true,
+    
+    
+    counter: true,
+    download: false,
+    getCaptionFromTitleOrAlt: false,
+    subHtmlSelectorRelative: true,
+    
+    
+    mobileSettings: {
+      controls: true,
+      showCloseIcon: true,
+      download: false
+    },
+    
+    
+    swipeThreshold: 50,
+    enableSwipe: true,
+    enableDrag: true,
+    
+    
+    zoomFromOrigin: true,
+    actualSize: true,
+    showZoomInOutIcons: true,
+    actualSizeIcons: {
+      zoomIn: "lg-zoom-in",
+      zoomOut: "lg-zoom-out"
+    },
+    scale: 1,
+    zoom: true,
+    
+    
+    thumbnail: true,
+    thumbWidth: 100,
+    thumbHeight: "80px",
+    thumbMargin: 5,
+    toggleThumb: true,
+    animateThumb: true,
+    
+    
+    fullScreen: true,
+    
+    
+    preload: 2,
+    
+    
+    ariaLabelledby: "lg-slide-title",
+    ariaDescribedby: "lg-slide-desc"
+  });
+
+  
+  
+  
+  galleryContainer.addEventListener("lgAfterOpen", () => {
+    console.log("Gallery opened");
+    
+  });
+
+  
+  galleryContainer.addEventListener("lgAfterSlide", (event) => {
+    const { index } = event.detail;
+    console.log(`Viewing slide ${index + 1}`);
+  });
+
+  
+  document.addEventListener("keydown", (e) => {
+    if (!document.querySelector(".lg-container")) return;
+    
+    if (e.key === "+" || e.key === "=") {
+      gallery.zoomIn();
+    } else if (e.key === "-") {
+      gallery.zoomOut();
+    }
+  });
+});
+</script>
+
+
+
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+
+    
+    
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym("99568144", "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

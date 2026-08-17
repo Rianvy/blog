@@ -6,8 +6,22 @@
     <description>Recent content in Веб-Разработка on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>ru</language>
-    <lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2026 12:00:00 +0300</lastBuildDate>
     <atom:link href="https://0x69.ru/tags/%D0%B2%D0%B5%D0%B1-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CleanSlate for Reddit — приватная очистка истории Reddit</title>
+      <link>https://0x69.ru/portfolio/cleanslate-for-reddit/</link>
+      <pubDate>Mon, 17 Aug 2026 12:00:00 +0300</pubDate>
+      <guid>https://0x69.ru/portfolio/cleanslate-for-reddit/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;CleanSlate for Reddit&lt;/strong&gt; — локальное браузерное расширение для безопасной и контролируемой очистки собственной истории Reddit без подписки, внешнего сервера и передачи данных третьим лицам.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Портфолио</title>
+      <link>https://0x69.ru/portfolio/</link>
+      <pubDate>Mon, 17 Aug 2026 12:00:00 +0300</pubDate>
+      <guid>https://0x69.ru/portfolio/</guid>
+      <description></description>
+    </item>
     <item>
       <title>URL Encoder/Decoder</title>
       <link>https://0x69.ru/utilities/url-encoder/</link>
@@ -23,18 +37,11 @@
       <description>&lt;p&gt;Разработка современного лендинга для браузерного расширения VKify — от креативной главной страницы до служебных страниц onboarding и changelog.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Портфолио</title>
-      <link>https://0x69.ru/portfolio/</link>
-      <pubDate>Wed, 28 Jan 2026 00:35:23 +0300</pubDate>
-      <guid>https://0x69.ru/portfolio/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>VKify — Расширение для ВКонтакте</title>
       <link>https://0x69.ru/portfolio/vkify-vkontakte-extension/</link>
       <pubDate>Tue, 27 Jan 2026 17:35:43 +0300</pubDate>
       <guid>https://0x69.ru/portfolio/vkify-vkontakte-extension/</guid>
-      <description>&lt;p&gt;VKify — браузерное расширение, которое делает ВКонтакте удобнее: блокировка рекламы, кастомизация интерфейса, режим приватности и многое другое.&lt;/p&gt;</description>
+      <description>&lt;p&gt;VKify объединяет настройку внешнего вида VK, чистую ленту, приватность, экспорт переписок, загрузку медиа и автоматизацию в одном расширении для Chrome, Firefox и Opera.&lt;/p&gt;</description>
     </item>
     <item>
       <title>CodeSqueeze — онлайн-минификатор кода</title>

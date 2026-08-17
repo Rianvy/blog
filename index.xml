@@ -6,8 +6,29 @@
     <description>Recent content on 0x69.ru</description>
     <generator>Hugo</generator>
     <language>ru</language>
-    <lastBuildDate>Thu, 12 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2026 12:00:00 +0300</lastBuildDate>
     <atom:link href="https://0x69.ru/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CleanSlate for Reddit — приватная очистка истории Reddit</title>
+      <link>https://0x69.ru/portfolio/cleanslate-for-reddit/</link>
+      <pubDate>Mon, 17 Aug 2026 12:00:00 +0300</pubDate>
+      <guid>https://0x69.ru/portfolio/cleanslate-for-reddit/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;CleanSlate for Reddit&lt;/strong&gt; — локальное браузерное расширение для безопасной и контролируемой очистки собственной истории Reddit без подписки, внешнего сервера и передачи данных третьим лицам.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>GitSmith — Visual Git Command Builder</title>
+      <link>https://0x69.ru/utilities/git-smith/</link>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/git-smith/</guid>
+      <description>&lt;p&gt;Визуальный конструктор git-команд: выберите команду, настройте флаги и параметры, получите готовую команду для копирования. Подсказки для каждого флага, предупреждения о деструктивных операциях (reset &amp;ndash;hard, push &amp;ndash;force), объяснения команд на русском языке.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>HostsLens</title>
+      <link>https://0x69.ru/utilities/hostslens/</link>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/hostslens/</guid>
+      <description>&lt;p&gt;Парсинг hosts-файлов, конвертация в AdGuard DNS-фильтры, фильтрация по категориям&lt;/p&gt;</description>
+    </item>
     <item>
       <title>CSS Formatter</title>
       <link>https://0x69.ru/utilities/css-formatter/</link>
@@ -177,6 +198,13 @@
       <description>&lt;p&gt;Бесплатный онлайн-инструмент для безопасного кодирования и декодирования URL. Преобразуйте специальные символы в URL-формат и обратно для корректной передачи параметров и работы с URI компонентами. Поддерживает UTF-8, параметры запросов и полные ссылки.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>TorrServer на VPS: безопасная настройка удалённого стриминга</title>
+      <link>https://0x69.ru/posts/torrserver-na-vps/</link>
+      <pubDate>Thu, 05 Feb 2026 06:08:46 +0300</pubDate>
+      <guid>https://0x69.ru/posts/torrserver-na-vps/</guid>
+      <description>&lt;p&gt;Полное руководство по установке TorrServer на удалённый VPS: от выбора сервера до защищённого подключения Lampa.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Реверс-инжиниринг Long Poll ВКонтакте: сниффер, скрытые события и WebSocket</title>
       <link>https://0x69.ru/posts/reverse-engineering-vk-long-poll/</link>
       <pubDate>Wed, 04 Feb 2026 13:52:09 +0300</pubDate>
@@ -195,7 +223,7 @@
       <link>https://0x69.ru/portfolio/vkify-vkontakte-extension/</link>
       <pubDate>Tue, 27 Jan 2026 17:35:43 +0300</pubDate>
       <guid>https://0x69.ru/portfolio/vkify-vkontakte-extension/</guid>
-      <description>&lt;p&gt;VKify — браузерное расширение, которое делает ВКонтакте удобнее: блокировка рекламы, кастомизация интерфейса, режим приватности и многое другое.&lt;/p&gt;</description>
+      <description>&lt;p&gt;VKify объединяет настройку внешнего вида VK, чистую ленту, приватность, экспорт переписок, загрузку медиа и автоматизацию в одном расширении для Chrome, Firefox и Opera.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Как смотреть фильмы и сериалы в 4K через Lampa и TorrServer</title>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Parser on 0x69.ru</title>
+    <link>https://0x69.ru/tags/parser/</link>
+    <description>Recent content in Parser on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>ru</language>
+    <lastBuildDate>Tue, 17 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://0x69.ru/tags/parser/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HostsLens</title>
+      <link>https://0x69.ru/utilities/hostslens/</link>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://0x69.ru/utilities/hostslens/</guid>
+      <description>&lt;p&gt;Парсинг hosts-файлов, конвертация в AdGuard DNS-фильтры, фильтрация по категориям&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

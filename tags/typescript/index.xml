@@ -16,6 +16,13 @@
       <description>&lt;p&gt;&lt;strong&gt;CleanSlate for Reddit&lt;/strong&gt; — локальное браузерное расширение для безопасной и контролируемой очистки собственной истории Reddit без подписки, внешнего сервера и передачи данных третьим лицам.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>AutoSteamGifts — автоматическая доставка Steam Gift</title>
+      <link>https://0x69.ru/portfolio/autosteamgifts/</link>
+      <pubDate>Wed, 29 Jul 2026 20:02:52 +0300</pubDate>
+      <guid>https://0x69.ru/portfolio/autosteamgifts/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;AutoSteamGifts&lt;/strong&gt; — self-hosted платформа, которая автоматизирует весь путь продажи Steam Gift: от webhook об оплате на Digiseller/Plati до выбора аккаунта нужного региона, отправки заявки в друзья, покупки игры и доставки подарка покупателю.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>JSON → TypeScript / Go / Zod</title>
       <link>https://0x69.ru/utilities/json-to-types/</link>
       <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>

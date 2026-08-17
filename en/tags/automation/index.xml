@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Automation on 0x69.ru</title>
+    <link>https://0x69.ru/en/tags/automation/</link>
+    <description>Recent content in Automation on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 29 Jul 2026 20:02:52 +0300</lastBuildDate>
+    <atom:link href="https://0x69.ru/en/tags/automation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AutoSteamGifts — Automated Steam Gift Delivery</title>
+      <link>https://0x69.ru/en/portfolio/autosteamgifts/</link>
+      <pubDate>Wed, 29 Jul 2026 20:02:52 +0300</pubDate>
+      <guid>https://0x69.ru/en/portfolio/autosteamgifts/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;AutoSteamGifts&lt;/strong&gt; is a self-hosted platform that automates the entire Steam Gift sales flow: from a Digiseller/Plati payment webhook to selecting a sender account in the correct region, adding the buyer as a friend, purchasing the game, and delivering the gift.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

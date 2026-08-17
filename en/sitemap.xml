@@ -187,6 +187,101 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
+    <loc>https://0x69.ru/en/tags/automation/</loc>
+    <lastmod>2026-07-29T20:02:52+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://0x69.ru/en/portfolio/autosteamgifts/</loc>
+    <lastmod>2026-07-29T20:02:52+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/portfolio/autosteamgifts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/portfolio/autosteamgifts/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/e-commerce/</loc>
+    <lastmod>2026-07-29T20:02:52+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/tags/e-commerce/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/e-commerce/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/fullstack/</loc>
+    <lastmod>2026-07-29T20:02:52+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/tags/fullstack/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/fullstack/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/node.js/</loc>
+    <lastmod>2026-07-29T20:02:52+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/tags/node.js/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/node.js/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/steam/</loc>
+    <lastmod>2026-07-29T20:02:52+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/tags/steam/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/steam/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/ui/ux/</loc>
+    <lastmod>2026-08-17T00:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/tags/ui/ux/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/ui/ux/"
+                />
+  </url><url>
     <loc>https://0x69.ru/en/tags/beautify/</loc>
     <lastmod>2026-02-12T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -2140,21 +2235,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://0x69.ru/en/tags/tailwind-css/"
-                />
-  </url><url>
-    <loc>https://0x69.ru/en/tags/ui/ux/</loc>
-    <lastmod>2026-08-17T00:00:00+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.ru/tags/ui/ux/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.ru/en/tags/ui/ux/"
                 />
   </url><url>
     <loc>https://0x69.ru/en/portfolio/vkify-website-extension-landing/</loc>

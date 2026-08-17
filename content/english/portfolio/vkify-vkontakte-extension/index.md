@@ -1,6 +1,7 @@
 ---
 title: VKify — Extension for VKontakte
 date: 2026-01-27T17:35:43+03:00
+lastmod: 2026-08-17T00:00:00+03:00
 status: in-progress  # completed | in-progress | archived | planned | paused
 completedDate: ""
 projectType: extension  # extension | website | mobile | design | api | bot
@@ -8,7 +9,7 @@ relatedProjects:
   - vkify-website-extension-landing  # slug of another project
 author: Rianvy
 avatar: /img/avatar.jpg
-description: A powerful browser extension for customizing VKontakte with ad blocking, themes, privacy mode, and custom CSS.
+description: A cross-browser extension for deep VK customization, privacy, ad blocking, messaging tools, and media downloads.
 cover: Cover.png
 images:
   - Cover.png
@@ -16,266 +17,206 @@ tags:
   - Web Development
   - Browser Extension
   - React
-  - JavaScript
+  - TypeScript
   - UI/UX
   - VKontakte
   - Customization
+  - Privacy
 filters:
   - Web-Development
 tools:
   - React
+  - TypeScript
   - Tailwind CSS
-  - Chrome Extension API
-  - Figma
-  - JavaScript
+  - Vite
+  - Zustand
+  - WebExtension API
+  - Vitest
 github: "https://github.com/VKify/vkify-extension"
 demo: "https://chromewebstore.google.com/detail/vkify/lofggenkgbpdmmplnbgfplnpfjhgljla"
 ---
-VKify is a browser extension that makes VKontakte more convenient: ad blocking, interface customization, privacy mode, and much more.
+VKify brings VK appearance controls, a cleaner feed, privacy tools, conversation export, media downloads, and automation together in one extension for Chrome, Firefox, and Opera.
 <!--more-->
 
 ## 📌 About the Project
 
-**VKify** is a full-featured browser extension designed to enhance the VKontakte user experience. The project includes interface design in **Figma**, development in **React** using the **Chrome Extension API**, and a well-thought-out settings system with synchronization.
+**VKify** is a cross-browser Manifest V3 extension that adds tools missing from the standard `vk.ru` and `vkvideo.ru` experience. Settings are available in a **10-section** popup and on the embedded `vk.ru/vkify_settings` page; `Ctrl/Cmd + K` opens feature search.
 
-The key goal is to create a **flexible and intuitive tool** that allows you to fully adapt VK to your needs without requiring technical knowledge.
+Changes apply instantly without a page reload and stay synchronized across open tabs. The project is developed from a single codebase and is currently released as version **1.8.2**.
+
+| Platform | Support |
+|---|---|
+| **Chrome and Chromium** | Chrome 109+, available through the Chrome Web Store |
+| **Firefox** | Firefox 115+, separate build published on Firefox Add-ons |
+| **Opera** | Dedicated Chromium build from the same codebase |
+| **Languages** | Complete Russian and English localization, switchable without reloading |
 
 ---
 
-## ✨ What Was Done
+## ✨ Features
 
-### Interface and UX
-- Designed a compact and functional popup extension interface
-- Implemented a tab system with settings categories
-- Support for light, dark, and automatic theme
-- Smooth animations and micro-interactions to improve UX
-- Adaptive components: toggles, sliders, color palettes
+### 🎨 Appearance and navigation
 
-### Functionality
+- **72 built-in themes** in 11 categories, with automatic light/dark switching
+- A custom accent color and automatic palette extraction from the selected background
+- More than **60 fonts** with size, weight, style, and line-height controls
+- Image, video, or HTML-animation backgrounds with blur, dimming, and opacity settings
+- Appearance profiles and built-in Minimalism, Privacy, and Performance presets
+- Wide and compact layouts, content width and horizontal offset controls, and column swapping
+- A minimal fixed sidebar with individual menu-item and counter controls
+- Visual filters, avatar shapes, corner-radius controls, and smart conflict warnings
 
-#### 🎨 Appearance
-- Extended (wide) content display mode
-- Compact and fixed sidebar menu
-- Customizable content width and corner rounding
-- 12 ready-made color themes + custom color selection
-- Custom background with blur, dimming, and transparency settings
+### 🛡️ Clean feed and privacy
 
-#### 🎨 Visual Filters
-- Black and white mode, sepia, color inversion
-- Image darkening for night mode
-- Brightness and contrast adjustment
-- Blur effect with hover removal
+- UI and feed ad blocking at both the DOM and API levels
+- Tracker and analytics blocking with an inspectable activity log
+- Precise hiding of stories, recommendations, comments, promo blocks, mini-chat, and other VK elements
+- Invisible mode and blocking for typing and read indicators
+- Hotkey-based hiding of selected conversations and page blur when the window loses focus
+- Message encryption using **COFFEE** and **VKify E2E v2**, built on AES-256-GCM with PBKDF2
 
-#### 👁️ Element Hiding
-- Stories, recommendations, friend suggestions
-- Emoji statuses, mini-chat, "Back to top" button
-- Mass enable/disable with one button
+### 📦 Center: messages and media
 
-#### 🔐 Privacy
-- Invisible mode (hide chats with Ctrl+Q)
-- Skeleton mode — replace content with gray placeholders
-- Block "typing" indicator
-- Disable read receipts
+- Conversation export to JSON, TXT, HTML, and ZIP, plus full or selected-message PDF export
+- Message templates with variables, conversation-linked notes, and quick copy
+- Quality-selectable video and clip downloads, story downloads, single photos, and complete albums as ZIP
+- Track and album downloads in the original format or MP3 with bitrate selection, ID3 tags, cover art, and lyrics
+- Batch operations and an on-page download center with progress, cancellation, and background work
+- Audio-player hotkeys, playback resume, and a 10-band equalizer
 
-#### 🛡️ Ad Blocking
-- Sidebar ads
-- Promotional posts in the news feed
-- Advertising stories and clips
-- Visual protection status
+### 📈 Activity tracking and automation
 
-#### ⚡ Scripts and Automation
-- Auto-add friends with customizable limits and delays
-- Bypass authorization popups
-- Real-time script statistics
+- LongPoll-based message activity tracking: typing, media, reads, edits, and deletions
+- Online monitoring with history, weekly charts, and browser notifications
+- Tracking avatar, status, and friend-count changes for selected profiles
+- Automatic friend requests with limits and randomized delays
+- A `ru ↔ en` keyboard-layout switcher on a hotkey
+- Direct external links that bypass `away.php`
 
-#### 🎨 Custom CSS
-- Built-in editor with syntax highlighting
-- Line numbering and auto-formatting
-- Change history (Undo/Redo)
-- 14 ready-made CSS snippet templates
-- Quick apply and save styles
+### ⚙️ Tools and settings
 
-#### ⚙️ Settings
-- Export/import settings to JSON
-- Reset to default values
-- Automatic synchronization between tabs
+- A CSS editor with highlighting, formatting, live preview, and ready-made snippets
+- Settings export/import and versioned storage migrations
+- Appearance profiles and themes that can be shared through a link
+- A diagnostics report and performance dashboard with a Feature Explorer
+- First-run onboarding and search across every setting
+- Instant synchronization between the popup, embedded settings page, and VK tabs
 
 ---
 
 ## 🖼️ Extension Interface
 
-{{< gallery id="features-screens" cols="3" gap="8px" >}}
-![Appearance](work/view.png "Width, theme, and background settings")
-![Filters](work/filters.png "Visual filters for page and content")
-![Elements](work/elements.png "Hiding individual VKontakte interface blocks")
-![Privacy](work/privacy.png "Invisible mode, skeleton, and activity protection")
-![Ads](work/ads.png "Blocking ad blocks, posts, and stories")
-![Scripts](work/scripts.png "Action automation and additional scenarios")
-![CSS Editor](work/css-editor.png "Custom CSS for deep customization")
-![More](work/more.png "General settings, export/import, and more")
+### Current version 1.8.2
+
+{{< gallery id="features-current" cols="3" gap="8px" >}}
+![Appearance](work/overview-v1.8.2.png "The new popup with 10 sections and quick actions")
+![Themes](work/themes-v1.8.2.png "A catalog of 72 themes across 11 categories")
+![Messenger](work/messages-v1.8.2.png "Copy, export, notes, and message templates")
+![Music downloads](work/music-download-v1.8.2.png "Format, quality, metadata, and filename controls")
+![Activity tracking](work/tracking-v1.8.2.png "Message activity, online monitoring, and profile changes")
+![Search](work/search-v1.8.2.png "Search across every feature with Ctrl/Cmd + K")
+![CSS Editor](work/css-editor-v1.8.2.png "Highlighting, formatting, and ready-made templates")
+{{< /gallery >}}
+
+### Earlier iterations
+
+These screens show the foundation from which the current interface structure evolved.
+
+{{< gallery id="features-legacy" cols="3" gap="8px" >}}
+![Appearance](work/view.png "Layout, themes, fonts, and background")
+![Filters](work/filters.png "Visual filters for the page and its content")
+![Elements](work/elements.png "Precise control over visible VK interface blocks")
+![Privacy](work/privacy.png "Invisible mode, hidden dialogs, and activity protection")
+![Ads](work/ads.png "Ad and tracker blocking")
+![Scripts](work/scripts.png "Automation and additional scenarios")
+![CSS Editor](work/css-editor.png "Custom styles with live preview")
+![Settings](work/more.png "Import, export, diagnostics, and general options")
 {{< /gallery >}}
 
 ---
 
-## 🎨 Design System
+## 🧩 Architecture
 
-### Light Theme
+Every user-facing capability is a declarative `FeatureDefinition`: metadata, category, initialization phase, dependencies, conflicts, and behavior plugins. `FeatureManager` owns the feature lifecycle, while the central registry allows new features to be added without modifying the core.
 
-{{< color_palette 
-    name1="Background Primary" code1="#ffffff"
-    name2="Background Secondary" code2="#f5f5f7"
-    name3="Background Tertiary" code3="#e8e8ed"
-    name4="Text Primary" code4="#1d1d1f"
-    name5="Text Secondary" code5="#6e6e73"
->}}
+The project is split into six cooperating parts:
 
-### Dark Theme
+1. **Popup** — the 10-tab React interface backed by a shared Zustand store.
+2. **Embed** — the same settings UI mounted directly inside a VK page.
+3. **Content scripts** — apply styles and behavior to the VK interface.
+4. **Injected scripts** — run in the page context for LongPoll, network filters, and APIs unavailable to an isolated content script.
+5. **Background** — VK API access, notifications, scheduled jobs, and download coordination.
+6. **Site bridge** — safely transfers settings and shared themes from the VKify website to the extension.
 
-{{< color_palette 
-    name1="Background Primary" code1="#1c1c1e"
-    name2="Background Secondary" code2="#000000"
-    name3="Background Tertiary" code3="#2c2c2e"
-    name4="Text Primary" code4="#f5f5f7"
-    name5="Text Secondary" code5="#a1a1a6"
->}}
+State is stored in `chrome.storage.local`, validated against a shared schema, and upgraded through versioned migrations. Settings reactively synchronize across every extension context.
 
-### Accent Colors
+### Cross-browser builds
 
-{{< color_palette 
-    name1="Primary / VK Blue" code1="#0077FF"
-    name2="Primary Hover" code2="#0066dd"
-    name3="Success" code3="#34c759"
-    name4="Error" code4="#ff3b30"
-    name5="Warning" code5="#ff9500"
->}}
+A shared `manifest/base.json` is combined with Chrome, Firefox, and Opera overrides. Chrome and Opera use a service worker and an offscreen document for PDF generation; Firefox uses a modular background page and an isolated utility tab. A small API-normalization layer preserves a promise-based interface in every browser.
 
-- **Typography:** SF Pro Display / System UI for interface, SF Mono / Consolas for CSS editor
-- **Components:** Custom toggles, gradient sliders, color pickers
-- **Icons:** Lucide-style SVG icons integrated as React components
-- **Shadows:** Multi-layered shadows with varying intensity for light and dark themes
+Vite/Rollup produces ESM bundles for the popup and background and standalone IIFE bundles for content and injected scripts. Heavy audio and PDF dependencies stay outside the critical path and load only when required.
 
----
+### Security
 
-## 🛠️ Technical Implementation
-
-### Extension Architecture
-
-The extension is built with a modular architecture with clear separation of concerns. The **popup interface** is implemented as a separate React application that communicates with **content scripts** via the Chrome Messaging API. All business logic is extracted into a separate **FeatureManager** class that manages enabling and disabling features.
-
-The structure includes three main layers: popup for user interface, content scripts for interacting with VK pages, and background service worker for background tasks and coordination.
-
-### Feature Manager
-
-The central **FeatureManager** class is responsible for managing all 50+ extension features. Upon initialization, it loads saved settings and applies active features. Each feature is represented by a handler with enable and disable methods, ensuring clean toggling without side effects.
-
-The manager supports reactive updates: when settings change in the popup, changes are instantly applied to the page without reloading. This is achieved through subscription to Chrome Storage API events.
-
-### Dynamic Styles System
-
-A dynamic CSS injection system was developed for applying visual changes. Each feature can create its own style block with a unique identifier. When a feature is disabled, the corresponding styles are removed from the DOM.
-
-This approach prevents conflicts between features and ensures instant application of changes. Styles are stored in a Map structure for quick access and management.
-
-### Extended Display Mode
-
-Implementing wide mode required detailed analysis of VKontakte's CSS structure. The main challenge was maintaining the proportions of the two-column profile layout when changing the container width.
-
-The solution is based on calculating the ratios of original column sizes and applying these proportions to the new width. Special attention was paid to handling position: fixed during scrolling when VK dynamically changes the styles of the right column.
-
-### Color Scheme Customization
-
-The accent color system overrides more than 50 VKontakte CSS variables. For transparent color variants to work correctly (hover effects, tint backgrounds), HEX to RGB component conversion was implemented.
-
-Additionally, dynamic updating of the VK SVG logo is implemented through MutationObserver, which tracks DOM changes and applies the selected color to new elements.
-
-### Custom Background
-
-The custom background feature supports both URL images and local file uploads with Base64 conversion. The background is applied through a body::before pseudo-element with customizable blur, dimming, and transparency parameters.
-
-When any background parameter changes (blur, dim, opacity), the system reapplies styles with new values, providing instant preview without saving.
-
-### Network Request Interception
-
-For privacy features (blocking "typing" and "read" indicators), script injection into the page context is used. This is necessary because content scripts don't have access to the page's WebSocket and XHR objects.
-
-The injected script intercepts WebSocket.send, XMLHttpRequest, and fetch, analyzes outgoing data for typing/setActivity and markAsRead patterns, and blocks corresponding requests. Settings are passed through localStorage and CustomEvent.
-
-### Invisible Mode
-
-Invisible mode is implemented with Ctrl+Q hotkey handling. When activated, all dialogs and unread message counters are hidden by adding CSS classes.
-
-The state is saved in Chrome Storage and restored when switching tabs via Visibility API. This prevents accidental dialog exposure when returning to the page.
-
-### Friend Auto-Add Automation
-
-The auto-add script only works on the friend search page and includes ban protection: randomized delays between actions, random button selection from the list, scroll simulation to the element before clicking.
-
-The user configures the hourly add limit and delay range. Work statistics (added count, status) are synchronized with the popup in real-time.
-
-### React Popup Architecture
-
-The popup is built on React 18 using functional components and hooks. Settings state is managed through Context API with **SettingsProvider**, which encapsulates loading, saving, and synchronization logic.
-
-A separate **ToastProvider** manages notifications. The custom **useTheme** hook ensures instant theme application with localStorage caching to eliminate flickering on load.
-
-### Cross-Tab Synchronization
-
-When a setting changes in the popup, it's saved to Chrome Storage and a message is sent to the active VK tab. The content script receives the message and calls the corresponding FeatureManager method.
-
-Reverse synchronization works through subscription to chrome.storage.onChanged, allowing multiple open popup windows to stay in sync.
-
-### CSS Editor
-
-The built-in editor includes regex-based syntax highlighting, line numbering with scroll synchronization, and change history for undo/redo.
-
-The technical challenge was overlaying a transparent textarea on top of a pre-element with highlighted code. This provides native input behavior with visual highlighting.
+- CSP restricts executable code to extension-owned resources
+- A per-session nonce protects the channel between content and injected scripts
+- Imported settings, URLs, CSS, and themes go through centralized validation
+- Runtime messages verify their sender, while network operations have limits and timeouts
+- Production builds are automatically scanned for references to remotely hosted executable code
+- The project has no custom backend: settings, profiles, and logs stay local, while external requests go directly to the services required by specific features
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category | Technologies |
-|----------|--------------|
-| **Frontend** | React 18, Tailwind CSS, CSS Variables |
-| **Build** | Vite, PostCSS |
-| **API** | Chrome Extension Manifest V3 |
-| **Storage** | Chrome Storage Local API, localStorage |
-| **Patterns** | Context API, Custom Hooks, Observer Pattern, Dependency Injection |
+| Layer | Technologies |
+|---|---|
+| **Interface** | React 18, TypeScript 5, Tailwind CSS 3, i18next |
+| **State** | Zustand 5, Chrome Storage, versioned migrations |
+| **Build** | Vite 5, Rollup, PostCSS, custom build and verification scripts |
+| **Extension** | Manifest V3, WebExtension APIs, content scripts, injected scripts |
+| **Media** | hls.js, lamejs, html2canvas, jsPDF, Web Audio API |
+| **Quality** | Vitest, happy-dom, Playwright, ESLint, TypeScript type checking |
 
 ---
 
-## 📊 Key Metrics
+## 🔧 Key Engineering Challenges
 
-- **50+** customizable features
-- **12** ready-made color themes
-- **14** CSS templates
-- **0** server dependencies — everything works locally
-- **3** architecture levels: popup, content scripts, background
+### Instant updates without a visual flash
 
----
+Critical appearance settings are mirrored before React initializes and applied during the earliest page-loading phase. Everything else flows through the feature registry and updates without reloading the tab.
 
-## 🔧 Technical Challenges and Solutions
+### Page-context access without weakening isolation
 
-### Problem: VK styles override custom ones
-**Solution:** Using !important and maximally specific selectors. For dynamic elements — MutationObserver with style reapplication.
+LongPoll and network interception need access to page-owned objects, so they live in the injected layer. Communication with the content script uses a validated, nonce-protected, strictly typed message channel.
 
-### Problem: WebSocket unavailable from content script
-**Solution:** Injecting a separate script into the page context via script tag with src pointing to an extension file. Communication through CustomEvent and localStorage.
+### Heavy exports without freezing VK
 
-### Problem: Theme flickering on popup load
-**Solution:** Synchronous theme reading from localStorage before first React render. Async synchronization with Chrome Storage happens afterwards.
+PDF generation runs outside the active VK tab: in an offscreen document on Chromium or an isolated background tab on Firefox. Data is streamed, the operation can be cancelled, and resources are released after completion.
 
-### Problem: Maintaining layout proportions when extending
-**Solution:** Mathematical calculation of original VK column ratios and applying these proportions through CSS calc() to the new width.
+### Resilience to VK interface changes
+
+DOM selectors are centralized, features are isolated from one another, and dynamic areas are observed selectively. This makes maintenance more predictable when `vk.ru` changes its markup.
 
 ---
 
-## 🌐 Summary
+## 📊 Project Metrics
 
-- Full-featured browser extension with rich functionality
-- Well-designed modular architecture with clear layer separation
-- Reactive settings system with instant synchronization
-- Intuitive interface with a well-thought-out navigation system
-- Flexible customization without technical knowledge
-- Secure operation — all data stored locally
-- Ready for feature expansion thanks to the handler pattern
+- **1.8.2** — current repository version
+- **3** target browsers from a single codebase
+- **10** interface sections
+- **72** built-in themes in 11 categories
+- **60+** available fonts
+- **2** fully localized languages
+- **5** conversation export options: JSON, TXT, HTML, ZIP, and PDF
+
+---
+
+## 🚀 Result
+
+VKify has grown from a collection of visual tweaks into an independent VK tool platform, with a declarative feature system, cross-browser builds, localization, a media pipeline, message export, and automated quality checks.
+
+- [Install from the Chrome Web Store](https://chromewebstore.google.com/detail/vkify/lofggenkgbpdmmplnbgfplnpfjhgljla)
+- [Install from Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/vkify/)
+- [Open the VKify website](https://vkify.ru/)
+- [Browse the source code](https://github.com/VKify/vkify-extension)

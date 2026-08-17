@@ -1,0 +1,1109 @@
+{{ define "title" }}
+{{ .Title }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-5 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}🔧{{ end }}</span>
+    </div>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">{{ .Title }}</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">{{ .Description }}</p>
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="construct-outline"></ion-icon>
+        {{ T "gitsmith.badgeBuilder" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+        <ion-icon name="warning-outline"></ion-icon>
+        {{ T "gitsmith.badgeSafety" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="school-outline"></ion-icon>
+        {{ T "gitsmith.badgeExplain" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="time-outline"></ion-icon>
+        {{ T "gitsmith.badgeHistory" }}
+      </span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
+
+    <!-- Commands Panel -->
+    <div class="xl:col-span-1 space-y-3 sm:space-y-4 order-2 xl:order-1">
+
+      <!-- Category: Basic -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="flash-outline" class="text-success"></ion-icon>
+              {{ T "gitsmith.catBasic" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3 grid grid-cols-2 gap-1.5" id="cat-basic"></div>
+        </details>
+      </div>
+
+      <!-- Category: Branches -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="git-branch-outline" class="text-info"></ion-icon>
+              {{ T "gitsmith.catBranches" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3 grid grid-cols-2 gap-1.5" id="cat-branches"></div>
+        </details>
+      </div>
+
+      <!-- Category: History -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="time-outline" class="text-accent"></ion-icon>
+              {{ T "gitsmith.catHistory" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3 grid grid-cols-2 gap-1.5" id="cat-history"></div>
+        </details>
+      </div>
+
+      <!-- Category: Undo -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="arrow-undo-outline" class="text-error"></ion-icon>
+              {{ T "gitsmith.catUndo" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3 grid grid-cols-2 gap-1.5" id="cat-undo"></div>
+        </details>
+      </div>
+
+      <!-- Category: Remote -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="cloud-outline" class="text-warning"></ion-icon>
+              {{ T "gitsmith.catRemote" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3 grid grid-cols-2 gap-1.5" id="cat-remote"></div>
+        </details>
+      </div>
+
+      <!-- Category: Advanced -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="rocket-outline" class="text-secondary"></ion-icon>
+              {{ T "gitsmith.catAdvanced" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3 grid grid-cols-2 gap-1.5" id="cat-advanced"></div>
+        </details>
+      </div>
+
+      <!-- History -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="receipt-outline" class="text-base-content/60"></ion-icon>
+              {{ T "gitsmith.historyTitle" }}
+              <span class="badge badge-xs badge-ghost" id="history-count">0</span>
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-2 sm:p-3">
+            <div id="history-list" class="space-y-1 max-h-60 overflow-y-auto"></div>
+            <div id="history-empty" class="text-center py-3 text-xs text-base-content/40">{{ T "gitsmith.historyEmpty" }}</div>
+            <button type="button" id="btn-clear-history" class="btn btn-ghost btn-xs w-full mt-2 gap-1 hidden">
+              <ion-icon name="trash-outline"></ion-icon>
+              {{ T "gitsmith.historyClear" }}
+            </button>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Builder Panel -->
+    <div class="xl:col-span-3 space-y-3 sm:space-y-4 order-1 xl:order-2">
+
+      <!-- No command selected -->
+      <div id="empty-state" class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="flex flex-col items-center justify-center py-16 sm:py-24 px-4 text-center">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-base-200/50 flex items-center justify-center mb-4">
+            <ion-icon name="git-branch-outline" class="text-3xl sm:text-4xl text-base-content/30"></ion-icon>
+          </div>
+          <h3 class="text-base sm:text-lg font-semibold text-base-content/50 mb-2">{{ T "gitsmith.emptyTitle" }}</h3>
+          <p class="text-xs sm:text-sm text-base-content/40 max-w-sm">{{ T "gitsmith.emptyDesc" }}</p>
+        </div>
+      </div>
+
+      <!-- Command Builder (hidden initially) -->
+      <div id="builder-panel" class="hidden space-y-3 sm:space-y-4">
+
+        <!-- Command header -->
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0" id="cmd-icon-wrap">
+              <ion-icon id="cmd-icon" class="text-lg sm:text-xl"></ion-icon>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h2 class="font-bold text-sm sm:text-lg font-mono" id="cmd-title">git commit</h2>
+              <p class="text-[10px] sm:text-xs text-base-content/60" id="cmd-desc"></p>
+            </div>
+            <div id="cmd-danger-badge" class="hidden">
+              <span class="badge badge-error badge-xs sm:badge-sm gap-1 animate-pulse">
+                <ion-icon name="warning-outline"></ion-icon>
+                {{ T "gitsmith.destructive" }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Fields -->
+          <div class="p-3 sm:p-4 space-y-3" id="cmd-fields"></div>
+        </div>
+
+        <!-- Destructive warning -->
+        <div id="danger-panel" class="hidden bg-error/5 border-2 border-error/30 rounded-xl sm:rounded-2xl overflow-hidden">
+          <div class="flex items-start gap-2.5 p-3 sm:p-4">
+            <ion-icon name="alert-circle" class="text-error text-xl sm:text-2xl shrink-0 mt-0.5"></ion-icon>
+            <div>
+              <div class="font-semibold text-xs sm:text-sm text-error mb-1">{{ T "gitsmith.dangerTitle" }}</div>
+              <p class="text-[10px] sm:text-xs text-error/80" id="danger-text"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result command -->
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="terminal-outline" class="text-success"></ion-icon>
+              {{ T "gitsmith.resultTitle" }}
+            </h2>
+            <button type="button" id="btn-copy" class="btn btn-primary btn-xs gap-1">
+              <ion-icon name="copy-outline"></ion-icon>
+              <span class="hidden sm:inline">{{ T "gitsmith.copyBtn" }}</span>
+            </button>
+          </div>
+          <div class="p-3 sm:p-4">
+            <div class="relative bg-neutral text-neutral-content rounded-lg sm:rounded-xl p-3 sm:p-4 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto" id="cmd-result">
+              <span class="text-success/70">$</span> <span id="cmd-result-text">git commit -m "initial commit"</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Explain -->
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <details class="group" open>
+            <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+              <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+                <ion-icon name="school-outline" class="text-info"></ion-icon>
+                {{ T "gitsmith.explainTitle" }}
+              </h2>
+              <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+            </summary>
+            <div class="p-3 sm:p-4">
+              <div class="prose prose-sm max-w-none text-xs sm:text-sm text-base-content/80 leading-relaxed" id="cmd-explain"></div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-info/10 flex items-center justify-center shrink-0">
+            <ion-icon name="help-circle-outline" class="text-lg sm:text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">{{ T "gitsmith.howTitle" }}</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "gitsmith.howSubtitle" }}</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <ion-icon name="list-outline" class="text-primary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "gitsmith.howSelect" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "gitsmith.howSelectDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center">
+                <ion-icon name="options-outline" class="text-success"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "gitsmith.howConfigure" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "gitsmith.howConfigureDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-warning/10 flex items-center justify-center">
+                <ion-icon name="copy-outline" class="text-warning"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "gitsmith.howCopy" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "gitsmith.howCopyDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center">
+                <ion-icon name="school-outline" class="text-secondary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "gitsmith.howLearn" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "gitsmith.howLearnDesc" }}</p>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- Status bar -->
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span id="status-text">{{ T "gitsmith.statusReady" }}</span>
+    <span>{{ T "gitsmith.statusBrowser" }}</span>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="gs-toast" class="toast toast-top toast-center hidden z-50">
+  <div class="alert alert-success py-2 px-4">
+    <ion-icon name="checkmark-circle-outline" class="text-lg"></ion-icon>
+    <span id="gs-toast-message" class="text-sm"></span>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  /* ================================================================
+     I18N
+     ================================================================ */
+  var i18n = {
+    copied: "{{ T "gitsmith.copied" }}",
+    historySaved: "{{ T "gitsmith.historySaved" }}",
+    historyCleared: "{{ T "gitsmith.historyCleared" }}",
+    statusReady: "{{ T "gitsmith.statusReady" }}",
+    destructive: "{{ T "gitsmith.destructive" }}",
+    explainPrefix: "{{ T "gitsmith.explainPrefix" }}"
+  };
+
+  var STORAGE_KEY = 'gitsmith-history';
+  var MAX_HISTORY = 30;
+
+  /* ================================================================
+     COMMANDS DATABASE
+     ================================================================ */
+  var COMMANDS = {
+
+    /* ---- BASIC ---- */
+    init: {
+      cat: 'basic', label: 'init', icon: 'add-circle-outline', color: 'success',
+      desc: '{{ T "gitsmith.cmd.init.desc" }}',
+      explain: '{{ T "gitsmith.cmd.init.explain" }}',
+      fields: [
+        { id: 'dir', type: 'text', label: '{{ T "gitsmith.field.directory" }}', placeholder: '.', pos: 'arg' },
+        { id: 'bare', type: 'toggle', label: '--bare', tip: '{{ T "gitsmith.tip.bare" }}' },
+        { id: 'initial-branch', type: 'text', label: '--initial-branch', placeholder: 'main', tip: '{{ T "gitsmith.tip.initialBranch" }}', flag: '--initial-branch' }
+      ]
+    },
+    clone: {
+      cat: 'basic', label: 'clone', icon: 'copy-outline', color: 'success',
+      desc: '{{ T "gitsmith.cmd.clone.desc" }}',
+      explain: '{{ T "gitsmith.cmd.clone.explain" }}',
+      fields: [
+        { id: 'url', type: 'text', label: '{{ T "gitsmith.field.repoUrl" }}', placeholder: 'https://github.com/user/repo.git', required: true, pos: 'arg' },
+        { id: 'dir', type: 'text', label: '{{ T "gitsmith.field.directory" }}', placeholder: '', pos: 'arg2' },
+        { id: 'depth', type: 'text', label: '--depth', placeholder: '1', tip: '{{ T "gitsmith.tip.depth" }}', flag: '--depth' },
+        { id: 'branch', type: 'text', label: '--branch', placeholder: 'main', tip: '{{ T "gitsmith.tip.cloneBranch" }}', flag: '--branch' },
+        { id: 'single-branch', type: 'toggle', label: '--single-branch', tip: '{{ T "gitsmith.tip.singleBranch" }}' },
+        { id: 'recursive', type: 'toggle', label: '--recursive', tip: '{{ T "gitsmith.tip.recursive" }}' }
+      ]
+    },
+    status: {
+      cat: 'basic', label: 'status', icon: 'information-circle-outline', color: 'success',
+      desc: '{{ T "gitsmith.cmd.status.desc" }}',
+      explain: '{{ T "gitsmith.cmd.status.explain" }}',
+      fields: [
+        { id: 'short', type: 'toggle', label: '-s / --short', tip: '{{ T "gitsmith.tip.statusShort" }}', flag: '-s' },
+        { id: 'branch-flag', type: 'toggle', label: '--branch', tip: '{{ T "gitsmith.tip.statusBranch" }}', flag: '--branch' },
+        { id: 'porcelain', type: 'toggle', label: '--porcelain', tip: '{{ T "gitsmith.tip.porcelain" }}' }
+      ]
+    },
+    add: {
+      cat: 'basic', label: 'add', icon: 'add-outline', color: 'success',
+      desc: '{{ T "gitsmith.cmd.add.desc" }}',
+      explain: '{{ T "gitsmith.cmd.add.explain" }}',
+      fields: [
+        { id: 'files', type: 'text', label: '{{ T "gitsmith.field.files" }}', placeholder: '.', pos: 'arg' },
+        { id: 'all', type: 'toggle', label: '--all / -A', tip: '{{ T "gitsmith.tip.addAll" }}', flag: '-A' },
+        { id: 'patch', type: 'toggle', label: '--patch / -p', tip: '{{ T "gitsmith.tip.addPatch" }}', flag: '-p' },
+        { id: 'dry-run', type: 'toggle', label: '--dry-run / -n', tip: '{{ T "gitsmith.tip.dryRun" }}', flag: '-n' }
+      ]
+    },
+    commit: {
+      cat: 'basic', label: 'commit', icon: 'checkmark-circle-outline', color: 'success',
+      desc: '{{ T "gitsmith.cmd.commit.desc" }}',
+      explain: '{{ T "gitsmith.cmd.commit.explain" }}',
+      fields: [
+        { id: 'message', type: 'text', label: '-m {{ T "gitsmith.field.message" }}', placeholder: '{{ T "gitsmith.placeholder.commitMsg" }}', required: true, flag: '-m', quote: true },
+        { id: 'amend', type: 'toggle', label: '--amend', tip: '{{ T "gitsmith.tip.amend" }}' },
+        { id: 'no-edit', type: 'toggle', label: '--no-edit', tip: '{{ T "gitsmith.tip.noEdit" }}' },
+        { id: 'all-flag', type: 'toggle', label: '-a', tip: '{{ T "gitsmith.tip.commitAll" }}', flag: '-a' },
+        { id: 'no-verify', type: 'toggle', label: '--no-verify', tip: '{{ T "gitsmith.tip.noVerify" }}' },
+        { id: 'signoff', type: 'toggle', label: '--signoff / -s', tip: '{{ T "gitsmith.tip.signoff" }}', flag: '--signoff' },
+        { id: 'gpg-sign', type: 'toggle', label: '--gpg-sign / -S', tip: '{{ T "gitsmith.tip.gpgSign" }}', flag: '-S' },
+        { id: 'allow-empty', type: 'toggle', label: '--allow-empty', tip: '{{ T "gitsmith.tip.allowEmpty" }}' }
+      ]
+    },
+    push: {
+      cat: 'basic', label: 'push', icon: 'arrow-up-outline', color: 'success',
+      desc: '{{ T "gitsmith.cmd.push.desc" }}',
+      explain: '{{ T "gitsmith.cmd.push.explain" }}',
+      danger: false,
+      fields: [
+        { id: 'remote', type: 'text', label: '{{ T "gitsmith.field.remote" }}', placeholder: 'origin', pos: 'arg' },
+        { id: 'branch', type: 'text', label: '{{ T "gitsmith.field.branch" }}', placeholder: 'main', pos: 'arg2' },
+        { id: 'force', type: 'toggle', label: '--force / -f', tip: '{{ T "gitsmith.tip.pushForce" }}', danger: true },
+        { id: 'force-with-lease', type: 'toggle', label: '--force-with-lease', tip: '{{ T "gitsmith.tip.forceWithLease" }}' },
+        { id: 'set-upstream', type: 'toggle', label: '-u / --set-upstream', tip: '{{ T "gitsmith.tip.setUpstream" }}', flag: '-u' },
+        { id: 'tags', type: 'toggle', label: '--tags', tip: '{{ T "gitsmith.tip.pushTags" }}' },
+        { id: 'all-flag', type: 'toggle', label: '--all', tip: '{{ T "gitsmith.tip.pushAll" }}' },
+        { id: 'dry-run', type: 'toggle', label: '--dry-run / -n', tip: '{{ T "gitsmith.tip.dryRun" }}', flag: '-n' }
+      ]
+    },
+    pull: {
+      cat: 'basic', label: 'pull', icon: 'arrow-down-outline', color: 'success',
+      desc: '{{ T "gitsmith.cmd.pull.desc" }}',
+      explain: '{{ T "gitsmith.cmd.pull.explain" }}',
+      fields: [
+        { id: 'remote', type: 'text', label: '{{ T "gitsmith.field.remote" }}', placeholder: 'origin', pos: 'arg' },
+        { id: 'branch', type: 'text', label: '{{ T "gitsmith.field.branch" }}', placeholder: '', pos: 'arg2' },
+        { id: 'rebase', type: 'toggle', label: '--rebase', tip: '{{ T "gitsmith.tip.pullRebase" }}' },
+        { id: 'no-rebase', type: 'toggle', label: '--no-rebase', tip: '{{ T "gitsmith.tip.pullNoRebase" }}' },
+        { id: 'ff-only', type: 'toggle', label: '--ff-only', tip: '{{ T "gitsmith.tip.ffOnly" }}' },
+        { id: 'no-ff', type: 'toggle', label: '--no-ff', tip: '{{ T "gitsmith.tip.noFf" }}' }
+      ]
+    },
+
+    /* ---- BRANCHES ---- */
+    branch: {
+      cat: 'branches', label: 'branch', icon: 'git-branch-outline', color: 'info',
+      desc: '{{ T "gitsmith.cmd.branch.desc" }}',
+      explain: '{{ T "gitsmith.cmd.branch.explain" }}',
+      fields: [
+        { id: 'name', type: 'text', label: '{{ T "gitsmith.field.branchName" }}', placeholder: 'feature/new', pos: 'arg' },
+        { id: 'list', type: 'toggle', label: '--list / -l', tip: '{{ T "gitsmith.tip.branchList" }}', flag: '-l' },
+        { id: 'all-flag', type: 'toggle', label: '-a / --all', tip: '{{ T "gitsmith.tip.branchAll" }}', flag: '-a' },
+        { id: 'delete', type: 'toggle', label: '-d / --delete', tip: '{{ T "gitsmith.tip.branchDelete" }}', flag: '-d' },
+        { id: 'force-delete', type: 'toggle', label: '-D', tip: '{{ T "gitsmith.tip.branchForceDelete" }}', flag: '-D', danger: true },
+        { id: 'move', type: 'toggle', label: '-m / --move', tip: '{{ T "gitsmith.tip.branchMove" }}', flag: '-m' },
+        { id: 'verbose', type: 'toggle', label: '-v / --verbose', tip: '{{ T "gitsmith.tip.verbose" }}', flag: '-v' }
+      ]
+    },
+    checkout: {
+      cat: 'branches', label: 'checkout', icon: 'swap-horizontal-outline', color: 'info',
+      desc: '{{ T "gitsmith.cmd.checkout.desc" }}',
+      explain: '{{ T "gitsmith.cmd.checkout.explain" }}',
+      fields: [
+        { id: 'target', type: 'text', label: '{{ T "gitsmith.field.branchOrCommit" }}', placeholder: 'main', pos: 'arg' },
+        { id: 'new-branch', type: 'toggle', label: '-b ({{ T "gitsmith.field.newBranch" }})', tip: '{{ T "gitsmith.tip.checkoutB" }}', flag: '-b' },
+        { id: 'force', type: 'toggle', label: '-f / --force', tip: '{{ T "gitsmith.tip.checkoutForce" }}', danger: true },
+        { id: 'track', type: 'toggle', label: '--track', tip: '{{ T "gitsmith.tip.track" }}' }
+      ]
+    },
+    switch: {
+      cat: 'branches', label: 'switch', icon: 'repeat-outline', color: 'info',
+      desc: '{{ T "gitsmith.cmd.switch.desc" }}',
+      explain: '{{ T "gitsmith.cmd.switch.explain" }}',
+      fields: [
+        { id: 'branch', type: 'text', label: '{{ T "gitsmith.field.branch" }}', placeholder: 'main', pos: 'arg' },
+        { id: 'create', type: 'toggle', label: '-c / --create', tip: '{{ T "gitsmith.tip.switchCreate" }}', flag: '-c' },
+        { id: 'force-create', type: 'toggle', label: '-C', tip: '{{ T "gitsmith.tip.switchForceCreate" }}', flag: '-C' },
+        { id: 'detach', type: 'toggle', label: '--detach', tip: '{{ T "gitsmith.tip.switchDetach" }}' }
+      ]
+    },
+    merge: {
+      cat: 'branches', label: 'merge', icon: 'git-merge-outline', color: 'info',
+      desc: '{{ T "gitsmith.cmd.merge.desc" }}',
+      explain: '{{ T "gitsmith.cmd.merge.explain" }}',
+      fields: [
+        { id: 'branch', type: 'text', label: '{{ T "gitsmith.field.branch" }}', placeholder: 'feature/new', pos: 'arg' },
+        { id: 'no-ff', type: 'toggle', label: '--no-ff', tip: '{{ T "gitsmith.tip.mergeNoFf" }}' },
+        { id: 'ff-only', type: 'toggle', label: '--ff-only', tip: '{{ T "gitsmith.tip.mergeFfOnly" }}' },
+        { id: 'squash', type: 'toggle', label: '--squash', tip: '{{ T "gitsmith.tip.mergeSquash" }}' },
+        { id: 'message', type: 'text', label: '-m {{ T "gitsmith.field.message" }}', placeholder: '', flag: '-m', quote: true },
+        { id: 'abort', type: 'toggle', label: '--abort', tip: '{{ T "gitsmith.tip.mergeAbort" }}' },
+        { id: 'continue', type: 'toggle', label: '--continue', tip: '{{ T "gitsmith.tip.mergeContinue" }}' }
+      ]
+    },
+    rebase: {
+      cat: 'branches', label: 'rebase', icon: 'git-commit-outline', color: 'info',
+      desc: '{{ T "gitsmith.cmd.rebase.desc" }}',
+      explain: '{{ T "gitsmith.cmd.rebase.explain" }}',
+      danger: true,
+      fields: [
+        { id: 'branch', type: 'text', label: '{{ T "gitsmith.field.branch" }}', placeholder: 'main', pos: 'arg' },
+        { id: 'onto', type: 'text', label: '--onto', placeholder: '', tip: '{{ T "gitsmith.tip.rebaseOnto" }}', flag: '--onto' },
+        { id: 'interactive', type: 'toggle', label: '-i / --interactive', tip: '{{ T "gitsmith.tip.rebaseInteractive" }}', flag: '-i' },
+        { id: 'autosquash', type: 'toggle', label: '--autosquash', tip: '{{ T "gitsmith.tip.autosquash" }}' },
+        { id: 'abort', type: 'toggle', label: '--abort', tip: '{{ T "gitsmith.tip.rebaseAbort" }}' },
+        { id: 'continue', type: 'toggle', label: '--continue', tip: '{{ T "gitsmith.tip.rebaseContinue" }}' },
+        { id: 'skip', type: 'toggle', label: '--skip', tip: '{{ T "gitsmith.tip.rebaseSkip" }}' }
+      ]
+    },
+    'cherry-pick': {
+      cat: 'branches', label: 'cherry-pick', icon: 'color-filter-outline', color: 'info',
+      desc: '{{ T "gitsmith.cmd.cherryPick.desc" }}',
+      explain: '{{ T "gitsmith.cmd.cherryPick.explain" }}',
+      fields: [
+        { id: 'commits', type: 'text', label: '{{ T "gitsmith.field.commits" }}', placeholder: 'abc1234', pos: 'arg' },
+        { id: 'no-commit', type: 'toggle', label: '--no-commit / -n', tip: '{{ T "gitsmith.tip.cherryPickNoCommit" }}', flag: '-n' },
+        { id: 'edit', type: 'toggle', label: '-e / --edit', tip: '{{ T "gitsmith.tip.cherryPickEdit" }}', flag: '-e' },
+        { id: 'mainline', type: 'text', label: '-m ({{ T "gitsmith.field.parentNumber" }})', placeholder: '1', flag: '-m' },
+        { id: 'abort', type: 'toggle', label: '--abort', tip: '{{ T "gitsmith.tip.mergeAbort" }}' },
+        { id: 'continue', type: 'toggle', label: '--continue', tip: '{{ T "gitsmith.tip.mergeContinue" }}' }
+      ]
+    },
+
+    /* ---- HISTORY ---- */
+    log: {
+      cat: 'history', label: 'log', icon: 'list-outline', color: 'accent',
+      desc: '{{ T "gitsmith.cmd.log.desc" }}',
+      explain: '{{ T "gitsmith.cmd.log.explain" }}',
+      fields: [
+        { id: 'oneline', type: 'toggle', label: '--oneline', tip: '{{ T "gitsmith.tip.logOneline" }}' },
+        { id: 'graph', type: 'toggle', label: '--graph', tip: '{{ T "gitsmith.tip.logGraph" }}' },
+        { id: 'all-flag', type: 'toggle', label: '--all', tip: '{{ T "gitsmith.tip.logAll" }}' },
+        { id: 'n', type: 'text', label: '-n ({{ T "gitsmith.field.count" }})', placeholder: '10', flag: '-n' },
+        { id: 'author', type: 'text', label: '--author', placeholder: 'name', flag: '--author', quote: true },
+        { id: 'since', type: 'text', label: '--since', placeholder: '2024-01-01', flag: '--since', quote: true },
+        { id: 'until', type: 'text', label: '--until', placeholder: '2024-12-31', flag: '--until', quote: true },
+        { id: 'grep', type: 'text', label: '--grep', placeholder: 'fix', flag: '--grep', quote: true },
+        { id: 'format', type: 'text', label: '--pretty=format:', placeholder: '%h %s', flag: '--pretty=format:', quote: true, noSpace: true },
+        { id: 'stat', type: 'toggle', label: '--stat', tip: '{{ T "gitsmith.tip.logStat" }}' },
+        { id: 'patch', type: 'toggle', label: '-p / --patch', tip: '{{ T "gitsmith.tip.logPatch" }}', flag: '-p' }
+      ]
+    },
+    diff: {
+      cat: 'history', label: 'diff', icon: 'git-compare-outline', color: 'accent',
+      desc: '{{ T "gitsmith.cmd.diff.desc" }}',
+      explain: '{{ T "gitsmith.cmd.diff.explain" }}',
+      fields: [
+        { id: 'target', type: 'text', label: '{{ T "gitsmith.field.commitOrBranch" }}', placeholder: 'HEAD~1', pos: 'arg' },
+        { id: 'staged', type: 'toggle', label: '--staged / --cached', tip: '{{ T "gitsmith.tip.diffStaged" }}', flag: '--staged' },
+        { id: 'stat', type: 'toggle', label: '--stat', tip: '{{ T "gitsmith.tip.diffStat" }}' },
+        { id: 'name-only', type: 'toggle', label: '--name-only', tip: '{{ T "gitsmith.tip.diffNameOnly" }}' },
+        { id: 'file', type: 'text', label: '-- {{ T "gitsmith.field.file" }}', placeholder: 'src/app.js', flag: '--', pos: 'last' }
+      ]
+    },
+    blame: {
+      cat: 'history', label: 'blame', icon: 'person-outline', color: 'accent',
+      desc: '{{ T "gitsmith.cmd.blame.desc" }}',
+      explain: '{{ T "gitsmith.cmd.blame.explain" }}',
+      fields: [
+        { id: 'file', type: 'text', label: '{{ T "gitsmith.field.file" }}', placeholder: 'src/app.js', required: true, pos: 'arg' },
+        { id: 'lines', type: 'text', label: '-L ({{ T "gitsmith.field.lineRange" }})', placeholder: '10,20', flag: '-L' },
+        { id: 'email', type: 'toggle', label: '-e / --show-email', tip: '{{ T "gitsmith.tip.blameEmail" }}', flag: '-e' }
+      ]
+    },
+    show: {
+      cat: 'history', label: 'show', icon: 'eye-outline', color: 'accent',
+      desc: '{{ T "gitsmith.cmd.show.desc" }}',
+      explain: '{{ T "gitsmith.cmd.show.explain" }}',
+      fields: [
+        { id: 'object', type: 'text', label: '{{ T "gitsmith.field.commitOrTag" }}', placeholder: 'HEAD', pos: 'arg' },
+        { id: 'stat', type: 'toggle', label: '--stat', tip: '{{ T "gitsmith.tip.logStat" }}' },
+        { id: 'format', type: 'text', label: '--pretty=format:', placeholder: '%H %s', flag: '--pretty=format:', quote: true, noSpace: true }
+      ]
+    },
+    stash: {
+      cat: 'history', label: 'stash', icon: 'archive-outline', color: 'accent',
+      desc: '{{ T "gitsmith.cmd.stash.desc" }}',
+      explain: '{{ T "gitsmith.cmd.stash.explain" }}',
+      fields: [
+        { id: 'action', type: 'select', label: '{{ T "gitsmith.field.action" }}', pos: 'arg', options: [
+          { value: '', label: '{{ T "gitsmith.stash.save" }}' },
+          { value: 'pop', label: 'pop' },
+          { value: 'apply', label: 'apply' },
+          { value: 'list', label: 'list' },
+          { value: 'drop', label: 'drop' },
+          { value: 'show', label: 'show' },
+          { value: 'clear', label: 'clear' }
+        ]},
+        { id: 'message', type: 'text', label: '-m {{ T "gitsmith.field.message" }}', placeholder: 'WIP: feature', flag: '-m', quote: true },
+        { id: 'include-untracked', type: 'toggle', label: '--include-untracked / -u', tip: '{{ T "gitsmith.tip.stashUntracked" }}', flag: '-u' },
+        { id: 'keep-index', type: 'toggle', label: '--keep-index', tip: '{{ T "gitsmith.tip.stashKeepIndex" }}' },
+        { id: 'index', type: 'text', label: 'stash@{n}', placeholder: '0', pos: 'arg2' }
+      ]
+    },
+
+    /* ---- UNDO ---- */
+    reset: {
+      cat: 'undo', label: 'reset', icon: 'refresh-outline', color: 'error',
+      desc: '{{ T "gitsmith.cmd.reset.desc" }}',
+      explain: '{{ T "gitsmith.cmd.reset.explain" }}',
+      danger: true,
+      fields: [
+        { id: 'mode', type: 'select', label: '{{ T "gitsmith.field.mode" }}', options: [
+          { value: '--mixed', label: '--mixed ({{ T "gitsmith.reset.mixed" }})' },
+          { value: '--soft', label: '--soft ({{ T "gitsmith.reset.soft" }})' },
+          { value: '--hard', label: '--hard ({{ T "gitsmith.reset.hard" }})', danger: true }
+        ], pos: 'flag-select' },
+        { id: 'target', type: 'text', label: '{{ T "gitsmith.field.commitOrRef" }}', placeholder: 'HEAD~1', pos: 'arg' }
+      ]
+    },
+    revert: {
+      cat: 'undo', label: 'revert', icon: 'arrow-undo-outline', color: 'error',
+      desc: '{{ T "gitsmith.cmd.revert.desc" }}',
+      explain: '{{ T "gitsmith.cmd.revert.explain" }}',
+      fields: [
+        { id: 'commit', type: 'text', label: '{{ T "gitsmith.field.commit" }}', placeholder: 'HEAD', pos: 'arg' },
+        { id: 'no-commit', type: 'toggle', label: '--no-commit / -n', tip: '{{ T "gitsmith.tip.revertNoCommit" }}', flag: '-n' },
+        { id: 'no-edit', type: 'toggle', label: '--no-edit', tip: '{{ T "gitsmith.tip.noEdit" }}' },
+        { id: 'mainline', type: 'text', label: '-m ({{ T "gitsmith.field.parentNumber" }})', placeholder: '1', flag: '-m' }
+      ]
+    },
+    restore: {
+      cat: 'undo', label: 'restore', icon: 'arrow-back-outline', color: 'error',
+      desc: '{{ T "gitsmith.cmd.restore.desc" }}',
+      explain: '{{ T "gitsmith.cmd.restore.explain" }}',
+      fields: [
+        { id: 'file', type: 'text', label: '{{ T "gitsmith.field.file" }}', placeholder: 'src/app.js', pos: 'arg' },
+        { id: 'staged', type: 'toggle', label: '--staged', tip: '{{ T "gitsmith.tip.restoreStaged" }}' },
+        { id: 'source', type: 'text', label: '--source', placeholder: 'HEAD~1', flag: '--source' },
+        { id: 'worktree', type: 'toggle', label: '--worktree', tip: '{{ T "gitsmith.tip.restoreWorktree" }}' }
+      ]
+    },
+    clean: {
+      cat: 'undo', label: 'clean', icon: 'trash-outline', color: 'error',
+      desc: '{{ T "gitsmith.cmd.clean.desc" }}',
+      explain: '{{ T "gitsmith.cmd.clean.explain" }}',
+      danger: true,
+      fields: [
+        { id: 'force', type: 'toggle', label: '-f / --force', tip: '{{ T "gitsmith.tip.cleanForce" }}', flag: '-f', danger: true },
+        { id: 'dirs', type: 'toggle', label: '-d', tip: '{{ T "gitsmith.tip.cleanDirs" }}', flag: '-d' },
+        { id: 'ignored', type: 'toggle', label: '-x', tip: '{{ T "gitsmith.tip.cleanIgnored" }}', flag: '-x' },
+        { id: 'dry-run', type: 'toggle', label: '-n / --dry-run', tip: '{{ T "gitsmith.tip.dryRun" }}', flag: '-n' },
+        { id: 'interactive', type: 'toggle', label: '-i / --interactive', tip: '{{ T "gitsmith.tip.cleanInteractive" }}', flag: '-i' }
+      ]
+    },
+
+    /* ---- REMOTE ---- */
+    remote: {
+      cat: 'remote', label: 'remote', icon: 'globe-outline', color: 'warning',
+      desc: '{{ T "gitsmith.cmd.remote.desc" }}',
+      explain: '{{ T "gitsmith.cmd.remote.explain" }}',
+      fields: [
+        { id: 'action', type: 'select', label: '{{ T "gitsmith.field.action" }}', pos: 'arg', options: [
+          { value: '', label: '{{ T "gitsmith.remote.list" }}' },
+          { value: 'add', label: 'add' },
+          { value: 'remove', label: 'remove' },
+          { value: 'rename', label: 'rename' },
+          { value: 'set-url', label: 'set-url' },
+          { value: 'show', label: 'show' },
+          { value: 'prune', label: 'prune' }
+        ]},
+        { id: 'name', type: 'text', label: '{{ T "gitsmith.field.remoteName" }}', placeholder: 'origin', pos: 'arg2' },
+        { id: 'url', type: 'text', label: 'URL', placeholder: 'https://github.com/user/repo.git', pos: 'arg3' },
+        { id: 'verbose', type: 'toggle', label: '-v / --verbose', tip: '{{ T "gitsmith.tip.verbose" }}', flag: '-v' }
+      ]
+    },
+    fetch: {
+      cat: 'remote', label: 'fetch', icon: 'cloud-download-outline', color: 'warning',
+      desc: '{{ T "gitsmith.cmd.fetch.desc" }}',
+      explain: '{{ T "gitsmith.cmd.fetch.explain" }}',
+      fields: [
+        { id: 'remote', type: 'text', label: '{{ T "gitsmith.field.remote" }}', placeholder: 'origin', pos: 'arg' },
+        { id: 'branch', type: 'text', label: '{{ T "gitsmith.field.branch" }}', placeholder: '', pos: 'arg2' },
+        { id: 'all-flag', type: 'toggle', label: '--all', tip: '{{ T "gitsmith.tip.fetchAll" }}' },
+        { id: 'prune', type: 'toggle', label: '--prune / -p', tip: '{{ T "gitsmith.tip.fetchPrune" }}', flag: '--prune' },
+        { id: 'tags', type: 'toggle', label: '--tags', tip: '{{ T "gitsmith.tip.fetchTags" }}' },
+        { id: 'dry-run', type: 'toggle', label: '--dry-run', tip: '{{ T "gitsmith.tip.dryRun" }}' }
+      ]
+    },
+    submodule: {
+      cat: 'remote', label: 'submodule', icon: 'layers-outline', color: 'warning',
+      desc: '{{ T "gitsmith.cmd.submodule.desc" }}',
+      explain: '{{ T "gitsmith.cmd.submodule.explain" }}',
+      fields: [
+        { id: 'action', type: 'select', label: '{{ T "gitsmith.field.action" }}', pos: 'arg', options: [
+          { value: 'add', label: 'add' },
+          { value: 'init', label: 'init' },
+          { value: 'update', label: 'update' },
+          { value: 'status', label: 'status' },
+          { value: 'deinit', label: 'deinit' },
+          { value: 'sync', label: 'sync' }
+        ]},
+        { id: 'url', type: 'text', label: 'URL / {{ T "gitsmith.field.path" }}', placeholder: 'https://...', pos: 'arg2' },
+        { id: 'recursive', type: 'toggle', label: '--recursive', tip: '{{ T "gitsmith.tip.recursive" }}' },
+        { id: 'init-flag', type: 'toggle', label: '--init', tip: '{{ T "gitsmith.tip.submoduleInit" }}' },
+        { id: 'remote-flag', type: 'toggle', label: '--remote', tip: '{{ T "gitsmith.tip.submoduleRemote" }}' }
+      ]
+    },
+
+    /* ---- ADVANCED ---- */
+    'rebase-i': {
+      cat: 'advanced', label: 'rebase -i', icon: 'build-outline', color: 'secondary',
+      base: 'rebase -i',
+      desc: '{{ T "gitsmith.cmd.rebaseI.desc" }}',
+      explain: '{{ T "gitsmith.cmd.rebaseI.explain" }}',
+      danger: true,
+      fields: [
+        { id: 'target', type: 'text', label: '{{ T "gitsmith.field.commitOrRef" }}', placeholder: 'HEAD~3', pos: 'arg' },
+        { id: 'autosquash', type: 'toggle', label: '--autosquash', tip: '{{ T "gitsmith.tip.autosquash" }}' },
+        { id: 'root', type: 'toggle', label: '--root', tip: '{{ T "gitsmith.tip.rebaseRoot" }}' }
+      ]
+    },
+    bisect: {
+      cat: 'advanced', label: 'bisect', icon: 'search-outline', color: 'secondary',
+      desc: '{{ T "gitsmith.cmd.bisect.desc" }}',
+      explain: '{{ T "gitsmith.cmd.bisect.explain" }}',
+      fields: [
+        { id: 'action', type: 'select', label: '{{ T "gitsmith.field.action" }}', pos: 'arg', options: [
+          { value: 'start', label: 'start' },
+          { value: 'bad', label: 'bad' },
+          { value: 'good', label: 'good' },
+          { value: 'reset', label: 'reset' },
+          { value: 'log', label: 'log' },
+          { value: 'run', label: 'run' }
+        ]},
+        { id: 'ref', type: 'text', label: '{{ T "gitsmith.field.commitOrRef" }}', placeholder: '', pos: 'arg2' }
+      ]
+    },
+    reflog: {
+      cat: 'advanced', label: 'reflog', icon: 'newspaper-outline', color: 'secondary',
+      desc: '{{ T "gitsmith.cmd.reflog.desc" }}',
+      explain: '{{ T "gitsmith.cmd.reflog.explain" }}',
+      fields: [
+        { id: 'action', type: 'select', label: '{{ T "gitsmith.field.action" }}', pos: 'arg', options: [
+          { value: '', label: 'show ({{ T "gitsmith.reflog.default" }})' },
+          { value: 'expire', label: 'expire' },
+          { value: 'delete', label: 'delete' }
+        ]},
+        { id: 'n', type: 'text', label: '-n ({{ T "gitsmith.field.count" }})', placeholder: '20', flag: '-n' },
+        { id: 'all-flag', type: 'toggle', label: '--all', tip: '{{ T "gitsmith.tip.reflogAll" }}' }
+      ]
+    },
+    tag: {
+      cat: 'advanced', label: 'tag', icon: 'pricetag-outline', color: 'secondary',
+      desc: '{{ T "gitsmith.cmd.tag.desc" }}',
+      explain: '{{ T "gitsmith.cmd.tag.explain" }}',
+      fields: [
+        { id: 'name', type: 'text', label: '{{ T "gitsmith.field.tagName" }}', placeholder: 'v1.0.0', pos: 'arg' },
+        { id: 'annotated', type: 'toggle', label: '-a ({{ T "gitsmith.tag.annotated" }})', tip: '{{ T "gitsmith.tip.tagAnnotated" }}', flag: '-a' },
+        { id: 'message', type: 'text', label: '-m {{ T "gitsmith.field.message" }}', placeholder: 'Release v1.0.0', flag: '-m', quote: true },
+        { id: 'delete', type: 'toggle', label: '-d / --delete', tip: '{{ T "gitsmith.tip.tagDelete" }}', flag: '-d' },
+        { id: 'list', type: 'toggle', label: '-l / --list', tip: '{{ T "gitsmith.tip.tagList" }}', flag: '-l' },
+        { id: 'sign', type: 'toggle', label: '-s / --sign', tip: '{{ T "gitsmith.tip.gpgSign" }}', flag: '-s' }
+      ]
+    }
+  };
+
+  /* ================================================================
+     RENDER CATEGORY BUTTONS
+     ================================================================ */
+  var catMap = { basic: 'cat-basic', branches: 'cat-branches', history: 'cat-history', undo: 'cat-undo', remote: 'cat-remote', advanced: 'cat-advanced' };
+
+  Object.keys(COMMANDS).forEach(function(key) {
+    var cmd = COMMANDS[key];
+    var container = document.getElementById(catMap[cmd.cat]);
+    if (!container) return;
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn btn-outline btn-xs sm:btn-sm gap-1 justify-start cmd-btn';
+    if (cmd.danger) btn.classList.add('btn-error');
+    btn.dataset.cmd = key;
+    btn.innerHTML = '<ion-icon name="' + cmd.icon + '"></ion-icon><span class="font-mono text-[10px] sm:text-xs truncate">' + cmd.label + '</span>';
+    container.appendChild(btn);
+  });
+
+  /* ================================================================
+     BUILDER LOGIC
+     ================================================================ */
+  var activeCmd = null;
+
+  function selectCommand(key) {
+    var cmd = COMMANDS[key];
+    if (!cmd) return;
+    activeCmd = key;
+
+    document.getElementById('empty-state').classList.add('hidden');
+    document.getElementById('builder-panel').classList.remove('hidden');
+
+    // Header
+    var baseLabel = cmd.base || cmd.label;
+    document.getElementById('cmd-title').textContent = 'git ' + baseLabel;
+    document.getElementById('cmd-desc').textContent = cmd.desc;
+    document.getElementById('cmd-icon').setAttribute('name', cmd.icon);
+    var iconWrap = document.getElementById('cmd-icon-wrap');
+    iconWrap.className = 'w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 bg-' + cmd.color + '/10 text-' + cmd.color;
+
+    // Danger badge
+    document.getElementById('cmd-danger-badge').classList.toggle('hidden', !cmd.danger);
+
+    // Active button
+    document.querySelectorAll('.cmd-btn').forEach(function(b) {
+      b.classList.toggle('btn-active', b.dataset.cmd === key);
+    });
+
+    // Build fields
+    renderFields(cmd);
+    buildCommand();
+    buildExplain();
+  }
+
+  function renderFields(cmd) {
+    var container = document.getElementById('cmd-fields');
+    container.innerHTML = '';
+
+    cmd.fields.forEach(function(f) {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'form-control';
+
+      if (f.type === 'toggle') {
+        wrapper.innerHTML =
+          '<label class="flex items-center justify-between cursor-pointer gap-2 py-0.5">' +
+            '<div class="flex items-center gap-2 min-w-0">' +
+              '<span class="font-mono text-xs font-medium whitespace-nowrap">' + f.label + '</span>' +
+              (f.tip ? '<div class="tooltip tooltip-right" data-tip="' + escapeAttr(f.tip) + '"><ion-icon name="help-circle-outline" class="text-base-content/30 text-sm cursor-help"></ion-icon></div>' : '') +
+              (f.danger ? '<span class="badge badge-error badge-xs">⚠</span>' : '') +
+            '</div>' +
+            '<input type="checkbox" class="toggle toggle-xs ' + (f.danger ? 'toggle-error' : 'toggle-primary') + '" data-field="' + f.id + '" />' +
+          '</label>';
+      } else if (f.type === 'select') {
+        var opts = f.options.map(function(o) {
+          return '<option value="' + escapeAttr(o.value) + '"' + (o.danger ? ' class="text-error"' : '') + '>' + o.label + '</option>';
+        }).join('');
+        wrapper.innerHTML =
+          '<label class="label py-0.5"><span class="label-text text-xs font-medium font-mono">' + f.label + '</span></label>' +
+          '<select class="select select-bordered select-xs text-xs font-mono" data-field="' + f.id + '">' + opts + '</select>';
+      } else {
+        wrapper.innerHTML =
+          '<label class="label py-0.5">' +
+            '<span class="label-text text-xs font-medium font-mono">' + f.label + '</span>' +
+            (f.tip ? '<span class="label-text-alt"><div class="tooltip tooltip-left" data-tip="' + escapeAttr(f.tip) + '"><ion-icon name="help-circle-outline" class="text-base-content/30 text-sm cursor-help"></ion-icon></div></span>' : '') +
+          '</label>' +
+          '<input type="text" class="input input-bordered input-xs font-mono text-xs" placeholder="' + escapeAttr(f.placeholder || '') + '" data-field="' + f.id + '" />';
+      }
+
+      container.appendChild(wrapper);
+    });
+
+    // Attach events
+    container.querySelectorAll('[data-field]').forEach(function(el) {
+      el.addEventListener('input', function() { buildCommand(); buildExplain(); checkDanger(); });
+      el.addEventListener('change', function() { buildCommand(); buildExplain(); checkDanger(); });
+    });
+  }
+
+  function getFieldValue(id) {
+    var el = document.querySelector('[data-field="' + id + '"]');
+    if (!el) return '';
+    if (el.type === 'checkbox') return el.checked;
+    return (el.value || '').trim();
+  }
+
+  function buildCommand() {
+    if (!activeCmd) return;
+    var cmd = COMMANDS[activeCmd];
+    var baseLabel = cmd.base || cmd.label;
+    var parts = ['git', baseLabel];
+    var args = [];
+    var args2 = [];
+    var args3 = [];
+    var lastArgs = [];
+
+    cmd.fields.forEach(function(f) {
+      var val = getFieldValue(f.id);
+
+      if (f.type === 'toggle' && val) {
+        var flagName = f.flag || f.label.split(' / ')[0].split(' (')[0].trim();
+        parts.push(flagName);
+        return;
+      }
+
+      if (f.type === 'select' && f.pos === 'arg') {
+        if (val) args.push(val);
+        return;
+      }
+
+      if (f.type === 'select' && f.pos === 'flag-select') {
+        if (val) parts.push(val);
+        return;
+      }
+
+      if (f.type === 'text' && val) {
+        if (f.pos === 'arg') {
+          args.push(val);
+        } else if (f.pos === 'arg2') {
+          args2.push(val);
+        } else if (f.pos === 'arg3') {
+          args3.push(val);
+        } else if (f.pos === 'last') {
+          lastArgs.push(f.flag ? f.flag + ' ' + val : val);
+        } else if (f.flag) {
+          var sep = f.noSpace ? '' : ' ';
+          var v = f.quote ? '"' + val + '"' : val;
+          parts.push(f.flag + sep + v);
+        }
+      }
+    });
+
+    var result = parts.concat(args).concat(args2).concat(args3).concat(lastArgs).join(' ');
+    document.getElementById('cmd-result-text').textContent = result;
+    return result;
+  }
+
+  function checkDanger() {
+    if (!activeCmd) return;
+    var cmd = COMMANDS[activeCmd];
+    var isDangerous = !!cmd.danger;
+
+    // Check individual dangerous fields
+    cmd.fields.forEach(function(f) {
+      if (f.danger && getFieldValue(f.id)) {
+        isDangerous = true;
+      }
+      // Special: reset --hard
+      if (f.id === 'mode' && f.type === 'select') {
+        var v = getFieldValue(f.id);
+        if (v === '--hard') isDangerous = true;
+      }
+    });
+
+    var dangerPanel = document.getElementById('danger-panel');
+    if (isDangerous) {
+      dangerPanel.classList.remove('hidden');
+      var warnings = [];
+      if (activeCmd === 'reset' && getFieldValue('mode') === '--hard') {
+        warnings.push('{{ T "gitsmith.danger.resetHard" }}');
+      }
+      if (getFieldValue('force')) {
+        warnings.push('{{ T "gitsmith.danger.pushForce" }}');
+      }
+      if (activeCmd === 'clean' && getFieldValue('force')) {
+        warnings.push('{{ T "gitsmith.danger.cleanForce" }}');
+      }
+      if (activeCmd === 'rebase' || activeCmd === 'rebase-i') {
+        warnings.push('{{ T "gitsmith.danger.rebase" }}');
+      }
+      if (getFieldValue('force-delete')) {
+        warnings.push('{{ T "gitsmith.danger.branchForceDelete" }}');
+      }
+      if (!warnings.length) warnings.push('{{ T "gitsmith.danger.generic" }}');
+      document.getElementById('danger-text').textContent = warnings.join('\n');
+    } else {
+      dangerPanel.classList.add('hidden');
+    }
+  }
+
+  function buildExplain() {
+    if (!activeCmd) return;
+    var cmd = COMMANDS[activeCmd];
+    var lines = ['<strong>git ' + (cmd.base || cmd.label) + '</strong> — ' + cmd.explain];
+    var details = [];
+
+    cmd.fields.forEach(function(f) {
+      var val = getFieldValue(f.id);
+      if (!val) return;
+      var label = f.label.split(' / ')[0].split(' (')[0].trim();
+      var tip = f.tip || '';
+      if (f.type === 'toggle') {
+        details.push('<code>' + label + '</code>' + (tip ? ' — ' + tip : ''));
+      } else if (f.type === 'text' && val) {
+        details.push('<code>' + label + '</code> = <code>' + escapeHtml(val) + '</code>' + (tip ? ' — ' + tip : ''));
+      } else if (f.type === 'select' && val) {
+        var opt = (f.options || []).find(function(o) { return o.value === val; });
+        details.push('<code>' + label + '</code> = <code>' + (opt ? opt.label : val) + '</code>');
+      }
+    });
+
+    if (details.length) {
+      lines.push('<ul class="list-disc list-inside mt-2 space-y-1">');
+      details.forEach(function(d) { lines.push('<li>' + d + '</li>'); });
+      lines.push('</ul>');
+    }
+
+    document.getElementById('cmd-explain').innerHTML = lines.join('\n');
+  }
+
+  /* ================================================================
+     HISTORY
+     ================================================================ */
+  function getHistory() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch(e) { return []; }
+  }
+
+  function saveToHistory(cmdText) {
+    var history = getHistory();
+    // Avoid duplicates at top
+    if (history.length && history[0].cmd === cmdText) return;
+    history.unshift({ cmd: cmdText, time: Date.now() });
+    if (history.length > MAX_HISTORY) history = history.slice(0, MAX_HISTORY);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+    renderHistory();
+  }
+
+  function renderHistory() {
+    var history = getHistory();
+    var list = document.getElementById('history-list');
+    var empty = document.getElementById('history-empty');
+    var clearBtn = document.getElementById('btn-clear-history');
+    var count = document.getElementById('history-count');
+
+    count.textContent = history.length;
+
+    if (!history.length) {
+      list.innerHTML = '';
+      empty.classList.remove('hidden');
+      clearBtn.classList.add('hidden');
+      return;
+    }
+
+    empty.classList.add('hidden');
+    clearBtn.classList.remove('hidden');
+
+    list.innerHTML = history.map(function(item, idx) {
+      var ago = timeAgo(item.time);
+      return '<div class="flex items-center gap-1.5 p-1.5 rounded-lg hover:bg-base-200/50 group cursor-pointer history-item" data-idx="' + idx + '">' +
+        '<div class="flex-1 min-w-0">' +
+          '<div class="font-mono text-[10px] truncate text-base-content/80">' + escapeHtml(item.cmd) + '</div>' +
+          '<div class="text-[8px] text-base-content/40">' + ago + '</div>' +
+        '</div>' +
+        '<button type="button" class="btn btn-ghost btn-xs opacity-0 group-hover:opacity-100 history-copy" data-cmd="' + escapeAttr(item.cmd) + '">' +
+          '<ion-icon name="copy-outline"></ion-icon>' +
+        '</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  function timeAgo(ts) {
+    var diff = Math.floor((Date.now() - ts) / 1000);
+    if (diff < 60) return diff + 's ago';
+    if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+    if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+    return Math.floor(diff / 86400) + 'd ago';
+  }
+
+  /* ================================================================
+     HELPERS
+     ================================================================ */
+  function escapeHtml(s) {
+    var d = document.createElement('div');
+    d.appendChild(document.createTextNode(s));
+    return d.innerHTML;
+  }
+
+  function escapeAttr(s) {
+    return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function showToast(msg) {
+    var t = document.getElementById('gs-toast');
+    document.getElementById('gs-toast-message').textContent = msg;
+    t.classList.remove('hidden');
+    setTimeout(function() { t.classList.add('hidden'); }, 2000);
+  }
+
+  /* ================================================================
+     EVENTS
+     ================================================================ */
+
+  // Command buttons
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.cmd-btn');
+    if (btn) {
+      selectCommand(btn.dataset.cmd);
+      return;
+    }
+
+    // History copy
+    var hCopy = e.target.closest('.history-copy');
+    if (hCopy) {
+      e.stopPropagation();
+      navigator.clipboard.writeText(hCopy.dataset.cmd).then(function() { showToast(i18n.copied); });
+      return;
+    }
+
+    // History item click
+    var hItem = e.target.closest('.history-item');
+    if (hItem) {
+      var idx = parseInt(hItem.dataset.idx);
+      var history = getHistory();
+      if (history[idx]) {
+        navigator.clipboard.writeText(history[idx].cmd).then(function() { showToast(i18n.copied); });
+      }
+    }
+  });
+
+  // Copy result
+  document.getElementById('btn-copy').addEventListener('click', function() {
+    var cmdText = document.getElementById('cmd-result-text').textContent;
+    if (!cmdText) return;
+    navigator.clipboard.writeText(cmdText).then(function() {
+      showToast(i18n.copied);
+      saveToHistory(cmdText);
+    });
+  });
+
+  // Clear history
+  document.getElementById('btn-clear-history').addEventListener('click', function() {
+    localStorage.removeItem(STORAGE_KEY);
+    renderHistory();
+    showToast(i18n.historyCleared);
+  });
+
+  // Keyboard: Ctrl+C on result
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && activeCmd) {
+      e.preventDefault();
+      var cmdText = document.getElementById('cmd-result-text').textContent;
+      navigator.clipboard.writeText(cmdText).then(function() {
+        showToast(i18n.copied);
+        saveToHistory(cmdText);
+      });
+    }
+  });
+
+  // Init
+  renderHistory();
+
+})();
+</script>
+{{ end }}

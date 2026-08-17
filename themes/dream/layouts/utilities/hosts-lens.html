@@ -1,0 +1,1313 @@
+{{ define "title" }}
+{{ .Title }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-10">
+
+  <!-- Hero -->
+  <div class="text-center mb-5 sm:mb-8">
+    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 text-primary mb-3 sm:mb-4">
+      <span class="text-3xl sm:text-5xl">{{ with .Params.icon }}{{ . }}{{ else }}🛡️{{ end }}</span>
+    </div>
+    <h1 class="text-xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">{{ .Title }}</h1>
+    <p class="text-sm sm:text-base text-base-content/60 max-w-2xl mx-auto mb-3 sm:mb-4 px-2">{{ .Description }}</p>
+    <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-success/10 text-success border border-success/20">
+        <ion-icon name="document-text-outline"></ion-icon>
+        {{ T "hostslens.badgeHosts" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        {{ T "hostslens.badgeAdGuard" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+        <ion-icon name="funnel-outline"></ion-icon>
+        {{ T "hostslens.badgeFilter" }}
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+        <ion-icon name="analytics-outline"></ion-icon>
+        {{ T "hostslens.badgeStats" }}
+      </span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
+
+    <!-- Settings Panel -->
+    <div class="xl:col-span-1 space-y-3 sm:space-y-4 order-2 xl:order-1">
+
+      <!-- Source -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="cloud-download-outline" class="text-primary"></ion-icon>
+            {{ T "hostslens.sourceTitle" }}
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-2">
+          <!-- Preset URLs -->
+          <div class="form-control">
+            <label class="label py-0.5">
+              <span class="label-text text-xs font-medium">{{ T "hostslens.presetLabel" }}</span>
+            </label>
+            <select id="preset-url" class="select select-bordered select-xs text-[10px] sm:text-xs">
+              <option value="">{{ T "hostslens.presetCustom" }}</option>
+              <option value="https://raw.githubusercontent.com/ImMALWARE/dns.malw.link/refs/heads/master/hosts" selected>ImMALWARE DNS</option>
+              <option value="https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts">StevenBlack Unified</option>
+              <option value="https://adaway.org/hosts.txt">AdAway Default</option>
+              <option value="https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0">Yoyo Adservers</option>
+              <option value="https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/pro.txt">Hagezi Pro</option>
+              <option value="https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt">KADhosts</option>
+            </select>
+          </div>
+          <input type="text" id="hosts-url" class="input input-bordered input-xs sm:input-sm w-full font-mono text-[10px] sm:text-xs"
+                 placeholder="{{ T "hostslens.urlPlaceholder" }}"
+                 value="https://raw.githubusercontent.com/ImMALWARE/dns.malw.link/refs/heads/master/hosts" />
+          <button type="button" id="btn-fetch" class="btn btn-primary btn-xs sm:btn-sm w-full gap-1">
+            <ion-icon name="download-outline"></ion-icon>
+            {{ T "hostslens.fetchBtn" }}
+          </button>
+          <div class="divider my-1 text-[10px]">{{ T "hostslens.orDivider" }}</div>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button type="button" id="btn-paste-input" class="btn btn-outline btn-xs sm:btn-sm gap-1">
+              <ion-icon name="clipboard-outline"></ion-icon>
+              {{ T "hostslens.pasteBtn" }}
+            </button>
+            <button type="button" id="btn-load-file" class="btn btn-outline btn-xs sm:btn-sm gap-1">
+              <ion-icon name="folder-open-outline"></ion-icon>
+              {{ T "hostslens.loadFileBtn" }}
+            </button>
+          </div>
+          <input type="file" id="file-input" accept=".txt,.hosts" class="hidden" />
+        </div>
+      </div>
+
+      <!-- Output Mode -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <div class="p-3 sm:p-4 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+          <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+            <ion-icon name="swap-horizontal-outline" class="text-warning"></ion-icon>
+            {{ T "hostslens.modeTitle" }}
+          </h2>
+        </div>
+        <div class="p-3 sm:p-4 space-y-2">
+          <div class="grid grid-cols-1 gap-1.5">
+            <label class="flex items-center gap-2.5 p-2 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-success has-[:checked]:bg-success/5 transition-all">
+              <input type="radio" name="output-mode" value="hosts" class="radio radio-xs radio-success" checked />
+              <div>
+                <span class="text-xs font-medium">{{ T "hostslens.modeHosts" }}</span>
+                <p class="text-[9px] text-base-content/50">{{ T "hostslens.modeHostsDesc" }}</p>
+              </div>
+            </label>
+            <label class="flex items-center gap-2.5 p-2 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-2 has-[:checked]:ring-warning has-[:checked]:bg-warning/5 transition-all">
+              <input type="radio" name="output-mode" value="adguard" class="radio radio-xs radio-warning" />
+              <div>
+                <span class="text-xs font-medium">{{ T "hostslens.modeAdGuard" }}</span>
+                <p class="text-[9px] text-base-content/50">{{ T "hostslens.modeAdGuardDesc" }}</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- AdGuard blocked style -->
+          <div id="adguard-block-opts" class="hidden pt-1">
+            <label class="label py-0.5">
+              <span class="label-text text-[10px] font-medium">{{ T "hostslens.adguardBlockStyle" }}</span>
+            </label>
+            <div class="grid grid-cols-1 gap-1">
+              <label class="flex items-center gap-2 p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-1 has-[:checked]:ring-warning has-[:checked]:bg-warning/5 transition-all">
+                <input type="radio" name="adguard-block" value="block" class="radio radio-xs radio-warning" checked />
+                <div>
+                  <span class="text-[10px] font-mono">||domain^</span>
+                  <p class="text-[8px] text-base-content/50">{{ T "hostslens.adguardBlockSimple" }}</p>
+                </div>
+              </label>
+              <label class="flex items-center gap-2 p-1.5 rounded-lg border border-base-200 cursor-pointer hover:bg-base-200/50 has-[:checked]:ring-1 has-[:checked]:ring-warning has-[:checked]:bg-warning/5 transition-all">
+                <input type="radio" name="adguard-block" value="rewrite" class="radio radio-xs radio-warning" />
+                <div>
+                  <span class="text-[10px] font-mono">||domain^$dnsrewrite=IP</span>
+                  <p class="text-[8px] text-base-content/50">{{ T "hostslens.adguardBlockRewrite" }}</p>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group" open>
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="funnel-outline" class="text-secondary"></ion-icon>
+              {{ T "hostslens.filtersTitle" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+            <label class="flex items-center justify-between cursor-pointer">
+              <div class="flex items-center gap-2">
+                <span class="text-sm">✅</span>
+                <div>
+                  <span class="text-xs font-medium">{{ T "hostslens.filterAllowed" }}</span>
+                  <p class="text-[9px] text-base-content/50">{{ T "hostslens.filterAllowedDesc" }}</p>
+                </div>
+              </div>
+              <input type="checkbox" id="filter-allowed" class="toggle toggle-xs toggle-success" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <div class="flex items-center gap-2">
+                <span class="text-sm">🚫</span>
+                <div>
+                  <span class="text-xs font-medium">{{ T "hostslens.filterBlocked" }}</span>
+                  <p class="text-[9px] text-base-content/50">{{ T "hostslens.filterBlockedDesc" }}</p>
+                </div>
+              </div>
+              <input type="checkbox" id="filter-blocked" class="toggle toggle-xs toggle-error" checked />
+            </label>
+
+            <div class="divider my-0.5"></div>
+
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "hostslens.includeComments" }}</span>
+              <input type="checkbox" id="opt-include-comments" class="toggle toggle-xs toggle-primary" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "hostslens.preserveSections" }}</span>
+              <input type="checkbox" id="opt-preserve-sections" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "hostslens.skipLocalhost" }}</span>
+              <input type="checkbox" id="opt-skip-localhost" class="toggle toggle-xs toggle-primary" checked />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-xs font-medium">{{ T "hostslens.deduplicate" }}</span>
+              <input type="checkbox" id="opt-deduplicate" class="toggle toggle-xs toggle-accent" checked />
+            </label>
+          </div>
+        </details>
+      </div>
+
+      <!-- Sort & Advanced -->
+      <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="settings-outline" class="text-info"></ion-icon>
+              {{ T "hostslens.advancedTitle" }}
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="p-3 sm:p-4 space-y-3">
+
+            <!-- Sort -->
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "hostslens.sortLabel" }}</span>
+              </label>
+              <select id="opt-sort" class="select select-bordered select-xs text-xs">
+                <option value="original">{{ T "hostslens.sortOriginal" }}</option>
+                <option value="domain-asc">{{ T "hostslens.sortDomainAsc" }}</option>
+                <option value="domain-desc">{{ T "hostslens.sortDomainDesc" }}</option>
+                <option value="ip-asc">{{ T "hostslens.sortIPAsc" }}</option>
+                <option value="ip-desc">{{ T "hostslens.sortIPDesc" }}</option>
+              </select>
+            </div>
+
+            <!-- Blocked IPs preset -->
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "hostslens.blockedIPsPreset" }}</span>
+              </label>
+              <div class="grid grid-cols-3 gap-1">
+                <button type="button" class="btn btn-outline btn-xs blocked-ip-preset" data-ips="0.0.0.0">0.0.0.0</button>
+                <button type="button" class="btn btn-outline btn-xs blocked-ip-preset" data-ips="127.0.0.1">127.0.0.1</button>
+                <button type="button" class="btn btn-outline btn-xs blocked-ip-preset active" data-ips="0.0.0.0&#10;127.0.0.1">{{ T "hostslens.blockedIPsBoth" }}</button>
+              </div>
+            </div>
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "hostslens.blockedIPs" }}</span>
+              </label>
+              <textarea id="blocked-ips" class="textarea textarea-bordered textarea-xs font-mono text-[10px] leading-relaxed h-16"
+                        spellcheck="false">0.0.0.0
+127.0.0.1</textarea>
+              <label class="label py-0.5">
+                <span class="label-text-alt text-[9px] text-base-content/50">{{ T "hostslens.blockedIPsDesc" }}</span>
+              </label>
+            </div>
+
+            <div class="form-control">
+              <label class="label py-0.5">
+                <span class="label-text text-xs font-medium">{{ T "hostslens.domainSearch" }}</span>
+              </label>
+              <div class="relative">
+                <input type="text" id="domain-search" class="input input-bordered input-xs font-mono text-[10px] w-full pr-7"
+                       placeholder="{{ T "hostslens.domainSearchPlaceholder" }}" />
+                <button type="button" id="btn-clear-search" class="absolute right-1 top-1/2 -translate-y-1/2 btn btn-ghost btn-xs btn-circle opacity-50 hover:opacity-100 hidden">
+                  <ion-icon name="close-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Editor panels -->
+    <div class="xl:col-span-3 space-y-3 sm:space-y-4 order-1 xl:order-2">
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+
+        <!-- Input -->
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="document-text-outline" class="text-primary"></ion-icon>
+              {{ T "hostslens.inputTitle" }}
+            </h2>
+            <button type="button" id="btn-sample" class="btn btn-ghost btn-xs gap-1" title="{{ T "hostslens.sampleTooltip" }}">
+              <ion-icon name="code-outline"></ion-icon>
+            </button>
+            <button type="button" id="btn-clear" class="btn btn-ghost btn-xs gap-1" title="{{ T "hostslens.clearTooltip" }}">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+          <div class="relative">
+            <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="input-stats"></div>
+            <textarea id="hosts-input" class="w-full h-[350px] sm:h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none"
+                      placeholder="{{ T "hostslens.inputPlaceholder" }}" spellcheck="false"></textarea>
+          </div>
+        </div>
+
+        <!-- Output -->
+        <div class="bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 p-2.5 sm:p-3 bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-xs sm:text-sm flex items-center gap-1.5 flex-1">
+              <ion-icon name="checkmark-circle-outline" class="text-success"></ion-icon>
+              {{ T "hostslens.outputTitle" }}
+            </h2>
+            <span id="output-mode-badge" class="badge badge-xs sm:badge-sm badge-success gap-1">
+              <ion-icon name="document-text-outline"></ion-icon>
+              Hosts
+            </span>
+            <button type="button" id="btn-copy" class="btn btn-primary btn-xs gap-1" disabled>
+              <ion-icon name="copy-outline"></ion-icon>
+              <span class="hidden sm:inline">{{ T "hostslens.copyBtn" }}</span>
+            </button>
+            <!-- Download dropdown -->
+            <div class="dropdown dropdown-end">
+              <label tabindex="0" id="btn-download-wrap" class="btn btn-ghost btn-xs gap-1 cursor-pointer" disabled>
+                <ion-icon name="download-outline"></ion-icon>
+                <ion-icon name="chevron-down-outline" class="text-[8px]"></ion-icon>
+              </label>
+              <ul tabindex="0" class="dropdown-content z-20 menu p-1 shadow-lg bg-base-100 rounded-lg border border-base-200 w-44">
+                <li><a id="btn-download-all" class="text-xs gap-2">
+                  <ion-icon name="document-outline"></ion-icon>
+                  {{ T "hostslens.downloadAll" }}
+                </a></li>
+                <li><a id="btn-download-allowed" class="text-xs gap-2">
+                  <span>✅</span>
+                  {{ T "hostslens.downloadAllowed" }}
+                </a></li>
+                <li><a id="btn-download-blocked" class="text-xs gap-2">
+                  <span>🚫</span>
+                  {{ T "hostslens.downloadBlocked" }}
+                </a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="absolute top-2 right-2 z-10 text-[9px] font-mono text-base-content/30" id="output-stats"></div>
+            <textarea id="hosts-output" class="w-full h-[350px] sm:h-[500px] p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-relaxed bg-transparent border-0 resize-none focus:outline-none"
+                      readonly placeholder="{{ T "hostslens.outputPlaceholder" }}"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading -->
+      <div id="loading-panel" class="hidden">
+        <div class="flex items-center justify-center gap-3 p-4 bg-info/5 border border-info/20 rounded-xl sm:rounded-2xl">
+          <span class="loading loading-spinner loading-sm text-info"></span>
+          <span class="text-sm text-info font-medium" id="loading-text">{{ T "hostslens.loading" }}</span>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div id="error-panel" class="hidden bg-error/5 border border-error/20 rounded-xl sm:rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-2 p-3 sm:p-4">
+          <ion-icon name="alert-circle-outline" class="text-error text-xl shrink-0"></ion-icon>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-xs sm:text-sm text-error">{{ T "hostslens.errorTitle" }}</div>
+            <pre class="text-[10px] sm:text-xs mt-1 text-error/80 font-mono whitespace-pre-wrap break-all" id="error-message"></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Warnings (duplicates, invalid IPs) -->
+      <div id="warnings-panel" class="hidden bg-warning/5 border border-warning/20 rounded-xl sm:rounded-2xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none">
+            <div class="flex items-center gap-2">
+              <ion-icon name="warning-outline" class="text-warning text-lg shrink-0"></ion-icon>
+              <span class="font-semibold text-xs sm:text-sm text-warning" id="warnings-title"></span>
+            </div>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+            <pre class="text-[10px] sm:text-xs text-warning/80 font-mono whitespace-pre-wrap break-all max-h-32 overflow-y-auto" id="warnings-message"></pre>
+          </div>
+        </details>
+      </div>
+
+      <!-- Update info -->
+      <div id="update-info" class="hidden">
+        <div class="flex items-center gap-2 p-3 bg-info/5 border border-info/20 rounded-xl sm:rounded-2xl">
+          <ion-icon name="time-outline" class="text-info text-lg shrink-0"></ion-icon>
+          <span class="text-xs sm:text-sm text-info font-medium" id="update-date-text"></span>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div id="stats-bar" class="hidden">
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3">
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-2.5 sm:p-3 text-center">
+            <div class="text-[9px] sm:text-[10px] text-base-content/50 mb-0.5">{{ T "hostslens.statTotal" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-primary" id="stat-total">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-2.5 sm:p-3 text-center">
+            <div class="text-[9px] sm:text-[10px] text-base-content/50 mb-0.5">✅ {{ T "hostslens.statAllowed" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-success" id="stat-allowed">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-2.5 sm:p-3 text-center">
+            <div class="text-[9px] sm:text-[10px] text-base-content/50 mb-0.5">🚫 {{ T "hostslens.statBlocked" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-error" id="stat-blocked">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-2.5 sm:p-3 text-center">
+            <div class="text-[9px] sm:text-[10px] text-base-content/50 mb-0.5">{{ T "hostslens.statUniqueDomains" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-accent" id="stat-unique-domains">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-2.5 sm:p-3 text-center">
+            <div class="text-[9px] sm:text-[10px] text-base-content/50 mb-0.5">{{ T "hostslens.statUniqueIPs" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-info" id="stat-unique-ips">—</div>
+          </div>
+          <div class="bg-base-100 rounded-xl border border-base-200 dark:border-base-content/10 p-2.5 sm:p-3 text-center">
+            <div class="text-[9px] sm:text-[10px] text-base-content/50 mb-0.5">{{ T "hostslens.statDuplicates" }}</div>
+            <div class="text-sm sm:text-lg font-bold text-warning" id="stat-duplicates">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entries table -->
+      <div id="entries-panel" class="hidden bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 shadow-xl overflow-hidden">
+        <details class="group">
+          <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none bg-base-200/30 border-b border-base-200 dark:border-base-content/10">
+            <h2 class="font-semibold text-sm sm:text-base flex items-center gap-2">
+              <ion-icon name="list-outline" class="text-accent"></ion-icon>
+              {{ T "hostslens.entriesTitle" }}
+              <span class="badge badge-xs badge-accent" id="entries-count">0</span>
+            </h2>
+            <ion-icon name="chevron-down" class="text-base-content/40 group-open:rotate-180 transition-transform"></ion-icon>
+          </summary>
+          <div class="max-h-72 overflow-y-auto">
+            <table class="table table-xs table-zebra w-full">
+              <thead class="sticky top-0 bg-base-200/80 backdrop-blur z-10">
+                <tr>
+                  <th class="text-[10px] w-10">{{ T "hostslens.colType" }}</th>
+                  <th class="text-[10px]">{{ T "hostslens.colIP" }}</th>
+                  <th class="text-[10px]">{{ T "hostslens.colDomain" }}</th>
+                  <th class="text-[10px]">{{ T "hostslens.colSection" }}</th>
+                  <th class="text-[10px] w-10">{{ T "hostslens.colDup" }}</th>
+                </tr>
+              </thead>
+              <tbody id="entries-tbody"></tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="mt-4 sm:mt-6 bg-base-100 rounded-xl sm:rounded-2xl border border-base-200 dark:border-base-content/10 overflow-hidden">
+    <details class="group">
+      <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer select-none hover:bg-base-200/50 transition-colors">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-info/10 flex items-center justify-center shrink-0">
+            <ion-icon name="help-circle-outline" class="text-lg sm:text-xl text-info"></ion-icon>
+          </div>
+          <div>
+            <h3 class="font-semibold text-sm sm:text-base">{{ T "hostslens.howTitle" }}</h3>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "hostslens.howSubtitle" }}</p>
+          </div>
+        </div>
+        <ion-icon name="chevron-down" class="text-lg text-base-content/40 group-open:rotate-180 transition-transform shrink-0"></ion-icon>
+      </summary>
+      <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <ion-icon name="cloud-download-outline" class="text-primary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "hostslens.howLoad" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "hostslens.howLoadDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center">
+                <ion-icon name="scan-outline" class="text-success"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "hostslens.howParse" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "hostslens.howParseDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-warning/10 flex items-center justify-center">
+                <ion-icon name="funnel-outline" class="text-warning"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "hostslens.howFilter" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "hostslens.howFilterDesc" }}</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200/50">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center">
+                <ion-icon name="swap-horizontal-outline" class="text-secondary"></ion-icon>
+              </div>
+              <h4 class="font-semibold text-xs sm:text-sm">{{ T "hostslens.howConvert" }}</h4>
+            </div>
+            <p class="text-[10px] sm:text-xs text-base-content/60">{{ T "hostslens.howConvertDesc" }}</p>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- Status bar -->
+  <div class="mt-4 flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-base-200/30 border border-base-200 dark:border-base-content/10 text-[10px] sm:text-xs text-base-content/50">
+    <span id="status-text">{{ T "hostslens.statusReady" }}</span>
+    <span>{{ T "hostslens.statusBrowser" }}</span>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="hl-toast" class="toast toast-top toast-center hidden z-50">
+  <div class="alert alert-success py-2 px-4">
+    <ion-icon name="checkmark-circle-outline" class="text-lg"></ion-icon>
+    <span id="hl-toast-message" class="text-sm"></span>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  var i18n = {
+    copied: "{{ T "hostslens.copied" }}",
+    cleared: "{{ T "hostslens.cleared" }}",
+    downloaded: "{{ T "hostslens.downloaded" }}",
+    fetched: "{{ T "hostslens.fetched" }}",
+    parsed: "{{ T "hostslens.parsed" }}",
+    fetchError: "{{ T "hostslens.fetchError" }}",
+    noData: "{{ T "hostslens.noData" }}",
+    statusReady: "{{ T "hostslens.statusReady" }}",
+    statusParsed: "{{ T "hostslens.statusParsed" }}",
+    statusError: "{{ T "hostslens.statusError" }}",
+    loading: "{{ T "hostslens.loading" }}",
+    updatePrefix: "{{ T "hostslens.updatePrefix" }}",
+    entries: "{{ T "hostslens.entries" }}",
+    allowed: "{{ T "hostslens.catAllowed" }}",
+    blocked: "{{ T "hostslens.catBlocked" }}",
+    warningDuplicates: "{{ T "hostslens.warningDuplicates" }}",
+    warningInvalidIP: "{{ T "hostslens.warningInvalidIP" }}",
+    warningsFound: "{{ T "hostslens.warningsFound" }}"
+  };
+
+  var STORAGE_KEY = 'hostslens-settings';
+
+  // ======================================================================
+  // SAMPLE
+  // ======================================================================
+  var SAMPLE_HOSTS = [
+    '# Hosts file for DNS filtering',
+    '# Последнее обновление: 2025-07-15 14:30:00 MSK',
+    '# Generated by ImMALWARE',
+    '',
+    '# === AI Services (allowed) ===',
+    '104.18.32.7 chat.openai.com',
+    '104.18.33.7 api.openai.com',
+    '104.18.34.7 platform.openai.com',
+    '172.64.155.188 claude.ai',
+    '172.64.155.189 api.anthropic.com',
+    '142.250.74.78 gemini.google.com',
+    '142.250.74.78 bard.google.com',
+    '13.107.246.70 copilot.microsoft.com',
+    '204.79.197.239 bing.com',
+    '',
+    '# === Blocked (ads, telemetry, tracking) ===',
+    '0.0.0.0 ads.google.com',
+    '0.0.0.0 pagead2.googlesyndication.com',
+    '0.0.0.0 adservice.google.com',
+    '0.0.0.0 analytics.google.com',
+    '127.0.0.1 telemetry.microsoft.com',
+    '127.0.0.1 vortex.data.microsoft.com',
+    '0.0.0.0 facebook.com',
+    '0.0.0.0 tracker.facebook.com',
+    '0.0.0.0 pixel.facebook.com',
+    '0.0.0.0 ads.yahoo.com',
+    '0.0.0.0 tracking.example.com',
+    '127.0.0.1 metrics.example.com',
+    '0.0.0.0 ad.doubleclick.net',
+    '0.0.0.0 stats.wp.com',
+    '',
+    '# === Duplicate test ===',
+    '0.0.0.0 ads.google.com',
+    '0.0.0.0 facebook.com'
+  ].join('\n');
+
+  // ======================================================================
+  // DOM
+  // ======================================================================
+  var inputEl = document.getElementById('hosts-input');
+  var outputEl = document.getElementById('hosts-output');
+  var statusText = document.getElementById('status-text');
+  var urlInput = document.getElementById('hosts-url');
+  var searchInput = document.getElementById('domain-search');
+  var clearSearchBtn = document.getElementById('btn-clear-search');
+
+  // ======================================================================
+  // HELPERS
+  // ======================================================================
+
+  function showToast(msg) {
+    var t = document.getElementById('hl-toast');
+    document.getElementById('hl-toast-message').textContent = msg;
+    t.classList.remove('hidden');
+    setTimeout(function() { t.classList.add('hidden'); }, 2500);
+  }
+
+  function showError(msg) {
+    document.getElementById('error-message').textContent = msg;
+    document.getElementById('error-panel').classList.remove('hidden');
+    statusText.textContent = i18n.statusError;
+  }
+
+  function hideError() {
+    document.getElementById('error-panel').classList.add('hidden');
+  }
+
+  function showWarnings(warnings) {
+    if (!warnings.length) {
+      document.getElementById('warnings-panel').classList.add('hidden');
+      return;
+    }
+    document.getElementById('warnings-title').textContent = warnings.length + ' ' + i18n.warningsFound;
+    document.getElementById('warnings-message').textContent = warnings.join('\n');
+    document.getElementById('warnings-panel').classList.remove('hidden');
+  }
+
+  function showLoading(show) {
+    document.getElementById('loading-panel').classList.toggle('hidden', !show);
+  }
+
+  function getMode() {
+    var c = document.querySelector('input[name="output-mode"]:checked');
+    return c ? c.value : 'hosts';
+  }
+
+  function getAdGuardBlockStyle() {
+    var c = document.querySelector('input[name="adguard-block"]:checked');
+    return c ? c.value : 'block';
+  }
+
+  function getBlockedIPs() {
+    return document.getElementById('blocked-ips').value
+      .split('\n').map(function(s) { return s.trim(); }).filter(Boolean);
+  }
+
+  function getSortMode() {
+    return document.getElementById('opt-sort').value;
+  }
+
+  function isBlockedIP(ip, list) {
+    return list.indexOf(ip) > -1;
+  }
+
+  function isLocalhost(domain) {
+    var locals = ['localhost', 'localhost.localdomain', 'local', 'broadcasthost',
+      'ip6-localhost', 'ip6-loopback', 'ip6-localnet', 'ip6-mcastprefix',
+      'ip6-allnodes', 'ip6-allrouters', 'ip6-allhosts'];
+    return locals.indexOf(domain) > -1;
+  }
+
+  // Validate IPv4
+  function isValidIPv4(ip) {
+    var parts = ip.split('.');
+    if (parts.length !== 4) return false;
+    for (var i = 0; i < 4; i++) {
+      var n = parseInt(parts[i], 10);
+      if (isNaN(n) || n < 0 || n > 255 || parts[i] !== String(n)) return false;
+    }
+    return true;
+  }
+
+  // IP to sortable number
+  function ipToNum(ip) {
+    var p = ip.split('.');
+    return ((parseInt(p[0]) << 24) + (parseInt(p[1]) << 16) + (parseInt(p[2]) << 8) + parseInt(p[3])) >>> 0;
+  }
+
+  function escapeHtml(str) {
+    var d = document.createElement('div');
+    d.appendChild(document.createTextNode(str));
+    return d.innerHTML;
+  }
+
+  // ======================================================================
+  // CORS-SAFE FETCH with multiple proxies
+  // ======================================================================
+
+  var PROXIES = [
+    function(url) { return url; }, // direct
+    function(url) { return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url); },
+    function(url) { return 'https://corsproxy.io/?' + encodeURIComponent(url); },
+    function(url) { return 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url); }
+  ];
+
+  function fetchWithFallback(url, proxyIdx) {
+    if (typeof proxyIdx === 'undefined') proxyIdx = 0;
+    if (proxyIdx >= PROXIES.length) {
+      return Promise.reject(new Error(i18n.fetchError + ' (all proxies failed)'));
+    }
+
+    var proxyUrl = PROXIES[proxyIdx](url);
+    return fetch(proxyUrl)
+      .then(function(res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.text();
+      })
+      .then(function(text) {
+        // Sanity check — allorigins sometimes returns JSON wrapper
+        if (text.charAt(0) === '{' && text.indexOf('"contents"') > -1) {
+          try {
+            var j = JSON.parse(text);
+            if (j.contents) return j.contents;
+          } catch(e) {}
+        }
+        return text;
+      })
+      .catch(function() {
+        return fetchWithFallback(url, proxyIdx + 1);
+      });
+  }
+
+  // ======================================================================
+  // PARSER
+  // ======================================================================
+
+  function parseHosts(text) {
+    var lines = text.split('\n');
+    var entries = [];
+    var updateDate = null;
+    var sections = [];
+    var warnings = [];
+    var blockedIPs = getBlockedIPs();
+    var skipLocalhost = document.getElementById('opt-skip-localhost').checked;
+    var currentSection = '';
+    var seenDomains = {};
+    var duplicateCount = 0;
+
+    var ipRegex = /^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+(\S+)/;
+
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i].trim();
+      if (!line) continue;
+
+      if (line.charAt(0) === '#') {
+        // Update date patterns
+        var dateMatch = line.match(/(?:Последнее обновление|Last updated|Updated|Date|Timestamp|Modified)[:\s]+(.+)/i);
+        if (dateMatch) {
+          updateDate = dateMatch[1].trim();
+        }
+
+        // Section headers: # === Title === or # --- Title --- or # [Title]
+        var sectionMatch = line.match(/^#\s*(?:={2,}|-{2,}|\[)\s*(.+?)\s*(?:={0,}|-{0,}|\])\s*$/);
+        if (sectionMatch) {
+          currentSection = sectionMatch[1].trim();
+          if (sections.indexOf(currentSection) === -1) {
+            sections.push(currentSection);
+          }
+        }
+
+        continue;
+      }
+
+      var match = line.match(ipRegex);
+      if (!match) continue;
+
+      var ip = match[1];
+      var domain = match[2].toLowerCase();
+
+      // Validate IP
+      if (!isValidIPv4(ip)) {
+        warnings.push(i18n.warningInvalidIP + ' (line ' + (i + 1) + '): ' + ip);
+        continue;
+      }
+
+      // Skip localhost
+      if (skipLocalhost && isLocalhost(domain)) continue;
+
+      // Track duplicates
+      var dupKey = domain;
+      var isDup = false;
+      if (seenDomains[dupKey]) {
+        isDup = true;
+        duplicateCount++;
+        seenDomains[dupKey].push(ip);
+      } else {
+        seenDomains[dupKey] = [ip];
+      }
+
+      var blocked = isBlockedIP(ip, blockedIPs);
+
+      entries.push({
+        line: i + 1,
+        ip: ip,
+        domain: domain,
+        blocked: blocked,
+        category: blocked ? 'blocked' : 'allowed',
+        section: currentSection,
+        duplicate: isDup,
+        raw: line
+      });
+    }
+
+    // Mark first occurrences of duplicates too
+    for (var d in seenDomains) {
+      if (seenDomains[d].length > 1) {
+        for (var e = 0; e < entries.length; e++) {
+          if (entries[e].domain === d) {
+            entries[e].duplicate = true;
+          }
+        }
+      }
+    }
+
+    // Add duplicate warnings
+    for (var dom in seenDomains) {
+      if (seenDomains[dom].length > 1) {
+        warnings.push(i18n.warningDuplicates + ': ' + dom + ' (' + seenDomains[dom].length + 'x → ' + seenDomains[dom].join(', ') + ')');
+      }
+    }
+
+    return {
+      entries: entries,
+      updateDate: updateDate,
+      sections: sections,
+      warnings: warnings,
+      duplicateCount: duplicateCount,
+      totalLines: lines.length
+    };
+  }
+
+  // ======================================================================
+  // RENDERER
+  // ======================================================================
+
+  function renderOutput(parsed, categoryFilter) {
+    // categoryFilter: 'all' | 'allowed' | 'blocked'
+    if (!categoryFilter) categoryFilter = 'all';
+
+    var mode = getMode();
+    var adguardBlockStyle = getAdGuardBlockStyle();
+    var showAllowed = (categoryFilter === 'all' || categoryFilter === 'allowed') && document.getElementById('filter-allowed').checked;
+    var showBlocked = (categoryFilter === 'all' || categoryFilter === 'blocked') && document.getElementById('filter-blocked').checked;
+    var includeComments = document.getElementById('opt-include-comments').checked;
+    var preserveSections = document.getElementById('opt-preserve-sections').checked;
+    var deduplicate = document.getElementById('opt-deduplicate').checked;
+    var searchTerm = searchInput.value.toLowerCase().trim();
+    var sortMode = getSortMode();
+
+    // Filter
+    var filtered = parsed.entries.filter(function(entry) {
+      if (entry.blocked && !showBlocked) return false;
+      if (!entry.blocked && !showAllowed) return false;
+      if (searchTerm && entry.domain.indexOf(searchTerm) === -1 && entry.ip.indexOf(searchTerm) === -1) return false;
+      return true;
+    });
+
+    // Deduplicate
+    if (deduplicate) {
+      var seen = {};
+      filtered = filtered.filter(function(entry) {
+        var key = entry.domain;
+        if (seen[key]) return false;
+        seen[key] = true;
+        return true;
+      });
+    }
+
+    // Sort
+    if (sortMode !== 'original') {
+      filtered.sort(function(a, b) {
+        switch (sortMode) {
+          case 'domain-asc': return a.domain.localeCompare(b.domain);
+          case 'domain-desc': return b.domain.localeCompare(a.domain);
+          case 'ip-asc': return ipToNum(a.ip) - ipToNum(b.ip);
+          case 'ip-desc': return ipToNum(b.ip) - ipToNum(a.ip);
+          default: return 0;
+        }
+      });
+    }
+
+    var lines = [];
+    var commentChar = mode === 'hosts' ? '#' : '!';
+
+    // Header
+    if (includeComments) {
+      if (parsed.updateDate) {
+        lines.push(commentChar + ' ' + i18n.updatePrefix + ' ' + parsed.updateDate);
+      }
+      lines.push(commentChar + ' ' + i18n.entries + ': ' + filtered.length);
+      lines.push(commentChar + ' Generated by HostsLens');
+      lines.push('');
+    }
+
+    // Group by sections or by category
+    if (preserveSections && sortMode === 'original') {
+      // Preserve original section structure
+      var currentSec = '';
+      filtered.forEach(function(entry) {
+        if (entry.section !== currentSec) {
+          currentSec = entry.section;
+          if (currentSec && includeComments) {
+            if (lines.length > 0 && lines[lines.length - 1] !== '') lines.push('');
+            lines.push(commentChar + ' === ' + currentSec + ' ===');
+          }
+        }
+        lines.push(formatEntry(entry, mode, adguardBlockStyle));
+      });
+    } else {
+      // Group by category
+      var allowedEntries = filtered.filter(function(e) { return !e.blocked; });
+      var blockedEntries = filtered.filter(function(e) { return e.blocked; });
+
+      if (allowedEntries.length > 0) {
+        if (includeComments) lines.push(commentChar + ' ✅ ' + i18n.allowed + ' (' + allowedEntries.length + ')');
+        allowedEntries.forEach(function(entry) {
+          lines.push(formatEntry(entry, mode, adguardBlockStyle));
+        });
+      }
+
+      if (allowedEntries.length > 0 && blockedEntries.length > 0) {
+        lines.push('');
+      }
+
+      if (blockedEntries.length > 0) {
+        if (includeComments) lines.push(commentChar + ' 🚫 ' + i18n.blocked + ' (' + blockedEntries.length + ')');
+        blockedEntries.forEach(function(entry) {
+          lines.push(formatEntry(entry, mode, adguardBlockStyle));
+        });
+      }
+    }
+
+    var allowedCount = filtered.filter(function(e) { return !e.blocked; }).length;
+    var blockedCount = filtered.filter(function(e) { return e.blocked; }).length;
+
+    return {
+      text: lines.join('\n'),
+      filtered: filtered,
+      allowedCount: allowedCount,
+      blockedCount: blockedCount
+    };
+  }
+
+  function formatEntry(entry, mode, adguardBlockStyle) {
+    if (mode === 'hosts') {
+      return entry.ip + ' ' + entry.domain;
+    }
+    // AdGuard
+    if (entry.blocked) {
+      if (adguardBlockStyle === 'rewrite') {
+        return '||' + entry.domain + '^$dnsrewrite=' + entry.ip;
+      }
+      return '||' + entry.domain + '^';
+    }
+    // Allowed — always dnsrewrite with real IP
+    return '||' + entry.domain + '^$dnsrewrite=' + entry.ip;
+  }
+
+  // ======================================================================
+  // ENTRIES TABLE
+  // ======================================================================
+
+  function renderEntriesTable(entries) {
+    var tbody = document.getElementById('entries-tbody');
+    var limit = Math.min(entries.length, 300);
+    var html = '';
+
+    for (var i = 0; i < limit; i++) {
+      var e = entries[i];
+      var typeIcon = e.blocked ? '🚫' : '✅';
+      var dupBadge = e.duplicate ? '<span class="badge badge-xs badge-warning">dup</span>' : '';
+      var section = e.section ? escapeHtml(e.section) : '<span class="text-base-content/30">—</span>';
+
+      html += '<tr class="hover">' +
+        '<td class="text-center text-xs">' + typeIcon + '</td>' +
+        '<td class="font-mono text-[10px] sm:text-xs">' + escapeHtml(e.ip) + '</td>' +
+        '<td class="font-mono text-[10px] sm:text-xs break-all">' + escapeHtml(e.domain) + '</td>' +
+        '<td class="text-[10px] text-base-content/60">' + section + '</td>' +
+        '<td class="text-center">' + dupBadge + '</td>' +
+        '</tr>';
+    }
+
+    if (entries.length > limit) {
+      html += '<tr><td colspan="5" class="text-center text-[10px] text-base-content/50 py-2">… +' + (entries.length - limit) + ' more</td></tr>';
+    }
+
+    tbody.innerHTML = html;
+    document.getElementById('entries-count').textContent = entries.length;
+    document.getElementById('entries-panel').classList.remove('hidden');
+  }
+
+  // ======================================================================
+  // PROCESS
+  // ======================================================================
+
+  var lastParsed = null;
+
+  function process() {
+    var text = inputEl.value;
+    if (!text.trim()) {
+      resetUI();
+      return;
+    }
+
+    hideError();
+
+    try {
+      var parsed = parseHosts(text);
+      lastParsed = parsed;
+      var result = renderOutput(parsed);
+
+      outputEl.value = result.text;
+      updateModeBadge();
+
+      // Update date
+      if (parsed.updateDate) {
+        document.getElementById('update-date-text').textContent = i18n.updatePrefix + ' ' + parsed.updateDate;
+        document.getElementById('update-info').classList.remove('hidden');
+      } else {
+        document.getElementById('update-info').classList.add('hidden');
+      }
+
+      // Unique stats
+      var uniqueDomains = {};
+      var uniqueIPs = {};
+      parsed.entries.forEach(function(e) { uniqueDomains[e.domain] = 1; uniqueIPs[e.ip] = 1; });
+
+      document.getElementById('stat-total').textContent = parsed.entries.length;
+      document.getElementById('stat-allowed').textContent = result.allowedCount;
+      document.getElementById('stat-blocked').textContent = result.blockedCount;
+      document.getElementById('stat-unique-domains').textContent = Object.keys(uniqueDomains).length;
+      document.getElementById('stat-unique-ips').textContent = Object.keys(uniqueIPs).length;
+      document.getElementById('stat-duplicates').textContent = parsed.duplicateCount;
+      document.getElementById('stats-bar').classList.remove('hidden');
+
+      // IO stats
+      var il = text.split('\n').length;
+      var ol = result.text ? result.text.split('\n').length : 0;
+      document.getElementById('input-stats').textContent = il + ' lines · ' + text.length + ' chars';
+      document.getElementById('output-stats').textContent = ol + ' lines · ' + result.text.length + ' chars';
+
+      // Table
+      renderEntriesTable(result.filtered);
+
+      // Warnings
+      showWarnings(parsed.warnings);
+
+      // Buttons
+      document.getElementById('btn-copy').disabled = false;
+      document.getElementById('btn-download-wrap').removeAttribute('disabled');
+
+      statusText.textContent = i18n.statusParsed + ' · ' + result.filtered.length + ' ' + i18n.entries;
+
+    } catch(e) {
+      showError(e.message || String(e));
+    }
+  }
+
+  function resetUI() {
+    outputEl.value = '';
+    lastParsed = null;
+    document.getElementById('btn-copy').disabled = true;
+    document.getElementById('btn-download-wrap').setAttribute('disabled', 'true');
+    document.getElementById('stats-bar').classList.add('hidden');
+    document.getElementById('entries-panel').classList.add('hidden');
+    document.getElementById('update-info').classList.add('hidden');
+    document.getElementById('warnings-panel').classList.add('hidden');
+    document.getElementById('input-stats').textContent = '';
+    document.getElementById('output-stats').textContent = '';
+  }
+
+  function updateModeBadge() {
+    var mode = getMode();
+    var badge = document.getElementById('output-mode-badge');
+    if (mode === 'hosts') {
+      badge.className = 'badge badge-xs sm:badge-sm badge-success gap-1';
+      badge.innerHTML = '<ion-icon name="document-text-outline"></ion-icon> Hosts';
+    } else {
+      badge.className = 'badge badge-xs sm:badge-sm badge-warning gap-1';
+      badge.innerHTML = '<ion-icon name="shield-checkmark-outline"></ion-icon> AdGuard';
+    }
+  }
+
+  // Debounce
+  var processTimer = null;
+  function debouncedProcess() {
+    clearTimeout(processTimer);
+    processTimer = setTimeout(process, 250);
+  }
+
+  // ======================================================================
+  // DOWNLOAD HELPER
+  // ======================================================================
+
+  function downloadOutput(categoryFilter) {
+    if (!lastParsed) return;
+    var result = renderOutput(lastParsed, categoryFilter);
+    if (!result.text) return;
+
+    var mode = getMode();
+    var now = new Date();
+    var date = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+    var suffix = categoryFilter === 'all' ? '' : '_' + categoryFilter;
+    var ext = mode === 'adguard' ? '.txt' : '.hosts';
+    var name = date + '_hostslens' + suffix + ext;
+    var blob = new Blob([result.text], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = name;
+    a.click();
+    setTimeout(function() { URL.revokeObjectURL(url); }, 100);
+    showToast(i18n.downloaded);
+  }
+
+  // ======================================================================
+  // EVENTS
+  // ======================================================================
+
+  inputEl.addEventListener('input', debouncedProcess);
+
+  // Mode changes
+  document.querySelectorAll('input[name="output-mode"]').forEach(function(el) {
+    el.addEventListener('change', function() {
+      document.getElementById('adguard-block-opts').classList.toggle('hidden', getMode() !== 'adguard');
+      process();
+    });
+  });
+
+  document.querySelectorAll('input[name="adguard-block"]').forEach(function(el) {
+    el.addEventListener('change', process);
+  });
+
+  // Filter changes
+  ['filter-allowed', 'filter-blocked', 'opt-include-comments', 'opt-preserve-sections', 'opt-skip-localhost', 'opt-deduplicate'].forEach(function(id) {
+    document.getElementById(id).addEventListener('change', process);
+  });
+
+  document.getElementById('opt-sort').addEventListener('change', process);
+  document.getElementById('blocked-ips').addEventListener('input', debouncedProcess);
+
+  // Search
+  searchInput.addEventListener('input', function() {
+    clearSearchBtn.classList.toggle('hidden', !searchInput.value);
+    debouncedProcess();
+  });
+  clearSearchBtn.addEventListener('click', function() {
+    searchInput.value = '';
+    clearSearchBtn.classList.add('hidden');
+    process();
+  });
+
+  // Preset URL selector
+  document.getElementById('preset-url').addEventListener('change', function() {
+    var val = this.value;
+    if (val) urlInput.value = val;
+  });
+
+  urlInput.addEventListener('input', function() {
+    document.getElementById('preset-url').value = '';
+  });
+
+  // Blocked IP presets
+  document.querySelectorAll('.blocked-ip-preset').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.getElementById('blocked-ips').value = this.getAttribute('data-ips');
+      document.querySelectorAll('.blocked-ip-preset').forEach(function(b) { b.classList.remove('btn-active'); });
+      this.classList.add('btn-active');
+      debouncedProcess();
+    });
+  });
+
+  // Fetch
+  document.getElementById('btn-fetch').addEventListener('click', function() {
+    var url = urlInput.value.trim();
+    if (!url) return;
+
+    hideError();
+    showLoading(true);
+    statusText.textContent = i18n.loading;
+
+    fetchWithFallback(url)
+      .then(function(text) {
+        inputEl.value = text;
+        showLoading(false);
+        showToast(i18n.fetched);
+        process();
+      })
+      .catch(function(err) {
+        showLoading(false);
+        showError(err.message || i18n.fetchError);
+      });
+  });
+
+  // Paste
+  document.getElementById('btn-paste-input').addEventListener('click', function() {
+    navigator.clipboard.readText().then(function(t) {
+      inputEl.value = t;
+      process();
+    }).catch(function() {});
+  });
+
+  // File
+  document.getElementById('btn-load-file').addEventListener('click', function() {
+    document.getElementById('file-input').click();
+  });
+  document.getElementById('file-input').addEventListener('change', function(e) {
+    var f = e.target.files[0];
+    if (!f) return;
+    var r = new FileReader();
+    r.onload = function(ev) { inputEl.value = ev.target.result; process(); };
+    r.readAsText(f);
+    e.target.value = '';
+  });
+
+  // Sample
+  document.getElementById('btn-sample').addEventListener('click', function() {
+    inputEl.value = SAMPLE_HOSTS;
+    process();
+  });
+
+  // Clear
+  document.getElementById('btn-clear').addEventListener('click', function() {
+    inputEl.value = '';
+    resetUI();
+    hideError();
+    statusText.textContent = i18n.statusReady;
+    showToast(i18n.cleared);
+  });
+
+  // Copy
+  document.getElementById('btn-copy').addEventListener('click', function() {
+    if (!outputEl.value) return;
+    navigator.clipboard.writeText(outputEl.value).then(function() { showToast(i18n.copied); });
+  });
+
+  // Downloads
+  document.getElementById('btn-download-all').addEventListener('click', function() { downloadOutput('all'); });
+  document.getElementById('btn-download-allowed').addEventListener('click', function() { downloadOutput('allowed'); });
+  document.getElementById('btn-download-blocked').addEventListener('click', function() { downloadOutput('blocked'); });
+
+  // Drag & drop
+  inputEl.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    e.currentTarget.classList.add('ring-2', 'ring-primary');
+  });
+  inputEl.addEventListener('dragleave', function(e) {
+    e.currentTarget.classList.remove('ring-2', 'ring-primary');
+  });
+  inputEl.addEventListener('drop', function(e) {
+    e.preventDefault();
+    e.currentTarget.classList.remove('ring-2', 'ring-primary');
+    var files = e.dataTransfer.files;
+    if (files.length > 0) {
+      var r = new FileReader();
+      r.onload = function(ev) { inputEl.value = ev.target.result; process(); };
+      r.readAsText(files[0]);
+    }
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      process();
+    }
+  });
+
+  // ======================================================================
+  // SETTINGS PERSISTENCE
+  // ======================================================================
+
+  function saveSettings() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        mode: getMode(),
+        adguardBlock: getAdGuardBlockStyle(),
+        filterAllowed: document.getElementById('filter-allowed').checked,
+        filterBlocked: document.getElementById('filter-blocked').checked,
+        includeComments: document.getElementById('opt-include-comments').checked,
+        preserveSections: document.getElementById('opt-preserve-sections').checked,
+        skipLocalhost: document.getElementById('opt-skip-localhost').checked,
+        deduplicate: document.getElementById('opt-deduplicate').checked,
+        sort: getSortMode(),
+        blockedIPs: document.getElementById('blocked-ips').value,
+        url: urlInput.value
+      }));
+    } catch(e) {}
+  }
+
+  function loadSettings() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s.mode) {
+        var r = document.querySelector('input[name="output-mode"][value="' + s.mode + '"]');
+        if (r) r.checked = true;
+      }
+      if (s.adguardBlock) {
+        var ab = document.querySelector('input[name="adguard-block"][value="' + s.adguardBlock + '"]');
+        if (ab) ab.checked = true;
+      }
+      if (s.mode === 'adguard') document.getElementById('adguard-block-opts').classList.remove('hidden');
+      if (typeof s.filterAllowed === 'boolean') document.getElementById('filter-allowed').checked = s.filterAllowed;
+      if (typeof s.filterBlocked === 'boolean') document.getElementById('filter-blocked').checked = s.filterBlocked;
+      if (typeof s.includeComments === 'boolean') document.getElementById('opt-include-comments').checked = s.includeComments;
+      if (typeof s.preserveSections === 'boolean') document.getElementById('opt-preserve-sections').checked = s.preserveSections;
+      if (typeof s.skipLocalhost === 'boolean') document.getElementById('opt-skip-localhost').checked = s.skipLocalhost;
+      if (typeof s.deduplicate === 'boolean') document.getElementById('opt-deduplicate').checked = s.deduplicate;
+      if (s.sort) document.getElementById('opt-sort').value = s.sort;
+      if (s.blockedIPs) document.getElementById('blocked-ips').value = s.blockedIPs;
+      if (s.url) urlInput.value = s.url;
+    } catch(e) {}
+  }
+
+  document.querySelectorAll('input[type="checkbox"], input[type="radio"], select').forEach(function(el) {
+    el.addEventListener('change', saveSettings);
+  });
+  document.getElementById('blocked-ips').addEventListener('change', saveSettings);
+  urlInput.addEventListener('change', saveSettings);
+
+  loadSettings();
+
+})();
+</script>
+{{ end }}

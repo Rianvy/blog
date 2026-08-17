@@ -1999,3 +1999,426 @@ howMinify = "Минификация"
 howMinifyDesc = "Удаляет пробелы, комментарии, необязательные теги и атрибуты."
 howExport = "Экспорт"
 howExportDesc = "Копируйте результат или скачайте как .html файл."
+
+# ==========================================
+# HostsLens
+# ==========================================
+[hostslens]
+badgeHosts = "Формат Hosts"
+badgeAdGuard = "AdGuard DNS"
+badgeFilter = "Фильтры категорий"
+badgeStats = "Статистика"
+
+sourceTitle = "Источник"
+urlPlaceholder = "URL hosts-файла..."
+fetchBtn = "Загрузить из URL"
+orDivider = "или"
+pasteBtn = "Вставить"
+loadFileBtn = "Из файла"
+presetLabel = "Готовые списки"
+presetCustom = "— свой URL —"
+
+modeTitle = "Режим вывода"
+modeHosts = "Стандартный Hosts"
+modeHostsDesc = "Формат IP домен"
+modeAdGuard = "AdGuard DNS-фильтры"
+modeAdGuardDesc = "||domain^$dnsrewrite=IP"
+adguardBlockStyle = "Формат блокировки"
+adguardBlockSimple = "Простая блокировка"
+adguardBlockRewrite = "DNS rewrite с оригинальным IP"
+
+filtersTitle = "Фильтры категорий"
+filterAllowed = "Разрешённые IP"
+filterAllowedDesc = "AI-сервисы, доступ и т.д."
+filterBlocked = "Заблокированные IP"
+filterBlockedDesc = "Реклама, телеметрия, трекинг"
+includeComments = "Включить комментарии"
+preserveSections = "Сохранять секции"
+skipLocalhost = "Пропускать localhost"
+deduplicate = "Убрать дубликаты"
+
+advancedTitle = "Расширенные"
+sortLabel = "Сортировка"
+sortOriginal = "Оригинальный порядок"
+sortDomainAsc = "Домен (А → Я)"
+sortDomainDesc = "Домен (Я → А)"
+sortIPAsc = "IP (возрастание)"
+sortIPDesc = "IP (убывание)"
+
+blockedIPsPreset = "Пресеты заблокированных IP"
+blockedIPsBoth = "Оба"
+blockedIPs = "Заблокированные IP (по одному)"
+blockedIPsDesc = "IP-адреса, считающиеся блокировкой"
+domainSearch = "Поиск доменов"
+domainSearchPlaceholder = "Фильтр по домену или IP..."
+
+inputTitle = "Hosts-файл"
+inputPlaceholder = "Вставьте содержимое hosts-файла или загрузите из URL..."
+outputTitle = "Результат"
+outputPlaceholder = "Здесь появится результат парсинга..."
+sampleTooltip = "Загрузить пример"
+clearTooltip = "Очистить"
+copyBtn = "Копировать"
+
+downloadAll = "Скачать всё"
+downloadAllowed = "Только разрешённые"
+downloadBlocked = "Только заблокированные"
+
+entriesTitle = "Распознанные записи"
+colType = "Тип"
+colIP = "IP"
+colDomain = "Домен"
+colSection = "Секция"
+colDup = "Дубль"
+
+statTotal = "Всего"
+statAllowed = "Разрешённые"
+statBlocked = "Заблокированные"
+statUniqueDomains = "Уник. домены"
+statUniqueIPs = "Уник. IP"
+statDuplicates = "Дубликаты"
+statOutput = "В результате"
+
+howTitle = "Как это работает"
+howSubtitle = "Загрузка, парсинг, фильтрация, конвертация"
+howLoad = "Загрузка"
+howLoadDesc = "Получите hosts-файл по URL (6+ прокси для обхода CORS), вставьте из буфера или загрузите файл"
+howParse = "Парсинг"
+howParseDesc = "Извлечение пар IP-домен с валидацией IP, детект даты обновления, секций и дубликатов"
+howFilter = "Фильтрация"
+howFilterDesc = "Фильтры по категориям, поиск по домену, сортировка, дедупликация"
+howConvert = "Конвертация"
+howConvertDesc = "Hosts-формат или AdGuard DNS rewrite с выбором стиля блокировки"
+
+errorTitle = "Ошибка"
+loading = "Загрузка hosts-файла..."
+updatePrefix = "Последнее обновление:"
+entries = "записей"
+catAllowed = "Разрешённый"
+catBlocked = "Заблокированный"
+
+warningDuplicates = "Дубликат домена"
+warningInvalidIP = "Невалидный IP"
+warningsFound = "предупреждений"
+
+copied = "Скопировано в буфер обмена!"
+cleared = "Очищено!"
+downloaded = "Файл скачан!"
+fetched = "Hosts-файл успешно загружен!"
+parsed = "Распознано"
+fetchError = "Не удалось загрузить"
+noData = "Нет данных"
+statusReady = "Готово — вставьте или загрузите hosts-файл"
+statusParsed = "Успешно распознано"
+statusError = "Произошла ошибка"
+statusBrowser = "Обработка полностью в браузере"
+
+# ==========================================
+# GitSmith
+# ==========================================
+[gitsmith]
+badgeBuilder = "Конструктор"
+badgeSafety = "Безопасность"
+badgeExplain = "Объяснения"
+badgeHistory = "История"
+
+catBasic = "Основные"
+catBranches = "Ветки"
+catHistory = "История"
+catUndo = "Отмена"
+catRemote = "Удалённые"
+catAdvanced = "Продвинутые"
+
+historyTitle = "История команд"
+historyEmpty = "Пока нет команд"
+historyClear = "Очистить историю"
+
+emptyTitle = "Выберите команду"
+emptyDesc = "Кликните на команду слева, чтобы открыть конструктор с настройками флагов и параметров"
+
+destructive = "Деструктивная"
+dangerTitle = "⚠ Внимание: деструктивная операция"
+resultTitle = "Готовая команда"
+copyBtn = "Копировать"
+explainTitle = "Объяснение команды"
+explainPrefix = "Эта команда"
+
+copied = "Скопировано!"
+historySaved = "Сохранено в историю"
+historyCleared = "История очищена"
+
+statusReady = "Выберите git-команду для конструирования"
+statusBrowser = "Работает в браузере"
+
+howTitle = "Как пользоваться"
+howSubtitle = "Выберите, настройте, скопируйте"
+howSelect = "Выберите"
+howSelectDesc = "Кликните на команду из категории слева — откроется конструктор"
+howConfigure = "Настройте"
+howConfigureDesc = "Включите нужные флаги, заполните параметры. Подсказки помогут разобраться"
+howCopy = "Скопируйте"
+howCopyDesc = "Готовая команда формируется в реальном времени. Одним кликом — в буфер обмена"
+howLearn = "Изучайте"
+howLearnDesc = "Блок «Объяснение» описывает каждый параметр. Предупреждения о деструктивных операциях"
+
+# Field labels
+[gitsmith.field]
+directory = "Директория"
+repoUrl = "URL репозитория"
+files = "Файлы"
+message = "Сообщение"
+remote = "Удалённый"
+branch = "Ветка"
+branchName = "Имя ветки"
+branchOrCommit = "Ветка или коммит"
+newBranch = "новая ветка"
+commitOrBranch = "Коммит или ветка"
+commitOrRef = "Коммит или ссылка"
+commitOrTag = "Коммит или тег"
+commit = "Коммит"
+commits = "Коммиты"
+file = "Файл"
+lineRange = "Диапазон строк"
+count = "Количество"
+action = "Действие"
+mode = "Режим"
+parentNumber = "Номер родителя"
+remoteName = "Имя remote"
+path = "Путь"
+tagName = "Имя тега"
+
+# Placeholders
+[gitsmith.placeholder]
+commitMsg = "feat: add new feature"
+
+# Command descriptions
+[gitsmith.cmd.init]
+desc = "Инициализация нового Git-репозитория"
+explain = "Создаёт новый репозиторий Git в указанной директории (или текущей). Создаёт папку .git с начальной структурой"
+
+[gitsmith.cmd.clone]
+desc = "Клонирование удалённого репозитория"
+explain = "Создаёт полную копию удалённого репозитория локально, включая всю историю коммитов"
+
+[gitsmith.cmd.status]
+desc = "Показать состояние рабочего дерева"
+explain = "Показывает какие файлы изменены, добавлены в staging или не отслеживаются"
+
+[gitsmith.cmd.add]
+desc = "Добавить файлы в staging area"
+explain = "Добавляет файлы в индекс (staging area) для следующего коммита"
+
+[gitsmith.cmd.commit]
+desc = "Записать изменения в репозиторий"
+explain = "Создаёт новый коммит с файлами из staging area и сообщением"
+
+[gitsmith.cmd.push]
+desc = "Отправить коммиты на удалённый сервер"
+explain = "Загружает локальные коммиты в удалённый репозиторий"
+
+[gitsmith.cmd.pull]
+desc = "Получить и интегрировать изменения"
+explain = "Скачивает изменения из удалённого репозитория и объединяет с текущей веткой (fetch + merge)"
+
+[gitsmith.cmd.branch]
+desc = "Управление ветками"
+explain = "Создаёт, удаляет, переименовывает или показывает список веток"
+
+[gitsmith.cmd.checkout]
+desc = "Переключение между ветками/коммитами"
+explain = "Переключает рабочее дерево на указанную ветку, тег или коммит"
+
+[gitsmith.cmd.switch]
+desc = "Переключение ветки (новая команда)"
+explain = "Безопасная замена checkout для переключения веток (Git 2.23+)"
+
+[gitsmith.cmd.merge]
+desc = "Слияние веток"
+explain = "Объединяет указанную ветку с текущей веткой"
+
+[gitsmith.cmd.rebase]
+desc = "Перебазирование коммитов"
+explain = "Переносит коммиты текущей ветки поверх указанной. Переписывает историю!"
+
+[gitsmith.cmd.cherryPick]
+desc = "Применить отдельные коммиты"
+explain = "Применяет изменения из указанных коммитов к текущей ветке"
+
+[gitsmith.cmd.log]
+desc = "Просмотр истории коммитов"
+explain = "Показывает историю коммитов с различными опциями форматирования"
+
+[gitsmith.cmd.diff]
+desc = "Показать различия между файлами/коммитами"
+explain = "Показывает изменения между рабочим деревом, staging area и коммитами"
+
+[gitsmith.cmd.blame]
+desc = "Показать кто изменял каждую строку"
+explain = "Построчно показывает автора и коммит последнего изменения"
+
+[gitsmith.cmd.show]
+desc = "Показать объект (коммит, тег)"
+explain = "Отображает информацию о коммите, теге или другом Git-объекте"
+
+[gitsmith.cmd.stash]
+desc = "Спрятать незакоммиченные изменения"
+explain = "Сохраняет текущие изменения во временное хранилище и очищает рабочее дерево"
+
+[gitsmith.cmd.reset]
+desc = "Сброс HEAD к указанному состоянию"
+explain = "Перемещает HEAD и опционально изменяет staging/рабочее дерево. Может удалить данные!"
+
+[gitsmith.cmd.revert]
+desc = "Отменить коммит новым коммитом"
+explain = "Безопасно отменяет изменения коммита, создавая новый «обратный» коммит"
+
+[gitsmith.cmd.restore]
+desc = "Восстановить файлы"
+explain = "Восстанавливает файлы из staging area или коммита (Git 2.23+)"
+
+[gitsmith.cmd.clean]
+desc = "Удалить неотслеживаемые файлы"
+explain = "Удаляет файлы и директории, которые не находятся под контролем Git"
+
+[gitsmith.cmd.remote]
+desc = "Управление удалёнными репозиториями"
+explain = "Добавляет, удаляет, переименовывает и просматривает удалённые репозитории"
+
+[gitsmith.cmd.fetch]
+desc = "Скачать объекты без слияния"
+explain = "Загружает коммиты, файлы и ссылки из удалённого репозитория без слияния"
+
+[gitsmith.cmd.submodule]
+desc = "Управление подмодулями"
+explain = "Инициализация, обновление и управление вложенными Git-репозиториями"
+
+[gitsmith.cmd.rebaseI]
+desc = "Интерактивный rebase"
+explain = "Позволяет редактировать, объединять, удалять и переставлять коммиты в интерактивном режиме"
+
+[gitsmith.cmd.bisect]
+desc = "Бинарный поиск бага в истории"
+explain = "Использует бинарный поиск для нахождения коммита, который ввёл баг"
+
+[gitsmith.cmd.reflog]
+desc = "Журнал ссылок (reflog)"
+explain = "Показывает журнал всех перемещений HEAD — позволяет восстановить «потерянные» коммиты"
+
+[gitsmith.cmd.tag]
+desc = "Управление тегами"
+explain = "Создаёт, удаляет и просматривает теги — метки для важных точек в истории"
+
+# Tips
+[gitsmith.tip]
+bare = "Создать bare-репозиторий (без рабочего дерева, для серверов)"
+initialBranch = "Имя начальной ветки вместо master"
+depth = "Ограничить глубину истории (shallow clone)"
+cloneBranch = "Клонировать только указанную ветку"
+singleBranch = "Скачать только одну ветку"
+recursive = "Инициализировать подмодули рекурсивно"
+statusShort = "Короткий формат вывода"
+statusBranch = "Показать информацию о ветке"
+porcelain = "Машиночитаемый формат вывода"
+addAll = "Добавить все изменённые и удалённые файлы"
+addPatch = "Интерактивный выбор частей файлов для добавления"
+dryRun = "Показать что будет сделано, без выполнения"
+amend = "Изменить последний коммит (сообщение и/или файлы)"
+noEdit = "Не открывать редактор для изменения сообщения"
+commitAll = "Автоматически добавить все изменённые файлы"
+noVerify = "Пропустить pre-commit и commit-msg хуки"
+signoff = "Добавить строку Signed-off-by"
+gpgSign = "Подписать GPG-ключом"
+allowEmpty = "Разрешить коммит без изменений"
+pushForce = "Перезаписать удалённую историю! Опасно для общих веток"
+forceWithLease = "Безопасный force-push: откажет если remote изменился"
+setUpstream = "Установить upstream-ветку для отслеживания"
+pushTags = "Отправить все теги"
+pushAll = "Отправить все ветки"
+pullRebase = "Использовать rebase вместо merge при pull"
+pullNoRebase = "Запретить rebase, использовать merge"
+ffOnly = "Только fast-forward (без merge-коммитов)"
+noFf = "Всегда создавать merge-коммит"
+branchList = "Показать список веток"
+branchAll = "Показать локальные и удалённые ветки"
+branchDelete = "Удалить ветку (только если полностью слита)"
+branchForceDelete = "Принудительно удалить ветку (даже если не слита)"
+branchMove = "Переименовать ветку"
+verbose = "Подробный вывод"
+checkoutB = "Создать новую ветку и переключиться на неё"
+checkoutForce = "Принудительно переключиться (потерять незакоммиченные изменения)"
+track = "Настроить отслеживание удалённой ветки"
+switchCreate = "Создать новую ветку и переключиться"
+switchForceCreate = "Создать (или пересоздать) ветку и переключиться"
+switchDetach = "Переключиться в detached HEAD"
+mergeNoFf = "Всегда создавать merge-коммит (без fast-forward)"
+mergeFfOnly = "Только fast-forward, иначе отказ"
+mergeSquash = "Собрать все коммиты ветки в один"
+mergeAbort = "Отменить текущий merge"
+mergeContinue = "Продолжить merge после разрешения конфликтов"
+rebaseOnto = "Перебазировать на указанную точку"
+rebaseInteractive = "Интерактивный режим — редактирование коммитов"
+autosquash = "Автоматически применить fixup!/squash! коммиты"
+rebaseAbort = "Отменить текущий rebase"
+rebaseContinue = "Продолжить rebase после разрешения конфликтов"
+rebaseSkip = "Пропустить текущий конфликтный коммит"
+rebaseRoot = "Перебазировать от самого первого коммита"
+cherryPickNoCommit = "Применить изменения без автоматического коммита"
+cherryPickEdit = "Открыть редактор для изменения сообщения"
+logOneline = "Одна строка на коммит"
+logGraph = "ASCII-граф веток"
+logAll = "Показать все ветки"
+logStat = "Показать статистику изменённых файлов"
+logPatch = "Показать патч (diff) каждого коммита"
+diffStaged = "Показать изменения в staging area"
+diffStat = "Только статистика (без полного diff)"
+diffNameOnly = "Показать только имена изменённых файлов"
+blameEmail = "Показать email автора"
+stashUntracked = "Включить неотслеживаемые файлы"
+stashKeepIndex = "Сохранить staging area"
+restoreStaged = "Убрать файл из staging (unstage)"
+restoreWorktree = "Восстановить файл в рабочем дереве"
+cleanForce = "Обязательный флаг для удаления файлов"
+cleanDirs = "Также удалить директории"
+cleanIgnored = "Также удалить игнорируемые файлы"
+cleanInteractive = "Интерактивный режим выбора"
+revertNoCommit = "Отменить без создания коммита"
+fetchAll = "Получить данные со всех remote"
+fetchPrune = "Удалить ссылки на несуществующие удалённые ветки"
+fetchTags = "Загрузить все теги"
+submoduleInit = "Инициализировать подмодули"
+submoduleRemote = "Обновить до последней версии с remote"
+reflogAll = "Показать reflog для всех ссылок"
+tagAnnotated = "Создать аннотированный тег"
+tagDelete = "Удалить тег"
+tagList = "Показать список тегов"
+
+# Stash actions
+[gitsmith.stash]
+save = "save (по умолчанию)"
+
+# Reset modes
+[gitsmith.reset]
+mixed = "убрать из staging"
+soft = "сохранить в staging"
+hard = "удалить всё"
+
+# Remote actions
+[gitsmith.remote]
+list = "list (по умолчанию)"
+
+# Reflog
+[gitsmith.reflog]
+default = "по умолчанию"
+
+# Tag
+[gitsmith.tag]
+annotated = "аннотированный"
+
+# Danger messages
+[gitsmith.danger]
+resetHard = "reset --hard удалит все незакоммиченные изменения безвозвратно! Убедитесь что нужные файлы сохранены."
+pushForce = "push --force перезапишет историю на удалённом сервере! Другие разработчики потеряют свои коммиты. Используйте --force-with-lease."
+cleanForce = "clean -f безвозвратно удалит все неотслеживаемые файлы! Сначала используйте -n (--dry-run)."
+rebase = "Rebase переписывает историю коммитов. Не используйте для коммитов, которые уже отправлены в общий репозиторий!"
+branchForceDelete = "Принудительное удаление ветки может привести к потере незамерженных коммитов!"
+generic = "Эта операция может привести к потере данных. Убедитесь что вы понимаете что делаете."

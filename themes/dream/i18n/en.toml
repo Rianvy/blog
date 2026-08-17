@@ -1969,3 +1969,426 @@ howMinify = "Minification"
 howMinifyDesc = "Removes whitespace, comments, optional tags and attributes."
 howExport = "Export"
 howExportDesc = "Copy the result or download as an .html file."
+
+# ==========================================
+# HostsLens
+# ==========================================
+[hostslens]
+badgeHosts = "Hosts Format"
+badgeAdGuard = "AdGuard DNS"
+badgeFilter = "Category Filters"
+badgeStats = "Statistics"
+
+sourceTitle = "Source"
+urlPlaceholder = "URL to hosts file..."
+fetchBtn = "Fetch from URL"
+orDivider = "or"
+pasteBtn = "Paste"
+loadFileBtn = "From file"
+presetLabel = "Preset lists"
+presetCustom = "— custom URL —"
+
+modeTitle = "Output Mode"
+modeHosts = "Standard Hosts"
+modeHostsDesc = "IP domain format"
+modeAdGuard = "AdGuard DNS Filters"
+modeAdGuardDesc = "||domain^$dnsrewrite=IP"
+adguardBlockStyle = "Block format"
+adguardBlockSimple = "Simple block"
+adguardBlockRewrite = "DNS rewrite with original IP"
+
+filtersTitle = "Category Filters"
+filterAllowed = "Allowed IPs"
+filterAllowedDesc = "AI services, access, etc."
+filterBlocked = "Blocked IPs"
+filterBlockedDesc = "Ads, telemetry, tracking"
+includeComments = "Include comments"
+preserveSections = "Preserve sections"
+skipLocalhost = "Skip localhost entries"
+deduplicate = "Remove duplicates"
+
+advancedTitle = "Advanced"
+sortLabel = "Sort order"
+sortOriginal = "Original order"
+sortDomainAsc = "Domain (A → Z)"
+sortDomainDesc = "Domain (Z → A)"
+sortIPAsc = "IP (ascending)"
+sortIPDesc = "IP (descending)"
+
+blockedIPsPreset = "Blocked IPs presets"
+blockedIPsBoth = "Both"
+blockedIPs = "Blocked IPs (one per line)"
+blockedIPsDesc = "IPs considered as blocking"
+domainSearch = "Search domains"
+domainSearchPlaceholder = "Filter by domain or IP..."
+
+inputTitle = "Hosts Input"
+inputPlaceholder = "Paste hosts file content or fetch from URL..."
+outputTitle = "Result"
+outputPlaceholder = "Parsed result will appear here..."
+sampleTooltip = "Load sample"
+clearTooltip = "Clear"
+copyBtn = "Copy"
+
+downloadAll = "Download all"
+downloadAllowed = "Allowed only"
+downloadBlocked = "Blocked only"
+
+entriesTitle = "Parsed Entries"
+colType = "Type"
+colIP = "IP"
+colDomain = "Domain"
+colSection = "Section"
+colDup = "Dup"
+
+statTotal = "Total"
+statAllowed = "Allowed"
+statBlocked = "Blocked"
+statUniqueDomains = "Uniq. domains"
+statUniqueIPs = "Uniq. IPs"
+statDuplicates = "Duplicates"
+statOutput = "In Output"
+
+howTitle = "How it works"
+howSubtitle = "Loading, parsing, filtering, converting"
+howLoad = "Load"
+howLoadDesc = "Fetch hosts file from URL (6+ CORS proxies), paste from clipboard, or load from file"
+howParse = "Parse"
+howParseDesc = "Extract IP-domain pairs with IP validation, detect update dates, sections and duplicates"
+howFilter = "Filter"
+howFilterDesc = "Category filters, domain search, sorting, deduplication"
+howConvert = "Convert"
+howConvertDesc = "Hosts format or AdGuard DNS rewrite with block style options"
+
+errorTitle = "Error"
+loading = "Fetching hosts file..."
+updatePrefix = "Last updated:"
+entries = "entries"
+catAllowed = "Allowed"
+catBlocked = "Blocked"
+
+warningDuplicates = "Duplicate domain"
+warningInvalidIP = "Invalid IP"
+warningsFound = "warnings"
+
+copied = "Copied to clipboard!"
+cleared = "Cleared!"
+downloaded = "File downloaded!"
+fetched = "Hosts file fetched successfully!"
+parsed = "Parsed"
+fetchError = "Failed to fetch"
+noData = "No data"
+statusReady = "Ready — paste or fetch a hosts file"
+statusParsed = "Parsed successfully"
+statusError = "Error occurred"
+statusBrowser = "All processing is done in your browser"
+
+# ==========================================
+# GitSmith
+# ==========================================
+[gitsmith]
+badgeBuilder = "Builder"
+badgeSafety = "Safety"
+badgeExplain = "Explain"
+badgeHistory = "History"
+
+catBasic = "Basic"
+catBranches = "Branches"
+catHistory = "History"
+catUndo = "Undo"
+catRemote = "Remote"
+catAdvanced = "Advanced"
+
+historyTitle = "Command History"
+historyEmpty = "No commands yet"
+historyClear = "Clear history"
+
+emptyTitle = "Select a command"
+emptyDesc = "Click on a command from the categories on the left to open the builder with flags and parameters"
+
+destructive = "Destructive"
+dangerTitle = "⚠ Warning: destructive operation"
+resultTitle = "Built command"
+copyBtn = "Copy"
+explainTitle = "Command explanation"
+explainPrefix = "This command"
+
+copied = "Copied!"
+historySaved = "Saved to history"
+historyCleared = "History cleared"
+
+statusReady = "Select a git command to build"
+statusBrowser = "Runs in browser"
+
+howTitle = "How to use"
+howSubtitle = "Select, configure, copy"
+howSelect = "Select"
+howSelectDesc = "Click a command from any category on the left to open its builder"
+howConfigure = "Configure"
+howConfigureDesc = "Toggle flags, fill in parameters. Tooltips explain each option"
+howCopy = "Copy"
+howCopyDesc = "The command builds in real-time. One click to copy to clipboard"
+howLearn = "Learn"
+howLearnDesc = "The Explanation section describes each parameter. Warnings highlight destructive operations"
+
+# Field labels
+[gitsmith.field]
+directory = "Directory"
+repoUrl = "Repository URL"
+files = "Files"
+message = "Message"
+remote = "Remote"
+branch = "Branch"
+branchName = "Branch name"
+branchOrCommit = "Branch or commit"
+newBranch = "new branch"
+commitOrBranch = "Commit or branch"
+commitOrRef = "Commit or ref"
+commitOrTag = "Commit or tag"
+commit = "Commit"
+commits = "Commits"
+file = "File"
+lineRange = "Line range"
+count = "Count"
+action = "Action"
+mode = "Mode"
+parentNumber = "Parent number"
+remoteName = "Remote name"
+path = "Path"
+tagName = "Tag name"
+
+# Placeholders
+[gitsmith.placeholder]
+commitMsg = "feat: add new feature"
+
+# Command descriptions
+[gitsmith.cmd.init]
+desc = "Initialize a new Git repository"
+explain = "Creates a new Git repository in the specified (or current) directory. Creates the .git folder with initial structure"
+
+[gitsmith.cmd.clone]
+desc = "Clone a remote repository"
+explain = "Creates a full copy of a remote repository locally, including the entire commit history"
+
+[gitsmith.cmd.status]
+desc = "Show working tree status"
+explain = "Shows which files are modified, staged, or untracked"
+
+[gitsmith.cmd.add]
+desc = "Add files to staging area"
+explain = "Adds files to the index (staging area) for the next commit"
+
+[gitsmith.cmd.commit]
+desc = "Record changes to the repository"
+explain = "Creates a new commit with staged files and a message"
+
+[gitsmith.cmd.push]
+desc = "Push commits to remote server"
+explain = "Uploads local commits to the remote repository"
+
+[gitsmith.cmd.pull]
+desc = "Fetch and integrate remote changes"
+explain = "Downloads changes from the remote repository and merges with the current branch (fetch + merge)"
+
+[gitsmith.cmd.branch]
+desc = "Manage branches"
+explain = "Creates, deletes, renames, or lists branches"
+
+[gitsmith.cmd.checkout]
+desc = "Switch between branches/commits"
+explain = "Switches the working tree to the specified branch, tag, or commit"
+
+[gitsmith.cmd.switch]
+desc = "Switch branch (modern command)"
+explain = "Safe replacement for checkout when switching branches (Git 2.23+)"
+
+[gitsmith.cmd.merge]
+desc = "Merge branches"
+explain = "Joins the specified branch into the current branch"
+
+[gitsmith.cmd.rebase]
+desc = "Rebase commits"
+explain = "Moves commits from the current branch on top of the specified branch. Rewrites history!"
+
+[gitsmith.cmd.cherryPick]
+desc = "Apply specific commits"
+explain = "Applies changes from specified commits to the current branch"
+
+[gitsmith.cmd.log]
+desc = "View commit history"
+explain = "Shows commit history with various formatting options"
+
+[gitsmith.cmd.diff]
+desc = "Show differences between files/commits"
+explain = "Shows changes between the working tree, staging area, and commits"
+
+[gitsmith.cmd.blame]
+desc = "Show who changed each line"
+explain = "Shows line-by-line the author and commit of the last change"
+
+[gitsmith.cmd.show]
+desc = "Show object (commit, tag)"
+explain = "Displays information about a commit, tag, or other Git object"
+
+[gitsmith.cmd.stash]
+desc = "Stash uncommitted changes"
+explain = "Saves current changes to a temporary storage and cleans the working tree"
+
+[gitsmith.cmd.reset]
+desc = "Reset HEAD to specified state"
+explain = "Moves HEAD and optionally modifies staging/working tree. Can delete data!"
+
+[gitsmith.cmd.revert]
+desc = "Undo a commit with a new commit"
+explain = "Safely undoes a commit's changes by creating a new 'reverse' commit"
+
+[gitsmith.cmd.restore]
+desc = "Restore files"
+explain = "Restores files from staging area or a commit (Git 2.23+)"
+
+[gitsmith.cmd.clean]
+desc = "Remove untracked files"
+explain = "Deletes files and directories that are not under Git control"
+
+[gitsmith.cmd.remote]
+desc = "Manage remote repositories"
+explain = "Adds, removes, renames, and shows remote repositories"
+
+[gitsmith.cmd.fetch]
+desc = "Download objects without merging"
+explain = "Downloads commits, files, and refs from a remote repository without merging"
+
+[gitsmith.cmd.submodule]
+desc = "Manage submodules"
+explain = "Initialize, update, and manage nested Git repositories"
+
+[gitsmith.cmd.rebaseI]
+desc = "Interactive rebase"
+explain = "Allows editing, squashing, dropping, and reordering commits interactively"
+
+[gitsmith.cmd.bisect]
+desc = "Binary search for a bug in history"
+explain = "Uses binary search to find the commit that introduced a bug"
+
+[gitsmith.cmd.reflog]
+desc = "Reference log (reflog)"
+explain = "Shows the log of all HEAD movements — allows recovering 'lost' commits"
+
+[gitsmith.cmd.tag]
+desc = "Manage tags"
+explain = "Creates, deletes, and lists tags — markers for important points in history"
+
+# Tips
+[gitsmith.tip]
+bare = "Create bare repository (no working tree, for servers)"
+initialBranch = "Name of the initial branch instead of master"
+depth = "Limit history depth (shallow clone)"
+cloneBranch = "Clone only the specified branch"
+singleBranch = "Download only one branch"
+recursive = "Initialize submodules recursively"
+statusShort = "Short output format"
+statusBranch = "Show branch information"
+porcelain = "Machine-readable output format"
+addAll = "Add all modified and deleted files"
+addPatch = "Interactively select parts of files to add"
+dryRun = "Show what would be done without executing"
+amend = "Modify the last commit (message and/or files)"
+noEdit = "Don't open editor to change the message"
+commitAll = "Automatically add all modified tracked files"
+noVerify = "Skip pre-commit and commit-msg hooks"
+signoff = "Add Signed-off-by line"
+gpgSign = "Sign with GPG key"
+allowEmpty = "Allow commit with no changes"
+pushForce = "Overwrite remote history! Dangerous for shared branches"
+forceWithLease = "Safe force-push: refuses if remote has changed"
+setUpstream = "Set upstream branch for tracking"
+pushTags = "Push all tags"
+pushAll = "Push all branches"
+pullRebase = "Use rebase instead of merge during pull"
+pullNoRebase = "Forbid rebase, use merge"
+ffOnly = "Fast-forward only (no merge commits)"
+noFf = "Always create a merge commit"
+branchList = "Show branch list"
+branchAll = "Show local and remote branches"
+branchDelete = "Delete branch (only if fully merged)"
+branchForceDelete = "Force delete branch (even if not merged)"
+branchMove = "Rename branch"
+verbose = "Verbose output"
+checkoutB = "Create new branch and switch to it"
+checkoutForce = "Force switch (discard uncommitted changes)"
+track = "Set up remote branch tracking"
+switchCreate = "Create new branch and switch to it"
+switchForceCreate = "Create (or recreate) branch and switch"
+switchDetach = "Switch to detached HEAD"
+mergeNoFf = "Always create merge commit (no fast-forward)"
+mergeFfOnly = "Fast-forward only, otherwise abort"
+mergeSquash = "Squash all branch commits into one"
+mergeAbort = "Abort current merge"
+mergeContinue = "Continue merge after resolving conflicts"
+rebaseOnto = "Rebase onto specified point"
+rebaseInteractive = "Interactive mode — edit commits"
+autosquash = "Automatically apply fixup!/squash! commits"
+rebaseAbort = "Abort current rebase"
+rebaseContinue = "Continue rebase after resolving conflicts"
+rebaseSkip = "Skip current conflicting commit"
+rebaseRoot = "Rebase from the very first commit"
+cherryPickNoCommit = "Apply changes without automatic commit"
+cherryPickEdit = "Open editor to modify commit message"
+logOneline = "One line per commit"
+logGraph = "ASCII branch graph"
+logAll = "Show all branches"
+logStat = "Show changed file statistics"
+logPatch = "Show patch (diff) for each commit"
+diffStaged = "Show changes in staging area"
+diffStat = "Stats only (no full diff)"
+diffNameOnly = "Show only changed file names"
+blameEmail = "Show author email"
+stashUntracked = "Include untracked files"
+stashKeepIndex = "Keep staging area"
+restoreStaged = "Remove file from staging (unstage)"
+restoreWorktree = "Restore file in working tree"
+cleanForce = "Required flag to delete files"
+cleanDirs = "Also remove directories"
+cleanIgnored = "Also remove ignored files"
+cleanInteractive = "Interactive selection mode"
+revertNoCommit = "Revert without creating a commit"
+fetchAll = "Fetch from all remotes"
+fetchPrune = "Remove refs to non-existent remote branches"
+fetchTags = "Download all tags"
+submoduleInit = "Initialize submodules"
+submoduleRemote = "Update to latest version from remote"
+reflogAll = "Show reflog for all refs"
+tagAnnotated = "Create annotated tag"
+tagDelete = "Delete tag"
+tagList = "Show tag list"
+
+# Stash actions
+[gitsmith.stash]
+save = "save (default)"
+
+# Reset modes
+[gitsmith.reset]
+mixed = "unstage files"
+soft = "keep in staging"
+hard = "discard everything"
+
+# Remote actions
+[gitsmith.remote]
+list = "list (default)"
+
+# Reflog
+[gitsmith.reflog]
+default = "default"
+
+# Tag
+[gitsmith.tag]
+annotated = "annotated"
+
+# Danger messages
+[gitsmith.danger]
+resetHard = "reset --hard will permanently delete all uncommitted changes! Make sure your files are saved."
+pushForce = "push --force will overwrite remote history! Other developers will lose their commits. Use --force-with-lease instead."
+cleanForce = "clean -f will permanently delete all untracked files! Use -n (--dry-run) first."
+rebase = "Rebase rewrites commit history. Do not use for commits already pushed to a shared repository!"
+branchForceDelete = "Force deleting a branch may result in losing unmerged commits!"
+generic = "This operation may result in data loss. Make sure you understand what you're doing."

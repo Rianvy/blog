@@ -33,7 +33,6 @@ tools:
   - Redis
   - BullMQ
   - Docker
-github: "https://github.com/Rianvy/AutoSteamGifts"
 ---
 **AutoSteamGifts** is a self-hosted platform that automates the entire Steam Gift sales flow: from a Digiseller/Plati payment webhook to selecting a sender account in the correct region, adding the buyer as a friend, purchasing the game, and delivering the gift.
 <!--more-->
@@ -41,6 +40,8 @@ github: "https://github.com/Rianvy/AutoSteamGifts"
 ## 📌 About the project
 
 The goal was to turn a manual Steam Gift fulfillment routine into a controlled and observable workflow. A seller connects a pool of sender accounts, creates products, and configures the shop. The system then processes new payments, moves every order through an explicit state machine, and shows the buyer live delivery progress.
+
+The project was originally built for sale — a turnkey self-hosted solution for launching your own Steam Gift shop. It will be available for purchase soon.
 
 The product combines three connected parts:
 
@@ -163,3 +164,4 @@ Every comparison uses the same application state and viewport. Light and dark va
 ## 🌐 Outcome
 
 The result is a single system for running a Steam Gift shop: buyers get a polished storefront and a transparent order status, while sellers get automated delivery, sender-pool control, operational tools, and complete visibility into every order.
+The project is being prepared for sale and will be available for purchase soon.

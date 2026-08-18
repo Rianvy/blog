@@ -1,7 +1,7 @@
 ---
 title: CleanSlate for Reddit — приватная очистка истории Reddit
 date: 2026-08-17T12:00:00+03:00
-status: in-progress  # completed | in-progress | archived | planned | paused
+status: completed  # completed | in-progress | archived | planned | paused
 completedDate: ""
 projectType: extension  # extension | website | mobile | design | api | bot
 author: Rianvy
@@ -28,6 +28,7 @@ tools:
   - Vitest
   - WebExtensions API
 github: "https://github.com/Rianvy/CleanSlate-for-Reddit"
+demo: "https://chromewebstore.google.com/detail/cleanslate-for-reddit/cingkcpkcjfhohhkcnkagjjbnnojhmaj"
 ---
 **CleanSlate for Reddit** — локальное браузерное расширение для безопасной и контролируемой очистки собственной истории Reddit без подписки, внешнего сервера и передачи данных третьим лицам.
 <!--more-->

@@ -981,7 +981,7 @@
   <meta itemprop="description" content="A self-hosted Steam game storefront with automated gift delivery, a public catalog, and a full-featured operations dashboard.">
   <meta itemprop="datePublished" content="2026-07-29T20:02:52+03:00">
   <meta itemprop="dateModified" content="2026-07-29T20:02:52+03:00">
-  <meta itemprop="wordCount" content="993">
+  <meta itemprop="wordCount" content="1033">
   <meta itemprop="image" content="https://0x69.ru/en/portfolio/autosteamgifts/Cover.png">
   <meta itemprop="keywords" content="Web-Development,Fullstack,Automation,E-Commerce,Steam,Typescript,React,Node.js,UI/UX">
 
@@ -1465,32 +1465,6 @@
 </div>
 
       
-      <div class="not-prose mb-8 space-y-2">
-        
-        
-        <a href="https://github.com/Rianvy/AutoSteamGifts" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="group flex items-center gap-3 p-3 rounded-xl
-                  bg-base-200/50 dark:bg-base-200/10
-                  border border-transparent
-                  hover:border-primary/30 hover:bg-base-200 dark:hover:bg-base-200/20
-                  transition-all duration-200">
-          <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-base-300/50 group-hover:bg-primary/10 transition-colors">
-            <ion-icon name="logo-github" class="text-xl group-hover:text-primary transition-colors"></ion-icon>
-          </div>
-          <div class="flex-1 min-w-0">
-            <div class="font-medium group-hover:text-primary transition-colors">Source Code</div>
-            <div class="text-xs text-base-content/50 truncate">https://github.com/Rianvy/AutoSteamGifts</div>
-          </div>
-          <ion-icon name="arrow-forward" class="text-base-content/30 group-hover:text-primary group-hover:translate-x-1 transition-all"></ion-icon>
-        </a>
-        
-        
-        
-        
-      </div>
-      
 
     
 
@@ -1499,6 +1473,7 @@
       <p><strong>AutoSteamGifts</strong> is a self-hosted platform that automates the entire Steam Gift sales flow: from a Digiseller/Plati payment webhook to selecting a sender account in the correct region, adding the buyer as a friend, purchasing the game, and delivering the gift.</p>
 <h2 id="-about-the-project">📌 About the project</h2>
 <p>The goal was to turn a manual Steam Gift fulfillment routine into a controlled and observable workflow. A seller connects a pool of sender accounts, creates products, and configures the shop. The system then processes new payments, moves every order through an explicit state machine, and shows the buyer live delivery progress.</p>
+<p>The project was originally built for sale — a turnkey self-hosted solution for launching your own Steam Gift shop. It will be available for purchase soon.</p>
 <p>The product combines three connected parts:</p>
 <ul>
 <li>a public storefront with a game catalog and product pages;</li>
@@ -1547,10 +1522,10 @@
 <p>The screenshots were captured on an isolated demo environment containing <strong>38 games, 5 collections, 17 test orders, and 3 mock sender accounts</strong>. All real Steam and Digiseller operations were disabled while the assets were prepared.</p>
 <p>Every comparison uses the same application state and viewport. Light and dark variants can be switched directly inside each block, while the key screens also support a draggable comparison slider.</p>
 <h3 id="public-storefront-1">Public storefront</h3>
-<div class="theme-compare-793851246 my-8 not-prose" data-mode="slider" data-tc-exclude>
+<div class="theme-compare-691847235 my-8 not-prose" data-mode="slider" data-tc-exclude>
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Complete storefront home page</h4>
-  <div class="tc-slider-793851246 relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-    <div class="tc-slider-container-793851246 relative select-none" style="--pos: 50%;">
+  <div class="tc-slider-691847235 relative overflow-hidden rounded-xl shadow-lg border border-base-300">
+    <div class="tc-slider-container-691847235 relative select-none" style="--pos: 50%;">
       <img 
         src="/en/portfolio/autosteamgifts/work/shop-home-dark_hu_fe6cb0e700ba3c7b.webp" 
         alt="Complete storefront home page - Dark"
@@ -1559,7 +1534,7 @@
         draggable="false"
       />
       
-      <div class="tc-overlay-793851246 absolute inset-0 overflow-hidden" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0);">
+      <div class="tc-overlay-691847235 absolute inset-0 overflow-hidden" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0);">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-home-light_hu_2884c94f489c0565.webp" 
           alt="Complete storefront home page - Light"
@@ -1569,7 +1544,7 @@
         />
       </div>
       
-      <div class="tc-handle-793851246 absolute top-0 bottom-0 cursor-ew-resize z-10 flex items-center justify-center" style="left: var(--pos); transform: translateX(-50%); width: 44px;">
+      <div class="tc-handle-691847235 absolute top-0 bottom-0 cursor-ew-resize z-10 flex items-center justify-center" style="left: var(--pos); transform: translateX(-50%); width: 44px;">
         <div class="absolute top-0 bottom-0 w-0.5 bg-white" style="box-shadow: 0 0 10px rgba(0,0,0,0.5);"></div>
         <div class="relative w-11 h-11 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-white/50" style="box-shadow: 0 2px 20px rgba(0,0,0,0.3);">
           <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
@@ -1593,41 +1568,41 @@
 </div>
 
 <style>
-  .tc-btn-793851246 {
+  .tc-btn-691847235 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-793851246.active {
+  .tc-btn-691847235.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-793851246:hover:not(.active) {
+  .tc-btn-691847235:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-793851246 {
+  .tc-slider-container-691847235 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-793851246 img {
+  .tc-slider-container-691847235 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-793851246:hover > div:last-child,
-  .tc-handle-793851246:active > div:last-child {
+  .tc-handle-691847235:hover > div:last-child,
+  .tc-handle-691847235:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-793851246 > div:last-child {
+  .tc-handle-691847235 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-793851246 {
+  .tc-overlay-691847235 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -1635,7 +1610,7 @@
 
 <script>
 (function() {
-  const id = '793851246';
+  const id = '691847235';
   const mode = 'slider';
   const sliderContainer = document.querySelector('.tc-slider-container-' + id);
   const handle = document.querySelector('.tc-handle-' + id);
@@ -1685,13 +1660,13 @@
   });
 })();
 </script>
-<div class="theme-compare-461928537 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-641973582 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Complete 38-game catalog</h4>
-  <div class="tc-toggle-461928537">
+  <div class="tc-toggle-641973582">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-461928537 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-641973582 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -1701,7 +1676,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-461928537 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-641973582 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -1714,7 +1689,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-461928537 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-641973582 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-catalog-light_hu_492f516eef70cf89.webp" 
           alt="Complete 38-game catalog - Light"
@@ -1723,7 +1698,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-461928537 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-641973582 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-catalog-dark_hu_f94a8c345b706156.webp" 
           alt="Complete 38-game catalog - Dark"
@@ -1738,41 +1713,41 @@
 </div>
 
 <style>
-  .tc-btn-461928537 {
+  .tc-btn-641973582 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-461928537.active {
+  .tc-btn-641973582.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-461928537:hover:not(.active) {
+  .tc-btn-641973582:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-461928537 {
+  .tc-slider-container-641973582 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-461928537 img {
+  .tc-slider-container-641973582 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-461928537:hover > div:last-child,
-  .tc-handle-461928537:active > div:last-child {
+  .tc-handle-641973582:hover > div:last-child,
+  .tc-handle-641973582:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-461928537 > div:last-child {
+  .tc-handle-641973582 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-461928537 {
+  .tc-overlay-641973582 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -1780,7 +1755,7 @@
 
 <script>
 (function() {
-  const id = '461928537';
+  const id = '641973582';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -1806,13 +1781,13 @@
   });
 })();
 </script>
-<div class="theme-compare-692574318 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-617542389 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Game product page</h4>
-  <div class="tc-toggle-692574318">
+  <div class="tc-toggle-617542389">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-692574318 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-617542389 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -1822,7 +1797,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-692574318 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-617542389 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -1835,7 +1810,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-692574318 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-617542389 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-product-light_hu_8fa47186c2e79393.webp" 
           alt="Game product page - Light"
@@ -1844,7 +1819,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-692574318 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-617542389 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-product-dark_hu_e78e0b4b9eb3b654.webp" 
           alt="Game product page - Dark"
@@ -1859,41 +1834,41 @@
 </div>
 
 <style>
-  .tc-btn-692574318 {
+  .tc-btn-617542389 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-692574318.active {
+  .tc-btn-617542389.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-692574318:hover:not(.active) {
+  .tc-btn-617542389:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-692574318 {
+  .tc-slider-container-617542389 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-692574318 img {
+  .tc-slider-container-617542389 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-692574318:hover > div:last-child,
-  .tc-handle-692574318:active > div:last-child {
+  .tc-handle-617542389:hover > div:last-child,
+  .tc-handle-617542389:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-692574318 > div:last-child {
+  .tc-handle-617542389 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-692574318 {
+  .tc-overlay-617542389 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -1901,7 +1876,7 @@
 
 <script>
 (function() {
-  const id = '692574318';
+  const id = '617542389';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -1927,13 +1902,13 @@
   });
 })();
 </script>
-<div class="theme-compare-759634128 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-123958467 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Product reviews</h4>
-  <div class="tc-toggle-759634128">
+  <div class="tc-toggle-123958467">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-759634128 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-123958467 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -1943,7 +1918,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-759634128 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-123958467 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -1956,7 +1931,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-759634128 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-123958467 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-product-reviews-light_hu_8b6b86cabd56ae1d.webp" 
           alt="Product reviews - Light"
@@ -1965,7 +1940,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-759634128 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-123958467 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-product-reviews-dark_hu_79ab15a5bb613935.webp" 
           alt="Product reviews - Dark"
@@ -1980,41 +1955,41 @@
 </div>
 
 <style>
-  .tc-btn-759634128 {
+  .tc-btn-123958467 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-759634128.active {
+  .tc-btn-123958467.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-759634128:hover:not(.active) {
+  .tc-btn-123958467:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-759634128 {
+  .tc-slider-container-123958467 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-759634128 img {
+  .tc-slider-container-123958467 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-759634128:hover > div:last-child,
-  .tc-handle-759634128:active > div:last-child {
+  .tc-handle-123958467:hover > div:last-child,
+  .tc-handle-123958467:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-759634128 > div:last-child {
+  .tc-handle-123958467 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-759634128 {
+  .tc-overlay-123958467 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2022,7 +1997,7 @@
 
 <script>
 (function() {
-  const id = '759634128';
+  const id = '123958467';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -2048,13 +2023,13 @@
   });
 })();
 </script>
-<div class="theme-compare-132465897 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-329614785 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Collections catalog</h4>
-  <div class="tc-toggle-132465897">
+  <div class="tc-toggle-329614785">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-132465897 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-329614785 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -2064,7 +2039,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-132465897 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-329614785 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -2077,7 +2052,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-132465897 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-329614785 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-collections-light_hu_a73800689afb1381.webp" 
           alt="Collections catalog - Light"
@@ -2086,7 +2061,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-132465897 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-329614785 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-collections-dark_hu_bec3d7eddae06cd5.webp" 
           alt="Collections catalog - Dark"
@@ -2101,41 +2076,41 @@
 </div>
 
 <style>
-  .tc-btn-132465897 {
+  .tc-btn-329614785 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-132465897.active {
+  .tc-btn-329614785.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-132465897:hover:not(.active) {
+  .tc-btn-329614785:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-132465897 {
+  .tc-slider-container-329614785 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-132465897 img {
+  .tc-slider-container-329614785 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-132465897:hover > div:last-child,
-  .tc-handle-132465897:active > div:last-child {
+  .tc-handle-329614785:hover > div:last-child,
+  .tc-handle-329614785:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-132465897 > div:last-child {
+  .tc-handle-329614785 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-132465897 {
+  .tc-overlay-329614785 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2143,7 +2118,7 @@
 
 <script>
 (function() {
-  const id = '132465897';
+  const id = '329614785';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -2169,13 +2144,13 @@
   });
 })();
 </script>
-<div class="theme-compare-678391254 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-261938745 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Collection page</h4>
-  <div class="tc-toggle-678391254">
+  <div class="tc-toggle-261938745">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-678391254 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-261938745 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -2185,7 +2160,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-678391254 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-261938745 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -2198,7 +2173,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-678391254 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-261938745 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-collection-detail-light_hu_c44c509ca7e0b28f.webp" 
           alt="Collection page - Light"
@@ -2207,7 +2182,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-678391254 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-261938745 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-collection-detail-dark_hu_4a8b7c2953ad9c9a.webp" 
           alt="Collection page - Dark"
@@ -2222,41 +2197,41 @@
 </div>
 
 <style>
-  .tc-btn-678391254 {
+  .tc-btn-261938745 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-678391254.active {
+  .tc-btn-261938745.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-678391254:hover:not(.active) {
+  .tc-btn-261938745:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-678391254 {
+  .tc-slider-container-261938745 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-678391254 img {
+  .tc-slider-container-261938745 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-678391254:hover > div:last-child,
-  .tc-handle-678391254:active > div:last-child {
+  .tc-handle-261938745:hover > div:last-child,
+  .tc-handle-261938745:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-678391254 > div:last-child {
+  .tc-handle-261938745 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-678391254 {
+  .tc-overlay-261938745 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2264,7 +2239,7 @@
 
 <script>
 (function() {
-  const id = '678391254';
+  const id = '261938745';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -2290,13 +2265,13 @@
   });
 })();
 </script>
-<div class="theme-compare-581692347 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-561987324 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Registration-free favorites</h4>
-  <div class="tc-toggle-581692347">
+  <div class="tc-toggle-561987324">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-581692347 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-561987324 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -2306,7 +2281,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-581692347 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-561987324 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -2319,7 +2294,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-581692347 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-561987324 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-favorites-light_hu_d9eef595f823fff4.webp" 
           alt="Registration-free favorites - Light"
@@ -2328,7 +2303,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-581692347 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-561987324 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-favorites-dark_hu_e4546c9478b27e7.webp" 
           alt="Registration-free favorites - Dark"
@@ -2343,41 +2318,41 @@
 </div>
 
 <style>
-  .tc-btn-581692347 {
+  .tc-btn-561987324 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-581692347.active {
+  .tc-btn-561987324.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-581692347:hover:not(.active) {
+  .tc-btn-561987324:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-581692347 {
+  .tc-slider-container-561987324 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-581692347 img {
+  .tc-slider-container-561987324 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-581692347:hover > div:last-child,
-  .tc-handle-581692347:active > div:last-child {
+  .tc-handle-561987324:hover > div:last-child,
+  .tc-handle-561987324:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-581692347 > div:last-child {
+  .tc-handle-561987324 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-581692347 {
+  .tc-overlay-561987324 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2385,7 +2360,7 @@
 
 <script>
 (function() {
-  const id = '581692347';
+  const id = '561987324';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -2411,13 +2386,13 @@
   });
 })();
 </script>
-<div class="theme-compare-135826497 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-156923847 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Purchase status</h4>
-  <div class="tc-toggle-135826497">
+  <div class="tc-toggle-156923847">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-135826497 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-156923847 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -2427,7 +2402,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-135826497 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-156923847 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -2440,7 +2415,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-135826497 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-156923847 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/buyer-order-light_hu_d877c724c6967d8c.webp" 
           alt="Purchase status - Light"
@@ -2449,7 +2424,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-135826497 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-156923847 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/buyer-order-dark_hu_28710501f3e0082f.webp" 
           alt="Purchase status - Dark"
@@ -2464,41 +2439,41 @@
 </div>
 
 <style>
-  .tc-btn-135826497 {
+  .tc-btn-156923847 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-135826497.active {
+  .tc-btn-156923847.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-135826497:hover:not(.active) {
+  .tc-btn-156923847:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-135826497 {
+  .tc-slider-container-156923847 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-135826497 img {
+  .tc-slider-container-156923847 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-135826497:hover > div:last-child,
-  .tc-handle-135826497:active > div:last-child {
+  .tc-handle-156923847:hover > div:last-child,
+  .tc-handle-156923847:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-135826497 > div:last-child {
+  .tc-handle-156923847 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-135826497 {
+  .tc-overlay-156923847 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2506,7 +2481,7 @@
 
 <script>
 (function() {
-  const id = '135826497';
+  const id = '156923847';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -2533,13 +2508,13 @@
 })();
 </script>
 <h3 id="storefront-content-and-system-states">Storefront content and system states</h3>
-<div class="theme-compare-978253614 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-273589641 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Terms of service</h4>
-  <div class="tc-toggle-978253614">
+  <div class="tc-toggle-273589641">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-978253614 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-273589641 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -2549,7 +2524,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-978253614 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-273589641 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -2562,7 +2537,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-978253614 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-273589641 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-terms-light_hu_8006d62ea20e8d24.webp" 
           alt="Terms of service - Light"
@@ -2571,7 +2546,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-978253614 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-273589641 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-terms-dark_hu_98db368922c084ef.webp" 
           alt="Terms of service - Dark"
@@ -2586,41 +2561,41 @@
 </div>
 
 <style>
-  .tc-btn-978253614 {
+  .tc-btn-273589641 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-978253614.active {
+  .tc-btn-273589641.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-978253614:hover:not(.active) {
+  .tc-btn-273589641:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-978253614 {
+  .tc-slider-container-273589641 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-978253614 img {
+  .tc-slider-container-273589641 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-978253614:hover > div:last-child,
-  .tc-handle-978253614:active > div:last-child {
+  .tc-handle-273589641:hover > div:last-child,
+  .tc-handle-273589641:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-978253614 > div:last-child {
+  .tc-handle-273589641 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-978253614 {
+  .tc-overlay-273589641 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2628,7 +2603,7 @@
 
 <script>
 (function() {
-  const id = '978253614';
+  const id = '273589641';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -2654,13 +2629,13 @@
   });
 })();
 </script>
-<div class="theme-compare-451923876 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-548739621 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Privacy policy</h4>
-  <div class="tc-toggle-451923876">
+  <div class="tc-toggle-548739621">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-451923876 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-548739621 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -2670,7 +2645,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-451923876 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-548739621 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -2683,7 +2658,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-451923876 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-548739621 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-privacy-light_hu_61bf5034c6621d97.webp" 
           alt="Privacy policy - Light"
@@ -2692,7 +2667,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-451923876 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-548739621 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-privacy-dark_hu_324f70c3f5d009e4.webp" 
           alt="Privacy policy - Dark"
@@ -2707,41 +2682,41 @@
 </div>
 
 <style>
-  .tc-btn-451923876 {
+  .tc-btn-548739621 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-451923876.active {
+  .tc-btn-548739621.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-451923876:hover:not(.active) {
+  .tc-btn-548739621:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-451923876 {
+  .tc-slider-container-548739621 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-451923876 img {
+  .tc-slider-container-548739621 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-451923876:hover > div:last-child,
-  .tc-handle-451923876:active > div:last-child {
+  .tc-handle-548739621:hover > div:last-child,
+  .tc-handle-548739621:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-451923876 > div:last-child {
+  .tc-handle-548739621 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-451923876 {
+  .tc-overlay-548739621 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2749,7 +2724,7 @@
 
 <script>
 (function() {
-  const id = '451923876';
+  const id = '548739621';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -2775,13 +2750,13 @@
   });
 })();
 </script>
-<div class="theme-compare-527314869 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-132759846 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">404 page</h4>
-  <div class="tc-toggle-527314869">
+  <div class="tc-toggle-132759846">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-527314869 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-132759846 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -2791,7 +2766,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-527314869 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-132759846 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -2804,7 +2779,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-527314869 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-132759846 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-404-light_hu_766d3d50deda74cc.webp" 
           alt="404 page - Light"
@@ -2813,7 +2788,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-527314869 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-132759846 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/shop-404-dark_hu_792422e97cdb8a12.webp" 
           alt="404 page - Dark"
@@ -2828,41 +2803,41 @@
 </div>
 
 <style>
-  .tc-btn-527314869 {
+  .tc-btn-132759846 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-527314869.active {
+  .tc-btn-132759846.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-527314869:hover:not(.active) {
+  .tc-btn-132759846:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-527314869 {
+  .tc-slider-container-132759846 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-527314869 img {
+  .tc-slider-container-132759846 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-527314869:hover > div:last-child,
-  .tc-handle-527314869:active > div:last-child {
+  .tc-handle-132759846:hover > div:last-child,
+  .tc-handle-132759846:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-527314869 > div:last-child {
+  .tc-handle-132759846 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-527314869 {
+  .tc-overlay-132759846 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2870,7 +2845,7 @@
 
 <script>
 (function() {
-  const id = '527314869';
+  const id = '132759846';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -2897,13 +2872,13 @@
 })();
 </script>
 <h3 id="administration-panel-1">Administration panel</h3>
-<div class="theme-compare-937625841 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-985427316 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Administrator sign-in</h4>
-  <div class="tc-toggle-937625841">
+  <div class="tc-toggle-985427316">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-937625841 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-985427316 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -2913,7 +2888,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-937625841 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-985427316 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -2926,7 +2901,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-937625841 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-985427316 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-login-light_hu_888f2e4f2ff2aea2.webp" 
           alt="Administrator sign-in - Light"
@@ -2935,7 +2910,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-937625841 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-985427316 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-login-dark_hu_4700907709d363af.webp" 
           alt="Administrator sign-in - Dark"
@@ -2950,41 +2925,41 @@
 </div>
 
 <style>
-  .tc-btn-937625841 {
+  .tc-btn-985427316 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-937625841.active {
+  .tc-btn-985427316.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-937625841:hover:not(.active) {
+  .tc-btn-985427316:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-937625841 {
+  .tc-slider-container-985427316 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-937625841 img {
+  .tc-slider-container-985427316 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-937625841:hover > div:last-child,
-  .tc-handle-937625841:active > div:last-child {
+  .tc-handle-985427316:hover > div:last-child,
+  .tc-handle-985427316:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-937625841 > div:last-child {
+  .tc-handle-985427316 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-937625841 {
+  .tc-overlay-985427316 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -2992,7 +2967,7 @@
 
 <script>
 (function() {
-  const id = '937625841';
+  const id = '985427316';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -3018,10 +2993,10 @@
   });
 })();
 </script>
-<div class="theme-compare-736581942 my-8 not-prose" data-mode="slider" data-tc-exclude>
+<div class="theme-compare-718326495 my-8 not-prose" data-mode="slider" data-tc-exclude>
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Operations dashboard</h4>
-  <div class="tc-slider-736581942 relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-    <div class="tc-slider-container-736581942 relative select-none" style="--pos: 50%;">
+  <div class="tc-slider-718326495 relative overflow-hidden rounded-xl shadow-lg border border-base-300">
+    <div class="tc-slider-container-718326495 relative select-none" style="--pos: 50%;">
       <img 
         src="/en/portfolio/autosteamgifts/work/admin-dashboard-dark_hu_8f6231268a63a07f.webp" 
         alt="Operations dashboard - Dark"
@@ -3030,7 +3005,7 @@
         draggable="false"
       />
       
-      <div class="tc-overlay-736581942 absolute inset-0 overflow-hidden" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0);">
+      <div class="tc-overlay-718326495 absolute inset-0 overflow-hidden" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0);">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-dashboard-light_hu_91be8d8d50b13868.webp" 
           alt="Operations dashboard - Light"
@@ -3040,7 +3015,7 @@
         />
       </div>
       
-      <div class="tc-handle-736581942 absolute top-0 bottom-0 cursor-ew-resize z-10 flex items-center justify-center" style="left: var(--pos); transform: translateX(-50%); width: 44px;">
+      <div class="tc-handle-718326495 absolute top-0 bottom-0 cursor-ew-resize z-10 flex items-center justify-center" style="left: var(--pos); transform: translateX(-50%); width: 44px;">
         <div class="absolute top-0 bottom-0 w-0.5 bg-white" style="box-shadow: 0 0 10px rgba(0,0,0,0.5);"></div>
         <div class="relative w-11 h-11 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-white/50" style="box-shadow: 0 2px 20px rgba(0,0,0,0.3);">
           <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
@@ -3064,41 +3039,41 @@
 </div>
 
 <style>
-  .tc-btn-736581942 {
+  .tc-btn-718326495 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-736581942.active {
+  .tc-btn-718326495.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-736581942:hover:not(.active) {
+  .tc-btn-718326495:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-736581942 {
+  .tc-slider-container-718326495 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-736581942 img {
+  .tc-slider-container-718326495 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-736581942:hover > div:last-child,
-  .tc-handle-736581942:active > div:last-child {
+  .tc-handle-718326495:hover > div:last-child,
+  .tc-handle-718326495:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-736581942 > div:last-child {
+  .tc-handle-718326495 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-736581942 {
+  .tc-overlay-718326495 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -3106,7 +3081,7 @@
 
 <script>
 (function() {
-  const id = '736581942';
+  const id = '718326495';
   const mode = 'slider';
   const sliderContainer = document.querySelector('.tc-slider-container-' + id);
   const handle = document.querySelector('.tc-handle-' + id);
@@ -3156,13 +3131,13 @@
   });
 })();
 </script>
-<div class="theme-compare-759238614 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-492718365 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Order list</h4>
-  <div class="tc-toggle-759238614">
+  <div class="tc-toggle-492718365">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-759238614 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-492718365 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -3172,7 +3147,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-759238614 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-492718365 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -3185,7 +3160,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-759238614 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-492718365 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-orders-light_hu_8172a4c7f8037f4e.webp" 
           alt="Order list - Light"
@@ -3194,7 +3169,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-759238614 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-492718365 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-orders-dark_hu_9db02cd79c6cfea3.webp" 
           alt="Order list - Dark"
@@ -3209,41 +3184,41 @@
 </div>
 
 <style>
-  .tc-btn-759238614 {
+  .tc-btn-492718365 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-759238614.active {
+  .tc-btn-492718365.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-759238614:hover:not(.active) {
+  .tc-btn-492718365:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-759238614 {
+  .tc-slider-container-492718365 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-759238614 img {
+  .tc-slider-container-492718365 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-759238614:hover > div:last-child,
-  .tc-handle-759238614:active > div:last-child {
+  .tc-handle-492718365:hover > div:last-child,
+  .tc-handle-492718365:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-759238614 > div:last-child {
+  .tc-handle-492718365 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-759238614 {
+  .tc-overlay-492718365 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -3251,7 +3226,7 @@
 
 <script>
 (function() {
-  const id = '759238614';
+  const id = '492718365';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -3277,13 +3252,13 @@
   });
 })();
 </script>
-<div class="theme-compare-547382961 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-416927385 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Detailed order view</h4>
-  <div class="tc-toggle-547382961">
+  <div class="tc-toggle-416927385">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-547382961 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-416927385 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -3293,7 +3268,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-547382961 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-416927385 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -3306,7 +3281,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-547382961 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-416927385 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-order-detail-light_hu_972c34dfbed51894.webp" 
           alt="Detailed order view - Light"
@@ -3315,7 +3290,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-547382961 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-416927385 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-order-detail-dark_hu_82e8bf2dcd9970b0.webp" 
           alt="Detailed order view - Dark"
@@ -3330,41 +3305,41 @@
 </div>
 
 <style>
-  .tc-btn-547382961 {
+  .tc-btn-416927385 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-547382961.active {
+  .tc-btn-416927385.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-547382961:hover:not(.active) {
+  .tc-btn-416927385:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-547382961 {
+  .tc-slider-container-416927385 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-547382961 img {
+  .tc-slider-container-416927385 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-547382961:hover > div:last-child,
-  .tc-handle-547382961:active > div:last-child {
+  .tc-handle-416927385:hover > div:last-child,
+  .tc-handle-416927385:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-547382961 > div:last-child {
+  .tc-handle-416927385 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-547382961 {
+  .tc-overlay-416927385 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -3372,7 +3347,7 @@
 
 <script>
 (function() {
-  const id = '547382961';
+  const id = '416927385';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -3398,13 +3373,13 @@
   });
 })();
 </script>
-<div class="theme-compare-796318542 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-749561823 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Steam sender pool</h4>
-  <div class="tc-toggle-796318542">
+  <div class="tc-toggle-749561823">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-796318542 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-749561823 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -3414,7 +3389,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-796318542 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-749561823 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -3427,7 +3402,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-796318542 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-749561823 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-accounts-light_hu_e997649c224268c4.webp" 
           alt="Steam sender pool - Light"
@@ -3436,7 +3411,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-796318542 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-749561823 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-accounts-dark_hu_b9f10cfda7fa74b.webp" 
           alt="Steam sender pool - Dark"
@@ -3451,41 +3426,41 @@
 </div>
 
 <style>
-  .tc-btn-796318542 {
+  .tc-btn-749561823 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-796318542.active {
+  .tc-btn-749561823.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-796318542:hover:not(.active) {
+  .tc-btn-749561823:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-796318542 {
+  .tc-slider-container-749561823 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-796318542 img {
+  .tc-slider-container-749561823 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-796318542:hover > div:last-child,
-  .tc-handle-796318542:active > div:last-child {
+  .tc-handle-749561823:hover > div:last-child,
+  .tc-handle-749561823:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-796318542 > div:last-child {
+  .tc-handle-749561823 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-796318542 {
+  .tc-overlay-749561823 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -3493,7 +3468,7 @@
 
 <script>
 (function() {
-  const id = '796318542';
+  const id = '749561823';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -3519,13 +3494,13 @@
   });
 })();
 </script>
-<div class="theme-compare-817564239 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-684923715 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Add sender account</h4>
-  <div class="tc-toggle-817564239">
+  <div class="tc-toggle-684923715">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-817564239 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-684923715 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -3535,7 +3510,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-817564239 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-684923715 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -3548,7 +3523,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-817564239 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-684923715 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-account-form-light_hu_fc83a3459127e1fb.webp" 
           alt="Add sender account - Light"
@@ -3557,7 +3532,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-817564239 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-684923715 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-account-form-dark_hu_20179cad3f50fd54.webp" 
           alt="Add sender account - Dark"
@@ -3572,41 +3547,41 @@
 </div>
 
 <style>
-  .tc-btn-817564239 {
+  .tc-btn-684923715 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-817564239.active {
+  .tc-btn-684923715.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-817564239:hover:not(.active) {
+  .tc-btn-684923715:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-817564239 {
+  .tc-slider-container-684923715 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-817564239 img {
+  .tc-slider-container-684923715 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-817564239:hover > div:last-child,
-  .tc-handle-817564239:active > div:last-child {
+  .tc-handle-684923715:hover > div:last-child,
+  .tc-handle-684923715:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-817564239 > div:last-child {
+  .tc-handle-684923715 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-817564239 {
+  .tc-overlay-684923715 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -3614,7 +3589,7 @@
 
 <script>
 (function() {
-  const id = '817564239';
+  const id = '684923715';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -3640,13 +3615,13 @@
   });
 })();
 </script>
-<div class="theme-compare-923148756 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-452197863 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Catalog management</h4>
-  <div class="tc-toggle-923148756">
+  <div class="tc-toggle-452197863">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-923148756 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-452197863 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -3656,7 +3631,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-923148756 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-452197863 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -3669,7 +3644,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-923148756 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-452197863 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-products-light_hu_475a851589842c0c.webp" 
           alt="Catalog management - Light"
@@ -3678,7 +3653,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-923148756 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-452197863 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-products-dark_hu_7a28cb6539371847.webp" 
           alt="Catalog management - Dark"
@@ -3693,41 +3668,41 @@
 </div>
 
 <style>
-  .tc-btn-923148756 {
+  .tc-btn-452197863 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-923148756.active {
+  .tc-btn-452197863.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-923148756:hover:not(.active) {
+  .tc-btn-452197863:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-923148756 {
+  .tc-slider-container-452197863 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-923148756 img {
+  .tc-slider-container-452197863 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-923148756:hover > div:last-child,
-  .tc-handle-923148756:active > div:last-child {
+  .tc-handle-452197863:hover > div:last-child,
+  .tc-handle-452197863:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-923148756 > div:last-child {
+  .tc-handle-452197863 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-923148756 {
+  .tc-overlay-452197863 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -3735,7 +3710,7 @@
 
 <script>
 (function() {
-  const id = '923148756';
+  const id = '452197863';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -3761,13 +3736,13 @@
   });
 })();
 </script>
-<div class="theme-compare-752914368 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-297845316 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Complete product editor</h4>
-  <div class="tc-toggle-752914368">
+  <div class="tc-toggle-297845316">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-752914368 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-297845316 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -3777,7 +3752,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-752914368 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-297845316 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -3790,7 +3765,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-752914368 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-297845316 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-product-form-light_hu_68cf0385ed9592fc.webp" 
           alt="Complete product editor - Light"
@@ -3799,7 +3774,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-752914368 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-297845316 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-product-form-dark_hu_ba2f931d3a33c000.webp" 
           alt="Complete product editor - Dark"
@@ -3814,41 +3789,41 @@
 </div>
 
 <style>
-  .tc-btn-752914368 {
+  .tc-btn-297845316 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-752914368.active {
+  .tc-btn-297845316.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-752914368:hover:not(.active) {
+  .tc-btn-297845316:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-752914368 {
+  .tc-slider-container-297845316 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-752914368 img {
+  .tc-slider-container-297845316 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-752914368:hover > div:last-child,
-  .tc-handle-752914368:active > div:last-child {
+  .tc-handle-297845316:hover > div:last-child,
+  .tc-handle-297845316:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-752914368 > div:last-child {
+  .tc-handle-297845316 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-752914368 {
+  .tc-overlay-297845316 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -3856,7 +3831,7 @@
 
 <script>
 (function() {
-  const id = '752914368';
+  const id = '297845316';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -3882,13 +3857,13 @@
   });
 })();
 </script>
-<div class="theme-compare-845317296 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-147952683 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Bulk product creation</h4>
-  <div class="tc-toggle-845317296">
+  <div class="tc-toggle-147952683">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-845317296 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-147952683 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -3898,7 +3873,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-845317296 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-147952683 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -3911,7 +3886,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-845317296 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-147952683 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-products-bulk-light_hu_e518fe0258ea6a34.webp" 
           alt="Bulk product creation - Light"
@@ -3920,7 +3895,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-845317296 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-147952683 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-products-bulk-dark_hu_c888754901dfb6fc.webp" 
           alt="Bulk product creation - Dark"
@@ -3935,41 +3910,41 @@
 </div>
 
 <style>
-  .tc-btn-845317296 {
+  .tc-btn-147952683 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-845317296.active {
+  .tc-btn-147952683.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-845317296:hover:not(.active) {
+  .tc-btn-147952683:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-845317296 {
+  .tc-slider-container-147952683 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-845317296 img {
+  .tc-slider-container-147952683 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-845317296:hover > div:last-child,
-  .tc-handle-845317296:active > div:last-child {
+  .tc-handle-147952683:hover > div:last-child,
+  .tc-handle-147952683:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-845317296 > div:last-child {
+  .tc-handle-147952683 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-845317296 {
+  .tc-overlay-147952683 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -3977,7 +3952,7 @@
 
 <script>
 (function() {
-  const id = '845317296';
+  const id = '147952683';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -4003,13 +3978,13 @@
   });
 })();
 </script>
-<div class="theme-compare-598173462 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-974613825 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Collection management</h4>
-  <div class="tc-toggle-598173462">
+  <div class="tc-toggle-974613825">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-598173462 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-974613825 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -4019,7 +3994,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-598173462 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-974613825 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -4032,7 +4007,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-598173462 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-974613825 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-collections-light_hu_d9d3a2bef307eb09.webp" 
           alt="Collection management - Light"
@@ -4041,7 +4016,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-598173462 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-974613825 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-collections-dark_hu_588a5567431833bb.webp" 
           alt="Collection management - Dark"
@@ -4056,41 +4031,41 @@
 </div>
 
 <style>
-  .tc-btn-598173462 {
+  .tc-btn-974613825 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-598173462.active {
+  .tc-btn-974613825.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-598173462:hover:not(.active) {
+  .tc-btn-974613825:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-598173462 {
+  .tc-slider-container-974613825 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-598173462 img {
+  .tc-slider-container-974613825 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-598173462:hover > div:last-child,
-  .tc-handle-598173462:active > div:last-child {
+  .tc-handle-974613825:hover > div:last-child,
+  .tc-handle-974613825:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-598173462 > div:last-child {
+  .tc-handle-974613825 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-598173462 {
+  .tc-overlay-974613825 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -4098,7 +4073,7 @@
 
 <script>
 (function() {
-  const id = '598173462';
+  const id = '974613825';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -4124,13 +4099,13 @@
   });
 })();
 </script>
-<div class="theme-compare-596482137 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-615749382 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Collection editor</h4>
-  <div class="tc-toggle-596482137">
+  <div class="tc-toggle-615749382">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-596482137 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-615749382 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -4140,7 +4115,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-596482137 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-615749382 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -4153,7 +4128,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-596482137 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-615749382 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-collection-form-light_hu_a03a0336b29ec993.webp" 
           alt="Collection editor - Light"
@@ -4162,7 +4137,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-596482137 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-615749382 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-collection-form-dark_hu_c141f1fae3aee3c1.webp" 
           alt="Collection editor - Dark"
@@ -4177,41 +4152,41 @@
 </div>
 
 <style>
-  .tc-btn-596482137 {
+  .tc-btn-615749382 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-596482137.active {
+  .tc-btn-615749382.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-596482137:hover:not(.active) {
+  .tc-btn-615749382:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-596482137 {
+  .tc-slider-container-615749382 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-596482137 img {
+  .tc-slider-container-615749382 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-596482137:hover > div:last-child,
-  .tc-handle-596482137:active > div:last-child {
+  .tc-handle-615749382:hover > div:last-child,
+  .tc-handle-615749382:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-596482137 > div:last-child {
+  .tc-handle-615749382 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-596482137 {
+  .tc-overlay-615749382 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -4219,7 +4194,7 @@
 
 <script>
 (function() {
-  const id = '596482137';
+  const id = '615749382';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -4245,13 +4220,13 @@
   });
 })();
 </script>
-<div class="theme-compare-697125348 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-475319682 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Page editor</h4>
-  <div class="tc-toggle-697125348">
+  <div class="tc-toggle-475319682">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-697125348 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-475319682 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -4261,7 +4236,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-697125348 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-475319682 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -4274,7 +4249,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-697125348 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-475319682 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-pages-light_hu_ef97814c4ee1096a.webp" 
           alt="Page editor - Light"
@@ -4283,7 +4258,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-697125348 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-475319682 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-pages-dark_hu_ae55b000cdcfd198.webp" 
           alt="Page editor - Dark"
@@ -4298,41 +4273,41 @@
 </div>
 
 <style>
-  .tc-btn-697125348 {
+  .tc-btn-475319682 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-697125348.active {
+  .tc-btn-475319682.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-697125348:hover:not(.active) {
+  .tc-btn-475319682:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-697125348 {
+  .tc-slider-container-475319682 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-697125348 img {
+  .tc-slider-container-475319682 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-697125348:hover > div:last-child,
-  .tc-handle-697125348:active > div:last-child {
+  .tc-handle-475319682:hover > div:last-child,
+  .tc-handle-475319682:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-697125348 > div:last-child {
+  .tc-handle-475319682 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-697125348 {
+  .tc-overlay-475319682 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -4340,7 +4315,7 @@
 
 <script>
 (function() {
-  const id = '697125348';
+  const id = '475319682';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -4366,13 +4341,13 @@
   });
 })();
 </script>
-<div class="theme-compare-694235718 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-925681437 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Platform settings</h4>
-  <div class="tc-toggle-694235718">
+  <div class="tc-toggle-925681437">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-694235718 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-925681437 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -4382,7 +4357,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-694235718 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-925681437 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -4395,7 +4370,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-694235718 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-925681437 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-settings-light_hu_f802dadbd8b5bcf3.webp" 
           alt="Platform settings - Light"
@@ -4404,7 +4379,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-694235718 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-925681437 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/admin-settings-dark_hu_65243e1134056074.webp" 
           alt="Platform settings - Dark"
@@ -4419,41 +4394,41 @@
 </div>
 
 <style>
-  .tc-btn-694235718 {
+  .tc-btn-925681437 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-694235718.active {
+  .tc-btn-925681437.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-694235718:hover:not(.active) {
+  .tc-btn-925681437:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-694235718 {
+  .tc-slider-container-925681437 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-694235718 img {
+  .tc-slider-container-925681437 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-694235718:hover > div:last-child,
-  .tc-handle-694235718:active > div:last-child {
+  .tc-handle-925681437:hover > div:last-child,
+  .tc-handle-925681437:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-694235718 > div:last-child {
+  .tc-handle-925681437 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-694235718 {
+  .tc-overlay-925681437 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -4461,7 +4436,7 @@
 
 <script>
 (function() {
-  const id = '694235718';
+  const id = '925681437';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -4487,13 +4462,13 @@
   });
 })();
 </script>
-<div class="theme-compare-835472961 my-8 not-prose" data-mode="toggle" >
+<div class="theme-compare-653724189 my-8 not-prose" data-mode="toggle" >
   <h4 class="text-center text-lg font-semibold mb-4 text-base-content">Protected installer state</h4>
-  <div class="tc-toggle-835472961">
+  <div class="tc-toggle-653724189">
     <div class="flex justify-center mb-4">
       <div class="inline-flex rounded-xl bg-base-200 p-1 gap-1">
         <button 
-          class="tc-btn-835472961 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-653724189 active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="light"
           aria-label="Show light theme"
         >
@@ -4503,7 +4478,7 @@
           Light
         </button>
         <button 
-          class="tc-btn-835472961 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="tc-btn-653724189 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           data-theme="dark"
           aria-label="Show dark theme"
         >
@@ -4516,7 +4491,7 @@
     </div>
     
     <div class="relative overflow-hidden rounded-xl shadow-lg border border-base-300">
-      <div class="tc-light-wrap-835472961 relative leading-[0] transition-opacity duration-500">
+      <div class="tc-light-wrap-653724189 relative leading-[0] transition-opacity duration-500">
         <img 
           src="/en/portfolio/autosteamgifts/work/installer-status-light_hu_5931492798b9c7e0.webp" 
           alt="Protected installer state - Light"
@@ -4525,7 +4500,7 @@
           loading="lazy"
         />
       </div>
-      <div class="tc-dark-wrap-835472961 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
+      <div class="tc-dark-wrap-653724189 absolute inset-0 leading-[0] opacity-0 transition-opacity duration-500 pointer-events-none">
         <img 
           src="/en/portfolio/autosteamgifts/work/installer-status-dark_hu_2530e82e54c4361f.webp" 
           alt="Protected installer state - Dark"
@@ -4540,41 +4515,41 @@
 </div>
 
 <style>
-  .tc-btn-835472961 {
+  .tc-btn-653724189 {
     color: oklch(var(--bc) / 0.7);
     background: transparent;
   }
   
-  .tc-btn-835472961.active {
+  .tc-btn-653724189.active {
     background: oklch(var(--b1));
     color: oklch(var(--bc));
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   }
   
-  .tc-btn-835472961:hover:not(.active) {
+  .tc-btn-653724189:hover:not(.active) {
     background: oklch(var(--b1) / 0.5);
   }
 
-  .tc-slider-container-835472961 {
+  .tc-slider-container-653724189 {
     touch-action: pan-y pinch-zoom;
   }
   
-  .tc-slider-container-835472961 img {
+  .tc-slider-container-653724189 img {
     pointer-events: none;
     user-select: none;
   }
   
-  .tc-handle-835472961:hover > div:last-child,
-  .tc-handle-835472961:active > div:last-child {
+  .tc-handle-653724189:hover > div:last-child,
+  .tc-handle-653724189:active > div:last-child {
     transform: scale(1.1);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   }
   
-  .tc-handle-835472961 > div:last-child {
+  .tc-handle-653724189 > div:last-child {
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .tc-overlay-835472961 {
+  .tc-overlay-653724189 {
     will-change: clip-path;
     pointer-events: none;
   }
@@ -4582,7 +4557,7 @@
 
 <script>
 (function() {
-  const id = '835472961';
+  const id = '653724189';
   const mode = 'toggle';
   const buttons = document.querySelectorAll('.tc-btn-' + id);
   const lightWrap = document.querySelector('.tc-light-wrap-' + id);
@@ -4617,7 +4592,8 @@
 <li><strong>Infrastructure:</strong> Docker, Docker Compose, Nginx.</li>
 </ul>
 <h2 id="-outcome">🌐 Outcome</h2>
-<p>The result is a single system for running a Steam Gift shop: buyers get a polished storefront and a transparent order status, while sellers get automated delivery, sender-pool control, operational tools, and complete visibility into every order.</p>
+<p>The result is a single system for running a Steam Gift shop: buyers get a polished storefront and a transparent order status, while sellers get automated delivery, sender-pool control, operational tools, and complete visibility into every order.
+The project is being prepared for sale and will be available for purchase soon.</p>
     </section>
 
     

@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://0x69.ru/en/</loc>
-    <lastmod>2026-08-17T12:00:00+03:00</lastmod>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -16,6 +16,151 @@
                 hreflang="en"
                 href="https://0x69.ru/en/"
                 />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/automation/</loc>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/c%23/</loc>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/tags/c%23/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/c%23/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/portfolio/codvisualassist/</loc>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/portfolio/codvisualassist/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/portfolio/codvisualassist/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/design/</loc>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/desktop/</loc>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/tags/desktop/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/desktop/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/extensions/</loc>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/frontend/</loc>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/tags/frontend/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/frontend/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/landing-pages/</loc>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://0x69.ru/en/tags/opencv/</loc>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/tags/opencv/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/opencv/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/portfolio/</loc>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/portfolio/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/portfolio/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/</loc>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/ui/ux/</loc>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru"
+                href="https://0x69.ru/tags/ui/ux/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x69.ru/en/tags/ui/ux/"
+                />
+  </url><url>
+    <loc>https://0x69.ru/en/tags/web-development/</loc>
+    <lastmod>2026-09-06T12:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://0x69.ru/en/tags/browser-extension/</loc>
     <lastmod>2026-08-17T12:00:00+03:00</lastmod>
@@ -47,36 +192,6 @@
                 href="https://0x69.ru/en/portfolio/cleanslate-for-reddit/"
                 />
   </url><url>
-    <loc>https://0x69.ru/en/tags/design/</loc>
-    <lastmod>2026-08-17T12:00:00+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://0x69.ru/en/tags/extensions/</loc>
-    <lastmod>2026-08-17T12:00:00+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://0x69.ru/en/tags/frontend/</loc>
-    <lastmod>2026-08-17T12:00:00+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.ru/tags/frontend/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.ru/en/tags/frontend/"
-                />
-  </url><url>
-    <loc>https://0x69.ru/en/tags/landing-pages/</loc>
-    <lastmod>2026-08-17T12:00:00+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://0x69.ru/en/tags/open-source/</loc>
     <lastmod>2026-08-17T12:00:00+03:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -90,21 +205,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://0x69.ru/en/tags/open-source/"
-                />
-  </url><url>
-    <loc>https://0x69.ru/en/portfolio/</loc>
-    <lastmod>2026-08-17T12:00:00+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.ru/portfolio/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.ru/en/portfolio/"
                 />
   </url><url>
     <loc>https://0x69.ru/en/tags/privacy/</loc>
@@ -152,21 +252,6 @@
                 href="https://0x69.ru/en/tags/reddit/"
                 />
   </url><url>
-    <loc>https://0x69.ru/en/tags/</loc>
-    <lastmod>2026-08-17T12:00:00+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.ru/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.ru/en/tags/"
-                />
-  </url><url>
     <loc>https://0x69.ru/en/tags/typescript/</loc>
     <lastmod>2026-08-17T12:00:00+03:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -181,16 +266,6 @@
                 hreflang="en"
                 href="https://0x69.ru/en/tags/typescript/"
                 />
-  </url><url>
-    <loc>https://0x69.ru/en/tags/web-development/</loc>
-    <lastmod>2026-08-17T12:00:00+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://0x69.ru/en/tags/automation/</loc>
-    <lastmod>2026-07-29T20:02:52+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url><url>
     <loc>https://0x69.ru/en/portfolio/autosteamgifts/</loc>
     <lastmod>2026-07-29T20:02:52+03:00</lastmod>
@@ -265,21 +340,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://0x69.ru/en/tags/steam/"
-                />
-  </url><url>
-    <loc>https://0x69.ru/en/tags/ui/ux/</loc>
-    <lastmod>2026-08-17T00:00:00+03:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ru"
-                href="https://0x69.ru/tags/ui/ux/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://0x69.ru/en/tags/ui/ux/"
                 />
   </url><url>
     <loc>https://0x69.ru/en/tags/beautify/</loc>

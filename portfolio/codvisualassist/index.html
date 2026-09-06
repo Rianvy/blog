@@ -1,0 +1,4277 @@
+<!DOCTYPE html>
+<html lang="ru"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#2A303C" media="(prefers-color-scheme: dark)" />
+
+    
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+    <title>COD VisualAssist — визуальный ассистент для Call … | 0x69.ru</title>
+    
+
+
+<link rel="icon" type="image/png" href="https://0x69.ru/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="https://0x69.ru/favicon.svg" />
+<link rel="shortcut icon" href="https://0x69.ru/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://0x69.ru/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="0x69" />
+<link rel="manifest" href="https://0x69.ru/site.webmanifest" />
+
+
+
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+
+
+
+<link rel="canonical" href="https://0x69.ru/portfolio/codvisualassist/" />
+
+
+
+  <link rel="alternate" hreflang="ru" href="https://0x69.ru/portfolio/codvisualassist/" />
+
+  <link rel="alternate" hreflang="en" href="https://0x69.ru/en/portfolio/codvisualassist/" /><link rel="alternate" hreflang="x-default" href="https://0x69.ru/portfolio/codvisualassist/" />
+
+
+
+
+
+<meta name="author" content="Rianvy" />
+
+
+<meta name="description" content="Desktop-приложение для современных версий Call of Duty: помогает с наведением на противника, распознаёт игровые маркеры, сопровождает цели и настраивает …" />
+
+
+<meta name="keywords" content="Desktop, C#, OpenCV, UI/UX, Автоматизация" /><meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+
+<meta property="og:title" content="COD VisualAssist — визуальный ассистент для Call of Duty" />
+
+
+<meta property="og:description" content="Desktop-приложение для современных версий Call of Duty: помогает с наведением на противника, распознаёт игровые маркеры, сопровождает цели и настраивает прозрачный оверлей." />
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://0x69.ru/portfolio/codvisualassist/" />
+<meta property="og:site_name" content="0x69.ru" />
+
+
+<meta property="og:locale" content="ru_RU" /><meta property="og:locale:alternate" content="en_US" />
+
+
+<meta property="og:image" content="https://0x69.ru/portfolio/codvisualassist/Cover_hu_9dcc76c10c9f391f.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="COD VisualAssist — визуальный ассистент для Call of Duty" />
+
+
+<meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="COD VisualAssist — визуальный ассистент для Call of Duty" />
+
+<meta name="twitter:description" content="Desktop-приложение для современных версий Call of Duty: помогает с наведением на противника, распознаёт игровые маркеры, сопровождает цели и настраивает прозрачный оверлей." />
+
+<meta name="twitter:image" content="https://0x69.ru/portfolio/codvisualassist/Cover_hu_9dcc76c10c9f391f.png" />
+<meta name="twitter:image:alt" content="COD VisualAssist — визуальный ассистент для Call of Duty" />
+
+
+<meta property="vk:image" content="https://0x69.ru/portfolio/codvisualassist/Cover_hu_9dcc76c10c9f391f.png" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rianvy",
+  "url": "https://0x69.ru/",
+  "image": "https://0x69.ru/img/avatar.jpg","email": "blackghost.v1@gmail.com","sameAs": ["https://github.com/rianvy"]}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "COD VisualAssist — визуальный ассистент для Call of Duty",
+  "description": "Desktop-приложение для современных версий Call of Duty: помогает с наведением на противника, распознаёт игровые маркеры, сопровождает цели и настраивает прозрачный оверлей.",
+  "url": "https://0x69.ru/portfolio/codvisualassist/",
+  "image": "https://0x69.ru/portfolio/codvisualassist/Cover_hu_1aa5f41ea864e6aa.webp",
+  "author": {
+    "@type": "Person",
+    "name": "Rianvy"
+  },
+  "dateCreated": "2026-09-06",
+  "inLanguage": "ru"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "0x69.ru",
+      "item": "https://0x69.ru/ru/"
+    },{
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Портфолио",
+      "item": "https://0x69.ru/portfolio/"
+    },{
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "COD VisualAssist — визуальный ассистент для Call of Duty",
+      "item": "https://0x69.ru/portfolio/codvisualassist/"
+    }
+  ]
+}
+</script>
+
+
+
+
+
+<meta name="generator" content="Hugo 0.143.0">
+
+
+
+
+  
+
+<link rel="stylesheet" href="/css/output.min.css" />
+
+    
+
+
+<link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css" data-syntax-highlight="true" id="syntax-theme">
+
+
+<style>
+   
+  pre { border-radius: 0.5rem;  }
+  
+   
+  .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: oklch(var(--p)); z-index: 9999; transition: width 0.1s ease-out; }
+  .reading-progress-text { position: fixed; top: 0.75rem; right: 1rem; z-index: 9999; font-size: 0.75rem; font-weight: 600; color: oklch(var(--p)); background: oklch(var(--b1) / 0.9); backdrop-filter: blur(8px); padding: 0.25rem 0.75rem; border-radius: 1rem; opacity: 0; transition: opacity 0.3s ease; }
+  .reading-progress-text.visible { opacity: 1; }
+  
+   
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  
+   
+  #TableOfContents { 
+    max-height: calc(100vh - 12rem); 
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  #TableOfContents::-webkit-scrollbar { width: 6px; }
+  #TableOfContents::-webkit-scrollbar-track { background: transparent; }
+  #TableOfContents::-webkit-scrollbar-thumb { background: oklch(var(--b3)); border-radius: 3px; }
+  #TableOfContents::-webkit-scrollbar-thumb:hover { background: oklch(var(--bc) / 0.3); }
+  #TableOfContents a.active { color: oklch(var(--p)); font-weight: 600; }
+  #TableOfContents ul { border-left: 2px solid oklch(var(--b3)); }
+  
+   
+  #dream-single-post-content img { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  #dream-single-post-content img:hover { transform: scale(1.02); box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
+  
+   
+  #dream-single-post-content a:not(.badge):not(.btn):not(.lg-item) { 
+    text-decoration: none; 
+    background-image: linear-gradient(oklch(var(--p)), oklch(var(--p)));
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease;
+  }
+  #dream-single-post-content a:not(.badge):not(.btn):not(.lg-item):hover { background-size: 100% 2px; }
+  
+   
+  body.focus-mode aside.right-sidebar { 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.3s ease; 
+  }
+  body.focus-mode article { 
+    max-width: 65ch; 
+    margin: 0 auto; 
+  }
+  
+   
+  aside.left-sidebar {
+    transition: opacity 0.3s ease;
+  }
+  
+   
+  body.focus-mode #focus-mode-btn {
+    background: oklch(var(--p) / 0.2);
+    color: oklch(var(--p));
+  }
+  
+   
+  .lg-sub-html { backdrop-filter: blur(16px); }
+</style>
+
+
+
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+
+    
+<div x-data="{ isSticky: false, mobileMenuOpen: false }"
+     x-init="
+       
+       $watch('mobileMenuOpen', value => document.body.classList.toggle('overflow-hidden', value));
+     ">
+
+  
+  
+  <nav class="mt-4 lg:mt-8 py-4">
+  
+
+    
+    <div class="container flex items-center justify-between px-4">
+    
+    
+      
+      <section class="flex items-center gap-3">
+        <button class="avatar cursor-pointer transition-all duration-200 group" 
+                @click="flip = !flip" 
+                title="Повернуть!"
+                aria-label="Повернуть!">
+          <div class="w-10 h-10 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all duration-200">
+            <img src="/img/avatar.jpg" 
+                 alt="0x69.ru &lt;/&gt;" 
+                 class="rounded-full" 
+                 loading="eager" />
+          </div>
+        </button>
+
+        
+        <div class="flex flex-col">
+          
+          <a href="/" 
+             class="text-lg font-semibold hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:text-primary">
+            0x69.ru &lt;/&gt;
+          </a>
+          
+          
+          <span class="text-sm text-base-content/60 hidden sm:block">Документируй сегодня то, что забудешь завтра</span>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="sm:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                :class="{ 'bg-primary text-primary-content shadow-md': mobileMenuOpen }"
+                aria-label="Открыть меню"
+                :aria-expanded="mobileMenuOpen">
+          <ion-icon :name="mobileMenuOpen ? 'close' : 'menu'" class="text-xl transition-colors duration-200"></ion-icon>
+        </button>
+      </div>
+
+      
+      <section class="hidden sm:flex sm:items-center sm:gap-1 md:gap-2">
+        
+        
+          
+          
+          <button class="px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+                  @click="flip = !flip"
+                  title="Обо мне">Обо мне</button>
+          
+        
+
+        
+        
+          
+        
+
+        
+          
+          
+          
+          
+            
+
+
+
+
+
+<a href="/search" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Поиск"
+   aria-label="Поиск">
+  <ion-icon name="search-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/categories" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Категории"
+   aria-label="Категории">
+  <ion-icon name="folder-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/portfolio" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Портфолио"
+   aria-label="Портфолио">
+  <ion-icon name="briefcase-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+            
+
+
+
+
+
+<a href="/utilities" 
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
+   title="Утилиты"
+   aria-label="Утилиты">
+  <ion-icon name="grid-outline" class="text-xl transition-colors duration-200 group-hover:text-primary-content"></ion-icon>
+</a>
+
+
+
+
+
+          
+        
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Выбрать язык"
+                    aria-haspopup="true">
+              <ion-icon name="language-outline" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] min-w-[180px] p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+                
+
+                
+                
+                
+                  
+                    
+                  
+                
+
+                
+                  
+                
+
+                <li role="none">
+                  <a href="https://0x69.ru/en/portfolio/codvisualassist/" 
+                     hreflang="en"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 "
+                     >
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">English</span>
+                    
+                  </a>
+                </li>
+              
+                
+                
+
+                
+                
+                
+                  
+                
+
+                
+                  
+                
+
+                <li role="none">
+                  <a href="/" 
+                     hreflang="ru"
+                     role="menuitem"
+                     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 bg-primary/10 text-primary font-semibold"
+                     aria-current="true">
+                    <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+                    <span class="flex-1">Русский</span>
+                    
+                    <ion-icon name="checkmark-circle" class="text-primary text-base"></ion-icon>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+            
+          
+          <div class="dropdown dropdown-end dropdown-hover">
+            <button tabindex="0" 
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-content hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95" 
+                    aria-label="Ещё"
+                    aria-haspopup="true">
+              <ion-icon name="ellipsis-horizontal" class="text-xl transition-colors duration-200"></ion-icon>
+            </button>
+            <ul tabindex="0" 
+                class="dropdown-content z-[1] w-48 p-2 mt-2 bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+                role="menu">
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">13</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+  <a href="/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">206</span>
+    
+  </a>
+</li>
+
+
+
+
+
+              
+                
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+              
+                
+
+
+
+
+
+<li role="none">
+  <a href="/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+              
+
+              
+                
+
+
+
+
+
+
+
+
+
+
+              
+            </ul>
+          </div>
+        
+      </section>
+    </div>
+  </nav>
+
+  
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       @click="mobileMenuOpen = false"
+       class="fixed inset-0 z-40 bg-base-100/80 backdrop-blur-sm sm:hidden"
+       style="display: none;"
+       aria-hidden="true">
+  </div>
+  
+  
+  <div x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+       x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+       x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
+       @click.outside="mobileMenuOpen = false"
+       @keydown.escape.window="mobileMenuOpen = false"
+       class="fixed right-4 top-20 z-50 w-72 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-7rem)] flex flex-col sm:hidden bg-base-100 rounded-xl shadow-xl border border-base-200 dark:border-base-content/10 overflow-hidden"
+       style="display: none;">
+    
+    
+    <div class="flex items-center justify-between px-4 py-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+      <span class="font-semibold text-base-content">Меню</span>
+      <button @click="mobileMenuOpen = false" 
+              class="inline-flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-95"
+              aria-label="Закрыть">
+        <ion-icon name="close" class="text-lg"></ion-icon>
+      </button>
+    </div>
+    
+    
+    
+      
+      
+      <div class="p-3 border-b border-base-200 dark:border-base-content/10 flex-shrink-0">
+        <button type="button"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                @click="flip = !flip; mobileMenuOpen = false"
+                title="Обо мне"
+                aria-label="Обо мне">
+          <ion-icon name="information-circle-outline" class="text-lg flex-shrink-0 text-primary"></ion-icon>
+          <span class="flex-1 text-left">Обо мне</span>
+          <ion-icon name="chevron-forward-outline" class="text-base-content/40"></ion-icon>
+        </button>
+      </div>
+      
+    
+    
+    
+    <div class="p-3 overflow-y-auto flex-1 overscroll-contain">
+      
+
+  
+
+
+<nav class="space-y-4" aria-label="Навигация">
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Язык
+    </h3>
+    <ul class="space-y-1">
+      
+        
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+          
+        
+        
+        <li>
+          <a href="https://0x69.ru/en/portfolio/codvisualassist/" 
+             title="English"
+             hreflang="en"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                    "
+             >
+            <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+            <span class="flex-1">English</span>
+            
+          </a>
+        </li>
+      
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+          
+        
+        
+        <li>
+          <a href="/" 
+             title="Русский"
+             hreflang="ru"
+             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                    bg-primary/10 text-primary font-semibold"
+             aria-current="true">
+            <ion-icon name="language" class="text-lg flex-shrink-0"></ion-icon>
+            <span class="flex-1">Русский</span>
+            
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  
+  <div class="border-t border-base-200 dark:border-base-content/10"></div>
+
+  
+  <div class="space-y-2">
+    <h3 class="px-3 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+      Меню
+    </h3>
+    <ul class="space-y-1">
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/search" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Поиск">
+    <ion-icon name="search-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Поиск</span>
+    <kbd class="kbd kbd-xs text-base-content/40">⌘K</kbd>
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/categories" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Категории">
+    <ion-icon name="folder-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Категории</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">5</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/portfolio" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Портфолио">
+    <ion-icon name="briefcase-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Портфолио</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">8</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/posts" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Архивы">
+    <ion-icon name="library-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Архивы</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">13</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/utilities" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Утилиты">
+    <ion-icon name="grid-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Утилиты</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">26</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+  <a href="/tags" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="Все теги">
+    <ion-icon name="pricetags-outline" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">Все теги</span>
+    
+    <span class="badge badge-sm badge-ghost font-normal">206</span>
+    
+  </a>
+</li>
+
+
+
+
+
+      
+        
+
+
+
+
+<li role="none">
+    <a href="https://github.com/rianvy" 
+       role="menuitem"
+       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="GitHub">
+      
+      <ion-icon name="logo-github" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+      
+      <span class="flex-1">GitHub</span>
+      
+      <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+      
+    </a>
+  </li>
+  
+
+      
+        
+
+
+
+
+
+<li role="none">
+  <a href="/index.xml" 
+     role="menuitem"
+     class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-base-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+     title="RSS"
+     target="_blank"
+     rel="noopener noreferrer">
+    <ion-icon name="logo-rss" class="text-lg flex-shrink-0 text-base-content/70"></ion-icon>
+    <span class="flex-1">RSS</span>
+    <ion-icon name="open-outline" class="text-xs text-base-content/40 flex-shrink-0"></ion-icon>
+  </a>
+</li>
+
+
+
+
+
+      
+      
+      
+        
+
+
+
+
+
+
+
+
+
+
+      
+    </ul>
+  </div>
+
+</nav>
+    </div>
+  </div>
+
+</div>
+
+    <style>
+    .flip-container .back {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .flip-container.flip-it .back {
+      opacity: 1;
+      visibility: visible;
+    }
+    </style>
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+<div class="reading-progress" id="reading-progress"></div>
+<div class="reading-progress-text" id="reading-progress-text">0%</div>
+
+<div class="lg:grid lg:grid-cols-12 gap-6 mt-4 px-4 max-w-screen-2xl mx-auto">
+  
+  <aside class="hidden lg:block lg:col-span-2 left-sidebar">
+    <div class="sticky top-20 space-y-4">
+      
+      <div class="flex flex-col gap-2">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn btn-ghost btn-sm gap-2" aria-label="Наверх">
+          <ion-icon name="arrow-up-outline"></ion-icon>
+          <span class="text-xs">Наверх</span>
+        </button>
+        <button onclick="toggleFocusMode()" class="btn btn-ghost btn-sm gap-2" id="focus-mode-btn" aria-label="Focus Mode">
+          <ion-icon name="eye-outline" id="focus-mode-icon"></ion-icon>
+          <span class="text-xs" id="focus-mode-text">Фокус</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  
+  <article class="lg:col-span-7 mx-auto prose prose-quoteless dark:prose-invert w-full max-w-4xl" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+    
+  <meta itemprop="name" content="COD VisualAssist — визуальный ассистент для Call of Duty">
+  <meta itemprop="description" content="Desktop-приложение для современных версий Call of Duty: помогает с наведением на противника, распознаёт игровые маркеры, сопровождает цели и настраивает прозрачный оверлей.">
+  <meta itemprop="datePublished" content="2026-09-06T12:00:00+03:00">
+  <meta itemprop="dateModified" content="2026-09-06T12:00:00+03:00">
+  <meta itemprop="wordCount" content="824">
+  <meta itemprop="image" content="https://0x69.ru/portfolio/codvisualassist/Cover.png">
+  <meta itemprop="keywords" content="Desktop,C#,OpenCV,UI/UX,Автоматизация">
+
+    <header class="not-prose mb-6 sm:mb-8">
+      
+      <nav class="text-xs sm:text-sm breadcrumbs mb-3 sm:mb-4 overflow-x-auto scrollbar-none">
+        <ul class="flex-nowrap">
+          <li class="shrink-0"><a href="/">Главная</a></li>
+          
+          <li class="shrink-0"><a href="/portfolio">Portfolio</a></li>
+          
+          
+          <li class="truncate max-w-[150px] sm:max-w-[200px] md:max-w-none">COD VisualAssist — визуальный ассистент для Call of Duty</li>
+        </ul>
+      </nav>
+
+      
+      
+
+      
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight sm:leading-snug mb-3 sm:mb-4 break-words hyphens-auto" 
+          itemprop="headline">
+        COD VisualAssist — визуальный ассистент для Call of Duty
+      </h1>
+
+      
+      <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-xs sm:text-sm text-base-content/70 mb-4 sm:mb-6">
+        
+        <time datetime="2026-09-06" class="flex items-center gap-1 min-w-0">
+          <ion-icon name="calendar-outline" class="text-sm sm:text-base shrink-0"></ion-icon>
+          <span class="truncate">
+            
+            <span data-format="luxon">2026-09-06T12:00:00&#43;03:00</span>
+            
+          </span>
+        </time>
+
+        
+        
+
+        
+        
+      </div>
+
+      
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4 py-3 sm:py-4 border-y border-base-300">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center">
+  
+  <div class="avatar mr-1">
+    <div class="w-8 rounded-full">
+      <img class="my-0" src="/img/avatar.jpg" alt="Rianvy" />
+    </div>
+  </div>
+  
+
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+  
+    
+      <span itemprop="name">Rianvy</span>
+    
+  
+  </span>
+</div>
+
+        </div>
+        <div class="flex justify-start sm:justify-end shrink-0">
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=COD%20VisualAssist%20%e2%80%94%20%d0%b2%d0%b8%d0%b7%d1%83%d0%b0%d0%bb%d1%8c%d0%bd%d1%8b%d0%b9%20%d0%b0%d1%81%d1%81%d0%b8%d1%81%d1%82%d0%b5%d0%bd%d1%82%20%d0%b4%d0%bb%d1%8f%20Call%20of%20Duty&amp;url=https://0x69.ru/portfolio/codvisualassist/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=https://0x69.ru/portfolio/codvisualassist/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=COD%20VisualAssist%20%e2%80%94%20%d0%b2%d0%b8%d0%b7%d1%83%d0%b0%d0%bb%d1%8c%d0%bd%d1%8b%d0%b9%20%d0%b0%d1%81%d1%81%d0%b8%d1%81%d1%82%d0%b5%d0%bd%d1%82%20%d0%b4%d0%bb%d1%8f%20Call%20of%20Duty%20https://0x69.ru/portfolio/codvisualassist/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://t.me/share/url?url=https://0x69.ru/portfolio/codvisualassist/&amp;resubmit=true&amp;title=COD%20VisualAssist%20%e2%80%94%20%d0%b2%d0%b8%d0%b7%d1%83%d0%b0%d0%bb%d1%8c%d0%bd%d1%8b%d0%b9%20%d0%b0%d1%81%d1%81%d0%b8%d1%81%d1%82%d0%b5%d0%bd%d1%82%20%d0%b4%d0%bb%d1%8f%20Call%20of%20Duty" target="_blank" rel="noopener noreferrer"
+      title="Share on Telegram">
+      <ion-icon class="group-hover:text-primary-content" name="send"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </div>
+    </header>
+
+    
+    
+    <div class="not-prose mb-6 sm:mb-8">
+      <div class="flex items-center gap-2 sm:gap-3
+                  p-3 sm:p-4
+                  rounded-xl border border-base-300 bg-base-200/50">
+
+        
+        <span class="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-full w-full bg-primary"></span>
+        </span>
+        <ion-icon name="language-outline" class="text-lg sm:text-xl shrink-0"></ion-icon>
+        <span class="text-xs sm:text-sm text-base-content/70 shrink-0">Эта запись также доступна на</span>
+
+        
+        
+        <a href="https://0x69.ru/en/portfolio/codvisualassist/"
+           class="group inline-flex items-center gap-1 sm:gap-1.5
+                  px-2.5 py-1 sm:px-3 sm:py-1.5
+                  rounded-full text-xs sm:text-sm
+                  bg-base-100 hover:bg-primary hover:text-primary-content
+                  border border-base-300 hover:border-primary
+                  transition-all duration-200 no-underline
+                  active:scale-95 shrink-0"
+           rel="noopener noreferrer"
+           hreflang="en">
+          <span class="opacity-70 group-hover:opacity-100">
+            🇬🇧
+          </span>
+          English
+          <ion-icon name="arrow-forward" class="text-xs opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-0 transition-all hidden sm:block"></ion-icon>
+        </a>
+        
+
+      </div>
+    </div>
+    
+
+    
+    
+    <figure class="not-prose mb-8"><img src="/portfolio/codvisualassist/Cover_hu_cd9a9029bc98b2ba.webp" 
+             alt="COD VisualAssist — визуальный ассистент для Call of Duty" 
+             width="1200" 
+             height="720"
+             class="w-full rounded-xl shadow-lg" 
+             loading="eager"/></figure>
+    
+
+    
+    
+
+      
+      
+      <div class="not-prose mb-6">
+        
+        
+        
+        
+        
+        
+          
+          
+          
+          
+        
+        
+        <div class="flex items-center gap-3 p-4 rounded-xl bg-success/10 border border-success/30">
+          <div class="flex items-center justify-center w-10 h-10 rounded-full bg-success/30">
+            <ion-icon name="checkmark-circle-outline" class="text-xl text-success"></ion-icon>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-semibold text-success">Завершён</span>
+              
+            </div>
+            <p class="text-sm text-base-content/60">Проект успешно завершён и работает</p>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="not-prose my-4">
+  
+  <div class="mb-8">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </div>
+      <h3 class="text-2xl md:text-3xl font-bold text-base-content">Используемые инструменты</h3>
+    </div>
+  </div>
+  
+  <div class="grid grid-cols-2 gap-3 md:hidden">
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-6 h-6 flex-shrink-0">
+        <svg preserveAspectRatio="xMidYMid" viewBox="0 -1.428 255.582 290.108" xmlns="http://www.w3.org/2000/svg" class="toolsUsed">
+          <path d="m255.569 84.452c-.002-4.83-1.035-9.098-3.124-12.76-2.052-3.603-5.125-6.622-9.247-9.009-34.025-19.619-68.083-39.178-102.097-58.817-9.17-5.294-18.061-5.1-27.163.27-13.543 7.986-81.348 46.833-101.553 58.536-8.321 4.818-12.37 12.19-12.372 21.771-.013 39.455 0 78.91-.013 118.365 0 4.724.991 8.91 2.988 12.517 2.053 3.711 5.169 6.813 9.386 9.254 20.206 11.703 88.02 50.547 101.56 58.536 9.106 5.373 17.997 5.565 27.17.27 34.015-19.64 68.075-39.199 102.105-58.818 4.217-2.44 7.333-5.544 9.386-9.252 1.994-3.608 2.987-7.793 2.987-12.518 0 0 0-78.889-.013-118.345" fill="#a179dc" />
+          <path d="m128.182 143.241-125.194 72.084c2.053 3.711 5.169 6.813 9.386 9.254 20.206 11.703 88.02 50.547 101.56 58.536 9.106 5.373 17.997 5.565 27.17.27 34.015-19.64 68.075-39.199 102.105-58.818 4.217-2.44 7.333-5.544 9.386-9.252z" fill="#280068" />
+          <path d="m255.569 84.452c-.002-4.83-1.035-9.098-3.124-12.76l-124.263 71.55 124.413 72.073c1.994-3.608 2.985-7.793 2.987-12.518 0 0 0-78.889-.013-118.345" fill="#390091" />
+          <g fill="#fff">
+            <path d="m201.892 116.294v13.474h13.474v-13.474h6.737v13.474h13.474v6.737h-13.474v13.473h13.474v6.737h-13.474v13.474h-6.737v-13.474h-13.474v13.474h-6.737v-13.474h-13.473v-6.737h13.473v-13.473h-13.473v-6.737h13.473v-13.474zm13.474 20.21h-13.474v13.474h13.474z" />
+            <path d="m128.457 48.626c35.144 0 65.827 19.086 82.262 47.456l-.16-.273-41.35 23.808c-8.146-13.793-23.08-23.102-40.213-23.294l-.54-.003c-26.125 0-47.305 21.18-47.305 47.305a47.08 47.08 0 0 0 6.239 23.47c8.154 14.235 23.483 23.836 41.067 23.836 17.693 0 33.109-9.723 41.221-24.11l-.197.345 41.287 23.918c-16.255 28.13-46.518 47.157-81.253 47.536l-1.058.006c-35.255 0-66.025-19.204-82.419-47.724-8.003-13.923-12.582-30.064-12.582-47.277 0-52.466 42.532-95 95-95z" />
+          </g>
+        </svg>
+      </div>
+      
+      <span class="font-medium text-sm text-base-content">C#</span>
+    </div>
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></div>
+      
+      <span class="font-medium text-sm text-base-content">.NET 8</span>
+    </div>
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></div>
+      
+      <span class="font-medium text-sm text-base-content">OpenCV</span>
+    </div>
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></div>
+      
+      <span class="font-medium text-sm text-base-content">ImGui.NET</span>
+    </div>
+    
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-base-300 bg-base-100 hover:border-primary/50 transition-all duration-200">
+      
+      
+      <div class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></div>
+      
+      <span class="font-medium text-sm text-base-content">DirectX 11</span>
+    </div>
+    
+  </div>
+  
+  <div class="hidden md:block overflow-hidden rounded-xl border border-base-300 bg-base-100">
+    <table class="w-full">
+      <tbody class="divide-y divide-base-300">
+               
+        <tr class="group hover:bg-base-200/50 transition-colors">
+                 
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-5 h-5 flex-shrink-0">
+                <svg preserveAspectRatio="xMidYMid" viewBox="0 -1.428 255.582 290.108" xmlns="http://www.w3.org/2000/svg" class="toolsUsed">
+                  <path d="m255.569 84.452c-.002-4.83-1.035-9.098-3.124-12.76-2.052-3.603-5.125-6.622-9.247-9.009-34.025-19.619-68.083-39.178-102.097-58.817-9.17-5.294-18.061-5.1-27.163.27-13.543 7.986-81.348 46.833-101.553 58.536-8.321 4.818-12.37 12.19-12.372 21.771-.013 39.455 0 78.91-.013 118.365 0 4.724.991 8.91 2.988 12.517 2.053 3.711 5.169 6.813 9.386 9.254 20.206 11.703 88.02 50.547 101.56 58.536 9.106 5.373 17.997 5.565 27.17.27 34.015-19.64 68.075-39.199 102.105-58.818 4.217-2.44 7.333-5.544 9.386-9.252 1.994-3.608 2.987-7.793 2.987-12.518 0 0 0-78.889-.013-118.345" fill="#a179dc" />
+                  <path d="m128.182 143.241-125.194 72.084c2.053 3.711 5.169 6.813 9.386 9.254 20.206 11.703 88.02 50.547 101.56 58.536 9.106 5.373 17.997 5.565 27.17.27 34.015-19.64 68.075-39.199 102.105-58.818 4.217-2.44 7.333-5.544 9.386-9.252z" fill="#280068" />
+                  <path d="m255.569 84.452c-.002-4.83-1.035-9.098-3.124-12.76l-124.263 71.55 124.413 72.073c1.994-3.608 2.985-7.793 2.987-12.518 0 0 0-78.889-.013-118.345" fill="#390091" />
+                  <g fill="#fff">
+                    <path d="m201.892 116.294v13.474h13.474v-13.474h6.737v13.474h13.474v6.737h-13.474v13.473h13.474v6.737h-13.474v13.474h-6.737v-13.474h-13.474v13.474h-6.737v-13.474h-13.473v-6.737h13.473v-13.473h-13.473v-6.737h13.473v-13.474zm13.474 20.21h-13.474v13.474h13.474z" />
+                    <path d="m128.457 48.626c35.144 0 65.827 19.086 82.262 47.456l-.16-.273-41.35 23.808c-8.146-13.793-23.08-23.102-40.213-23.294l-.54-.003c-26.125 0-47.305 21.18-47.305 47.305a47.08 47.08 0 0 0 6.239 23.47c8.154 14.235 23.483 23.836 41.067 23.836 17.693 0 33.109-9.723 41.221-24.11l-.197.345 41.287 23.918c-16.255 28.13-46.518 47.157-81.253 47.536l-1.058.006c-35.255 0-66.025-19.204-82.419-47.724-8.003-13.923-12.582-30.064-12.582-47.277 0-52.466 42.532-95 95-95z" />
+                  </g>
+                </svg>
+              </div>
+              
+              <span class="font-medium text-base-content">C#</span>
+            </div>
+          </td>
+                   
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 group-hover:scale-125 transition-transform"></div>
+              
+              <span class="font-medium text-base-content">.NET 8</span>
+            </div>
+          </td>
+                   
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 group-hover:scale-125 transition-transform"></div>
+              
+              <span class="font-medium text-base-content">OpenCV</span>
+            </div>
+          </td>
+            
+        </tr>
+             
+        <tr class="group hover:bg-base-200/50 transition-colors">
+                 
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 group-hover:scale-125 transition-transform"></div>
+              
+              <span class="font-medium text-base-content">ImGui.NET</span>
+            </div>
+          </td>
+                     
+          <td class="px-6 py-4 border-r border-base-300 last:border-r-0" colspan="2" >
+            <div class="flex items-center gap-3">
+              
+              
+              <div class="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 group-hover:scale-125 transition-transform"></div>
+              
+              <span class="font-medium text-base-content">DirectX 11</span>
+            </div>
+          </td>
+               
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+      
+
+    
+
+    
+    <section id="dream-single-post-content" class="fade-in-up" itemprop="articleBody">
+      <p><strong>COD VisualAssist</strong> — desktop-приложение для современных версий Call of Duty, созданное для помощи в наведении на противника. Оно распознаёт игровые маркеры на экране, сопровождает цели и управляет визуальными подсказками через прозрачный оверлей.</p>
+<h2 id="от-экранного-маркера--к-действию">От экранного маркера — к действию</h2>
+<p>COD VisualAssist объединяет компьютерное зрение, сопровождение объектов и помощь в наведении поверх современных игр серии Call of Duty. Приложение находит маркеры по цвету и форме в захваченном изображении, сохраняет идентичность цели между кадрами и передаёт результат системе наведения и прозрачному оверлею.</p>
+<p>За лаконичной панелью находится самостоятельный конвейер захвата и обработки кадров. Пользователь начинает с цвета маркера и готового режима, а затем уточняет поведение, внешний вид и горячие клавиши.</p>
+
+
+
+  <blockquote>
+    <p>Изображение экрана — источник данных для детектора. Чтение памяти игрового процесса в проекте не используется.</p>
+  </blockquote>
+
+<h2 id="01--распознать">01 / Распознать</h2>
+<p>Первый экран настройки отвечает на простой вопрос: что именно должно увидеть приложение. Большая палитра объединена с готовыми цветами, историей выбора и пипеткой для получения цвета с экрана. Справа — форма маркера, область поиска, приоритет объекта и наглядный предпросмотр маски.</p>
+<p>Поддерживаются <strong>ромб, круг и поиск обеих форм</strong>. Детектор проверяет разные масштабы, а приоритет позволяет выбирать между сбалансированным отбором, близостью к прицелу, достоверностью и размером маркера. Точка наведения задаётся отдельно — с визуальной схемой положения на силуэте.</p>
+
+<section
+  class="not-prose gallery-section my-8 w-full"
+  aria-label="Галерея изображений"
+  data-gallery-id="codvisualassist-detection"
+>
+
+
+  <div
+    class="gallery gallery--hover-zoom"
+    id="codvisualassist-detection"
+    role="list"
+    data-cols="1"
+    data-gap="6"
+    data-hover="zoom"
+    data-captions="always"
+  ><figure class="my-4">
+    <img
+      src="work/target-dark.png"
+      alt="Раздел «Цель»: палитра цвета, форма цели, область поиска и предпросмотр маски"
+      title="Цвет, геометрия и область поиска собраны в одном рабочем пространстве"
+      decoding="async"
+      class="rounded-xl shadow-lg"
+    /><figcaption class="text-center text-sm text-base-content/60 mt-2">Цвет, геометрия и область поиска собраны в одном рабочем пространстве</figcaption></figure></div>
+</section>
+
+
+
+<style>
+   
+
+  
+  #codvisualassist-detection.gallery {
+    columns: 1;
+    column-gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    #codvisualassist-detection.gallery {
+      columns: 1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #codvisualassist-detection.gallery {
+      columns: 1;
+    }
+  }
+  
+
+   
+  #codvisualassist-detection figure,
+  #codvisualassist-detection > p {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: oklch(var(--b2, 0.93 0 0));
+    break-inside: avoid;
+    
+    margin-bottom: 1.5rem;
+    
+
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    animation: stagger-codvisualassist-detection-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  @keyframes stagger-codvisualassist-detection-enter {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+   
+  #codvisualassist-detection.gallery--hover-lift figure:hover,
+  #codvisualassist-detection.gallery--hover-lift > p:hover {
+    transform: translateY(-4px);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+   
+  #codvisualassist-detection figure a,
+  #codvisualassist-detection > p > a {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    line-height: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+   
+  #codvisualassist-detection img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    cursor: pointer;
+    user-select: none;
+    margin: 0 !important;
+    transition:
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      filter    0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity   0.4s ease;
+    will-change: transform;
+    
+  }
+
+   
+  #codvisualassist-detection.gallery--hover-zoom figure:hover img,
+  #codvisualassist-detection.gallery--hover-zoom > p:hover img {
+    transform: scale(1.06);
+    filter: brightness(1.05);
+  }
+
+   
+  #codvisualassist-detection.gallery--hover-fade figure:hover img,
+  #codvisualassist-detection.gallery--hover-fade > p:hover img {
+    opacity: 0.85;
+  }
+
+   
+  #codvisualassist-detection.gallery--hover-lift figure:hover img,
+  #codvisualassist-detection.gallery--hover-lift > p:hover img {
+    filter: brightness(1.03);
+  }
+
+   
+  #codvisualassist-detection.gallery--hover-none figure:hover img,
+  #codvisualassist-detection.gallery--hover-none > p:hover img {
+    transform: none;
+    filter: none;
+  }
+
+   
+  #codvisualassist-detection figure a::after,
+  #codvisualassist-detection > p > a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.25) 0%,
+      oklch(0 0 0 / 0.06) 40%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #codvisualassist-detection.gallery--hover-none figure a::after,
+  #codvisualassist-detection.gallery--hover-none > p > a::after {
+    display: none;
+  }
+
+  #codvisualassist-detection figure:hover a::after,
+  #codvisualassist-detection > p:hover > a::after {
+    opacity: 1;
+  }
+
+   
+  #codvisualassist-detection figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.25rem 1rem 0.75rem;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.55) 0%,
+      transparent 100%
+    );
+    color: white;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    border-radius: 0 0 1rem 1rem;
+    pointer-events: none;
+    z-index: 2;
+
+    
+    opacity: 1;
+    
+  }
+
+  
+
+   
+  #codvisualassist-detection a:focus-visible,
+  #codvisualassist-detection img:focus-visible {
+    outline: 2px solid oklch(var(--p, 0.65 0.25 260));
+    outline-offset: 2px;
+    border-radius: 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #codvisualassist-detection figure,
+    #codvisualassist-detection > p {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    #codvisualassist-detection img {
+      transition-duration: 0.01ms !important;
+    }
+
+    #codvisualassist-detection figure a::after,
+    #codvisualassist-detection > p > a::after,
+    #codvisualassist-detection figcaption {
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+   
+  #codvisualassist-detection img[loading="lazy"] {
+    background:
+      linear-gradient(
+        110deg,
+        oklch(var(--b2, 0.93 0 0)) 30%,
+        oklch(var(--b3, 0.88 0 0)) 50%,
+        oklch(var(--b2, 0.93 0 0)) 70%
+      );
+    background-size: 200% 100%;
+    animation: codvisualassist-detection-shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes codvisualassist-detection-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  #codvisualassist-detection img.loaded {
+    animation: none;
+    background: none;
+  }
+</style>
+
+
+
+<script>
+  (() => {
+    const gallery = document.getElementById('codvisualassist-detection');
+    if (!gallery) return;
+
+    const items = gallery.querySelectorAll('figure, :scope > p');
+    items.forEach((el, i) => {
+      el.style.setProperty('--i', i);
+      el.setAttribute('role', 'listitem');
+    });
+
+    gallery.querySelectorAll('img').forEach(img => {
+      const markLoaded = () => img.classList.add('loaded');
+      if (img.complete) {
+        markLoaded();
+      } else {
+        img.addEventListener('load', markLoaded, { once: true });
+        img.addEventListener('error', markLoaded, { once: true });
+      }
+
+      if (!img.closest('a')) {
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('role', 'button');
+      }
+    });
+
+    const counter = document.getElementById('codvisualassist-detection-count');
+    if (counter) {
+      const total = gallery.querySelectorAll('img').length;
+      counter.textContent = `Галерея: ${total} ${total === 1 ? 'изображение' : 'изображений'}`;
+    }
+
+    gallery.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const img = e.target;
+        if (img.tagName === 'IMG') {
+          e.preventDefault();
+          const link = img.closest('a');
+          if (link) link.click();
+        }
+      }
+    });
+  })();
+</script>
+<h2 id="02--удержать">02 / Удержать</h2>
+<p>Сопровождение строится вокруг непрерывности: краткий пропуск маркера не должен превращаться в случайную смену объекта. Многоцелевой трекер присваивает объектам устойчивые идентификаторы, сопоставляет наблюдения между кадрами и прогнозирует движение при коротком перекрытии.</p>
+<p>В интерфейсе доступны <strong>автоматический, мягкий, сбалансированный, точный и пользовательский режимы</strong>. Они согласованно управляют поиском, прогнозом и восстановлением. Автоматическое наведение и наведение при удержании клавиши включаются отдельно; для автовыстрела предусмотрены удержание кнопки, повторные клики и одиночное срабатывание.</p>
+
+<section
+  class="not-prose gallery-section my-8 w-full"
+  aria-label="Галерея изображений"
+  data-gallery-id="codvisualassist-tracking"
+>
+
+
+  <div
+    class="gallery gallery--hover-zoom"
+    id="codvisualassist-tracking"
+    role="list"
+    data-cols="1"
+    data-gap="6"
+    data-hover="zoom"
+    data-captions="always"
+  ><figure class="my-4">
+    <img
+      src="work/tracking-dark.png"
+      alt="Раздел «Сопровождение»: пять режимов и параметры активации"
+      title="Готовые режимы дают понятную отправную точку для настройки поведения"
+      decoding="async"
+      class="rounded-xl shadow-lg"
+    /><figcaption class="text-center text-sm text-base-content/60 mt-2">Готовые режимы дают понятную отправную точку для настройки поведения</figcaption></figure></div>
+</section>
+
+
+
+<style>
+   
+
+  
+  #codvisualassist-tracking.gallery {
+    columns: 1;
+    column-gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    #codvisualassist-tracking.gallery {
+      columns: 1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #codvisualassist-tracking.gallery {
+      columns: 1;
+    }
+  }
+  
+
+   
+  #codvisualassist-tracking figure,
+  #codvisualassist-tracking > p {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: oklch(var(--b2, 0.93 0 0));
+    break-inside: avoid;
+    
+    margin-bottom: 1.5rem;
+    
+
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    animation: stagger-codvisualassist-tracking-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  @keyframes stagger-codvisualassist-tracking-enter {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+   
+  #codvisualassist-tracking.gallery--hover-lift figure:hover,
+  #codvisualassist-tracking.gallery--hover-lift > p:hover {
+    transform: translateY(-4px);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+   
+  #codvisualassist-tracking figure a,
+  #codvisualassist-tracking > p > a {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    line-height: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+   
+  #codvisualassist-tracking img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    cursor: pointer;
+    user-select: none;
+    margin: 0 !important;
+    transition:
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      filter    0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity   0.4s ease;
+    will-change: transform;
+    
+  }
+
+   
+  #codvisualassist-tracking.gallery--hover-zoom figure:hover img,
+  #codvisualassist-tracking.gallery--hover-zoom > p:hover img {
+    transform: scale(1.06);
+    filter: brightness(1.05);
+  }
+
+   
+  #codvisualassist-tracking.gallery--hover-fade figure:hover img,
+  #codvisualassist-tracking.gallery--hover-fade > p:hover img {
+    opacity: 0.85;
+  }
+
+   
+  #codvisualassist-tracking.gallery--hover-lift figure:hover img,
+  #codvisualassist-tracking.gallery--hover-lift > p:hover img {
+    filter: brightness(1.03);
+  }
+
+   
+  #codvisualassist-tracking.gallery--hover-none figure:hover img,
+  #codvisualassist-tracking.gallery--hover-none > p:hover img {
+    transform: none;
+    filter: none;
+  }
+
+   
+  #codvisualassist-tracking figure a::after,
+  #codvisualassist-tracking > p > a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.25) 0%,
+      oklch(0 0 0 / 0.06) 40%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #codvisualassist-tracking.gallery--hover-none figure a::after,
+  #codvisualassist-tracking.gallery--hover-none > p > a::after {
+    display: none;
+  }
+
+  #codvisualassist-tracking figure:hover a::after,
+  #codvisualassist-tracking > p:hover > a::after {
+    opacity: 1;
+  }
+
+   
+  #codvisualassist-tracking figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.25rem 1rem 0.75rem;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.55) 0%,
+      transparent 100%
+    );
+    color: white;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    border-radius: 0 0 1rem 1rem;
+    pointer-events: none;
+    z-index: 2;
+
+    
+    opacity: 1;
+    
+  }
+
+  
+
+   
+  #codvisualassist-tracking a:focus-visible,
+  #codvisualassist-tracking img:focus-visible {
+    outline: 2px solid oklch(var(--p, 0.65 0.25 260));
+    outline-offset: 2px;
+    border-radius: 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #codvisualassist-tracking figure,
+    #codvisualassist-tracking > p {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    #codvisualassist-tracking img {
+      transition-duration: 0.01ms !important;
+    }
+
+    #codvisualassist-tracking figure a::after,
+    #codvisualassist-tracking > p > a::after,
+    #codvisualassist-tracking figcaption {
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+   
+  #codvisualassist-tracking img[loading="lazy"] {
+    background:
+      linear-gradient(
+        110deg,
+        oklch(var(--b2, 0.93 0 0)) 30%,
+        oklch(var(--b3, 0.88 0 0)) 50%,
+        oklch(var(--b2, 0.93 0 0)) 70%
+      );
+    background-size: 200% 100%;
+    animation: codvisualassist-tracking-shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes codvisualassist-tracking-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  #codvisualassist-tracking img.loaded {
+    animation: none;
+    background: none;
+  }
+</style>
+
+
+
+<script>
+  (() => {
+    const gallery = document.getElementById('codvisualassist-tracking');
+    if (!gallery) return;
+
+    const items = gallery.querySelectorAll('figure, :scope > p');
+    items.forEach((el, i) => {
+      el.style.setProperty('--i', i);
+      el.setAttribute('role', 'listitem');
+    });
+
+    gallery.querySelectorAll('img').forEach(img => {
+      const markLoaded = () => img.classList.add('loaded');
+      if (img.complete) {
+        markLoaded();
+      } else {
+        img.addEventListener('load', markLoaded, { once: true });
+        img.addEventListener('error', markLoaded, { once: true });
+      }
+
+      if (!img.closest('a')) {
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('role', 'button');
+      }
+    });
+
+    const counter = document.getElementById('codvisualassist-tracking-count');
+    if (counter) {
+      const total = gallery.querySelectorAll('img').length;
+      counter.textContent = `Галерея: ${total} ${total === 1 ? 'изображение' : 'изображений'}`;
+    }
+
+    gallery.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const img = e.target;
+        if (img.tagName === 'IMG') {
+          e.preventDefault();
+          const link = img.closest('a');
+          if (link) link.click();
+        }
+      }
+    });
+  })();
+</script>
+<h3 id="один-жизненный-цикл-цели">Один жизненный цикл цели</h3>
+<ol>
+<li><strong>Поиск — Acquiring.</strong> Приложение накапливает подтверждение нового объекта.</li>
+<li><strong>Захват — Locked.</strong> Подтверждённая цель получает приоритет сопровождения.</li>
+<li><strong>Перекрытие — Coasting.</strong> Позиция кратковременно прогнозируется; автовыстрел не разрешается.</li>
+<li><strong>Потеря — Lost.</strong> После окончательной потери система возвращается к выбору цели.</li>
+</ol>
+<p>Эта модель используется наведением, визуальными подсказками и телеметрией. Благодаря общей модели разные части приложения согласованно реагируют на смену состояния.</p>
+<h2 id="03--отобразить">03 / Отобразить</h2>
+<p>Оверлей настраивается как единая визуальная система. Рамки объектов, линии к цели, подписи, область поиска и отдельный прицел имеют собственные параметры. Доступны варианты линий и рамок, толщина, цвет, прозрачность и свечение.</p>
+<p>Готовые стили — <strong>минимальный, чистый, неоновый, тактический и мягкий</strong> — позволяют быстро собрать согласованное оформление. Встроенный предпросмотр показывает результат в разных состояниях цели. Его можно переключить на живые данные детектора.</p>
+
+<section
+  class="not-prose gallery-section my-8 w-full"
+  aria-label="Галерея изображений"
+  data-gallery-id="codvisualassist-overlay"
+>
+
+
+  <div
+    class="gallery gallery--hover-zoom"
+    id="codvisualassist-overlay"
+    role="list"
+    data-cols="1"
+    data-gap="6"
+    data-hover="zoom"
+    data-captions="always"
+  ><figure class="my-4">
+    <img
+      src="work/overlay-dark.png"
+      alt="Раздел «Оверлей»: стили, предпросмотр рамки и линии, настройка прицела"
+      title="Стиль «Чистый» во встроенном предпросмотре приложения"
+      decoding="async"
+      class="rounded-xl shadow-lg"
+    /><figcaption class="text-center text-sm text-base-content/60 mt-2">Стиль «Чистый» во встроенном предпросмотре приложения</figcaption></figure></div>
+</section>
+
+
+
+<style>
+   
+
+  
+  #codvisualassist-overlay.gallery {
+    columns: 1;
+    column-gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    #codvisualassist-overlay.gallery {
+      columns: 1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #codvisualassist-overlay.gallery {
+      columns: 1;
+    }
+  }
+  
+
+   
+  #codvisualassist-overlay figure,
+  #codvisualassist-overlay > p {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: oklch(var(--b2, 0.93 0 0));
+    break-inside: avoid;
+    
+    margin-bottom: 1.5rem;
+    
+
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    animation: stagger-codvisualassist-overlay-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  @keyframes stagger-codvisualassist-overlay-enter {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+   
+  #codvisualassist-overlay.gallery--hover-lift figure:hover,
+  #codvisualassist-overlay.gallery--hover-lift > p:hover {
+    transform: translateY(-4px);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+   
+  #codvisualassist-overlay figure a,
+  #codvisualassist-overlay > p > a {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    line-height: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+   
+  #codvisualassist-overlay img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    cursor: pointer;
+    user-select: none;
+    margin: 0 !important;
+    transition:
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      filter    0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity   0.4s ease;
+    will-change: transform;
+    
+  }
+
+   
+  #codvisualassist-overlay.gallery--hover-zoom figure:hover img,
+  #codvisualassist-overlay.gallery--hover-zoom > p:hover img {
+    transform: scale(1.06);
+    filter: brightness(1.05);
+  }
+
+   
+  #codvisualassist-overlay.gallery--hover-fade figure:hover img,
+  #codvisualassist-overlay.gallery--hover-fade > p:hover img {
+    opacity: 0.85;
+  }
+
+   
+  #codvisualassist-overlay.gallery--hover-lift figure:hover img,
+  #codvisualassist-overlay.gallery--hover-lift > p:hover img {
+    filter: brightness(1.03);
+  }
+
+   
+  #codvisualassist-overlay.gallery--hover-none figure:hover img,
+  #codvisualassist-overlay.gallery--hover-none > p:hover img {
+    transform: none;
+    filter: none;
+  }
+
+   
+  #codvisualassist-overlay figure a::after,
+  #codvisualassist-overlay > p > a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.25) 0%,
+      oklch(0 0 0 / 0.06) 40%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #codvisualassist-overlay.gallery--hover-none figure a::after,
+  #codvisualassist-overlay.gallery--hover-none > p > a::after {
+    display: none;
+  }
+
+  #codvisualassist-overlay figure:hover a::after,
+  #codvisualassist-overlay > p:hover > a::after {
+    opacity: 1;
+  }
+
+   
+  #codvisualassist-overlay figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.25rem 1rem 0.75rem;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.55) 0%,
+      transparent 100%
+    );
+    color: white;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    border-radius: 0 0 1rem 1rem;
+    pointer-events: none;
+    z-index: 2;
+
+    
+    opacity: 1;
+    
+  }
+
+  
+
+   
+  #codvisualassist-overlay a:focus-visible,
+  #codvisualassist-overlay img:focus-visible {
+    outline: 2px solid oklch(var(--p, 0.65 0.25 260));
+    outline-offset: 2px;
+    border-radius: 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #codvisualassist-overlay figure,
+    #codvisualassist-overlay > p {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    #codvisualassist-overlay img {
+      transition-duration: 0.01ms !important;
+    }
+
+    #codvisualassist-overlay figure a::after,
+    #codvisualassist-overlay > p > a::after,
+    #codvisualassist-overlay figcaption {
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+   
+  #codvisualassist-overlay img[loading="lazy"] {
+    background:
+      linear-gradient(
+        110deg,
+        oklch(var(--b2, 0.93 0 0)) 30%,
+        oklch(var(--b3, 0.88 0 0)) 50%,
+        oklch(var(--b2, 0.93 0 0)) 70%
+      );
+    background-size: 200% 100%;
+    animation: codvisualassist-overlay-shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes codvisualassist-overlay-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  #codvisualassist-overlay img.loaded {
+    animation: none;
+    background: none;
+  }
+</style>
+
+
+
+<script>
+  (() => {
+    const gallery = document.getElementById('codvisualassist-overlay');
+    if (!gallery) return;
+
+    const items = gallery.querySelectorAll('figure, :scope > p');
+    items.forEach((el, i) => {
+      el.style.setProperty('--i', i);
+      el.setAttribute('role', 'listitem');
+    });
+
+    gallery.querySelectorAll('img').forEach(img => {
+      const markLoaded = () => img.classList.add('loaded');
+      if (img.complete) {
+        markLoaded();
+      } else {
+        img.addEventListener('load', markLoaded, { once: true });
+        img.addEventListener('error', markLoaded, { once: true });
+      }
+
+      if (!img.closest('a')) {
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('role', 'button');
+      }
+    });
+
+    const counter = document.getElementById('codvisualassist-overlay-count');
+    if (counter) {
+      const total = gallery.querySelectorAll('img').length;
+      counter.textContent = `Галерея: ${total} ${total === 1 ? 'изображение' : 'изображений'}`;
+    }
+
+    gallery.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const img = e.target;
+        if (img.tagName === 'IMG') {
+          e.preventDefault();
+          const link = img.closest('a');
+          if (link) link.click();
+        }
+      }
+    });
+  })();
+</script>
+<p>Рамки показывают известные трекеру объекты: активная цель выделяется основным цветом, остальные — нейтральным, а временно перекрытые — приглушённым. Линия и индикатор захвата относятся к активной цели.</p>
+<h2 id="интерфейс-который-подстраивается">Интерфейс, который подстраивается</h2>
+<p>Визуальный язык приложения строится на графитовых поверхностях, тонких границах, голубом акценте и типографике Segoe UI. Постоянная боковая навигация сохраняет контекст, а карточки объединяют связанные параметры. Светлая тема использует ту же сетку и иерархию.</p>
+<p>Пользователь может менять акцентный цвет, масштаб интерфейса и шрифта, плотность, прозрачность и язык. Для увеличения текста приложение пересобирает атлас шрифтов. Палитра команд, горячие клавиши, отмена и повтор изменений сокращают путь к нужному действию; компактная сводка оставляет на экране основные показатели.</p>
+
+<section
+  class="not-prose gallery-section my-8 w-full"
+  aria-label="Галерея изображений"
+  data-gallery-id="codvisualassist-appearance"
+>
+
+
+  <div
+    class="gallery gallery--hover-zoom"
+    id="codvisualassist-appearance"
+    role="list"
+    data-cols="1"
+    data-gap="6"
+    data-hover="zoom"
+    data-captions="always"
+  ><figure class="my-4">
+    <img
+      src="work/appearance-light.png"
+      alt="Раздел «Оформление» в светлой теме"
+      title="Масштабирование, русский и английский языки, прозрачность и выбор монитора"
+      decoding="async"
+      class="rounded-xl shadow-lg"
+    /><figcaption class="text-center text-sm text-base-content/60 mt-2">Масштабирование, русский и английский языки, прозрачность и выбор монитора</figcaption></figure></div>
+</section>
+
+
+
+<style>
+   
+
+  
+  #codvisualassist-appearance.gallery {
+    columns: 1;
+    column-gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    #codvisualassist-appearance.gallery {
+      columns: 1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #codvisualassist-appearance.gallery {
+      columns: 1;
+    }
+  }
+  
+
+   
+  #codvisualassist-appearance figure,
+  #codvisualassist-appearance > p {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: oklch(var(--b2, 0.93 0 0));
+    break-inside: avoid;
+    
+    margin-bottom: 1.5rem;
+    
+
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    animation: stagger-codvisualassist-appearance-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  @keyframes stagger-codvisualassist-appearance-enter {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+   
+  #codvisualassist-appearance.gallery--hover-lift figure:hover,
+  #codvisualassist-appearance.gallery--hover-lift > p:hover {
+    transform: translateY(-4px);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+   
+  #codvisualassist-appearance figure a,
+  #codvisualassist-appearance > p > a {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    line-height: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+   
+  #codvisualassist-appearance img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    cursor: pointer;
+    user-select: none;
+    margin: 0 !important;
+    transition:
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      filter    0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity   0.4s ease;
+    will-change: transform;
+    
+  }
+
+   
+  #codvisualassist-appearance.gallery--hover-zoom figure:hover img,
+  #codvisualassist-appearance.gallery--hover-zoom > p:hover img {
+    transform: scale(1.06);
+    filter: brightness(1.05);
+  }
+
+   
+  #codvisualassist-appearance.gallery--hover-fade figure:hover img,
+  #codvisualassist-appearance.gallery--hover-fade > p:hover img {
+    opacity: 0.85;
+  }
+
+   
+  #codvisualassist-appearance.gallery--hover-lift figure:hover img,
+  #codvisualassist-appearance.gallery--hover-lift > p:hover img {
+    filter: brightness(1.03);
+  }
+
+   
+  #codvisualassist-appearance.gallery--hover-none figure:hover img,
+  #codvisualassist-appearance.gallery--hover-none > p:hover img {
+    transform: none;
+    filter: none;
+  }
+
+   
+  #codvisualassist-appearance figure a::after,
+  #codvisualassist-appearance > p > a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.25) 0%,
+      oklch(0 0 0 / 0.06) 40%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #codvisualassist-appearance.gallery--hover-none figure a::after,
+  #codvisualassist-appearance.gallery--hover-none > p > a::after {
+    display: none;
+  }
+
+  #codvisualassist-appearance figure:hover a::after,
+  #codvisualassist-appearance > p:hover > a::after {
+    opacity: 1;
+  }
+
+   
+  #codvisualassist-appearance figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.25rem 1rem 0.75rem;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.55) 0%,
+      transparent 100%
+    );
+    color: white;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    border-radius: 0 0 1rem 1rem;
+    pointer-events: none;
+    z-index: 2;
+
+    
+    opacity: 1;
+    
+  }
+
+  
+
+   
+  #codvisualassist-appearance a:focus-visible,
+  #codvisualassist-appearance img:focus-visible {
+    outline: 2px solid oklch(var(--p, 0.65 0.25 260));
+    outline-offset: 2px;
+    border-radius: 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #codvisualassist-appearance figure,
+    #codvisualassist-appearance > p {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    #codvisualassist-appearance img {
+      transition-duration: 0.01ms !important;
+    }
+
+    #codvisualassist-appearance figure a::after,
+    #codvisualassist-appearance > p > a::after,
+    #codvisualassist-appearance figcaption {
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+   
+  #codvisualassist-appearance img[loading="lazy"] {
+    background:
+      linear-gradient(
+        110deg,
+        oklch(var(--b2, 0.93 0 0)) 30%,
+        oklch(var(--b3, 0.88 0 0)) 50%,
+        oklch(var(--b2, 0.93 0 0)) 70%
+      );
+    background-size: 200% 100%;
+    animation: codvisualassist-appearance-shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes codvisualassist-appearance-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  #codvisualassist-appearance img.loaded {
+    animation: none;
+    background: none;
+  }
+</style>
+
+
+
+<script>
+  (() => {
+    const gallery = document.getElementById('codvisualassist-appearance');
+    if (!gallery) return;
+
+    const items = gallery.querySelectorAll('figure, :scope > p');
+    items.forEach((el, i) => {
+      el.style.setProperty('--i', i);
+      el.setAttribute('role', 'listitem');
+    });
+
+    gallery.querySelectorAll('img').forEach(img => {
+      const markLoaded = () => img.classList.add('loaded');
+      if (img.complete) {
+        markLoaded();
+      } else {
+        img.addEventListener('load', markLoaded, { once: true });
+        img.addEventListener('error', markLoaded, { once: true });
+      }
+
+      if (!img.closest('a')) {
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('role', 'button');
+      }
+    });
+
+    const counter = document.getElementById('codvisualassist-appearance-count');
+    if (counter) {
+      const total = gallery.querySelectorAll('img').length;
+      counter.textContent = `Галерея: ${total} ${total === 1 ? 'изображение' : 'изображений'}`;
+    }
+
+    gallery.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const img = e.target;
+        if (img.tagName === 'IMG') {
+          e.preventDefault();
+          const link = img.closest('a');
+          if (link) link.click();
+        }
+      }
+    });
+  })();
+</script>
+<h3 id="настройки-которые-можно-сохранить">Настройки, которые можно сохранить</h3>
+<p>Полные конфигурации сохраняются в именованные профили. Приложение поддерживает автосохранение, историю изменений и сравнение параметров профилей. Основной INI-файл записывается через временный файл и атомарную замену; резервная копия помогает восстановить повреждённую конфигурацию.</p>
+<h2 id="техническая-реализация">Техническая реализация</h2>
+
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Слой
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Реализация
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Захват
+        </td>
+        
+        <td 
+          class=""
+        >
+          DXGI Desktop Duplication через DirectX 11; резервный способ захвата экрана. Выбор монитора и учёт его координат.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Распознавание
+        </td>
+        
+        <td 
+          class=""
+        >
+          OpenCvSharp: фильтрация по цвету, анализ формы, многомасштабный поиск и локальное восстановление.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Сопровождение
+        </td>
+        
+        <td 
+          class=""
+        >
+          Многоцелевой трекер, сопоставление наблюдений, устойчивые ID, удержание и прогноз движения.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Отрисовка
+        </td>
+        
+        <td 
+          class=""
+        >
+          ImGui.NET и ClickableTransparentOverlay; общий рендерер визуальных элементов для оверлея и его предпросмотра.
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          Конфигурация
+        </td>
+        
+        <td 
+          class=""
+        >
+          INI, профили, автосохранение и резервное восстановление; снимки параметров для рабочих компонентов.
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Слой
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Захват
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Реализация
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          DXGI Desktop Duplication через DirectX 11; резервный способ захвата экрана. Выбор монитора и учёт его координат.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Слой
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Распознавание
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Реализация
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          OpenCvSharp: фильтрация по цвету, анализ формы, многомасштабный поиск и локальное восстановление.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Слой
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Сопровождение
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Реализация
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Многоцелевой трекер, сопоставление наблюдений, устойчивые ID, удержание и прогноз движения.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Слой
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Отрисовка
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Реализация
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          ImGui.NET и ClickableTransparentOverlay; общий рендерер визуальных элементов для оверлея и его предпросмотра.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Слой
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Конфигурация
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Реализация
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          INI, профили, автосохранение и резервное восстановление; снимки параметров для рабочих компонентов.
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div><h3 id="обработка-кадров-без-лишней-работы">Обработка кадров без лишней работы</h3>
+<p>Конвейер использует поиск по кандидатным областям, проверку изменений кадра и адаптивное управление частотой детекции. Режимы производительности задают компромисс между точностью и задержкой. Данные о кадрах, времени обработки и состоянии сопровождения доступны для разбора; встроенный симулятор позволяет проверить поведение на управляемой сцене.</p>
+<p>Качество распознавания зависит от видимости, формы и стабильности цвета игрового маркера. Поэтому настройки области поиска и детектора вынесены в интерфейс вместе с визуальной обратной связью.</p>
+<h2 id="цельный-desktop-продукт">Цельный desktop-продукт</h2>
+<p>COD VisualAssist связывает настройку распознавания, поведение сопровождения и визуальный результат в последовательный рабочий процесс для современных игр Call of Duty. Готовые режимы упрощают начало работы, а детальные параметры, профили и предпросмотр дают контроль над каждым следующим шагом.</p>
+
+<section
+  class="not-prose gallery-section my-8 w-full"
+  aria-label="Галерея изображений"
+  data-gallery-id="codvisualassist-dashboard"
+>
+
+
+  <div
+    class="gallery gallery--hover-zoom"
+    id="codvisualassist-dashboard"
+    role="list"
+    data-cols="1"
+    data-gap="6"
+    data-hover="zoom"
+    data-captions="always"
+  ><figure class="my-4">
+    <img
+      src="work/dashboard-dark.png"
+      alt="Главная панель COD VisualAssist: состояние детектора, показатели и быстрые действия"
+      title="Главная панель в состоянии ожидания с быстрыми переходами к настройкам"
+      decoding="async"
+      class="rounded-xl shadow-lg"
+    /><figcaption class="text-center text-sm text-base-content/60 mt-2">Главная панель в состоянии ожидания с быстрыми переходами к настройкам</figcaption></figure></div>
+</section>
+
+
+
+<style>
+   
+
+  
+  #codvisualassist-dashboard.gallery {
+    columns: 1;
+    column-gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    #codvisualassist-dashboard.gallery {
+      columns: 1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #codvisualassist-dashboard.gallery {
+      columns: 1;
+    }
+  }
+  
+
+   
+  #codvisualassist-dashboard figure,
+  #codvisualassist-dashboard > p {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: oklch(var(--b2, 0.93 0 0));
+    break-inside: avoid;
+    
+    margin-bottom: 1.5rem;
+    
+
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    animation: stagger-codvisualassist-dashboard-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  @keyframes stagger-codvisualassist-dashboard-enter {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+   
+  #codvisualassist-dashboard.gallery--hover-lift figure:hover,
+  #codvisualassist-dashboard.gallery--hover-lift > p:hover {
+    transform: translateY(-4px);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+   
+  #codvisualassist-dashboard figure a,
+  #codvisualassist-dashboard > p > a {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    line-height: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+   
+  #codvisualassist-dashboard img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    cursor: pointer;
+    user-select: none;
+    margin: 0 !important;
+    transition:
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      filter    0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity   0.4s ease;
+    will-change: transform;
+    
+  }
+
+   
+  #codvisualassist-dashboard.gallery--hover-zoom figure:hover img,
+  #codvisualassist-dashboard.gallery--hover-zoom > p:hover img {
+    transform: scale(1.06);
+    filter: brightness(1.05);
+  }
+
+   
+  #codvisualassist-dashboard.gallery--hover-fade figure:hover img,
+  #codvisualassist-dashboard.gallery--hover-fade > p:hover img {
+    opacity: 0.85;
+  }
+
+   
+  #codvisualassist-dashboard.gallery--hover-lift figure:hover img,
+  #codvisualassist-dashboard.gallery--hover-lift > p:hover img {
+    filter: brightness(1.03);
+  }
+
+   
+  #codvisualassist-dashboard.gallery--hover-none figure:hover img,
+  #codvisualassist-dashboard.gallery--hover-none > p:hover img {
+    transform: none;
+    filter: none;
+  }
+
+   
+  #codvisualassist-dashboard figure a::after,
+  #codvisualassist-dashboard > p > a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.25) 0%,
+      oklch(0 0 0 / 0.06) 40%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #codvisualassist-dashboard.gallery--hover-none figure a::after,
+  #codvisualassist-dashboard.gallery--hover-none > p > a::after {
+    display: none;
+  }
+
+  #codvisualassist-dashboard figure:hover a::after,
+  #codvisualassist-dashboard > p:hover > a::after {
+    opacity: 1;
+  }
+
+   
+  #codvisualassist-dashboard figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.25rem 1rem 0.75rem;
+    background: linear-gradient(
+      to top,
+      oklch(0 0 0 / 0.55) 0%,
+      transparent 100%
+    );
+    color: white;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    border-radius: 0 0 1rem 1rem;
+    pointer-events: none;
+    z-index: 2;
+
+    
+    opacity: 1;
+    
+  }
+
+  
+
+   
+  #codvisualassist-dashboard a:focus-visible,
+  #codvisualassist-dashboard img:focus-visible {
+    outline: 2px solid oklch(var(--p, 0.65 0.25 260));
+    outline-offset: 2px;
+    border-radius: 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #codvisualassist-dashboard figure,
+    #codvisualassist-dashboard > p {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    #codvisualassist-dashboard img {
+      transition-duration: 0.01ms !important;
+    }
+
+    #codvisualassist-dashboard figure a::after,
+    #codvisualassist-dashboard > p > a::after,
+    #codvisualassist-dashboard figcaption {
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+   
+  #codvisualassist-dashboard img[loading="lazy"] {
+    background:
+      linear-gradient(
+        110deg,
+        oklch(var(--b2, 0.93 0 0)) 30%,
+        oklch(var(--b3, 0.88 0 0)) 50%,
+        oklch(var(--b2, 0.93 0 0)) 70%
+      );
+    background-size: 200% 100%;
+    animation: codvisualassist-dashboard-shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes codvisualassist-dashboard-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  #codvisualassist-dashboard img.loaded {
+    animation: none;
+    background: none;
+  }
+</style>
+
+
+
+<script>
+  (() => {
+    const gallery = document.getElementById('codvisualassist-dashboard');
+    if (!gallery) return;
+
+    const items = gallery.querySelectorAll('figure, :scope > p');
+    items.forEach((el, i) => {
+      el.style.setProperty('--i', i);
+      el.setAttribute('role', 'listitem');
+    });
+
+    gallery.querySelectorAll('img').forEach(img => {
+      const markLoaded = () => img.classList.add('loaded');
+      if (img.complete) {
+        markLoaded();
+      } else {
+        img.addEventListener('load', markLoaded, { once: true });
+        img.addEventListener('error', markLoaded, { once: true });
+      }
+
+      if (!img.closest('a')) {
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('role', 'button');
+      }
+    });
+
+    const counter = document.getElementById('codvisualassist-dashboard-count');
+    if (counter) {
+      const total = gallery.querySelectorAll('img').length;
+      counter.textContent = `Галерея: ${total} ${total === 1 ? 'изображение' : 'изображений'}`;
+    }
+
+    gallery.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const img = e.target;
+        if (img.tagName === 'IMG') {
+          e.preventDefault();
+          const link = img.closest('a');
+          if (link) link.click();
+        }
+      }
+    });
+  })();
+</script>
+    </section>
+
+    
+    
+    
+
+
+
+
+    
+
+    
+
+    
+    
+    <footer class="not-prose mt-12 pt-6 border-t border-base-300">
+      <div class="flex flex-wrap items-center gap-2">
+        <ion-icon name="pricetags-outline" class="text-lg text-base-content/60"></ion-icon>
+        
+        
+        <a href="/tags/desktop/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Desktop
+        </a>
+        
+        <a href="/tags/c/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #C#
+        </a>
+        
+        <a href="/tags/opencv/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #OpenCV
+        </a>
+        
+        <a href="/tags/uiux/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #UI/UX
+        </a>
+        
+        <a href="/tags/%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f/" class="badge badge-ghost hover:badge-primary transition-colors" rel="tag">
+          #Автоматизация
+        </a>
+        
+      </div>
+    </footer>
+    
+
+    
+    
+    <nav class="not-prose mt-8" aria-label="Post navigation">
+      <div class="divider"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div></div>
+
+        
+        <a href="/portfolio/cleanslate-for-reddit/" class="group card bg-base-200 hover:bg-base-300 transition-colors p-4 md:text-right">
+          <div class="flex items-center gap-3 md:flex-row-reverse">
+            <ion-icon name="chevron-forward" class="text-xl text-base-content/50 group-hover:text-primary transition-colors"></ion-icon>
+            <div class="min-w-0">
+              <span class="text-xs text-base-content/60 uppercase tracking-wide">Следующая</span>
+              <p class="font-medium truncate">CleanSlate for Reddit — приватная очистка истории Reddit</p>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+    </nav>
+    
+
+    
+    
+    <section class="mt-12">
+      
+
+
+<template x-if="['localhost', '127.0.0.1'].indexOf(window.location.hostname) == -1">
+  <article>
+    <div class="giscus" id="giscus-container"></div>
+    <script>
+      (function() {
+        function isDark() {
+          return document.documentElement.getAttribute('data-theme') === 'dim';
+        }
+
+        function getTheme() {
+          return isDark() ? 'https://0x69.ru/css/giscus-dim.css' : 'light';
+        }
+
+        function getLang() {
+          var path = window.location.pathname;
+          if (path.startsWith('/en/')) return 'en';
+          return 'ru';
+        }
+
+        function sendTheme() {
+          var frame = document.querySelector('iframe.giscus-frame');
+          if (!frame) return;
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: getTheme() } } },
+            'https://giscus.app'
+          );
+        }
+
+        var script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.setAttribute('data-repo', 'Rianvy\/blog');
+        script.setAttribute('data-repo-id', 'R_kgDONpZnjw');
+        script.setAttribute('data-category', 'Comments');
+        script.setAttribute('data-category-id', 'DIC_kwDONpZnj84C2KjB');
+        script.setAttribute('data-mapping', 'pathname');
+        script.setAttribute('data-strict', '1');
+        script.setAttribute('data-reactions-enabled', '1');
+        script.setAttribute('data-emit-metadata', '0');
+        script.setAttribute('data-input-position', 'top');
+        script.setAttribute('data-theme', getTheme());
+        script.setAttribute('data-lang', getLang());
+        script.setAttribute('data-loading', 'lazy');
+        script.crossOrigin = 'anonymous';
+        script.async = true;
+        document.getElementById('giscus-container').appendChild(script);
+
+        new MutationObserver(function() {
+          sendTheme();
+        }).observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['data-theme']
+        });
+
+      })();
+    </script>
+  </article>
+</template>
+
+
+
+
+
+
+
+
+
+    </section>
+    
+  </article>
+
+  
+  <aside class="hidden lg:block lg:col-span-3 right-sidebar">
+    <div class="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto space-y-6 pr-2">
+      
+      
+
+      
+      
+      <div class="card bg-base-200 p-4">
+        <h3 class="font-semibold mb-3 flex items-center gap-2">
+          <ion-icon name="list-outline"></ion-icon>
+          Содержание
+        </h3>
+        <nav class="text-sm">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#от-экранного-маркера--к-действию">От экранного маркера — к действию</a></li>
+    <li><a href="#01--распознать">01 / Распознать</a></li>
+    <li><a href="#02--удержать">02 / Удержать</a>
+      <ul>
+        <li><a href="#один-жизненный-цикл-цели">Один жизненный цикл цели</a></li>
+      </ul>
+    </li>
+    <li><a href="#03--отобразить">03 / Отобразить</a></li>
+    <li><a href="#интерфейс-который-подстраивается">Интерфейс, который подстраивается</a>
+      <ul>
+        <li><a href="#настройки-которые-можно-сохранить">Настройки, которые можно сохранить</a></li>
+      </ul>
+    </li>
+    <li><a href="#техническая-реализация">Техническая реализация</a>
+      <ul>
+        <li><a href="#обработка-кадров-без-лишней-работы">Обработка кадров без лишней работы</a></li>
+      </ul>
+    </li>
+    <li><a href="#цельный-desktop-продукт">Цельный desktop-продукт</a></li>
+  </ul>
+</nav>
+        </nav>
+      </div>
+      
+    </div>
+  </aside>
+</div>
+
+
+<div class="lg:hidden sticky bottom-6 z-50 pointer-events-none">
+  <div class="flex justify-end pr-6">
+    <button onclick="document.getElementById('mobile-actions-modal').showModal()" 
+            class="pointer-events-auto btn btn-circle btn-primary shadow-2xl w-14 h-14 group">
+      <ion-icon name="apps" class="text-2xl transition-transform duration-300 group-active:scale-90"></ion-icon>
+    </button>
+  </div>
+</div>
+
+
+<dialog id="mobile-actions-modal" class="modal modal-bottom lg:hidden">
+  <div class="modal-box rounded-t-3xl pb-8">
+    
+    <div class="flex justify-center mb-4">
+      <div class="w-12 h-1.5 bg-base-300 rounded-full"></div>
+    </div>
+    
+    
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="font-bold text-lg flex items-center gap-2">
+        <ion-icon name="apps-outline" class="text-primary"></ion-icon>
+        Быстрые действия
+      </h3>
+      <button onclick="document.getElementById('mobile-actions-modal').close()" 
+              class="btn btn-circle btn-ghost btn-sm">
+        <ion-icon name="close" class="text-xl"></ion-icon>
+      </button>
+    </div>
+    
+    
+    <div class="grid grid-cols-4 gap-3">
+      
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-info/20 flex items-center justify-center">
+          <ion-icon name="arrow-up" class="text-2xl text-info"></ion-icon>
+        </div>
+        <span class="text-xs">Наверх</span>
+      </button>
+      
+      
+      
+      <button onclick="document.getElementById('mobile-actions-modal').close(); setTimeout(() => document.getElementById('mobile-toc-modal').showModal(), 150);"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-success/20 flex items-center justify-center">
+          <ion-icon name="list" class="text-2xl text-success"></ion-icon>
+        </div>
+        <span class="text-xs">Содержание</span>
+      </button>
+      
+      
+      
+      <button onclick="navigator.share({title: 'COD VisualAssist — визуальный ассистент для Call of Duty', url: 'https:\/\/0x69.ru\/portfolio\/codvisualassist\/'}).catch(() => {}); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-warning/20 flex items-center justify-center">
+          <ion-icon name="share-social" class="text-2xl text-warning"></ion-icon>
+        </div>
+        <span class="text-xs">Поделиться</span>
+      </button>
+      
+      
+      <button onclick="navigator.clipboard.writeText('https:\/\/0x69.ru\/portfolio\/codvisualassist\/'); document.getElementById('mobile-actions-modal').close();"
+              class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-base-200 active:scale-95 transition-transform">
+        <div class="w-12 h-12 rounded-full bg-error/20 flex items-center justify-center">
+          <ion-icon name="copy" class="text-2xl text-error"></ion-icon>
+        </div>
+        <span class="text-xs">Копировать</span>
+      </button>
+    </div>
+  </div>
+  
+  <form method="dialog" class="modal-backdrop bg-black/50">
+    <button>close</button>
+  </form>
+</dialog>
+
+
+
+<dialog id="mobile-toc-modal" class="modal modal-bottom">
+  <div class="modal-box rounded-t-3xl max-h-[75vh]">
+    <div class="flex justify-center mb-4">
+      <div class="w-12 h-1.5 bg-base-300 rounded-full"></div>
+    </div>
+    
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-bold text-lg">Содержание</h3>
+      <button onclick="document.getElementById('mobile-toc-modal').close()" class="btn btn-circle btn-ghost btn-sm">
+        <ion-icon name="close" class="text-xl"></ion-icon>
+      </button>
+    </div>
+    
+    <nav class="overflow-y-auto" onclick="if(event.target.tagName === 'A') document.getElementById('mobile-toc-modal').close();">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#от-экранного-маркера--к-действию">От экранного маркера — к действию</a></li>
+    <li><a href="#01--распознать">01 / Распознать</a></li>
+    <li><a href="#02--удержать">02 / Удержать</a>
+      <ul>
+        <li><a href="#один-жизненный-цикл-цели">Один жизненный цикл цели</a></li>
+      </ul>
+    </li>
+    <li><a href="#03--отобразить">03 / Отобразить</a></li>
+    <li><a href="#интерфейс-который-подстраивается">Интерфейс, который подстраивается</a>
+      <ul>
+        <li><a href="#настройки-которые-можно-сохранить">Настройки, которые можно сохранить</a></li>
+      </ul>
+    </li>
+    <li><a href="#техническая-реализация">Техническая реализация</a>
+      <ul>
+        <li><a href="#обработка-кадров-без-лишней-работы">Обработка кадров без лишней работы</a></li>
+      </ul>
+    </li>
+    <li><a href="#цельный-desktop-продукт">Цельный desktop-продукт</a></li>
+  </ul>
+</nav>
+    </nav>
+  </div>
+  
+  <form method="dialog" class="modal-backdrop bg-black/50">
+    <button>close</button>
+  </form>
+</dialog>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+      
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Readme.md</div>
+
+                <div class="prose dark:prose-invert">
+                    <h1 id="whoami-">whoami 👨‍💻</h1>
+<pre><code class="language-bash">$ cat /etc/profile
+</code></pre>
+<p><strong>Username:</strong> Rianvy<br>
+<strong>Real name:</strong> Максим Александров<br>
+<strong>Age:</strong> 28
+<strong>Location:</strong> Тула, RU<br>
+<strong>Role:</strong> Senior Developer &amp; UI/UX Designer 😎</p>
+<h2 id="about">About</h2>
+<p>Этот блог — мой personal knowledge base, где я пушу заметки про tech stack, life experience и всё, что триггерит мой interest <code>=&gt;</code> 🚀</p>
+<h2 id="contact">Contact</h2>
+<p>Open for collaboration 🤝 — готов к мёрджу идей и совместным проектам.</p>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Stack</div>
+
+                <div class="prose dark:prose-invert">
+                    <h2 id="-яп">💻 ЯП</h2>
+<ul>
+<li><strong>C#</strong>, <strong>PHP</strong>, <strong>JavaScript/TypeScript</strong>, <strong>Python</strong></li>
+</ul>
+<h2 id="-frontend">⚛️ Frontend</h2>
+<ul>
+<li><strong>React</strong> / <strong>Next.js</strong>, <strong>Vue.js</strong> / <strong>Nuxt.js</strong></li>
+<li><strong>Tailwind CSS</strong> / <strong>SCSS</strong></li>
+<li>Адаптивная вёрстка (<strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>) 📱</li>
+</ul>
+<h2 id="-backend">🔧 Backend</h2>
+<ul>
+<li><strong>Laravel</strong>, <strong>Node.js</strong> / <strong>Express</strong> / <strong>NestJS</strong></li>
+<li><strong>REST API</strong></li>
+</ul>
+<h2 id="-базы-данных">🗄️ Базы данных</h2>
+<ul>
+<li><strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>MongoDB</strong>, <strong>Redis</strong></li>
+</ul>
+<h2 id="-devops">🛠️ DevOps</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Git</strong>, <strong>CI/CD</strong>, <strong>Linux</strong> 🐧</li>
+</ul>
+<h2 id="-дизайн-и-графика">🎨 Дизайн и графика</h2>
+<ul>
+<li><strong>Figma</strong> — UI/UX дизайн и прототипирование</li>
+<li><strong>Photoshop</strong> — графика и обработка изображений</li>
+<li><strong>After Effects</strong> — моушн-дизайн и анимация 🎬</li>
+</ul>
+
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои Open Source проекты 🌟</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://github.com/Rianvy/CleanSlate-for-Reddit" target="_blank">CleanSlate for Reddit</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          Приватное local-first расширение для очистки постов, комментариев, сохранённых публикаций и голосов Reddit прямо в браузере
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/VKify" target="_blank">VKify</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Мощное браузерное расширение для кастомизации ВКонтакте с блокировкой рекламы, темами оформления, режимом приватности и пользовательским CSS
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://github.com/Rianvy/CleanSlate-for-Reddit" target="_blank">CleanSlate for Reddit</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          Приватное local-first расширение для очистки постов, комментариев, сохранённых публикаций и голосов Reddit прямо в браузере
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Мои проекты 🚀</div>
+
+                <div class="prose dark:prose-invert">
+                    
+<div class="hidden md:block overflow-x-auto my-6 not-prose">
+  <table class="table table-zebra table-sm lg:table-md w-full">
+    <thead>
+      
+      <tr>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Название
+        </th>
+        
+        <th 
+          class="text-base-content/80"
+        >
+          Описание
+        </th>
+        
+      </tr>
+      
+    </thead>
+    <tbody>
+      
+      <tr>
+        
+        <td 
+          class=""
+        >
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </td>
+        
+        <td 
+          class=""
+        >
+          VPN-сервис в Telegram
+        </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<div class="md:hidden my-6 space-y-3">
+  
+  <div class="card card-compact bg-base-100 shadow border border-base-300">
+    <div class="card-body !p-4">
+      
+      <div class="flex justify-between items-center py-1.5 ">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Название
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          <a href="https://t.me/greenshield_official_bot" target="_blank">GreenShield VPN</a>
+
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center py-1.5 border-t border-base-200">
+        <span class="font-medium text-base-content/70 text-sm pr-2">
+          Описание
+        </span>
+        <span class="text-base-content text-sm text-right flex-1 ml-4 min-w-0 break-words">
+          VPN-сервис в Telegram
+        </span>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+                </div>
+            </div>
+        </article>
+    </div>
+     
+	 
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+        <article class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30">
+            <div class="card-body">
+                <div class="card-title">Социальные сети</div>
+
+                <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:blackghost.v1@gmail.com" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/Rianvy" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://www.behance.net/rianvy" target="_blank" title="Behance">
+      <ion-icon name="logo-behance"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://instagram.com/rianvy" target="_blank" title="Instagram">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://t.me/cyber_way" target="_blank" title="Telegram">
+      <ion-icon name="send"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+            </div>
+        </article>
+    </div>
+     
+	 
+	 
+	
+</div>
+
+            
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12" id="site-footer">
+
+  <div>
+  
+  <p>
+    © 2025 - 2026 0x69.ru
+  </p>
+  
+
+  
+  <p>Powered by ❤️</p>
+  
+</div>
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "dim"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+    
+  
+  <script src="/js/grid.min.js"></script>
+
+
+
+
+  
+
+<script src="/js/main.min.js"></script>
+
+
+    
+<script>
+
+function toggleFocusMode() {
+  const body = document.body;
+  const icon = document.getElementById('focus-mode-icon');
+  const text = document.getElementById('focus-mode-text');
+  
+  body.classList.toggle('focus-mode');
+  
+  const isFocusMode = body.classList.contains('focus-mode');
+  
+  if (icon) {
+    icon.setAttribute('name', isFocusMode ? 'eye-off-outline' : 'eye-outline');
+  }
+  
+  if (text) {
+    text.textContent = isFocusMode ? 'Exit' : 'Фокус';
+  }
+  
+  
+  localStorage.setItem('focusMode', isFocusMode ? 'on' : 'off');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  
+  if (localStorage.getItem('focusMode') === 'on') {
+    document.body.classList.add('focus-mode');
+    const icon = document.getElementById('focus-mode-icon');
+    const text = document.getElementById('focus-mode-text');
+    if (icon) icon.setAttribute('name', 'eye-off-outline');
+    if (text) text.textContent = 'Exit';
+  }
+
+  
+  const progressBar = document.getElementById('reading-progress');
+  const progressText = document.getElementById('reading-progress-text');
+  const article = document.getElementById('dream-single-post-main');
+  
+  if (progressBar && article) {
+    const updateProgress = () => {
+      const rect = article.getBoundingClientRect();
+      const scrolled = Math.max(0, -rect.top);
+      const total = rect.height - window.innerHeight;
+      const progress = Math.min(100, Math.max(0, (scrolled / total) * 100));
+      progressBar.style.width = `${progress}%`;
+      
+      if (progressText) {
+        progressText.textContent = `${Math.round(progress)}%`;
+        progressText.classList.toggle('visible', progress > 5 && progress < 95);
+      }
+    };
+    
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  
+  const tocLinks = document.querySelectorAll('#TableOfContents a');
+  const headings = document.querySelectorAll('#dream-single-post-content h1, #dream-single-post-content h2, #dream-single-post-content h3');
+  
+  if (tocLinks.length && headings.length) {
+    const tocObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => link.classList.remove('active'));
+          const activeLink = document.querySelector(`#TableOfContents a[href="#${entry.target.id}"]`);
+          activeLink?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0% -60% 0%' });
+    
+    headings.forEach(h => tocObserver.observe(h));
+  }
+});
+</script>
+
+
+
+
+
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
+  integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
+  crossorigin="anonymous"
+></script>
+<script>
+  format()
+
+  function format() {
+    document.querySelectorAll('span[data-format="luxon"]').forEach(el => {
+      const date = el.textContent
+
+      el.textContent = luxon.DateTime.fromISO(date, { locale: "ru" }).toFormat("dd.MM.yyyy, HH:mm")
+    })
+  }
+</script>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/apache.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/shell.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sh.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/zsh.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/powershell.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/ini.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/nginx.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script><script>
+  hljs.highlightAll();
+  hljs.addPlugin(new CopyButtonPlugin());
+
+  document.addEventListener('alpine:initialized', () => {
+    window.customSyntaxHighlighting = {
+      dark: 'github-dark-dimmed',
+      light: 'atom-one-light'
+    };
+
+    const updateSyntaxTheme = () => {
+      try {
+        const isDark = Alpine.store('darkMode').isDark();
+        const currentTheme = isDark ? 
+          window.customSyntaxHighlighting.dark : 
+          window.customSyntaxHighlighting.light;
+
+        let link = document.querySelector('link[data-syntax-highlight]');
+        if (link) {
+          const currentHref = link.href;
+          const updatedHref = currentHref.replace(/styles\/[^/]+\.min\.css/, `styles/${currentTheme}.min.css`);
+          link.href = updatedHref;
+        }
+      } catch (error) {
+        console.warn('Error updating syntax theme:', error);
+      }
+    };
+
+    updateSyntaxTheme();
+    Alpine.effect(() => {
+      updateSyntaxTheme();
+    });
+  });
+</script>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-fullscreen.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-thumbnail.min.css">
+
+
+<style>
+   
+  .lg-backdrop {
+    background-color: rgba(0, 0, 0, 0.95) !important;
+  }
+  
+   
+  .lg-sub-html {
+    background: linear-gradient(transparent, rgba(0,0,0,0.8)) !important;
+    padding: 20px 40px !important;
+    text-align: left !important;
+  }
+  
+  .lg-sub-html h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  
+  .lg-sub-html h2 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.8);
+  }
+  
+  .lg-sub-html .project-meta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.6);
+  }
+  
+  .lg-sub-html .project-link {
+    color: #60a5fa;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .lg-sub-html .project-link:hover {
+    color: #93c5fd;
+  }
+  
+   
+  .lg-item img {
+    transition: transform 0.3s ease;
+  }
+  
+   
+  .lg-progress-bar {
+    background-color: #3b82f6 !important;
+    height: 3px !important;
+  }
+  
+   
+  .lg-thumb-item {
+    border-radius: 4px;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  
+  .lg-thumb-item.active,
+  .lg-thumb-item:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  
+   
+  .lg-toolbar .lg-icon {
+    font-size: 1.5rem;
+  }
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/fullscreen/lg-fullscreen.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const galleryContainer = document.querySelector("#dream-single-post-content");
+  const images = galleryContainer?.querySelectorAll("img");
+
+  if (!galleryContainer || !images?.length) return;
+
+  
+  galleryContainer.querySelectorAll("a.lg-item").forEach(el => el.remove());
+
+  images.forEach((img, index) => {
+    if (img.closest('[data-tc-exclude]')) return;
+    if (img.closest("a.lg-item")) return;
+
+    const wrapper = document.createElement("a");
+    wrapper.href = img.src;
+    wrapper.classList.add("lg-item", "not-prose");
+    
+    
+    wrapper.style.cursor = "zoom-in";
+
+    
+    const alt = img.alt || "";
+    const title = img.title || "";
+    
+    
+    const projectUrl = img.dataset.projectUrl || "";
+    const projectYear = img.dataset.year || "";
+    const projectTech = img.dataset.tech || "";
+
+    let subHtml = "";
+    
+    if (alt) {
+      subHtml += `<h1>${alt}</h1>`;
+    }
+    
+    if (title) {
+      subHtml += `<h2>${title}</h2>`;
+    }
+    
+    
+    if (projectUrl || projectYear || projectTech) {
+      subHtml += `<div class="project-meta">`;
+      
+      if (projectYear) {
+        subHtml += `<span>📅 ${projectYear}</span>`;
+      }
+      
+      if (projectTech) {
+        subHtml += `<span>🛠️ ${projectTech}</span>`;
+      }
+      
+      if (projectUrl) {
+        subHtml += `<a href="${projectUrl}" target="_blank" rel="noopener" class="project-link">🔗 Открыть проект</a>`;
+      }
+      
+      subHtml += `</div>`;
+    }
+
+    wrapper.dataset.subHtml = subHtml;
+    
+    
+    wrapper.dataset.src = img.src;
+    
+    
+    if (img.dataset.srcLarge) {
+      wrapper.dataset.src = img.dataset.srcLarge;
+    }
+
+    img.parentNode.insertBefore(wrapper, img);
+    wrapper.appendChild(img);
+  });
+
+  
+  const gallery = lightGallery(galleryContainer, {
+    selector: "a.lg-item",
+    plugins: [lgZoom, lgFullscreen, lgThumbnail],
+    
+    
+    speed: 400,
+    backdropDuration: 300,
+    startAnimationDuration: 400,
+    endAnimationDuration: 300,
+    
+    
+    loop: true,
+    slideShowAutoplay: false,
+    slideShowInterval: 4000,
+    mousewheel: true,
+    hideScrollbar: true,
+    
+    
+    closeOnTap: true,
+    closable: true,
+    escKey: true,
+    
+    
+    counter: true,
+    download: false,
+    getCaptionFromTitleOrAlt: false,
+    subHtmlSelectorRelative: true,
+    
+    
+    mobileSettings: {
+      controls: true,
+      showCloseIcon: true,
+      download: false
+    },
+    
+    
+    swipeThreshold: 50,
+    enableSwipe: true,
+    enableDrag: true,
+    
+    
+    zoomFromOrigin: true,
+    actualSize: true,
+    showZoomInOutIcons: true,
+    actualSizeIcons: {
+      zoomIn: "lg-zoom-in",
+      zoomOut: "lg-zoom-out"
+    },
+    scale: 1,
+    zoom: true,
+    
+    
+    thumbnail: true,
+    thumbWidth: 100,
+    thumbHeight: "80px",
+    thumbMargin: 5,
+    toggleThumb: true,
+    animateThumb: true,
+    
+    
+    fullScreen: true,
+    
+    
+    preload: 2,
+    
+    
+    ariaLabelledby: "lg-slide-title",
+    ariaDescribedby: "lg-slide-desc"
+  });
+
+  
+  
+  
+  galleryContainer.addEventListener("lgAfterOpen", () => {
+    console.log("Gallery opened");
+    
+  });
+
+  
+  galleryContainer.addEventListener("lgAfterSlide", (event) => {
+    const { index } = event.detail;
+    console.log(`Viewing slide ${index + 1}`);
+  });
+
+  
+  document.addEventListener("keydown", (e) => {
+    if (!document.querySelector(".lg-container")) return;
+    
+    if (e.key === "+" || e.key === "=") {
+      gallery.zoomIn();
+    } else if (e.key === "-") {
+      gallery.zoomOut();
+    }
+  });
+});
+</script>
+
+
+
+
+    
+
+    
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGGNL85KC3"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EGGNL85KC3');
+        }
+      </script>
+    
+
+    
+    
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym("99568144", "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/99568144" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

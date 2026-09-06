@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Desktop on 0x69.ru</title>
+    <link>https://0x69.ru/en/tags/desktop/</link>
+    <description>Recent content in Desktop on 0x69.ru</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 06 Sep 2026 12:00:00 +0300</lastBuildDate>
+    <atom:link href="https://0x69.ru/en/tags/desktop/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>COD VisualAssist — visual assistant for Call of Duty</title>
+      <link>https://0x69.ru/en/portfolio/codvisualassist/</link>
+      <pubDate>Sun, 06 Sep 2026 12:00:00 +0300</pubDate>
+      <guid>https://0x69.ru/en/portfolio/codvisualassist/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;COD VisualAssist&lt;/strong&gt; is a desktop application for modern Call of Duty games, built to assist with aiming at opponents. It detects on-screen game markers, tracks targets and controls visual guidance through a transparent overlay.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
